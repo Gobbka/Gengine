@@ -6,6 +6,18 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_device = dev;
 	_swap = swap;
 	_context = context;
+
+	
+	ID3D11Resource* back_buffer;
+	_swap->GetBuffer(0, __uuidof(ID3D11Resource), (void**)&back_buffer);
+	_device->CreateRenderTargetView(back_buffer, nullptr, &_targetView);
+	back_buffer->Release();
+}
+
+void Core::GraphicsContext::clear()
+{
+	float color[4]{ 0,0.5,0.5,1.f };
+	_context->ClearRenderTargetView(_targetView, color);
 }
 
 void Core::GraphicsContext::present()

@@ -22,6 +22,7 @@ int WINAPI wWinMain(
         TranslateMessage(&msg);
         DispatchMessage(&msg);
 
+        graphic->clear();
         graphic->present();
     }
 	

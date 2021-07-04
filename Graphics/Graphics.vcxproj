@@ -141,10 +141,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Canvas\CanvasLayer.h" />
+    <ClInclude Include="Canvas\D3D11Canvas.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Graphics\Types.h" />
+    <ClInclude Include="Render\d3d\Bindable.h" />
+    <ClInclude Include="Render\d3d\Buffer\VertexBuffer.h" />
+    <ClInclude Include="Render\d3d\Vertex.h" />
+    <ClInclude Include="Render\Engine\D3DEngine.h" />
+    <ClInclude Include="Render\Events\RenderEvent.h" />
+    <ClInclude Include="Render\Layer\ILayer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Canvas\CanvasLayer.cpp" />
+    <ClCompile Include="Canvas\D3D11Canvas.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Graphics\Types.cpp" />
+    <ClCompile Include="Render\d3d\Bindable.cpp" />
+    <ClCompile Include="Render\d3d\Buffer\VertexBuffer.cpp" />
+    <ClCompile Include="Render\d3d\Vertex.cpp" />
+    <ClCompile Include="Render\Engine\D3DEngine.cpp" />
+    <ClCompile Include="Render\Events\RenderEvent.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Render\d3d\shaders\shaders.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VS</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VS</EntryPointName>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

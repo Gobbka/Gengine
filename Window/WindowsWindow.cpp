@@ -4,6 +4,12 @@
 
 LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	if (msg == WM_CLOSE)
+		exit(0);
+
+	if (msg == WM_SIZING)
+		return 0;
+	
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }
 
@@ -15,8 +21,8 @@ Core::WindowsWindow::WindowsWindow(HINSTANCE hint)
 	WNDCLASSEXW wndClass
 	{
 		sizeof(WNDCLASSEXW),
-		CS_OWNDC | CS_DROPSHADOW,
-		DefWindowProc,
+		CS_OWNDC,
+		window_procedure,
 		0,0,
 		_hInst,nullptr,nullptr,nullptr,
 		nullptr,
@@ -30,10 +36,10 @@ Core::WindowsWindow::WindowsWindow(HINSTANCE hint)
 		0,
 		class_name,
 		L"GENIGNE MAIN",
-		WS_CAPTION|WS_MINIMIZEBOX,
+		WS_CAPTION|WS_MINIMIZEBOX| WS_SIZEBOX | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
-		500, 500,
+		1350, 720,
 		0,
 		0,
 		_hInst,

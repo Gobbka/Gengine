@@ -1,0 +1,27 @@
+cbuffer ConstantBuffer2D : register(b0)
+{
+	float alpha;
+}
+
+// PSI (PixelShaderInput)
+struct PSI
+{
+	float4 pos : SV_POSITION;
+	float4 color : COLOR;
+};
+
+// VertexShader
+PSI VS(float4 pos : POSITION, float4 color : COLOR)
+{
+	PSI psi;
+	psi.color = color;
+	psi.color.a = alpha;
+	psi.pos = pos;
+	return psi;
+}
+
+// PixelShader
+float4 PS(PSI psi) : SV_TARGET
+{
+	return psi.color;
+}

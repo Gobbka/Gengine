@@ -18,7 +18,7 @@ int WINAPI wWinMain(
 
     auto* layer = graphic->create_2d_layer();
 
-    auto* rectangle = new Canvas::Rectangle(Color4(RGB_TO_FLOAT(120,120,120),1.f),Position2(0,0),Surface(50,50));
+    auto* rectangle = new Canvas::Rectangle(Color4(RGB_TO_FLOAT(120,120,120),1.f),Position2(0,0),Surface(390,100));
 
     layer->add_object(rectangle);
 	

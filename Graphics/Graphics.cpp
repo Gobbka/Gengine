@@ -107,7 +107,7 @@ Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd)
 
 	DXGI_SWAP_CHAIN_DESC sd;
 	sd.BufferDesc = DXGI_MODE_DESC{
-		0,0,
+		800,600,
 		{0,0},
 		DXGI_FORMAT_B8G8R8A8_UNORM,
 		DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED,
@@ -121,7 +121,7 @@ Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd)
 	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	sd.Flags = 0;
 	
-	if(FAILED (D3D11CreateDeviceAndSwapChain(
+	assert(SUCCEEDED (D3D11CreateDeviceAndSwapChain(
 		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
 		nullptr,
@@ -134,10 +134,7 @@ Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd)
 		&device,
 		nullptr,
 		&context
-	)))
-	{
-		MessageBox(0, L"CANNOT CREATE DEVICE", L"D3D ERROR", MB_ICONERROR);
-	}
+	)));
 
 	return new GraphicsContext(device, pswap, context);
 }

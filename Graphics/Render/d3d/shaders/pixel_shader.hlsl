@@ -7,5 +7,5 @@ struct PSI
 // PixelShader
 float4 PS(PSI psi) : SV_TARGET
 {
-	return float4(1.f,1.f,1.f,1.f);
+	return psi.color;
 }

@@ -1,6 +1,6 @@
 #include <Windows.h>
-#include "WindowsWindow.h"
 #include "Graphics.h"
+#include "WindowsManager.h"
 
 int WINAPI wWinMain(
     _In_ HINSTANCE hInstance,
@@ -10,13 +10,13 @@ int WINAPI wWinMain(
 )
 {
 
-    auto* window = new Core::WindowsWindow(hInstance);
+    auto* window = Core::WindowsManager::instance()->create_window(hInstance);
     window->show();
+
+    auto* graphic = Core::GraphicsContext::new_context(window->hwnd());
 
     MSG msg;
 
-    auto* graphic = Core::GraphicsContext::new_context(window->hwnd());
-	
     while (GetMessage(&msg,nullptr,0,0)>0)
     {
         TranslateMessage(&msg);

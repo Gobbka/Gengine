@@ -2,13 +2,32 @@
 
 #include <cassert>
 
+#include "WindowsManager.h"
+
 LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
+{	
+	auto* window = (WindowsWindow*)WindowsManager::instance()->get_by_hwnd(hwnd);
+	
+	if(!window)
+		return DefWindowProc(hwnd, msg, wParam, lParam);
+	
 	if (msg == WM_CLOSE)
 		exit(0);
 
 	if (msg == WM_SIZING)
-		return 0;
+	{
+		RECT r = *(RECT*)lParam;
+		const auto window_width = r.right - r.left;
+		const auto window_height = r.bottom - r.top;
+		
+		if (window_width > window->max_width)
+			((RECT*)lParam)->right = r.left + window->max_width;
+
+		if (window_height > window->max_height)
+			((RECT*)lParam)->bottom = r.top + window->max_height;
+
+		
+	}
 	
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }

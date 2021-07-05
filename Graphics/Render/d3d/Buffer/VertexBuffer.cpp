@@ -30,7 +30,7 @@ Render::VertexBuffer::VertexBuffer(D3DEngine* engine, Vertex* data, UINT size, b
 	};
 	D3D11_SUBRESOURCE_DATA sd{ data,0,0 };
 
-	assert(_engine->create_buffer(&vbuffer, &sd, &_buffer));
+	assert(SUCCEEDED(_engine->create_buffer(&vbuffer, &sd, &_buffer)));
 }
 
 Render::VertexBuffer::~VertexBuffer()
@@ -55,7 +55,7 @@ void Render::VertexBuffer::update(UINT update_size)
 	auto* pContext = _engine->context();
 	D3D11_MAPPED_SUBRESOURCE subdata;
 
-	pContext->Map(_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &subdata);
+	assert(SUCCEEDED( pContext->Map(_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &subdata)));
 
 	this->copy_to(subdata.pData, update_size);
 

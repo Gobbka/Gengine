@@ -19,8 +19,6 @@ Render::D3DEngine::D3DEngine(Core::GraphicsContext* context)
 
 void Render::D3DEngine::present(DrawEvent* event)
 {
-	for(auto*layer:_layers)
-	{
-		layer->render(event);
-	}
+	
+	event->layer->render(event);
 }

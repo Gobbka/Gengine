@@ -19,9 +19,7 @@ void Canvas::Canvas2DLayer::update()
 }
 
 void Canvas::Canvas2DLayer::render(Render::DrawEvent* event)
-{
-	_canvas.get_vbuffer()->bind();
-	
+{	
 	for(auto object : _objects)
 	{
 		if(!object->hidden)

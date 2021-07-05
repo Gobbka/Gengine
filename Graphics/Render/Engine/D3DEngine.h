@@ -10,8 +10,6 @@ namespace Render
 	{
 	private:
 		Core::GraphicsContext* _context;
-		std::vector<ILayer*> _layers;
-
 	public:
 		bool create_buffer(D3D11_BUFFER_DESC* desc,D3D11_SUBRESOURCE_DATA*data,ID3D11Buffer**buffer) const;
 		

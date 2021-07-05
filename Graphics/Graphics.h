@@ -20,6 +20,12 @@ namespace Core
 		IDXGISwapChain* _swap;
 		ID3D11DeviceContext* _context;
 		ID3D11RenderTargetView* _targetView;
+
+		ID3D11VertexShader* _vertexShader;
+		ID3D11PixelShader* _pixelShader;
+		ID3D11InputLayout* _inputLayout;
+
+		D3D11_VIEWPORT _viewport;
 	private:
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 

@@ -92,5 +92,6 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Render\d3d\shaders\shaders.hlsl" />
+    <FxCompile Include="Render\d3d\shaders\pixel_shader.hlsl" />
   </ItemGroup>
 </Project>

@@ -17,8 +17,13 @@ int WINAPI wWinMain(
     auto* graphic = Core::GraphicsContext::new_context(window->hwnd());
 
     auto* layer = graphic->create_2d_layer();
+	
+    window->on_resize = [graphic](Surface size)
+    {
 
-    auto* rectangle = new Canvas::Rectangle(Color4(RGB_TO_FLOAT(120,120,120),1.f),Position2(0,0),Surface(390,100));
+    };
+	
+    auto* rectangle = new Canvas::Rectangle(Color4(RGB_TO_FLOAT(120,120,120),1.f),Position2(-50,50),Surface(390,100));
 
     layer->add_object(rectangle);
 	

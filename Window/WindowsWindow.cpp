@@ -32,11 +32,19 @@ LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }
 
-Core::WindowsWindow::WindowsWindow(HINSTANCE hint)
+void Core::WindowsWindow::handle_resize(RECT* lprect)
+{
+	auto rect = *lprect;
+	_size = Surface(rect.right - rect.left, rect.bottom - rect.top);
+	this->on_resize(_size);
+}
+
+Core::WindowsWindow::WindowsWindow(HINSTANCE hint, UINT width, UINT height)
+	: _size(width,height)
 {
 	_hInst = hint;
-	
-	auto* class_name = L"GENGINE";
+
+	const auto* class_name = L"GENGINE";
 	WNDCLASSEXW wndClass
 	{
 		sizeof(WNDCLASSEXW),
@@ -58,7 +66,7 @@ Core::WindowsWindow::WindowsWindow(HINSTANCE hint)
 		WS_CAPTION|WS_MINIMIZEBOX| WS_SIZEBOX | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
-		800, 600,
+		width, height,
 		0,
 		0,
 		_hInst,

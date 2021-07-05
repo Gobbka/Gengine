@@ -148,6 +148,11 @@
     <ClCompile Include="WindowsManager.cpp" />
     <ClCompile Include="WindowsWindow.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Graphics\Graphics.vcxproj">
+      <Project>{34da52e9-8e67-41d5-a346-e0241375392c}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

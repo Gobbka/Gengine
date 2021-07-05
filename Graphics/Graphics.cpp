@@ -1,6 +1,7 @@
 #include "Graphics.h"
 #pragma comment(lib,"d3d11.lib")
 
+#include "Canvas/CanvasLayer.h"
 #include "Graphics/Types.h"
 #include "Render/Engine/D3DEngine.h"
 
@@ -28,6 +29,13 @@ ID3D11DeviceContext* Core::GraphicsContext::context() const
 	return _context;
 }
 
+Canvas::Canvas2DLayer* Core::GraphicsContext::create_2d_layer()
+{
+	auto* layer = new Canvas::Canvas2DLayer(_engine);
+	_2d_layers.push_back(layer);
+	return layer;
+}
+
 void Core::GraphicsContext::clear()
 {
 	float color[4]{ RGB_TO_FLOAT(31,31,32) ,1.f };
@@ -36,11 +44,12 @@ void Core::GraphicsContext::clear()
 
 void Core::GraphicsContext::present() const
 {
-	Render::DrawEvent draw_event(nullptr);
+	Render::DrawEvent draw_event(_engine,nullptr);
 	
 	for(auto* layer2d : _2d_layers)
 	{
 		draw_event.layer = layer2d;
+		layer2d->update();
 		
 		_engine->present(&draw_event);
 	}

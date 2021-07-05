@@ -6,8 +6,6 @@
 
 namespace Render
 {
-	class DrawEvent;
-
 	class D3DEngine
 	{
 	private:

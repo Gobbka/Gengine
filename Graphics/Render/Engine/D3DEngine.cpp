@@ -15,9 +15,6 @@ ID3D11DeviceContext* Render::D3DEngine::context() const
 Render::D3DEngine::D3DEngine(Core::GraphicsContext* context)
 {
 	_context = context;
-
-	auto*canvas = new Canvas::CanvasLayer(this);
-
 }
 
 void Render::D3DEngine::present(DrawEvent* event)

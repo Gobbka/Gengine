@@ -3,6 +3,8 @@
 #include <vector>
 
 
+
+#include "Canvas/CanvasLayer.h"
 #include "Render/Layer/ILayer.h"
 
 namespace Render {
@@ -21,11 +23,13 @@ namespace Core
 	private:
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 
-		std::vector<Render::I2DLayer*> _2d_layers;
+		std::vector<Canvas::Canvas2DLayer*> _2d_layers;
 		Render::D3DEngine* _engine;
 	public:
 		ID3D11Device* device() const;
 		ID3D11DeviceContext* context() const;
+
+		Canvas::Canvas2DLayer* create_2d_layer();
 	public:
 		void clear();
 		

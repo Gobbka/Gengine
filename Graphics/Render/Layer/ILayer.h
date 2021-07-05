@@ -17,14 +17,4 @@ namespace Render {
 		virtual void update() = 0;
 		virtual void render(Render::DrawEvent* event) = 0;
 	};
-
-	class I2DLayer : public ILayer
-	{
-		
-	};
-
-	class I3DLayer : public ILayer
-	{
-		
-	};
 }

@@ -143,10 +143,13 @@
   <ItemGroup>
     <ClInclude Include="Canvas\CanvasLayer.h" />
     <ClInclude Include="Canvas\D3D11Canvas.h" />
+    <ClInclude Include="Canvas\Objects\I2DCanvasObject.h" />
+    <ClInclude Include="Canvas\Objects\Rectangle\Rectangle.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Graphics\Types.h" />
     <ClInclude Include="Render\d3d\Bindable.h" />
     <ClInclude Include="Render\d3d\Buffer\VertexBuffer.h" />
+    <ClInclude Include="Render\d3d\D3DObjectDescription.h" />
     <ClInclude Include="Render\d3d\Vertex.h" />
     <ClInclude Include="Render\Engine\D3DEngine.h" />
     <ClInclude Include="Render\Events\RenderEvent.h" />
@@ -155,6 +158,8 @@
   <ItemGroup>
     <ClCompile Include="Canvas\CanvasLayer.cpp" />
     <ClCompile Include="Canvas\D3D11Canvas.cpp" />
+    <ClCompile Include="Canvas\Objects\I2DCanvasObject.cpp" />
+    <ClCompile Include="Canvas\Objects\Rectangle\Rectangle.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Graphics\Types.cpp" />
     <ClCompile Include="Render\d3d\Bindable.cpp" />

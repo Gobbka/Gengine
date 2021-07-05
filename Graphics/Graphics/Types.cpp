@@ -1,9 +1,25 @@
 #include "Types.h"
 
+DirectX::XMFLOAT3 Color3::to_float3()
+{
+	return DirectX::XMFLOAT3(r, g, b);
+}
+
+DirectX::XMFLOAT4 Color4::to_float4() const
+{
+	return DirectX::XMFLOAT4( r,g,b,a );
+}
+
 Surface::Surface(float w, float h)
 {
 	width = w;
 	height = h;
+}
+
+void Position2::operator+=(Position2 pos)
+{
+	x += pos.x;
+	y += pos.y;
 }
 
 Position2::Position2(float x, float y)

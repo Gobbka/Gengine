@@ -8,7 +8,7 @@ namespace Render
 	class D3DEngine;
 	class VertexBuffer;
 
-	class D3D11Canvas
+	class __declspec(dllexport) D3D11Canvas
 	{
 	private:
 		struct Allocator
@@ -50,6 +50,6 @@ namespace Render
 		D3D11Canvas(D3DEngine* pEngine, VertexBuffer* buffer);
 		explicit D3D11Canvas(D3DEngine* pEngine);
 
-		~D3D11Canvas();
+		virtual ~D3D11Canvas();
 	};
 }

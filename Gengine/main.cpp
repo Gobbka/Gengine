@@ -24,7 +24,6 @@ int WINAPI wWinMain(
         graphic->set_resolution(Surface(rect));
     }
 
-	
     auto* layer = graphic->create_2d_layer();
 	
     window->on_resize = [graphic](Surface size)

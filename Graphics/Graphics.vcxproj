@@ -151,6 +151,7 @@
     <ClInclude Include="Render\d3d\Buffer\ConstantBuffer.h" />
     <ClInclude Include="Render\d3d\Buffer\VertexBuffer.h" />
     <ClInclude Include="Render\d3d\Vertex.h" />
+    <ClInclude Include="Render\Engine\BlendEngine.h" />
     <ClInclude Include="Render\Engine\D3DEngine.h" />
     <ClInclude Include="Render\Events\RenderEvent.h" />
     <ClInclude Include="Render\Layer\ILayer.h" />
@@ -166,6 +167,7 @@
     <ClCompile Include="Render\d3d\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Render\d3d\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Render\d3d\Vertex.cpp" />
+    <ClCompile Include="Render\Engine\BlendEngine.cpp" />
     <ClCompile Include="Render\Engine\D3DEngine.cpp" />
     <ClCompile Include="Render\Events\RenderEvent.cpp" />
   </ItemGroup>

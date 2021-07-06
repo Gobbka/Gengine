@@ -7,7 +7,7 @@ namespace Render {
 	class ConstantBuffer : Render::Bindable
 	{
 		ID3D11Buffer* _d3d_buffer;
-		void* _buffer;
+		void* _struct;
 		UINT _slot = 0;
 	public:
 		ConstantBuffer(D3DEngine*engine,void* struct_pointer,UINT struct_size, UINT slot = 0);

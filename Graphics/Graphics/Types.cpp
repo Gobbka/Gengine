@@ -16,6 +16,12 @@ Surface::Surface(float w, float h)
 	height = h;
 }
 
+Surface::Surface(RECT rect)
+{
+	width = (float)(rect.right - rect.left);
+	height = (float)(rect.bottom - rect.top);
+}
+
 void Position2::operator+=(Position2 pos)
 {
 	x += pos.x;

@@ -1,3 +1,4 @@
+#include <iostream>
 #include <Windows.h>
 #include "Graphics.h"
 #include "WindowsManager.h"
@@ -17,6 +18,13 @@ int WINAPI wWinMain(
 
     auto* graphic = Core::GraphicsContext::new_context(window->hwnd());
 
+    {
+        RECT rect;
+        GetClientRect(window->hwnd(), &rect);
+        graphic->set_resolution(Surface(rect));
+    }
+
+	
     auto* layer = graphic->create_2d_layer();
 	
     window->on_resize = [graphic](Surface size)
@@ -24,8 +32,13 @@ int WINAPI wWinMain(
         graphic->set_resolution(size);
     };
 	
-    auto* rectangle = new Canvas::Rectangle(Color4(RGB_TO_FLOAT(120,120,120),1.f),Position2(0,0),Surface(390,100));
+    auto* rectangle = new Canvas::Rectangle(Color4(RGB_TO_FLOAT(120,120,120),1.f),Position2(1,-1),Surface(390,100));
 
+    AllocConsole();
+    freopen("CONIN$", "r", stdin);
+    freopen("CONOUT$", "w", stdout);
+    freopen("CONOUT$", "w", stderr);
+	
     layer->add_object(rectangle);
 	
     MSG msg;

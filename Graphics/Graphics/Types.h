@@ -1,5 +1,6 @@
 #pragma once
 #include <DirectXMath.h>
+#include <d3d11.h>
 
 #define RGB_TO_FLOAT(r,g,b) r/255.f, g/255.f, b/255.f
 
@@ -28,6 +29,7 @@ struct __declspec(dllexport) Surface {
 	float height;
 
 	Surface(float w, float h);
+	Surface(RECT rect);
 };
 
 struct __declspec(dllexport) Position2 {

@@ -1,6 +1,8 @@
 ﻿#include "WindowsWindow.h"
 
 #include <cassert>
+#include <iostream>
+
 
 #include "WindowsManager.h"
 
@@ -14,13 +16,23 @@ LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam
 	if (msg == WM_CLOSE)
 		exit(0);
 
+	if(msg == WM_SIZE)
+	{
+		const auto window_width  = LOWORD(lParam);
+		const auto window_height = HIWORD(lParam);
+
+		std::cout << window_width << " " << window_height << '\n';
+
+		if(window->on_resize)
+			window->on_resize(Surface((float)window_width, (float)window_height));
+	}
+	
 	if (msg == WM_SIZING)
 	{
 		RECT r = *(RECT*)lParam;
+		
 		const auto window_width = r.right - r.left;
 		const auto window_height = r.bottom - r.top;
-
-		window->on_resize(Surface(window_width, window_height));
 		
 		if (window_width > window->max_width)
 			((RECT*)lParam)->right = r.left + window->max_width;

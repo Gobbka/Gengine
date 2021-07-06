@@ -10,7 +10,7 @@ namespace Core {
 	public:
 		Core::WindowsWindow* get_by_hwnd(HWND hwnd);
 
-		Core::WindowsWindow* create_window(HINSTANCE hints);
+		Core::WindowsWindow* create_window(HINSTANCE hinst, UINT width = 800u, UINT height = 600u);
 
 		static WindowsManager* instance();
 	};

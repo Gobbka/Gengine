@@ -148,6 +148,7 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Graphics\Types.h" />
     <ClInclude Include="Render\d3d\Bindable.h" />
+    <ClInclude Include="Render\d3d\Buffer\ConstantBuffer.h" />
     <ClInclude Include="Render\d3d\Buffer\VertexBuffer.h" />
     <ClInclude Include="Render\d3d\D3DObjectDescription.h" />
     <ClInclude Include="Render\d3d\Vertex.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Graphics\Types.cpp" />
     <ClCompile Include="Render\d3d\Bindable.cpp" />
+    <ClCompile Include="Render\d3d\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Render\d3d\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Render\d3d\Vertex.cpp" />
     <ClCompile Include="Render\Engine\D3DEngine.cpp" />

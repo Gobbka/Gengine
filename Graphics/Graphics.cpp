@@ -67,6 +67,11 @@ Canvas::Canvas2DLayer* Core::GraphicsContext::create_2d_layer()
 	return layer;
 }
 
+void Core::GraphicsContext::set_resolution(Surface new_resolution)
+{
+	_engine->set_resolution(new_resolution);
+}
+
 void Core::GraphicsContext::clear()
 {
 	float color[4]{ RGB_TO_FLOAT(31,31,32) ,1.f };
@@ -123,9 +128,10 @@ Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd)
 	
 	assert(SUCCEEDED (D3D11CreateDeviceAndSwapChain(
 		nullptr,
-		D3D_DRIVER_TYPE_HARDWARE,
+		D3D_DRIVER_TYPE_REFERENCE,
+		//D3D_DRIVER_TYPE_HARDWARE,
 		nullptr,
-		0,
+		D3D11_CREATE_DEVICE_DEBUG,
 		nullptr,
 		0,
 		D3D11_SDK_VERSION,

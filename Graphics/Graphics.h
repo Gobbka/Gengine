@@ -7,6 +7,8 @@
 #include "Canvas/CanvasLayer.h"
 #include "Render/Layer/ILayer.h"
 
+struct Surface;
+
 namespace Render {
 	class D3DEngine;
 }
@@ -37,6 +39,8 @@ namespace Core
 
 		Canvas::Canvas2DLayer* create_2d_layer();
 	public:
+		void set_resolution(Surface new_resolution);
+		
 		void clear();
 		
 		void present() const;

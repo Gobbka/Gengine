@@ -3,6 +3,7 @@
 #include "WindowsManager.h"
 #include "Canvas/Objects/Rectangle/Rectangle.h"
 
+
 int WINAPI wWinMain(
     _In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
@@ -11,7 +12,7 @@ int WINAPI wWinMain(
 )
 {
 
-    auto* window = Core::WindowsManager::instance()->create_window(hInstance);
+    auto* window = Core::WindowsManager::instance()->create_window(hInstance,800,600);
     window->show();
 
     auto* graphic = Core::GraphicsContext::new_context(window->hwnd());
@@ -20,10 +21,10 @@ int WINAPI wWinMain(
 	
     window->on_resize = [graphic](Surface size)
     {
-
+        graphic->set_resolution(size);
     };
 	
-    auto* rectangle = new Canvas::Rectangle(Color4(RGB_TO_FLOAT(120,120,120),1.f),Position2(-50,50),Surface(390,100));
+    auto* rectangle = new Canvas::Rectangle(Color4(RGB_TO_FLOAT(120,120,120),1.f),Position2(0,0),Surface(390,100));
 
     layer->add_object(rectangle);
 	

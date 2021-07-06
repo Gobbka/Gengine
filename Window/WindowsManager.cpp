@@ -11,9 +11,9 @@ Core::WindowsWindow* Core::WindowsManager::get_by_hwnd(HWND hwnd)
 	return nullptr;
 }
 
-Core::WindowsWindow* Core::WindowsManager::create_window(HINSTANCE hints)
+Core::WindowsWindow* Core::WindowsManager::create_window(HINSTANCE hinst, UINT width, UINT height)
 {
-	auto* new_window = new Core::WindowsWindow(hints);
+	auto* new_window = new Core::WindowsWindow(hinst,width,height);
 	
 	_windows.push_back(new_window);
 

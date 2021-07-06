@@ -19,6 +19,8 @@ LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam
 		RECT r = *(RECT*)lParam;
 		const auto window_width = r.right - r.left;
 		const auto window_height = r.bottom - r.top;
+
+		window->on_resize(Surface(window_width, window_height));
 		
 		if (window_width > window->max_width)
 			((RECT*)lParam)->right = r.left + window->max_width;

@@ -1,7 +1,9 @@
-//cbuffer ConstantBuffer2D : register(b0)
-//{
-//	float alpha;
-//}
+
+cbuffer ConstantBuffer2D : register(b0)
+{
+	float width;
+	float height;
+}
 
 // PSI (PixelShaderInput)
 struct PSI
@@ -17,7 +19,7 @@ PSI VS(float4 pos : POSITION, float4 color : COLOR)
 	psi.color = color;
 	psi.color.a = 0.0f;
 	psi.pos = pos;
-	psi.pos.x = pos.x / 400.f;
-	psi.pos.y = pos.y / 300.f;
+	psi.pos.x = pos.x / (width / 2) -1;
+	psi.pos.y = pos.y / (height / 2) +1;
 	return psi;
 }

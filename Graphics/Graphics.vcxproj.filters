@@ -48,9 +48,6 @@
     <ClInclude Include="Canvas\Objects\I2DCanvasObject.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\d3d\D3DObjectDescription.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Canvas\Objects\Rectangle\Rectangle.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>

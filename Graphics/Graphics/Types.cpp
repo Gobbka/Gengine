@@ -28,6 +28,12 @@ void Position2::operator+=(Position2 pos)
 	y += pos.y;
 }
 
+void Position2::operator-=(Position2 pos)
+{
+	x -= pos.x;
+	y -= pos.y;
+}
+
 Position2::Position2(float x, float y)
 {
 	this->x = x;

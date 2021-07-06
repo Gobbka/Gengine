@@ -37,6 +37,7 @@ struct __declspec(dllexport) Position2 {
 	float y;
 
 	void operator +=(Position2 pos);
+	void operator -=(Position2 pos);
 	
 	Position2(float x, float y);
 };

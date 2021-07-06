@@ -9,6 +9,8 @@ namespace Canvas {
 	private:
 		Render::D3D11Canvas _canvas;
 		std::vector<I2DCanvasObject*> _objects;
+	protected:
+		virtual void render_components(Render::DrawEvent* event);
 	public:
 		Render::Vertex* vertices() const;
 		

@@ -2,6 +2,15 @@
 #include "Objects/I2DCanvasObject.h"
 #include "../Render/d3d/Buffer/VertexBuffer.h"
 
+void Canvas::Canvas2DLayer::render_components(Render::DrawEvent* event)
+{
+	for (auto object : _objects)
+	{
+		if (!object->hidden)
+			object->draw(event);
+	}
+}
+
 Render::Vertex* Canvas::Canvas2DLayer::vertices() const
 {
 	return _canvas.get_ptr();
@@ -20,11 +29,7 @@ void Canvas::Canvas2DLayer::update()
 
 void Canvas::Canvas2DLayer::render(Render::DrawEvent* event)
 {	
-	for(auto object : _objects)
-	{
-		if(!object->hidden)
-			object->draw(event);
-	}
+	this->render_components(event);
 }
 
 Render::D3D11Canvas* Canvas::Canvas2DLayer::canvas()

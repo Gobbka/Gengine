@@ -2,7 +2,7 @@
 #include "../../../Render/Events/RenderEvent.h"
 #include "../../../Render/d3d/Vertex.h"
 
-Render::D3DObjectDescription::INDEX Canvas::Rectangle::size()
+Canvas::I2DCanvasObject::INDEX Canvas::Rectangle::size()
 {
 	return 4;
 }

@@ -7,6 +7,7 @@
 
 namespace Render
 {
+	class MaskEngine;
 	class BlendEngine;
 
 	class D3DEngine
@@ -25,6 +26,7 @@ namespace Render
 		ConstantBuffer* b0_buffer;
 
 		BlendEngine* _blendEngine;
+		MaskEngine*  _maskEngine;
 	public:
 		bool create_buffer(D3D11_BUFFER_DESC* desc,D3D11_SUBRESOURCE_DATA*data,ID3D11Buffer**buffer) const;
 		void set_resolution(Surface new_resolution);
@@ -32,6 +34,9 @@ namespace Render
 	public:
 		ID3D11DeviceContext* context() const;
 		ID3D11Device* device() const;
+		ID3D11RenderTargetView* get_target_view() const;
+
+		Surface get_screen_resolution() const;
 	public:
 		
 		D3DEngine(Core::GraphicsContext* context);

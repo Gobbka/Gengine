@@ -11,10 +11,21 @@
 #include "Render/d3d/Buffer/VertexBuffer.h"
 
 Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11DeviceContext* context)
+	: _screen_resolution(0,0)
 {
 	_device = dev;
 	_swap = swap;
 	_context = context;
+
+	RECT window_rect;
+
+	{
+		DXGI_SWAP_CHAIN_DESC desc;
+		swap->GetDesc(&desc);
+		GetClientRect(desc.OutputWindow, &window_rect);
+	}
+
+	_screen_resolution = Surface(window_rect);
 	
 	ID3D11Resource* back_buffer;
 	_swap->GetBuffer(0, __uuidof(ID3D11Resource), (void**)&back_buffer);
@@ -41,8 +52,8 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	assert(SUCCEEDED( D3DReadFileToBlob(L"C:\\Users\\Gobka\\source\\repos\\Gengine\\out\\pixel_shader.cso", &blob)));
 	assert(SUCCEEDED( _device->CreatePixelShader((const void*)blob->GetBufferPointer(), (size_t)blob->GetBufferSize(), nullptr, &_pixelShader)));
 
-	_viewport.Width = 800;
-	_viewport.Height = 600;
+	_viewport.Width = _screen_resolution.width;
+	_viewport.Height = _screen_resolution.height;
 	_viewport.MaxDepth = 1;
 	_viewport.MinDepth = 1;
 	_viewport.TopLeftX = 0;
@@ -60,6 +71,16 @@ ID3D11DeviceContext* Core::GraphicsContext::context() const
 	return _context;
 }
 
+Surface Core::GraphicsContext::get_screen_resolution() const
+{
+	return _screen_resolution;
+}
+
+ID3D11RenderTargetView* Core::GraphicsContext::get_render_target_view()
+{
+	return _targetView;
+}
+
 Canvas::Canvas2DLayer* Core::GraphicsContext::create_2d_layer()
 {
 	auto* layer = new Canvas::Canvas2DLayer(_engine);
@@ -69,6 +90,7 @@ Canvas::Canvas2DLayer* Core::GraphicsContext::create_2d_layer()
 
 void Core::GraphicsContext::set_resolution(Surface new_resolution)
 {
+	_screen_resolution = new_resolution;
 	_engine->set_resolution(new_resolution);
 }
 

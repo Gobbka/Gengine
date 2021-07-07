@@ -38,6 +38,7 @@ int WINAPI wWinMain(
     freopen("CONOUT$", "w", stdout);
     freopen("CONOUT$", "w", stderr);
 	
+    layer->add_object(new Canvas::Rectangle(Color4(RGB_TO_FLOAT(30, 120, 30), 1.f), Position2(1, -1), Surface(100, 390)));
     layer->add_object(rectangle);
 	
     MSG msg;

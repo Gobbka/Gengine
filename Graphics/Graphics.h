@@ -1,13 +1,10 @@
 #pragma once
 #include <d3d11.h>
 #include <vector>
-
-
-
 #include "Canvas/CanvasLayer.h"
+#include "Graphics/Types.h"
 #include "Render/Layer/ILayer.h"
 
-struct Surface;
 
 namespace Render {
 	class D3DEngine;
@@ -18,6 +15,8 @@ namespace Core
 	class __declspec(dllexport) GraphicsContext
 	{
 	private:
+		Surface _screen_resolution;
+		
 		ID3D11Device* _device;
 		IDXGISwapChain* _swap;
 		ID3D11DeviceContext* _context;
@@ -36,7 +35,9 @@ namespace Core
 	public:
 		ID3D11Device* device() const;
 		ID3D11DeviceContext* context() const;
-
+		Surface get_screen_resolution() const;
+		ID3D11RenderTargetView* get_render_target_view();
+		
 		Canvas::Canvas2DLayer* create_2d_layer();
 	public:
 		void set_resolution(Surface new_resolution);

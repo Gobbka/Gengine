@@ -7,7 +7,7 @@ void Canvas::Canvas2DLayer::render_components(Render::DrawEvent* event)
 	for (auto object : _objects)
 	{
 		if (!object->hidden)
-			object->draw(event);
+			event->draw_object(object);
 	}
 }
 

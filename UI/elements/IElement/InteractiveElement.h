@@ -61,7 +61,6 @@ namespace UI {
 		Parent* parent = nullptr;
 	protected:
 		static void default_event_callback(UIElementEventArgs args) {}
-		virtual void on_initialize() {}
 	protected:
 		float alpha = 1.f;
 	public:
@@ -93,8 +92,6 @@ namespace UI {
 		// public setters
 
 		void set_parent(Parent* parent);
-
-		virtual InteractiveElement* set_resolution(float width, float height) PURE;
 
 		void set_alpha(float alpha);
 

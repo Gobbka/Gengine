@@ -30,6 +30,9 @@
     <ClCompile Include="elements\IElement\InteractiveElement.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InteractiveForm.h">
@@ -48,6 +51,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="elements\IElement\InteractiveElement.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

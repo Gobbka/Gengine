@@ -22,7 +22,7 @@ void Canvas::Rectangle::apply_rectangle()
 	ptr[3].pos = DirectX::XMFLOAT3(x + width, y - height, 1.f);
 }
 
-void Canvas::Rectangle::init()
+void Canvas::Rectangle::on_initialize()
 {
 	this->set_position(_position);
 	this->set_resolution(_resolution);

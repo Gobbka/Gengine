@@ -8,8 +8,6 @@ namespace Render {
 
 namespace Canvas {
 	class Canvas2DLayer;
-	
-	// IControllableObject -> D3DObject -> 
 
 	class __declspec(dllexport) IControllableObject
 	{
@@ -18,9 +16,10 @@ namespace Canvas {
 	protected:
 		Canvas2DLayer* layer() const;
 
-		virtual void init() = 0;
+		virtual void on_initialize() = 0;
 
 	public:
+		virtual ~IControllableObject() = default;
 		bool hidden = false;
 
 		virtual void draw(Render::DrawEvent* event) = 0;

@@ -37,11 +37,6 @@ void UI::Panel::on_initialize()
 	Parent::on_initialize();
 }
 
-void UI::Panel::init()
-{
-	
-}
-
 Color4 UI::Panel::get_color()
 {
 	return rect.get_color();
@@ -94,12 +89,6 @@ Position2 UI::Panel::get_position()
 	return this->rect.get_position();
 }
 
-
-UI::InteractiveElement*UI::Panel::set_resolution(float width, float height)
-{
-	this->rect.set_resolution(Surface(width, height));
-	return this;
-}
 
 Surface UI::Panel::get_resolution()
 {

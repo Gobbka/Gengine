@@ -4,7 +4,8 @@
 #include "WindowsManager.h"
 #include "Canvas/Objects/Rectangle/Rectangle.h"
 #include "elements/Panel/Panel.h"
-
+#include "UIManager.h"
+#include "InteractiveForm.h"
 
 int WINAPI wWinMain(
     _In_ HINSTANCE hInstance,
@@ -25,24 +26,30 @@ int WINAPI wWinMain(
         graphic->set_resolution(Surface(rect));
     }
 
-    auto* layer = graphic->create_2d_layer();
+    auto* panel = new UI::Panel({ 0,0 }, { 300,300 }, { 0.5,0.5,0.5,0.5f });
+	
+    auto* ui = UI::UIManager::create_layer(graphic->get_2d_engine(),nullptr);
+    ui->add_element(panel);
+	
+    graphic->append_2d_layer(ui);
+    //auto* layer = graphic->create_2d_layer();
 
-    auto* interactive = new UI::Panel({0,0},{400,400},{0.5,0.5,0.5,0.5});
+    //auto* interactive = new UI::Panel({0,0},{400,400},{0.5,0.5,0.5,0.5});
 	
     window->on_resize = [graphic](Surface size)
     {
         graphic->set_resolution(size);
     };
 	
-    auto* rectangle = new Canvas::Rectangle(Color4(RGB_TO_FLOAT(120,120,120),1.f),Position2(1,-1),Surface(390,100));
+    //auto* rectangle = new Canvas::Rectangle(Color4(RGB_TO_FLOAT(120,120,120),1.f),Position2(1,-1),Surface(390,100));
 
     AllocConsole();
     freopen("CONIN$", "r", stdin);
     freopen("CONOUT$", "w", stdout);
     freopen("CONOUT$", "w", stderr);
 	
-    layer->add_object(new Canvas::Rectangle(Color4(RGB_TO_FLOAT(30, 120, 30), 1.f), Position2(1, -1), Surface(100, 390)));
-    layer->add_object(rectangle);
+    //layer->add_object(new Canvas::Rectangle(Color4(RGB_TO_FLOAT(30, 120, 30), 1.f), Position2(1, -1), Surface(100, 390)));
+    //layer->add_object(rectangle);
 	
     MSG msg;
     while (GetMessage(&msg,nullptr,0,0) > 0)

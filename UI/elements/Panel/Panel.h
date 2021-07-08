@@ -20,7 +20,6 @@ namespace UI
 		void draw(Render::DrawEvent* event) override;
 		void on_initialize() override;
 	public:
-		void init() override;
 		Color4 get_color() override;
 		
 		ElementDescription get_desc() override;
@@ -36,7 +35,6 @@ namespace UI
 		Position2 get_position() override;
 		Surface get_resolution() override;
 		void set_resolution(Surface surface) override;
-		InteractiveElement* set_resolution(float width, float height) override;
 	};
 }
 

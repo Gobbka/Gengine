@@ -153,6 +153,7 @@
     <ClCompile Include="elements\Panel\Panel.cpp" />
     <ClCompile Include="Events\WinIntEventHandler.cpp" />
     <ClCompile Include="InteractiveForm.cpp" />
+    <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="elements\IElement\InteractiveElement.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Events\InteractionEventHandler.h" />
     <ClInclude Include="Events\WinIntEventHandler.h" />
     <ClInclude Include="InteractiveForm.h" />
+    <ClInclude Include="UIManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,7 +4,7 @@
 void Canvas::IControllableObject::initialize(Canvas::Canvas2DLayer* layer)
 {
 	_layer = layer;
-	this->init();
+	this->on_initialize();
 }
 
 Canvas::IControllableObject::IControllableObject()

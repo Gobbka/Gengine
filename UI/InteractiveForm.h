@@ -15,7 +15,7 @@ namespace UI {
 	struct InteractiveElementDesc;
 	class InteractiveElement;
 
-	class InteractiveForm final : public Canvas::Canvas2DLayer
+	class __declspec(dllexport) InteractiveForm final : public Canvas::Canvas2DLayer
 	{
 	public:
 		struct DragStruct

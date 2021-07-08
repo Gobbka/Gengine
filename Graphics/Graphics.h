@@ -37,8 +37,11 @@ namespace Core
 		ID3D11DeviceContext* context() const;
 		Surface get_screen_resolution() const;
 		ID3D11RenderTargetView* get_render_target_view();
+
+		Render::D3DEngine* get_2d_engine();
 		
 		Canvas::Canvas2DLayer* create_2d_layer();
+		void append_2d_layer(Canvas::Canvas2DLayer*layer);
 	public:
 		void set_resolution(Surface new_resolution);
 		

@@ -14,7 +14,7 @@ namespace Canvas
 
 	private:
 		void apply_rectangle();
-		void init() override;
+		void on_initialize() override;
 	public:
 		Rectangle(Color4 background,Position2 position,Surface resolution);
 		

@@ -81,11 +81,21 @@ ID3D11RenderTargetView* Core::GraphicsContext::get_render_target_view()
 	return _targetView;
 }
 
+Render::D3DEngine* Core::GraphicsContext::get_2d_engine()
+{
+	return _engine;
+}
+
 Canvas::Canvas2DLayer* Core::GraphicsContext::create_2d_layer()
 {
 	auto* layer = new Canvas::Canvas2DLayer(_engine);
-	_2d_layers.push_back(layer);
+	append_2d_layer(layer);
 	return layer;
+}
+
+void Core::GraphicsContext::append_2d_layer(Canvas::Canvas2DLayer*layer)
+{
+	_2d_layers.push_back(layer);
 }
 
 void Core::GraphicsContext::set_resolution(Surface new_resolution)

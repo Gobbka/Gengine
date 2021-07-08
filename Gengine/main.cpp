@@ -26,10 +26,11 @@ int WINAPI wWinMain(
         graphic->set_resolution(Surface(rect));
     }
 
-    auto* panel = new UI::Panel({ 0,0 }, { 300,300 }, { 0.5,0.5,0.5,0.5f });
+    auto* panel = new UI::Panel({ 50,-50 }, { 300,300 }, { 0.5,0.5,0.5,0.5f });
 	
     auto* ui = UI::UIManager::create_layer(graphic->get_2d_engine(),nullptr);
     ui->add_element(panel);
+    panel->add_element(new UI::Panel({ 0,0 }, { 50,50 }, { 0.0,0.5,0.,1.f }));
 	
     graphic->append_2d_layer(ui);
     //auto* layer = graphic->create_2d_layer();

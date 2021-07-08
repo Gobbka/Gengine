@@ -12,6 +12,9 @@ LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam
 	
 	if(!window)
 		return DefWindowProc(hwnd, msg, wParam, lParam);
+
+	if (window->on_wndproc)
+		window->on_wndproc(msg, wParam, lParam);
 	
 	if (msg == WM_CLOSE)
 		exit(0);

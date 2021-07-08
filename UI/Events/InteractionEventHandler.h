@@ -13,6 +13,8 @@ namespace UI
 		
 		class IEventHandler
 		{
+		public:
+			virtual ~IEventHandler() = default;
 		protected:
 			bool can_handle_event = true;
 		protected:

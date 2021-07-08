@@ -27,19 +27,24 @@ int WINAPI wWinMain(
     }
 
     auto* panel = new UI::Panel({ 50,-50 }, { 300,300 }, { 0.5,0.5,0.5,0.5f });
+
+    auto* instance = UI::UIManager::instance();
+
 	
-    auto* ui = UI::UIManager::create_layer(graphic->get_2d_engine(),nullptr);
+    auto* ui = instance->create_layer(graphic->get_2d_engine(),nullptr);
     ui->add_element(panel);
     panel->add_element(new UI::Panel({ 0,0 }, { 50,50 }, { 0.0,0.5,0.,1.f }));
 	
     graphic->append_2d_layer(ui);
-    //auto* layer = graphic->create_2d_layer();
-
-    //auto* interactive = new UI::Panel({0,0},{400,400},{0.5,0.5,0.5,0.5});
 	
     window->on_resize = [graphic](Surface size)
     {
         graphic->set_resolution(size);
+    };
+
+    window->on_wndproc = [instance](UINT msg, WPARAM wparam, LPARAM lParam)
+    {
+        instance->window_proc(msg, wparam, lParam);
     };
 	
     //auto* rectangle = new Canvas::Rectangle(Color4(RGB_TO_FLOAT(120,120,120),1.f),Position2(1,-1),Surface(390,100));

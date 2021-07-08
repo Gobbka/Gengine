@@ -24,6 +24,7 @@ namespace Core {
 		UINT min_height = 50;
 	public:
 		std::function<void(Surface)> on_resize;
+		std::function<void(UINT msg,WPARAM wParam,LPARAM lParam)> on_wndproc;
 		
 		WindowsWindow(HINSTANCE hinst,UINT width=800u,UINT height=600u);
 

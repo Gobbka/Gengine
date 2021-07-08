@@ -11,7 +11,7 @@ namespace Canvas {
 	
 	// IControllableObject -> D3DObject -> 
 
-	class IControllableObject
+	class __declspec(dllexport) IControllableObject
 	{
 	private:
 		Canvas2DLayer* _layer;

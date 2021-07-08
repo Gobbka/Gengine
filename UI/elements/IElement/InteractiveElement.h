@@ -10,11 +10,8 @@ namespace Render {
 	struct DrawEvent;
 }
 
-namespace Application {
-	class InteractiveForm;
-}
-
 namespace UI {
+	class InteractiveForm;
 
 	class Parent;
 	class InteractiveElement;
@@ -53,8 +50,7 @@ namespace UI {
 		ElementDescription(bool can_be_parent, const char* string_name, bool has_text = false);
 	};
 
-
-	class InteractiveElement : public Canvas::IControllableObject
+	class __declspec(dllexport) InteractiveElement : public Canvas::IControllableObject
 	{
 	public:
 		typedef std::function<void(UIElementEventArgs)> EventCallback;
@@ -81,11 +77,11 @@ namespace UI {
 		bool have_parent() const;
 
 		// return's screen position
-		virtual Position2 get_position() PURE;
+		Position2 get_position() override PURE;
 
 		virtual ElementDescription get_desc() PURE;
 
-		virtual Surface get_resolution() PURE;
+		Surface get_resolution() override PURE;
 
 		virtual bool point_belongs(Position2 point) PURE;
 

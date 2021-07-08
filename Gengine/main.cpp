@@ -3,6 +3,7 @@
 #include "Graphics.h"
 #include "WindowsManager.h"
 #include "Canvas/Objects/Rectangle/Rectangle.h"
+#include "elements/Panel/Panel.h"
 
 
 int WINAPI wWinMain(
@@ -25,6 +26,8 @@ int WINAPI wWinMain(
     }
 
     auto* layer = graphic->create_2d_layer();
+
+    auto* interactive = new UI::Panel({0,0},{400,400},{0.5,0.5,0.5,0.5});
 	
     window->on_resize = [graphic](Surface size)
     {

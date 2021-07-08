@@ -36,6 +36,16 @@ ID3D11RenderTargetView* Render::D3DEngine::get_target_view() const
 	return _context->get_render_target_view();
 }
 
+Render::MaskEngine* Render::D3DEngine::mask_engine() const
+{
+	return _maskEngine;
+}
+
+Render::BlendEngine* Render::D3DEngine::blend_engine() const
+{
+	return _blendEngine;
+}
+
 Surface Render::D3DEngine::get_screen_resolution() const
 {
 	return _context->get_screen_resolution();
@@ -58,7 +68,7 @@ void Render::D3DEngine::present(DrawEvent* event)
 {
 	_blendEngine->bind();
 	b0_buffer->bind();
-	//_maskEngine->bind();
+	_maskEngine->bind();
 	
 	event->layer->render(event);
 }

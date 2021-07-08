@@ -21,7 +21,7 @@ namespace UI {
 		struct DragStruct
 		{
 			Position2 dragged_offset;
-			UI::InteractiveElement* element;
+			InteractiveElement* element;
 		};
 	private:
 		std::vector<UI::InteractiveElement*> childs;

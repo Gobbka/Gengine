@@ -35,6 +35,8 @@ namespace Render
 		ID3D11DeviceContext* context() const;
 		ID3D11Device* device() const;
 		ID3D11RenderTargetView* get_target_view() const;
+		MaskEngine* mask_engine() const;
+		BlendEngine* blend_engine() const;
 
 		Surface get_screen_resolution() const;
 	public:

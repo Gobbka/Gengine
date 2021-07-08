@@ -29,7 +29,7 @@ namespace UI
 		void append(UI::InteractiveElement* child);
 	};
 
-	class Parent : public InteractiveElement
+	class __declspec(dllexport) Parent : public InteractiveElement
 	{
 	private:
 		Position2 _offset_position;

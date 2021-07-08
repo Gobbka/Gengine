@@ -79,6 +79,11 @@ void Render::MaskEngine::set_state(ID3D11DepthStencilState* state, UINT referenc
 	_engine->context()->OMSetDepthStencilState(state, reference);
 }
 
+void Render::MaskEngine::clear_buffer()
+{
+	_engine->context()->ClearDepthStencilView(_view, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 0, 0);
+}
+
 void Render::MaskEngine::bind()
 {
 	auto* nigger = _engine->get_target_view();

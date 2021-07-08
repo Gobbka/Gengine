@@ -69,7 +69,7 @@ Interaction::EventStatus InteractiveForm::on_mouse_move(int mx,int my)
 	if (this->hidden())
 		return Interaction::EventStatus::none;
 
-	const Position2 cursor = {mx,my};
+	const Position2 cursor = {(float)mx,(float)my};
 
 	if (this->dragged)
 	{

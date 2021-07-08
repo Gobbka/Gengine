@@ -73,13 +73,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)out</OutDir>
-    <IncludePath>$(SolutionDir)Window;$(SolutionDir)Graphics;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Window;$(SolutionDir)Graphics;$(SolutionDir)UI;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)out;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)out</OutDir>
-    <IncludePath>$(SolutionDir)Window;$(SolutionDir)Graphics;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Window;$(SolutionDir)Graphics;$(SolutionDir)UI;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)out;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -158,6 +158,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Graphics\Graphics.vcxproj">
       <Project>{34da52e9-8e67-41d5-a346-e0241375392c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\UI\UI.vcxproj">
+      <Project>{2bebf010-a931-410d-b5b5-e47d441f1948}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Window\Window.vcxproj">
       <Project>{e60426fb-0403-4d98-859a-0505afcde763}</Project>

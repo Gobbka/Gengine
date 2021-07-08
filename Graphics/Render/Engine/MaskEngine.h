@@ -19,6 +19,8 @@ namespace Render {
 		MaskEngine(D3DEngine* engine);
 
 		void set_state(ID3D11DepthStencilState* state,UINT reference = 0);
+		void clear_buffer();
+		
 		void bind() override;
 
 		ID3D11DepthStencilState* get_drawState() CONST

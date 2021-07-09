@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "Events/WinIntEventHandler.h"
+#include "Graphics/Types.h"
 struct Position2;
 
 namespace Render {
@@ -15,10 +16,12 @@ namespace UI {
 	{
 	private:
 		std::vector<InteractiveForm*> _forms;
-		
+		Position2 _cursor;
+
+		UIManager();
 	public:
 		static UIManager* instance();
-		InteractiveForm* create_layer(Render::D3DEngine* engine,Position2*lp_cursor);
+		InteractiveForm* create_layer(Render::D3DEngine* engine);
 	protected:
 		void on_lbmouse_down() override;
 		void on_lbmouse_up() override;

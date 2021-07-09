@@ -4,15 +4,20 @@
 
 #include "InteractiveForm.h"
 
+UI::UIManager::UIManager()
+	: _cursor(0, 0)
+{
+}
+
 UI::UIManager* UI::UIManager::instance()
 {
 	static auto* instance = new UIManager();
 	return instance;
 }
 
-UI::InteractiveForm* UI::UIManager::create_layer(Render::D3DEngine* engine, Position2* lp_cursor)
+UI::InteractiveForm* UI::UIManager::create_layer(Render::D3DEngine* engine)
 {
-	auto* form = new InteractiveForm(engine, lp_cursor);
+	auto* form = new InteractiveForm(engine, &_cursor);
 	_forms.push_back(form);
 	return form;
 }
@@ -40,7 +45,8 @@ void UI::UIManager::on_mouse_scroll(short direction)
 
 void UI::UIManager::on_mouse_move(int mx, int my)
 {
-
+	_cursor = Position2(mx, my);
+	
 	for (auto iteration = _forms.size(); iteration --> 0;)
 	{
 		if (_forms[iteration]->on_mouse_move(mx,my) == Interaction::EventStatus::handled)

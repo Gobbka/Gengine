@@ -1,4 +1,7 @@
 #include "InteractiveForm.h"
+
+#include <iostream>
+
 #include "elements/IElement/InteractiveElement.h"
 #include <windowsx.h>
 
@@ -25,6 +28,10 @@ void InteractiveForm::drag_move(InteractiveElement* element)
 {
 	auto pos = element->get_position();
 	auto cursor = *_cursor_position;
+	
+	std::cout << "CURSOR: " << cursor.x << " " << cursor.y << '\n';
+	std::cout << "ELEMENT: " << pos.x << " " << pos.y << '\n';
+	pos.y *= -1;
 	cursor -= pos;
 	this->dragged = new DragStruct{ cursor ,element};
 }
@@ -73,7 +80,7 @@ Interaction::EventStatus InteractiveForm::on_mouse_move(int mx,int my)
 
 	if (this->dragged)
 	{
-		this->dragged->element->set_position(Position2(cursor.x - this->dragged->dragged_offset.x, cursor.y - this->dragged->dragged_offset.y));
+		this->dragged->element->set_position(Position2(cursor.x - this->dragged->dragged_offset.x, cursor.y + this->dragged->dragged_offset.y));
 		return Interaction::EventStatus::handled;
 	}
 

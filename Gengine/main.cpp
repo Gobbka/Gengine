@@ -35,7 +35,7 @@ int WINAPI wWinMain(
         graphic->set_resolution(size);
     };
 
-    auto* uicanvas = UI::UIManager::instance()->create_layer(graphic->get_2d_engine(), nullptr);
+    auto* uicanvas = UI::UIManager::instance()->create_layer(graphic->get_2d_engine());
     auto* panel = new UI::Panel({ 0,0}, { 250,300 }, { 1.,0.3f,0.2f,1.f });
     uicanvas->add_element(panel);
 
@@ -49,7 +49,17 @@ int WINAPI wWinMain(
         args->set_color({ 0.5,0.3,0.2,1.f });
     };
 
+    panel->onMouseDown = [uicanvas](UI::UIElementEventArgs args)
+    {
+        uicanvas->drag_move(args);
+    };
+	
     graphic->append_2d_layer(uicanvas);
+
+    window->on_wndproc = [](UINT msg, WPARAM wp, LPARAM lp)
+    {
+        UI::UIManager::instance()->window_proc(msg, wp, lp);
+    };
 	
     MSG msg;
     while (GetMessage(&msg,nullptr,0,0) > 0)

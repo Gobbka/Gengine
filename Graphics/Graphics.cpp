@@ -52,8 +52,8 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	assert(SUCCEEDED( D3DReadFileToBlob(L"C:\\Users\\Gobka\\source\\repos\\Gengine\\out\\pixel_shader.cso", &blob)));
 	assert(SUCCEEDED( _device->CreatePixelShader((const void*)blob->GetBufferPointer(), (size_t)blob->GetBufferSize(), nullptr, &_pixelShader)));
 
-	_viewport.Width = _screen_resolution.width;
-	_viewport.Height = _screen_resolution.height;
+	_viewport.Width = 800;
+	_viewport.Height = 600;
 	_viewport.MaxDepth = 1;
 	_viewport.MinDepth = 1;
 	_viewport.TopLeftX = 0;

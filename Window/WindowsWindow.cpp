@@ -6,6 +6,8 @@
 
 #include "WindowsManager.h"
 
+// todo: fix creating window with wrong resolution
+
 LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {	
 	auto* window = (WindowsWindow*)WindowsManager::instance()->get_by_hwnd(hwnd);

@@ -1,4 +1,7 @@
 #include "D3DEngine.h"
+
+#include <iostream>
+
 #include "../../Graphics/Types.h"
 #include "BlendEngine.h"
 #include "MaskEngine.h"
@@ -10,6 +13,7 @@ bool Render::D3DEngine::create_buffer(D3D11_BUFFER_DESC* desc, D3D11_SUBRESOURCE
 
 void Render::D3DEngine::set_resolution(Surface new_resolution)
 {
+	std::cout << "NEW RESOLUTION: " << new_resolution.width << " " << new_resolution.height << '\n';
 	_b0_constant_buffer_struct.width = new_resolution.width;
 	_b0_constant_buffer_struct.height = new_resolution.height;
 	b0_buffer->update();
@@ -68,7 +72,7 @@ void Render::D3DEngine::present(DrawEvent* event)
 {
 	_blendEngine->bind();
 	b0_buffer->bind();
-	_maskEngine->bind();
+	//_maskEngine->bind();
 	
 	event->layer->render(event);
 }

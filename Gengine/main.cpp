@@ -2,7 +2,6 @@
 #include <Windows.h>
 #include "Graphics.h"
 #include "WindowsManager.h"
-#include "Canvas/Objects/Rectangle/Rectangle.h"
 #include "elements/Panel/Panel.h"
 #include "UIManager.h"
 #include "InteractiveForm.h"
@@ -15,6 +14,11 @@ int WINAPI wWinMain(
 )
 {
 
+    AllocConsole();
+    freopen("CONIN$", "r", stdin);
+    freopen("CONOUT$", "w", stdout);
+    freopen("CONOUT$", "w", stderr);
+	
     auto* window = Core::WindowsManager::instance()->create_window(hInstance,800,600);
     window->show();
 
@@ -25,37 +29,27 @@ int WINAPI wWinMain(
         GetClientRect(window->hwnd(), &rect);
         graphic->set_resolution(Surface(rect));
     }
-
-    auto* panel = new UI::Panel({ 50,-50 }, { 300,300 }, { 0.5,0.5,0.5,0.5f });
-
-    auto* instance = UI::UIManager::instance();
-
-	
-    auto* ui = instance->create_layer(graphic->get_2d_engine(),nullptr);
-    ui->add_element(panel);
-    panel->add_element(new UI::Panel({ 0,0 }, { 50,50 }, { 0.0,0.5,0.,1.f }));
-	
-    graphic->append_2d_layer(ui);
 	
     window->on_resize = [graphic](Surface size)
     {
         graphic->set_resolution(size);
     };
 
-    window->on_wndproc = [instance](UINT msg, WPARAM wparam, LPARAM lParam)
-    {
-        instance->window_proc(msg, wparam, lParam);
-    };
-	
-    //auto* rectangle = new Canvas::Rectangle(Color4(RGB_TO_FLOAT(120,120,120),1.f),Position2(1,-1),Surface(390,100));
+    auto* uicanvas = UI::UIManager::instance()->create_layer(graphic->get_2d_engine(), nullptr);
+    auto* panel = new UI::Panel({ 0,0}, { 250,300 }, { 1.,0.3f,0.2f,1.f });
+    uicanvas->add_element(panel);
 
-    AllocConsole();
-    freopen("CONIN$", "r", stdin);
-    freopen("CONOUT$", "w", stdout);
-    freopen("CONOUT$", "w", stderr);
-	
-    //layer->add_object(new Canvas::Rectangle(Color4(RGB_TO_FLOAT(30, 120, 30), 1.f), Position2(1, -1), Surface(100, 390)));
-    //layer->add_object(rectangle);
+    panel->onMouseEnter = [](UI::UIElementEventArgs args)
+    {
+        args->set_color({ 0.8,0.5,0.3,1.f });
+    };
+
+    panel->onMouseLeave = [](UI::UIElementEventArgs args)
+    {
+        args->set_color({ 0.5,0.3,0.2,1.f });
+    };
+
+    graphic->append_2d_layer(uicanvas);
 	
     MSG msg;
     while (GetMessage(&msg,nullptr,0,0) > 0)

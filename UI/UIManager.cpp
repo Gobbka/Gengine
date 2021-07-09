@@ -19,22 +19,33 @@ UI::InteractiveForm* UI::UIManager::create_layer(Render::D3DEngine* engine, Posi
 
 void UI::UIManager::on_lbmouse_down()
 {
-	
+	for (auto* form : _forms)
+		if (form->on_lbmouse_down() == Interaction::EventStatus::handled)
+			return;
 }
 
 void UI::UIManager::on_lbmouse_up()
 {
+	for (auto* form : _forms)
+		if (form->on_lbmouse_up() == Interaction::EventStatus::handled)
+			return;
 }
 
 void UI::UIManager::on_mouse_scroll(short direction)
 {
+	for (auto* form : _forms)
+		if (form->on_mouse_scroll(direction) == Interaction::EventStatus::handled)
+			return;
 }
 
 void UI::UIManager::on_mouse_move(int mx, int my)
 {
-	std::cout << mx << " " << my << '\n';
-	for(auto*layer:_forms)
+
+	for (auto iteration = _forms.size(); iteration --> 0;)
 	{
-		layer->on_mouse_move(mx, my);
+		if (_forms[iteration]->on_mouse_move(mx,my) == Interaction::EventStatus::handled)
+		{
+			return;
+		}
 	}
 }

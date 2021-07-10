@@ -9,7 +9,7 @@ cbuffer ConstantBuffer2D : register(b0)
 struct PSI
 {
 	float4 pos : SV_POSITION;
-	float2 texCoord : TEXCOORD;
+	float3 texCoord : TEXCOORD;
 };
 
 Texture2D objTexture : TEXTURE: register(t0);

@@ -7,6 +7,8 @@
 
 
 namespace Render {
+	class VertexShader;
+	class PixelShader;
 	class D3DEngine;
 }
 
@@ -22,8 +24,8 @@ namespace Core
 		ID3D11DeviceContext* _context;
 		ID3D11RenderTargetView* _targetView;
 
-		ID3D11VertexShader* _vertexShader;
-		ID3D11PixelShader* _pixelShader;
+		Render::PixelShader* _pixelShader;
+		Render::VertexShader* _vertexShader;
 		ID3D11InputLayout* _inputLayout;
 
 		D3D11_VIEWPORT _viewport;

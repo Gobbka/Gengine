@@ -148,6 +148,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation\Animator.cpp" />
     <ClCompile Include="elements\IElement\InteractiveElement.cpp" />
     <ClCompile Include="elements\IElement\Parentable.cpp" />
     <ClCompile Include="elements\Panel\Panel.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation\Animator.h" />
     <ClInclude Include="elements\IElement\InteractiveElement.h" />
     <ClInclude Include="elements\IElement\Parentable.h" />
     <ClInclude Include="elements\Panel\Panel.h" />

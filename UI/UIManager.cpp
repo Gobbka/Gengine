@@ -7,6 +7,7 @@
 UI::UIManager::UIManager()
 	: _cursor(0, 0)
 {
+	_animator.start();
 }
 
 UI::UIManager* UI::UIManager::instance()
@@ -20,6 +21,11 @@ UI::InteractiveForm* UI::UIManager::create_layer(Render::D3DEngine* engine)
 	auto* form = new InteractiveForm(engine, &_cursor);
 	_forms.push_back(form);
 	return form;
+}
+
+UI::Animator* UI::UIManager::animator()
+{
+	return &_animator;
 }
 
 void UI::UIManager::on_lbmouse_down()

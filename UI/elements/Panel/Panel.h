@@ -31,6 +31,7 @@ namespace UI
 		void set_color(Color4 color) override;
 
 		void move_by(Position2 pos) override;
+		void scale(float value) override;
 
 		Position2 get_position() override;
 		Surface get_resolution() override;

@@ -33,6 +33,7 @@ namespace Canvas {
 		virtual void    set_color(Color4 color) = 0;
 		virtual Color4  get_color() = 0;
 
+		virtual void    scale(float value) =0;
 
 		virtual void move_by(Position2) = 0;
 
@@ -41,7 +42,7 @@ namespace Canvas {
 		IControllableObject();
 	};
 
-	class I2DCanvasObject : public IControllableObject
+	class __declspec(dllexport) I2DCanvasObject : public IControllableObject
 	{
 	public:
 		Render::Vertex* vertices() const;
@@ -53,6 +54,9 @@ namespace Canvas {
 	public:
 		auto get_index() const { return _index; }
 		void set_index(INDEX new_index) { _index = new_index; }
+
+		// todo: fix scaling
+		void scale(float value) override;
 
 		// must return needed object vertex length
 		virtual INDEX size() = 0;

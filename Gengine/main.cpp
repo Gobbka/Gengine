@@ -41,15 +41,25 @@ int WINAPI wWinMain(
 
     panel->onMouseEnter = [](UI::UIElementEventArgs args)
     {
-        args->set_color({ 0.8,0.5,0.3,1.f });
+        args->set_color({ .8f,.5f,.3f,1.f });
     };
 
     panel->onMouseLeave = [](UI::UIElementEventArgs args)
     {
-        args->set_color({ 0.5,0.3,0.2,1.f });
+        args->set_color({ .5f,.3f,.2f,1.f });
     };
 
     panel->onMouseDown = [uicanvas](UI::UIElementEventArgs args)
+    {
+        auto* button = (UI::Panel*)args;
+        UI::UIManager::instance()->animator()->add_animation(new UI::Animation(0, 1.f, 1000, [button](float value)
+            {
+                button->set_alpha(value);
+            }));
+        uicanvas->drag_move(args);
+    };
+
+    panel->onMouseUp = [uicanvas](UI::UIElementEventArgs args)
     {
         uicanvas->drag_move(args);
     };
@@ -62,14 +72,19 @@ int WINAPI wWinMain(
     };
 	
     MSG msg;
-    while (GetMessage(&msg,nullptr,0,0) > 0)
-    {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
+	while(true)
+	{
+		if(PeekMessage(&msg, nullptr,0, 0, PM_REMOVE))
+		{
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+		}
 
         graphic->clear();
         graphic->present();
-    }
+
+        Sleep(10);
+	}
 	
     return 0;
 }

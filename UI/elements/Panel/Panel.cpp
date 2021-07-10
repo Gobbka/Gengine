@@ -84,6 +84,11 @@ void UI::Panel::move_by(Position2 pos)
 	UI::Parent::move_by(pos);
 }
 
+void UI::Panel::scale(float value)
+{
+	rect.scale(value);
+}
+
 Position2 UI::Panel::get_position()
 {
 	return this->rect.get_position();

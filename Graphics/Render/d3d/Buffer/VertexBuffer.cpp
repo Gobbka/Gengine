@@ -24,7 +24,7 @@ Render::VertexBuffer::VertexBuffer(D3DEngine* engine, Vertex* data, UINT size, b
 		sizeof(Vertex) * size,
 		dynamic ? D3D11_USAGE_DYNAMIC : D3D11_USAGE_DEFAULT,
 		D3D11_BIND_VERTEX_BUFFER,
-		dynamic ? D3D11_CPU_ACCESS_WRITE : 0,
+		(dynamic ? D3D11_CPU_ACCESS_WRITE : 0u),
 		0,
 		sizeof(Vertex)
 	};

@@ -11,7 +11,7 @@ namespace Render
 	class __declspec(dllexport) D3D11Canvas
 	{
 	private:
-		struct Allocator
+		struct  __declspec(dllexport) Allocator
 		{
 			UINT start_size;
 			UINT step_size;

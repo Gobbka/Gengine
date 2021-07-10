@@ -29,7 +29,10 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	
 	ID3D11Resource* back_buffer;
 	_swap->GetBuffer(0, __uuidof(ID3D11Resource), (void**)&back_buffer);
+	
+	assert(back_buffer != nullptr);
 	assert(SUCCEEDED(_device->CreateRenderTargetView(back_buffer, nullptr, &_targetView)));
+	
 	back_buffer->Release();
 
 	_engine = new Render::D3DEngine(this);
@@ -40,8 +43,8 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	assert(SUCCEEDED(_device->CreateVertexShader((const void*)blob->GetBufferPointer(), (size_t)blob->GetBufferSize(), nullptr, &_vertexShader)));
 
 	HRESULT hr = _device->CreateInputLayout(
-		Render::Layout,
-		ARRAYSIZE(Render::Layout),
+		Render::VertexLayout,
+		ARRAYSIZE(Render::VertexLayout),
 		blob->GetBufferPointer(),
 		blob->GetBufferSize(),
 		&_inputLayout
@@ -104,10 +107,10 @@ void Core::GraphicsContext::set_resolution(Surface new_resolution)
 	_engine->set_resolution(new_resolution);
 }
 
-void Core::GraphicsContext::clear()
+void Core::GraphicsContext::clear(Color3 color)
 {
-	float color[4]{ RGB_TO_FLOAT(31,31,32) ,1.f };
-	_context->ClearRenderTargetView(_targetView, color);
+	auto float_color = Color4(color).to_float4();
+	_context->ClearRenderTargetView(_targetView, (FLOAT*)&float_color);
 }
 
 void Core::GraphicsContext::present() const

@@ -28,9 +28,7 @@ void InteractiveForm::drag_move(InteractiveElement* element)
 {
 	auto pos = element->get_position();
 	auto cursor = *_cursor_position;
-	
-	std::cout << "CURSOR: " << cursor.x << " " << cursor.y << '\n';
-	std::cout << "ELEMENT: " << pos.x << " " << pos.y << '\n';
+
 	pos.y *= -1;
 	cursor -= pos;
 	this->dragged = new DragStruct{ cursor ,element};

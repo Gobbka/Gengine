@@ -45,7 +45,7 @@ namespace Core
 	public:
 		void set_resolution(Surface new_resolution);
 		
-		void clear();
+		void clear(Color3 color);
 		
 		void present() const;
 	public:

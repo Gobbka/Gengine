@@ -2,7 +2,7 @@
 #include "../Events/RenderEvent.h"
 
 namespace Render {
-	class ILayer
+	class __declspec(dllexport) ILayer
 	{
 	private:
 		bool _hidden = false;

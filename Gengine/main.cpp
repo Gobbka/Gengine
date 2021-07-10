@@ -36,33 +36,8 @@ int WINAPI wWinMain(
     };
 
     auto* uicanvas = UI::UIManager::instance()->create_layer(graphic->get_2d_engine());
-    auto* panel = new UI::Panel({ 0,0}, { 250,300 }, { 1.,0.3f,0.2f,1.f });
+    auto* panel = new UI::Panel({ 0,0}, { 250,300 }, { RGB_TO_FLOAT(38,37,37),1.f });
     uicanvas->add_element(panel);
-
-    panel->onMouseEnter = [](UI::UIElementEventArgs args)
-    {
-        args->set_color({ .8f,.5f,.3f,1.f });
-    };
-
-    panel->onMouseLeave = [](UI::UIElementEventArgs args)
-    {
-        args->set_color({ .5f,.3f,.2f,1.f });
-    };
-
-    panel->onMouseDown = [uicanvas](UI::UIElementEventArgs args)
-    {
-        auto* button = (UI::Panel*)args;
-        UI::UIManager::instance()->animator()->add_animation(new UI::Animation(0, 1.f, 1000, [button](float value)
-            {
-                button->set_alpha(value);
-            }));
-        uicanvas->drag_move(args);
-    };
-
-    panel->onMouseUp = [uicanvas](UI::UIElementEventArgs args)
-    {
-        uicanvas->drag_move(args);
-    };
 	
     graphic->append_2d_layer(uicanvas);
 
@@ -80,7 +55,7 @@ int WINAPI wWinMain(
             DispatchMessage(&msg);
 		}
 
-        graphic->clear();
+        graphic->clear(Color3(RGB_TO_FLOAT(24,24,24)));
         graphic->present();
 
         Sleep(10);

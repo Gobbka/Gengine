@@ -10,8 +10,8 @@ Render::MaskEngine::MaskEngine(D3DEngine* engine)
 	
 	D3D11_TEXTURE2D_DESC texture_2d_desc{};
 	
-	texture_2d_desc.Width = screen_resolution.width;
-	texture_2d_desc.Height = screen_resolution.height;
+	texture_2d_desc.Width = (UINT)screen_resolution.width;
+	texture_2d_desc.Height = (UINT)screen_resolution.height;
 	texture_2d_desc.Format = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
 	texture_2d_desc.ArraySize = 1;
 	texture_2d_desc.MipLevels = 1;

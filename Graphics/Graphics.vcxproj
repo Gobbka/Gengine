@@ -149,8 +149,10 @@
     <ClInclude Include="Graphics\Types.h" />
     <ClInclude Include="Render\d3d\Bindable.h" />
     <ClInclude Include="Render\d3d\Buffer\ConstantBuffer.h" />
+    <ClInclude Include="Render\d3d\Buffer\Texture.h" />
     <ClInclude Include="Render\d3d\Buffer\VertexBuffer.h" />
     <ClInclude Include="Render\d3d\Shader\PixelShader.h" />
+    <ClInclude Include="Render\d3d\Shader\SamplerState.h" />
     <ClInclude Include="Render\d3d\Shader\Shader.h" />
     <ClInclude Include="Render\d3d\Shader\VertexShader.h" />
     <ClInclude Include="Render\d3d\Vertex.h" />
@@ -169,8 +171,10 @@
     <ClCompile Include="Graphics\Types.cpp" />
     <ClCompile Include="Render\d3d\Bindable.cpp" />
     <ClCompile Include="Render\d3d\Buffer\ConstantBuffer.cpp" />
+    <ClCompile Include="Render\d3d\Buffer\Texture.cpp" />
     <ClCompile Include="Render\d3d\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Render\d3d\Shader\PixelShader.cpp" />
+    <ClCompile Include="Render\d3d\Shader\SamplerState.cpp" />
     <ClCompile Include="Render\d3d\Shader\Shader.cpp" />
     <ClCompile Include="Render\d3d\Shader\VertexShader.cpp" />
     <ClCompile Include="Render\d3d\Vertex.cpp" />

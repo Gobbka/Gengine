@@ -6,7 +6,12 @@
 #include "Render/Layer/ILayer.h"
 
 
+// TODO-LIST:
+// Rename D3DEngine to Camera and replace all D3DEngine* dependency to Graphic*
+//
+
 namespace Render {
+	class SamplerState;
 	class VertexShader;
 	class PixelShader;
 	class D3DEngine;
@@ -24,8 +29,15 @@ namespace Core
 		ID3D11DeviceContext* _context;
 		ID3D11RenderTargetView* _targetView;
 
+		Render::SamplerState* _samplerState;
+		ID3D11InputLayout* _texture_layout;
+		
 		Render::PixelShader* _pixelShader;
 		Render::VertexShader* _vertexShader;
+
+		Render::PixelShader* _texture_ps;
+		Render::VertexShader* _texture_vs;
+		
 		ID3D11InputLayout* _inputLayout;
 
 		D3D11_VIEWPORT _viewport;

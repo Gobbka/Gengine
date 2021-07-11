@@ -13,7 +13,6 @@ int WINAPI wWinMain(
     _In_ int nShowCmd
 )
 {
-
     AllocConsole();
     freopen("CONIN$", "r", stdin);
     freopen("CONOUT$", "w", stdout);
@@ -36,8 +35,9 @@ int WINAPI wWinMain(
     };
 
     auto* uicanvas = UI::UIManager::instance()->create_layer(graphic->get_2d_engine());
-    auto* panel = new UI::Panel({ 0,0}, { 250,300 }, { RGB_TO_FLOAT(38,37,37),1.f });
+    auto* panel = new UI::Panel({ -1,1}, { 1,1 }, { RGB_TO_FLOAT(38,37,37),1.f });
     uicanvas->add_element(panel);
+    panel->set_texture(nullptr);
 	
     graphic->append_2d_layer(uicanvas);
 
@@ -60,6 +60,4 @@ int WINAPI wWinMain(
 
         Sleep(10);
 	}
-	
-    return 0;
 }

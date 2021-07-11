@@ -7,9 +7,11 @@
 
 #include "Canvas/CanvasLayer.h"
 #include "Graphics/Types.h"
+#include "Render/d3d/Buffer/Texture.h"
 #include "Render/Engine/D3DEngine.h"
 #include "Render/d3d/Buffer/VertexBuffer.h"
 
+#include "Render/d3d/Shader/SamplerState.h"
 #include "Render/d3d/Shader/PixelShader.h"
 #include "Render/d3d/Shader/VertexShader.h"
 
@@ -40,15 +42,28 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 
 	_engine = new Render::D3DEngine(this);
 
+	_samplerState = new Render::SamplerState(_engine);
+	
 	_vertexShader = new Render::VertexShader(_engine);
 	_pixelShader  = new Render::PixelShader(_engine);
 
+	_texture_ps = new Render::PixelShader(_engine);
+	_texture_vs = new Render::VertexShader(_engine);
+	
 	_vertexShader->read_file(L"C:\\Users\\Gobka\\source\\repos\\Gengine\\out\\shaders.cso");
 	_vertexShader->create_input_layout(Render::VertexLayout, ARRAYSIZE(Render::VertexLayout), &_inputLayout);
 	_vertexShader->release_blob();
 
 	_pixelShader->read_file(L"C:\\Users\\Gobka\\source\\repos\\Gengine\\out\\pixel_shader.cso");
 	_pixelShader->release_blob();
+
+	_texture_vs->read_file(L"C:\\Users\\Gobka\\source\\repos\\Gengine\\out\\texture_vs.cso");
+	_texture_vs->create_input_layout(Render::TextureLayout, ARRAYSIZE(Render::TextureLayout), &_texture_layout);
+	_texture_vs->release_blob();
+
+	_texture_ps->read_file(L"C:\\Users\\Gobka\\source\\repos\\Gengine\\out\\texture_ps.cso");
+	_texture_ps->release_blob();
+	
 	
 	_viewport.Width = 800;
 	_viewport.Height = 600;
@@ -116,8 +131,17 @@ void Core::GraphicsContext::present() const
 
 	_vertexShader->bind();
 	_pixelShader->bind();
-
+	
 	_context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+
+
+	static auto* texture = new Render::Texture(_engine, { 2,2 }, nullptr);
+
+	_context->IASetInputLayout(_texture_layout);
+	_samplerState->bind();
+	texture->bind();
+	_texture_ps->bind();
+	_texture_vs->bind();
 	
 	Render::DrawEvent draw_event(_engine,nullptr);
 	

@@ -89,6 +89,11 @@ void UI::Panel::scale(float value)
 	rect.scale(value);
 }
 
+void UI::Panel::set_texture(Render::Texture* texture)
+{
+	rect.set_texture(texture);
+}
+
 Position2 UI::Panel::get_position()
 {
 	return this->rect.get_position();

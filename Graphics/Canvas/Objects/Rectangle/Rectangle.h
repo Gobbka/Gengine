@@ -26,5 +26,7 @@ namespace Canvas
 		void move_by(Position2) override;
 		void set_color(Color4 color) override;
 		Color4 get_color() override;
+
+		void set_texture(Render::Texture* texture) override;
 	};
 }

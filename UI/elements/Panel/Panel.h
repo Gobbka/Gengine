@@ -33,6 +33,8 @@ namespace UI
 		void move_by(Position2 pos) override;
 		void scale(float value) override;
 
+		void set_texture(Render::Texture* texture) override;
+
 		Position2 get_position() override;
 		Surface get_resolution() override;
 		void set_resolution(Surface surface) override;

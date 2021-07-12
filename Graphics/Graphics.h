@@ -3,6 +3,7 @@
 #include <vector>
 #include "Canvas/CanvasLayer.h"
 #include "Graphics/Types.h"
+#include "Graphics/Material/Material.h"
 #include "Render/Layer/ILayer.h"
 
 
@@ -11,6 +12,7 @@
 //
 
 namespace Render {
+	class Texture;
 	class SamplerState;
 	class VertexShader;
 	class PixelShader;
@@ -41,6 +43,7 @@ namespace Core
 		ID3D11InputLayout* _inputLayout;
 
 		D3D11_VIEWPORT _viewport;
+
 	private:
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 
@@ -63,6 +66,10 @@ namespace Core
 		
 		void present() const;
 	public:
+		Render::Material* create_material(Surface resolution,char* pointer);
+		Render::Texture* create_texture(Render::Material* material);
+		void set_texture(Render::Texture* texture);
+		
 		static GraphicsContext* new_context(HWND hwnd);
 	};
 }

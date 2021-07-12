@@ -146,6 +146,7 @@
     <ClInclude Include="Canvas\Objects\I2DCanvasObject.h" />
     <ClInclude Include="Canvas\Objects\Rectangle\Rectangle.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Graphics\Material\Material.h" />
     <ClInclude Include="Graphics\Types.h" />
     <ClInclude Include="Render\d3d\Bindable.h" />
     <ClInclude Include="Render\d3d\Buffer\ConstantBuffer.h" />
@@ -168,6 +169,7 @@
     <ClCompile Include="Canvas\Objects\I2DCanvasObject.cpp" />
     <ClCompile Include="Canvas\Objects\Rectangle\Rectangle.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Graphics\Material\Material.cpp" />
     <ClCompile Include="Graphics\Types.cpp" />
     <ClCompile Include="Render\d3d\Bindable.cpp" />
     <ClCompile Include="Render\d3d\Buffer\ConstantBuffer.cpp" />

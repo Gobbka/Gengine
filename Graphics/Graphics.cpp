@@ -15,6 +15,8 @@
 #include "Render/d3d/Shader/PixelShader.h"
 #include "Render/d3d/Shader/VertexShader.h"
 
+#include "Graphics/Material/Material.h"
+
 Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11DeviceContext* context)
 	: _screen_resolution(0,0)
 {
@@ -134,12 +136,9 @@ void Core::GraphicsContext::present() const
 	
 	_context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-
-	static auto* texture = new Render::Texture(_engine, { 2,2 }, nullptr);
-
 	_context->IASetInputLayout(_texture_layout);
 	_samplerState->bind();
-	texture->bind();
+
 	_texture_ps->bind();
 	_texture_vs->bind();
 	
@@ -155,6 +154,21 @@ void Core::GraphicsContext::present() const
 		_engine->present(&draw_event);
 	}
 	_swap->Present(1u, 0u);
+}
+
+Render::Material* Core::GraphicsContext::create_material(Surface resolution, char* pointer)
+{
+	return new Render::Material(pointer, resolution);
+}
+
+Render::Texture* Core::GraphicsContext::create_texture(Render::Material* material)
+{
+	return new Render::Texture(get_2d_engine(), *material);
+}
+
+void Core::GraphicsContext::set_texture(Render::Texture* texture)
+{
+	texture->bind();
 }
 
 Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd)

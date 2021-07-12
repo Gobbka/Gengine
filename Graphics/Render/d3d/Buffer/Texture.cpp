@@ -6,12 +6,16 @@ Render::Texture::Texture(D3DEngine* engine,Material material)
 	: Bindable(engine)
 {
 	
-	static const BYTE gokba[] = { 255,255,255,255 ,  255,255,255,255  , 255,255,255,255  , 255,255,255,255 };
+	static const BYTE gokba[] = {
+		0,0,0,255 ,  255,255,255,255  , 255,255,255,255  ,
+		0,0,0,255 ,  255,255,255,255  , 255,255,255,255  ,
+		0,0,0,255 ,  255,255,255,255  , 255,255,255,255  ,
+	};
 	
 	D3D11_TEXTURE2D_DESC texture_desc;
 	texture_desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
-	texture_desc.Width = 2;
-	texture_desc.Height = 2;
+	texture_desc.Width = material.width();
+	texture_desc.Height = material.height();
 	texture_desc.MipLevels = 1;
 	texture_desc.ArraySize = 1;
 	texture_desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -26,7 +30,7 @@ Render::Texture::Texture(D3DEngine* engine,Material material)
 	rvDesc.Texture2D.MostDetailedMip = texture_desc.MipLevels - 1;
 	rvDesc.ViewDimension = D3D_SRV_DIMENSION_TEXTURE2D;
 	
-	D3D11_SUBRESOURCE_DATA sb{material.pSysMem(),2 * 4,0};
+	D3D11_SUBRESOURCE_DATA sb{material.pSysMem(),material.width() * 4,0};
 	
 	assert(SUCCEEDED(engine->device()->CreateTexture2D(&texture_desc, &sb, &_texture)));
 

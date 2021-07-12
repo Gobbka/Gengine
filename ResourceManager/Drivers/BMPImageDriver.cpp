@@ -1,5 +1,6 @@
 #include "BMPImageDriver.h"
 #include <cassert>
+#include <fstream>
 
 #define READ_INT32(ptr,offset) *(int*)((char*)ptr + offset)
 #define READ_INT16(ptr,offset) *(unsigned short*)((char*)ptr + offset)
@@ -24,7 +25,6 @@ BMPImageDriver::DriverOutput BMPImageDriver::to_data_byte4(DriverInput input)
 
 	const auto bits_per_pixel = READ_INT16(input.ptr, 0x1c);
 
-	auto* input_ptr = input.ptr + offset;
 
 	const auto total_pixels = (size_t)width * height;
 
@@ -34,16 +34,30 @@ BMPImageDriver::DriverOutput BMPImageDriver::to_data_byte4(DriverInput input)
 	};
 
 	auto* img_output_ptr = new Color4Byte[total_pixels];
+
+	auto* input_ptr = input.ptr;
+
+	auto write_offset = offset;
+
+	const auto layer_offset = 0x3;
 	
-	for(size_t i = 0; i < total_pixels;i++)
+	for(int i = 0,k=height*width-1;i < height;i++)
 	{
-		img_output_ptr[i] = Color4Byte{
-			input_ptr[i * 3],
-			input_ptr[i * 3+1],
-			input_ptr[i * 3+2],
-			(char)0xFF
-		};
+		for(int j = 0;j<width;j++)
+		{	
+			img_output_ptr[k] = Color4Byte{
+				input_ptr[write_offset+2],
+				input_ptr[write_offset+1],
+				input_ptr[write_offset],
+				(char)0xFF
+			};
+			write_offset += 3;
+			k--;
+		}
+		write_offset += layer_offset;
 	}
+
+	
 	
 	return DriverOutput((char*)img_output_ptr, total_pixels * 4,width,height);
 }

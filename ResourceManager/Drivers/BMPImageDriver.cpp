@@ -44,7 +44,8 @@ BMPImageDriver::DriverOutput BMPImageDriver::to_data_byte4(DriverInput input)
 	for(int i = 0,k=height*width-1;i < height;i++)
 	{
 		for(int j = 0;j<width;j++)
-		{	
+		{
+			
 			img_output_ptr[k] = Color4Byte{
 				input_ptr[write_offset+2],
 				input_ptr[write_offset+1],

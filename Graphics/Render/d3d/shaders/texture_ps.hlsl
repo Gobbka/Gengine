@@ -19,6 +19,6 @@ float4 main(PSI input) : SV_TARGET
 {
 
 	
-	float3 pixelColor = objTexture.Sample(objSamplerState,input.texCoord);
-	return float4(pixelColor, 1.0f);
+	float4 pixelColor = objTexture.Sample(objSamplerState,input.texCoord);
+	return float4(pixelColor);
 }

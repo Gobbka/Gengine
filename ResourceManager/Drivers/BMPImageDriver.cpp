@@ -5,16 +5,7 @@
 #define READ_INT32(ptr,offset) *(int*)((char*)ptr + offset)
 #define READ_INT16(ptr,offset) *(unsigned short*)((char*)ptr + offset)
 
-BMPImageDriver::DriverOutput::DriverOutput(char* ptr, size_t size, size_t width, size_t height)
-	: DriverInput()
-{
-	this->ptr = ptr;
-	this->size = size;
-	this->width = width;
-	this->height = height;
-}
-
-BMPImageDriver::DriverOutput BMPImageDriver::to_data_byte4(DriverInput input)
+DriverOutput BMPImageDriver::to_data_byte4(DriverInput input)
 {
 	const auto file_size = (size_t)READ_INT32(input.ptr, 0x2);
 	const auto image_size = (size_t)READ_INT32(input.ptr, 0x22);
@@ -27,11 +18,6 @@ BMPImageDriver::DriverOutput BMPImageDriver::to_data_byte4(DriverInput input)
 
 
 	const auto total_pixels = (size_t)width * height;
-
-	struct Color4Byte
-	{
-		char r, g, b, a;
-	};
 
 	auto* img_output_ptr = new Color4Byte[total_pixels];
 
@@ -52,6 +38,7 @@ BMPImageDriver::DriverOutput BMPImageDriver::to_data_byte4(DriverInput input)
 				input_ptr[write_offset],
 				(char)0xFF
 			};
+			
 			write_offset += 3;
 			k--;
 		}

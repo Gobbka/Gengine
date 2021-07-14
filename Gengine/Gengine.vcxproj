@@ -73,13 +73,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)out</OutDir>
-    <IncludePath>$(SolutionDir)Window;$(SolutionDir)Graphics;$(SolutionDir)UI;$(SolutionDir)ResourceManager;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Window;$(SolutionDir)Graphics;$(SolutionDir)UI;$(SolutionDir)Libs/FreeImage/;$(SolutionDir)ResourceManager;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)out;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)out</OutDir>
-    <IncludePath>$(SolutionDir)Window;$(SolutionDir)Graphics;$(SolutionDir)UI;$(SolutionDir)ResourceManager;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Window;$(SolutionDir)Graphics;$(SolutionDir)UI;$(SolutionDir)Libs/FreeImage/;$(SolutionDir)ResourceManager;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)out;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -99,7 +99,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)Libs\FreeImage\FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>
       </DelayLoadDLLs>
     </Link>
@@ -119,7 +119,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)Libs\FreeImage\FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>
       </DelayLoadDLLs>
     </Link>

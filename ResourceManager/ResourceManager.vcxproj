@@ -143,12 +143,15 @@
   <ItemGroup>
     <ClInclude Include="AsyncResourceLoader.h" />
     <ClInclude Include="Drivers\BMPImageDriver.h" />
+    <ClInclude Include="Drivers\ImageDriver.h" />
+    <ClInclude Include="Drivers\PNGImageDriver.h" />
     <ClInclude Include="IResource.h" />
     <ClInclude Include="IResourceLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AsyncResourceLoader.cpp" />
     <ClCompile Include="Drivers\BMPImageDriver.cpp" />
+    <ClCompile Include="Drivers\PNGImageDriver.cpp" />
     <ClCompile Include="IResource.cpp" />
     <ClCompile Include="IResourceLoader.cpp" />
   </ItemGroup>

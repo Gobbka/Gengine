@@ -107,7 +107,7 @@ int WINAPI wWinMain(
     };
 
     auto* uicanvas = UI::UIManager::instance()->create_layer(graphic->get_2d_engine());
-    auto* panel = new UI::Panel({ -1,1}, { 1,1 }, { RGB_TO_FLOAT(38,37,37),1.f });
+    auto* panel = new UI::Panel({ -1,1}, { 100,150 }, { RGB_TO_FLOAT(38,37,37),1.f });
     uicanvas->add_element(panel);
 
     bmp_test(graphic);

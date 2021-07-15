@@ -153,6 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Forms\Form\Form.cpp" />
     <ClCompile Include="Forms\MainForm\MainForm.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -171,6 +172,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Forms\Form\Form.h" />
     <ClInclude Include="Forms\MainForm\MainForm.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

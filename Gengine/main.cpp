@@ -90,10 +90,8 @@ int WINAPI wWinMain(
     freopen("CONOUT$", "w", stdout);
     freopen("CONOUT$", "w", stderr);
 
-	
-    //auto* window = Core::WindowsManager::instance()->create_window(hInstance,1400,780);
     auto*form = new Forms::MainForm(hInstance, 1400, 780);
-    Core::WindowsManager::instance()->register_window(form);
+    Core::WindowsManager::instance()->register_window((Core::WindowsWindow*)form);
     form->show();
 
     auto* graphic = Core::GraphicsContext::new_context(form->hwnd());
@@ -110,7 +108,7 @@ int WINAPI wWinMain(
     };
 
     auto* uicanvas = UI::UIManager::instance()->create_layer(graphic->get_2d_engine());
-    auto* panel = new UI::Panel({ -1,1}, { 100,150 }, { RGB_TO_FLOAT(38,37,37),1.f });
+    auto* panel = new UI::Panel({ 0,0}, { 100,150 }, { RGB_TO_FLOAT(38,37,37),1.f });
     uicanvas->add_element(panel);
 
     bmp_test(graphic);

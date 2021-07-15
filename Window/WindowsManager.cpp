@@ -14,10 +14,15 @@ Core::WindowsWindow* Core::WindowsManager::get_by_hwnd(HWND hwnd)
 Core::WindowsWindow* Core::WindowsManager::create_window(HINSTANCE hinst, UINT width, UINT height)
 {
 	auto* new_window = new Core::WindowsWindow(hinst,width,height);
-	
-	_windows.push_back(new_window);
+
+	register_window(new_window);
 
 	return new_window;
+}
+
+void Core::WindowsManager::register_window(WindowsWindow* wnd)
+{
+	_windows.push_back(wnd);
 }
 
 Core::WindowsManager* Core::WindowsManager::instance()

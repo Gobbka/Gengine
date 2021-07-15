@@ -12,6 +12,7 @@
 #include <fstream>
 
 #include "Drivers/PNGImageDriver.h"
+#include "Forms/MainForm/MainForm.h"
 
 Render::Material* material;
 
@@ -90,18 +91,20 @@ int WINAPI wWinMain(
     freopen("CONOUT$", "w", stderr);
 
 	
-    auto* window = Core::WindowsManager::instance()->create_window(hInstance,800,600);
-    window->show();
+    //auto* window = Core::WindowsManager::instance()->create_window(hInstance,1400,780);
+    auto*form = new Forms::MainForm(hInstance, 1400, 780);
+    Core::WindowsManager::instance()->register_window(form);
+    form->show();
 
-    auto* graphic = Core::GraphicsContext::new_context(window->hwnd());
+    auto* graphic = Core::GraphicsContext::new_context(form->hwnd());
 
     {
         RECT rect;
-        GetClientRect(window->hwnd(), &rect);
+        GetClientRect(form->hwnd(), &rect);
         graphic->set_resolution(Surface(rect));
     }
 	
-    window->on_resize = [graphic](Surface size)
+    form->on_resize = [graphic](Surface size)
     {
         graphic->set_resolution(size);
     };
@@ -116,7 +119,12 @@ int WINAPI wWinMain(
 	
     graphic->append_2d_layer(uicanvas);
 
-    window->on_wndproc = [](UINT msg, WPARAM wp, LPARAM lp)
+    panel->onMouseDown = [uicanvas](UI::UIElementEventArgs args)
+    {
+        uicanvas->drag_move(args);
+    };
+
+    form->on_wndproc = [](UINT msg, WPARAM wp, LPARAM lp)
     {
         UI::UIManager::instance()->window_proc(msg, wp, lp);
     };

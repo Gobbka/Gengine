@@ -10,7 +10,7 @@ namespace Render
 	private:
 		ID3D11BlendState* _blend;
 	public:
-		BlendEngine(D3DEngine* engine);
+		BlendEngine(Core::GraphicsContext* engine);
 		
 		void bind() override;
 	};

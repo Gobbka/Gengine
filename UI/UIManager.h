@@ -8,7 +8,7 @@
 struct Position2;
 
 namespace Render {
-	class D3DEngine;
+	class Camera;
 }
 
 namespace UI {
@@ -24,7 +24,7 @@ namespace UI {
 		UIManager();
 	public:
 		static UIManager* instance();
-		InteractiveForm* create_layer(Render::D3DEngine* engine);
+		InteractiveForm* create_layer(Render::Camera* engine);
 
 		Animator* animator();
 	protected:

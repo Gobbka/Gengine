@@ -158,7 +158,7 @@
     <ClInclude Include="Render\d3d\Shader\VertexShader.h" />
     <ClInclude Include="Render\d3d\Vertex.h" />
     <ClInclude Include="Render\Engine\BlendEngine.h" />
-    <ClInclude Include="Render\Engine\D3DEngine.h" />
+    <ClInclude Include="Render\Engine\Camera.h" />
     <ClInclude Include="Render\Engine\MaskEngine.h" />
     <ClInclude Include="Render\Events\RenderEvent.h" />
     <ClInclude Include="Render\Layer\ILayer.h" />
@@ -181,7 +181,7 @@
     <ClCompile Include="Render\d3d\Shader\VertexShader.cpp" />
     <ClCompile Include="Render\d3d\Vertex.cpp" />
     <ClCompile Include="Render\Engine\BlendEngine.cpp" />
-    <ClCompile Include="Render\Engine\D3DEngine.cpp" />
+    <ClCompile Include="Render\Engine\Camera.cpp" />
     <ClCompile Include="Render\Engine\MaskEngine.cpp" />
     <ClCompile Include="Render\Events\RenderEvent.cpp" />
   </ItemGroup>

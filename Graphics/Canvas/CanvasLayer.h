@@ -14,7 +14,7 @@ namespace Canvas {
 	public:
 		Render::Vertex* vertices() const;
 		
-		Canvas2DLayer(Render::D3DEngine*engine);
+		Canvas2DLayer(Core::GraphicsContext*engine);
 		
 		void update() override;
 		void render(Render::DrawEvent* event) override;

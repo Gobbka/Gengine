@@ -7,7 +7,7 @@
 #include "Events/InteractionEventHandler.h"
 
 namespace Render {
-	class D3DEngine;
+	class Camera;
 	struct DrawEvent;
 }
 
@@ -37,7 +37,7 @@ namespace UI {
 		bool has_element(UI::InteractiveElement* element);
 		InteractiveForm* add_element(UI::InteractiveElement* element);
 	public:
-		InteractiveForm(Render::D3DEngine* pEngine,Position2*cursor_position);
+		InteractiveForm(Core::GraphicsContext* pEngine,Position2*cursor_position);
 		virtual ~InteractiveForm();
 	public:
 		Interaction::EventStatus on_lbmouse_up();

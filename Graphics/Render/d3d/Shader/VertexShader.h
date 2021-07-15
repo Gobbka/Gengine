@@ -11,7 +11,7 @@ namespace Render {
 
 		void create_input_layout(const D3D11_INPUT_ELEMENT_DESC*elements,UINT num_elements,ID3D11InputLayout**layout);
 		
-		VertexShader(D3DEngine* engine);
+		VertexShader(Core::GraphicsContext* engine);
 
 		void bind() override;
 	};

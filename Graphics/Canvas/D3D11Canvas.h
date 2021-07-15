@@ -3,9 +3,13 @@
 
 #include "../Render/d3d/Vertex.h"
 
+namespace Core {
+	class GraphicsContext;
+}
+
 namespace Render
 {
-	class D3DEngine;
+	class Camera;
 	class VertexBuffer;
 
 	class __declspec(dllexport) D3D11Canvas
@@ -24,7 +28,7 @@ namespace Render
 			}
 		};
 	private:
-		D3DEngine* _engine;
+		Core::GraphicsContext* _engine;
 		Allocator _allocator;
 
 		VertexBuffer* alloc_vbuffer(UINT size) const;
@@ -36,7 +40,7 @@ namespace Render
 		UINT buffer_size() const;
 		UINT get_allocated_size() const;
 
-		D3DEngine* get_engine() const;
+		Core::GraphicsContext* get_graphics_context() const;
 
 		virtual void update() const;
 
@@ -47,8 +51,8 @@ namespace Render
 		VertexBuffer* get_vbuffer() const;
 
 
-		D3D11Canvas(D3DEngine* pEngine, VertexBuffer* buffer);
-		explicit D3D11Canvas(D3DEngine* pEngine);
+		D3D11Canvas(Core::GraphicsContext* pEngine, VertexBuffer* buffer);
+		explicit D3D11Canvas(Core::GraphicsContext* pEngine);
 
 		virtual ~D3D11Canvas();
 	};

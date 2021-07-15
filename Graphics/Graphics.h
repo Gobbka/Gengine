@@ -16,7 +16,7 @@ namespace Render {
 	class SamplerState;
 	class VertexShader;
 	class PixelShader;
-	class D3DEngine;
+	class Camera;
 }
 
 namespace Core
@@ -46,19 +46,17 @@ namespace Core
 
 	private:
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
-
-		std::vector<Canvas::Canvas2DLayer*> _2d_layers;
-		Render::D3DEngine* _engine;
+		
+		Render::Camera* _main_camera;
 	public:
 		ID3D11Device* device() const;
 		ID3D11DeviceContext* context() const;
 		Surface get_screen_resolution() const;
 		ID3D11RenderTargetView* get_render_target_view();
 
-		Render::D3DEngine* get_2d_engine();
-		
-		Canvas::Canvas2DLayer* create_2d_layer();
-		void append_2d_layer(Canvas::Canvas2DLayer*layer);
+		Render::Camera* main_camera();
+
+		bool create_buffer(D3D11_BUFFER_DESC* desc, D3D11_SUBRESOURCE_DATA* data, ID3D11Buffer** buffer) const;
 	public:
 		void set_resolution(Surface new_resolution);
 		

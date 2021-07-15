@@ -10,7 +10,7 @@ namespace Render
 	class MaskEngine;
 	class BlendEngine;
 
-	class D3DEngine
+	class __declspec(dllexport) Camera
 	{
 	private:
 		Core::GraphicsContext* _context;
@@ -27,11 +27,16 @@ namespace Render
 
 		BlendEngine* _blendEngine;
 		MaskEngine*  _maskEngine;
+
+		std::vector<Canvas::Canvas2DLayer*> _canvas2DLayers;
 	public:
-		bool create_buffer(D3D11_BUFFER_DESC* desc,D3D11_SUBRESOURCE_DATA*data,ID3D11Buffer**buffer) const;
 		void set_resolution(Surface new_resolution);
 		void set_alpha(float alpha);
+
+		Canvas::Canvas2DLayer* create_canvas_2d();
+		void register_canvas_2d(Canvas::Canvas2DLayer* layer);
 	public:
+		Core::GraphicsContext* graphics_context();
 		ID3D11DeviceContext* context() const;
 		ID3D11Device* device() const;
 		ID3D11RenderTargetView* get_target_view() const;
@@ -41,7 +46,7 @@ namespace Render
 		Surface get_screen_resolution() const;
 	public:
 		
-		D3DEngine(Core::GraphicsContext* context);
+		Camera(Core::GraphicsContext* context);
 
 		void present(DrawEvent* event);
 	};

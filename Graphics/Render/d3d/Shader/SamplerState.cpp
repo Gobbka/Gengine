@@ -1,7 +1,7 @@
 ﻿#include "SamplerState.h"
-#include "../../Engine/D3DEngine.h"
+#include "../../Engine/Camera.h"
 
-Render::SamplerState::SamplerState(D3DEngine* engine)
+Render::SamplerState::SamplerState(Core::GraphicsContext* engine)
 	: Bindable(engine)
 {
 	D3D11_SAMPLER_DESC desc{};

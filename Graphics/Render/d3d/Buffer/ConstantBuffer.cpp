@@ -1,8 +1,8 @@
 ﻿#include "ConstantBuffer.h"
-#include "../../Engine/D3DEngine.h"
+#include "../../Engine/Camera.h"
 
 
-Render::ConstantBuffer::ConstantBuffer(D3DEngine* engine, void* struct_pointer, UINT struct_size, UINT slot )
+Render::ConstantBuffer::ConstantBuffer(Core::GraphicsContext* engine, void* struct_pointer, UINT struct_size, UINT slot )
 	: Bindable(engine)
 {
 	_struct = struct_pointer;

@@ -58,7 +58,7 @@ InteractiveForm* InteractiveForm::add_element(UI::InteractiveElement* element)
 	return this;
 }
 
-InteractiveForm::InteractiveForm(Render::D3DEngine* pEngine, Position2* cursor_position)
+InteractiveForm::InteractiveForm(Core::GraphicsContext* pEngine, Position2* cursor_position)
 	: Canvas2DLayer(pEngine)
 {
 	_cursor_position = cursor_position;

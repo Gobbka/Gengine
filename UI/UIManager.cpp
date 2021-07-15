@@ -1,7 +1,7 @@
 ﻿#include "UIManager.h"
 
 #include <iostream>
-
+#include "Render/Engine/Camera.h"
 #include "InteractiveForm.h"
 
 UI::UIManager::UIManager()
@@ -16,10 +16,13 @@ UI::UIManager* UI::UIManager::instance()
 	return instance;
 }
 
-UI::InteractiveForm* UI::UIManager::create_layer(Render::D3DEngine* engine)
+UI::InteractiveForm* UI::UIManager::create_layer(Render::Camera* camera)
 {
-	auto* form = new InteractiveForm(engine, &_cursor);
+	auto* form = new InteractiveForm(camera->graphics_context(), &_cursor);
+	
+	camera->register_canvas_2d(form);
 	_forms.push_back(form);
+	
 	return form;
 }
 

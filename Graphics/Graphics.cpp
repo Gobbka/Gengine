@@ -8,7 +8,7 @@
 #include "Canvas/CanvasLayer.h"
 #include "Graphics/Types.h"
 #include "Render/d3d/Buffer/Texture.h"
-#include "Render/Engine/D3DEngine.h"
+#include "Render/Engine/Camera.h"
 #include "Render/d3d/Buffer/VertexBuffer.h"
 
 #include "Render/d3d/Shader/SamplerState.h"
@@ -42,15 +42,15 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	
 	back_buffer->Release();
 
-	_engine = new Render::D3DEngine(this);
+	_main_camera = new Render::Camera(this);
 
-	_samplerState = new Render::SamplerState(_engine);
+	_samplerState = new Render::SamplerState(this);
 	
-	_vertexShader = new Render::VertexShader(_engine);
-	_pixelShader  = new Render::PixelShader(_engine);
+	_vertexShader = new Render::VertexShader(this);
+	_pixelShader  = new Render::PixelShader(this);
 
-	_texture_ps = new Render::PixelShader(_engine);
-	_texture_vs = new Render::VertexShader(_engine);
+	_texture_ps = new Render::PixelShader(this);
+	_texture_vs = new Render::VertexShader(this);
 	
 	_vertexShader->read_file(L"C:\\Users\\Gobka\\source\\repos\\Gengine\\out\\shaders.cso");
 	_vertexShader->create_input_layout(Render::VertexLayout, ARRAYSIZE(Render::VertexLayout), &_inputLayout);
@@ -96,27 +96,20 @@ ID3D11RenderTargetView* Core::GraphicsContext::get_render_target_view()
 	return _targetView;
 }
 
-Render::D3DEngine* Core::GraphicsContext::get_2d_engine()
+Render::Camera* Core::GraphicsContext::main_camera()
 {
-	return _engine;
+	return _main_camera;
 }
 
-Canvas::Canvas2DLayer* Core::GraphicsContext::create_2d_layer()
+bool Core::GraphicsContext::create_buffer(D3D11_BUFFER_DESC* desc, D3D11_SUBRESOURCE_DATA* data, ID3D11Buffer** buffer) const
 {
-	auto* layer = new Canvas::Canvas2DLayer(_engine);
-	append_2d_layer(layer);
-	return layer;
-}
-
-void Core::GraphicsContext::append_2d_layer(Canvas::Canvas2DLayer*layer)
-{
-	_2d_layers.push_back(layer);
+	return SUCCEEDED(_device->CreateBuffer(desc, data, buffer));
 }
 
 void Core::GraphicsContext::set_resolution(Surface new_resolution)
 {
 	_screen_resolution = new_resolution;
-	_engine->set_resolution(new_resolution);
+	_main_camera->set_resolution(new_resolution);
 }
 
 void Core::GraphicsContext::clear(Color3 color)
@@ -142,17 +135,10 @@ void Core::GraphicsContext::present() const
 	_texture_ps->bind();
 	_texture_vs->bind();
 	
-	Render::DrawEvent draw_event(_engine,nullptr);
-	
-	for(auto* layer2d : _2d_layers)
-	{
-		draw_event.layer = layer2d;
-		
-		layer2d->update();
-		layer2d->canvas()->get_vbuffer()->bind();
-		
-		_engine->present(&draw_event);
-	}
+	Render::DrawEvent draw_event(_main_camera,nullptr);
+
+	_main_camera->present(&draw_event);
+
 	_swap->Present(1u, 0u);
 }
 
@@ -163,7 +149,7 @@ Render::Material* Core::GraphicsContext::create_material(Surface resolution, cha
 
 Render::Texture* Core::GraphicsContext::create_texture(Render::Material* material)
 {
-	return new Render::Texture(get_2d_engine(), *material);
+	return new Render::Texture(this, *material);
 }
 
 void Core::GraphicsContext::set_texture(Render::Texture* texture)

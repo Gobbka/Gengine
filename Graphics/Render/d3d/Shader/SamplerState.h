@@ -7,7 +7,7 @@ namespace Render {
 	{
 		ID3D11SamplerState* _state;
 	public:
-		SamplerState(D3DEngine* engine);
+		SamplerState(Core::GraphicsContext* engine);
 
 		void bind() override;
 	};

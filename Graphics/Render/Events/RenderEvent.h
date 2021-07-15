@@ -7,12 +7,12 @@ namespace Canvas
 }
 
 namespace Render {
-	class D3DEngine;
+	class Camera;
 	class ILayer;
 
 	struct __declspec(dllexport) DrawEvent {
 	private:
-		D3DEngine* _engine;
+		Camera* _engine;
 		
 		UINT _draw_index = 0u;
 		UINT _stencil_layer = 0u;
@@ -20,7 +20,7 @@ namespace Render {
 	public:
 		ILayer* layer;
 
-		DrawEvent(D3DEngine* engine , ILayer* layer);
+		DrawEvent(Camera* engine , ILayer* layer);
 
 	public:
 

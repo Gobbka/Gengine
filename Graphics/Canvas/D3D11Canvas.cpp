@@ -1,5 +1,5 @@
 #include "D3D11Canvas.h"
-#include "../Render/Engine/D3DEngine.h"
+#include "../Render/Engine/Camera.h"
 #include "../Render/d3d/Buffer/VertexBuffer.h"
 
 Render::VertexBuffer* Render::D3D11Canvas::alloc_vbuffer(UINT size) const
@@ -24,7 +24,7 @@ UINT Render::D3D11Canvas::get_allocated_size() const
 	return _allocator.allocated;
 }
 
-Render::D3DEngine* Render::D3D11Canvas::get_engine() const
+Core::GraphicsContext* Render::D3D11Canvas::get_graphics_context() const
 {
 	return _engine;
 }
@@ -61,7 +61,7 @@ Render::VertexBuffer* Render::D3D11Canvas::get_vbuffer() const
 	return _vertex_buffer;
 }
 
-Render::D3D11Canvas::D3D11Canvas(D3DEngine* pEngine, VertexBuffer* buffer)
+Render::D3D11Canvas::D3D11Canvas(Core::GraphicsContext* pEngine, VertexBuffer* buffer)
 	:_allocator(100,100)
 {
 	_engine = pEngine;
@@ -69,7 +69,7 @@ Render::D3D11Canvas::D3D11Canvas(D3DEngine* pEngine, VertexBuffer* buffer)
 	_allocator.allocated = buffer->size;
 }
 
-Render::D3D11Canvas::D3D11Canvas(D3DEngine* pEngine)
+Render::D3D11Canvas::D3D11Canvas(Core::GraphicsContext* pEngine)
 	:_allocator(100, 100)
 {
 	_vertex_buffer = nullptr;

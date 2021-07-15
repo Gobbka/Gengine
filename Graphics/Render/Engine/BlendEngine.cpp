@@ -1,7 +1,7 @@
 ﻿#include "BlendEngine.h"
-#include "D3DEngine.h"
+#include "Camera.h"
 
-Render::BlendEngine::BlendEngine(D3DEngine* engine)
+Render::BlendEngine::BlendEngine(Core::GraphicsContext* engine)
 	: Bindable(engine)
 {
 	D3D11_BLEND_DESC blendDesc;

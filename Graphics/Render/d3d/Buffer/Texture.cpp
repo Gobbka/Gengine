@@ -1,8 +1,8 @@
 ﻿#include "Texture.h"
-#include "../../Engine/D3DEngine.h"
+#include "../../Engine/Camera.h"
 #include "../../../Graphics/Material/Material.h"
 
-Render::Texture::Texture(D3DEngine* engine,Material material)
+Render::Texture::Texture(Core::GraphicsContext* engine,Material material)
 	: Bindable(engine)
 {
 	

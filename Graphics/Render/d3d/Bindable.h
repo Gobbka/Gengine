@@ -1,15 +1,19 @@
 ﻿#pragma once
 
+namespace Core {
+	class GraphicsContext;
+}
+
 namespace Render
 {
-	class D3DEngine;
+	class Camera;
 
 	class Bindable
 	{
 	protected:
-		D3DEngine* _engine;
+		Core::GraphicsContext* _engine;
 	public:
-		Bindable(D3DEngine*engine);
+		Bindable(Core::GraphicsContext*engine);
 		virtual ~Bindable();
 
 		virtual void bind() = 0;

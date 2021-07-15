@@ -1,9 +1,9 @@
 #include "RenderEvent.h"
 #include "../../Canvas/Objects/I2DCanvasObject.h"
-#include "../Engine/D3DEngine.h"
+#include "../Engine/Camera.h"
 #include "../Engine/MaskEngine.h"
 
-Render::DrawEvent::DrawEvent(D3DEngine* engine, ILayer* layer)
+Render::DrawEvent::DrawEvent(Camera* engine, ILayer* layer)
 {
 	this->layer = layer;
 	_engine = engine;

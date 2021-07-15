@@ -1,8 +1,8 @@
 ﻿#include "MaskEngine.h"
-#include "D3DEngine.h"
+#include "Camera.h"
 #include "../../Graphics/Types.h"
 
-Render::MaskEngine::MaskEngine(D3DEngine* engine)
+Render::MaskEngine::MaskEngine(Core::GraphicsContext* engine)
 	: Bindable(engine)
 {
 	auto screen_resolution = engine->get_screen_resolution();
@@ -86,6 +86,6 @@ void Render::MaskEngine::clear_buffer()
 
 void Render::MaskEngine::bind()
 {
-	auto* nigger = _engine->get_target_view();
+	auto* nigger = _engine->get_render_target_view();
 	_engine->context()->OMSetRenderTargets(1, &nigger, _view);
 }

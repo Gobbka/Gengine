@@ -10,7 +10,7 @@ namespace Render {
 		void* _struct;
 		UINT _slot = 0;
 	public:
-		ConstantBuffer(D3DEngine*engine,void* struct_pointer,UINT struct_size, UINT slot = 0);
+		ConstantBuffer(Core::GraphicsContext*engine,void* struct_pointer,UINT struct_size, UINT slot = 0);
 
 		void update() const;
 		void bind() override;

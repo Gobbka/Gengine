@@ -17,7 +17,7 @@ namespace Render
 		void copy_to(VertexBuffer* buffer) const;
 		void copy_to(void* buffer, UINT size) const;
 	public:
-		VertexBuffer(D3DEngine* engine, Vertex* data, UINT size, bool dynamic = true);
+		VertexBuffer(Core::GraphicsContext* engine, Vertex* data, UINT size, bool dynamic = true);
 		~VertexBuffer() override;
 
 		void bind() override;

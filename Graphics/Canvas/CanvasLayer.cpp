@@ -16,7 +16,7 @@ Render::Vertex* Canvas::Canvas2DLayer::vertices() const
 	return _canvas.get_ptr();
 }
 
-Canvas::Canvas2DLayer::Canvas2DLayer(Render::D3DEngine* engine)
+Canvas::Canvas2DLayer::Canvas2DLayer(Core::GraphicsContext* engine)
 	: _canvas(engine)
 {
 	

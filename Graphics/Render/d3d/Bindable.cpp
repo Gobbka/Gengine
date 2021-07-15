@@ -1,6 +1,6 @@
 ﻿#include "Bindable.h"
 
-Render::Bindable::Bindable(Render::D3DEngine* engine)
+Render::Bindable::Bindable(Core::GraphicsContext* engine)
 {
 	_engine = engine;
 }

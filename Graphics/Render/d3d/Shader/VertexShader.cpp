@@ -1,5 +1,5 @@
 ﻿#include "VertexShader.h"
-#include "../../../Render/Engine/D3DEngine.h"
+#include "../../../Render/Engine/Camera.h"
 
 void Render::VertexShader::construct(ID3DBlob* shader_blob)
 {
@@ -23,7 +23,7 @@ void Render::VertexShader::create_input_layout(const D3D11_INPUT_ELEMENT_DESC* e
 	);
 }
 
-Render::VertexShader::VertexShader(D3DEngine* engine)
+Render::VertexShader::VertexShader(Core::GraphicsContext* engine)
 	: Shader(engine)
 {
 	_shader = nullptr;

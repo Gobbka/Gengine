@@ -1,5 +1,5 @@
 ﻿#include "VertexBuffer.h"
-#include "../../Engine/D3DEngine.h"
+#include "../../Engine/Camera.h"
 #include "../Vertex.h"
 
 void Render::VertexBuffer::copy_to(VertexBuffer* buffer) const
@@ -14,7 +14,7 @@ void Render::VertexBuffer::copy_to(void* buffer, UINT size) const
 	memcpy(buffer, this->data, size * sizeof(Vertex));
 }
 
-Render::VertexBuffer::VertexBuffer(D3DEngine* engine, Vertex* data, UINT size, bool dynamic)
+Render::VertexBuffer::VertexBuffer(Core::GraphicsContext* engine, Vertex* data, UINT size, bool dynamic)
 	: Bindable(engine)
 {
 	this->data = data;

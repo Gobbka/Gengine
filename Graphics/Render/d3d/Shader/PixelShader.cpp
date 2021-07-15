@@ -1,5 +1,5 @@
 ﻿#include "PixelShader.h"
-#include "../../Engine/D3DEngine.h"
+#include "../../Engine/Camera.h"
 
 void Render::PixelShader::construct(ID3DBlob* shader_blob)
 {
@@ -11,7 +11,7 @@ void Render::PixelShader::construct(ID3DBlob* shader_blob)
 	);
 }
 
-Render::PixelShader::PixelShader(D3DEngine* engine)
+Render::PixelShader::PixelShader(Core::GraphicsContext* engine)
 	: Shader(engine)
 {
 	_shader = nullptr;

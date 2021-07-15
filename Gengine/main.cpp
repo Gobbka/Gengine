@@ -107,15 +107,13 @@ int WINAPI wWinMain(
         graphic->set_resolution(size);
     };
 
-    auto* uicanvas = UI::UIManager::instance()->create_layer(graphic->get_2d_engine());
+    auto* uicanvas = UI::UIManager::instance()->create_layer(graphic->main_camera());
     auto* panel = new UI::Panel({ 0,0}, { 100,150 }, { RGB_TO_FLOAT(38,37,37),1.f });
     uicanvas->add_element(panel);
 
     bmp_test(graphic);
     auto* texture = graphic->create_texture(material);
     panel->set_texture(texture);
-	
-    graphic->append_2d_layer(uicanvas);
 
     panel->onMouseDown = [uicanvas](UI::UIElementEventArgs args)
     {

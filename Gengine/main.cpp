@@ -63,13 +63,10 @@ void bmp_test(Core::GraphicsContext* context)
     auto* ptr = new char[size + 1];
     ptr[size] = '\0';
     ifs.read(ptr, size);
-
-    //auto output = PNGImageDriver::to_data_byte4({ ptr,size });
-
-    //auto output = PNGImageDriver::to_data_byte4({ ptr,size });
+	
     auto* fmemory = FreeImage_OpenMemory((BYTE*)ptr, size);
     auto bitmap = FreeImage_LoadFromMemory(FIF_PNG, (FIMEMORY*)fmemory);
-    //FIBITMAP bitmap;
+
 
     auto*nigger = FreeImage_GetBits(bitmap);
     material = context->create_material({ (float)FreeImage_GetWidth(bitmap) ,(float)FreeImage_GetHeight(bitmap) }, (char*)nigger);

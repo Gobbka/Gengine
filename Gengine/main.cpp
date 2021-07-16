@@ -61,7 +61,7 @@ int WINAPI wWinMain(
     auto* graphic = form->get_graphics_context();
 
     auto* uicanvas = UI::UIManager::instance()->create_layer(graphic->main_camera());
-    auto* panel = new UI::Panel({ 0,0}, { 1400,25 }, { RGB_TO_FLOAT(26,26,26),1.f });
+    auto* panel = new UI::Panel({ 0,0}, { 100,25 }, { RGB_TO_FLOAT(26,26,26),1.f });
     uicanvas->add_element(panel);
 
     //bmp_test(graphic);
@@ -70,8 +70,8 @@ int WINAPI wWinMain(
 
     panel->onMouseDown = [&](UI::UIElementEventArgs args)
     {
-        form->drag_move();
-        //uicanvas->drag_move(args);
+        //form->drag_move();
+        uicanvas->drag_move(args);
     };
 
     form->on_wndproc = [](UINT msg, WPARAM wp, LPARAM lp)

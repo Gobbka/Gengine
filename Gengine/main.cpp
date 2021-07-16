@@ -56,16 +56,17 @@ int WINAPI wWinMain(
 
     auto*form = new Forms::MainForm(hInstance, 1400, 780);
     form->show();
+    form->background = { 17,17,17 };
 
     auto* graphic = form->get_graphics_context();
 
     auto* uicanvas = UI::UIManager::instance()->create_layer(graphic->main_camera());
-    auto* panel = new UI::Panel({ 0,0}, { 100,150 }, { RGB_TO_FLOAT(38,37,37),1.f });
+    auto* panel = new UI::Panel({ 0,0}, { 1400,25 }, { RGB_TO_FLOAT(26,26,26),1.f });
     uicanvas->add_element(panel);
 
-    bmp_test(graphic);
-    auto* texture = graphic->create_texture(material);
-    panel->set_texture(texture);
+    //bmp_test(graphic);
+    //auto* texture = graphic->create_texture(material);
+    //panel->set_texture(texture);
 
     panel->onMouseDown = [&](UI::UIElementEventArgs args)
     {
@@ -86,10 +87,9 @@ int WINAPI wWinMain(
             TranslateMessage(&msg);
             DispatchMessage(&msg);
 		}
-
-        graphic->clear(Color3(RGB_TO_FLOAT(24,24,24)));
-        graphic->set_texture(texture);
-        graphic->present();
+		
+        //graphic->set_texture(texture);
+        form->force_draw();
 
         Sleep(10);
 	}

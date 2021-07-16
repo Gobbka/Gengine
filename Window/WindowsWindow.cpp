@@ -81,7 +81,7 @@ Core::WindowsWindow::WindowsWindow(HINSTANCE hint, UINT width, UINT height)
 		0,
 		class_name,
 		L"GENIGNE MAIN",
-		WS_CAPTION|WS_MINIMIZEBOX| WS_SIZEBOX | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU,
+		  WS_POPUP | WS_SYSMENU,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
 		width, height,

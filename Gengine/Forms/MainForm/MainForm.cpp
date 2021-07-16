@@ -10,3 +10,8 @@ void Forms::MainForm::initialize_components(Core::GraphicsContext* graphics)
 {
 	
 }
+
+void Forms::MainForm::handle_resize(Surface rect)
+{
+	
+}

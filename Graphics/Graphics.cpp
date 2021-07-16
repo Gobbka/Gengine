@@ -129,11 +129,11 @@ void Core::GraphicsContext::present() const
 	
 	_context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-	_context->IASetInputLayout(_texture_layout);
-	_samplerState->bind();
+	//_context->IASetInputLayout(_texture_layout);
+	//_samplerState->bind();
 
-	_texture_ps->bind();
-	_texture_vs->bind();
+	//_texture_ps->bind();
+	//_texture_vs->bind();
 	
 	Render::DrawEvent draw_event(_main_camera,nullptr);
 

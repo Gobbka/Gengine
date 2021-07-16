@@ -38,3 +38,10 @@ void Core::Form::drag_move()
     ReleaseCapture();
     SendMessage(hwnd(), WM_NCLBUTTONDOWN, HTCAPTION, 0);
 }
+
+void Core::Form::force_draw()
+{
+    _graphics->clear(Color3(RGB_TO_FLOAT(background.r,background.g,background.b)));
+    
+    _graphics->present();
+}

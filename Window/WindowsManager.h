@@ -12,6 +12,7 @@ namespace Core {
 
 		Core::WindowsWindow* create_window(HINSTANCE hinst, UINT width = 800u, UINT height = 600u);
 		void register_window(WindowsWindow* wnd);
+		void remove_window(WindowsWindow* wnd);
 
 		static WindowsManager* instance();
 	};

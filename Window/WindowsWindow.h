@@ -14,8 +14,8 @@ namespace Core {
 		HINSTANCE _hInst;
 		HWND _hwnd;
 		Surface _size;
-	private:
-		void handle_resize(RECT* rect);
+	protected:
+		virtual void handle_resize(RECT* rect);
 		
 	public:
 		UINT max_width = 0xFFFFFF;

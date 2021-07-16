@@ -25,6 +25,11 @@ void Core::WindowsManager::register_window(WindowsWindow* wnd)
 	_windows.push_back(wnd);
 }
 
+void Core::WindowsManager::remove_window(WindowsWindow* wnd)
+{
+	// TODO: complete
+}
+
 Core::WindowsManager* Core::WindowsManager::instance()
 {
 	static auto* instance = new WindowsManager();

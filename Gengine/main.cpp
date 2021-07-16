@@ -91,21 +91,9 @@ int WINAPI wWinMain(
     freopen("CONOUT$", "w", stderr);
 
     auto*form = new Forms::MainForm(hInstance, 1400, 780);
-    Core::WindowsManager::instance()->register_window((Core::WindowsWindow*)form);
     form->show();
 
-    auto* graphic = Core::GraphicsContext::new_context(form->hwnd());
-
-    {
-        RECT rect;
-        GetClientRect(form->hwnd(), &rect);
-        graphic->set_resolution(Surface(rect));
-    }
-	
-    form->on_resize = [graphic](Surface size)
-    {
-        graphic->set_resolution(size);
-    };
+    auto* graphic = form->get_graphics_context();
 
     auto* uicanvas = UI::UIManager::instance()->create_layer(graphic->main_camera());
     auto* panel = new UI::Panel({ 0,0}, { 100,150 }, { RGB_TO_FLOAT(38,37,37),1.f });

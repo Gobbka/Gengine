@@ -67,9 +67,10 @@ int WINAPI wWinMain(
     auto* texture = graphic->create_texture(material);
     panel->set_texture(texture);
 
-    panel->onMouseDown = [uicanvas](UI::UIElementEventArgs args)
+    panel->onMouseDown = [&](UI::UIElementEventArgs args)
     {
-        uicanvas->drag_move(args);
+        form->drag_move();
+        //uicanvas->drag_move(args);
     };
 
     form->on_wndproc = [](UINT msg, WPARAM wp, LPARAM lp)

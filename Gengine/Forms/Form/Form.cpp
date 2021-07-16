@@ -32,3 +32,9 @@ Core::GraphicsContext* Core::Form::get_graphics_context() const
 {
     return _graphics;
 }
+
+void Core::Form::drag_move()
+{
+    ReleaseCapture();
+    SendMessage(hwnd(), WM_NCLBUTTONDOWN, HTCAPTION, 0);
+}

@@ -16,5 +16,7 @@ namespace Core
 		virtual ~Form();
 	public:
 		GraphicsContext* get_graphics_context() const;
+
+		void drag_move();
 	};
 }

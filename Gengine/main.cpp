@@ -16,44 +16,8 @@
 
 Render::Material* material;
 
-void png_test()
-{
-	
-    std::ifstream ifs("228.png", std::ios::in | std::ios::binary | std::ifstream::ate);
-
-    assert(ifs.is_open());
-
-    auto size = (size_t)ifs.tellg();
-    ifs.seekg(0);
-
-    auto* ptr = new char[size + 1];
-    ptr[size] = '\0';
-    ifs.read(ptr, size);
-
-
-
-	
-    delete[] ptr;
-}
-
 void bmp_test(Core::GraphicsContext* context)
 {
-    png_test();
-	
-    //std::ifstream ifs("228.bmp", std::ios::in | std::ios::binary | std::ifstream::ate);
-
-    //assert(ifs.is_open());
-	
-    //auto size = (size_t)ifs.tellg();
-    //ifs.seekg(0);
-
-    //auto* ptr = new char[size+1];
-    //ptr[size] = '\0';
-    //ifs.read(ptr, size);
-
-    //auto output = BMPImageDriver::to_data_byte4({ ptr,size });
-
-    //delete[] ptr;
     std::ifstream ifs("228.png", std::ios::in | std::ios::binary | std::ifstream::ate);
 
     assert(ifs.is_open());

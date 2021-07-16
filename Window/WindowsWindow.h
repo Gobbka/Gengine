@@ -15,7 +15,7 @@ namespace Core {
 		HWND _hwnd;
 		Surface _size;
 	protected:
-		virtual void handle_resize(RECT* rect);
+		virtual void handle_resize(Surface rect);
 		
 	public:
 		UINT max_width = 0xFFFFFF;

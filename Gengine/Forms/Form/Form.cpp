@@ -3,9 +3,9 @@
 #include "Graphics.h"
 #include "WindowsManager.h"
 
-void Core::Form::handle_resize(RECT* rect)
+void Core::Form::handle_resize(Surface rect)
 {
-    _graphics->set_resolution(Surface(*rect));
+    _graphics->set_resolution(rect);
     WindowsWindow::handle_resize(rect);
 }
 

@@ -27,9 +27,9 @@ LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam
 		const auto window_height = HIWORD(lParam);
 
 		std::cout << window_width << " " << window_height << '\n';
-
-		if(window->on_resize)
-			window->on_resize(Surface((float)window_width, (float)window_height));
+		window->handle_resize(Surface(window_width,window_height));
+		/*if(window->on_resize)
+			window->on_resize(Surface((float)window_width, (float)window_height));*/
 	}
 	
 	if (msg == WM_SIZING)
@@ -51,11 +51,10 @@ LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }
 
-void Core::WindowsWindow::handle_resize(RECT* lprect)
+void Core::WindowsWindow::handle_resize(Surface lprect)
 {
-	auto rect = *lprect;
-	_size = Surface(rect.right - rect.left, rect.bottom - rect.top);
-	this->on_resize(_size);
+	if(this->on_resize)
+		this->on_resize(lprect);
 }
 
 Core::WindowsWindow::WindowsWindow(HINSTANCE hint, UINT width, UINT height)

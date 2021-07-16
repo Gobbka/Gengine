@@ -13,10 +13,14 @@ namespace Forms
 	class MainForm : public Core::Form
 	{
 	private:
-		UI::Panel* topbar_panel;
+		UI::Panel* _topbar_panel;
+		UI::Panel* _worldspace_panel;
+		UI::Panel* _assets_panel;
 	public:
 		MainForm(HINSTANCE hinst, UINT width, UINT height);
 
+		void handle_resize(Surface rect) override;
+		
 		void initialize_components(Core::GraphicsContext*graphics);
 	};
 }

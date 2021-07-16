@@ -2,15 +2,14 @@
 #include <Windows.h>
 #include "Graphics.h"
 #include "WindowsManager.h"
-#include "elements/Panel/Panel.h"
-#include "UIManager.h"
-#include "InteractiveForm.h"
-#include "Drivers/BMPImageDriver.h"
+
 #include "FreeImage.h"
 #include "Render/d3d/Buffer/Texture.h"
 
 #include <fstream>
 
+
+#include "UIManager.h"
 #include "Drivers/PNGImageDriver.h"
 #include "Forms/MainForm/MainForm.h"
 
@@ -60,19 +59,11 @@ int WINAPI wWinMain(
 
     auto* graphic = form->get_graphics_context();
 
-    auto* uicanvas = UI::UIManager::instance()->create_layer(graphic->main_camera());
-    auto* panel = new UI::Panel({ 0,0}, { 100,25 }, { RGB_TO_FLOAT(26,26,26),1.f });
-    uicanvas->add_element(panel);
-
-    //bmp_test(graphic);
-    //auto* texture = graphic->create_texture(material);
-    //panel->set_texture(texture);
-
-    panel->onMouseDown = [&](UI::UIElementEventArgs args)
-    {
-        //form->drag_move();
-        uicanvas->drag_move(args);
-    };
+    //panel->onMouseDown = [&](UI::UIElementEventArgs args)
+    //{
+    //    //form->drag_move();
+    //    uicanvas->drag_move(args);
+    //};
 
     form->on_wndproc = [](UINT msg, WPARAM wp, LPARAM lp)
     {

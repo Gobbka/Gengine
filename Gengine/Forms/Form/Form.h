@@ -9,7 +9,7 @@ namespace Core
 	{
 	private:
 		GraphicsContext* _graphics;
-
+	protected:
 		void handle_resize(Surface rect) override;
 	protected:
 		Form(HINSTANCE hinst, UINT width, UINT height);

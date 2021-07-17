@@ -8,7 +8,7 @@ namespace Render
 		void* _pSysMem;
 		Surface _resolution;
 	public:
-		enum RGBChannel
+		enum class RGBChannel
 		{
 			red = 0,
 			green = 1,
@@ -22,6 +22,6 @@ namespace Render
 		
 		Material(void* pSysMem, Surface resolution);
 
-		void swap_channels(RGBChannel first, RGBChannel second);
+		void swap_channels(RGBChannel first, RGBChannel second) const;
 	};
 }

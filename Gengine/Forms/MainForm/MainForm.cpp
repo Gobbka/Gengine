@@ -31,7 +31,7 @@ void bmp_test(Core::GraphicsContext* context)
 
 	auto* nigger = FreeImage_GetBits(bitmap);
 	material = context->create_material({ (float)FreeImage_GetWidth(bitmap) ,(float)FreeImage_GetHeight(bitmap) }, (char*)nigger);
-	material->swap_channels(Render::Material::red, Render::Material::blue);
+	material->swap_channels(Render::Material::RGBChannel::red, Render::Material::RGBChannel::blue);
 	
 	FreeImage_CloseMemory(fmemory);
 

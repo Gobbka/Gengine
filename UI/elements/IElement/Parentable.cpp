@@ -1,5 +1,7 @@
 #include "Parentable.h"
 
+#include <iostream>
+
 void UI::ReadChildrenCollection::foreach(std::function<void(UI::InteractiveElement* element)> iterator)
 {
 	for(auto*element: _children)
@@ -20,6 +22,15 @@ size_t UI::ReadChildrenCollection::count()
 UI::InteractiveElement* UI::ReadChildrenCollection::operator[](UINT index)
 {
 	return _children[index];
+}
+
+UI::InteractiveElement* UI::ReadChildrenCollection::last()
+{
+	auto _size = count();
+	if (count() == 0)
+		return nullptr;
+	
+	return _children[_size - 1];
 }
 
 
@@ -101,7 +112,6 @@ void UI::Parent::on_initialize()
 {
 	this->_children.foreach([&](UI::InteractiveElement* element) {
 		element->initialize(this->form);
-		element->move_by(_offset_position);
 	});
 
 	this->initialized = true;
@@ -150,13 +160,34 @@ UI::Parent* UI::Parent::add_element(InteractiveElement* element)
 		return this;
 	
 	element->set_parent(this);
+	element->move_by(this->get_position());
+	
+	auto* last_element = _children.last();
 	this->_children.append(element);
+
+	if (last_element == nullptr)
+		return this;
+
+	auto relative_point = last_element->point_to(this);
+	auto element_res = last_element->get_resolution();
+
+	//if(relative_point.x + element_res.width + element->styles.margin.w + element->styles.margin.y > get_resolution().width)
+	//{
+	//	
+	//}else
+	//{
+	//	element->move_by({ relative_point.x + element_res.width,relative_point.y });
+	//}
+
+
+	if (this->styles.display == ElementStyles::DisplayType::block)
+	{
+		std::cout << relative_point.y << '\n';
+		element->move_by({ 0,relative_point.y - element_res.height });
+	}
 	
 	if(this->initialized)
-	{
 		element->initialize(this->form);
-		element->move_by(this->get_position());
-	}
 	
 	return this;
 }

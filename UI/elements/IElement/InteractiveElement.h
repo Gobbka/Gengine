@@ -31,7 +31,7 @@ namespace UI {
 			flex,
 			block,
 			none,
-		} display;
+		} display = DisplayType::block;
 		enum class FlexDirectionType
 		{
 			row,
@@ -98,6 +98,8 @@ namespace UI {
 		Parent* get_parent() const;
 		// return's form where this object where registered
 		InteractiveForm* get_form() const;
+
+		Position2 point_to(InteractiveElement* element);
 	public:
 		// public setters
 

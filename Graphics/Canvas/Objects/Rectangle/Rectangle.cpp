@@ -11,6 +11,9 @@ Canvas::I2DCanvasObject::INDEX Canvas::Rectangle::size()
 
 void Canvas::Rectangle::apply_rectangle()
 {
+	if (this->layer() == nullptr)
+		return;
+	
 	auto* ptr = vertices();
 
 	auto x = _position.x;
@@ -26,6 +29,9 @@ void Canvas::Rectangle::apply_rectangle()
 
 void Canvas::Rectangle::apply_color()
 {
+	if (this->layer() == nullptr)
+		return;
+	
 	auto* ptr = vertices();
 
 	if(_background_texture != nullptr)
@@ -79,8 +85,6 @@ void Canvas::Rectangle::set_position(Position2 pos)
 {
 	_position = pos;
 	
-	if (this->layer() == nullptr)
-		return;
 	apply_rectangle();
 }
 
@@ -93,8 +97,6 @@ void Canvas::Rectangle::set_resolution(Surface surface)
 {
 	_resolution = surface;
 
-	if (this->layer() == nullptr)
-		return;
 	apply_rectangle();
 }
 
@@ -107,16 +109,7 @@ void Canvas::Rectangle::move_by(Position2 pos)
 {
 	_position += pos;
 
-	if (this->layer() == nullptr)
-		return;
-	
-	auto* ptr = vertices();
-
-	for (INDEX i = 0; i < size(); i++)
-	{
-		const auto _pos = ptr[i].pos;
-		ptr[i].pos = DirectX::XMFLOAT3(_pos.x + pos.x, _pos.y + pos.y, 1.f);
-	}
+	apply_rectangle();
 }
 
 void Canvas::Rectangle::set_color(Color4 color)
@@ -124,8 +117,6 @@ void Canvas::Rectangle::set_color(Color4 color)
 	_background_color = color;
 	_background_texture = nullptr;
 	
-	if (this->layer() == nullptr)
-		return;
 	apply_color();
 }
 
@@ -137,9 +128,6 @@ Color4 Canvas::Rectangle::get_color()
 void Canvas::Rectangle::set_texture(Render::Texture* texture)
 {
 	_background_texture = texture;
-
-	if (this->layer() == nullptr)
-		return;
 
 	apply_color();
 }

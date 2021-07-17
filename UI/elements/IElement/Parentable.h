@@ -22,6 +22,8 @@ namespace UI
 		size_t count();
 
 		UI::InteractiveElement* operator[](UINT index);
+
+		InteractiveElement* last();
 	};
 
 	class ReadWriteChildrenCollection : public ReadChildrenCollection {

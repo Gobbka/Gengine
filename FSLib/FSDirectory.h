@@ -4,7 +4,7 @@
 #include "FSFile.h"
 
 namespace FS {
-	class FSDirectory
+	class __declspec(dllexport) FSDirectory
 	{
 		wchar_t* _dir_path;
 	public:

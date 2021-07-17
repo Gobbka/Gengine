@@ -2,12 +2,15 @@
 
 #include <FreeImage.h>
 #include <fstream>
+#include <iostream>
+
 
 
 #include "Graphics.h"
 #include "elements/Panel/Panel.h"
 #include "UIManager.h"
 #include "InteractiveForm.h"
+#include "../../../FSLib/FSDirectory.h"
 #include "../../../FSLib/FSFile.h"
 #include "Render/d3d/Buffer/Texture.h"
 
@@ -45,6 +48,12 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	
 	_folder_texture = get_graphics_context()->create_texture( load_png(L"assets\\folder.png"));
 
+	FS::FSDirectory directory((wchar_t*)L"assets\\*");
+
+	directory.foreach([](FS::FSFile* file)
+		{
+			std::wcout << file->path() << '\n';
+		});
 	
 	uicanvas
 		->add_element(_topbar_panel)

@@ -7,11 +7,13 @@
 Render::Material::Material(BYTE* pSysMem, Surface resolution)
 	: _resolution(resolution)
 {
-	_pSysMem = pSysMem;
+	_pSysMem = (BYTE*)malloc(resolution.width * resolution.height * 4);// pSysMem;
+	memcpy(_pSysMem, pSysMem, resolution.width * resolution.height * 4);
 }
 
 Render::Material::~Material()
 {
+	delete[] _pSysMem;
 }
 
 void Render::Material::swap_channels(RGBChannel _first, RGBChannel _second) const

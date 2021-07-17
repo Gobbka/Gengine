@@ -13,6 +13,7 @@ namespace Render
 			red = 0,
 			green = 1,
 			blue = 2,
+			alpha = 3,
 		};
 		
 		void* pSysMem() { return _pSysMem; };

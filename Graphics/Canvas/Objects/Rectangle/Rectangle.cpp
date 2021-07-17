@@ -47,9 +47,6 @@ void Canvas::Rectangle::on_initialize()
 {
 	apply_rectangle();
 	apply_color();
-	// this->set_position(_position);
-	// this->set_resolution(_resolution);
-	this->set_color(_background_color);
 }
 
 Canvas::Rectangle::Rectangle(Color4 background, Position2 position, Surface resolution)

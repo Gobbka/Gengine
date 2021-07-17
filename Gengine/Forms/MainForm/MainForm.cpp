@@ -10,34 +10,32 @@
 #include "InteractiveForm.h"
 #include "Render/d3d/Buffer/Texture.h"
 
-Render::Material* material;
-
-void bmp_test(Core::GraphicsContext* context)
+Render::Material* load_png(const wchar_t*path)
 {
-	std::ifstream ifs("228.png", std::ios::in | std::ios::binary | std::ifstream::ate);
+	std::ifstream ifs(path, std::ios::in | std::ios::binary | std::ifstream::ate);
 
 	assert(ifs.is_open());
 
 	auto size = (size_t)ifs.tellg();
 	ifs.seekg(0);
 
-	auto* ptr = new char[size + 1];
-	ptr[size] = '\0';
+	auto* ptr = new char[size];
 	ifs.read(ptr, size);
 
 	auto* fmemory = FreeImage_OpenMemory((BYTE*)ptr, size);
 	auto bitmap = FreeImage_LoadFromMemory(FIF_PNG, (FIMEMORY*)fmemory);
 
-
 	auto* nigger = FreeImage_GetBits(bitmap);
-	material = context->create_material({ (float)FreeImage_GetWidth(bitmap) ,(float)FreeImage_GetHeight(bitmap) }, (char*)nigger);
+
+	auto* material = new Render::Material(nigger, Surface((float)FreeImage_GetWidth(bitmap), (float)FreeImage_GetHeight(bitmap)));
+	// we need to swap it cuz driver returns BGR but we need RGB
 	material->swap_channels(Render::Material::RGBChannel::red, Render::Material::RGBChannel::blue);
-	
+
 	FreeImage_CloseMemory(fmemory);
 
 	delete[] ptr;
+	return material;
 }
-
 
 Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	: Form(hinst, width, height)
@@ -52,9 +50,8 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 		new UI::Panel({ 0,0 }, { (float)width - 250,30 }, { RGB_TO_FLOAT(34,34,34),1.f })
 	);
 
-	bmp_test(get_graphics_context());
-	
-	auto* texture = get_graphics_context()->create_texture(material);
+	_folder_texture = get_graphics_context()->create_texture( load_png(L"folder.png"));
+
 	
 	uicanvas
 		->add_element(_topbar_panel)
@@ -62,7 +59,6 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 		->add_element(_assets_panel)
 	;
 
-	_worldspace_panel->set_texture(texture);
 }
 
 void Forms::MainForm::handle_resize(Surface rect)

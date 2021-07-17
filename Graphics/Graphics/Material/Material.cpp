@@ -1,5 +1,7 @@
 #include "Material.h"
+#include <fstream>
 
+#include "../../../Libs/FreeImage/FreeImage.h"
 #include "../../../ResourceManager/Drivers/ImageDriver.h"
 
 Render::Material::Material(void* pSysMem, Surface resolution)

@@ -1,5 +1,10 @@
 #pragma once
 #include "../Form/Form.h"
+
+namespace Render {
+	class Texture;
+}
+
 namespace Core {
 	class GraphicsContext;
 }
@@ -16,6 +21,8 @@ namespace Forms
 		UI::Panel* _topbar_panel;
 		UI::Panel* _worldspace_panel;
 		UI::Panel* _assets_panel;
+
+		Render::Texture* _folder_texture;
 	public:
 		MainForm(HINSTANCE hinst, UINT width, UINT height);
 

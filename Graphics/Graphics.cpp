@@ -54,19 +54,19 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	ID3D11InputLayout* _texture_layout=nullptr;
 
 	
-	_vertexShader->read_file(L"C:\\Users\\Gobka\\source\\repos\\Gengine\\out\\shaders.cso");
+	_vertexShader->read_file(L"d3d11\\shaders.cso");
 	_vertexShader->create_input_layout(Render::VertexLayout, ARRAYSIZE(Render::VertexLayout), &_inputLayout);
 	_vertexShader->release_blob();
 
-	_pixelShader->read_file(L"C:\\Users\\Gobka\\source\\repos\\Gengine\\out\\pixel_shader.cso");
+	_pixelShader->read_file(L"d3d11\\pixel_shader.cso");
 	_pixelShader->release_blob();
 
 
-	_texture_vs->read_file(L"C:\\Users\\Gobka\\source\\repos\\Gengine\\out\\texture_vs.cso");
+	_texture_vs->read_file(L"d3d11\\texture_vs.cso");
 	_texture_vs->create_input_layout(Render::TextureLayout, ARRAYSIZE(Render::TextureLayout), &_texture_layout);
 	_texture_vs->release_blob();
 
-	_texture_ps->read_file(L"C:\\Users\\Gobka\\source\\repos\\Gengine\\out\\texture_ps.cso");
+	_texture_ps->read_file(L"d3d11\\texture_ps.cso");
 	_texture_ps->release_blob();
 
 	_spriteEngine = new Render::SpriteEngine(this, _texture_ps, _texture_vs, _texture_layout);
@@ -152,11 +152,6 @@ void Core::GraphicsContext::present() const
 	_main_camera->present(&draw_event);
 
 	_swap->Present(1u, 0u);
-}
-
-Render::Material* Core::GraphicsContext::create_material(Surface resolution, char* pointer)
-{
-	return new Render::Material(pointer, resolution);
 }
 
 Render::Texture* Core::GraphicsContext::create_texture(Render::Material* material)

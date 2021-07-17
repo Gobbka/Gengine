@@ -8,32 +8,25 @@
 #include "elements/Panel/Panel.h"
 #include "UIManager.h"
 #include "InteractiveForm.h"
+#include "../../../FSLib/FSFile.h"
 #include "Render/d3d/Buffer/Texture.h"
 
 Render::Material* load_png(const wchar_t*path)
 {
-	std::ifstream ifs(path, std::ios::in | std::ios::binary | std::ifstream::ate);
+	auto file = FS::FSFile::read_file((wchar_t*)path);
 
-	assert(ifs.is_open());
+	auto* fmemory = FreeImage_OpenMemory((BYTE*)file.data(), file.size());
 
-	auto size = (size_t)ifs.tellg();
-	ifs.seekg(0);
-
-	auto* ptr = new char[size];
-	ifs.read(ptr, size);
-
-	auto* fmemory = FreeImage_OpenMemory((BYTE*)ptr, size);
 	auto bitmap = FreeImage_LoadFromMemory(FIF_PNG, (FIMEMORY*)fmemory);
-
 	auto* nigger = FreeImage_GetBits(bitmap);
 
 	auto* material = new Render::Material(nigger, Surface((float)FreeImage_GetWidth(bitmap), (float)FreeImage_GetHeight(bitmap)));
 	// we need to swap it cuz driver returns BGR but we need RGB
 	material->swap_channels(Render::Material::RGBChannel::red, Render::Material::RGBChannel::blue);
 
+	FreeImage_Unload(bitmap);
 	FreeImage_CloseMemory(fmemory);
 
-	delete[] ptr;
 	return material;
 }
 
@@ -49,8 +42,8 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_assets_panel->add_element(
 		new UI::Panel({ 0,0 }, { (float)width - 250,30 }, { RGB_TO_FLOAT(34,34,34),1.f })
 	);
-
-	_folder_texture = get_graphics_context()->create_texture( load_png(L"folder.png"));
+	
+	_folder_texture = get_graphics_context()->create_texture( load_png(L"assets\\folder.png"));
 
 	
 	uicanvas
@@ -58,7 +51,6 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 		->add_element(_worldspace_panel)
 		->add_element(_assets_panel)
 	;
-
 }
 
 void Forms::MainForm::handle_resize(Surface rect)

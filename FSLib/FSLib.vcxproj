@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{34da52e9-8e67-41d5-a346-e0241375392c}</ProjectGuid>
-    <RootNamespace>Graphics</RootNamespace>
+    <ProjectGuid>{cc635b89-5da1-4456-9d59-1ef1f28e2aea}</ProjectGuid>
+    <RootNamespace>FSLib</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -141,97 +141,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Canvas\CanvasLayer.h" />
-    <ClInclude Include="Canvas\D3D11Canvas.h" />
-    <ClInclude Include="Canvas\Objects\I2DCanvasObject.h" />
-    <ClInclude Include="Canvas\Objects\Rectangle\Rectangle.h" />
-    <ClInclude Include="Graphics.h" />
-    <ClInclude Include="Graphics\Material\Material.h" />
-    <ClInclude Include="Graphics\Types.h" />
-    <ClInclude Include="Render\d3d\Bindable.h" />
-    <ClInclude Include="Render\d3d\Buffer\ConstantBuffer.h" />
-    <ClInclude Include="Render\d3d\Buffer\Texture.h" />
-    <ClInclude Include="Render\d3d\Buffer\VertexBuffer.h" />
-    <ClInclude Include="Render\d3d\Shader\PixelShader.h" />
-    <ClInclude Include="Render\d3d\Shader\SamplerState.h" />
-    <ClInclude Include="Render\d3d\Shader\Shader.h" />
-    <ClInclude Include="Render\d3d\Shader\VertexShader.h" />
-    <ClInclude Include="Render\d3d\Vertex.h" />
-    <ClInclude Include="Render\Engine\BlendEngine.h" />
-    <ClInclude Include="Render\Engine\Camera.h" />
-    <ClInclude Include="Render\Engine\MaskEngine.h" />
-    <ClInclude Include="Render\Engine\SpriteEngine.h" />
-    <ClInclude Include="Render\Events\RenderEvent.h" />
-    <ClInclude Include="Render\Layer\ILayer.h" />
+    <ClInclude Include="FSDirectory.h" />
+    <ClInclude Include="FSFile.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Canvas\CanvasLayer.cpp" />
-    <ClCompile Include="Canvas\D3D11Canvas.cpp" />
-    <ClCompile Include="Canvas\Objects\I2DCanvasObject.cpp" />
-    <ClCompile Include="Canvas\Objects\Rectangle\Rectangle.cpp" />
-    <ClCompile Include="Graphics.cpp" />
-    <ClCompile Include="Graphics\Material\Material.cpp" />
-    <ClCompile Include="Graphics\Types.cpp" />
-    <ClCompile Include="Render\d3d\Bindable.cpp" />
-    <ClCompile Include="Render\d3d\Buffer\ConstantBuffer.cpp" />
-    <ClCompile Include="Render\d3d\Buffer\Texture.cpp" />
-    <ClCompile Include="Render\d3d\Buffer\VertexBuffer.cpp" />
-    <ClCompile Include="Render\d3d\Shader\PixelShader.cpp" />
-    <ClCompile Include="Render\d3d\Shader\SamplerState.cpp" />
-    <ClCompile Include="Render\d3d\Shader\Shader.cpp" />
-    <ClCompile Include="Render\d3d\Shader\VertexShader.cpp" />
-    <ClCompile Include="Render\d3d\Vertex.cpp" />
-    <ClCompile Include="Render\Engine\BlendEngine.cpp" />
-    <ClCompile Include="Render\Engine\Camera.cpp" />
-    <ClCompile Include="Render\Engine\MaskEngine.cpp" />
-    <ClCompile Include="Render\Engine\SpriteEngine.cpp" />
-    <ClCompile Include="Render\Events\RenderEvent.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="Render\d3d\shaders\pixel_shader.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PS</EntryPointName>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PS</EntryPointName>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)/d3d11/%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)/d3d11/%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Render\d3d\shaders\shaders.hlsl">
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VS</EntryPointName>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VS</EntryPointName>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)/d3d11/%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)/d3d11/%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Render\d3d\shaders\texture_ps.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)/d3d11/%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)/d3d11/%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Render\d3d\shaders\texture_vs.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VS</EntryPointName>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VS</EntryPointName>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)/d3d11/%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)/d3d11/%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
+    <ClCompile Include="FSDirectory.cpp" />
+    <ClCompile Include="FSFile.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

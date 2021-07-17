@@ -65,7 +65,6 @@ namespace Core
 		
 		void present() const;
 	public:
-		Render::Material* create_material(Surface resolution,char* pointer);
 		Render::Texture* create_texture(Render::Material* material);
 		void set_texture(Render::Texture* texture);
 		

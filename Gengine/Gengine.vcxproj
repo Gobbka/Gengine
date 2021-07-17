@@ -158,6 +158,9 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FSLib\FSLib.vcxproj">
+      <Project>{cc635b89-5da1-4456-9d59-1ef1f28e2aea}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Graphics\Graphics.vcxproj">
       <Project>{34da52e9-8e67-41d5-a346-e0241375392c}</Project>
     </ProjectReference>

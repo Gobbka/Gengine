@@ -4,10 +4,14 @@
 #include "../../../Libs/FreeImage/FreeImage.h"
 #include "../../../ResourceManager/Drivers/ImageDriver.h"
 
-Render::Material::Material(void* pSysMem, Surface resolution)
+Render::Material::Material(BYTE* pSysMem, Surface resolution)
 	: _resolution(resolution)
 {
 	_pSysMem = pSysMem;
+}
+
+Render::Material::~Material()
+{
 }
 
 void Render::Material::swap_channels(RGBChannel _first, RGBChannel _second) const

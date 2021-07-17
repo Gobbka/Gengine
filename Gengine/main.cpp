@@ -25,6 +25,8 @@ int WINAPI wWinMain(
     freopen("CONOUT$", "w", stdout);
     freopen("CONOUT$", "w", stderr);
 
+    std::wcout << lpCmdLine<<'\0';
+	
     auto*form = new Forms::MainForm(hInstance, 1400, 780);
     form->show();
     form->background = { 17,17,17 };

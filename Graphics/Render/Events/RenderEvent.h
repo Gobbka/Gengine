@@ -7,6 +7,7 @@ namespace Canvas
 }
 
 namespace Render {
+	class SpriteEngine;
 	class Camera;
 	class ILayer;
 
@@ -23,6 +24,7 @@ namespace Render {
 		DrawEvent(Camera* engine , ILayer* layer);
 
 	public:
+		SpriteEngine* sprite_engine();
 
 		void mask_draw_begin() const;
 		void mask_discard_begin(bool increase_layer = true);

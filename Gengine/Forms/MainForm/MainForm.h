@@ -20,7 +20,5 @@ namespace Forms
 		MainForm(HINSTANCE hinst, UINT width, UINT height);
 
 		void handle_resize(Surface rect) override;
-		
-		void initialize_components(Core::GraphicsContext*graphics);
 	};
 }

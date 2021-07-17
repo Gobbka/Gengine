@@ -4,6 +4,7 @@
 #include "Canvas/CanvasLayer.h"
 #include "Graphics/Types.h"
 #include "Graphics/Material/Material.h"
+#include "Render/Engine/SpriteEngine.h"
 #include "Render/Layer/ILayer.h"
 
 
@@ -32,13 +33,9 @@ namespace Core
 		ID3D11RenderTargetView* _targetView;
 
 		Render::SamplerState* _samplerState;
-		ID3D11InputLayout* _texture_layout;
 		
 		Render::PixelShader* _pixelShader;
 		Render::VertexShader* _vertexShader;
-
-		Render::PixelShader* _texture_ps;
-		Render::VertexShader* _texture_vs;
 		
 		ID3D11InputLayout* _inputLayout;
 
@@ -48,7 +45,11 @@ namespace Core
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 		
 		Render::Camera* _main_camera;
+		Render::SpriteEngine* _spriteEngine;
+
 	public:
+		Render::SpriteEngine* get_sprite_engine();
+		
 		ID3D11Device* device() const;
 		ID3D11DeviceContext* context() const;
 		Surface get_screen_resolution() const;

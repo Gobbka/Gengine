@@ -160,6 +160,7 @@
     <ClInclude Include="Render\Engine\BlendEngine.h" />
     <ClInclude Include="Render\Engine\Camera.h" />
     <ClInclude Include="Render\Engine\MaskEngine.h" />
+    <ClInclude Include="Render\Engine\SpriteEngine.h" />
     <ClInclude Include="Render\Events\RenderEvent.h" />
     <ClInclude Include="Render\Layer\ILayer.h" />
   </ItemGroup>
@@ -183,6 +184,7 @@
     <ClCompile Include="Render\Engine\BlendEngine.cpp" />
     <ClCompile Include="Render\Engine\Camera.cpp" />
     <ClCompile Include="Render\Engine\MaskEngine.cpp" />
+    <ClCompile Include="Render\Engine\SpriteEngine.cpp" />
     <ClCompile Include="Render\Events\RenderEvent.cpp" />
   </ItemGroup>
   <ItemGroup>

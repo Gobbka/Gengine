@@ -9,6 +9,11 @@ Render::DrawEvent::DrawEvent(Camera* engine, ILayer* layer)
 	_engine = engine;
 }
 
+Render::SpriteEngine* Render::DrawEvent::sprite_engine()
+{
+	return _engine->graphics_context()->get_sprite_engine();
+}
+
 void Render::DrawEvent::mask_draw_begin() const
 {
 	auto* mask = _engine->mask_engine();

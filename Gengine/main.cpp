@@ -13,34 +13,6 @@
 #include "Drivers/PNGImageDriver.h"
 #include "Forms/MainForm/MainForm.h"
 
-Render::Material* material;
-
-void bmp_test(Core::GraphicsContext* context)
-{
-    std::ifstream ifs("228.png", std::ios::in | std::ios::binary | std::ifstream::ate);
-
-    assert(ifs.is_open());
-
-    auto size = (size_t)ifs.tellg();
-    ifs.seekg(0);
-
-    auto* ptr = new char[size + 1];
-    ptr[size] = '\0';
-    ifs.read(ptr, size);
-	
-    auto* fmemory = FreeImage_OpenMemory((BYTE*)ptr, size);
-    auto bitmap = FreeImage_LoadFromMemory(FIF_PNG, (FIMEMORY*)fmemory);
-
-
-    auto*nigger = FreeImage_GetBits(bitmap);
-    material = context->create_material({ (float)FreeImage_GetWidth(bitmap) ,(float)FreeImage_GetHeight(bitmap) }, (char*)nigger);
-
-	
-    FreeImage_CloseMemory(fmemory);
-	
-    delete[] ptr;
-}
-
 int WINAPI wWinMain(
     _In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,

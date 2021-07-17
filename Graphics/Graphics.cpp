@@ -49,8 +49,10 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_vertexShader = new Render::VertexShader(this);
 	_pixelShader  = new Render::PixelShader(this);
 
-	_texture_ps = new Render::PixelShader(this);
-	_texture_vs = new Render::VertexShader(this);
+	auto* _texture_ps = new Render::PixelShader(this);
+	auto* _texture_vs = new Render::VertexShader(this);
+	ID3D11InputLayout* _texture_layout=nullptr;
+
 	
 	_vertexShader->read_file(L"C:\\Users\\Gobka\\source\\repos\\Gengine\\out\\shaders.cso");
 	_vertexShader->create_input_layout(Render::VertexLayout, ARRAYSIZE(Render::VertexLayout), &_inputLayout);
@@ -59,12 +61,15 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_pixelShader->read_file(L"C:\\Users\\Gobka\\source\\repos\\Gengine\\out\\pixel_shader.cso");
 	_pixelShader->release_blob();
 
+
 	_texture_vs->read_file(L"C:\\Users\\Gobka\\source\\repos\\Gengine\\out\\texture_vs.cso");
 	_texture_vs->create_input_layout(Render::TextureLayout, ARRAYSIZE(Render::TextureLayout), &_texture_layout);
 	_texture_vs->release_blob();
 
 	_texture_ps->read_file(L"C:\\Users\\Gobka\\source\\repos\\Gengine\\out\\texture_ps.cso");
 	_texture_ps->release_blob();
+
+	_spriteEngine = new Render::SpriteEngine(this, _texture_ps, _texture_vs, _texture_layout);
 	
 	
 	_viewport.Width = 800;
@@ -74,6 +79,13 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_viewport.TopLeftX = 0;
 	_viewport.TopLeftY = 0;
 	_context->RSSetViewports(1, &_viewport);
+
+	_samplerState->bind();
+}
+
+Render::SpriteEngine* Core::GraphicsContext::get_sprite_engine()
+{
+	return _spriteEngine;
 }
 
 ID3D11Device* Core::GraphicsContext::device() const

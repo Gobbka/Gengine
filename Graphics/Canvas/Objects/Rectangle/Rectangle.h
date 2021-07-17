@@ -9,11 +9,15 @@ namespace Canvas
 		INDEX size() override;
 	private:
 		Color4 _background_color;
+		Render::Texture* _background_texture;
+		
 		Position2 _position;
 		Surface _resolution;
 
 	private:
 		void apply_rectangle();
+		void apply_color();
+		
 		void on_initialize() override;
 	public:
 		Rectangle(Color4 background,Position2 position,Surface resolution);

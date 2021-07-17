@@ -1,6 +1,8 @@
 #include "Rectangle.h"
 #include "../../../Render/Events/RenderEvent.h"
 #include "../../../Render/d3d/Vertex.h"
+#include "../../../Render/Engine/SpriteEngine.h"
+#include "../../../Render/d3d/Buffer/Texture.h"
 
 Canvas::I2DCanvasObject::INDEX Canvas::Rectangle::size()
 {
@@ -22,10 +24,31 @@ void Canvas::Rectangle::apply_rectangle()
 	ptr[3].pos = DirectX::XMFLOAT3(x + width, y - height, 1.f);
 }
 
+void Canvas::Rectangle::apply_color()
+{
+	auto* ptr = vertices();
+
+	if(_background_texture != nullptr)
+	{
+		ptr[2].color = { 0,0,0 };
+		ptr[3].color = { 1,0,0 };
+		ptr[0].color = { 0,1,0 };
+		ptr[1].color = { 1,1,0 };
+	}else
+	{
+		for (INDEX i = 0; i < size(); i++)
+			vertices()[i].color = _background_color.to_float3();
+	}
+	
+	
+}
+
 void Canvas::Rectangle::on_initialize()
 {
-	this->set_position(_position);
-	this->set_resolution(_resolution);
+	apply_rectangle();
+	apply_color();
+	// this->set_position(_position);
+	// this->set_resolution(_resolution);
 	this->set_color(_background_color);
 }
 
@@ -40,6 +63,18 @@ Canvas::Rectangle::Rectangle(Color4 background, Position2 position, Surface reso
 
 void Canvas::Rectangle::draw(Render::DrawEvent* draw_event)
 {
+	if(_background_texture)
+	{
+		auto* sprite = draw_event->sprite_engine();
+		sprite->begin();
+
+		_background_texture->bind();
+		draw_event->draw_vertex(4);
+		
+		sprite->end();
+		return;
+	}
+	
 	draw_event->draw_vertex(4);
 }
 
@@ -90,12 +125,11 @@ void Canvas::Rectangle::move_by(Position2 pos)
 void Canvas::Rectangle::set_color(Color4 color)
 {
 	_background_color = color;
+	_background_texture = nullptr;
 	
 	if (this->layer() == nullptr)
 		return;
-
-	for(INDEX i = 0;i < size();i++)
-		vertices()[i].color = color.to_float3();
+	apply_color();
 }
 
 Color4 Canvas::Rectangle::get_color()
@@ -105,9 +139,10 @@ Color4 Canvas::Rectangle::get_color()
 
 void Canvas::Rectangle::set_texture(Render::Texture* texture)
 {
-	auto* ptr = vertices();
-	ptr[2].color = { 0,0,0 };
-	ptr[3].color = { 1,0,0 };
-	ptr[0].color = { 0,1,0 };
-	ptr[1].color = { 1,1,0 };
+	_background_texture = texture;
+
+	if (this->layer() == nullptr)
+		return;
+
+	apply_color();
 }

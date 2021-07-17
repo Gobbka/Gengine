@@ -17,23 +17,33 @@ namespace UI {
 	class InteractiveElement;
 	typedef InteractiveElement* UIElementEventArgs;
 
-	enum VisibleState : bool
+	enum class VisibleState : bool
 	{
-		VISIBLE_STATE_VISIBLE = true,
-		VISIBLE_STATE_HIDDEN = false,
+		visible = true,
+		hidden = false,
 	};
 
 	struct ElementStyles
 	{
-		VisibleState      overflow = VISIBLE_STATE_VISIBLE;
-#define MARGIN_AUTO -1
+		VisibleState      overflow = VisibleState::visible;
+		enum class DisplayType
+		{
+			flex,
+			block,
+			none,
+		} display;
+		enum class FlexDirectionType
+		{
+			row,
+			column,
+		} flex_direction;
+		
 		DirectX::XMFLOAT4 margin = { 0,0,0,0 };
 	};
 
 	struct ElementState
 	{
 		bool         hovered = false;
-		VisibleState visible = VISIBLE_STATE_VISIBLE;
 	};
 
 	struct ElementDescription

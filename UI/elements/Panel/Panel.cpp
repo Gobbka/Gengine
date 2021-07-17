@@ -8,7 +8,7 @@ void UI::Panel::draw(Render::DrawEvent* event)
 		this->unique_id = 0x228;
 	}
 	
-	if(this->styles.overflow == VISIBLE_STATE_HIDDEN)
+	if(this->styles.overflow == VisibleState::hidden)
 	{
 		event->mask_draw_begin();
 		event->set_alpha(this->alpha);

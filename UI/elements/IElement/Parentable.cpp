@@ -67,7 +67,7 @@ void UI::Parent::handle_mouse_move(float mX, float mY)
 		
 		if (
 			e_handled == false &&
-			element->state.visible == VisibleState::VISIBLE_STATE_VISIBLE &&
+			element->styles.display != ElementStyles::DisplayType::none &&
 			element->point_belongs({(mX),(mY)})
 			)
 		{
@@ -120,7 +120,7 @@ UI::Parent::Parent(Position2 position)
 void UI::Parent::draw(::Render::DrawEvent* event)
 {
 	this->_children.foreach([&](UI::InteractiveElement* element) {
-		if (element->state.visible == VisibleState::VISIBLE_STATE_VISIBLE)
+		if (element->styles.display != ElementStyles::DisplayType::none)
 			element->draw(event);
 	});
 }
@@ -163,7 +163,7 @@ UI::Parent* UI::Parent::add_element(InteractiveElement* element)
 
 UI::Parent* UI::Parent::add_element(InteractiveElement* element, bool visible)
 {
-	element->state.visible = (VisibleState) !element->state.visible;
+	element->styles.display = visible ? ElementStyles::DisplayType::none : ElementStyles::DisplayType::block;
 	return this->add_element(element);
 }
 

@@ -47,13 +47,21 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	);
 	
 	_folder_texture = get_graphics_context()->create_texture( load_png(L"assets\\folder.png"));
+	
+	FS::FSDirectory directory((wchar_t*)L"assets\\*.*");
 
-	FS::FSDirectory directory((wchar_t*)L"assets\\*");
-
-	directory.foreach([](FS::FSFile* file)
+	directory.foreach([&](FS::FSFile* file)
+	{
+		std::wcout << file->path() << '\n';
+		auto* panel = new UI::Panel({ 0,0 }, { 150,150 }, { RGB_TO_FLOAT(20,20,20),1.f });
+		panel->set_texture(_folder_texture);
+		panel->onMouseDown = [&](UI::UIElementEventArgs args)
 		{
-			std::wcout << file->path() << '\n';
-		});
+			args->get_form()->drag_move(args);
+			
+		};
+		_assets_panel->add_element(panel);
+	});
 	
 	uicanvas
 		->add_element(_topbar_panel)

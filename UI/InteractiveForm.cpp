@@ -11,7 +11,7 @@ void InteractiveForm::render_components(Render::DrawEvent* event)
 {
 	for(auto*element:this->childs)
 	{
-		if (element->state.visible == UI::VISIBLE_STATE_VISIBLE)
+		if (element->styles.display != ElementStyles::DisplayType::none)
 			element->draw(event);
 		
 		event->mask_clear();
@@ -89,7 +89,7 @@ Interaction::EventStatus InteractiveForm::on_mouse_move(int mx,int my)
 		auto* element = this->childs[i];
 		
 		if (
-			element->state.visible == UI::VISIBLE_STATE_VISIBLE &&
+			element->styles.display != ElementStyles::DisplayType::none &&
 			e_handled == Interaction::EventStatus::none &&
 			element->point_belongs(cursor)
 			)

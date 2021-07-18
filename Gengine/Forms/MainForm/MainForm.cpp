@@ -44,7 +44,8 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 		new UI::Panel({ 0,0 }, { (float)width - 250,30 }, { RGB_TO_FLOAT(34,34,34),1.f })
 	);
 
-	_assets_panel = new UI::Panel({ 0,0}, { (float)width - 250,250-30 }, { RGB_TO_FLOAT(255,26,26),1.f });
+	_assets_panel = new UI::Panel({ 0,0}, { (float)width - 250,250-30 }, { RGB_TO_FLOAT(255,26,26),0.f });
+	_assets_panel->styles.display = UI::ElementStyles::DisplayType::flex;
 
 	_assets_panel_wrapper->add_element(_assets_panel);
 	

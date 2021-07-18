@@ -22,6 +22,7 @@ namespace UI
 			virtual void on_lbmouse_up() PURE;
 			virtual void on_mouse_scroll(short direction) PURE;
 			virtual void on_mouse_move(int mx,int my) PURE;
+			virtual void on_db_click() PURE;
 		};
 	}
 }

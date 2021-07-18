@@ -24,6 +24,7 @@ namespace Forms
 		UI::Panel* _assets_panel;
 
 		Render::Texture* _folder_texture;
+		Render::Texture* _file_texture;
 	public:
 		MainForm(HINSTANCE hinst, UINT width, UINT height);
 

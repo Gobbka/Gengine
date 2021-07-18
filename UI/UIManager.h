@@ -32,5 +32,7 @@ namespace UI {
 		void on_lbmouse_up() override;
 		void on_mouse_scroll(short direction) override;
 		void on_mouse_move(int mx, int my) override;
+		void on_db_click() override;
+		
 	};
 }

@@ -1,5 +1,7 @@
 #include "WinIntEventHandler.h"
 
+
+#include <iostream>
 #include <windowsx.h>
 
 void UI::Interaction::WinIntEventHandler::window_proc(UINT msg, WPARAM wParam, LPARAM lParam)
@@ -29,6 +31,7 @@ void UI::Interaction::WinIntEventHandler::window_proc(UINT msg, WPARAM wParam, L
 
 	if(msg == WM_LBUTTONDBLCLK)
 	{
+		this->on_db_click();
 		//this->on_lbmouse_down();
 		//Sleep(5);
 		//this->on_lbmouse_up();

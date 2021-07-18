@@ -9,7 +9,7 @@
 LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {	
 	auto* window = (WindowsWindow*)WindowsManager::instance()->get_by_hwnd(hwnd);
-	
+
 	if(!window)
 		return DefWindowProc(hwnd, msg, wParam, lParam);
 
@@ -64,7 +64,7 @@ Core::WindowsWindow::WindowsWindow(HINSTANCE hint, UINT width, UINT height)
 	WNDCLASSEXW wndClass
 	{
 		sizeof(WNDCLASSEXW),
-		CS_OWNDC,
+		CS_OWNDC | CS_DBLCLKS,
 		window_procedure,
 		0,0,
 		_hInst,nullptr,nullptr,nullptr,

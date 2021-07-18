@@ -25,6 +25,8 @@ int WINAPI wWinMain(
     freopen("CONOUT$", "w", stdout);
     freopen("CONOUT$", "w", stderr);
 
+    
+
     std::wcout << lpCmdLine<<'\0';
 	
     auto*form = new Forms::MainForm(hInstance, 1400, 780);
@@ -33,16 +35,11 @@ int WINAPI wWinMain(
 
     auto* graphic = form->get_graphics_context();
 
-    //panel->onMouseDown = [&](UI::UIElementEventArgs args)
-    //{
-    //    //form->drag_move();
-    //    uicanvas->drag_move(args);
-    //};
-
     form->on_wndproc = [](UINT msg, WPARAM wp, LPARAM lp)
     {
         UI::UIManager::instance()->window_proc(msg, wp, lp);
     };
+
 	
     MSG msg;
 	while(true)
@@ -53,7 +50,6 @@ int WINAPI wWinMain(
             DispatchMessage(&msg);
 		}
 		
-        //graphic->set_texture(texture);
         form->force_draw();
 
         Sleep(10);

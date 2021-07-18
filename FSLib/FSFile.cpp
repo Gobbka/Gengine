@@ -4,8 +4,8 @@
 #include <fstream>
 
 FS::FSFile::FSFile(wchar_t* file_path, size_t file_size, char* data)
+	: FSObject(std::wstring(file_path))
 {
-	_file_path = file_path;
 	_file_size = file_size;
 	_data = data;
 }

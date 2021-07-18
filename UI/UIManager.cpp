@@ -64,3 +64,14 @@ void UI::UIManager::on_mouse_move(int mx, int my)
 		}
 	}
 }
+
+void UI::UIManager::on_db_click()
+{
+	for (auto iteration = _forms.size(); iteration-- > 0;)
+	{
+		if (_forms[iteration]->on_db_click() == Interaction::EventStatus::handled)
+		{
+			return;
+		}
+	}
+}

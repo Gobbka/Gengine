@@ -143,10 +143,12 @@
   <ItemGroup>
     <ClInclude Include="FSDirectory.h" />
     <ClInclude Include="FSFile.h" />
+    <ClInclude Include="FSObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FSDirectory.cpp" />
     <ClCompile Include="FSFile.cpp" />
+    <ClCompile Include="FSObject.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

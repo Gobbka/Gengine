@@ -108,6 +108,15 @@ void UI::Parent::handle_mouse_scroll(int delta)
 	InteractiveElement::handle_mouse_scroll(delta);
 }
 
+void UI::Parent::handle_db_click()
+{
+	this->_children.foreach([](UI::InteractiveElement* element)
+		{
+			if (element->state.hovered == true)
+				element->handle_db_click();
+		});
+}
+
 void UI::Parent::on_initialize()
 {
 	this->_children.foreach([&](UI::InteractiveElement* element) {
@@ -169,7 +178,6 @@ UI::Parent* UI::Parent::add_element(InteractiveElement* element)
 	{
 		auto relative_point = last_element->point_to(this);
 		auto element_res = last_element->get_resolution();
-
 
 		if (this->styles.display == ElementStyles::DisplayType::block)
 		{

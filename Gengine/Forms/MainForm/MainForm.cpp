@@ -12,6 +12,29 @@
 #include "../../../FSLib/FSFile.h"
 #include "Render/d3d/Buffer/Texture.h"
 
+namespace UI
+{
+	class Directory : public Panel
+	{
+	private:
+		FS::FSFile _directory;
+	public:
+		Directory(FS::FSFile directory, Position2 position, Surface resolution, Render::Texture* texture)
+			: Panel(position, resolution, { 0,0,0,0 }),
+			_directory(directory)
+		{
+			Panel::set_texture(texture);
+			
+		}
+
+		void handle_db_click() override
+		{
+			system("start assets\\228.png");
+			Parent::handle_db_click();
+		}
+	};
+}
+
 Render::Material* load_png(const wchar_t*path)
 {
 	auto file = FS::FSFile::read_file((wchar_t*)path);
@@ -50,6 +73,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_assets_panel_wrapper->add_element(_assets_panel);
 	
 	_folder_texture = get_graphics_context()->create_texture( load_png(L"assets\\folder.png"));
+	_file_texture = get_graphics_context()->create_texture( load_png(L"assets\\file.png"));
 	
 	uicanvas
 		->add_element(_topbar_panel)
@@ -62,21 +86,34 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 
 void Forms::MainForm::scan_assets_directory()
 {
-	FS::FSDirectory directory((wchar_t*)L"assets\\*.*");
+	FS::FSDirectory directory((wchar_t*)L"assets\\*");
 
-	directory.foreach([&](FS::FSFile* file)
+	directory.foreach([&](FS::FSObject* file)
 	{
 		std::wcout << file->path() << '\n';
-		auto* panel = new UI::Panel({ 0,0 }, { 150,150 }, { RGB_TO_FLOAT(20,20,20),1.f });
-		panel->set_texture(_folder_texture);
+		Render::Texture* lp_texture = file->is_directory() ? _folder_texture : _file_texture;
+		
+		auto* panel = new UI::Directory(*(FS::FSFile*)file, { 0,0 }, { 150,150 }, lp_texture);
+		//panel->set_texture(_folder_texture);
 		
 		_assets_panel->add_element(panel);
 
-		panel->onMouseDown = [](UI::UIElementEventArgs args)
-		{
-			args->get_form()->drag_move(args);
-		};
+		//panel->onMouseDown = [](UI::UIElementEventArgs args)
+		//{
+		//	//auto strlenght = strlen((char*)args->data);
+		//	//auto lenght = 6 + strlenght  + 1;
+		//	//auto* path = new char[lenght];
+		//	//path[lenght] = '\0';
+
+		//	//memcpy(path, "start ", 6);
+		//	//memcpy(path+6, args->data, strlenght);
+
+		//	//_wsystem(L"nigger");
+
+		//	//delete[] path;
+		//};
 	});
+
 }
 
 void Forms::MainForm::handle_resize(Surface rect)

@@ -125,6 +125,7 @@ namespace UI {
 		std::function<void(UIElementEventArgs args, int delta)>onMouseScroll = [](UIElementEventArgs, int) {};
 		EventCallback onMouseUp = default_event_callback;
 		EventCallback onMouseDown = default_event_callback;
+		EventCallback onDBClick = default_event_callback;
 
 
 	public:
@@ -139,6 +140,7 @@ namespace UI {
 		virtual void handle_mouse_enter();
 		virtual void handle_mouse_up();
 		virtual void handle_mouse_down();
+		virtual void handle_db_click();
 		virtual void handle_mouse_scroll(int delta);
 	};
 }

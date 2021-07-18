@@ -123,6 +123,19 @@ Interaction::EventStatus InteractiveForm::on_mouse_scroll(short direction)
 	return Interaction::EventStatus::none;
 }
 
+Interaction::EventStatus InteractiveForm::on_db_click()
+{
+	if (this->hidden())
+		return Interaction::EventStatus::none;
+
+	this->foreach([](UI::InteractiveElement* element)
+		{
+			if (element->state.hovered == true)
+				element->handle_db_click();
+		});
+	return Interaction::EventStatus::none;
+}
+
 Interaction::EventStatus InteractiveForm::on_lbmouse_up()
 {
 	if (this->hidden())

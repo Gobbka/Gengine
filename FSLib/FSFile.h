@@ -1,9 +1,11 @@
 ﻿#pragma once
+#include <string>
+
+#include "FSObject.h"
 
 namespace FS {
-	class  __declspec(dllexport) FSFile
+	class  __declspec(dllexport) FSFile : public FSObject
 	{
-		wchar_t* _file_path;
 		size_t _file_size;
 		char* _data;
 	public:
@@ -12,7 +14,6 @@ namespace FS {
 
 		auto* data() { return _data; }
 		auto size() { return _file_size; }
-		auto* path() { return _file_path; }
 		
 		static FSFile read_file(wchar_t* file_path);
 	};

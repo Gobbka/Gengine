@@ -44,5 +44,6 @@ namespace UI {
 		Interaction::EventStatus on_lbmouse_down();
 		Interaction::EventStatus on_mouse_move(int mx, int my);
 		Interaction::EventStatus on_mouse_scroll(short direction);
+		Interaction::EventStatus on_db_click();
 	};
 }

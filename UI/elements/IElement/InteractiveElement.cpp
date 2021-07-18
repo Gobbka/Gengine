@@ -87,6 +87,11 @@ void UI::InteractiveElement::handle_mouse_down()
 	this->onMouseDown(this);
 }
 
+void UI::InteractiveElement::handle_db_click()
+{
+	this->onDBClick(this);
+}
+
 void UI::InteractiveElement::handle_mouse_scroll(int delta)
 {
 	this->onMouseScroll(this, delta);

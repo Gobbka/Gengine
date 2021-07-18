@@ -4,8 +4,6 @@
 #include <fstream>
 #include <iostream>
 
-
-
 #include "Graphics.h"
 #include "elements/Panel/Panel.h"
 #include "UIManager.h"
@@ -41,13 +39,28 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_topbar_panel = new UI::Panel({ 0,0 }, { (float)width,30 }, { RGB_TO_FLOAT(26,26,26),1.f });
 	_worldspace_panel = new UI::Panel({ 0,-30 }, { 250,(float)height - 30.f }, { RGB_TO_FLOAT(20,20,20),1.f });
 	
-	_assets_panel = new UI::Panel({ 250, -1 * (float)(height) + 250.f }, { (float)width-250,250 }, { RGB_TO_FLOAT(26,26,26),1.f });
-	_assets_panel->add_element(
+	_assets_panel_wrapper = new UI::Panel({ 250, -1 * (float)(height) + 250.f }, { (float)width-250,250 }, { RGB_TO_FLOAT(26,26,26),1.f });
+	_assets_panel_wrapper->add_element(
 		new UI::Panel({ 0,0 }, { (float)width - 250,30 }, { RGB_TO_FLOAT(34,34,34),1.f })
 	);
+
+	_assets_panel = new UI::Panel({ 0,0}, { (float)width - 250,250-30 }, { RGB_TO_FLOAT(255,26,26),1.f });
+
+	_assets_panel_wrapper->add_element(_assets_panel);
 	
 	_folder_texture = get_graphics_context()->create_texture( load_png(L"assets\\folder.png"));
 	
+	uicanvas
+		->add_element(_topbar_panel)
+		->add_element(_worldspace_panel)
+		->add_element(_assets_panel_wrapper)
+	;
+
+	scan_assets_directory();
+}
+
+void Forms::MainForm::scan_assets_directory()
+{
 	FS::FSDirectory directory((wchar_t*)L"assets\\*.*");
 
 	directory.foreach([&](FS::FSFile* file)
@@ -55,19 +68,14 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 		std::wcout << file->path() << '\n';
 		auto* panel = new UI::Panel({ 0,0 }, { 150,150 }, { RGB_TO_FLOAT(20,20,20),1.f });
 		panel->set_texture(_folder_texture);
-		panel->onMouseDown = [&](UI::UIElementEventArgs args)
+		
+		_assets_panel->add_element(panel);
+
+		panel->onMouseDown = [](UI::UIElementEventArgs args)
 		{
 			args->get_form()->drag_move(args);
-			
 		};
-		_assets_panel->add_element(panel);
 	});
-	
-	uicanvas
-		->add_element(_topbar_panel)
-		->add_element(_worldspace_panel)
-		->add_element(_assets_panel)
-	;
 }
 
 void Forms::MainForm::handle_resize(Surface rect)

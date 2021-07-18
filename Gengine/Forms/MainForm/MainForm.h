@@ -20,11 +20,14 @@ namespace Forms
 	private:
 		UI::Panel* _topbar_panel;
 		UI::Panel* _worldspace_panel;
+		UI::Panel* _assets_panel_wrapper;
 		UI::Panel* _assets_panel;
 
 		Render::Texture* _folder_texture;
 	public:
 		MainForm(HINSTANCE hinst, UINT width, UINT height);
+
+		void scan_assets_directory();
 
 		void handle_resize(Surface rect) override;
 	};

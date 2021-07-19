@@ -13,5 +13,6 @@ namespace FS
 		FSObject(std::wstring path);
 		
 		auto* path() { return _path.c_str(); }
+		auto wpath() { return _path; }
 	};
 }

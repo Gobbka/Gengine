@@ -9,7 +9,7 @@ namespace FS {
 		size_t _file_size;
 		char* _data;
 	public:
-		FSFile(wchar_t* file_path,size_t file_size,char*data);
+		FSFile(std::wstring file_path,size_t file_size,char*data);
 		~FSFile();
 
 		auto* data() { return _data; }

@@ -11,17 +11,26 @@ void FS::FSDirectory::foreach(std::function<void(FSObject*)> callback)
 {
 	WIN32_FIND_DATA data;
 	HANDLE handle;
-	 
-	handle = FindFirstFile(path(), &data);
+
+	std::wstring file_path = wpath();
+	file_path = file_path + L"\\*";
+	
+	handle = FindFirstFile(file_path.c_str(), &data);
 	if(handle != INVALID_HANDLE_VALUE)
 	{
-		FSFile file(data.cFileName, data.nFileSizeLow, nullptr);
+		std::wstring filename(path());
+		filename = filename + L'\\' + data.cFileName;
+		
+		FSFile file(filename, data.nFileSizeLow, nullptr);
 		callback(&file);
 	}
 
 	while(FindNextFile(handle,&data))
 	{
-		FSFile file(data.cFileName, data.nFileSizeLow, nullptr);
+		std::wstring filename(path());
+		filename = filename + L'\\' + data.cFileName;
+		
+		FSFile file(filename, data.nFileSizeLow, nullptr);
 		callback(&file);
 	}
 }

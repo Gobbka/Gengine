@@ -48,6 +48,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	
 	_vertexShader = new Render::VertexShader(this);
 	_pixelShader  = new Render::PixelShader(this);
+	_vertexShader3d = new Render::VertexShader(this);
 
 	auto* _texture_ps = new Render::PixelShader(this);
 	auto* _texture_vs = new Render::VertexShader(this);
@@ -57,6 +58,9 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_vertexShader->read_file(L"d3d11\\shaders.cso");
 	_vertexShader->create_input_layout(Render::VertexLayout, ARRAYSIZE(Render::VertexLayout), &_inputLayout);
 	_vertexShader->release_blob();
+
+	_vertexShader3d->read_file(L"d3d11\\vertex_3d_vs.cso");
+	_vertexShader3d->release_blob();
 
 	_pixelShader->read_file(L"d3d11\\pixel_shader.cso");
 	_pixelShader->release_blob();
@@ -135,9 +139,6 @@ void Core::GraphicsContext::present() const
 	_context->RSSetViewports(1, &_viewport);
 	_context->OMSetRenderTargets(1, &_targetView, nullptr);
 	_context->IASetInputLayout(_inputLayout);
-
-	_vertexShader->bind();
-	_pixelShader->bind();
 	
 	_context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
@@ -152,6 +153,19 @@ void Core::GraphicsContext::present() const
 	_main_camera->present(&draw_event);
 
 	_swap->Present(1u, 0u);
+}
+
+void Core::GraphicsContext::begin_2d()
+{
+	_context->IASetInputLayout(_inputLayout);
+	_vertexShader->bind();
+	_pixelShader->bind();
+}
+
+void Core::GraphicsContext::begin_3d()
+{
+	_vertexShader3d->bind();
+	_context->IASetInputLayout(_inputLayout);
 }
 
 Render::Texture* Core::GraphicsContext::create_texture(Render::Material* material)

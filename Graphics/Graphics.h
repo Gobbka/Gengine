@@ -36,6 +36,7 @@ namespace Core
 		
 		Render::PixelShader* _pixelShader;
 		Render::VertexShader* _vertexShader;
+		Render::VertexShader* _vertexShader3d;
 		
 		ID3D11InputLayout* _inputLayout;
 
@@ -64,6 +65,9 @@ namespace Core
 		void clear(Color3 color);
 		
 		void present() const;
+
+		void begin_2d();
+		void begin_3d();
 	public:
 		Render::Texture* create_texture(Render::Material* material);
 		void set_texture(Render::Texture* texture);

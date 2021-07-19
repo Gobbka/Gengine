@@ -7,6 +7,7 @@
 
 namespace Render
 {
+	class Cube;
 	class MaskEngine;
 	class BlendEngine;
 
@@ -23,10 +24,19 @@ namespace Render
 			float alpha;
 		} _b0_constant_buffer_struct;
 
+		__declspec(align(16))
+		struct
+		{
+			DirectX::XMMATRIX _viewMatrix;
+		} _b1_constant_buffer_struct;
+
 		ConstantBuffer* b0_buffer;
+		ConstantBuffer* matrix_buffer;
 
 		BlendEngine* _blendEngine;
 		MaskEngine*  _maskEngine;
+
+		Cube* _cube;
 
 		std::vector<Canvas::Canvas2DLayer*> _canvas2DLayers;
 	public:

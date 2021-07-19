@@ -81,6 +81,12 @@
     <ClInclude Include="Render\Engine\SpriteEngine.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Render\I3DObject\I3DObject.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\I3DObject\Cube\Cube.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp">
@@ -146,11 +152,18 @@
     <ClCompile Include="Render\Engine\SpriteEngine.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Render\I3DObject\I3DObject.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\I3DObject\Cube\Cube.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Render\d3d\shaders\shaders.hlsl" />
-    <FxCompile Include="Render\d3d\shaders\pixel_shader.hlsl" />
-    <FxCompile Include="Render\d3d\shaders\texture_vs.hlsl" />
-    <FxCompile Include="Render\d3d\shaders\texture_ps.hlsl" />
+    <FxCompile Include="Render\d3d\hlsl\pixel_shader.hlsl" />
+    <FxCompile Include="Render\d3d\hlsl\shaders.hlsl" />
+    <FxCompile Include="Render\d3d\hlsl\texture_ps.hlsl" />
+    <FxCompile Include="Render\d3d\hlsl\texture_vs.hlsl" />
+    <FxCompile Include="Render\d3d\hlsl\vertex_3d_vs.hlsl" />
   </ItemGroup>
 </Project>

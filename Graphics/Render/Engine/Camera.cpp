@@ -6,6 +6,7 @@
 #include "BlendEngine.h"
 #include "MaskEngine.h"
 #include "../d3d/Buffer/VertexBuffer.h"
+#include "../I3DObject/Cube/Cube.h"
 
 
 void Render::Camera::set_resolution(Surface new_resolution)
@@ -80,17 +81,28 @@ Render::Camera::Camera(Core::GraphicsContext* context)
 	b0_buffer = new ConstantBuffer(_context, &_b0_constant_buffer_struct, sizeof(_b0_constant_buffer_struct), 0);
 	b0_buffer->update();
 
+	_b1_constant_buffer_struct = { DirectX::XMMatrixRotationRollPitchYaw(0,35,0) };
+
+	matrix_buffer = new ConstantBuffer(context, &_b1_constant_buffer_struct, sizeof(_b1_constant_buffer_struct), 0);
+	matrix_buffer->update();
+
+	_cube = new Cube(_context);
 }
 
 void Render::Camera::present(DrawEvent* event)
 {
 	_blendEngine->bind();
-	b0_buffer->bind();
 	//_maskEngine->bind();
-	
+
+	_context->begin_3d();
+	matrix_buffer->bind();
+	_cube->draw();
 	// render all world objects
 	
 	// then render canvas
+	_context->begin_2d();
+	b0_buffer->bind();
+
 	for(auto*layer : _canvas2DLayers)
 	{
 		event->layer = layer;

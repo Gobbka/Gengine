@@ -14,6 +14,11 @@ void Render::VertexBuffer::copy_to(void* buffer, UINT size) const
 	memcpy(buffer, this->data, size * sizeof(Vertex));
 }
 
+Render::VertexBuffer* Render::VertexBuffer::alloc(Core::GraphicsContext* engine, UINT size, bool dynamic)
+{
+	return new VertexBuffer(engine, new Vertex[size], size, dynamic);
+}
+
 Render::VertexBuffer::VertexBuffer(Core::GraphicsContext* engine, Vertex* data, UINT size, bool dynamic)
 	: Bindable(engine)
 {

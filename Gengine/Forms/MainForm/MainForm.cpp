@@ -92,7 +92,7 @@ void Forms::MainForm::scan_assets_directory()
 	{
 		Render::Texture* lp_texture = file->is_directory() ? _folder_texture : _file_texture;
 		
-		auto* panel = new UI::Directory(*(FS::FSFile*)file, { 0,0 }, { 120,120 }, lp_texture);
+		auto* panel = new UI::Directory(*(FS::FSFile*)file, { 0,0 }, { 500,500 }, lp_texture);
 		//panel->set_texture(_folder_texture);
 		
 		_assets_panel->add_element(panel);

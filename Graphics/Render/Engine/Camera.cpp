@@ -71,6 +71,8 @@ Surface Render::Camera::get_screen_resolution() const
 }
 
 Render::Camera::Camera(Core::GraphicsContext* context)
+	: _camPosition(DirectX::XMVectorSet(0,0,-4.f,0)),
+	  _lookAt(DirectX::XMVectorSet(0.f,0.f,0.f,0.f))
 {
 	_context = context;
 	_blendEngine = new BlendEngine(_context);
@@ -81,19 +83,34 @@ Render::Camera::Camera(Core::GraphicsContext* context)
 	b0_buffer = new ConstantBuffer(_context, &_b0_constant_buffer_struct, sizeof(_b0_constant_buffer_struct), 0);
 	b0_buffer->update();
 
-	_b1_constant_buffer_struct = { DirectX::XMMatrixRotationRollPitchYaw(0,35,0) };
+	_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose( DirectX::XMMatrixRotationRollPitchYaw(0,35,0) )};
 
 	matrix_buffer = new ConstantBuffer(context, &_b1_constant_buffer_struct, sizeof(_b1_constant_buffer_struct), 0);
 	matrix_buffer->update();
 
 	_cube = new Cube(_context);
+
+	
 }
 
 void Render::Camera::present(DrawEvent* event)
 {
 	_blendEngine->bind();
 	//_maskEngine->bind();
+	{
+		static float gakba = 0.0f;
+		auto worldMatrix = DirectX::XMMatrixIdentity();
+		auto viewMatrix = DirectX::XMMatrixLookAtLH(_camPosition, _lookAt, DirectX::XMVectorSet(0, 1.f, 0, 0));
 
+		auto forRadians = (_fov / 360.f) * DirectX::XM_2PI;
+		auto aspectRatio = 1400.f / 780.f;
+
+		auto projMatrix = DirectX::XMMatrixPerspectiveFovLH(forRadians, aspectRatio, 0.1f, 1000.f);
+		
+		_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose(worldMatrix * viewMatrix * projMatrix )};
+		matrix_buffer->update();
+		gakba += 0.01f;
+	}
 	_context->begin_3d();
 	matrix_buffer->bind();
 	_cube->draw();

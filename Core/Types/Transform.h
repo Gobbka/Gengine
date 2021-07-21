@@ -20,6 +20,8 @@ namespace Core
 	public:
 		Quaternion3(Vector3 rotation);
 
+		void adjust_rotation(Vector3 rot);
+
 		Vector3 get_rotation();
 	};
 };

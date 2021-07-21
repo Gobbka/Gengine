@@ -54,13 +54,20 @@ namespace Render
 		void update_position();
 		
 		DirectX::XMMATRIX create_view_matrix();
-		
+
+
+		DirectX::XMVECTOR _forward_vector;
+		DirectX::XMVECTOR _backward_vector;
+		DirectX::XMVECTOR _right_vector;
+		DirectX::XMVECTOR _left_vector;
+		DirectX::XMVECTOR _up_vector;
 	public:
 		void set_position(Position3 pos);
 		void adjust_position(Position3 pos);
-
+		void adjust_position_relative(Position3 pos);
+		
 		void set_rotation(Core::Quaternion3 quat);
-		void adjust_rotation(Core::Quaternion3 quat);
+		void adjust_rotation(Vector3 rot);
 		
 		void set_resolution(Surface new_resolution);
 		void set_alpha(float alpha);

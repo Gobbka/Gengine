@@ -27,6 +27,11 @@ Core::Quaternion3::Quaternion3(Vector3 rotation)
 {
 }
 
+void Core::Quaternion3::adjust_rotation(Vector3 rot)
+{
+	_rotation += rot;
+}
+
 Vector3 Core::Quaternion3::get_rotation()
 {
 	return _rotation;

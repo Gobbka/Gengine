@@ -10,6 +10,12 @@
 #include "Types/Types.h"
 #include <DirectXMath.h>
 
+const static DirectX::XMVECTOR DEFAULT_FORWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
+const static DirectX::XMVECTOR DEFAULT_UP_VECTOR = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+const static DirectX::XMVECTOR DEFAULT_BACKWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f);
+const static DirectX::XMVECTOR DEFAULT_LEFT_VECTOR = DirectX::XMVectorSet(-1.0f, 0.0f, 0.0f, 0.0f);
+const static DirectX::XMVECTOR DEFAULT_RIGHT_VECTOR = DirectX::XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f);
+
 void Render::Camera::update_position()
 {
 	auto camPos = _transform.get_position();
@@ -21,11 +27,16 @@ DirectX::XMMATRIX Render::Camera::create_view_matrix()
 	auto rotation = _rotation.get_rotation();
 	
 	auto camRotMatrix = DirectX::XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
-	auto camTarget = DirectX::XMVector3TransformCoord(DirectX::XMVectorSet(0, 0, 1, 0), camRotMatrix);
+	auto camTarget = DirectX::XMVector3TransformCoord(DEFAULT_FORWARD_VECTOR, camRotMatrix);
 
 	camTarget = DirectX::XMVectorAdd(camTarget, _xm_camPosition);
 	
-	auto upDir = DirectX::XMVector3TransformCoord(DirectX::XMVectorSet(0, 1.f, 0, 0), camRotMatrix);
+	auto upDir = DirectX::XMVector3TransformCoord(DEFAULT_UP_VECTOR, camRotMatrix);
+
+	auto rotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(0, rotation.y, 0);
+	_forward_vector = DirectX::XMVector3TransformCoord(DEFAULT_FORWARD_VECTOR, rotationMatrix);
+	_right_vector = DirectX::XMVector3TransformCoord(DEFAULT_RIGHT_VECTOR, rotationMatrix);
+	_up_vector = DirectX::XMVector3TransformCoord(DEFAULT_UP_VECTOR, rotationMatrix);
 
 	return DirectX::XMMatrixLookAtLH(
 		_xm_camPosition,
@@ -44,6 +55,22 @@ void Render::Camera::adjust_position(Position3 pos)
 {
 	_transform.adjust_position(pos);
 	update_position();
+}
+
+void Render::Camera::adjust_position_relative(Position3 pos)
+{
+	using namespace DirectX;
+	auto nigga = (_forward_vector * pos.x) + (_right_vector * pos.z) + (_up_vector * pos.y);
+	
+	XMFLOAT3 forw;
+	XMStoreFloat3(&forw,nigga);
+	_transform.adjust_position(Position3(forw.z, forw.y, forw.x));
+	update_position();
+}
+
+void Render::Camera::adjust_rotation(Vector3 rot)
+{
+	_rotation.adjust_rotation(rot);
 }
 
 void Render::Camera::set_resolution(Surface new_resolution)
@@ -142,7 +169,7 @@ void Render::Camera::present(DrawEvent* event)
 		auto viewMatrix = create_view_matrix();
 
 		auto forRadians = (_fov / 360.f) * DirectX::XM_2PI;
-		auto aspectRatio = 1400.f / 780.f;
+		auto aspectRatio = 1600.f / 980.f;
 
 		auto projMatrix = DirectX::XMMatrixPerspectiveFovLH(forRadians, aspectRatio, 0.1f, 1000.f);
 		

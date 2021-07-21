@@ -8,8 +8,6 @@ namespace Render {
 	struct DrawEvent;
 }
 
-struct Position2;
-
 namespace UI
 {
 	class __declspec(dllexport) Panel : public Parent
@@ -24,7 +22,7 @@ namespace UI
 		
 		ElementDescription get_desc() override;
 
-		Panel(Position2 position, Surface resolution, Color4 color);
+		Panel(Vector2 position, Surface resolution, Color4 color);
 
 		bool point_belongs(Position2 point) override;
 		void set_position(Position2 pos) override;

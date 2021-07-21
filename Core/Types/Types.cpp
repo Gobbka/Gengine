@@ -22,38 +22,38 @@ Surface::Surface(RECT rect)
 	height = (float)(rect.bottom - rect.top);
 }
 
-void Position2::operator+=(Position2 pos)
+void Vector2::operator+=(Vector2 pos)
 {
 	x += pos.x;
 	y += pos.y;
 }
 
-void Position2::operator-=(Position2 pos)
+void Vector2::operator-=(Vector2 pos)
 {
 	x -= pos.x;
 	y -= pos.y;
 }
 
-Position2::Position2(float x, float y)
+Vector2::Vector2(float x, float y)
 {
 	this->x = x;
 	this->y = y;
 }
 
-void Position3::operator+=(Position3 pos)
+void Vector3::operator+=(Vector3 pos)
 {
 	this->z += pos.z;
-	Position2::operator+=((Position2)pos);
+	Position2::operator+=((Vector2)pos);
 }
 
-void Position3::operator-=(Position3 pos)
+void Vector3::operator-=(Vector3 pos)
 {
 	this->z -= pos.z;
-	Position2::operator-=((Position2)pos);
+	Vector2::operator-=((Vector2)pos);
 }
 
-Position3::Position3(float x, float y, float z)
-	: Position2(x,y)
+Vector3::Vector3(float x, float y, float z)
+	: Vector2(x,y)
 {
 	this->z = z;
 }

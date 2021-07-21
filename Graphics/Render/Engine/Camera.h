@@ -39,16 +39,28 @@ namespace Render
 		BlendEngine* _blendEngine;
 		MaskEngine*  _maskEngine;
 
-		DirectX::XMFLOAT4 _camPosition;
-		DirectX::XMFLOAT4 _lookAt;
+		Core::Transform _transform;
+		Core::Quaternion3 _rotation;
+
+		DirectX::XMVECTOR _xm_camPosition;
+		DirectX::XMVECTOR _xm_lookAt;
 		
 		float _fov = 90.f;
 		
 		Cube* _cube;
 
 		std::vector<Canvas::Canvas2DLayer*> _canvas2DLayers;
+	private:
+		void update_position();
+		
+		DirectX::XMMATRIX create_view_matrix();
+		
 	public:
-		Core::Transform transform;
+		void set_position(Position3 pos);
+		void adjust_position(Position3 pos);
+
+		void set_rotation(Core::Quaternion3 quat);
+		void adjust_rotation(Core::Quaternion3 quat);
 		
 		void set_resolution(Surface new_resolution);
 		void set_alpha(float alpha);

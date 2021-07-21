@@ -21,3 +21,13 @@ Position3 Core::Transform::get_position()
 {
 	return _pos;
 }
+
+Core::Quaternion3::Quaternion3(Vector3 rotation)
+	: _rotation(rotation)
+{
+}
+
+Vector3 Core::Quaternion3::get_rotation()
+{
+	return _rotation;
+}

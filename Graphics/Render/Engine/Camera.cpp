@@ -8,6 +8,43 @@
 #include "../d3d/Buffer/VertexBuffer.h"
 #include "../I3DObject/Cube/Cube.h"
 #include "Types/Types.h"
+#include <DirectXMath.h>
+
+void Render::Camera::update_position()
+{
+	auto camPos = _transform.get_position();
+	_xm_camPosition = DirectX::XMVectorSet(camPos.z, camPos.y, camPos.x, 0.f);
+}
+
+DirectX::XMMATRIX Render::Camera::create_view_matrix()
+{
+	auto rotation = _rotation.get_rotation();
+	
+	auto camRotMatrix = DirectX::XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
+	auto camTarget = DirectX::XMVector3TransformCoord(DirectX::XMVectorSet(0, 0, 1, 0), camRotMatrix);
+
+	camTarget = DirectX::XMVectorAdd(camTarget, _xm_camPosition);
+	
+	auto upDir = DirectX::XMVector3TransformCoord(DirectX::XMVectorSet(0, 1.f, 0, 0), camRotMatrix);
+
+	return DirectX::XMMatrixLookAtLH(
+		_xm_camPosition,
+		camTarget,
+		upDir
+	);
+}
+
+void Render::Camera::set_position(Position3 pos)
+{
+	_transform.set_position(pos);
+	update_position();
+}
+
+void Render::Camera::adjust_position(Position3 pos)
+{
+	_transform.adjust_position(pos);
+	update_position();
+}
 
 void Render::Camera::set_resolution(Surface new_resolution)
 {
@@ -71,9 +108,9 @@ Surface Render::Camera::get_screen_resolution() const
 }
 
 Render::Camera::Camera(Core::GraphicsContext* context)
-	: _camPosition(0,0,-4.f,0),
-	  _lookAt(0,0,0,0),
-	transform(Position3(0,0,-4.f))
+	:
+	_transform(Position3(-4.f, 0, 0)),
+	_rotation(Vector3(0, 0, 0))
 {
 	_context = context;
 	_blendEngine = new BlendEngine(_context);
@@ -90,6 +127,8 @@ Render::Camera::Camera(Core::GraphicsContext* context)
 	matrix_buffer->update();
 
 	_cube = new Cube(_context);
+
+	update_position();
 }
 
 void Render::Camera::present(DrawEvent* event)
@@ -97,21 +136,10 @@ void Render::Camera::present(DrawEvent* event)
 	_blendEngine->bind();
 	//_maskEngine->bind();
 	{
-		static float _x_pos = -4.0f;
-		static float direction = 1.f;
-
-
-		_camPosition.y = sqrt(pow(_x_pos, 2) + 16.f);
-		_camPosition.z = _x_pos;
 		
 		auto worldMatrix = DirectX::XMMatrixIdentity();
 
-		auto camPos = transform.get_position();
-		auto viewMatrix = DirectX::XMMatrixLookAtLH(
-			DirectX::XMVectorSet(camPos.x, camPos.y, camPos.z, 0.f),
-			DirectX::XMVectorSet(camPos.x, camPos.y, camPos.z+1, _lookAt.w),
-			DirectX::XMVectorSet(0, 1.f, 0, 0)
-		);
+		auto viewMatrix = create_view_matrix();
 
 		auto forRadians = (_fov / 360.f) * DirectX::XM_2PI;
 		auto aspectRatio = 1400.f / 780.f;
@@ -120,10 +148,6 @@ void Render::Camera::present(DrawEvent* event)
 		
 		_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose(worldMatrix * viewMatrix * projMatrix )};
 		matrix_buffer->update();
-		_x_pos += 0.01f * direction;
-
-		if (_x_pos == 2.f || _x_pos == -2.f)
-			direction *= -1.f;
 	}
 	_context->begin_3d();
 	matrix_buffer->bind();

@@ -32,23 +32,26 @@ struct __declspec(dllexport) Surface {
 	Surface(RECT rect);
 };
 
-struct __declspec(dllexport) Position2 {
+struct __declspec(dllexport) Vector2 {
 	float x;
 	float y;
 
-	void operator +=(Position2 pos);
-	void operator -=(Position2 pos);
+	void operator +=(Vector2 pos);
+	void operator -=(Vector2 pos);
 	
-	Position2(float x, float y);
+	Vector2(float x, float y);
 };
 
-struct __declspec(dllexport) Position3 : public Position2 {
+struct __declspec(dllexport) Vector3 : public Vector2 {
 	float z;
 
-	void operator +=(Position3 pos);
-	void operator -=(Position3 pos);
+	void operator +=(Vector3 pos);
+	void operator -=(Vector3 pos);
 
-	Position3(float x, float y, float z);
+	Vector3(float x, float y, float z);
 };
+
+typedef __declspec(dllexport) Vector2 Position2;
+typedef __declspec(dllexport) Vector3 Position3;
 
 

@@ -9,7 +9,6 @@ namespace Render
 	{
 	public:
 		Cube(Core::GraphicsContext* context);
-
 		
 		void draw() override;
 	};

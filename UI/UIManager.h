@@ -5,7 +5,6 @@
 #include "Animation/Animator.h"
 #include "Events/WinIntEventHandler.h"
 #include "Types/Types.h"
-struct Position2;
 
 namespace Render {
 	class Camera;
@@ -18,7 +17,7 @@ namespace UI {
 	{
 	private:
 		std::vector<InteractiveForm*> _forms;
-		Position2 _cursor;
+		Vector2 _cursor;
 		Animator _animator;
 
 		UIManager();

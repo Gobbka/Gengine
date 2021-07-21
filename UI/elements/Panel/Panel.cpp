@@ -1,5 +1,6 @@
 #include "Panel.h"
 #include "../../InteractiveForm.h"
+#include "Types/Types.h"
 
 void UI::Panel::draw(Render::DrawEvent* event)
 {
@@ -47,7 +48,7 @@ UI::ElementDescription UI::Panel::get_desc()
 	return ElementDescription(true, "PANEL");
 }
 
-UI::Panel::Panel(Position2 position,Surface resolution, Color4 color)
+UI::Panel::Panel(Vector2 position,Surface resolution, Color4 color)
 	:
 	Parent(position),
 	rect(color,position,resolution)

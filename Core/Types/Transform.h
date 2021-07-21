@@ -14,4 +14,12 @@ namespace Core
 
 		Position3 get_position();
 	};
+
+	class __declspec(dllexport) Quaternion3 {
+		Vector3 _rotation;
+	public:
+		Quaternion3(Vector3 rotation);
+
+		Vector3 get_rotation();
+	};
 };

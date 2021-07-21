@@ -3,12 +3,16 @@
 
 namespace Render
 {
+	class Texture;
 	struct DrawEvent;
 
-	class Cube : public I3DObject
+	class __declspec(dllexport) Cube : public I3DObject
 	{
+		Texture* texture;
 	public:
 		Cube(Core::GraphicsContext* context);
+
+		void set_texture(Render::Texture* texture);
 		
 		void draw() override;
 	};

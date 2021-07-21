@@ -11,6 +11,8 @@
 #include "../../../FSLib/FSDirectory.h"
 #include "../../../FSLib/FSFile.h"
 #include "Render/d3d/Buffer/Texture.h"
+#include "Render/Engine/Camera.h"
+#include "Render/I3DObject/Cube/Cube.h"
 
 namespace UI
 {
@@ -80,7 +82,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 		->add_element(_worldspace_panel)
 		->add_element(_assets_panel_wrapper)
 	;
-
+	
 	scan_assets_directory();
 }
 

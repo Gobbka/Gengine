@@ -82,7 +82,6 @@ int WINAPI wWinMain(
                 form->get_graphics_context()->main_camera()->adjust_rotation((Vector3(0.1f, 0, 0)));
             }
     	}
-			
     };
 
 	

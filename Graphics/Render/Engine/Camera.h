@@ -47,7 +47,6 @@ namespace Render
 		
 		float _fov = 90.f;
 		
-		Cube* _cube;
 
 		std::vector<Canvas::Canvas2DLayer*> _canvas2DLayers;
 	private:
@@ -84,6 +83,9 @@ namespace Render
 
 		Surface get_screen_resolution() const;
 	public:
+
+		Cube* _cube;
+
 		
 		Camera(Core::GraphicsContext* context);
 

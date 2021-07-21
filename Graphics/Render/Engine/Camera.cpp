@@ -2,12 +2,12 @@
 
 #include <iostream>
 
-#include "../../Graphics/Types.h"
 #include "BlendEngine.h"
 #include "MaskEngine.h"
+
 #include "../d3d/Buffer/VertexBuffer.h"
 #include "../I3DObject/Cube/Cube.h"
-
+#include "Types/Types.h"
 
 void Render::Camera::set_resolution(Surface new_resolution)
 {
@@ -71,8 +71,9 @@ Surface Render::Camera::get_screen_resolution() const
 }
 
 Render::Camera::Camera(Core::GraphicsContext* context)
-	: _camPosition(DirectX::XMVectorSet(0,0,-4.f,0)),
-	  _lookAt(DirectX::XMVectorSet(0.f,0.f,0.f,0.f))
+	: _camPosition(0,0,-4.f,0),
+	  _lookAt(0,0,0,0),
+	transform(Position3(0,0,-4.f))
 {
 	_context = context;
 	_blendEngine = new BlendEngine(_context);
@@ -89,8 +90,6 @@ Render::Camera::Camera(Core::GraphicsContext* context)
 	matrix_buffer->update();
 
 	_cube = new Cube(_context);
-
-	
 }
 
 void Render::Camera::present(DrawEvent* event)
@@ -98,9 +97,21 @@ void Render::Camera::present(DrawEvent* event)
 	_blendEngine->bind();
 	//_maskEngine->bind();
 	{
-		static float gakba = 0.0f;
+		static float _x_pos = -4.0f;
+		static float direction = 1.f;
+
+
+		_camPosition.y = sqrt(pow(_x_pos, 2) + 16.f);
+		_camPosition.z = _x_pos;
+		
 		auto worldMatrix = DirectX::XMMatrixIdentity();
-		auto viewMatrix = DirectX::XMMatrixLookAtLH(_camPosition, _lookAt, DirectX::XMVectorSet(0, 1.f, 0, 0));
+
+		auto camPos = transform.get_position();
+		auto viewMatrix = DirectX::XMMatrixLookAtLH(
+			DirectX::XMVectorSet(camPos.x, camPos.y, camPos.z, 0.f),
+			DirectX::XMVectorSet(camPos.x, camPos.y, camPos.z+1, _lookAt.w),
+			DirectX::XMVectorSet(0, 1.f, 0, 0)
+		);
 
 		auto forRadians = (_fov / 360.f) * DirectX::XM_2PI;
 		auto aspectRatio = 1400.f / 780.f;
@@ -109,7 +120,10 @@ void Render::Camera::present(DrawEvent* event)
 		
 		_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose(worldMatrix * viewMatrix * projMatrix )};
 		matrix_buffer->update();
-		gakba += 0.01f;
+		_x_pos += 0.01f * direction;
+
+		if (_x_pos == 2.f || _x_pos == -2.f)
+			direction *= -1.f;
 	}
 	_context->begin_3d();
 	matrix_buffer->bind();

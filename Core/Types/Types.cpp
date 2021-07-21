@@ -39,3 +39,21 @@ Position2::Position2(float x, float y)
 	this->x = x;
 	this->y = y;
 }
+
+void Position3::operator+=(Position3 pos)
+{
+	this->z += pos.z;
+	Position2::operator+=((Position2)pos);
+}
+
+void Position3::operator-=(Position3 pos)
+{
+	this->z -= pos.z;
+	Position2::operator-=((Position2)pos);
+}
+
+Position3::Position3(float x, float y, float z)
+	: Position2(x,y)
+{
+	this->z = z;
+}

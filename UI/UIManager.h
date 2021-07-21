@@ -4,7 +4,7 @@
 
 #include "Animation/Animator.h"
 #include "Events/WinIntEventHandler.h"
-#include "Graphics/Types.h"
+#include "Types/Types.h"
 struct Position2;
 
 namespace Render {

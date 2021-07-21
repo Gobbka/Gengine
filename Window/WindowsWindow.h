@@ -1,8 +1,9 @@
 ﻿#pragma once
+#include "Types/Types.h"
+
 #include <functional>
 #include <Windows.h>
 
-#include "../Graphics/Graphics/Types.h"
 
 namespace Core {
 	class __declspec(dllexport) WindowsWindow

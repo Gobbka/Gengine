@@ -1,5 +1,5 @@
 #pragma once
-#include "../../Graphics/Types.h"
+#include "Types/Types.h"
 
 namespace Render {
 	class Texture;

@@ -42,4 +42,13 @@ struct __declspec(dllexport) Position2 {
 	Position2(float x, float y);
 };
 
+struct __declspec(dllexport) Position3 : public Position2 {
+	float z;
+
+	void operator +=(Position3 pos);
+	void operator -=(Position3 pos);
+
+	Position3(float x, float y, float z);
+};
+
 

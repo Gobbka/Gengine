@@ -1,11 +1,8 @@
 #pragma once
 #include <d3d11.h>
-#include <vector>
 #include "Canvas/CanvasLayer.h"
-#include "Graphics/Types.h"
 #include "Graphics/Material/Material.h"
 #include "Render/Engine/SpriteEngine.h"
-#include "Render/Layer/ILayer.h"
 
 
 // TODO-LIST:

@@ -1,6 +1,6 @@
 #pragma once
 #include "WindowsWindow.h"
-
+#include "Types/Types.h"
 namespace Core
 {
 	class GraphicsContext;

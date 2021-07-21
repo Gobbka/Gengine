@@ -6,10 +6,9 @@
 #pragma comment(lib,"D3DCompiler.lib")
 
 #include "Canvas/CanvasLayer.h"
-#include "Graphics/Types.h"
+#include "Types/Types.h"
 #include "Render/d3d/Buffer/Texture.h"
 #include "Render/Engine/Camera.h"
-#include "Render/d3d/Buffer/VertexBuffer.h"
 
 #include "Render/d3d/Shader/SamplerState.h"
 #include "Render/d3d/Shader/PixelShader.h"

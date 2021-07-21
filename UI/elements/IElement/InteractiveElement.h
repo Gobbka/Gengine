@@ -3,7 +3,7 @@
 #include <DirectXMath.h>
 #include "functional"
 #include "Canvas/Objects/I2DCanvasObject.h"
-#include "Graphics/Types.h"
+#include "Types/Types.h"
 
 
 namespace Render {

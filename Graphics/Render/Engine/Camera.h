@@ -4,6 +4,9 @@
 #include "../../Graphics.h"
 #include "../d3d/Buffer/ConstantBuffer.h"
 #include "../Layer/ILayer.h"
+#include "Types/Transform.h"
+
+struct Surface;
 
 namespace Render
 {
@@ -36,14 +39,17 @@ namespace Render
 		BlendEngine* _blendEngine;
 		MaskEngine*  _maskEngine;
 
-		DirectX::XMVECTOR _camPosition;
-		DirectX::XMVECTOR _lookAt;
+		DirectX::XMFLOAT4 _camPosition;
+		DirectX::XMFLOAT4 _lookAt;
+		
 		float _fov = 90.f;
 		
 		Cube* _cube;
 
 		std::vector<Canvas::Canvas2DLayer*> _canvas2DLayers;
 	public:
+		Core::Transform transform;
+		
 		void set_resolution(Surface new_resolution);
 		void set_alpha(float alpha);
 

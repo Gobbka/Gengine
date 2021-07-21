@@ -1,6 +1,6 @@
 ﻿#include "MaskEngine.h"
 #include "Camera.h"
-#include "../../Graphics/Types.h"
+#include "Types/Types.h"
 
 Render::MaskEngine::MaskEngine(Core::GraphicsContext* engine)
 	: Bindable(engine)

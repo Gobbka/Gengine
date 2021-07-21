@@ -3,6 +3,7 @@
 
 #include "../../../Libs/FreeImage/FreeImage.h"
 #include "../../../ResourceManager/Drivers/ImageDriver.h"
+#include "Types/Types.h"
 
 Render::Material::Material(BYTE* pSysMem, Surface resolution)
 	: _resolution(resolution)

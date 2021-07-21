@@ -30,7 +30,7 @@ Render::Texture::Texture(Core::GraphicsContext* engine,Material material)
 	rvDesc.Texture2D.MostDetailedMip = texture_desc.MipLevels - 1;
 	rvDesc.ViewDimension = D3D_SRV_DIMENSION_TEXTURE2D;
 	
-	D3D11_SUBRESOURCE_DATA sb{material.pSysMem(),material.width() * 4,0};
+	D3D11_SUBRESOURCE_DATA sb{material.pSysMem(),(UINT)material.width() * 4,0};
 	
 	assert(SUCCEEDED(engine->device()->CreateTexture2D(&texture_desc, &sb, &_texture)));
 

@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{2bebf010-a931-410d-b5b5-e47d441f1948}</ProjectGuid>
-    <RootNamespace>UI</RootNamespace>
+    <ProjectGuid>{23ace9d1-999a-4a6b-a355-a81ae87b95e9}</ProjectGuid>
+    <RootNamespace>Core</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -73,12 +73,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)out</OutDir>
-    <IncludePath>$(SolutionDir)Graphics;$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)out</OutDir>
-    <IncludePath>$(SolutionDir)Graphics;$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -143,31 +141,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.vcxproj">
-      <Project>{23ace9d1-999a-4a6b-a355-a81ae87b95e9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Graphics\Graphics.vcxproj">
-      <Project>{34da52e9-8e67-41d5-a346-e0241375392c}</Project>
-    </ProjectReference>
+    <ClInclude Include="Types\Transform.h" />
+    <ClInclude Include="Types\Types.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animation\Animator.cpp" />
-    <ClCompile Include="elements\IElement\InteractiveElement.cpp" />
-    <ClCompile Include="elements\IElement\Parentable.cpp" />
-    <ClCompile Include="elements\Panel\Panel.cpp" />
-    <ClCompile Include="Events\WinIntEventHandler.cpp" />
-    <ClCompile Include="InteractiveForm.cpp" />
-    <ClCompile Include="UIManager.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Animation\Animator.h" />
-    <ClInclude Include="elements\IElement\InteractiveElement.h" />
-    <ClInclude Include="elements\IElement\Parentable.h" />
-    <ClInclude Include="elements\Panel\Panel.h" />
-    <ClInclude Include="Events\InteractionEventHandler.h" />
-    <ClInclude Include="Events\WinIntEventHandler.h" />
-    <ClInclude Include="InteractiveForm.h" />
-    <ClInclude Include="UIManager.h" />
+    <ClCompile Include="Types\Transform.cpp" />
+    <ClCompile Include="Types\Types.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

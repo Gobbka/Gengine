@@ -12,6 +12,7 @@
 #include "UIManager.h"
 #include "Drivers/PNGImageDriver.h"
 #include "Forms/MainForm/MainForm.h"
+#include "Render/Engine/Camera.h"
 
 int WINAPI wWinMain(
     _In_ HINSTANCE hInstance,
@@ -33,11 +34,38 @@ int WINAPI wWinMain(
     form->show();
     form->background = { 17,17,17 };
 
-    auto* graphic = form->get_graphics_context();
-
-    form->on_wndproc = [](UINT msg, WPARAM wp, LPARAM lp)
+    form->on_wndproc = [&](UINT msg, WPARAM wp, LPARAM lp)
     {
         UI::UIManager::instance()->window_proc(msg, wp, lp);
+
+    	if(msg == WM_KEYDOWN)
+    	{
+    		if(wp == 0x57) // W
+    		{
+                form->get_graphics_context()->main_camera()->transform.adjust_position(Position3(0,0, 0.5f));
+    		}
+    		if(wp == 0x53)
+    		{
+                form->get_graphics_context()->main_camera()->transform.adjust_position(Position3(0, 0, -0.5f));
+    		}
+            if (wp == 0x44)
+            {
+                form->get_graphics_context()->main_camera()->transform.adjust_position(Position3(0.5f, 0, 0));
+            }
+    		if(wp == 0x41)
+    		{
+                form->get_graphics_context()->main_camera()->transform.adjust_position(Position3(-0.5f, 0, 0));
+    		}
+    		if(wp == VK_SPACE)
+    		{
+                form->get_graphics_context()->main_camera()->transform.adjust_position(Position3(0, 0.5f, 0));
+    		}
+            if (wp == VK_CONTROL)
+            {
+                form->get_graphics_context()->main_camera()->transform.adjust_position(Position3(0, -0.5f, 0));
+            }
+    	}
+			
     };
 
 	

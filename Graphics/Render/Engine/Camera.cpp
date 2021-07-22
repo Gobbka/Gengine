@@ -153,7 +153,8 @@ Render::Camera::Camera(Core::GraphicsContext* context)
 	matrix_buffer = new ConstantBuffer(context, &_b1_constant_buffer_struct, sizeof(_b1_constant_buffer_struct), 0);
 	matrix_buffer->update();
 
-	_cube = new Cube(_context);
+	_cube = new Cube(Position3(-.5f,0.5f,0),_context);
+	_secondCube = new Cube({ -5.f,0.5f,0 }, _context);
 
 	update_position();
 }
@@ -179,6 +180,7 @@ void Render::Camera::present(DrawEvent* event)
 	_context->begin_3d();
 	matrix_buffer->bind();
 	_cube->draw();
+	_secondCube->draw();
 	// render all world objects
 	
 	// then render canvas

@@ -7,20 +7,29 @@
 
 Render::IndexBuffer* CUBE_INDEX_BUFFER;
 
-Render::Cube::Cube(Core::GraphicsContext* context)
+Render::Cube::Cube(Position3 pos,Core::GraphicsContext* context)
 	: I3DObject(context,8)
 {
 	auto* ptr = vertices();
 
-	ptr[0].pos = { -0.5,0.5,0 };
-	ptr[1].pos = { 0.5,0.5,0 };
-	ptr[2].pos = { -0.5,-0.5,0 };
-	ptr[3].pos = { 0.5,-0.5,0 };
+	auto x = pos.x;
+	auto y = pos.y;
+	auto width = 0.5f;
+	
+	 ptr[0].pos = { x,y,0 };
+	 ptr[1].pos = { x+width,y,0 };
+	 ptr[2].pos = { x,y-width,0 };
+	 ptr[3].pos = { x+width,y-width,0 };
 
-	ptr[4].pos = { -0.5,0.5,1 };
-	ptr[5].pos = { 0.5,0.5,1 };
-	ptr[6].pos = { -0.5,-0.5,1 };
-	ptr[7].pos = { 0.5,-0.5,1 };
+	 ptr[4].pos = { x,y,width };
+	 ptr[5].pos = { x + width,y,width };
+	 ptr[6].pos = { x,y - width,width };
+	 ptr[7].pos = { x + width,y - width,width };
+	
+	 //ptr[4].pos = { -0.5,0.5,1 };
+	 //ptr[5].pos = { 0.5,0.5,1 };
+	 //ptr[6].pos = { -0.5,-0.5,1 };
+	 //ptr[7].pos = { 0.5,-0.5,1 };
 
 	ptr[0].color = { 0,0,1 };
 	ptr[1].color = { 0,1,0 };

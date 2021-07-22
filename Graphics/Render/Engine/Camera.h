@@ -85,6 +85,7 @@ namespace Render
 	public:
 
 		Cube* _cube;
+		Cube* _secondCube;
 
 		
 		Camera(Core::GraphicsContext* context);

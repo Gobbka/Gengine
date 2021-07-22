@@ -1,5 +1,6 @@
 #pragma once
 #include "../I3DObject.h"
+#include "Types/Types.h"
 
 namespace Render
 {
@@ -10,7 +11,7 @@ namespace Render
 	{
 		Texture* texture;
 	public:
-		Cube(Core::GraphicsContext* context);
+		Cube(Position3 pos, Core::GraphicsContext* context);
 
 		void set_texture(Render::Texture* texture);
 		

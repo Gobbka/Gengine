@@ -14,13 +14,7 @@ Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
 {
 	WindowsManager::instance()->register_window(this);
 	
-	_graphics = GraphicsContext::new_context(WindowsWindow::hwnd());
-
-    {
-        RECT rect;
-        GetClientRect(hwnd(), &rect);
-        _graphics->set_resolution(Surface(rect));
-    }
+	_graphics = GraphicsContext::new_context(WindowsWindow::hwnd(),WindowsWindow::size());
 }
 
 Core::Form::~Form()

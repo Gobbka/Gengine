@@ -143,7 +143,8 @@ Render::Camera::Camera(Core::GraphicsContext* context)
 	_blendEngine = new BlendEngine(_context);
 	_maskEngine  = new MaskEngine(_context);
 	
-	_b0_constant_buffer_struct = { 800,600,0.5 };
+	auto resolution = context->get_screen_resolution();
+	_b0_constant_buffer_struct = { resolution.width,resolution.height,0.5 };
 
 	b0_buffer = new ConstantBuffer(_context, &_b0_constant_buffer_struct, sizeof(_b0_constant_buffer_struct), 0);
 	b0_buffer->update();
@@ -170,9 +171,11 @@ void Render::Camera::present(DrawEvent* event)
 		auto viewMatrix = create_view_matrix();
 
 		auto forRadians = (_fov / 360.f) * DirectX::XM_2PI;
-		auto aspectRatio = 1600.f / 980.f;
 
-		auto projMatrix = DirectX::XMMatrixPerspectiveFovLH(forRadians, aspectRatio, 0.1f, 1000.f);
+		auto res = _context->get_screen_resolution(); 
+		auto aspectRatio = res.width / res.height;
+
+		auto projMatrix = DirectX::XMMatrixPerspectiveFovLH(forRadians, aspectRatio, 0.1f, 120.f);
 		
 		_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose(worldMatrix * viewMatrix * projMatrix )};
 		matrix_buffer->update();
@@ -186,7 +189,7 @@ void Render::Camera::present(DrawEvent* event)
 	// then render canvas
 	_context->begin_2d();
 	b0_buffer->bind();
-
+	return;
 	for(auto*layer : _canvas2DLayers)
 	{
 		event->layer = layer;

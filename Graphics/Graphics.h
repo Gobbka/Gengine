@@ -69,6 +69,6 @@ namespace Core
 		Render::Texture* create_texture(Render::Material* material);
 		void set_texture(Render::Texture* texture);
 		
-		static GraphicsContext* new_context(HWND hwnd);
+		static GraphicsContext* new_context(HWND hwnd,Surface size);
 	};
 }

@@ -25,11 +25,6 @@ Render::Cube::Cube(Position3 pos,Core::GraphicsContext* context)
 	 ptr[5].pos = { x + width,y,width };
 	 ptr[6].pos = { x,y - width,width };
 	 ptr[7].pos = { x + width,y - width,width };
-	
-	 //ptr[4].pos = { -0.5,0.5,1 };
-	 //ptr[5].pos = { 0.5,0.5,1 };
-	 //ptr[6].pos = { -0.5,-0.5,1 };
-	 //ptr[7].pos = { 0.5,-0.5,1 };
 
 	ptr[0].color = { 0,0,1 };
 	ptr[1].color = { 0,1,0 };
@@ -72,7 +67,7 @@ void Render::Cube::draw()
 	if(this->texture != nullptr)
 		texture->bind();
 	
-	this->bind();
+	I3DObject::bind();
 
 	CUBE_INDEX_BUFFER->bind();
 	_context->context()->DrawIndexed(8,0,0);

@@ -8,9 +8,11 @@
 #include "elements/Panel/Panel.h"
 #include "UIManager.h"
 #include "InteractiveForm.h"
+#include "Keyboard.h"
 #include "../../../FSLib/FSDirectory.h"
 #include "../../../FSLib/FSFile.h"
 #include "Render/d3d/Buffer/Texture.h"
+
 #include "Render/Engine/Camera.h"
 #include "Render/I3DObject/Cube/Cube.h"
 
@@ -110,4 +112,50 @@ void Forms::MainForm::handle_resize(Surface rect)
 	_worldspace_panel->set_resolution(Surface(250, height - 30));
 	
 	Form::handle_resize(rect);
+}
+
+void Forms::MainForm::update()
+{
+
+	if (Keyboard::pressed(VirtualKey::VK_KEY_W)) // W
+	{
+		get_graphics_context()->main_camera()->adjust_position_relative(Position3(0.05f, 0, 0));
+	}
+	if (Keyboard::pressed(VirtualKey::VK_KEY_S))
+	{
+		get_graphics_context()->main_camera()->adjust_position_relative(Position3(-0.05f, 0, 0));
+	}
+	if (Keyboard::pressed(VirtualKey::VK_KEY_D))
+	{
+		get_graphics_context()->main_camera()->adjust_position_relative(Position3(0, 0, 0.05f));
+	}
+	if (Keyboard::pressed(VirtualKey::VK_KEY_A))
+	{
+		get_graphics_context()->main_camera()->adjust_position_relative(Position3(0, 0, -0.05f));
+	}
+	if (Keyboard::pressed((VirtualKey)VK_SPACE))
+	{
+		get_graphics_context()->main_camera()->adjust_position(Position3(0, 0.05f, 0));
+	}
+	if (Keyboard::pressed((VirtualKey)VK_CONTROL))
+	{
+		get_graphics_context()->main_camera()->adjust_position(Position3(0, -0.05f, 0));
+	}
+
+	if (Keyboard::pressed((VirtualKey)VK_LEFT))
+	{
+		get_graphics_context()->main_camera()->adjust_rotation((Vector3(0, -0.04f, 0)));
+	}
+	if (Keyboard::pressed((VirtualKey)VK_RIGHT))
+	{
+		get_graphics_context()->main_camera()->adjust_rotation((Vector3(0, 0.04f, 0)));
+	}
+	if (Keyboard::pressed((VirtualKey)VK_UP))
+	{
+		get_graphics_context()->main_camera()->adjust_rotation((Vector3(-0.04f, 0, 0)));
+	}
+	if (Keyboard::pressed((VirtualKey)VK_DOWN))
+	{
+		get_graphics_context()->main_camera()->adjust_rotation((Vector3(0.04f, 0, 0)));
+	}
 }

@@ -31,5 +31,7 @@ namespace Forms
 		void scan_assets_directory();
 
 		void handle_resize(Surface rect) override;
+
+		void update() override;
 	};
 }

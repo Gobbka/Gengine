@@ -37,51 +37,6 @@ int WINAPI wWinMain(
     form->on_wndproc = [&](UINT msg, WPARAM wp, LPARAM lp)
     {
         UI::UIManager::instance()->window_proc(msg, wp, lp);
-
-    	if(msg == WM_KEYDOWN)
-    	{
-    		if(wp == 0x57) // W
-    		{
-                form->get_graphics_context()->main_camera()->adjust_position_relative(Position3(0.5f,0, 0));
-    		}
-    		if(wp == 0x53)
-    		{
-                form->get_graphics_context()->main_camera()->adjust_position_relative(Position3(-0.5f, 0, 0));
-    		}
-            if (wp == 0x44)
-            {
-                form->get_graphics_context()->main_camera()->adjust_position_relative(Position3(0, 0, 0.5f));
-            }
-    		if(wp == 0x41)
-    		{
-                form->get_graphics_context()->main_camera()->adjust_position_relative(Position3(0, 0, -0.5f));
-    		}
-    		if(wp == VK_SPACE)
-    		{
-                form->get_graphics_context()->main_camera()->adjust_position(Position3(0, 0.5f, 0));
-    		}
-            if (wp == VK_CONTROL)
-            {
-                form->get_graphics_context()->main_camera()->adjust_position(Position3(0, -0.5f, 0));
-            }
-
-            if (wp == VK_LEFT)
-            {
-                form->get_graphics_context()->main_camera()->adjust_rotation((Vector3(0, -0.1f, 0)));
-            }
-            if (wp == VK_RIGHT)
-            {
-                form->get_graphics_context()->main_camera()->adjust_rotation((Vector3(0, 0.1f, 0)));
-            }
-    		if(wp == VK_UP)
-    		{
-                form->get_graphics_context()->main_camera()->adjust_rotation((Vector3(-0.1f, 0, 0)));
-    		}
-            if (wp == VK_DOWN)
-            {
-                form->get_graphics_context()->main_camera()->adjust_rotation((Vector3(0.1f, 0, 0)));
-            }
-    	}
     };
 
 	
@@ -95,7 +50,8 @@ int WINAPI wWinMain(
 		}
 		
         form->force_draw();
-
+        form->update();
+		
         Sleep(10);
 	}
 }

@@ -33,5 +33,6 @@ namespace Core {
 		void hide();
 
 		HWND hwnd();
+		Surface size();
 	};
 }

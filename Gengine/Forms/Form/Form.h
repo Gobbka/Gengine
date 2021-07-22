@@ -22,5 +22,7 @@ namespace Core
 		void drag_move();
 
 		void force_draw();
+
+		virtual void update() PURE;
 	};
 }

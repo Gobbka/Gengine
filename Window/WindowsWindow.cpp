@@ -75,27 +75,38 @@ Core::WindowsWindow::WindowsWindow(HINSTANCE hint, UINT width, UINT height)
 
 	assert(RegisterClassExW(&wndClass) != 0);
 
+	int centerScreenX = GetSystemMetrics(SM_CXSCREEN) / 2 - width / 2;
+	int centerScreenY = GetSystemMetrics(SM_CYSCREEN) / 2 - height / 2;
+
+	RECT wr; //Widow Rectangle
+	wr.left = centerScreenX;
+	wr.top = centerScreenY;
+	wr.right = wr.left + width;
+	wr.bottom = wr.top + height;
+	AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE);
+
 	_hwnd = CreateWindowExW(
 		0,
 		class_name,
 		L"GENIGNE MAIN",
 		WS_CAPTION | WS_MINIMIZEBOX | WS_SIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU,
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
-		width, height,
+		wr.left, //Window X Position
+		wr.top, //Window Y Position
+		wr.right - wr.left, //Window Width
+		wr.bottom - wr.top, //Window Height
 		0,
 		0,
 		_hInst,
 		0
 	);
 
-
-
 	if(_hwnd == 0)
 	{
 		auto error = GetLastError();
 		error = 228;
 	}
+
+	_size = Surface(width, height);
 }
 
 void Core::WindowsWindow::show()
@@ -111,4 +122,9 @@ void Core::WindowsWindow::hide()
 HWND Core::WindowsWindow::hwnd()
 {
 	return _hwnd;
+}
+
+Surface Core::WindowsWindow::size()
+{
+	return _size;
 }

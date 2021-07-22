@@ -23,15 +23,11 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_swap = swap;
 	_context = context;
 
-	RECT window_rect;
-
 	{
 		DXGI_SWAP_CHAIN_DESC desc;
 		swap->GetDesc(&desc);
-		GetClientRect(desc.OutputWindow, &window_rect);
+		_screen_resolution = Surface(desc.BufferDesc.Width,desc.BufferDesc.Height);
 	}
-
-	_screen_resolution = Surface(window_rect);
 	
 	ID3D11Resource* back_buffer;
 	_swap->GetBuffer(0, __uuidof(ID3D11Resource), (void**)&back_buffer);
@@ -74,9 +70,8 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 
 	_spriteEngine = new Render::SpriteEngine(this, _texture_ps, _texture_vs, _texture_layout);
 	
-	
-	_viewport.Width = 800;
-	_viewport.Height = 600;
+	_viewport.Width  = _screen_resolution.width;
+	_viewport.Height = _screen_resolution.height;
 	_viewport.MaxDepth = 1;
 	_viewport.MinDepth = 1;
 	_viewport.TopLeftX = 0;
@@ -177,7 +172,7 @@ void Core::GraphicsContext::set_texture(Render::Texture* texture)
 	texture->bind();
 }
 
-Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd)
+Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd,Surface size)
 {
 	IDXGISwapChain* pswap;
 	ID3D11Device* device;
@@ -185,8 +180,8 @@ Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd)
 
 	DXGI_SWAP_CHAIN_DESC sd;
 	sd.BufferDesc = DXGI_MODE_DESC{
-		800,600,
-		{0,0},
+		(UINT)size.width,(UINT)size.height,
+		{60,1},
 		DXGI_FORMAT_B8G8R8A8_UNORM,
 		DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED,
 		DXGI_MODE_SCALING_UNSPECIFIED

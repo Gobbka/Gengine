@@ -55,12 +55,8 @@ void Render::Cube::draw()
 	if (CUBE_INDEX_BUFFER == nullptr)
 	{
 		UINT indexed[]{
-			0,1,2,3,
-			5,4,7,6,
-			0,2,4,6,
-			5,7,1,3,
-			4,5,0,1,
-			2,3,6,7,
+			0,1,2,3,6,7,4,5,
+			2,6,0,4,1,5,3,7
 		};
 		CUBE_INDEX_BUFFER = new IndexBuffer(_context, indexed, ARRAYSIZE(indexed));
 	}
@@ -70,10 +66,6 @@ void Render::Cube::draw()
 	this->bind();
 
 	CUBE_INDEX_BUFFER->bind();
-	_context->context()->DrawIndexed(4,0,0);
-	_context->context()->DrawIndexed(4,4,0);
-	_context->context()->DrawIndexed(4,8,0);
-	_context->context()->DrawIndexed(4,12,0);
-	_context->context()->DrawIndexed(4,16,0);
-	_context->context()->DrawIndexed(4,20,0);
+	_context->context()->DrawIndexed(8,0,0);
+	_context->context()->DrawIndexed(8,8,0);
 }

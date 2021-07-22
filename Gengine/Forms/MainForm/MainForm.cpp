@@ -94,25 +94,9 @@ void Forms::MainForm::scan_assets_directory()
 	{
 		Render::Texture* lp_texture = file->is_directory() ? _folder_texture : _file_texture;
 		
-		auto* panel = new UI::Directory(*(FS::FSFile*)file, { 0,0 }, { 500,500 }, lp_texture);
-		//panel->set_texture(_folder_texture);
+		auto* panel = new UI::Directory(*(FS::FSFile*)file, { 0,0 }, { 120,120 }, lp_texture);
 		
 		_assets_panel->add_element(panel);
-
-		//panel->onMouseDown = [](UI::UIElementEventArgs args)
-		//{
-		//	//auto strlenght = strlen((char*)args->data);
-		//	//auto lenght = 6 + strlenght  + 1;
-		//	//auto* path = new char[lenght];
-		//	//path[lenght] = '\0';
-
-		//	//memcpy(path, "start ", 6);
-		//	//memcpy(path+6, args->data, strlenght);
-
-		//	//_wsystem(L"nigger");
-
-		//	//delete[] path;
-		//};
 	});
 
 }

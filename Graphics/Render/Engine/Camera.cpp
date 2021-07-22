@@ -20,6 +20,7 @@ void Render::Camera::update_position()
 {
 	auto camPos = _transform.get_position();
 	_xm_camPosition = DirectX::XMVectorSet(camPos.z, camPos.y, camPos.x, 0.f);
+	_viewMatrix = create_view_matrix();
 }
 
 DirectX::XMMATRIX Render::Camera::create_view_matrix()
@@ -43,6 +44,16 @@ DirectX::XMMATRIX Render::Camera::create_view_matrix()
 		camTarget,
 		upDir
 	);
+}
+
+DirectX::XMMATRIX Render::Camera::create_proj_matrix()
+{
+	auto forRadians = (_fov / 360.f) * DirectX::XM_2PI;
+
+	auto res = _context->get_screen_resolution();
+	auto aspectRatio = res.width / res.height;
+
+	return DirectX::XMMatrixPerspectiveFovLH(forRadians, aspectRatio, 0.1f, 120.f);
 }
 
 void Render::Camera::set_position(Position3 pos)
@@ -71,6 +82,7 @@ void Render::Camera::adjust_position_relative(Position3 pos)
 void Render::Camera::adjust_rotation(Vector3 rot)
 {
 	_rotation.adjust_rotation(rot);
+	_viewMatrix = create_view_matrix();
 }
 
 void Render::Camera::set_resolution(Surface new_resolution)
@@ -157,6 +169,8 @@ Render::Camera::Camera(Core::GraphicsContext* context)
 	_cube = new Cube(Position3(-.5f,0.5f,0),_context);
 	_secondCube = new Cube({ -5.f,0.5f,0 }, _context);
 
+	_projectionMatrix = create_proj_matrix();
+	
 	update_position();
 }
 
@@ -167,17 +181,8 @@ void Render::Camera::present(DrawEvent* event)
 	{
 		
 		auto worldMatrix = DirectX::XMMatrixIdentity();
-
-		auto viewMatrix = create_view_matrix();
-
-		auto forRadians = (_fov / 360.f) * DirectX::XM_2PI;
-
-		auto res = _context->get_screen_resolution(); 
-		auto aspectRatio = res.width / res.height;
-
-		auto projMatrix = DirectX::XMMatrixPerspectiveFovLH(forRadians, aspectRatio, 0.1f, 120.f);
 		
-		_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose(worldMatrix * viewMatrix * projMatrix )};
+		_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose(worldMatrix * _viewMatrix * _projectionMatrix )};
 		matrix_buffer->update();
 	}
 	_context->begin_3d();

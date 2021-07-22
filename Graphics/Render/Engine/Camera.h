@@ -53,8 +53,11 @@ namespace Render
 		void update_position();
 		
 		DirectX::XMMATRIX create_view_matrix();
-
-
+		DirectX::XMMATRIX create_proj_matrix();
+		
+		DirectX::XMMATRIX _projectionMatrix;
+		DirectX::XMMATRIX _viewMatrix;
+		
 		DirectX::XMVECTOR _forward_vector;
 		DirectX::XMVECTOR _backward_vector;
 		DirectX::XMVECTOR _right_vector;

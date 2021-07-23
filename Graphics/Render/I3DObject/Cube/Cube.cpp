@@ -8,12 +8,12 @@
 Render::IndexBuffer* CUBE_INDEX_BUFFER;
 
 Render::Cube::Cube(Position3 pos,Core::GraphicsContext* context)
-	: I3DObject(context,8)
+	: I3DObject(context,8,pos)
 {
 	auto* ptr = vertices();
 
-	auto x = pos.x;
-	auto y = pos.y;
+	auto x = 0.f;
+	auto y = 0.f;
 	auto width = 0.5f;
 	
 	 ptr[0].pos = { x,y,0 };

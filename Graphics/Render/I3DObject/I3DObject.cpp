@@ -18,6 +18,14 @@ void Render::I3DObject::bind()
 }
 
 Render::I3DObject::I3DObject(Core::GraphicsContext*context,size_t vertex_size)
+	: transform(Position3(0,0,0))
+{
+	_context = context;
+	_buffer = VertexBuffer::alloc(context, vertex_size, true);
+}
+
+Render::I3DObject::I3DObject(Core::GraphicsContext* context, size_t vertex_size, Position3 pos)
+	: transform(pos)
 {
 	_context = context;
 	_buffer = VertexBuffer::alloc(context, vertex_size, true);

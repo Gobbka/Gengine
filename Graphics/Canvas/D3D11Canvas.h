@@ -50,6 +50,7 @@ namespace Render
 		Vertex* get_ptr() const;
 		VertexBuffer* get_vbuffer() const;
 
+		void bind();
 
 		D3D11Canvas(Core::GraphicsContext* pEngine, VertexBuffer* buffer);
 		explicit D3D11Canvas(Core::GraphicsContext* pEngine);

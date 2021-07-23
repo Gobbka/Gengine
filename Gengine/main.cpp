@@ -46,9 +46,9 @@ int WINAPI wWinMain(
             TranslateMessage(&msg);
             DispatchMessage(&msg);
 		}
-		
-        form->force_draw();
+
         form->update();
+        form->force_draw();
 		
         Sleep(10);
 	}

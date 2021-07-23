@@ -13,8 +13,6 @@ void InteractiveForm::render_components(Render::DrawEvent2D* event)
 	{
 		if (element->styles.display != ElementStyles::DisplayType::none)
 			element->draw(event);
-		
-		event->mask_clear();
 	}
 }
 

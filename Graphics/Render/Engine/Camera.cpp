@@ -166,7 +166,7 @@ Render::Camera::Camera(Core::GraphicsContext* context)
 	matrix_buffer = new ConstantBuffer(context, &_b1_constant_buffer_struct, sizeof(_b1_constant_buffer_struct), 0);
 	matrix_buffer->update();
 
-	_cube = new Cube(Position3(-.5f,0.5f,0),_context);
+	_cube = new Cube(Position3(0,0.5f,0),_context);
 	_secondCube = new Cube({ -5.f,0.5f,0 }, _context);
 
 	_projectionMatrix = create_proj_matrix();
@@ -179,25 +179,33 @@ void Render::Camera::present()
 	_blendEngine->bind();
 	_maskEngine->bind();
 	_maskEngine->clear_buffer();
-	{
-		
-		auto worldMatrix = DirectX::XMMatrixIdentity();
-		
-		_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose(worldMatrix * _viewMatrix * _projectionMatrix )};
-		matrix_buffer->update();
-	}
+
 	_context->begin_3d();
 	matrix_buffer->bind();
 
 	_maskEngine->set_state(_maskEngine->get_drawState(),0);
-	_cube->draw();
+	
+	{
+		auto worldMatrix = _cube->transform.get_world_matrix();
+		_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose(worldMatrix * _viewMatrix * _projectionMatrix) };
+		matrix_buffer->update();
+		_cube->draw();
+	}
 	_maskEngine->set_state(_maskEngine->get_discardState(),1);
-	_secondCube->draw();
+	{
+		auto worldMatrix = _secondCube->transform.get_world_matrix();
+		_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose(worldMatrix * _viewMatrix * _projectionMatrix) };
+		matrix_buffer->update();
+		_secondCube->draw();
+	}
 	// render all world objects
 	
 	// then render canvas
-	
+
+	_secondCube->transform.adjust_position(Position3(0, -0.01f, 0));
+	return;
 	_context->begin_2d();
+
 	b0_buffer->bind();
 	_maskEngine->clear_buffer();
 
@@ -207,9 +215,6 @@ void Render::Camera::present()
 		event.layer = layer;
 
 		layer->update();
-		layer->canvas()->get_vbuffer()->bind();
-		
 		layer->render(&event);
 	}
-	//event->layer->render(event);
 }

@@ -60,7 +60,7 @@ void Render::VertexBuffer::update(UINT update_size)
 	auto* pContext = _engine->context();
 	D3D11_MAPPED_SUBRESOURCE subdata;
 
-	assert(SUCCEEDED( pContext->Map(_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &subdata)));
+	pContext->Map(_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &subdata);
 
 	this->copy_to(subdata.pData, update_size);
 

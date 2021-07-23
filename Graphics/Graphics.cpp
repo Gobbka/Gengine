@@ -157,6 +157,7 @@ void Core::GraphicsContext::begin_2d()
 void Core::GraphicsContext::begin_3d()
 {
 	_vertexShader3d->bind();
+	_pixelShader->bind();
 	_context->IASetInputLayout(_inputLayout);
 }
 

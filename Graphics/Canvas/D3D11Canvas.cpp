@@ -61,6 +61,11 @@ Render::VertexBuffer* Render::D3D11Canvas::get_vbuffer() const
 	return _vertex_buffer;
 }
 
+void Render::D3D11Canvas::bind()
+{
+	_vertex_buffer->bind();
+}
+
 Render::D3D11Canvas::D3D11Canvas(Core::GraphicsContext* pEngine, VertexBuffer* buffer)
 	:_allocator(100,100)
 {

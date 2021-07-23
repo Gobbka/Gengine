@@ -28,7 +28,8 @@ void Canvas::Canvas2DLayer::update()
 }
 
 void Canvas::Canvas2DLayer::render(Render::DrawEvent2D* event)
-{	
+{
+	_canvas.bind();
 	this->render_components(event);
 }
 

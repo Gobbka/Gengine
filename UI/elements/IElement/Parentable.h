@@ -52,7 +52,7 @@ namespace UI
 
 		Parent(Position2 position);
 
-		void draw(::Render::DrawEvent* event) override;
+		void draw(Render::DrawEvent2D* event) override;
 		void set_color(Color4 color) override;
 		void move_by(Position2 move) override;
 

@@ -117,44 +117,44 @@ void Forms::MainForm::handle_resize(Surface rect)
 void Forms::MainForm::update()
 {
 
-	if (Keyboard::pressed(VirtualKey::VK_KEY_W)) // W
+	if (Keyboard::pressed(VirtualKey::KEY_W)) // W
 	{
 		get_graphics_context()->main_camera()->adjust_position_relative(Position3(0.05f, 0, 0));
 	}
-	if (Keyboard::pressed(VirtualKey::VK_KEY_S))
+	if (Keyboard::pressed(VirtualKey::KEY_S))
 	{
 		get_graphics_context()->main_camera()->adjust_position_relative(Position3(-0.05f, 0, 0));
 	}
-	if (Keyboard::pressed(VirtualKey::VK_KEY_D))
+	if (Keyboard::pressed(VirtualKey::KEY_D))
 	{
 		get_graphics_context()->main_camera()->adjust_position_relative(Position3(0, 0, 0.05f));
 	}
-	if (Keyboard::pressed(VirtualKey::VK_KEY_A))
+	if (Keyboard::pressed(VirtualKey::KEY_A))
 	{
 		get_graphics_context()->main_camera()->adjust_position_relative(Position3(0, 0, -0.05f));
 	}
-	if (Keyboard::pressed((VirtualKey)VK_SPACE))
+	if (Keyboard::pressed(VirtualKey::SPACE))
 	{
 		get_graphics_context()->main_camera()->adjust_position(Position3(0, 0.05f, 0));
 	}
-	if (Keyboard::pressed((VirtualKey)VK_CONTROL))
+	if (Keyboard::pressed(VirtualKey::CONTROL))
 	{
 		get_graphics_context()->main_camera()->adjust_position(Position3(0, -0.05f, 0));
 	}
 
-	if (Keyboard::pressed((VirtualKey)VK_LEFT))
+	if (Keyboard::pressed(VirtualKey::LEFT))
 	{
 		get_graphics_context()->main_camera()->adjust_rotation((Vector3(0, -0.04f, 0)));
 	}
-	if (Keyboard::pressed((VirtualKey)VK_RIGHT))
+	if (Keyboard::pressed(VirtualKey::RIGHT))
 	{
 		get_graphics_context()->main_camera()->adjust_rotation((Vector3(0, 0.04f, 0)));
 	}
-	if (Keyboard::pressed((VirtualKey)VK_UP))
+	if (Keyboard::pressed(VirtualKey::UP))
 	{
 		get_graphics_context()->main_camera()->adjust_rotation((Vector3(-0.04f, 0, 0)));
 	}
-	if (Keyboard::pressed((VirtualKey)VK_DOWN))
+	if (Keyboard::pressed(VirtualKey::DOWN))
 	{
 		get_graphics_context()->main_camera()->adjust_rotation((Vector3(0.04f, 0, 0)));
 	}

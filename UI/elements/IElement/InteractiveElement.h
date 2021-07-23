@@ -7,6 +7,7 @@
 
 
 namespace Render {
+	struct DrawEvent2D;
 	struct DrawEvent;
 }
 
@@ -111,7 +112,7 @@ namespace UI {
 		void set_margin(float x, float y, float z, float w);
 	public:
 		// public voids
-		void draw(Render::DrawEvent* event) override PURE;
+		void draw(Render::DrawEvent2D* event) override PURE;
 
 		void initialize(InteractiveForm* form);
 	protected:

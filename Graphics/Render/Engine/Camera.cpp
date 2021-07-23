@@ -174,10 +174,11 @@ Render::Camera::Camera(Core::GraphicsContext* context)
 	update_position();
 }
 
-void Render::Camera::present(DrawEvent* event)
+void Render::Camera::present()
 {
 	_blendEngine->bind();
-	//_maskEngine->bind();
+	_maskEngine->bind();
+	_maskEngine->clear_buffer();
 	{
 		
 		auto worldMatrix = DirectX::XMMatrixIdentity();
@@ -187,22 +188,28 @@ void Render::Camera::present(DrawEvent* event)
 	}
 	_context->begin_3d();
 	matrix_buffer->bind();
+
+	_maskEngine->set_state(_maskEngine->get_drawState(),0);
 	_cube->draw();
+	_maskEngine->set_state(_maskEngine->get_discardState(),1);
 	_secondCube->draw();
 	// render all world objects
 	
 	// then render canvas
+	
 	_context->begin_2d();
 	b0_buffer->bind();
-	return;
+	_maskEngine->clear_buffer();
+
+	DrawEvent2D event(this,nullptr);
 	for(auto*layer : _canvas2DLayers)
 	{
-		event->layer = layer;
+		event.layer = layer;
 
 		layer->update();
 		layer->canvas()->get_vbuffer()->bind();
 		
-		layer->render(event);
+		layer->render(&event);
 	}
 	//event->layer->render(event);
 }

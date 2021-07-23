@@ -15,6 +15,6 @@ namespace Render {
 		bool hidden() const { return _hidden; }
 
 		virtual void update() = 0;
-		virtual void render(Render::DrawEvent* event) = 0;
+		virtual void render(Render::DrawEvent2D* event) = 0;
 	};
 }

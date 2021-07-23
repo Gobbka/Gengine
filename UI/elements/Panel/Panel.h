@@ -5,6 +5,7 @@
 
 
 namespace Render {
+	struct DrawEvent2D;
 	struct DrawEvent;
 }
 
@@ -15,7 +16,7 @@ namespace UI
 	protected:
 		Canvas::Rectangle rect;
 
-		void draw(Render::DrawEvent* event) override;
+		void draw(Render::DrawEvent2D* event) override;
 		void on_initialize() override;
 	public:
 		Color4 get_color() override;

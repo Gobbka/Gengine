@@ -12,16 +12,15 @@ namespace Render {
 	class ILayer;
 
 	struct __declspec(dllexport) DrawEvent {
+	protected:
+		Camera* _camera;
 	private:
-		Camera* _engine;
-		
-		UINT _draw_index = 0u;
 		UINT _stencil_layer = 0u;
 		
 	public:
-		ILayer* layer;
+		
 
-		DrawEvent(Camera* engine , ILayer* layer);
+		DrawEvent(Camera* engine);
 
 	public:
 		SpriteEngine* sprite_engine();
@@ -35,7 +34,16 @@ namespace Render {
 
 		void set_alpha(float alpha);
 		
+	};
+
+	struct __declspec(dllexport) DrawEvent2D : public DrawEvent{
+	private:
+		UINT _draw_index = 0u;
+	public:
+		ILayer* layer;
+		DrawEvent2D(Camera* camera,ILayer*layer);
+		
 		void draw_vertex(UINT count, UINT start = 0) const;
-		void draw_object(Canvas::I2DCanvasObject*object);
+		void draw_object(Canvas::I2DCanvasObject* object);
 	};
 }

@@ -7,7 +7,7 @@
 
 using namespace UI;
 
-void InteractiveForm::render_components(Render::DrawEvent* event)
+void InteractiveForm::render_components(Render::DrawEvent2D* event)
 {
 	for(auto*element:this->childs)
 	{

@@ -10,14 +10,14 @@ namespace Canvas {
 		Render::D3D11Canvas _canvas;
 		std::vector<I2DCanvasObject*> _objects;
 	protected:
-		virtual void render_components(Render::DrawEvent* event);
+		virtual void render_components(Render::DrawEvent2D* event);
 	public:
 		Render::Vertex* vertices() const;
 		
 		Canvas2DLayer(Core::GraphicsContext*engine);
 		
 		void update() override;
-		void render(Render::DrawEvent* event) override;
+		void render(Render::DrawEvent2D* event) override;
 
 		Render::D3D11Canvas* canvas();
 

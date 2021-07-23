@@ -2,6 +2,7 @@
 #include "Types/Types.h"
 
 namespace Render {
+	struct DrawEvent2D;
 	class Texture;
 	struct Vertex;
 	struct DrawEvent;
@@ -23,7 +24,7 @@ namespace Canvas {
 		virtual ~IControllableObject() = default;
 		bool hidden = false;
 
-		virtual void draw(Render::DrawEvent* event) = 0;
+		virtual void draw(Render::DrawEvent2D* event) = 0;
 
 		virtual void      set_position(Position2 pos) = 0;
 		virtual Position2 get_position() = 0;

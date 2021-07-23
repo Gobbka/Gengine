@@ -8,7 +8,6 @@
 
 namespace Render {
 	class Camera;
-	struct DrawEvent;
 }
 
 namespace UI {
@@ -25,7 +24,7 @@ namespace UI {
 		};
 	private:
 		std::vector<UI::InteractiveElement*> childs;
-		void render_components(Render::DrawEvent* event) override;
+		void render_components(Render::DrawEvent2D* event) override;
 
 		Position2* _cursor_position;
 		DragStruct* dragged = nullptr;

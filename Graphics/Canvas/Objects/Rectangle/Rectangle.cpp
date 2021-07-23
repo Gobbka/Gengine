@@ -64,7 +64,7 @@ Canvas::Rectangle::Rectangle(Color4 background, Position2 position, Surface reso
 }
 
 
-void Canvas::Rectangle::draw(Render::DrawEvent* draw_event)
+void Canvas::Rectangle::draw(Render::DrawEvent2D* draw_event)
 {
 	if(_background_texture)
 	{

@@ -2,7 +2,7 @@
 #include "Objects/I2DCanvasObject.h"
 #include "../Render/d3d/Buffer/VertexBuffer.h"
 
-void Canvas::Canvas2DLayer::render_components(Render::DrawEvent* event)
+void Canvas::Canvas2DLayer::render_components(Render::DrawEvent2D* event)
 {
 	for (auto object : _objects)
 	{
@@ -27,7 +27,7 @@ void Canvas::Canvas2DLayer::update()
 	_canvas.update();
 }
 
-void Canvas::Canvas2DLayer::render(Render::DrawEvent* event)
+void Canvas::Canvas2DLayer::render(Render::DrawEvent2D* event)
 {	
 	this->render_components(event);
 }

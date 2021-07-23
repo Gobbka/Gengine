@@ -2,7 +2,7 @@
 #include "../../InteractiveForm.h"
 #include "Types/Types.h"
 
-void UI::Panel::draw(Render::DrawEvent* event)
+void UI::Panel::draw(Render::DrawEvent2D* event)
 {
 	if(this->unique_id == 0x228)
 	{

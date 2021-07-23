@@ -141,10 +141,8 @@ void Core::GraphicsContext::present() const
 
 	//_texture_ps->bind();
 	//_texture_vs->bind();
-	
-	Render::DrawEvent draw_event(_main_camera,nullptr);
 
-	_main_camera->present(&draw_event);
+	_main_camera->present();
 
 	_swap->Present(1u, 0u);
 }

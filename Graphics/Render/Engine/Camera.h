@@ -3,6 +3,7 @@
 
 #include "../../Graphics.h"
 #include "../d3d/Buffer/ConstantBuffer.h"
+#include "../I3DObject/I3DObject.h"
 #include "../Layer/ILayer.h"
 #include "Types/Transform.h"
 
@@ -46,7 +47,6 @@ namespace Render
 		DirectX::XMVECTOR _xm_lookAt;
 		
 		float _fov = 90.f;
-		
 
 		std::vector<Canvas::Canvas2DLayer*> _canvas2DLayers;
 	private:
@@ -92,6 +92,6 @@ namespace Render
 		
 		Camera(Core::GraphicsContext* context);
 
-		void present(DrawEvent* event);
+		void present();
 	};
 }

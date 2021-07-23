@@ -1,6 +1,6 @@
 ﻿#include "Keyboard.h"
 
-bool* __virtal_keys = new bool[0XFE]{};
+bool __virtal_keys[0XFE]{};
 
 bool Keyboard::pressed(VirtualKey key)
 {

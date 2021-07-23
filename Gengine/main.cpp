@@ -24,11 +24,9 @@ int WINAPI wWinMain(
     AllocConsole();
     freopen("CONIN$", "r", stdin);
     freopen("CONOUT$", "w", stdout);
-    freopen("CONOUT$", "w", stderr);
+    freopen("CONOUT$", "w", stderr);    
 
-    
-
-    std::wcout << lpCmdLine<<'\0';
+    std::wcout << lpCmdLine<<'\n';
 	
     auto*form = new Forms::MainForm(hInstance, 1400, 780);
     form->show();

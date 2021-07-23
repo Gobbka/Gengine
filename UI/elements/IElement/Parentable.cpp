@@ -136,7 +136,7 @@ UI::Parent::Parent(Position2 position)
 {
 }
 
-void UI::Parent::draw(::Render::DrawEvent* event)
+void UI::Parent::draw(::Render::DrawEvent2D* event)
 {
 	this->_children.foreach([&](UI::InteractiveElement* element) {
 		if (element->styles.display != ElementStyles::DisplayType::none)

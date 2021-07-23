@@ -1,6 +1,10 @@
 #pragma once
 #include "../I2DCanvasObject.h"
 
+namespace Render {
+	struct DrawEvent2D;
+}
+
 namespace Canvas
 {
 	class __declspec(dllexport) Rectangle final : public Canvas::I2DCanvasObject
@@ -22,7 +26,7 @@ namespace Canvas
 	public:
 		Rectangle(Color4 background,Position2 position,Surface resolution);
 		
-		void draw(Render::DrawEvent*draw_event) override;
+		void draw(Render::DrawEvent2D*draw_event) override;
 		void set_position(Position2 pos) override;
 		Position2 get_position() override;
 		void set_resolution(Surface surface) override;

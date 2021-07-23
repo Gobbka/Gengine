@@ -202,7 +202,7 @@ void Render::Camera::present()
 	
 	// then render canvas
 
-	_secondCube->transform.adjust_position(Position3(0, -0.01f, 0));
+	_secondCube->transform.adjust_rotation(Position3(0.1f, 0, 0));
 	return;
 	_context->begin_2d();
 

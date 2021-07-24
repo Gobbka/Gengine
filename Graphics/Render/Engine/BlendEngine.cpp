@@ -21,10 +21,10 @@ Render::BlendEngine::BlendEngine(Core::GraphicsContext* engine)
 
 	blendDesc.RenderTarget[0] = rtbd;
 
-	assert(SUCCEEDED(_engine->device()->CreateBlendState(&blendDesc, &_blend)));
+	assert(SUCCEEDED(_engine->device->CreateBlendState(&blendDesc, &_blend)));
 }
 
 void Render::BlendEngine::bind()
 {
-	_engine->context()->OMSetBlendState(_blend, 0, 0xFFFFFFFF);
+	_engine->context->OMSetBlendState(_blend, 0, 0xFFFFFFFF);
 }

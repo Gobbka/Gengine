@@ -3,7 +3,7 @@
 
 void Render::PixelShader::construct(ID3DBlob* shader_blob)
 {
-	_engine->device()->CreatePixelShader(
+	_engine->device->CreatePixelShader(
 		shader_blob->GetBufferPointer(),
 		shader_blob->GetBufferSize(),
 		nullptr,
@@ -19,5 +19,5 @@ Render::PixelShader::PixelShader(Core::GraphicsContext* engine)
 
 void Render::PixelShader::bind()
 {
-	_engine->context()->PSSetShader(_shader, nullptr, 0);
+	_engine->context->PSSetShader(_shader, nullptr, 0);
 }

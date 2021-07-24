@@ -31,6 +31,7 @@ Core::GraphicsContext* Render::D3D11Canvas::get_graphics_context() const
 
 void Render::D3D11Canvas::update() const
 {
+	// replace with allocates_size
 	if (buffer_size() <= 0)
 		return;
 

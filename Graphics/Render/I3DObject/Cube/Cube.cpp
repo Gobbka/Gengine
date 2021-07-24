@@ -75,8 +75,8 @@ void Render::Cube::draw()
 		engine->begin();
 		texture->bind();
 	}
-	_context->context()->DrawIndexed(8,0,0);
-	_context->context()->DrawIndexed(8,8,0);
+	_context->context->DrawIndexed(8,0,0);
+	_context->context->DrawIndexed(8,8,0);
 	if(this->texture != nullptr)
 	{
 		_context->get_sprite_engine()->end();

@@ -50,14 +50,14 @@ void Render::VertexBuffer::bind()
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
 	
-	_engine->context()->IASetVertexBuffers(0, 1, &_buffer, &stride, &offset);
+	_engine->context->IASetVertexBuffers(0, 1, &_buffer, &stride, &offset);
 }
 
 void Render::VertexBuffer::update(UINT update_size)
 {
 	update_size = min(update_size, this->size);
 
-	auto* pContext = _engine->context();
+	auto* pContext = _engine->context;
 	D3D11_MAPPED_SUBRESOURCE subdata;
 
 	pContext->Map(_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &subdata);

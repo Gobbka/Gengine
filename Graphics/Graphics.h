@@ -27,12 +27,13 @@ namespace Core
 	
 	class __declspec(dllexport) GraphicsContext
 	{
+	public:
+		ID3D11DeviceContext* context;
+		ID3D11Device* device;
 	private:
 		Surface _screen_resolution;
 		
-		ID3D11Device* _device;
 		IDXGISwapChain* _swap;
-		ID3D11DeviceContext* _context;
 		ID3D11RenderTargetView* _targetView;
 
 		Render::SamplerState* _samplerState;
@@ -56,8 +57,6 @@ namespace Core
 		
 		Render::SpriteEngine* get_sprite_engine();
 		
-		ID3D11Device* device() const;
-		ID3D11DeviceContext* context() const;
 		Surface get_screen_resolution() const;
 		ID3D11RenderTargetView* get_render_target_view();
 

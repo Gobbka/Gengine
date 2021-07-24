@@ -41,7 +41,6 @@ int WINAPI wWinMain(
     };
 
     auto* material = load_png(L"assets\\mine4ok.png");
-    
 	
     auto cube = Render::Cube(Position3::null(), form->get_graphics_context());
     cube.set_texture(form->get_graphics_context()->create_texture(material));

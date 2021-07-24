@@ -6,7 +6,7 @@ Render::MaskEngine::MaskEngine(Core::GraphicsContext* engine)
 	: Bindable(engine)
 {
 	auto screen_resolution = engine->get_screen_resolution();
-	auto* device = _engine->device();
+	auto* device = _engine->device;
 	
 	D3D11_TEXTURE2D_DESC texture_2d_desc{};
 	
@@ -76,17 +76,17 @@ Render::MaskEngine::MaskEngine(Core::GraphicsContext* engine)
 void Render::MaskEngine::set_state(ID3D11DepthStencilState* state, UINT reference)
 {
 	_currentState = state;
-	_engine->context()->OMSetDepthStencilState(state, reference);
+	_engine->context->OMSetDepthStencilState(state, reference);
 }
 
 void Render::MaskEngine::clear_buffer()
 {
-	_engine->context()->ClearDepthStencilView(_view, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 0, 0);
+	_engine->context->ClearDepthStencilView(_view, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 0, 0);
 }
 
 void Render::MaskEngine::bind()
 {
 	
 	auto* nigger = _engine->get_render_target_view();
-	_engine->context()->OMSetRenderTargets(1, &nigger, _view);
+	_engine->context->OMSetRenderTargets(1, &nigger, _view);
 }

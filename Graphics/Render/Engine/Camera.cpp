@@ -26,7 +26,9 @@ void Render::Camera::update_position()
 void Render::Camera::draw_object(I3DObject* object)
 {
 	auto worldMatrix = object->transform.get_world_matrix();
-	_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose(worldMatrix * _viewMatrix * _projectionMatrix) };
+	_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose(
+		worldMatrix * _viewMatrix * _projectionMatrix
+	) };
 	matrix_buffer->update();
 	object->draw();
 }
@@ -126,12 +128,12 @@ Core::GraphicsContext* Render::Camera::graphics_context()
 
 ID3D11DeviceContext* Render::Camera::context() const
 {
-	return _context->context();
+	return _context->context;
 }
 
 ID3D11Device* Render::Camera::device() const
 {
-	return _context->device();
+	return _context->device;
 }
 
 ID3D11RenderTargetView* Render::Camera::get_target_view() const
@@ -188,32 +190,28 @@ void Render::Camera::present()
 	_context->begin_3d();
 	matrix_buffer->bind();
 
+	// render all world objects
+	
 	auto objects = _context->worldspace()->objects;
-
 	for(auto*object : objects)
 	{
 		this->draw_object(object);
 	}
 	
-	/*_maskEngine->set_state(_maskEngine->get_drawState(),0);
-	this->draw_object(_cube);
-	_maskEngine->set_state(_maskEngine->get_discardState(), 1);
-	this->draw_object(_secondCube);*/
-	// render all world objects
 	
 	// then render canvas
-
-	return;
+	
 	_context->begin_2d();
-
 	b0_buffer->bind();
+	
 	_maskEngine->clear_buffer();
 
 	DrawEvent2D event(this,nullptr);
 	for(auto*layer : _canvas2DLayers)
 	{
 		event.layer = layer;
-
+		event.set_alpha(1.f);
+		
 		layer->update();
 		layer->render(&event);
 	}

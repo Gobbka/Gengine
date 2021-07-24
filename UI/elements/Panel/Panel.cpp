@@ -4,17 +4,13 @@
 
 void UI::Panel::draw(Render::DrawEvent2D* event)
 {
-	if(this->unique_id == 0x228)
-	{
-		this->unique_id = 0x228;
-	}
+	if(this->alpha != 1.f)
+		event->set_alpha(this->alpha);
 	
 	if(this->styles.overflow == VisibleState::hidden)
 	{
 		event->mask_draw_begin();
-		event->set_alpha(this->alpha);
 		event->draw_object(&this->rect);
-		event->set_alpha(1.f);
 		
 		event->mask_discard_begin();
 		Parent::draw(event);
@@ -22,12 +18,8 @@ void UI::Panel::draw(Render::DrawEvent2D* event)
 	}else
 	{
 		event->mask_discard_begin(false);
-		
-		event->set_alpha(this->alpha);
 		event->draw_object(&this->rect);
-		event->set_alpha(1.f);
 		Parent::draw(event);
-		
 		event->mask_discard_end(false);
 	}
 }

@@ -4,11 +4,9 @@
 
 void Canvas::Canvas2DLayer::render_components(Render::DrawEvent2D* event)
 {
-	for (auto object : _objects)
-	{
+	for (auto* object : _objects)
 		if (!object->hidden)
 			event->draw_object(object);
-	}
 }
 
 Render::Vertex* Canvas::Canvas2DLayer::vertices() const

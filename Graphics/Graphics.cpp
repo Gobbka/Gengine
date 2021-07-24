@@ -24,9 +24,9 @@ void Core::WorldSpace::add_object(Render::I3DObject* object)
 Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11DeviceContext* context)
 	: _screen_resolution(0,0)
 {
-	_device = dev;
+	device = dev;
 	_swap = swap;
-	_context = context;
+	this->context = context;
 
 	{
 		DXGI_SWAP_CHAIN_DESC desc;
@@ -38,7 +38,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_swap->GetBuffer(0, __uuidof(ID3D11Resource), (void**)&back_buffer);
 	
 	assert(back_buffer != nullptr);
-	assert(SUCCEEDED(_device->CreateRenderTargetView(back_buffer, nullptr, &_targetView)));
+	assert(SUCCEEDED(device->CreateRenderTargetView(back_buffer, nullptr, &_targetView)));
 	
 	back_buffer->Release();
 
@@ -81,7 +81,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_viewport.MinDepth = 1;
 	_viewport.TopLeftX = 0;
 	_viewport.TopLeftY = 0;
-	_context->RSSetViewports(1, &_viewport);
+	context->RSSetViewports(1, &_viewport);
 
 	_samplerState->bind();
 }
@@ -94,16 +94,6 @@ Core::WorldSpace* Core::GraphicsContext::worldspace()
 Render::SpriteEngine* Core::GraphicsContext::get_sprite_engine()
 {
 	return _spriteEngine;
-}
-
-ID3D11Device* Core::GraphicsContext::device() const
-{
-	return _device;
-}
-
-ID3D11DeviceContext* Core::GraphicsContext::context() const
-{
-	return _context;
 }
 
 Surface Core::GraphicsContext::get_screen_resolution() const
@@ -123,7 +113,7 @@ Render::Camera* Core::GraphicsContext::main_camera()
 
 bool Core::GraphicsContext::create_buffer(D3D11_BUFFER_DESC* desc, D3D11_SUBRESOURCE_DATA* data, ID3D11Buffer** buffer) const
 {
-	return SUCCEEDED(_device->CreateBuffer(desc, data, buffer));
+	return SUCCEEDED(device->CreateBuffer(desc, data, buffer));
 }
 
 void Core::GraphicsContext::set_resolution(Surface new_resolution)
@@ -135,16 +125,16 @@ void Core::GraphicsContext::set_resolution(Surface new_resolution)
 void Core::GraphicsContext::clear(Color3 color)
 {
 	auto float_color = Color4(color).to_float4();
-	_context->ClearRenderTargetView(_targetView, (FLOAT*)&float_color);
+	context->ClearRenderTargetView(_targetView, (FLOAT*)&float_color);
 }
 
 void Core::GraphicsContext::present() const
 {
-	_context->RSSetViewports(1, &_viewport);
-	_context->OMSetRenderTargets(1, &_targetView, nullptr);
-	_context->IASetInputLayout(_inputLayout);
+	context->RSSetViewports(1, &_viewport);
+	context->OMSetRenderTargets(1, &_targetView, nullptr);
+	context->IASetInputLayout(_inputLayout);
 	
-	_context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+	context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
 	//_context->IASetInputLayout(_texture_layout);
 	//_samplerState->bind();
@@ -159,7 +149,7 @@ void Core::GraphicsContext::present() const
 
 void Core::GraphicsContext::begin_2d()
 {
-	_context->IASetInputLayout(_inputLayout);
+	context->IASetInputLayout(_inputLayout);
 	_vertexShader->bind();
 	_pixelShader->bind();
 }
@@ -168,7 +158,7 @@ void Core::GraphicsContext::begin_3d()
 {
 	_vertexShader3d->bind();
 	_pixelShader->bind();
-	_context->IASetInputLayout(_inputLayout);
+	context->IASetInputLayout(_inputLayout);
 }
 
 Render::Texture* Core::GraphicsContext::create_texture(Render::Material* material)

@@ -14,7 +14,7 @@ Render::SpriteEngine::SpriteEngine(Core::GraphicsContext* context, PixelShader* 
 
 void Render::SpriteEngine::begin()
 {
-	auto* context = _graphicsContext->context();
+	auto* context = _graphicsContext->context;
 	context->PSGetShader(&_old_ps, nullptr, 0);
 	context->VSGetShader(&_old_vs, nullptr, 0);
 	context->IAGetInputLayout(&_old_layout);
@@ -23,12 +23,12 @@ void Render::SpriteEngine::begin()
 	_texture_ps->bind();
 	_texture_vs->bind();
 
-	_graphicsContext->context()->IASetInputLayout(_layout);
+	_graphicsContext->context->IASetInputLayout(_layout);
 }
 
 void Render::SpriteEngine::end()
 {
-	auto* context = _graphicsContext->context();
+	auto* context = _graphicsContext->context;
 	context->PSSetShader(_old_ps, nullptr, 0);
 	context->VSSetShader(_old_vs, nullptr, 0);
 	context->IASetInputLayout(_old_layout);

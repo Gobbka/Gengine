@@ -13,10 +13,10 @@ Render::SamplerState::SamplerState(Core::GraphicsContext* engine)
 	desc.MaxLOD = D3D11_FLOAT32_MAX;
 	desc.MinLOD = 0;
 	
-	assert(SUCCEEDED(_engine->device()->CreateSamplerState(&desc, &_state)));
+	assert(SUCCEEDED(_engine->device->CreateSamplerState(&desc, &_state)));
 }
 
 void Render::SamplerState::bind()
 {
-	_engine->context()->PSSetSamplers(0, 1, &_state);
+	_engine->context->PSSetSamplers(0, 1, &_state);
 }

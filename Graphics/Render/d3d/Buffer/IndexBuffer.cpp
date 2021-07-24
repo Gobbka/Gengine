@@ -14,10 +14,10 @@ Render::IndexBuffer::IndexBuffer(Core::GraphicsContext* graphics_context, UINT* 
 
 	D3D11_SUBRESOURCE_DATA sb_data{ index,0,0 };
 	
-	graphics_context->device()->CreateBuffer(&desc, &sb_data, &_index_buffer);
+	graphics_context->device->CreateBuffer(&desc, &sb_data, &_index_buffer);
 }
 
 void Render::IndexBuffer::bind()
 {
-	_engine->context()->IASetIndexBuffer(_index_buffer, DXGI_FORMAT_R32_UINT, 0);
+	_engine->context->IASetIndexBuffer(_index_buffer, DXGI_FORMAT_R32_UINT, 0);
 }

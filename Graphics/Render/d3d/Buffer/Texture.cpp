@@ -26,12 +26,12 @@ Render::Texture::Texture(Core::GraphicsContext* engine,Material material)
 	
 	D3D11_SUBRESOURCE_DATA sb{material.pSysMem(),(UINT)material.width() * 4,0};
 	
-	assert(SUCCEEDED(engine->device()->CreateTexture2D(&texture_desc, &sb, &_texture)));
+	assert(SUCCEEDED(engine->device->CreateTexture2D(&texture_desc, &sb, &_texture)));
 
-	assert(SUCCEEDED(engine->device()->CreateShaderResourceView(_texture, &rvDesc, &_resource)));
+	assert(SUCCEEDED(engine->device->CreateShaderResourceView(_texture, &rvDesc, &_resource)));
 }
 
 void Render::Texture::bind()
 {
-	_engine->context()->PSSetShaderResources(0, 1, &_resource);
+	_engine->context->PSSetShaderResources(0, 1, &_resource);
 }

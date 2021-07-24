@@ -9,7 +9,6 @@ Render::SpriteEngine::SpriteEngine(Core::GraphicsContext* context, PixelShader* 
 	_texture_vs = vs;
 	_layout = layout;
 	
-	
 	_graphicsContext = context;
 }
 
@@ -19,6 +18,7 @@ void Render::SpriteEngine::begin()
 	context->PSGetShader(&_old_ps, nullptr, 0);
 	context->VSGetShader(&_old_vs, nullptr, 0);
 	context->IAGetInputLayout(&_old_layout);
+	
 	
 	_texture_ps->bind();
 	_texture_vs->bind();

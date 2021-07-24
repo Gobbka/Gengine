@@ -6,12 +6,6 @@ Render::Texture::Texture(Core::GraphicsContext* engine,Material material)
 	: Bindable(engine)
 {
 	
-	static const BYTE gokba[] = {
-		0,0,0,255 ,  255,255,255,255  , 255,255,255,255  ,
-		0,0,0,255 ,  255,255,255,255  , 255,255,255,255  ,
-		0,0,0,255 ,  255,255,255,255  , 255,255,255,255  ,
-	};
-	
 	D3D11_TEXTURE2D_DESC texture_desc;
 	texture_desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
 	texture_desc.Width = material.width();

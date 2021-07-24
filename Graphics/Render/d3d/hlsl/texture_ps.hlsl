@@ -1,8 +1,6 @@
 cbuffer ConstantBuffer2D : register(b0)
 {
-	float width;
-	float height;
-	float c_alpha;
+	float4x4 viewMatrix;
 }
 
 // PSI (PixelShaderInput)
@@ -17,8 +15,6 @@ SamplerState objSamplerState : SAMPLER: register(s0);
 
 float4 main(PSI input) : SV_TARGET
 {
-
-	
 	float4 pixelColor = objTexture.Sample(objSamplerState,input.texCoord);
 	return float4(pixelColor);
 }

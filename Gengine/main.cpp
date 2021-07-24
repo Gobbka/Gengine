@@ -15,6 +15,8 @@
 #include "Render/Engine/Camera.h"
 #include "Render/I3DObject/Cube/Cube.h"
 
+extern Render::Material* load_png(const wchar_t* path);
+
 int WINAPI wWinMain(
     _In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
@@ -38,7 +40,11 @@ int WINAPI wWinMain(
         UI::UIManager::instance()->window_proc(msg, wp, lp);
     };
 
+    auto* material = load_png(L"assets\\mine4ok.png");
+    
+	
     auto cube = Render::Cube(Position3::null(), form->get_graphics_context());
+    cube.set_texture(form->get_graphics_context()->create_texture(material));
 	
     form->get_graphics_context()->worldspace()->add_object(&cube);
 	

@@ -46,11 +46,11 @@ void Render::Cube::set_texture(Render::Texture* texture)
 	ptr[3].color = { 1,0,0 };
 	ptr[0].color = { 0,1,0 };
 	ptr[1].color = { 1,1,0 };
-	ptr[6].color = { 0,0,0 };
-	ptr[7].color = { 1,0,0 };
-	ptr[4].color = { 0,1,0 };
-	ptr[5].color = { 1,1,0 };
-	
+	ptr[7].color = { 0,0,0 };
+	ptr[6].color = { 1,0,0 };
+	ptr[5].color = { 0,1,0 };
+	ptr[4].color = { 1,1,0 };
+	update_buffer();
 	this->texture = texture;
 }
 
@@ -64,12 +64,21 @@ void Render::Cube::draw()
 		};
 		CUBE_INDEX_BUFFER = new IndexBuffer(_context, indexed, ARRAYSIZE(indexed));
 	}
-	if(this->texture != nullptr)
-		texture->bind();
+	
 	
 	I3DObject::bind();
 
 	CUBE_INDEX_BUFFER->bind();
+	if (this->texture != nullptr)
+	{
+		auto* engine = _context->get_sprite_engine();
+		engine->begin();
+		texture->bind();
+	}
 	_context->context()->DrawIndexed(8,0,0);
 	_context->context()->DrawIndexed(8,8,0);
+	if(this->texture != nullptr)
+	{
+		_context->get_sprite_engine()->end();
+	}
 }

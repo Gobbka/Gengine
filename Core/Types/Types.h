@@ -49,6 +49,8 @@ struct __declspec(dllexport) Vector3 : public Vector2 {
 	void operator -=(Vector3 pos);
 
 	Vector3(float x, float y, float z);
+
+	static Vector3 null();
 };
 
 typedef __declspec(dllexport) Vector2 Position2;

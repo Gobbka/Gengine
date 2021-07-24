@@ -19,6 +19,12 @@ namespace Render {
 
 namespace Core
 {
+	struct __declspec(dllexport) WorldSpace {
+		std::vector<Render::I3DObject*> objects;
+
+		void add_object(Render::I3DObject* object);
+	};
+	
 	class __declspec(dllexport) GraphicsContext
 	{
 	private:
@@ -44,8 +50,10 @@ namespace Core
 		
 		Render::Camera* _main_camera;
 		Render::SpriteEngine* _spriteEngine;
-
+		WorldSpace _worldSpace;
 	public:
+		WorldSpace* worldspace();
+		
 		Render::SpriteEngine* get_sprite_engine();
 		
 		ID3D11Device* device() const;

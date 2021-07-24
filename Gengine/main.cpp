@@ -13,6 +13,7 @@
 #include "Drivers/PNGImageDriver.h"
 #include "Forms/MainForm/MainForm.h"
 #include "Render/Engine/Camera.h"
+#include "Render/I3DObject/Cube/Cube.h"
 
 int WINAPI wWinMain(
     _In_ HINSTANCE hInstance,
@@ -37,6 +38,9 @@ int WINAPI wWinMain(
         UI::UIManager::instance()->window_proc(msg, wp, lp);
     };
 
+    auto cube = Render::Cube(Position3::null(), form->get_graphics_context());
+	
+    form->get_graphics_context()->worldspace()->add_object(&cube);
 	
     MSG msg;
 	while(true)

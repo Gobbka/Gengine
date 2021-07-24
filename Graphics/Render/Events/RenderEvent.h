@@ -7,6 +7,7 @@ namespace Canvas
 }
 
 namespace Render {
+	class I3DObject;
 	class SpriteEngine;
 	class Camera;
 	class ILayer;
@@ -45,5 +46,14 @@ namespace Render {
 		
 		void draw_vertex(UINT count, UINT start = 0) const;
 		void draw_object(Canvas::I2DCanvasObject* object);
+	};
+
+	struct DrawEvent3D : public DrawEvent
+	{
+	public:
+		DrawEvent3D(Camera* camera);
+
+
+		void draw_object(I3DObject* object);
 	};
 }

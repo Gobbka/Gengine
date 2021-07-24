@@ -16,6 +16,11 @@
 
 #include "Graphics/Material/Material.h"
 
+void Core::WorldSpace::add_object(Render::I3DObject* object)
+{
+	objects.push_back(object);
+}
+
 Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11DeviceContext* context)
 	: _screen_resolution(0,0)
 {
@@ -79,6 +84,11 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_context->RSSetViewports(1, &_viewport);
 
 	_samplerState->bind();
+}
+
+Core::WorldSpace* Core::GraphicsContext::worldspace()
+{
+	return &_worldSpace;
 }
 
 Render::SpriteEngine* Core::GraphicsContext::get_sprite_engine()

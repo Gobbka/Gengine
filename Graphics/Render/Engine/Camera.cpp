@@ -23,6 +23,14 @@ void Render::Camera::update_position()
 	_viewMatrix = create_view_matrix();
 }
 
+void Render::Camera::draw_object(I3DObject* object)
+{
+	auto worldMatrix = object->transform.get_world_matrix();
+	_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose(worldMatrix * _viewMatrix * _projectionMatrix) };
+	matrix_buffer->update();
+	object->draw();
+}
+
 DirectX::XMMATRIX Render::Camera::create_view_matrix()
 {
 	auto rotation = _rotation.get_rotation();
@@ -166,9 +174,6 @@ Render::Camera::Camera(Core::GraphicsContext* context)
 	matrix_buffer = new ConstantBuffer(context, &_b1_constant_buffer_struct, sizeof(_b1_constant_buffer_struct), 0);
 	matrix_buffer->update();
 
-	_cube = new Cube(Position3(0,0.5f,0),_context);
-	_secondCube = new Cube({ -5.f,0.5f,0 }, _context);
-
 	_projectionMatrix = create_proj_matrix();
 	
 	update_position();
@@ -183,26 +188,21 @@ void Render::Camera::present()
 	_context->begin_3d();
 	matrix_buffer->bind();
 
-	_maskEngine->set_state(_maskEngine->get_drawState(),0);
+	auto objects = _context->worldspace()->objects;
+
+	for(auto*object : objects)
+	{
+		this->draw_object(object);
+	}
 	
-	{
-		auto worldMatrix = _cube->transform.get_world_matrix();
-		_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose(worldMatrix * _viewMatrix * _projectionMatrix) };
-		matrix_buffer->update();
-		_cube->draw();
-	}
-	_maskEngine->set_state(_maskEngine->get_discardState(),1);
-	{
-		auto worldMatrix = _secondCube->transform.get_world_matrix();
-		_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose(worldMatrix * _viewMatrix * _projectionMatrix) };
-		matrix_buffer->update();
-		_secondCube->draw();
-	}
+	/*_maskEngine->set_state(_maskEngine->get_drawState(),0);
+	this->draw_object(_cube);
+	_maskEngine->set_state(_maskEngine->get_discardState(), 1);
+	this->draw_object(_secondCube);*/
 	// render all world objects
 	
 	// then render canvas
 
-	_secondCube->transform.adjust_rotation(Position3(0.1f, 0, 0));
 	return;
 	_context->begin_2d();
 

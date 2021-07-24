@@ -57,3 +57,8 @@ Vector3::Vector3(float x, float y, float z)
 {
 	this->z = z;
 }
+
+Vector3 Vector3::null()
+{
+	return Vector3(0, 0, 0);
+}

@@ -66,6 +66,17 @@ void Render::DrawEvent2D::draw_object(Canvas::I2DCanvasObject* object)
 	object->draw(this);
 }
 
+Render::DrawEvent3D::DrawEvent3D(Camera* camera)
+	: DrawEvent(camera)
+{
+	
+}
+
+void Render::DrawEvent3D::draw_object(I3DObject* object)
+{
+	object->transform.get_world_matrix();
+}
+
 Render::DrawEvent2D::DrawEvent2D(Camera* camera, ILayer* layer)
 	: DrawEvent(camera)
 {

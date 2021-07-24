@@ -1,8 +1,7 @@
 
 cbuffer ConstantBuffer2D : register(b0)
 {
-	float width;
-	float height;
+	float4x4 view_matrix;
 	float c_alpha;
 }
 
@@ -20,12 +19,9 @@ PSI VS(float4 pos : POSITION, float4 color : COLOR)
 	psi.color = color;
 	psi.color.a = c_alpha;
 
-	psi.pos = float4(
-		pos.x / (width / 2.f)  - 1, 
-		pos.y / (height / 2.f) + 1,
-		1.f, 
-		1.f
-	);
+	psi.pos = mul(float4(pos.x, pos.y, pos.z, 1.f), view_matrix);
+	psi.pos.x -= 1.f;
+	psi.pos.y += 1.f;
 
 	return psi;
 }

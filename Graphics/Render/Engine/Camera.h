@@ -23,8 +23,7 @@ namespace Render
 		__declspec(align(16))
 		struct
 		{
-			float width;
-			float height;
+			DirectX::XMMATRIX _viewMatrix;
 			float alpha;
 		} _b0_constant_buffer_struct;
 

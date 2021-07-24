@@ -5,6 +5,8 @@
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"D3DCompiler.lib")
 
+#include <iostream>
+
 #include "Canvas/CanvasLayer.h"
 #include "Types/Types.h"
 #include "Render/d3d/Buffer/Texture.h"
@@ -173,9 +175,9 @@ void Core::GraphicsContext::set_texture(Render::Texture* texture)
 
 Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd,Surface size)
 {
-	IDXGISwapChain* pswap;
-	ID3D11Device* device;
-	ID3D11DeviceContext* context;
+	IDXGISwapChain* pswap=nullptr;
+	ID3D11Device* device=nullptr;
+	ID3D11DeviceContext* context=nullptr;
 
 	DXGI_SWAP_CHAIN_DESC sd;
 	sd.BufferDesc = DXGI_MODE_DESC{
@@ -193,10 +195,13 @@ Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd,Surface size
 	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	sd.Flags = 0;
 	
-	assert(SUCCEEDED (D3D11CreateDeviceAndSwapChain(
+	auto hr = D3D11CreateDeviceAndSwapChain(
 		nullptr,
+	#ifdef _DEBUG
 		D3D_DRIVER_TYPE_REFERENCE,
-		//D3D_DRIVER_TYPE_HARDWARE,
+	#else
+		D3D_DRIVER_TYPE_HARDWARE,
+	#endif
 		nullptr,
 		D3D11_CREATE_DEVICE_DEBUG,
 		nullptr,
@@ -207,7 +212,9 @@ Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd,Surface size
 		&device,
 		nullptr,
 		&context
-	)));
+	);
+	
+	assert(SUCCEEDED(hr));
 
 	return new GraphicsContext(device, pswap, context);
 }

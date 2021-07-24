@@ -24,10 +24,10 @@ namespace UI
 		FS::FSFile _directory;
 	public:
 		Directory(FS::FSFile directory, Position2 position, Surface resolution, Render::Texture* texture)
-			: Panel(position, resolution, { 0,0,0,0 }),
+			: Panel(position, resolution, { 1.f,1.f,1.f,1.f }),
 			_directory(directory)
 		{
-			Panel::set_texture(texture);
+			//Panel::set_texture(texture);
 			
 		}
 

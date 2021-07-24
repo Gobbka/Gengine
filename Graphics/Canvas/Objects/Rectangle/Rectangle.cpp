@@ -127,7 +127,7 @@ Color4 Canvas::Rectangle::get_color()
 
 void Canvas::Rectangle::set_texture(Render::Texture* texture)
 {
-	_background_texture = texture;
+	//_background_texture = texture;
 
 	apply_color();
 }

@@ -98,8 +98,8 @@ void Render::Camera::adjust_rotation(Vector3 rot)
 void Render::Camera::set_resolution(Surface new_resolution)
 {
 	std::cout << "NEW RESOLUTION: " << new_resolution.width << " " << new_resolution.height << '\n';
-	_b0_constant_buffer_struct.width = new_resolution.width;
-	_b0_constant_buffer_struct.height = new_resolution.height;
+	//_b0_constant_buffer_struct.width = new_resolution.width;
+	//_b0_constant_buffer_struct.height = new_resolution.height;
 	b0_buffer->update();
 }
 
@@ -166,7 +166,8 @@ Render::Camera::Camera(Core::GraphicsContext* context)
 	_maskEngine  = new MaskEngine(_context);
 	
 	auto resolution = context->get_screen_resolution();
-	_b0_constant_buffer_struct = { resolution.width,resolution.height,0.5 };
+	_b0_constant_buffer_struct = { DirectX::XMMatrixScaling(1.f / (resolution.width / 2),1.f / (resolution.height / 2),1.f),1.f };
+	//_b0_constant_buffer_struct = { resolution.width,resolution.height,0.5 };
 
 	b0_buffer = new ConstantBuffer(_context, &_b0_constant_buffer_struct, sizeof(_b0_constant_buffer_struct), 0);
 	b0_buffer->update();

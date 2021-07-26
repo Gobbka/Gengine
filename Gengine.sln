@@ -21,7 +21,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Physics", "Physics\Physics.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3EB6ED58-44E6-44FA-9BFD-15038B9625BE}"
 	ProjectSection(SolutionItems) = preProject
-		readme.md = readme.md
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global

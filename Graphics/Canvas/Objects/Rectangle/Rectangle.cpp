@@ -36,6 +36,11 @@ void Canvas::Rectangle::apply_color()
 
 	if(_background_texture != nullptr)
 	{
+		ptr[0].pos = { -50.f,50.f,1.f };
+		ptr[1].pos = { 50.f,50.f,1.f };
+		ptr[2].pos = { -50.f,-50.f,1.f };
+		ptr[3].pos = { 50.f,-50.f,1.f };
+		
 		ptr[2].color = { 0,0,0 };
 		ptr[3].color = { 1,0,0 };
 		ptr[0].color = { 0,1,0 };
@@ -68,6 +73,8 @@ void Canvas::Rectangle::draw(Render::DrawEvent2D* draw_event)
 {
 	if(_background_texture)
 	{
+		auto* nigger = vertices();
+		
 		auto* sprite = draw_event->sprite_engine();
 		sprite->begin();
 
@@ -127,7 +134,7 @@ Color4 Canvas::Rectangle::get_color()
 
 void Canvas::Rectangle::set_texture(Render::Texture* texture)
 {
-	//_background_texture = texture;
+	_background_texture = texture;
 
 	apply_color();
 }

@@ -27,7 +27,7 @@ namespace UI
 			: Panel(position, resolution, { 1.f,1.f,1.f,1.f }),
 			_directory(directory)
 		{
-			//Panel::set_texture(texture);
+			// Panel::set_texture(texture);
 			
 		}
 
@@ -116,7 +116,6 @@ void Forms::MainForm::handle_resize(Surface rect)
 
 void Forms::MainForm::update()
 {
-
 	if (Keyboard::pressed(VirtualKey::KEY_W)) // W
 	{
 		get_graphics_context()->main_camera()->adjust_position_relative(Position3(0.05f, 0, 0));

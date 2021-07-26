@@ -19,7 +19,6 @@ void Render::SpriteEngine::begin()
 	context->VSGetShader(&_old_vs, nullptr, 0);
 	context->IAGetInputLayout(&_old_layout);
 	
-	
 	_texture_ps->bind();
 	_texture_vs->bind();
 

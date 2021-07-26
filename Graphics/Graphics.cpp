@@ -133,8 +133,8 @@ void Core::GraphicsContext::clear(Color3 color)
 void Core::GraphicsContext::present() const
 {
 	context->RSSetViewports(1, &_viewport);
-	context->OMSetRenderTargets(1, &_targetView, nullptr);
-	context->IASetInputLayout(_inputLayout);
+	//context->OMSetRenderTargets(1, &_targetView, nullptr);
+	//context->IASetInputLayout(_inputLayout);
 	
 	context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
@@ -198,7 +198,8 @@ Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd,Surface size
 	auto hr = D3D11CreateDeviceAndSwapChain(
 		nullptr,
 	#ifdef _DEBUG
-		D3D_DRIVER_TYPE_REFERENCE,
+		//D3D_DRIVER_TYPE_REFERENCE,
+		D3D_DRIVER_TYPE_HARDWARE,
 	#else
 		D3D_DRIVER_TYPE_HARDWARE,
 	#endif

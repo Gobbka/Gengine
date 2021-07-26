@@ -1,4 +1,3 @@
-
 cbuffer ConstantBuffer2D : register(b0)
 {
 	float4x4 viewMatrix;

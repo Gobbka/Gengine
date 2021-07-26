@@ -9,6 +9,8 @@
 #include <fstream>
 
 
+
+#include "PhysicsModule.h"
 #include "UIManager.h"
 #include "Drivers/PNGImageDriver.h"
 #include "Forms/MainForm/MainForm.h"
@@ -41,9 +43,13 @@ int WINAPI wWinMain(
     };
 
     auto* material = load_png(L"assets\\mine4ok.png");
-	
+
     auto cube = Render::Cube(Position3::null(), form->get_graphics_context());
     cube.set_texture(form->get_graphics_context()->create_texture(material));
+
+    PhysicsModule module;
+
+    module.add_element(RigidBody(&cube.transform));
 	
     form->get_graphics_context()->worldspace()->add_object(&cube);
 	

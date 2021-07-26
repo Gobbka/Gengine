@@ -26,7 +26,7 @@ void Render::Camera::update_position()
 void Render::Camera::draw_object(I3DObject* object)
 {
 	auto worldMatrix = object->transform.get_world_matrix();
-	_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose(
+	_matrix_buffer_struct = { DirectX::XMMatrixTranspose(
 		worldMatrix * _viewMatrix * _projectionMatrix
 	) };
 	matrix_buffer->update();
@@ -100,13 +100,13 @@ void Render::Camera::set_resolution(Surface new_resolution)
 	std::cout << "NEW RESOLUTION: " << new_resolution.width << " " << new_resolution.height << '\n';
 	//_b0_constant_buffer_struct.width = new_resolution.width;
 	//_b0_constant_buffer_struct.height = new_resolution.height;
-	b0_buffer->update();
+	control_buffer->update();
 }
 
 void Render::Camera::set_alpha(float alpha)
 {
-	_b0_constant_buffer_struct.alpha = alpha;
-	b0_buffer->update();
+	_control_buffer_struct.opacity = alpha;
+	control_buffer->update();
 }
 
 Canvas::Canvas2DLayer* Render::Camera::create_canvas_2d()
@@ -166,16 +166,14 @@ Render::Camera::Camera(Core::GraphicsContext* context)
 	_maskEngine  = new MaskEngine(_context);
 	
 	auto resolution = context->get_screen_resolution();
-	_b0_constant_buffer_struct = { DirectX::XMMatrixScaling(1.f / (resolution.width / 2),1.f / (resolution.height / 2),1.f),1.f };
-	//_b0_constant_buffer_struct = { resolution.width,resolution.height,0.5 };
+	_matrix2d_buffer_struct = { DirectX::XMMatrixScaling(1.f / (resolution.width / 2),1.f / (resolution.height / 2),1.f) };
+	matrix2d_buffer = new ConstantBuffer(_context, &_matrix2d_buffer_struct, sizeof(_matrix2d_buffer_struct), 0);
 
-	b0_buffer = new ConstantBuffer(_context, &_b0_constant_buffer_struct, sizeof(_b0_constant_buffer_struct), 0);
-	b0_buffer->update();
-
-	_b1_constant_buffer_struct = { DirectX::XMMatrixTranspose( DirectX::XMMatrixRotationRollPitchYaw(0,35,0) )};
-
-	matrix_buffer = new ConstantBuffer(context, &_b1_constant_buffer_struct, sizeof(_b1_constant_buffer_struct), 0);
+	matrix_buffer = new ConstantBuffer(_context, &_matrix_buffer_struct, sizeof(_matrix_buffer_struct), 0);
 	matrix_buffer->update();
+
+	control_buffer = new ConstantBuffer(context, &_control_buffer_struct, sizeof(_control_buffer_struct), 1);
+	control_buffer->update();
 
 	_projectionMatrix = create_proj_matrix();
 	
@@ -189,7 +187,12 @@ void Render::Camera::present()
 	_maskEngine->clear_buffer();
 
 	_context->begin_3d();
+	
 	matrix_buffer->bind();
+	control_buffer->bind();
+
+	_control_buffer_struct.offset = Position2(0, 0);
+	control_buffer->update();
 
 	// render all world objects
 	
@@ -203,9 +206,12 @@ void Render::Camera::present()
 	// then render canvas
 	
 	_context->begin_2d();
-	b0_buffer->bind();
-	
 	_maskEngine->clear_buffer();
+
+	matrix2d_buffer->bind();
+
+	_control_buffer_struct.offset = Position2(-1, 1);
+	control_buffer->update();
 
 	DrawEvent2D event(this,nullptr);
 	for(auto*layer : _canvas2DLayers)

@@ -27,7 +27,7 @@ namespace UI
 			: Panel(position, resolution, { 1.f,1.f,1.f,1.f }),
 			_directory(directory)
 		{
-			// Panel::set_texture(texture);
+			Panel::set_texture(texture);
 			
 		}
 

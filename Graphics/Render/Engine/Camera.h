@@ -24,17 +24,24 @@ namespace Render
 		struct
 		{
 			DirectX::XMMATRIX _viewMatrix;
-			float alpha;
-		} _b0_constant_buffer_struct;
+		} _matrix_buffer_struct;
 
+		__declspec(align(16))
+			struct
+		{
+			DirectX::XMMATRIX _viewMatrix;
+		} _matrix2d_buffer_struct;
+		
 		__declspec(align(16))
 		struct
 		{
-			DirectX::XMMATRIX _viewMatrix;
-		} _b1_constant_buffer_struct;
+			Position2 offset = Position2(0,0);
+			float opacity = 1.f;
+		} _control_buffer_struct;
 
-		ConstantBuffer* b0_buffer;
 		ConstantBuffer* matrix_buffer;
+		ConstantBuffer* matrix2d_buffer;
+		ConstantBuffer* control_buffer;
 
 		BlendEngine* _blendEngine;
 		MaskEngine*  _maskEngine;

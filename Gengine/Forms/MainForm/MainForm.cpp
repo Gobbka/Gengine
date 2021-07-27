@@ -21,11 +21,11 @@ namespace UI
 	class Directory : public Panel
 	{
 	private:
-		FS::FSFile _directory;
+		FS::FSObject _object;
 	public:
-		Directory(FS::FSFile directory, Position2 position, Surface resolution, Render::Texture* texture)
+		Directory(FS::FSObject object, Position2 position, Surface resolution, Render::Texture* texture)
 			: Panel(position, resolution, { 1.f,1.f,1.f,1.f }),
-			_directory(directory)
+			_object(object)
 		{
 			Panel::set_texture(texture);
 			
@@ -33,7 +33,13 @@ namespace UI
 
 		void handle_db_click() override
 		{
-			system("start assets\\228.png");
+			if(!_object.is_directory())
+			{
+				std::wstring command(L"start ");
+				command += _object.path();
+				
+				_wsystem(command.c_str());
+			}
 			Parent::handle_db_click();
 		}
 	};
@@ -96,7 +102,7 @@ void Forms::MainForm::scan_assets_directory()
 	{
 		Render::Texture* lp_texture = file->is_directory() ? _folder_texture : _file_texture;
 		
-		auto* panel = new UI::Directory(*(FS::FSFile*)file, { 0,0 }, { 120,120 }, lp_texture);
+		auto* panel = new UI::Directory(*file, { 0,0 }, { 120,120 }, lp_texture);
 		
 		_assets_panel->add_element(panel);
 	});

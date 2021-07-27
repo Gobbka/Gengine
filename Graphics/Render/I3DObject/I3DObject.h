@@ -22,6 +22,7 @@ namespace Render
 
 		void bind();
 	public:
+		virtual ~I3DObject() = default;
 		Core::Transform transform;
 		
 		I3DObject(Core::GraphicsContext*context,size_t vertex_size);

@@ -164,6 +164,7 @@ Render::Camera::Camera(Core::GraphicsContext* context)
 	_context = context;
 	_blendEngine = new BlendEngine(_context);
 	_maskEngine  = new MaskEngine(_context);
+	_maskEngine->bind();
 	
 	auto resolution = context->get_screen_resolution();
 	_matrix2d_buffer_struct = { DirectX::XMMatrixScaling(1.f / (resolution.width / 2),1.f / (resolution.height / 2),1.f) };
@@ -183,13 +184,14 @@ Render::Camera::Camera(Core::GraphicsContext* context)
 void Render::Camera::present()
 {
 	_blendEngine->bind();
-	_maskEngine->bind();
 	_maskEngine->clear_buffer();
 
-	_context->begin_3d();
-	
+
 	matrix_buffer->bind();
 	control_buffer->bind();
+	
+	_context->begin_3d();
+
 
 	_control_buffer_struct.offset = Position2(0, 0);
 	control_buffer->update();

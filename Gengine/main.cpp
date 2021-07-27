@@ -43,15 +43,20 @@ int WINAPI wWinMain(
     };
 
     auto* material = load_png(L"assets\\mine4ok.png");
+    auto* texture = form->get_graphics_context()->create_texture(material);
 
     auto cube = Render::Cube(Position3::null(), form->get_graphics_context());
-    cube.set_texture(form->get_graphics_context()->create_texture(material));
+    cube.set_texture(texture);
+
+    auto paral = Render::Parallelepiped(Position3(-15, -7, -15), form->get_graphics_context(), Vector3(30, 1, 30));
+	paral.set_texture(texture);
 
     PhysicsModule module;
 
     module.add_element(RigidBody(&cube.transform));
 	
     form->get_graphics_context()->worldspace()->add_object(&cube);
+    form->get_graphics_context()->worldspace()->add_object(&paral);
 	
     MSG msg;
 	while(true)

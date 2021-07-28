@@ -203,7 +203,7 @@ void Render::Camera::present()
 	{
 		this->draw_object(object);
 	}
-	
+	return;
 	
 	// then render canvas
 	

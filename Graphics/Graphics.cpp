@@ -80,7 +80,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_viewport.Width  = _screen_resolution.width;
 	_viewport.Height = _screen_resolution.height;
 	_viewport.MaxDepth = 1;
-	_viewport.MinDepth = 1;
+	_viewport.MinDepth = 0;
 	_viewport.TopLeftX = 0;
 	_viewport.TopLeftY = 0;
 	context->RSSetViewports(1, &_viewport);

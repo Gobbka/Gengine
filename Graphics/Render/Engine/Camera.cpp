@@ -105,6 +105,8 @@ void Render::Camera::set_resolution(Surface new_resolution)
 
 void Render::Camera::set_alpha(float alpha)
 {
+	if (alpha == _control_buffer_struct.opacity)
+		return;
 	_control_buffer_struct.opacity = alpha;
 	control_buffer->update();
 }
@@ -185,7 +187,7 @@ void Render::Camera::present()
 {
 	_blendEngine->bind();
 	_maskEngine->clear_buffer();
-
+	_maskEngine->set_state(_maskEngine->get_disabledState());
 
 	matrix_buffer->bind();
 	control_buffer->bind();
@@ -203,7 +205,6 @@ void Render::Camera::present()
 	{
 		this->draw_object(object);
 	}
-	return;
 	
 	// then render canvas
 	

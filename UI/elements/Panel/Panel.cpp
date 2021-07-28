@@ -4,9 +4,6 @@
 
 void UI::Panel::draw(Render::DrawEvent2D* event)
 {
-	if(this->alpha != 1.f)
-		event->set_alpha(this->alpha);
-	
 	if (this->styles.overflow == VisibleState::hidden)
 	{
 		event->mask_draw_begin();

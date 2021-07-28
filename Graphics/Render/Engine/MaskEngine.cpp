@@ -120,6 +120,8 @@ Render::MaskEngine::MaskEngine(Core::GraphicsContext* engine)
 
 void Render::MaskEngine::set_state(ID3D11DepthStencilState* state, UINT reference)
 {
+	if (_currentState == state)
+		return;
 	_currentState = state;
 	_engine->context->OMSetDepthStencilState(state, reference);
 }

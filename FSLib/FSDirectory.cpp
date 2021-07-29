@@ -18,15 +18,18 @@ void FS::FSDirectory::foreach(std::function<void(FSObject*)> callback)
 	handle = FindFirstFile(file_path.c_str(), &data);
 	if(handle != INVALID_HANDLE_VALUE)
 	{
-		std::wstring filename(path());
-		filename = filename + L'\\' + data.cFileName;
-		
-		FSFile file(filename, data.nFileSizeLow, nullptr);
-		callback(&file);
+		if(wcscmp(data.cFileName,L".") != 0)
+		{
+			std::wstring filename(path());
+			filename = filename + L'\\' + data.cFileName;
+
+			FSFile file(filename, data.nFileSizeLow, nullptr);
+			callback(&file);
+		}
 	}
 
 	while(FindNextFile(handle,&data))
-	{
+	{	
 		std::wstring filename(path());
 		filename = filename + L'\\' + data.cFileName;
 		

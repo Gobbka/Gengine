@@ -47,7 +47,6 @@ namespace Render
 		MaskEngine*  _maskEngine;
 
 		Core::Transform _transform;
-		Core::Quaternion3 _rotation;
 
 		DirectX::XMVECTOR _xm_camPosition;
 		DirectX::XMVECTOR _xm_lookAt;
@@ -65,11 +64,6 @@ namespace Render
 		DirectX::XMMATRIX _projectionMatrix;
 		DirectX::XMMATRIX _viewMatrix;
 		
-		DirectX::XMVECTOR _forward_vector;
-		DirectX::XMVECTOR _backward_vector;
-		DirectX::XMVECTOR _right_vector;
-		DirectX::XMVECTOR _left_vector;
-		DirectX::XMVECTOR _up_vector;
 	public:
 		void set_position(Position3 pos);
 		void adjust_position(Position3 pos);

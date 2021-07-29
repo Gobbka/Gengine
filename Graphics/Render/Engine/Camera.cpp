@@ -35,7 +35,7 @@ void Render::Camera::draw_object(I3DObject* object)
 
 DirectX::XMMATRIX Render::Camera::create_view_matrix()
 {
-	auto rotation = _rotation.get_rotation();
+	auto rotation = _transform.get_rotation();
 	
 	auto camRotMatrix = DirectX::XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
 	auto camTarget = DirectX::XMVector3TransformCoord(DEFAULT_FORWARD_VECTOR, camRotMatrix);
@@ -43,11 +43,6 @@ DirectX::XMMATRIX Render::Camera::create_view_matrix()
 	camTarget = DirectX::XMVectorAdd(camTarget, _xm_camPosition);
 	
 	auto upDir = DirectX::XMVector3TransformCoord(DEFAULT_UP_VECTOR, camRotMatrix);
-
-	auto rotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(0, rotation.y, 0);
-	_forward_vector = DirectX::XMVector3TransformCoord(DEFAULT_FORWARD_VECTOR, rotationMatrix);
-	_right_vector = DirectX::XMVector3TransformCoord(DEFAULT_RIGHT_VECTOR, rotationMatrix);
-	_up_vector = DirectX::XMVector3TransformCoord(DEFAULT_UP_VECTOR, rotationMatrix);
 
 	return DirectX::XMMatrixLookAtLH(
 		_xm_camPosition,
@@ -80,18 +75,13 @@ void Render::Camera::adjust_position(Position3 pos)
 
 void Render::Camera::adjust_position_relative(Position3 pos)
 {
-	using namespace DirectX;
-	auto nigga = (_forward_vector * pos.x) + (_right_vector * pos.z) + (_up_vector * pos.y);
-	
-	XMFLOAT3 forw;
-	XMStoreFloat3(&forw,nigga);
-	_transform.adjust_position(Position3(forw.z, forw.y, forw.x));
+	_transform.adjust_position(pos);
 	update_position();
 }
 
 void Render::Camera::adjust_rotation(Vector3 rot)
 {
-	_rotation.adjust_rotation(rot);
+	_transform.adjust_rotation(rot);
 	_viewMatrix = create_view_matrix();
 }
 
@@ -160,8 +150,8 @@ Surface Render::Camera::get_screen_resolution() const
 
 Render::Camera::Camera(Core::GraphicsContext* context)
 	:
-	_transform(Position3(-4.f, 0, 0)),
-	_rotation(Vector3(0, 0, 0))
+	_transform(Position3(-4.f, 0, 0))
+	//_rotation(Vector3(0, 0, 0))
 {
 	_context = context;
 	_blendEngine = new BlendEngine(_context);
@@ -196,6 +186,7 @@ void Render::Camera::present()
 
 
 	_control_buffer_struct.offset = Position2(0, 0);
+	_control_buffer_struct.opacity = 1.f;
 	control_buffer->update();
 
 	// render all world objects
@@ -214,6 +205,7 @@ void Render::Camera::present()
 	matrix2d_buffer->bind();
 
 	_control_buffer_struct.offset = Position2(-1, 1);
+	_control_buffer_struct.opacity = 1.f;
 	control_buffer->update();
 
 	DrawEvent2D event(this,nullptr);

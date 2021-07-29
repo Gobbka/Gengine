@@ -91,7 +91,8 @@ Render::MaskEngine::MaskEngine(Core::GraphicsContext* engine)
 	assert(SUCCEEDED(device->CreateDepthStencilView(_buffer, &descDSV, &_view)));
 
 	D3D11_DEPTH_STENCIL_DESC depthstencildesc = {};
-	depthstencildesc.DepthEnable = TRUE;
+	// i dont know why, but ui wont work when DepthEnable equals true
+	depthstencildesc.DepthEnable = false;
 	depthstencildesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
 	depthstencildesc.DepthFunc = D3D11_COMPARISON_LESS;
 

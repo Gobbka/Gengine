@@ -4,8 +4,6 @@
 #include <iostream>
 #include "WindowsManager.h"
 
-// todo: fix creating window with wrong resolution
-
 LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {	
 	auto* window = (WindowsWindow*)WindowsManager::instance()->get_by_hwnd(hwnd);
@@ -42,8 +40,6 @@ LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam
 
 		if (window_height > window->max_height)
 			((RECT*)lParam)->bottom = r.top + window->max_height;
-
-		
 	}
 	
 	return DefWindowProc(hwnd, msg, wParam, lParam);
@@ -67,7 +63,7 @@ Core::WindowsWindow::WindowsWindow(HINSTANCE hint, UINT width, UINT height)
 		CS_OWNDC | CS_DBLCLKS,
 		window_procedure,
 		0,0,
-		_hInst,nullptr,nullptr,nullptr,
+		_hInst,nullptr,LoadCursor(nullptr,IDC_ARROW),nullptr,
 		nullptr,
 		class_name,
 		nullptr

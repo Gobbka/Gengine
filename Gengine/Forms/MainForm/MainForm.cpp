@@ -42,6 +42,20 @@ namespace UI
 			}
 			Parent::handle_db_click();
 		}
+
+		void handle_mouse_enter() override
+		{
+			SetCursor(LoadCursor(0, IDC_HAND));
+			Panel::handle_mouse_enter();
+		}
+
+		void handle_mouse_leave() override
+		{
+			SetCursor(LoadCursor(0, IDC_ARROW));
+			Panel::handle_mouse_leave();
+		}
+		
+		
 	};
 }
 

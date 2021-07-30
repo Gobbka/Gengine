@@ -27,6 +27,7 @@ namespace Render
 		
 		I3DObject(Core::GraphicsContext*context,size_t vertex_size);
 		I3DObject(Core::GraphicsContext*context,size_t vertex_size,Position3 pos);
+		I3DObject(Core::GraphicsContext* context, VertexBuffer* buffer, ID3D11Buffer* index_buffer);
 		
 		virtual void draw() =0;
 	};

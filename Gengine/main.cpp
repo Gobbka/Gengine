@@ -8,14 +8,17 @@
 
 #include <fstream>
 
-
-
 #include "PhysicsModule.h"
 #include "UIManager.h"
 #include "Drivers/PNGImageDriver.h"
 #include "Forms/MainForm/MainForm.h"
 #include "Render/Engine/Camera.h"
 #include "Render/I3DObject/Cube/Cube.h"
+
+#include <assimp/importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+#include <assimp/mesh.h>
 
 extern Render::Material* load_png(const wchar_t* path);
 
@@ -42,6 +45,15 @@ int WINAPI wWinMain(
         UI::UIManager::instance()->window_proc(msg, wp, lp);
     };
 
+    Assimp::Importer importer;
+    auto*scene = importer.ReadFile("assets\\gun.obj",aiProcess_Triangulate | aiProcess_ConvertToLeftHanded);
+    assert(scene != nullptr);
+
+	for(UINT i = 0;i < scene->mRootNode->mNumMeshes;i++)
+	{
+		
+	}
+	
     auto* material = load_png(L"assets\\mine4ok.png");
     auto* texture = form->get_graphics_context()->create_texture(material);
 

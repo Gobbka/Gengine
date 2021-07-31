@@ -72,7 +72,7 @@ Render::DrawEvent3D::DrawEvent3D(Camera* camera)
 	
 }
 
-void Render::DrawEvent3D::draw_object(I3DObject* object)
+void Render::DrawEvent3D::draw_object(Object3D* object)
 {
 	object->transform.get_world_matrix();
 }

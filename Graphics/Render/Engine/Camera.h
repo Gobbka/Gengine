@@ -3,7 +3,7 @@
 
 #include "../../Graphics.h"
 #include "../d3d/Buffer/ConstantBuffer.h"
-#include "../I3DObject/I3DObject.h"
+#include "../I3DObject/Object3D.h"
 #include "../Layer/ILayer.h"
 #include "Types/Transform.h"
 
@@ -56,7 +56,7 @@ namespace Render
 		std::vector<Canvas::Canvas2DLayer*> _canvas2DLayers;
 	private:
 		void update_position();
-		void draw_object(I3DObject* object);
+		void draw_object(Object3D* object);
 		
 		DirectX::XMMATRIX create_view_matrix();
 		DirectX::XMMATRIX create_proj_matrix();

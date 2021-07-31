@@ -9,10 +9,13 @@ namespace Render {
 	class IndexBuffer;
 }
 
-Render::IndexBuffer* Parallelepiped_INDEX_BUFFER;
+UINT PARALLELEPIPED_INDEX_ARRAY[]{
+	0,1,2,3,6,7,4,5,
+	2,6,0,4,1,5,3,7
+};
 
 Render::Parallelepiped::Parallelepiped(Position3 pos, Core::GraphicsContext* context, Vector3 resolution)
-	: I3DObject(context, 8, pos)
+	: Object3D(context, 8, new IndexBuffer(context, PARALLELEPIPED_INDEX_ARRAY, ARRAYSIZE(PARALLELEPIPED_INDEX_ARRAY)),pos)
 {
 	auto* ptr = vertices();
 
@@ -62,19 +65,8 @@ void Render::Parallelepiped::set_texture(Render::Texture* texture)
 
 void Render::Parallelepiped::draw()
 {
-	if (Parallelepiped_INDEX_BUFFER == nullptr)
-	{
-		UINT indexed[]{
-			0,1,2,3,6,7,4,5,
-			2,6,0,4,1,5,3,7
-		};
-		Parallelepiped_INDEX_BUFFER = new IndexBuffer(_context, indexed, ARRAYSIZE(indexed));
-	}
-
-
-	I3DObject::bind();
-
-	Parallelepiped_INDEX_BUFFER->bind();
+	Object3D::bind();
+	
 	if (this->texture != nullptr)
 	{
 		auto* engine = _context->get_sprite_engine();

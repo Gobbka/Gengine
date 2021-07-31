@@ -7,7 +7,7 @@ namespace Canvas
 }
 
 namespace Render {
-	class I3DObject;
+	class Object3D;
 	class SpriteEngine;
 	class Camera;
 	class ILayer;
@@ -54,6 +54,6 @@ namespace Render {
 		DrawEvent3D(Camera* camera);
 
 
-		void draw_object(I3DObject* object);
+		void draw_object(Object3D* object);
 	};
 }

@@ -20,9 +20,9 @@ namespace Render {
 namespace Core
 {
 	struct __declspec(dllexport) WorldSpace {
-		std::vector<Render::I3DObject*> objects;
+		std::vector<Render::Object3D*> objects;
 
-		void add_object(Render::I3DObject* object);
+		void add_object(Render::Object3D* object);
 	};
 	
 	class __declspec(dllexport) GraphicsContext

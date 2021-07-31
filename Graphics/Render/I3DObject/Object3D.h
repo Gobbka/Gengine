@@ -8,11 +8,13 @@ namespace Core {
 
 namespace Render
 {
+	class IndexBuffer;
 	class VertexBuffer;
 
-	class I3DObject
+	class Object3D
 	{
 		VertexBuffer* _buffer;
+		IndexBuffer* _index_buffer;
 	protected:
 		// TODO: remove it from here
 		Core::GraphicsContext* _context;
@@ -22,12 +24,11 @@ namespace Render
 
 		void bind();
 	public:
-		virtual ~I3DObject() = default;
+		virtual ~Object3D() = default;
 		Core::Transform transform;
 		
-		I3DObject(Core::GraphicsContext*context,size_t vertex_size);
-		I3DObject(Core::GraphicsContext*context,size_t vertex_size,Position3 pos);
-		I3DObject(Core::GraphicsContext* context, VertexBuffer* buffer, ID3D11Buffer* index_buffer);
+		Object3D(Core::GraphicsContext*context,size_t vertex_size,IndexBuffer*index_buffer,Position3 pos = { 0,0,0 });
+		Object3D(Core::GraphicsContext* context, VertexBuffer* buffer, IndexBuffer* index_buffer,Position3 pos = {0,0,0});
 		
 		virtual void draw() =0;
 	};

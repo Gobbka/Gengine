@@ -1,12 +1,12 @@
 #pragma once
-#include "../I3DObject.h"
+#include "../Object3D.h"
 
 namespace Render
 {
 	class Texture;
 	struct DrawEvent;
 
-	class __declspec(dllexport) Parallelepiped : public I3DObject
+	class __declspec(dllexport) Parallelepiped : public Object3D
 	{
 		Texture* texture;
 	public:

@@ -1,5 +1,5 @@
 #pragma once
-#include "../I3DObject.h"
+#include "../Object3D.h"
 #include "../Parallelepiped/Parallelepiped.h"
 #include "Types/Types.h"
 

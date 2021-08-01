@@ -2,9 +2,10 @@
 #include <d3d11.h>
 
 #include "../Bindable.h"
+#include "../../../Graphics/IBuffers/IIndexBuffer.h"
 
 namespace Render {
-	class __declspec(dllexport) IndexBuffer : public Bindable
+	class IndexBuffer : public IIndexBuffer
 	{
 		ID3D11Buffer* _index_buffer;
 		UINT* _index;

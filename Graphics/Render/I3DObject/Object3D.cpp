@@ -26,7 +26,7 @@ Render::Object3D::Object3D(Core::GraphicsContext* context, size_t vertex_size, I
 	Position3 pos)
 {
 	_context = context;
-	_buffer = VertexBuffer::alloc(context, vertex_size, true);
+	_buffer = new VertexBuffer(context,new Vertex[vertex_size],vertex_size, true);
 	_index_buffer = index_buffer;
 }
 

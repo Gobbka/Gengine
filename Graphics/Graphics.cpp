@@ -17,6 +17,7 @@
 #include "Render/d3d/Shader/VertexShader.h"
 
 #include "Graphics/Material/Material.h"
+#include "Render/d3d/Buffer/D3D11BufferAllocator.h"
 
 void Core::WorldSpace::add_object(Render::Model* object)
 {
@@ -35,6 +36,8 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 		swap->GetDesc(&desc);
 		_screen_resolution = Surface(desc.BufferDesc.Width,desc.BufferDesc.Height);
 	}
+
+	_bufferAllocator = new Render::D3D11BufferAllocator(this);
 	
 	ID3D11Resource* back_buffer;
 	_swap->GetBuffer(0, __uuidof(ID3D11Resource), (void**)&back_buffer);
@@ -88,6 +91,11 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_samplerState->bind();
 }
 
+Render::IBufferAllocator* Core::GraphicsContext::buffer_allocator() const
+{
+	return _bufferAllocator;
+}
+
 Core::WorldSpace* Core::GraphicsContext::worldspace()
 {
 	return &_worldSpace;
@@ -133,16 +141,8 @@ void Core::GraphicsContext::clear(Color3 color)
 void Core::GraphicsContext::present() const
 {
 	context->RSSetViewports(1, &_viewport);
-	//context->OMSetRenderTargets(1, &_targetView, nullptr);
-	//context->IASetInputLayout(_inputLayout);
 	
 	context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-
-	//_context->IASetInputLayout(_texture_layout);
-	//_samplerState->bind();
-
-	//_texture_ps->bind();
-	//_texture_vs->bind();
 
 	_main_camera->present();
 

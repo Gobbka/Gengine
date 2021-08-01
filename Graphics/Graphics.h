@@ -1,5 +1,7 @@
 #pragma once
 #include <d3d11.h>
+
+#include "BufferAllocator.h"
 #include "Canvas/CanvasLayer.h"
 #include "Graphics/Material/Material.h"
 #include "Render/Engine/SpriteEngine.h"
@@ -46,7 +48,7 @@ namespace Core
 		ID3D11InputLayout* _inputLayout;
 
 		D3D11_VIEWPORT _viewport;
-
+		Render::IBufferAllocator* _bufferAllocator;
 	private:
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 		
@@ -54,6 +56,7 @@ namespace Core
 		Render::SpriteEngine* _spriteEngine;
 		WorldSpace _worldSpace;
 	public:
+		Render::IBufferAllocator* buffer_allocator() const;
 		WorldSpace* worldspace();
 		
 		Render::SpriteEngine* get_sprite_engine();

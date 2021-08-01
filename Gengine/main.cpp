@@ -33,8 +33,10 @@ Render::Model* load_model(const wchar_t*path,Core::GraphicsContext*context)
     for (UINT i = 0; i < scene->mRootNode->mNumMeshes; i++)
     {
         auto* mesh = scene->mMeshes[scene->mRootNode->mMeshes[i]];
-        auto* vert = Render::VertexBuffer::alloc(context,mesh->mNumVertices);
+        auto* vert = context->buffer_allocator()->alloc_vertex_buffer(context,mesh->mNumVertices);
     }
+
+    return nullptr;
 }
 
 extern Render::Material* load_png(const wchar_t* path);

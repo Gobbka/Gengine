@@ -2,7 +2,7 @@
 #include "../../../Graphics.h"
 
 Render::IndexBuffer::IndexBuffer(Core::GraphicsContext* graphics_context, UINT* index, size_t size)
-	: Bindable(graphics_context)
+	: IIndexBuffer(graphics_context)
 {
 	_index = index;
 	_size = size;

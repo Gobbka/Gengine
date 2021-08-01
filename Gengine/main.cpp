@@ -24,6 +24,19 @@
 #include "Render/d3d/Buffer/IndexBuffer.h"
 #include "Render/d3d/Buffer/VertexBuffer.h"
 
+Render::Model* load_model(const wchar_t*path,Core::GraphicsContext*context)
+{
+    Assimp::Importer importer;
+    auto* scene = importer.ReadFile("assets\\gun.obj", aiProcess_Triangulate | aiProcess_ConvertToLeftHanded);
+    assert(scene != nullptr);
+
+    for (UINT i = 0; i < scene->mRootNode->mNumMeshes; i++)
+    {
+        auto* mesh = scene->mMeshes[scene->mRootNode->mMeshes[i]];
+        auto* vert = Render::VertexBuffer::alloc(context,mesh->mNumVertices);
+    }
+}
+
 extern Render::Material* load_png(const wchar_t* path);
 
 int WINAPI wWinMain(
@@ -49,23 +62,16 @@ int WINAPI wWinMain(
         UI::UIManager::instance()->window_proc(msg, wp, lp);
     };
 
-    Assimp::Importer importer;
-    auto*scene = importer.ReadFile("assets\\gun.obj",aiProcess_Triangulate | aiProcess_ConvertToLeftHanded);
-    assert(scene != nullptr);
-
-	for(UINT i = 0;i < scene->mRootNode->mNumMeshes;i++)
-	{
-		
-	}
-	
     auto* material = load_png(L"assets\\mine4ok.png");
     auto* texture = form->get_graphics_context()->create_texture(material);
 
     auto cube = Render::Model();//Render::Cube(Position3::null(), form->get_graphics_context());
     auto cube_mesh = Render::Cube(Position3::null(), form->get_graphics_context());
+    auto nigga_mesh = Render::Parallelepiped(Position3(15,15,0), form->get_graphics_context(),Vector3{9,3,9});
     cube_mesh.set_texture(texture);
 
     cube.add_mesh(&cube_mesh);
+    cube.add_mesh(&nigga_mesh);
 
     auto paral = Render::Parallelepiped(Position3(-15, -7, -15), form->get_graphics_context(), Vector3(30, 1, 30));
 	paral.set_texture(texture);

@@ -4,6 +4,9 @@
 Render::IndexBuffer::IndexBuffer(Core::GraphicsContext* graphics_context, UINT* index, size_t size)
 	: Bindable(graphics_context)
 {
+	_index = index;
+	_size = size;
+	
 	D3D11_BUFFER_DESC desc;
 	desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
@@ -20,4 +23,8 @@ Render::IndexBuffer::IndexBuffer(Core::GraphicsContext* graphics_context, UINT* 
 void Render::IndexBuffer::bind()
 {
 	_engine->context->IASetIndexBuffer(_index_buffer, DXGI_FORMAT_R32_UINT, 0);
+}
+
+Render::IndexBuffer::~IndexBuffer()
+{
 }

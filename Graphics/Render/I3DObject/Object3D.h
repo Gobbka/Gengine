@@ -11,7 +11,7 @@ namespace Render
 	class IndexBuffer;
 	class VertexBuffer;
 
-	class Object3D
+	class __declspec(dllexport) Object3D
 	{
 		VertexBuffer* _buffer;
 		IndexBuffer* _index_buffer;
@@ -30,6 +30,6 @@ namespace Render
 		Object3D(Core::GraphicsContext*context,size_t vertex_size,IndexBuffer*index_buffer,Position3 pos = { 0,0,0 });
 		Object3D(Core::GraphicsContext* context, VertexBuffer* buffer, IndexBuffer* index_buffer,Position3 pos = {0,0,0});
 		
-		virtual void draw() =0;
+		virtual void draw();
 	};
 }

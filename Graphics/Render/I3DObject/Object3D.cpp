@@ -1,6 +1,8 @@
 #include "Object3D.h"
 
 
+
+#include "../../Graphics.h"
 #include "../d3d/Buffer/IndexBuffer.h"
 #include "../d3d/Buffer/VertexBuffer.h"
 
@@ -36,4 +38,10 @@ Render::Object3D::Object3D(Core::GraphicsContext* context, VertexBuffer* buffer,
 	_context = context;
 	_buffer = buffer;
 	_index_buffer = index_buffer;
+}
+
+void Render::Object3D::draw()
+{
+	bind();
+	_context->context->DrawIndexed(_index_buffer->size(), 0, 0);
 }

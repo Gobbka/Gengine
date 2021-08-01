@@ -20,6 +20,10 @@
 #include <assimp/postprocess.h>
 #include <assimp/mesh.h>
 
+
+#include "Render/d3d/Buffer/IndexBuffer.h"
+#include "Render/d3d/Buffer/VertexBuffer.h"
+
 extern Render::Material* load_png(const wchar_t* path);
 
 int WINAPI wWinMain(
@@ -62,6 +66,8 @@ int WINAPI wWinMain(
 
     auto paral = Render::Parallelepiped(Position3(-15, -7, -15), form->get_graphics_context(), Vector3(30, 1, 30));
 	paral.set_texture(texture);
+
+	
 
     PhysicsModule module;
 

@@ -6,7 +6,7 @@ namespace Render
 {
 	struct Vertex;
 
-	class VertexBuffer : public Bindable
+	class __declspec(dllexport) VertexBuffer : public Bindable
 	{
 	private:
 		ID3D11Buffer* _buffer = nullptr;

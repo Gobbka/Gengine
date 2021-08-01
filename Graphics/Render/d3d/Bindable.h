@@ -8,7 +8,7 @@ namespace Render
 {
 	class Camera;
 
-	class Bindable
+	class __declspec(dllexport) Bindable
 	{
 	protected:
 		Core::GraphicsContext* _engine;

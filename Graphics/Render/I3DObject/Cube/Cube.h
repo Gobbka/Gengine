@@ -10,7 +10,6 @@ namespace Render
 
 	class __declspec(dllexport) Cube : public Parallelepiped
 	{
-		Texture* texture;
 	public:
 		Cube(Position3 pos, Core::GraphicsContext* context);
 	};

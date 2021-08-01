@@ -18,7 +18,7 @@
 
 #include "Graphics/Material/Material.h"
 
-void Core::WorldSpace::add_object(Render::Object3D* object)
+void Core::WorldSpace::add_object(Render::Model* object)
 {
 	objects.push_back(object);
 }

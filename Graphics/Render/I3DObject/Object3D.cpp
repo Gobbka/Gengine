@@ -24,7 +24,6 @@ void Render::Object3D::bind()
 
 Render::Object3D::Object3D(Core::GraphicsContext* context, size_t vertex_size, IndexBuffer* index_buffer,
 	Position3 pos)
-		: transform(pos)
 {
 	_context = context;
 	_buffer = VertexBuffer::alloc(context, vertex_size, true);
@@ -33,7 +32,6 @@ Render::Object3D::Object3D(Core::GraphicsContext* context, size_t vertex_size, I
 
 Render::Object3D::Object3D(Core::GraphicsContext* context, VertexBuffer* buffer, IndexBuffer* index_buffer,
 	Position3 pos)
-		: transform(pos)
 {
 	_context = context;
 	_buffer = buffer;

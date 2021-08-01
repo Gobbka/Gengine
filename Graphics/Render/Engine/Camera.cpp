@@ -23,7 +23,7 @@ void Render::Camera::update_position()
 	_viewMatrix = create_view_matrix();
 }
 
-void Render::Camera::draw_object(Object3D* object)
+void Render::Camera::draw_object(Model* object)
 {
 	auto worldMatrix = object->transform.get_world_matrix();
 	_matrix_buffer_struct = { DirectX::XMMatrixTranspose(

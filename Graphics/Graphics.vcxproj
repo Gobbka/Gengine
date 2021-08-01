@@ -168,6 +168,7 @@
     <ClInclude Include="Render\I3DObject\Object3D.h" />
     <ClInclude Include="Render\I3DObject\Parallelepiped\Parallelepiped.h" />
     <ClInclude Include="Render\Layer\ILayer.h" />
+    <ClInclude Include="Render\Model\Model.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Canvas\CanvasLayer.cpp" />
@@ -194,6 +195,7 @@
     <ClCompile Include="Render\I3DObject\Cube\Cube.cpp" />
     <ClCompile Include="Render\I3DObject\Object3D.cpp" />
     <ClCompile Include="Render\I3DObject\Parallelepiped\Parallelepiped.cpp" />
+    <ClCompile Include="Render\Model\Model.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Render\d3d\hlsl\pixel_shader.hlsl">

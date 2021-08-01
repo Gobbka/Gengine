@@ -25,7 +25,6 @@ namespace Render
 		void bind();
 	public:
 		virtual ~Object3D() = default;
-		Core::Transform transform;
 		
 		Object3D(Core::GraphicsContext*context,size_t vertex_size,IndexBuffer*index_buffer,Position3 pos = { 0,0,0 });
 		Object3D(Core::GraphicsContext* context, VertexBuffer* buffer, IndexBuffer* index_buffer,Position3 pos = {0,0,0});

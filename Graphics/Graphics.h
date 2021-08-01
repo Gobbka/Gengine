@@ -3,6 +3,7 @@
 #include "Canvas/CanvasLayer.h"
 #include "Graphics/Material/Material.h"
 #include "Render/Engine/SpriteEngine.h"
+#include "Render/Model/Model.h"
 
 
 // TODO-LIST:
@@ -20,9 +21,9 @@ namespace Render {
 namespace Core
 {
 	struct __declspec(dllexport) WorldSpace {
-		std::vector<Render::Object3D*> objects;
+		std::vector<Render::Model*> objects;
 
-		void add_object(Render::Object3D* object);
+		void add_object(Render::Model* object);
 	};
 	
 	class __declspec(dllexport) GraphicsContext

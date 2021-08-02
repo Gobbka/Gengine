@@ -43,11 +43,6 @@ void Core::Transform::adjust_position(Position3 pos)
 void Core::Transform::set_position(Position3 pos)
 {
 	_pos = pos;
-
-	auto rotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(0, _rotation.y, 0);
-	_forward_vector = DirectX::XMVector3TransformCoord(DEFAULT_FORWARD_VECTOR, rotationMatrix);
-	_right_vector = DirectX::XMVector3TransformCoord(DEFAULT_RIGHT_VECTOR, rotationMatrix);
-	_up_vector = DirectX::XMVector3TransformCoord(DEFAULT_UP_VECTOR, rotationMatrix);
 	
 	update_world_matrix();
 }

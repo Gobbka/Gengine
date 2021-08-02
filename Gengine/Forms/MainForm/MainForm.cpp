@@ -136,6 +136,8 @@ void Forms::MainForm::handle_resize(Surface rect)
 
 void Forms::MainForm::update()
 {
+	static float scale = 1.f;
+	
 	if (Keyboard::pressed(VirtualKey::KEY_W)) // W
 	{
 		get_graphics_context()->main_camera()->adjust_position_relative(Position3(0.05f, 0, 0));
@@ -154,11 +156,13 @@ void Forms::MainForm::update()
 	}
 	if (Keyboard::pressed(VirtualKey::SPACE))
 	{
-		get_graphics_context()->main_camera()->adjust_position(Position3(0, 0.05f, 0));
+		get_graphics_context()->main_camera()->set_scale(scale);
+		scale += 0.01f;
 	}
 	if (Keyboard::pressed(VirtualKey::CONTROL))
 	{
-		get_graphics_context()->main_camera()->adjust_position(Position3(0, -0.05f, 0));
+		get_graphics_context()->main_camera()->set_scale(scale);
+		scale -= 0.01f;
 	}
 
 	if (Keyboard::pressed(VirtualKey::LEFT))

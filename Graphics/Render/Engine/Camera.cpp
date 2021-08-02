@@ -58,7 +58,7 @@ DirectX::XMMATRIX Render::Camera::create_proj_matrix()
 	auto res = _context->get_screen_resolution();
 	auto aspectRatio = res.width / res.height;
 
-	return DirectX::XMMatrixPerspectiveFovLH(forRadians, aspectRatio, 0.1f, 120.f);
+	return DirectX::XMMatrixPerspectiveFovLH(forRadians, aspectRatio, 0.1f, 120.f) * DirectX::XMMatrixScaling(_scale,_scale,1.f);
 }
 
 void Render::Camera::set_position(Position3 pos)
@@ -99,6 +99,18 @@ void Render::Camera::set_alpha(float alpha)
 		return;
 	_control_buffer_struct.opacity = alpha;
 	control_buffer->update();
+}
+
+void Render::Camera::set_scale(float scale)
+{
+	_scale = scale;
+	_projectionMatrix = create_proj_matrix();
+}
+
+void Render::Camera::set_fov(float fov)
+{
+	_fov = fov;
+	_projectionMatrix = create_proj_matrix();
 }
 
 Canvas::Canvas2DLayer* Render::Camera::create_canvas_2d()

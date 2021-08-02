@@ -52,6 +52,7 @@ namespace Render
 		DirectX::XMVECTOR _xm_lookAt;
 		
 		float _fov = 90.f;
+		float _scale = 1.f;
 
 		std::vector<Canvas::Canvas2DLayer*> _canvas2DLayers;
 	private:
@@ -74,6 +75,9 @@ namespace Render
 		
 		void set_resolution(Surface new_resolution);
 		void set_alpha(float alpha);
+
+		void set_scale(float scale);
+		void set_fov(float fov);
 
 		Canvas::Canvas2DLayer* create_canvas_2d();
 		void register_canvas_2d(Canvas::Canvas2DLayer* layer);

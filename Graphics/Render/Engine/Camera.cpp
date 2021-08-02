@@ -23,14 +23,14 @@ void Render::Camera::update_position()
 	_viewMatrix = create_view_matrix();
 }
 
-void Render::Camera::draw_object(Model* object)
+void Render::Camera::draw_object(Model* object, DrawEvent3D event3d)
 {
 	auto worldMatrix = object->transform.get_world_matrix();
 	_matrix_buffer_struct = { DirectX::XMMatrixTranspose(
 		worldMatrix * _viewMatrix * _projectionMatrix
 	) };
 	matrix_buffer->update();
-	object->draw();
+	object->draw(event3d);
 }
 
 DirectX::XMMATRIX Render::Camera::create_view_matrix()
@@ -184,17 +184,17 @@ void Render::Camera::present()
 	
 	_context->begin_3d();
 
-
 	_control_buffer_struct.offset = Position2(0, 0);
 	_control_buffer_struct.opacity = 1.f;
 	control_buffer->update();
 
 	// render all world objects
+	DrawEvent3D event3d(graphics_context(),this);
 	
 	auto objects = _context->worldspace()->objects;
 	for(auto*object : objects)
 	{
-		this->draw_object(object);
+		this->draw_object(object,event3d);
 	}
 	
 	// then render canvas

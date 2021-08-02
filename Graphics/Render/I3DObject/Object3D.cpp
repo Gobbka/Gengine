@@ -38,8 +38,8 @@ Render::Object3D::Object3D(Core::GraphicsContext* context, VertexBuffer* buffer,
 	_index_buffer = index_buffer;
 }
 
-void Render::Object3D::draw()
+void Render::Object3D::draw(DrawEvent3D event3d)
 {
 	bind();
-	_context->context->DrawIndexed(_index_buffer->size(), 0, 0);
+	event3d.draw_indexed(_index_buffer->size());
 }

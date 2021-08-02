@@ -5,6 +5,7 @@
 
 namespace Render
 {
+	struct DrawEvent3D;
 	typedef Object3D Mesh;
 	
 	class __declspec(dllexport) Model
@@ -18,6 +19,6 @@ namespace Render
 
 		void add_mesh(Mesh* mesh);
 		
-		void draw();
+		void draw(DrawEvent3D event3d);
 	};
 }

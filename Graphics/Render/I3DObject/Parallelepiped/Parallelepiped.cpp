@@ -63,7 +63,7 @@ void Render::Parallelepiped::set_texture(Render::Texture* texture)
 	this->texture = texture;
 }
 
-void Render::Parallelepiped::draw()
+void Render::Parallelepiped::draw(DrawEvent3D event3d)
 {
 	Object3D::bind();
 	
@@ -73,8 +73,10 @@ void Render::Parallelepiped::draw()
 		engine->begin();
 		texture->bind();
 	}
-	_context->context->DrawIndexed(8, 0, 0);
-	_context->context->DrawIndexed(8, 8, 0);
+	
+	event3d.draw_indexed(8);
+	event3d.draw_indexed(8,8);
+	
 	if (this->texture != nullptr)
 	{
 		_context->get_sprite_engine()->end();

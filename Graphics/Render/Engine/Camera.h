@@ -56,7 +56,7 @@ namespace Render
 		std::vector<Canvas::Canvas2DLayer*> _canvas2DLayers;
 	private:
 		void update_position();
-		void draw_object(Model* object);
+		void draw_object(Model* object,DrawEvent3D event3d);
 		
 		DirectX::XMMATRIX create_view_matrix();
 		DirectX::XMMATRIX create_proj_matrix();

@@ -8,6 +8,7 @@ namespace Core {
 
 namespace Render
 {
+	struct DrawEvent3D;
 	class IndexBuffer;
 	class VertexBuffer;
 
@@ -29,6 +30,6 @@ namespace Render
 		Object3D(Core::GraphicsContext*context,size_t vertex_size,IndexBuffer*index_buffer,Position3 pos = { 0,0,0 });
 		Object3D(Core::GraphicsContext* context, VertexBuffer* buffer, IndexBuffer* index_buffer,Position3 pos = {0,0,0});
 		
-		virtual void draw();
+		virtual void draw(DrawEvent3D event3d);
 	};
 }

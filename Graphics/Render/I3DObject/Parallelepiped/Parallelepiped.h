@@ -14,6 +14,6 @@ namespace Render
 
 		void set_texture(Render::Texture* texture);
 
-		void draw() override;
+		void draw(DrawEvent3D event3d) override;
 	};
 }

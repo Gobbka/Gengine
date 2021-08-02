@@ -66,10 +66,20 @@ void Render::DrawEvent2D::draw_object(Canvas::I2DCanvasObject* object)
 	object->draw(this);
 }
 
-Render::DrawEvent3D::DrawEvent3D(Camera* camera)
+Render::DrawEvent3D::DrawEvent3D(Core::GraphicsContext* context,Camera*camera)
 	: DrawEvent(camera)
 {
-	
+	_context = context;
+}
+
+void Render::DrawEvent3D::draw(UINT count, UINT start_location)
+{
+	_context->context->Draw(count, start_location);
+}
+
+void Render::DrawEvent3D::draw_indexed(UINT count, UINT start_location)
+{
+	_context->context->DrawIndexed(count, start_location, 0);
 }
 
 void Render::DrawEvent3D::draw_object(Model* object)

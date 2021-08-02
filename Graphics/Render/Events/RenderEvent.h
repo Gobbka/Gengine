@@ -1,6 +1,10 @@
 #pragma once
 #include <d3d11.h>
 
+namespace Core {
+	class GraphicsContext;
+}
+
 namespace Canvas
 {
 	class I2DCanvasObject;
@@ -19,8 +23,6 @@ namespace Render {
 		UINT _stencil_layer = 0u;
 		
 	public:
-		
-
 		DrawEvent(Camera* engine);
 
 	public:
@@ -50,9 +52,13 @@ namespace Render {
 
 	struct DrawEvent3D : public DrawEvent
 	{
+		Core::GraphicsContext* _context;
 	public:
-		DrawEvent3D(Camera* camera);
+		DrawEvent3D(Core::GraphicsContext* context,Camera*camera);
 
+		void draw(UINT count,UINT start_location = 0);
+		void draw_indexed(UINT count,UINT start_location = 0);
+		
 		void draw_object(Model* object);
 	};
 }

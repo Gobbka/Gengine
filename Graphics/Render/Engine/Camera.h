@@ -85,7 +85,7 @@ namespace Render
 		Core::GraphicsContext* graphics_context();
 		ID3D11DeviceContext* context() const;
 		ID3D11Device* device() const;
-		ID3D11RenderTargetView* get_target_view() const;
+		RenderTarget* get_target_view() const;
 		MaskEngine* mask_engine() const;
 		BlendEngine* blend_engine() const;
 

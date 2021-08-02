@@ -25,7 +25,10 @@ void Core::WorldSpace::add_object(Render::Model* object)
 }
 
 Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11DeviceContext* context)
-	: _screen_resolution(0,0)
+	: _screen_resolution(0,0),
+	device(dev),
+	context(context),
+	_targetView(this,swap)
 {
 	device = dev;
 	_swap = swap;
@@ -38,14 +41,6 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	}
 
 	_bufferAllocator = new Render::D3D11BufferAllocator(this);
-	
-	ID3D11Resource* back_buffer;
-	_swap->GetBuffer(0, __uuidof(ID3D11Resource), (void**)&back_buffer);
-	
-	assert(back_buffer != nullptr);
-	assert(SUCCEEDED(device->CreateRenderTargetView(back_buffer, nullptr, &_targetView)));
-	
-	back_buffer->Release();
 
 	_main_camera = new Render::Camera(this);
 
@@ -111,9 +106,9 @@ Surface Core::GraphicsContext::get_screen_resolution() const
 	return _screen_resolution;
 }
 
-ID3D11RenderTargetView* Core::GraphicsContext::get_render_target_view()
+Render::RenderTarget* Core::GraphicsContext::get_render_target_view()
 {
-	return _targetView;
+	return &_targetView;
 }
 
 Render::Camera* Core::GraphicsContext::main_camera()
@@ -134,8 +129,7 @@ void Core::GraphicsContext::set_resolution(Surface new_resolution)
 
 void Core::GraphicsContext::clear(Color3 color)
 {
-	auto float_color = Color4(color).to_float4();
-	context->ClearRenderTargetView(_targetView, (FLOAT*)&float_color);
+	_targetView.clear(color);
 }
 
 void Core::GraphicsContext::present() const
@@ -170,7 +164,9 @@ Render::Texture* Core::GraphicsContext::create_texture(Render::Material* materia
 
 void Core::GraphicsContext::set_texture(Render::Texture* texture)
 {
-	texture->bind();
+	_texture = texture;
+	_texture_camera = new Render::Camera(this);
+	
 }
 
 Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd,Surface size)

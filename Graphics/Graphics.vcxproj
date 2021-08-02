@@ -166,6 +166,7 @@
     <ClInclude Include="Render\Engine\BlendEngine.h" />
     <ClInclude Include="Render\Engine\Camera.h" />
     <ClInclude Include="Render\Engine\MaskEngine.h" />
+    <ClInclude Include="Render\Engine\RenderTarget.h" />
     <ClInclude Include="Render\Engine\SpriteEngine.h" />
     <ClInclude Include="Render\Events\RenderEvent.h" />
     <ClInclude Include="Render\I3DObject\Cube\Cube.h" />
@@ -195,6 +196,7 @@
     <ClCompile Include="Render\Engine\BlendEngine.cpp" />
     <ClCompile Include="Render\Engine\Camera.cpp" />
     <ClCompile Include="Render\Engine\MaskEngine.cpp" />
+    <ClCompile Include="Render\Engine\RenderTarget.cpp" />
     <ClCompile Include="Render\Engine\SpriteEngine.cpp" />
     <ClCompile Include="Render\Events\RenderEvent.cpp" />
     <ClCompile Include="Render\I3DObject\Cube\Cube.cpp" />

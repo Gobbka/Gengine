@@ -4,6 +4,7 @@
 #include "BufferAllocator.h"
 #include "Canvas/CanvasLayer.h"
 #include "Graphics/Material/Material.h"
+#include "Render/Engine/RenderTarget.h"
 #include "Render/Engine/SpriteEngine.h"
 #include "Render/Model/Model.h"
 
@@ -13,6 +14,7 @@
 //
 
 namespace Render {
+	class RenderTarget;
 	class Texture;
 	class SamplerState;
 	class VertexShader;
@@ -37,7 +39,7 @@ namespace Core
 		Surface _screen_resolution;
 		
 		IDXGISwapChain* _swap;
-		ID3D11RenderTargetView* _targetView;
+		Render::RenderTarget _targetView;
 
 		Render::SamplerState* _samplerState;
 		
@@ -53,7 +55,11 @@ namespace Core
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 		
 		Render::Camera* _main_camera;
+		Render::Camera* _texture_camera;
 		Render::SpriteEngine* _spriteEngine;
+
+		Render::Texture* _texture;
+		
 		WorldSpace _worldSpace;
 	public:
 		Render::IBufferAllocator* buffer_allocator() const;
@@ -62,7 +68,7 @@ namespace Core
 		Render::SpriteEngine* get_sprite_engine();
 		
 		Surface get_screen_resolution() const;
-		ID3D11RenderTargetView* get_render_target_view();
+		Render::RenderTarget* get_render_target_view();
 
 		Render::Camera* main_camera();
 

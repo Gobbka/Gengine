@@ -134,7 +134,5 @@ void Render::MaskEngine::clear_buffer()
 
 void Render::MaskEngine::bind()
 {
-	
-	auto* nigger = _engine->get_render_target_view();
-	_engine->context->OMSetRenderTargets(1, &nigger, _view);
+	_engine->get_render_target_view()->bind(_view);
 }

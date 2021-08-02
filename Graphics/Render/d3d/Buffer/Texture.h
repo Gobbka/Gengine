@@ -13,6 +13,8 @@ namespace Render {
 		ID3D11Texture2D* _texture;
 		ID3D11ShaderResourceView* _resource;
 	public:
+		ID3D11Texture2D* texture();
+		
 		Texture(Core::GraphicsContext* engine, Material material);
 
 		void bind() override;

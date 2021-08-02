@@ -1,14 +1,11 @@
 #include "Camera.h"
 
-#include <iostream>
-
 #include "BlendEngine.h"
 #include "MaskEngine.h"
-
-#include "../d3d/Buffer/VertexBuffer.h"
-#include "../I3DObject/Cube/Cube.h"
 #include "Types/Types.h"
+
 #include <DirectXMath.h>
+#include <iostream>
 
 const static DirectX::XMVECTOR DEFAULT_FORWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
 const static DirectX::XMVECTOR DEFAULT_UP_VECTOR = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
@@ -140,7 +137,7 @@ ID3D11Device* Render::Camera::device() const
 	return _context->device;
 }
 
-ID3D11RenderTargetView* Render::Camera::get_target_view() const
+Render::RenderTarget* Render::Camera::get_target_view() const
 {
 	return _context->get_render_target_view();
 }

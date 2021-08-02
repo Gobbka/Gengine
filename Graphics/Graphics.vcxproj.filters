@@ -105,6 +105,9 @@
     <ClInclude Include="Render\d3d\Buffer\D3D11BufferAllocator.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Render\Engine\RenderTarget.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp">
@@ -183,6 +186,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Render\d3d\Buffer\D3D11BufferAllocator.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Engine\RenderTarget.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

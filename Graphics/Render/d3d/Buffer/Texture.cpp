@@ -2,6 +2,11 @@
 #include "../../Engine/Camera.h"
 #include "../../../Graphics/Material/Material.h"
 
+ID3D11Texture2D* Render::Texture::texture()
+{
+	return _texture;
+}
+
 Render::Texture::Texture(Core::GraphicsContext* engine,Material material)
 	: Bindable(engine)
 {

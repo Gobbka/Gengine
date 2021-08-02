@@ -23,7 +23,7 @@ namespace Render
 		__declspec(align(16))
 		struct
 		{
-			DirectX::XMMATRIX _viewMatrix;
+			DirectX::XMMATRIX _MVPMatrix;
 		} _matrix_buffer_struct;
 
 		__declspec(align(16))

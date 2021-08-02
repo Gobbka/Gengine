@@ -66,8 +66,9 @@ void Render::DrawEvent2D::draw_object(Canvas::I2DCanvasObject* object)
 	object->draw(this);
 }
 
-Render::DrawEvent3D::DrawEvent3D(Core::GraphicsContext* context,Camera*camera)
-	: DrawEvent(camera)
+Render::DrawEvent3D::DrawEvent3D(Core::GraphicsContext* context,Camera*camera,DirectX::XMMATRIX vpMatrix)
+	: DrawEvent(camera),
+	VPMatrix(vpMatrix)
 {
 	_context = context;
 }

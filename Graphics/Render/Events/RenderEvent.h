@@ -1,5 +1,6 @@
 #pragma once
 #include <d3d11.h>
+#include <DirectXMath.h>
 
 namespace Core {
 	class GraphicsContext;
@@ -54,7 +55,9 @@ namespace Render {
 	{
 		Core::GraphicsContext* _context;
 	public:
-		DrawEvent3D(Core::GraphicsContext* context,Camera*camera);
+		DirectX::XMMATRIX VPMatrix;
+		
+		DrawEvent3D(Core::GraphicsContext* context,Camera*camera,DirectX::XMMATRIX VPMatrix);
 
 		void draw(UINT count,UINT start_location = 0);
 		void draw_indexed(UINT count,UINT start_location = 0);

@@ -25,9 +25,9 @@ void Render::Camera::update_position()
 
 void Render::Camera::draw_object(Model* object, DrawEvent3D event3d)
 {
-	auto worldMatrix = object->transform.get_world_matrix();
+	auto modelMatrix = object->transform.get_world_matrix();
 	_matrix_buffer_struct = { DirectX::XMMatrixTranspose(
-		worldMatrix * _viewMatrix * _projectionMatrix
+		modelMatrix * event3d.VPMatrix
 	) };
 	matrix_buffer->update();
 	object->draw(event3d);
@@ -201,7 +201,7 @@ void Render::Camera::present()
 	control_buffer->update();
 
 	// render all world objects
-	DrawEvent3D event3d(graphics_context(),this);
+	DrawEvent3D event3d(graphics_context(),this, _viewMatrix * _projectionMatrix);
 	
 	auto objects = _context->worldspace()->objects;
 	for(auto*object : objects)

@@ -7,7 +7,7 @@ struct Surface;
 namespace Render {
 	class Material;
 
-	class Texture : Bindable
+	class __declspec(dllexport) Texture : Bindable
 	{
 	public:
 		ID3D11Texture2D* _texture;
@@ -16,8 +16,9 @@ namespace Render {
 		UINT height;
 	public:
 		ID3D11Texture2D* texture();
-		
-		Texture(Core::GraphicsContext* engine, Material material);
+
+		Texture(Core::GraphicsContext* context, Surface resolution, UINT bind_flags = D3D11_BIND_SHADER_RESOURCE,DXGI_FORMAT format =DXGI_FORMAT_R8G8B8A8_UNORM);
+		Texture(Core::GraphicsContext* context, Material material);
 		Texture(Core::GraphicsContext* context, ID3D11Texture2D* texture);
 
 		void bind() override;

@@ -97,7 +97,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_assets_panel_wrapper->add_element(_assets_panel);
 	
 	_folder_texture = get_graphics_context()->create_texture( load_png(L"assets\\folder.png"));
-	_file_texture = get_graphics_context()->create_texture( load_png(L"assets\\file.png"));
+	_file_texture = new Render::Texture(get_graphics_context(), Surface(1400, 780), D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE);// get_graphics_context()->create_texture(load_png(L"assets\\file.png"));
 
 	get_graphics_context()->set_texture(_file_texture);
 	

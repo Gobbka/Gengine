@@ -7,6 +7,34 @@ ID3D11Texture2D* Render::Texture::texture()
 	return _texture;
 }
 
+Render::Texture::Texture(Core::GraphicsContext* context, Surface resolution, UINT bind_flags, DXGI_FORMAT format)
+	: Bindable(context)
+{
+	D3D11_TEXTURE2D_DESC texture_desc;
+	texture_desc.BindFlags = bind_flags;
+	texture_desc.Width = width = resolution.width;
+	texture_desc.Height = height = resolution.height;
+	texture_desc.MipLevels = 1;
+	texture_desc.ArraySize = 1;
+	texture_desc.Format = format;
+	texture_desc.SampleDesc = { 1,0 };
+	texture_desc.CPUAccessFlags = 0;
+	texture_desc.MiscFlags = 0;
+	texture_desc.Usage = D3D11_USAGE_DEFAULT;
+
+	D3D11_SHADER_RESOURCE_VIEW_DESC rvDesc;
+	rvDesc.Format = DXGI_FORMAT_UNKNOWN;
+	rvDesc.Texture2D.MipLevels = texture_desc.MipLevels;
+	rvDesc.Texture2D.MostDetailedMip = texture_desc.MipLevels - 1;
+	rvDesc.ViewDimension = D3D_SRV_DIMENSION_TEXTURE2D;
+
+	D3D11_SUBRESOURCE_DATA sb{ new char[resolution.width * resolution.height * 4],resolution.width * 4,0 };
+
+	assert(SUCCEEDED(_engine->device->CreateTexture2D(&texture_desc, &sb, &_texture)));
+
+	assert(SUCCEEDED(_engine->device->CreateShaderResourceView(_texture, &rvDesc, &_resource)));
+}
+
 Render::Texture::Texture(Core::GraphicsContext* engine,Material material)
 	: Bindable(engine)
 {

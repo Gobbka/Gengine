@@ -79,7 +79,7 @@ namespace Core
 		
 		void clear(Color3 color);
 		
-		void present() const;
+		void present();
 
 		void begin_2d();
 		void begin_3d();

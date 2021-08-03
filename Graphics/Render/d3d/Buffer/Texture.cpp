@@ -45,14 +45,14 @@ Render::Texture::Texture(Core::GraphicsContext* engine,Material material)
 	texture_desc.Height = height = material.height();
 	texture_desc.MipLevels = 1;
 	texture_desc.ArraySize = 1;
-	texture_desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	texture_desc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
 	texture_desc.SampleDesc = { 1,0 };
 	texture_desc.CPUAccessFlags = 0;
 	texture_desc.MiscFlags = 0;
 	texture_desc.Usage = D3D11_USAGE_DEFAULT;
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC rvDesc;
-	rvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	rvDesc.Format = DXGI_FORMAT_UNKNOWN;
 	rvDesc.Texture2D.MipLevels = texture_desc.MipLevels;
 	rvDesc.Texture2D.MostDetailedMip = texture_desc.MipLevels - 1;
 	rvDesc.ViewDimension = D3D_SRV_DIMENSION_TEXTURE2D;
@@ -79,6 +79,11 @@ void Render::Texture::bind()
 	_engine->context->PSSetShaderResources(0, 1, &_resource);
 }
 
+ID3D11Texture2D* Render::Texture::get_texture()
+{
+	return _texture;
+}
+
 char* Render::Texture::get_data(size_t* lpsize)
 {
 	D3D11_MAPPED_SUBRESOURCE mp;
@@ -93,4 +98,9 @@ char* Render::Texture::get_data(size_t* lpsize)
 void Render::Texture::copy_to(Texture* target)
 {
 	_engine->context->CopyResource(target->_texture, _texture);
+}
+
+void Render::Texture::copy_to(ID3D11Resource* target)
+{
+	_engine->context->CopyResource(target, _texture);
 }

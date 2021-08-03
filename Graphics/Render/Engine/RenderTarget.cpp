@@ -10,7 +10,7 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, IDXGISwapChai
 	swap->GetBuffer(0, __uuidof(ID3D11Resource), (void**)&back_buffer);
 
 	context->device->CreateRenderTargetView(back_buffer, nullptr, &_targetView);
-
+	
 	back_buffer->Release();
 }
 
@@ -18,6 +18,13 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Texture* text
 	: _context(context)
 {
 	assert(SUCCEEDED(context->device->CreateRenderTargetView(texture->texture(), nullptr, &_targetView)));
+}
+
+ID3D11Resource* Render::RenderTarget::get_resource()
+{
+	ID3D11Resource* resource;
+	_targetView->GetResource(&resource);
+	return resource;
 }
 
 void Render::RenderTarget::bind(ID3D11DepthStencilView* stencil) const

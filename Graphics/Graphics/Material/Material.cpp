@@ -5,11 +5,24 @@
 #include "../../../ResourceManager/Drivers/ImageDriver.h"
 #include "Types/Types.h"
 
-Render::Material::Material(BYTE* pSysMem, Surface resolution)
+Render::Material::Material(BYTE* pSysMem, Surface resolution,bool alpha)
 	: _resolution(resolution)
 {
 	_pSysMem = (BYTE*)malloc(resolution.width * resolution.height * 4);// pSysMem;
-	memcpy(_pSysMem, pSysMem, resolution.width * resolution.height * 4);
+	if(alpha || true)
+		memcpy(_pSysMem, pSysMem, resolution.width * resolution.height * 4);
+	else
+	{
+		for(int i = 0;i < resolution.width * resolution.height;i++)
+		{
+			auto dst = (Color4Byte*)_pSysMem;
+			auto src = (Color3Byte*)pSysMem;
+
+			auto pixel = src[i];
+			
+			dst[i] = Color4Byte{ pixel.r,pixel.g,pixel.b,(char)0xff };
+		}
+	}
 }
 
 Render::Material::~Material()

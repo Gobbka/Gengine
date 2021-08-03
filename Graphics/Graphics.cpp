@@ -132,7 +132,7 @@ void Core::GraphicsContext::clear(Color3 color)
 	_targetView.clear(color);
 }
 
-void Core::GraphicsContext::present() const
+void Core::GraphicsContext::present()
 {
 	context->RSSetViewports(1, &_viewport);
 	
@@ -140,9 +140,17 @@ void Core::GraphicsContext::present() const
 
 	if (_texture != nullptr)
 	{
-		_textureTarget->clear(Color3(0.2f,0.2f,0.2f));
-		_main_camera->render({false,true,true,_textureTarget});
-		_buffer_texture->copy_to(_texture);
+		D3D11_TEXTURE2D_DESC viewDesc;
+		D3D11_TEXTURE2D_DESC textureDesc;
+
+		((ID3D11Texture2D*)_targetView.get_resource())->GetDesc(&viewDesc);
+		_texture->get_texture()->GetDesc(&textureDesc);
+		
+		_texture->copy_to(_targetView.get_resource());
+		//_textureTarget->clear(Color3(0.2f,0.2f,0.2f));
+		//_main_camera->render({false,true,true,_textureTarget});
+		//_buffer_texture->copy_to(_texture);
+
 	}
 	//
 	_main_camera->render({true,true,true,(Render::RenderTarget*)&_targetView});
@@ -173,23 +181,23 @@ void Core::GraphicsContext::set_texture(Render::Texture* texture)
 {
 	_texture = texture;
 
-	D3D11_TEXTURE2D_DESC texture_desc;
-	texture_desc.BindFlags = D3D11_BIND_RENDER_TARGET;
-	texture_desc.Width = texture->width;
-	texture_desc.Height = texture->height;
-	texture_desc.MipLevels = 1;
-	texture_desc.ArraySize = 1;
-	texture_desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	texture_desc.SampleDesc = { 1,0 };
-	texture_desc.CPUAccessFlags = 0;
-	texture_desc.MiscFlags = 0;
-	texture_desc.Usage = D3D11_USAGE_DEFAULT;
-	
-	ID3D11Texture2D* render_texture;
-	device->CreateTexture2D(&texture_desc, nullptr, &render_texture);
-	_buffer_texture = new Render::Texture(this, render_texture);
-	
-	_textureTarget = new Render::RenderTarget(this,_buffer_texture);
+	//D3D11_TEXTURE2D_DESC texture_desc;
+	//texture_desc.BindFlags = D3D11_BIND_RENDER_TARGET;
+	//texture_desc.Width = texture->width;
+	//texture_desc.Height = texture->height;
+	//texture_desc.MipLevels = 1;
+	//texture_desc.ArraySize = 1;
+	//texture_desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	//texture_desc.SampleDesc = { 1,0 };
+	//texture_desc.CPUAccessFlags = 0;
+	//texture_desc.MiscFlags = 0;
+	//texture_desc.Usage = D3D11_USAGE_DEFAULT;
+	//
+	//ID3D11Texture2D* render_texture;
+	//device->CreateTexture2D(&texture_desc, nullptr, &render_texture);
+	//_buffer_texture = new Render::Texture(this, render_texture);
+	//
+	//_textureTarget = new Render::RenderTarget(this,_buffer_texture);
 }
 
 Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd,Surface size)

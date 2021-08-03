@@ -23,7 +23,11 @@ namespace Render {
 
 		void bind() override;
 
+		ID3D11Texture2D* get_texture();
+		
 		char* get_data(size_t* lpsize=nullptr);
+		
 		void copy_to(Texture* target);
+		void copy_to(ID3D11Resource* target);
 	};
 }

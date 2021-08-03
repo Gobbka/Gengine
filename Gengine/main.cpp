@@ -65,9 +65,13 @@ int WINAPI wWinMain(
     };
 
     auto* material = load_png(L"assets\\mine4ok.png");
+    auto* negr = load_png(L"assets\\workspace_background.png");
+
     auto* texture = form->get_graphics_context()->create_texture(material);
 
-    auto cube = Render::Model();//Render::Cube(Position3::null(), form->get_graphics_context());
+    form->get_graphics_context()->set_texture(form->get_graphics_context()->create_texture(negr));
+
+    auto cube = Render::Model();
     auto cube_mesh = Render::Cube(Position3::null(), form->get_graphics_context());
     auto nigga_mesh = Render::Parallelepiped(Position3(15,15,0), form->get_graphics_context(),Vector3{9,3,9});
     cube_mesh.set_texture(texture);

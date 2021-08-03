@@ -21,7 +21,7 @@ namespace Render
 		auto width() { return _resolution.width; }
 		auto height() { return _resolution.height; }
 		
-		Material(BYTE* pSysMem, Surface resolution);
+		Material(BYTE* pSysMem, Surface resolution,bool alpha = true);
 		~Material();
 
 		void swap_channels(RGBChannel first, RGBChannel second) const;

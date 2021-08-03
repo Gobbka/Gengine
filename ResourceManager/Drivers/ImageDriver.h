@@ -24,3 +24,8 @@ struct Color4Byte
 {
 	char r, g, b, a;
 };
+
+struct Color3Byte
+{
+	char r, g, b;
+};

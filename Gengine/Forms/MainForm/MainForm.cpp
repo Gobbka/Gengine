@@ -68,9 +68,12 @@ Render::Material* load_png(const wchar_t*path)
 	auto bitmap = FreeImage_LoadFromMemory(FIF_PNG, (FIMEMORY*)fmemory);
 	auto* nigger = FreeImage_GetBits(bitmap);
 
-	auto* material = new Render::Material(nigger, Surface((float)FreeImage_GetWidth(bitmap), (float)FreeImage_GetHeight(bitmap)));
+	auto gabka = FreeImage_GetColorType(bitmap);
+
+	auto* material = 
+		new Render::Material(nigger, Surface((float)FreeImage_GetWidth(bitmap), (float)FreeImage_GetHeight(bitmap)));
 	// we need to swap it cuz driver returns BGR but we need RGB
-	material->swap_channels(Render::Material::RGBChannel::red, Render::Material::RGBChannel::blue);
+	//material->swap_channels(Render::Material::RGBChannel::red, Render::Material::RGBChannel::blue);
 
 	FreeImage_Unload(bitmap);
 	FreeImage_CloseMemory(fmemory);
@@ -97,9 +100,9 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_assets_panel_wrapper->add_element(_assets_panel);
 	
 	_folder_texture = get_graphics_context()->create_texture( load_png(L"assets\\folder.png"));
-	_file_texture = new Render::Texture(get_graphics_context(), Surface(1400, 780), D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE);// get_graphics_context()->create_texture(load_png(L"assets\\file.png"));
+	_file_texture = get_graphics_context()->create_texture(load_png(L"assets\\file.png"));
 
-	get_graphics_context()->set_texture(_file_texture);
+	//get_graphics_context()->set_texture(negr);
 	
 	uicanvas
 		->add_element(_topbar_panel)

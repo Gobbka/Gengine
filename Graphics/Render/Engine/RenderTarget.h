@@ -20,6 +20,8 @@ namespace Render {
 		RenderTarget(Core::GraphicsContext* context, IDXGISwapChain* swap);
 		RenderTarget(Core::GraphicsContext* context, Texture* texture);
 
+		ID3D11Resource* get_resource();
+
 		void bind(ID3D11DepthStencilView* stencil=nullptr) const;
 		void clear(Color3 color);
 	};

@@ -17,7 +17,7 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, IDXGISwapChai
 Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Texture* texture)
 	: _context(context)
 {
-	context->device->CreateRenderTargetView(texture->texture(), nullptr, &_targetView);
+	assert(SUCCEEDED(context->device->CreateRenderTargetView(texture->texture(), nullptr, &_targetView)));
 }
 
 void Render::RenderTarget::bind(ID3D11DepthStencilView* stencil) const

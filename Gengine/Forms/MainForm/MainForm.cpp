@@ -98,6 +98,8 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	
 	_folder_texture = get_graphics_context()->create_texture( load_png(L"assets\\folder.png"));
 	_file_texture = get_graphics_context()->create_texture( load_png(L"assets\\file.png"));
+
+	get_graphics_context()->set_texture(_file_texture);
 	
 	uicanvas
 		->add_element(_topbar_panel)

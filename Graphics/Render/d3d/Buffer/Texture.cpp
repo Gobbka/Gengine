@@ -13,15 +13,15 @@ Render::Texture::Texture(Core::GraphicsContext* engine,Material material)
 	
 	D3D11_TEXTURE2D_DESC texture_desc;
 	texture_desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
-	texture_desc.Width = material.width();
-	texture_desc.Height = material.height();
+	texture_desc.Width = width = material.width();
+	texture_desc.Height = height = material.height();
 	texture_desc.MipLevels = 1;
 	texture_desc.ArraySize = 1;
 	texture_desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	texture_desc.SampleDesc = { 1,0 };
-	texture_desc.CPUAccessFlags = 0;
+	texture_desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	texture_desc.MiscFlags = 0;
-	texture_desc.Usage = D3D11_USAGE_DEFAULT;
+	texture_desc.Usage = D3D11_USAGE_DYNAMIC;
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC rvDesc;
 	rvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -34,6 +34,16 @@ Render::Texture::Texture(Core::GraphicsContext* engine,Material material)
 	assert(SUCCEEDED(engine->device->CreateTexture2D(&texture_desc, &sb, &_texture)));
 
 	assert(SUCCEEDED(engine->device->CreateShaderResourceView(_texture, &rvDesc, &_resource)));
+}
+
+Render::Texture::Texture(Core::GraphicsContext* context, ID3D11Texture2D* texture)
+	: Bindable(context)
+{
+	_texture = texture;
+	D3D11_TEXTURE2D_DESC desc;
+	_texture->GetDesc(&desc);
+	width = desc.Width;
+	height = desc.Height;
 }
 
 void Render::Texture::bind()
@@ -50,4 +60,9 @@ char* Render::Texture::get_data(size_t* lpsize)
 	_engine->context->Unmap(_texture, 0);
 
 	return nullptr;
+}
+
+void Render::Texture::copy_to(Texture* target)
+{
+	_engine->context->CopyResource(target->_texture, _texture);
 }

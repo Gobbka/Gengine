@@ -20,6 +20,7 @@ namespace Render
 		bool render_2d = true;
 		bool render_3d = true;
 		bool shadows   = true;
+		RenderTarget* renderTarget = nullptr;
 	};
 
 	class __declspec(dllexport) Camera
@@ -71,6 +72,8 @@ namespace Render
 		
 		DirectX::XMMATRIX _projectionMatrix;
 		DirectX::XMMATRIX _viewMatrix;
+
+		RenderTarget* _renderTarget;
 		
 	public:
 		void set_position(Position3 pos);
@@ -99,7 +102,7 @@ namespace Render
 		Surface get_screen_resolution() const;
 	public:
 		
-		Camera(Core::GraphicsContext* context);
+		Camera(Core::GraphicsContext* context,RenderTarget*target);
 
 		void render(RenderOptions render_options=RenderOptions());
 	};

@@ -19,9 +19,12 @@ namespace Render {
 		MaskEngine(Core::GraphicsContext* engine);
 
 		void set_state(ID3D11DepthStencilState* state,UINT reference = 0);
+		void set_state_force(ID3D11DepthStencilState* state,UINT reference = 0);
 		void clear_buffer();
 		
 		void bind() override;
+
+		auto get_view() { return _view; }
 
 		ID3D11DepthStencilState* get_drawState() CONST
 		{

@@ -42,7 +42,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 
 	_bufferAllocator = new Render::D3D11BufferAllocator(this);
 
-	_main_camera = new Render::Camera(this);
+	_main_camera = new Render::Camera(this,&_targetView);
 
 	_samplerState = new Render::SamplerState(this);
 	
@@ -140,14 +140,12 @@ void Core::GraphicsContext::present() const
 
 	if (_texture != nullptr)
 	{
-		_textureTarget->bind();
 		_textureTarget->clear(Color3(0.2f,0.2f,0.2f));
-		_main_camera->render({false,true,true});
+		_main_camera->render({false,true,true,_textureTarget});
 		_buffer_texture->copy_to(_texture);
 	}
-	
-	_targetView.bind();
-	_main_camera->render();
+	//
+	_main_camera->render({true,true,true,(Render::RenderTarget*)&_targetView});
 
 	_swap->Present(1u, 0u);
 }

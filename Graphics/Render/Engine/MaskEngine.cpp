@@ -123,6 +123,11 @@ void Render::MaskEngine::set_state(ID3D11DepthStencilState* state, UINT referenc
 {
 	if (_currentState == state)
 		return;
+	set_state_force(state, reference);
+}
+
+void Render::MaskEngine::set_state_force(ID3D11DepthStencilState* state, UINT reference)
+{
 	_currentState = state;
 	_engine->context->OMSetDepthStencilState(state, reference);
 }

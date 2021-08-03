@@ -157,12 +157,13 @@ Surface Render::Camera::get_screen_resolution() const
 	return _context->get_screen_resolution();
 }
 
-Render::Camera::Camera(Core::GraphicsContext* context)
+Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 	:
 	_transform(Position3(-4.f, 0, 0))
 	//_rotation(Vector3(0, 0, 0))
 {
 	_context = context;
+	_renderTarget = target;
 	_blendEngine = new BlendEngine(_context);
 	_maskEngine  = new MaskEngine(_context);
 	_maskEngine->bind();
@@ -184,9 +185,14 @@ Render::Camera::Camera(Core::GraphicsContext* context)
 
 void Render::Camera::render(RenderOptions render_options)
 {
+	if(render_options.renderTarget != nullptr)
+		render_options.renderTarget->bind(_maskEngine->get_view());
+	else
+		_renderTarget->bind(_maskEngine->get_view());
+	
 	_blendEngine->bind();
 	_maskEngine->clear_buffer();
-	_maskEngine->set_state(_maskEngine->get_disabledState());
+	_maskEngine->set_state_force(_maskEngine->get_disabledState());
 
 	matrix_buffer->bind();
 	control_buffer->bind();

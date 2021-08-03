@@ -183,7 +183,7 @@ void Core::GraphicsContext::set_texture(Render::Texture* texture)
 	texture_desc.ArraySize = 1;
 	texture_desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	texture_desc.SampleDesc = { 1,0 };
-	texture_desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+	texture_desc.CPUAccessFlags = 0;
 	texture_desc.MiscFlags = 0;
 	texture_desc.Usage = D3D11_USAGE_DEFAULT;
 	

@@ -19,9 +19,9 @@ Render::Texture::Texture(Core::GraphicsContext* engine,Material material)
 	texture_desc.ArraySize = 1;
 	texture_desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	texture_desc.SampleDesc = { 1,0 };
-	texture_desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	texture_desc.CPUAccessFlags = 0;
 	texture_desc.MiscFlags = 0;
-	texture_desc.Usage = D3D11_USAGE_DYNAMIC;
+	texture_desc.Usage = D3D11_USAGE_DEFAULT;
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC rvDesc;
 	rvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;

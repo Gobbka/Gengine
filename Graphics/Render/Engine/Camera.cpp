@@ -182,7 +182,7 @@ Render::Camera::Camera(Core::GraphicsContext* context)
 	update_position();
 }
 
-void Render::Camera::present()
+void Render::Camera::render(RenderOptions render_options)
 {
 	_blendEngine->bind();
 	_maskEngine->clear_buffer();
@@ -190,40 +190,46 @@ void Render::Camera::present()
 
 	matrix_buffer->bind();
 	control_buffer->bind();
-	
-	_context->begin_3d();
 
-	_control_buffer_struct.offset = Position2(0, 0);
-	_control_buffer_struct.opacity = 1.f;
-	control_buffer->update();
-
-	// render all world objects
-	DrawEvent3D event3d(graphics_context(),this, _viewMatrix * _projectionMatrix);
-	
-	auto objects = _context->worldspace()->objects;
-	for(auto*object : objects)
+	if(render_options.render_3d)
 	{
-		this->draw_object(object,event3d);
+		_context->begin_3d();
+
+		_control_buffer_struct.offset = Position2(0, 0);
+		_control_buffer_struct.opacity = 1.f;
+		control_buffer->update();
+
+		// render all world objects
+		DrawEvent3D event3d(graphics_context(), this, _viewMatrix * _projectionMatrix);
+
+		auto objects = _context->worldspace()->objects;
+		for (auto* object : objects)
+		{
+			this->draw_object(object, event3d);
+		}
 	}
 	
-	// then render canvas
-	
-	_context->begin_2d();
-	_maskEngine->clear_buffer();
-
-	matrix2d_buffer->bind();
-
-	_control_buffer_struct.offset = Position2(-1, 1);
-	_control_buffer_struct.opacity = 1.f;
-	control_buffer->update();
-
-	DrawEvent2D event(this,nullptr);
-	for(auto*layer : _canvas2DLayers)
+	if(render_options.render_2d)
 	{
-		event.layer = layer;
-		event.set_alpha(1.f);
-		
-		layer->update();
-		layer->render(&event);
+		// then render canvas
+
+		_context->begin_2d();
+		_maskEngine->clear_buffer();
+
+		matrix2d_buffer->bind();
+
+		_control_buffer_struct.offset = Position2(-1, 1);
+		_control_buffer_struct.opacity = 1.f;
+		control_buffer->update();
+
+		DrawEvent2D event(this, nullptr);
+		for (auto* layer : _canvas2DLayers)
+		{
+			event.layer = layer;
+			event.set_alpha(1.f);
+
+			layer->update();
+			layer->render(&event);
+		}
 	}
 }

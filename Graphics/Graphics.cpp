@@ -141,13 +141,13 @@ void Core::GraphicsContext::present() const
 	if (_texture != nullptr)
 	{
 		_textureTarget->bind();
-		_textureTarget->clear(Color3(43,43,43));
-		_main_camera->present();
+		_textureTarget->clear(Color3(0.2f,0.2f,0.2f));
+		_main_camera->render({false,true,true});
 		_buffer_texture->copy_to(_texture);
 	}
 	
 	_targetView.bind();
-	_main_camera->present();
+	_main_camera->render();
 
 	_swap->Present(1u, 0u);
 }

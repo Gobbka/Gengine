@@ -15,6 +15,13 @@ namespace Render
 	class MaskEngine;
 	class BlendEngine;
 
+	struct RenderOptions
+	{
+		bool render_2d = true;
+		bool render_3d = true;
+		bool shadows   = true;
+	};
+
 	class __declspec(dllexport) Camera
 	{
 	private:
@@ -94,6 +101,6 @@ namespace Render
 		
 		Camera(Core::GraphicsContext* context);
 
-		void present();
+		void render(RenderOptions render_options=RenderOptions());
 	};
 }

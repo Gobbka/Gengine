@@ -40,3 +40,14 @@ void Render::Texture::bind()
 {
 	_engine->context->PSSetShaderResources(0, 1, &_resource);
 }
+
+char* Render::Texture::get_data(size_t* lpsize)
+{
+	D3D11_MAPPED_SUBRESOURCE mp;
+	
+	_engine->context->Map(_texture, 0, D3D11_MAP_READ, 0, &mp);
+	
+	_engine->context->Unmap(_texture, 0);
+
+	return nullptr;
+}

@@ -18,5 +18,7 @@ namespace Render {
 		Texture(Core::GraphicsContext* engine, Material material);
 
 		void bind() override;
+
+		char* get_data(size_t* lpsize=nullptr);
 	};
 }

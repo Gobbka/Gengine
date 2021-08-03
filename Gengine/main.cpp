@@ -77,12 +77,8 @@ int WINAPI wWinMain(
 
     auto paral = Render::Parallelepiped(Position3(-15, -7, -15), form->get_graphics_context(), Vector3(30, 1, 30));
 	paral.set_texture(texture);
-
 	
-
     PhysicsModule module;
-
-	
 	
     form->get_graphics_context()->worldspace()->add_object(&cube);
     //form->get_graphics_context()->worldspace()->add_object(&paral);

@@ -20,11 +20,6 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Texture* text
 	context->device->CreateRenderTargetView(texture->texture(), nullptr, &_targetView);
 }
 
-//void Render::RenderTarget::bind()
-//{
-//	_context->context->OMSetRenderTargets(1, &_targetView,nullptr);
-//}
-
 void Render::RenderTarget::bind(ID3D11DepthStencilView* stencil) const
 {
 	_context->context->OMSetRenderTargets(1, &_targetView, stencil);

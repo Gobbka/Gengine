@@ -36,10 +36,10 @@ void Canvas::Rectangle::apply_color()
 
 	if(_background_texture != nullptr)
 	{		
-		ptr[2].color = { 0,0,0 };
-		ptr[3].color = { 1,0,0 };
-		ptr[0].color = { 0,1,0 };
-		ptr[1].color = { 1,1,0 };
+		ptr[0].color = { 0,0,0 };
+		ptr[1].color = { 1,0,0 };
+		ptr[2].color = { 0,1,0 };
+		ptr[3].color = { 1,1,0 };
 	}else
 	{
 		for (INDEX i = 0; i < size(); i++)

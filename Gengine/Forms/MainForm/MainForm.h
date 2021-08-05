@@ -23,6 +23,7 @@ namespace Forms
 		UI::Panel* _worldspace_panel;
 		UI::Panel* _assets_panel_wrapper;
 		UI::Panel* _assets_panel;
+		UI::Panel* _render_panel;
 
 		Render::Texture* _folder_texture;
 		Render::Texture* _file_texture;

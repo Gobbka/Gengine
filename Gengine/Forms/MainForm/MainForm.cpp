@@ -87,12 +87,14 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	auto* uicanvas = UI::UIManager::instance()->create_layer(get_graphics_context()->main_camera());
 
 	_topbar_panel = new UI::Panel({ 0,0 }, { (float)width,30 }, { RGB_TO_FLOAT(26,26,26),1.f });
-	_worldspace_panel = new UI::Panel({ 0,-30 }, { 250,(float)height - 30.f }, { RGB_TO_FLOAT(20,20,20),1.f });
+	_worldspace_panel = new UI::Panel({ 0,-30 }, { 840,468 }, { RGB_TO_FLOAT(20,20,20),1.f });
 	
 	_assets_panel_wrapper = new UI::Panel({ 250, -1 * (float)(height) + 250.f }, { (float)width-250,250 }, { RGB_TO_FLOAT(26,26,26),1.f });
 	_assets_panel_wrapper->add_element(
 		new UI::Panel({ 0,0 }, { (float)width - 250,30 }, { RGB_TO_FLOAT(34,34,34),1.f })
 	);
+
+	_render_panel = new UI::Panel({ 250, -30 }, { (float)width - 250,(float)height - 250 - 30 }, { RGB_TO_FLOAT(255,0,0),1.f });
 
 	_assets_panel = new UI::Panel({ 0,0}, { (float)width - 250,250-30 }, { RGB_TO_FLOAT(255,26,26),0.f });
 	_assets_panel->styles.display = UI::ElementStyles::DisplayType::flex;
@@ -101,20 +103,20 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	
 	_folder_texture = get_graphics_context()->create_texture( load_png(L"assets\\folder.png"));
 	_file_texture = get_graphics_context()->create_texture(load_png(L"assets\\file.png"));
+	auto* _matiko_texture = get_graphics_context()->create_texture(load_png(L"assets\\matiko.png"));
 
 	auto worldTexture = Render::RenderTarget::create_texture(get_graphics_context());
 	_worldCamera = get_graphics_context()->create_camera(worldTexture);
-	//get_graphics_context()->set_texture(negr);
 
-	//auto* output_texture = get_graphics_context()->main_camera()->get_output_texture();
+	_render_panel->set_texture(worldTexture->get_texture());
 
-	// причина по которой в текстуру ничего не рисуется в том, что передается nullptr как ресурс шейдера
-	_worldspace_panel->set_texture(worldTexture->get_texture());
 	_worldspace_panel->unique_id = 228;
 	
 	uicanvas
 		->add_element(_topbar_panel)
 		->add_element(_worldspace_panel)
+		->add_element(_render_panel)
+
 		->add_element(_assets_panel_wrapper)
 	;
 	
@@ -157,48 +159,49 @@ void Forms::MainForm::draw_frame()
 void Forms::MainForm::update()
 {
 	static float scale = 1.f;
+	auto* camera = _worldCamera;
 	
 	if (Keyboard::pressed(VirtualKey::KEY_W)) // W
 	{
-		get_graphics_context()->main_camera()->adjust_position_relative(Position3(0.05f, 0, 0));
+		camera->adjust_position_relative(Position3(0.05f, 0, 0));
 	}
 	if (Keyboard::pressed(VirtualKey::KEY_S))
 	{
-		get_graphics_context()->main_camera()->adjust_position_relative(Position3(-0.05f, 0, 0));
+		camera->adjust_position_relative(Position3(-0.05f, 0, 0));
 	}
 	if (Keyboard::pressed(VirtualKey::KEY_D))
 	{
-		get_graphics_context()->main_camera()->adjust_position_relative(Position3(0, 0, 0.05f));
+		camera->adjust_position_relative(Position3(0, 0, 0.05f));
 	}
 	if (Keyboard::pressed(VirtualKey::KEY_A))
 	{
-		get_graphics_context()->main_camera()->adjust_position_relative(Position3(0, 0, -0.05f));
+		camera->adjust_position_relative(Position3(0, 0, -0.05f));
 	}
 	if (Keyboard::pressed(VirtualKey::SPACE))
 	{
-		get_graphics_context()->main_camera()->set_scale(scale);
+		camera->set_scale(scale);
 		scale += 0.01f;
 	}
 	if (Keyboard::pressed(VirtualKey::CONTROL))
 	{
-		get_graphics_context()->main_camera()->set_scale(scale);
+		camera->set_scale(scale);
 		scale -= 0.01f;
 	}
 
 	if (Keyboard::pressed(VirtualKey::LEFT))
 	{
-		get_graphics_context()->main_camera()->adjust_rotation((Vector3(0, -0.04f, 0)));
+		camera->adjust_rotation((Vector3(0, -0.04f, 0)));
 	}
 	if (Keyboard::pressed(VirtualKey::RIGHT))
 	{
-		get_graphics_context()->main_camera()->adjust_rotation((Vector3(0, 0.04f, 0)));
+		camera->adjust_rotation((Vector3(0, 0.04f, 0)));
 	}
 	if (Keyboard::pressed(VirtualKey::UP))
 	{
-		get_graphics_context()->main_camera()->adjust_rotation((Vector3(-0.04f, 0, 0)));
+		camera->adjust_rotation((Vector3(-0.04f, 0, 0)));
 	}
 	if (Keyboard::pressed(VirtualKey::DOWN))
 	{
-		get_graphics_context()->main_camera()->adjust_rotation((Vector3(0.04f, 0, 0)));
+		camera->adjust_rotation((Vector3(0.04f, 0, 0)));
 	}
 }

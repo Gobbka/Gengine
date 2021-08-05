@@ -2,6 +2,7 @@
 #include "../Form/Form.h"
 
 namespace Render {
+	class Camera;
 	class Texture;
 }
 
@@ -25,12 +26,14 @@ namespace Forms
 
 		Render::Texture* _folder_texture;
 		Render::Texture* _file_texture;
+		Render::Camera* _worldCamera;
 	public:
 		MainForm(HINSTANCE hinst, UINT width, UINT height);
 
 		void scan_assets_directory();
 
 		void handle_resize(Surface rect) override;
+		void draw_frame() override;
 
 		void update() override;
 	};

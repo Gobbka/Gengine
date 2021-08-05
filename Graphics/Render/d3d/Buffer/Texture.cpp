@@ -74,6 +74,23 @@ Render::Texture::Texture(Core::GraphicsContext* context, ID3D11Texture2D* textur
 	height = desc.Height;
 }
 
+Render::Texture::Texture(Core::GraphicsContext* context)
+	: Bindable(context)
+{
+}
+
+void Render::Texture::create_shader_resource()
+{
+	D3D11_TEXTURE2D_DESC texture_desc;
+	_texture->GetDesc(&texture_desc);
+	
+	D3D11_SHADER_RESOURCE_VIEW_DESC rvDesc;
+	rvDesc.Format = DXGI_FORMAT_UNKNOWN;
+	rvDesc.Texture2D.MipLevels = texture_desc.MipLevels;
+	rvDesc.Texture2D.MostDetailedMip = texture_desc.MipLevels - 1;
+	rvDesc.ViewDimension = D3D_SRV_DIMENSION_TEXTURE2D;
+}
+
 void Render::Texture::bind()
 {
 	_engine->context->PSSetShaderResources(0, 1, &_resource);

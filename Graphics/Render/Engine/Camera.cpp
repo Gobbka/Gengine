@@ -7,6 +7,8 @@
 #include <DirectXMath.h>
 #include <iostream>
 
+#include "../d3d/Buffer/Texture.h"
+
 const static DirectX::XMVECTOR DEFAULT_FORWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
 const static DirectX::XMVECTOR DEFAULT_UP_VECTOR = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 const static DirectX::XMVECTOR DEFAULT_BACKWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f);
@@ -52,7 +54,7 @@ DirectX::XMMATRIX Render::Camera::create_proj_matrix()
 {
 	auto forRadians = (_fov / 360.f) * DirectX::XM_2PI;
 
-	auto res = _context->get_screen_resolution();
+	auto res = _resolution;
 	auto aspectRatio = res.width / res.height;
 
 	return DirectX::XMMatrixPerspectiveFovLH(forRadians, aspectRatio, 0.1f, 120.f) * DirectX::XMMatrixScaling(_scale,_scale,1.f);
@@ -82,18 +84,20 @@ void Render::Camera::adjust_rotation(Vector3 rot)
 	_viewMatrix = create_view_matrix();
 }
 
-void Render::Camera::set_resolution(Surface new_resolution)
+void Render::Camera::set_resolution(Surface resolution)
 {
-	std::cout << "NEW RESOLUTION: " << new_resolution.width << " " << new_resolution.height << '\n';
-	//_b0_constant_buffer_struct.width = new_resolution.width;
-	//_b0_constant_buffer_struct.height = new_resolution.height;
-	control_buffer->update();
+	_resolution = resolution;
+	_matrix2d_buffer_struct = { DirectX::XMMatrixScaling(1.f / (resolution.width / 2),1.f / (resolution.height / 2),1.f) };
+	_projectionMatrix = create_proj_matrix();
+	
+	matrix2d_buffer->update();
 }
 
 void Render::Camera::set_alpha(float alpha)
 {
 	if (alpha == _control_buffer_struct.opacity)
 		return;
+	
 	_control_buffer_struct.opacity = alpha;
 	control_buffer->update();
 }
@@ -122,6 +126,11 @@ void Render::Camera::register_canvas_2d(Canvas::Canvas2DLayer* layer)
 	_canvas2DLayers.push_back(layer);
 }
 
+void Render::Camera::set_render_target(RenderTarget* target)
+{
+	_renderTarget = target;
+}
+
 Core::GraphicsContext* Render::Camera::graphics_context()
 {
 	return _context;
@@ -139,7 +148,7 @@ ID3D11Device* Render::Camera::device() const
 
 Render::RenderTarget* Render::Camera::get_target_view() const
 {
-	return _context->get_render_target_view();
+	return _renderTarget;
 }
 
 Render::MaskEngine* Render::Camera::mask_engine() const
@@ -159,24 +168,21 @@ Surface Render::Camera::get_screen_resolution() const
 
 Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 	:
-	_transform(Position3(-4.f, 0, 0))
-	//_rotation(Vector3(0, 0, 0))
+	_transform(Position3(-4.f, 0, 0)),
+	_resolution(0,0)
 {
 	_context = context;
 	_renderTarget = target;
 	_blendEngine = new BlendEngine(_context);
 	_maskEngine  = new MaskEngine(_context);
-	_maskEngine->bind();
 	
-	auto resolution = context->get_screen_resolution();
-	_matrix2d_buffer_struct = { DirectX::XMMatrixScaling(1.f / (resolution.width / 2),1.f / (resolution.height / 2),1.f) };
+	_resolution = context->get_screen_resolution();
+	_matrix2d_buffer_struct = { DirectX::XMMatrixScaling(1.f / (_resolution.width / 2),1.f / (_resolution.height / 2),1.f) };
 	matrix2d_buffer = new ConstantBuffer(_context, &_matrix2d_buffer_struct, sizeof(_matrix2d_buffer_struct), 0);
 
 	matrix_buffer = new ConstantBuffer(_context, &_matrix_buffer_struct, sizeof(_matrix_buffer_struct), 0);
-	matrix_buffer->update();
 
 	control_buffer = new ConstantBuffer(context, &_control_buffer_struct, sizeof(_control_buffer_struct), 1);
-	control_buffer->update();
 
 	_projectionMatrix = create_proj_matrix();
 	

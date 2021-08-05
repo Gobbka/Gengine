@@ -65,9 +65,9 @@ Render::Material* load_png(const wchar_t*path)
 
 	auto* fmemory = FreeImage_OpenMemory((BYTE*)file.data(), file.size());
 
-	auto bitmap = FreeImage_LoadFromMemory(FIF_PNG, (FIMEMORY*)fmemory);
+	auto bitmap = FreeImage_LoadFromMemory(FIF_PNG, (FIMEMORY*)fmemory, ICO_MAKEALPHA);
 	auto* nigger = FreeImage_GetBits(bitmap);
-
+	
 	auto gabka = FreeImage_GetColorType(bitmap);
 
 	auto* material = 
@@ -102,7 +102,15 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_folder_texture = get_graphics_context()->create_texture( load_png(L"assets\\folder.png"));
 	_file_texture = get_graphics_context()->create_texture(load_png(L"assets\\file.png"));
 
+	auto worldTexture = Render::RenderTarget::create_texture(get_graphics_context());
+	_worldCamera = get_graphics_context()->create_camera(worldTexture);
 	//get_graphics_context()->set_texture(negr);
+
+	//auto* output_texture = get_graphics_context()->main_camera()->get_output_texture();
+
+	// причина по которой в текстуру ничего не рисуется в том, что передается nullptr как ресурс шейдера
+	_worldspace_panel->set_texture(worldTexture->get_texture());
+	_worldspace_panel->unique_id = 228;
 	
 	uicanvas
 		->add_element(_topbar_panel)
@@ -137,6 +145,13 @@ void Forms::MainForm::handle_resize(Surface rect)
 	_worldspace_panel->set_resolution(Surface(250, height - 30));
 	
 	Form::handle_resize(rect);
+}
+
+void Forms::MainForm::draw_frame()
+{
+	_worldCamera->get_target_view()->clear(Color3{ 0,0,0 });
+	_worldCamera->render({false,true,true});
+	Form::draw_frame();
 }
 
 void Forms::MainForm::update()

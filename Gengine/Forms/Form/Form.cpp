@@ -9,6 +9,13 @@ void Core::Form::handle_resize(Surface rect)
     WindowsWindow::handle_resize(rect);
 }
 
+void Core::Form::draw_frame()
+{
+    _graphics->clear(Color3(RGB_TO_FLOAT(background.r, background.g, background.b)));
+
+    _graphics->present();
+}
+
 Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
 	: WindowsWindow(hinst,width,height)
 {
@@ -35,7 +42,6 @@ void Core::Form::drag_move()
 
 void Core::Form::force_draw()
 {
-    _graphics->clear(Color3(RGB_TO_FLOAT(background.r,background.g,background.b)));
-    
-    _graphics->present();
+    _graphics->reset_render_state();
+    draw_frame();
 }

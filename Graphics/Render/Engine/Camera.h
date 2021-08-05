@@ -61,6 +61,9 @@ namespace Render
 		
 		float _fov = 90.f;
 		float _scale = 1.f;
+		Surface _resolution;
+		
+		RenderTarget* _renderTarget;
 
 		std::vector<Canvas::Canvas2DLayer*> _canvas2DLayers;
 	private:
@@ -72,9 +75,6 @@ namespace Render
 		
 		DirectX::XMMATRIX _projectionMatrix;
 		DirectX::XMMATRIX _viewMatrix;
-
-		RenderTarget* _renderTarget;
-		
 	public:
 		void set_position(Position3 pos);
 		void adjust_position(Position3 pos);
@@ -91,6 +91,8 @@ namespace Render
 
 		Canvas::Canvas2DLayer* create_canvas_2d();
 		void register_canvas_2d(Canvas::Canvas2DLayer* layer);
+
+		void set_render_target(RenderTarget* target);
 	public:
 		Core::GraphicsContext* graphics_context();
 		ID3D11DeviceContext* context() const;

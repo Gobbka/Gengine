@@ -3,7 +3,7 @@
 #include "Types/Types.h"
 
 void UI::Panel::draw(Render::DrawEvent2D* event)
-{
+{	
 	if (this->styles.overflow == VisibleState::hidden)
 	{
 		event->mask_draw_begin();

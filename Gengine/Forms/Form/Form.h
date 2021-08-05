@@ -11,6 +11,8 @@ namespace Core
 		GraphicsContext* _graphics;
 	protected:
 		void handle_resize(Surface rect) override;
+
+		virtual void draw_frame();
 	protected:
 		Form(HINSTANCE hinst, UINT width, UINT height);
 		virtual ~Form();
@@ -20,7 +22,7 @@ namespace Core
 		GraphicsContext* get_graphics_context() const;
 
 		void drag_move();
-
+		
 		void force_draw();
 
 		virtual void update() PURE;

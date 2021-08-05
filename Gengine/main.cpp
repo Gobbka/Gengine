@@ -98,7 +98,5 @@ int WINAPI wWinMain(
 
         form->update();
         form->force_draw();
-		
-        Sleep(10);
 	}
 }

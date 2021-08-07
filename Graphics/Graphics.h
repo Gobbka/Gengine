@@ -73,8 +73,6 @@ namespace Core
 
 		Render::Camera* main_camera();
 		Render::Camera* create_camera(Render::RenderTarget*target);
-
-		bool create_buffer(D3D11_BUFFER_DESC* desc, D3D11_SUBRESOURCE_DATA* data, ID3D11Buffer** buffer) const;
 	public:
 		void set_resolution(Surface new_resolution);
 		

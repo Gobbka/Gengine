@@ -29,8 +29,8 @@ Render::VertexBuffer::VertexBuffer(Core::GraphicsContext* engine, Vertex* data, 
 		sizeof(Vertex)
 	};
 	D3D11_SUBRESOURCE_DATA sd{ data,0,0 };
-
-	assert(SUCCEEDED(_engine->create_buffer(&vbuffer, &sd, &_buffer)));
+	
+	assert(SUCCEEDED(_engine->device->CreateBuffer(&vbuffer, &sd, &_buffer)));
 }
 
 Render::VertexBuffer::~VertexBuffer()

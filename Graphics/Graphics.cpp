@@ -121,11 +121,6 @@ Render::Camera* Core::GraphicsContext::create_camera(Render::RenderTarget* targe
 	return new Render::Camera(this,target);
 }
 
-bool Core::GraphicsContext::create_buffer(D3D11_BUFFER_DESC* desc, D3D11_SUBRESOURCE_DATA* data, ID3D11Buffer** buffer) const
-{
-	return SUCCEEDED(device->CreateBuffer(desc, data, buffer));
-}
-
 void Core::GraphicsContext::set_resolution(Surface new_resolution)
 {
 	_screen_resolution = new_resolution;

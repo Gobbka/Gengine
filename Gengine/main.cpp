@@ -64,7 +64,7 @@ int WINAPI wWinMain(
         UI::UIManager::instance()->window_proc(msg, wp, lp);
     };
 
-    auto* material = load_png(L"assets\\cube.png");
+    auto* material = load_png(L"assets\\mine4ok.png");
     auto* negr = load_png(L"assets\\workspace_background.png");
 
     auto* texture = form->get_graphics_context()->create_texture(material);

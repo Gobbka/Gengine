@@ -12,8 +12,6 @@ void Core::Form::handle_resize(Surface rect)
 void Core::Form::draw_frame()
 {
     _graphics->clear(Color3(RGB_TO_FLOAT(background.r, background.g, background.b)));
-
-    _graphics->present();
 }
 
 Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
@@ -42,6 +40,7 @@ void Core::Form::drag_move()
 
 void Core::Form::force_draw()
 {
-    _graphics->reset_render_state();
+    _graphics->new_frame();
     draw_frame();
+    _graphics->present_frame();
 }

@@ -80,8 +80,8 @@ namespace Core
 		
 		void clear(Color3 color);
 
-		void reset_render_state();
-		void present();
+		void new_frame();
+		void present_frame();
 
 		void begin_2d();
 		void begin_3d();

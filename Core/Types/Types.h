@@ -7,9 +7,12 @@
 struct __declspec(dllexport) Color3
 {
 	float r; float g; float b;
-	Color3(float r, float g, float b) : r(r), g(g), b(b) {};
-	Color3(float r, float g, float b, float a) : r(r), g(g), b(b) {};
-	Color3(DirectX::XMFLOAT3 f3) : r(f3.x), g(f3.y), b(f3.z) {};
+	Color3(float r, float g, float b) : r(r), g(g), b(b) {}
+	Color3(float r, float g, float b, float a) : r(r), g(g), b(b) {}
+	Color3(DirectX::XMFLOAT3 f3) : r(f3.x), g(f3.y), b(f3.z) {}
+
+	const static Color3 black() { return Color3(0, 0, 0); }
+	static Color3 from_rgb(float r,float g,float b) { return Color3(r/255.f, g/255.f, b/255.f); }
 
 	DirectX::XMFLOAT3 to_float3();
 };

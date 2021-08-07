@@ -141,12 +141,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Ecs\Entity.h" />
+    <ClInclude Include="Ecs\Ecs.h" />
     <ClInclude Include="Types\Transform.h" />
     <ClInclude Include="Types\Types.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Ecs\Entity.cpp" />
     <ClCompile Include="Types\Transform.cpp" />
     <ClCompile Include="Types\Types.cpp" />
   </ItemGroup>

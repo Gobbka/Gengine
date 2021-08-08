@@ -15,7 +15,7 @@ namespace Render
 	class MaskEngine;
 	class BlendEngine;
 
-	struct RenderOptions
+	struct CameraOptions
 	{
 		bool render_2d = true;
 		bool render_3d = true;
@@ -62,8 +62,9 @@ namespace Render
 		float _fov = 90.f;
 		float _scale = 1.f;
 		Surface _resolution;
-		
-		RenderTarget* _renderTarget;
+
+		CameraOptions _cameraOptions;
+		//RenderTarget* _renderTarget;
 
 		std::vector<Canvas::Canvas2DLayer*> _canvas2DLayers;
 	private:
@@ -94,6 +95,7 @@ namespace Render
 
 		void set_render_target(RenderTarget* target);
 	public:
+		CameraOptions* options();
 		Core::GraphicsContext* graphics_context();
 		ID3D11DeviceContext* context() const;
 		ID3D11Device* device() const;
@@ -106,6 +108,6 @@ namespace Render
 		
 		Camera(Core::GraphicsContext* context,RenderTarget*target);
 
-		void render(RenderOptions render_options=RenderOptions());
+		void render();
 	};
 }

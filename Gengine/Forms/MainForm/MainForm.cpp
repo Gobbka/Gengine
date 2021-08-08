@@ -107,6 +107,9 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 
 	auto worldTexture = Render::RenderTarget::create_texture(get_graphics_context());
 	_worldCamera = get_graphics_context()->create_camera(worldTexture);
+	auto* cam_options = _worldCamera->options();
+	cam_options->render_2d = false;
+	cam_options->render_3d = true;
 
 	_render_panel->set_texture(worldTexture->get_texture());
 
@@ -152,7 +155,9 @@ void Forms::MainForm::handle_resize(Surface rect)
 void Forms::MainForm::draw_frame()
 {
 	_worldCamera->get_target_view()->clear(Color3{ 0,0,0 });
-	_worldCamera->render({false,true,true});
+
+	
+	_worldCamera->render();
 	Form::draw_frame();
 }
 

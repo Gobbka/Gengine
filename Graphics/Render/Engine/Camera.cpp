@@ -128,7 +128,12 @@ void Render::Camera::register_canvas_2d(Canvas::Canvas2DLayer* layer)
 
 void Render::Camera::set_render_target(RenderTarget* target)
 {
-	_renderTarget = target;
+	_cameraOptions.renderTarget = target;
+}
+
+Render::CameraOptions* Render::Camera::options()
+{
+	return &_cameraOptions;
 }
 
 Core::GraphicsContext* Render::Camera::graphics_context()
@@ -148,7 +153,7 @@ ID3D11Device* Render::Camera::device() const
 
 Render::RenderTarget* Render::Camera::get_target_view() const
 {
-	return _renderTarget;
+	return _cameraOptions.renderTarget;
 }
 
 Render::MaskEngine* Render::Camera::mask_engine() const
@@ -172,7 +177,7 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 	_resolution(0,0)
 {
 	_context = context;
-	_renderTarget = target;
+	_cameraOptions.renderTarget = target;
 	_blendEngine = new BlendEngine(_context);
 	_maskEngine  = new MaskEngine(_context);
 	
@@ -189,12 +194,9 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 	update_position();
 }
 
-void Render::Camera::render(RenderOptions render_options)
+void Render::Camera::render()
 {
-	if(render_options.renderTarget != nullptr)
-		render_options.renderTarget->bind(_maskEngine->get_view());
-	else
-		_renderTarget->bind(_maskEngine->get_view());
+	_cameraOptions.renderTarget->bind(_maskEngine->get_view());
 	
 	_blendEngine->bind();
 	_maskEngine->clear_buffer();
@@ -203,7 +205,7 @@ void Render::Camera::render(RenderOptions render_options)
 	matrix_buffer->bind();
 	control_buffer->bind();
 
-	if(render_options.render_3d)
+	if(_cameraOptions.render_3d)
 	{
 		_context->begin_3d();
 
@@ -221,7 +223,7 @@ void Render::Camera::render(RenderOptions render_options)
 		}
 	}
 	
-	if(render_options.render_2d)
+	if(_cameraOptions.render_2d)
 	{
 		// then render canvas
 

@@ -48,6 +48,7 @@ int WINAPI wWinMain(
     _In_ int nShowCmd
 )
 {
+	
     AllocConsole();
     freopen("CONIN$", "r", stdin);
     freopen("CONOUT$", "w", stdout);

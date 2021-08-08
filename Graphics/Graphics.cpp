@@ -160,7 +160,10 @@ void Core::GraphicsContext::present_frame()
 
 	//}
 	////
-	_main_camera->render({true,false,true,(Render::RenderTarget*)&_targetView});
+	///
+	*_main_camera->options() = { true,false,true,(Render::RenderTarget*) & _targetView };
+	
+	_main_camera->render();
 
 	_swap->Present(1u, 0u);
 }

@@ -20,6 +20,8 @@
 #include <assimp/mesh.h>
 
 
+
+#include "Debugger/PipeServer.h"
 #include "Render/d3d/Buffer/IndexBuffer.h"
 #include "Render/d3d/Buffer/VertexBuffer.h"
 
@@ -40,6 +42,19 @@ Render::Model* load_model(const wchar_t*path,Core::GraphicsContext*context)
 }
 
 extern Render::Material* load_png(const wchar_t* path);
+
+void debugger_loop()
+{
+    auto* server = PipeServer::create(L"\\\\.\\pipe\\GENGINE_DBG");
+
+	while(true)
+	{
+        char* buffer;
+        server->receive(&buffer);
+
+        std::cout << "[DBG]" << buffer << '\n';
+	}
+}
 
 int WINAPI wWinMain(
     _In_ HINSTANCE hInstance,
@@ -86,6 +101,8 @@ int WINAPI wWinMain(
 	
     form->get_graphics_context()->worldspace()->add_object(&cube);
     //form->get_graphics_context()->worldspace()->add_object(&paral);
+
+    CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);
 	
     MSG msg;
 	while(true)

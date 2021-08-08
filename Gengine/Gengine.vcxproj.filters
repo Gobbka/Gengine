@@ -24,12 +24,18 @@
     <ClCompile Include="Forms\Form\Form.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Debugger\PipeServer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Forms\MainForm\MainForm.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Forms\Form\Form.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Debugger\PipeServer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

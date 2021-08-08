@@ -4,17 +4,18 @@
 #include <fstream>
 #include <iostream>
 
-#include "Graphics.h"
-#include "elements/Panel/Panel.h"
-#include "UIManager.h"
-#include "InteractiveForm.h"
-#include "Keyboard.h"
-#include "../../../FSLib/FSDirectory.h"
-#include "../../../FSLib/FSFile.h"
-#include "Render/d3d/Buffer/Texture.h"
+#include <Keyboard.h>
+#include <FS/FSFile.h>
+#include <FS/FSObject.h>
+#include <FS/FSDirectory.h>
 
-#include "Render/Engine/Camera.h"
-#include "Render/I3DObject/Cube/Cube.h"
+#include <Graphics.h>
+#include <Render/d3d/Buffer/Texture.h>
+#include <Render/Engine/Camera.h>
+#include <elements/Panel/Panel.h>
+#include <InteractiveForm.h>
+#include <UIManager.h>
+
 
 namespace UI
 {

@@ -142,10 +142,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Ecs\Ecs.h" />
+    <ClInclude Include="FS\FSDirectory.h" />
+    <ClInclude Include="FS\FSFile.h" />
+    <ClInclude Include="FS\FSObject.h" />
     <ClInclude Include="Types\Transform.h" />
     <ClInclude Include="Types\Types.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FS\FSDirectory.cpp" />
+    <ClCompile Include="FS\FSFile.cpp" />
+    <ClCompile Include="FS\FSObject.cpp" />
     <ClCompile Include="Types\Transform.cpp" />
     <ClCompile Include="Types\Types.cpp" />
   </ItemGroup>

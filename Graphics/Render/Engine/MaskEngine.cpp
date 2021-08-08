@@ -7,10 +7,10 @@ D3D11_DEPTH_STENCILOP_DESC create_depth_stencilop_desc(D3D11_COMPARISON_FUNC ste
 	return D3D11_DEPTH_STENCILOP_DESC{ D3D11_STENCIL_OP_KEEP,D3D11_STENCIL_OP_KEEP,success_func,stencil_func };
 }
 
-Render::MaskEngine::MaskEngine(Core::GraphicsContext* engine)
-	: Bindable(engine)
+Render::MaskEngine::MaskEngine(Render::Camera* target)
+	: Bindable(target->graphics_context())
 {
-	auto screen_resolution = engine->get_screen_resolution();
+	auto screen_resolution = target->get_screen_resolution();
 	auto* device = _engine->device;
 	
 	D3D11_TEXTURE2D_DESC texture_2d_desc{};

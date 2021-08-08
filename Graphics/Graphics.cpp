@@ -141,23 +141,6 @@ void Core::GraphicsContext::new_frame()
 
 void Core::GraphicsContext::present_frame()
 {
-	//if (_texture != nullptr)
-	//{
-	//	//D3D11_TEXTURE2D_DESC viewDesc;
-	//	//D3D11_TEXTURE2D_DESC textureDesc;
-
-	//	//((ID3D11Texture2D*)_targetView.get_resource())->GetDesc(&viewDesc);
-	//	//_texture->get_texture()->GetDesc(&textureDesc);
-	//	//
-	//	//_texture->copy_to(_targetView.get_resource());
-	//	//_textureTarget->clear(Color3(0.2f,0.2f,0.2f));
-	//	//_main_camera->render({false,true,true,_textureTarget});
-	//	//_buffer_texture->copy_to(_texture);
-
-	//}
-	////
-	///
-
 	_swap->Present(1u, 0u);
 }
 

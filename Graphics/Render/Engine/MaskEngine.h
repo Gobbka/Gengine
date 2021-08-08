@@ -16,7 +16,7 @@ namespace Render {
 		ID3D11Texture2D* _buffer;
 		ID3D11DepthStencilView* _view;
 	public:
-		MaskEngine(Core::GraphicsContext* engine);
+		MaskEngine(Render::Camera* target);
 
 		void set_state(ID3D11DepthStencilState* state,UINT reference = 0);
 		void set_state_force(ID3D11DepthStencilState* state,UINT reference = 0);

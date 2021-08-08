@@ -179,7 +179,7 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 	_context = context;
 	_cameraOptions.renderTarget = target;
 	_blendEngine = new BlendEngine(_context);
-	_maskEngine  = new MaskEngine(_context);
+	_maskEngine  = new MaskEngine(this);
 	
 	_resolution = context->get_screen_resolution();
 	_matrix2d_buffer_struct = { DirectX::XMMatrixScaling(1.f / (_resolution.width / 2),1.f / (_resolution.height / 2),1.f) };

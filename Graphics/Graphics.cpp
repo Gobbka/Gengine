@@ -42,8 +42,6 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 
 	_bufferAllocator = new Render::D3D11BufferAllocator(this);
 
-	_main_camera = new Render::Camera(this,&_targetView);
-
 	_samplerState = new Render::SamplerState(this);
 	
 	_vertexShader = new Render::VertexShader(this);
@@ -111,14 +109,11 @@ Render::RenderTarget* Core::GraphicsContext::get_render_target_view()
 	return &_targetView;
 }
 
-Render::Camera* Core::GraphicsContext::main_camera()
-{
-	return _main_camera;
-}
-
 Render::Camera* Core::GraphicsContext::create_camera(Render::RenderTarget* target)
 {
-	return new Render::Camera(this,target);
+	return target == nullptr ?
+		new Render::Camera(this, &_targetView) :
+		new Render::Camera(this,target);
 }
 
 void Core::GraphicsContext::set_resolution(Surface new_resolution)
@@ -127,8 +122,9 @@ void Core::GraphicsContext::set_resolution(Surface new_resolution)
 
 	_viewport.Width = _screen_resolution.width;
 	_viewport.Height = _screen_resolution.height;
-	
-	_main_camera->set_resolution(new_resolution);
+
+	// TODO: make draw event where pass screen resolution
+	//_main_camera->set_resolution(new_resolution);
 }
 
 void Core::GraphicsContext::clear(Color3 color)
@@ -161,9 +157,6 @@ void Core::GraphicsContext::present_frame()
 	//}
 	////
 	///
-	*_main_camera->options() = { true,false,true,(Render::RenderTarget*) & _targetView };
-	
-	_main_camera->render();
 
 	_swap->Present(1u, 0u);
 }

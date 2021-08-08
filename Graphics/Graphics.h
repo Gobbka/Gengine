@@ -55,7 +55,6 @@ namespace Core
 	private:
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 		
-		Render::Camera* _main_camera;
 		Render::SpriteEngine* _spriteEngine;
 
 		Render::Texture* _buffer_texture;
@@ -71,7 +70,11 @@ namespace Core
 		Surface get_screen_resolution() const;
 		Render::RenderTarget* get_render_target_view();
 
-		Render::Camera* main_camera();
+		/// <summary>
+		/// create and returns camera pointer
+		/// </summary>
+		/// <param name="target">pointer to render target.If nullptr passed,camera will create from swap chain</param>
+		/// <returns></returns>
 		Render::Camera* create_camera(Render::RenderTarget*target);
 	public:
 		void set_resolution(Surface new_resolution);

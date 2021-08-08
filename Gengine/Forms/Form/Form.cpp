@@ -2,6 +2,7 @@
 
 #include "Graphics.h"
 #include "WindowsManager.h"
+#include "Render/Engine/Camera.h"
 
 void Core::Form::handle_resize(Surface rect)
 {
@@ -11,7 +12,7 @@ void Core::Form::handle_resize(Surface rect)
 
 void Core::Form::draw_frame()
 {
-    _graphics->clear(Color3(RGB_TO_FLOAT(background.r, background.g, background.b)));
+    main_camera->render();
 }
 
 Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
@@ -20,6 +21,7 @@ Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
 	WindowsManager::instance()->register_window(this);
 	
 	_graphics = GraphicsContext::new_context(WindowsWindow::hwnd(),WindowsWindow::size());
+    main_camera = _graphics->create_camera(nullptr);
 }
 
 Core::Form::~Form()
@@ -41,6 +43,7 @@ void Core::Form::drag_move()
 void Core::Form::force_draw()
 {
     _graphics->new_frame();
+    _graphics->clear(Color3(RGB_TO_FLOAT(background.r, background.g, background.b)));
     draw_frame();
     _graphics->present_frame();
 }

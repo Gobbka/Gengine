@@ -1,6 +1,11 @@
 #pragma once
 #include "WindowsWindow.h"
 #include "Types/Types.h"
+
+namespace Render {
+	class Camera;
+}
+
 namespace Core
 {
 	class GraphicsContext;
@@ -10,6 +15,7 @@ namespace Core
 	private:
 		GraphicsContext* _graphics;
 	protected:
+		Render::Camera* main_camera;
 		void handle_resize(Surface rect) override;
 
 		virtual void draw_frame();

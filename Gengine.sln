@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GengineApi", "GengineApi\GengineApi.vcxproj", "{D6007364-C335-49FB-9706-0AF582AED6E5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GBuilder", "GBuilder\GBuilder.vcxproj", "{6D2F38EE-EC82-4466-B7F4-430D11ED5584}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -96,6 +98,14 @@ Global
 		{D6007364-C335-49FB-9706-0AF582AED6E5}.Release|x64.Build.0 = Release|x64
 		{D6007364-C335-49FB-9706-0AF582AED6E5}.Release|x86.ActiveCfg = Release|Win32
 		{D6007364-C335-49FB-9706-0AF582AED6E5}.Release|x86.Build.0 = Release|Win32
+		{6D2F38EE-EC82-4466-B7F4-430D11ED5584}.Debug|x64.ActiveCfg = Debug|x64
+		{6D2F38EE-EC82-4466-B7F4-430D11ED5584}.Debug|x64.Build.0 = Debug|x64
+		{6D2F38EE-EC82-4466-B7F4-430D11ED5584}.Debug|x86.ActiveCfg = Debug|Win32
+		{6D2F38EE-EC82-4466-B7F4-430D11ED5584}.Debug|x86.Build.0 = Debug|Win32
+		{6D2F38EE-EC82-4466-B7F4-430D11ED5584}.Release|x64.ActiveCfg = Release|x64
+		{6D2F38EE-EC82-4466-B7F4-430D11ED5584}.Release|x64.Build.0 = Release|x64
+		{6D2F38EE-EC82-4466-B7F4-430D11ED5584}.Release|x86.ActiveCfg = Release|Win32
+		{6D2F38EE-EC82-4466-B7F4-430D11ED5584}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

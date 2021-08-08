@@ -180,29 +180,6 @@ Render::Texture* Core::GraphicsContext::create_texture(Render::Material* materia
 	return new Render::Texture(this, *material);
 }
 
-void Core::GraphicsContext::set_texture(Render::Texture* texture)
-{
-	_texture = texture;
-
-	//D3D11_TEXTURE2D_DESC texture_desc;
-	//texture_desc.BindFlags = D3D11_BIND_RENDER_TARGET;
-	//texture_desc.Width = texture->width;
-	//texture_desc.Height = texture->height;
-	//texture_desc.MipLevels = 1;
-	//texture_desc.ArraySize = 1;
-	//texture_desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	//texture_desc.SampleDesc = { 1,0 };
-	//texture_desc.CPUAccessFlags = 0;
-	//texture_desc.MiscFlags = 0;
-	//texture_desc.Usage = D3D11_USAGE_DEFAULT;
-	//
-	//ID3D11Texture2D* render_texture;
-	//device->CreateTexture2D(&texture_desc, nullptr, &render_texture);
-	//_buffer_texture = new Render::Texture(this, render_texture);
-	//
-	//_textureTarget = new Render::RenderTarget(this,_buffer_texture);
-}
-
 Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd,Surface size)
 {
 	IDXGISwapChain* pswap=nullptr;

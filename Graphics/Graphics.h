@@ -40,7 +40,6 @@ namespace Core
 		
 		IDXGISwapChain* _swap;
 		Render::RenderTarget _targetView;
-		Render::RenderTarget* _textureTarget;
 
 		Render::SamplerState* _samplerState;
 		
@@ -56,9 +55,6 @@ namespace Core
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 		
 		Render::SpriteEngine* _spriteEngine;
-
-		Render::Texture* _buffer_texture;
-		Render::Texture* _texture;
 		
 		WorldSpace _worldSpace;
 	public:
@@ -88,7 +84,6 @@ namespace Core
 		void begin_3d();
 	public:
 		Render::Texture* create_texture(Render::Material* material);
-		void set_texture(Render::Texture* texture);
 		
 		static GraphicsContext* new_context(HWND hwnd,Surface size);
 	};

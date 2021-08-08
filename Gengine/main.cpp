@@ -27,6 +27,7 @@ Render::Model* load_model(const wchar_t*path,Core::GraphicsContext*context)
 {
     Assimp::Importer importer;
     auto* scene = importer.ReadFile("assets\\gun.obj", aiProcess_Triangulate | aiProcess_ConvertToLeftHanded);
+	
     assert(scene != nullptr);
 
     for (UINT i = 0; i < scene->mRootNode->mNumMeshes; i++)
@@ -69,7 +70,6 @@ int WINAPI wWinMain(
 
     auto* texture = form->get_graphics_context()->create_texture(material);
 
-    form->get_graphics_context()->set_texture(form->get_graphics_context()->create_texture(negr));
 	
     auto cube = Render::Model();
     auto cube_mesh = Render::Cube(Position3::null(), form->get_graphics_context());

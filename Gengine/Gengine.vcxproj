@@ -171,9 +171,6 @@
     <ProjectReference Include="..\Physics\Physics.vcxproj">
       <Project>{95c169a4-3e79-46eb-b13c-e89f793e0b13}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\ResourceManager\ResourceManager.vcxproj">
-      <Project>{4db21218-daf1-4b11-99fc-ab49acb6a059}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\UI\UI.vcxproj">
       <Project>{2bebf010-a931-410d-b5b5-e47d441f1948}</Project>
     </ProjectReference>

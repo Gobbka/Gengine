@@ -10,7 +10,6 @@
 
 #include "PhysicsModule.h"
 #include "UIManager.h"
-#include "Drivers/PNGImageDriver.h"
 #include "Forms/MainForm/MainForm.h"
 #include "Render/Engine/Camera.h"
 #include "Render/I3DObject/Cube/Cube.h"

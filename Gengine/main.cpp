@@ -19,11 +19,12 @@
 #include <assimp/postprocess.h>
 #include <assimp/mesh.h>
 
-
-
 #include "Debugger/PipeServer.h"
 #include "Render/d3d/Buffer/IndexBuffer.h"
 #include "Render/d3d/Buffer/VertexBuffer.h"
+
+#include <Ecs/Ecs.h>
+#include <chrono>
 
 Render::Model* load_model(const wchar_t*path,Core::GraphicsContext*context)
 {
@@ -85,6 +86,9 @@ int WINAPI wWinMain(
 
     auto* texture = form->get_graphics_context()->create_texture(material);
 
+    auto* world = ECS::World::createWorld();
+	
+	
 	
     auto cube = Render::Model();
     auto cube_mesh = Render::Cube(Position3::null(), form->get_graphics_context());
@@ -105,8 +109,13 @@ int WINAPI wWinMain(
     CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);
 	
     MSG msg;
+
+    auto time = std::chrono::high_resolution_clock::now();
+	
 	while(true)
 	{
+        
+		
 		if(PeekMessage(&msg, nullptr,0, 0, PM_REMOVE))
 		{
             TranslateMessage(&msg);
@@ -115,5 +124,12 @@ int WINAPI wWinMain(
 
         form->update();
         form->force_draw();
+
+        auto now = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(now - time);
+		
+        world->tick(duration.count());
+
+        time = now;
 	}
 }

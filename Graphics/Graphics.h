@@ -59,6 +59,8 @@ namespace Core
 		WorldSpace _worldSpace;
 	public:
 		Render::IBufferAllocator* buffer_allocator() const;
+
+		
 		WorldSpace* worldspace();
 		
 		Render::SpriteEngine* get_sprite_engine();
@@ -82,6 +84,7 @@ namespace Core
 
 		void begin_2d();
 		void begin_3d();
+		void bind_input_layout(ID3D11InputLayout* layout);
 	public:
 		Render::Texture* create_texture(Render::Material* material);
 		

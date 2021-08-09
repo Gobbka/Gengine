@@ -66,16 +66,16 @@ Canvas::Rectangle::Rectangle(Color4 background, Position2 position, Surface reso
 
 void Canvas::Rectangle::draw(Render::DrawEvent2D* draw_event)
 {
+	auto* sprite = draw_event->sprite_engine();
+
 	if(_background_texture)
 	{
-		auto* sprite = draw_event->sprite_engine();
-		sprite->begin();
+		sprite->begin_sprite_mode();
 
 		_background_texture->bind();
-		draw_event->draw_vertex(4);
-		
-		sprite->end();
-		return;
+	}else
+	{
+		sprite->begin_color_mode();
 	}
 	
 	draw_event->draw_vertex(4);

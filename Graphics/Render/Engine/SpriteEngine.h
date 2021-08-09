@@ -12,20 +12,36 @@ namespace Render {
 	class SpriteEngine
 	{
 	private:
+		enum class DrawMode
+		{
+			none,
+			sprite,
+			color,
+		};
+		
+	private:
 		Core::GraphicsContext* _graphicsContext;
 
-		PixelShader* _texture_ps;
+		PixelShader*  _texture_ps;
 		VertexShader* _texture_vs;
-		
-		ID3D11InputLayout* _layout;
 
-		ID3D11VertexShader* _old_vs = nullptr;
-		ID3D11PixelShader* _old_ps  = nullptr;
-		ID3D11InputLayout* _old_layout = nullptr;
-	public:
-		SpriteEngine(Core::GraphicsContext* context,PixelShader*ps,VertexShader*vs, ID3D11InputLayout* layout);
+		PixelShader*  _color_ps;
+		VertexShader* _color_vs;
 		
-		void begin();
+		ID3D11InputLayout* _texture_layout;
+		ID3D11InputLayout* _color_layout;
+
+		DrawMode _drawMode;
+	public:
+		SpriteEngine(
+			Core::GraphicsContext* context,
+			PixelShader* texture_ps, VertexShader* texture_vs, ID3D11InputLayout* texture_layout,
+			PixelShader* color_ps, VertexShader* color_vs, ID3D11InputLayout* color_layout
+		);
+
+		void begin_sprite_mode();
+		void begin_color_mode();
 		void end();
+		
 	};
 }

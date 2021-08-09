@@ -25,14 +25,12 @@ void Core::WorldSpace::add_object(Render::Model* object)
 }
 
 Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11DeviceContext* context)
-	: _screen_resolution(0,0),
+	: context(context),
 	device(dev),
-	context(context),
+	_screen_resolution(0,0),
 	_targetView(this,swap)
 {
-	device = dev;
 	_swap = swap;
-	this->context = context;
 
 	{
 		DXGI_SWAP_CHAIN_DESC desc;
@@ -51,7 +49,6 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	auto* _texture_ps = new Render::PixelShader(this);
 	auto* _texture_vs = new Render::VertexShader(this);
 	ID3D11InputLayout* _texture_layout=nullptr;
-
 	
 	_vertexShader->read_file(L"d3d11\\shaders.cso");
 	_vertexShader->create_input_layout(Render::VertexLayout, ARRAYSIZE(Render::VertexLayout), &_inputLayout);
@@ -71,7 +68,11 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_texture_ps->read_file(L"d3d11\\texture_ps.cso");
 	_texture_ps->release_blob();
 
-	_spriteEngine = new Render::SpriteEngine(this, _texture_ps, _texture_vs, _texture_layout);
+	_spriteEngine = new Render::SpriteEngine(
+		this, 
+		_texture_ps, _texture_vs, _texture_layout,
+		_pixelShader,_vertexShader,_inputLayout
+	);
 	
 	_viewport.Width  = _screen_resolution.width;
 	_viewport.Height = _screen_resolution.height;
@@ -141,6 +142,7 @@ void Core::GraphicsContext::new_frame()
 
 void Core::GraphicsContext::present_frame()
 {
+	_spriteEngine->end();
 	_swap->Present(1u, 0u);
 }
 

@@ -64,7 +64,6 @@ namespace Render
 		Surface _resolution;
 
 		CameraOptions _cameraOptions;
-		//RenderTarget* _renderTarget;
 
 		std::vector<Canvas::Canvas2DLayer*> _canvas2DLayers;
 	private:

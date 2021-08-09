@@ -3,32 +3,43 @@
 #include "../d3d/Shader/VertexShader.h"
 #include "../../Graphics.h"
 
-Render::SpriteEngine::SpriteEngine(Core::GraphicsContext* context, PixelShader* ps, VertexShader* vs, ID3D11InputLayout* layout)
+Render::SpriteEngine::SpriteEngine(Core::GraphicsContext* context, PixelShader* texture_ps, VertexShader* texture_vs,
+	ID3D11InputLayout* texture_layout, PixelShader* color_ps, VertexShader* color_vs, ID3D11InputLayout* color_layout)
 {
-	_texture_ps = ps;
-	_texture_vs = vs;
-	_layout = layout;
-	
 	_graphicsContext = context;
+	_texture_ps = texture_ps;
+	_texture_vs = texture_vs;
+	_color_ps = color_ps;
+	_color_vs = color_vs;
+	_texture_layout = texture_layout;
+	_color_layout = color_layout;
 }
 
-void Render::SpriteEngine::begin()
+void Render::SpriteEngine::begin_sprite_mode()
 {
-	auto* context = _graphicsContext->context;
-	context->PSGetShader(&_old_ps, nullptr, 0);
-	context->VSGetShader(&_old_vs, nullptr, 0);
-	context->IAGetInputLayout(&_old_layout);
+	if (_drawMode == DrawMode::sprite)
+		return;
 	
 	_texture_ps->bind();
 	_texture_vs->bind();
+	_graphicsContext->context->IASetInputLayout(_texture_layout);
 
-	_graphicsContext->context->IASetInputLayout(_layout);
+	_drawMode = DrawMode::sprite;
+}
+
+void Render::SpriteEngine::begin_color_mode()
+{
+	if (_drawMode == DrawMode::color)
+		return;
+	
+	_color_ps->bind();
+	_color_vs->bind();
+	_graphicsContext->context->IASetInputLayout(_color_layout);
+
+	_drawMode = DrawMode::color;
 }
 
 void Render::SpriteEngine::end()
 {
-	auto* context = _graphicsContext->context;
-	context->PSSetShader(_old_ps, nullptr, 0);
-	context->VSSetShader(_old_vs, nullptr, 0);
-	context->IASetInputLayout(_old_layout);
+	_drawMode = DrawMode::none;
 }

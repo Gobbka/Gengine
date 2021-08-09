@@ -43,7 +43,9 @@ void Core::Form::drag_move()
 void Core::Form::force_draw()
 {
     _graphics->new_frame();
-    _graphics->clear(Color3(RGB_TO_FLOAT(background.r, background.g, background.b)));
+	
+    main_camera->get_target_view()->clear(Color3(0.1f, 0.1f, 0.1f));
     draw_frame();
+	
     _graphics->present_frame();
 }

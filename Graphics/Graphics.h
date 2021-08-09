@@ -76,8 +76,6 @@ namespace Core
 		Render::Camera* create_camera(Render::RenderTarget*target);
 	public:
 		void set_resolution(Surface new_resolution);
-		
-		void clear(Color3 color);
 
 		void new_frame();
 		void present_frame();

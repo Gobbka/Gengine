@@ -197,7 +197,6 @@ void Render::Camera::render()
 	_cameraOptions.renderTarget->bind(_maskEngine->get_view());
 	
 	_blendEngine->bind();
-	_maskEngine->clear_buffer();
 	_maskEngine->set_state_force(_maskEngine->get_disabledState());
 
 	matrix_buffer->bind();
@@ -219,6 +218,8 @@ void Render::Camera::render()
 		{
 			this->draw_object(object, event3d);
 		}
+
+		_maskEngine->clear_buffer();
 	}
 	
 	if(_cameraOptions.render_2d)
@@ -226,7 +227,6 @@ void Render::Camera::render()
 		// then render canvas
 
 		_context->begin_2d();
-		_maskEngine->clear_buffer();
 
 		matrix2d_buffer->bind();
 
@@ -243,5 +243,7 @@ void Render::Camera::render()
 			layer->update();
 			layer->render(&event);
 		}
+
+		_maskEngine->clear_buffer();
 	}
 }

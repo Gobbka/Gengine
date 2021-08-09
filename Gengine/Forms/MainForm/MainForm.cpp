@@ -159,7 +159,6 @@ void Forms::MainForm::handle_resize(Surface rect)
 
 void Forms::MainForm::draw_frame()
 {
-
 	_worldCamera->get_target_view()->clear(Color3{ 0,0,0 });
 	_worldCamera->render();
 

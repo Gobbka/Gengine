@@ -118,15 +118,8 @@ void Core::GraphicsContext::set_resolution(Surface new_resolution)
 	//_main_camera->set_resolution(new_resolution);
 }
 
-void Core::GraphicsContext::clear(Color3 color)
-{
-	_targetView.clear(color);
-}
-
 void Core::GraphicsContext::new_frame()
 {
-	clear(Color3::black());
-	_spriteEngine->begin_color_mode();
 	context->RSSetViewports(1, &_viewport);
 	context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 }

@@ -15,6 +15,15 @@ Render::SpriteEngine::SpriteEngine(Core::GraphicsContext* context, PixelShader* 
 	_color_layout = color_layout;
 }
 
+void Render::SpriteEngine::bind_texture(Texture* texture)
+{
+	if(texture != _binded_texture)
+	{
+		texture->bind();
+		_binded_texture = texture;
+	}
+}
+
 void Render::SpriteEngine::begin_sprite_mode()
 {
 	if (_drawMode == DrawMode::sprite)

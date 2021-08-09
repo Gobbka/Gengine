@@ -71,7 +71,7 @@ void Render::Parallelepiped::draw(DrawEvent3D event3d)
 	if (this->texture != nullptr)
 	{
 		engine->begin_sprite_mode();
-		texture->bind();
+		engine->bind_texture(texture);
 	}else
 	{
 		engine->begin_color_mode();

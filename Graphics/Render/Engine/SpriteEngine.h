@@ -6,6 +6,7 @@ namespace Core {
 }
 
 namespace Render {
+	class Texture;
 	class PixelShader;
 	class VertexShader;
 
@@ -21,6 +22,7 @@ namespace Render {
 		
 	private:
 		Core::GraphicsContext* _graphicsContext;
+		Texture* _binded_texture;
 
 		PixelShader*  _texture_ps;
 		VertexShader* _texture_vs;
@@ -38,6 +40,8 @@ namespace Render {
 			PixelShader* texture_ps, VertexShader* texture_vs, ID3D11InputLayout* texture_layout,
 			PixelShader* color_ps, VertexShader* color_vs, ID3D11InputLayout* color_layout
 		);
+
+		void bind_texture(Texture* texture);
 
 		void begin_sprite_mode();
 		void begin_color_mode();

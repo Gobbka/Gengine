@@ -2,9 +2,10 @@
 #include "../../Engine/Camera.h"
 
 
-Render::ConstantBuffer::ConstantBuffer(Core::GraphicsContext* engine, void* struct_pointer, UINT struct_size, UINT slot )
+Render::ConstantBuffer::ConstantBuffer(Core::GraphicsContext* engine, void* struct_pointer, UINT struct_size, UINT slot, BYTE binds)
 	: Bindable(engine)
 {
+	_binds = binds;
 	_struct = struct_pointer;
 	_slot = slot;
 
@@ -22,5 +23,9 @@ void Render::ConstantBuffer::update() const
 
 void Render::ConstantBuffer::bind()
 {
-	_engine->context->VSSetConstantBuffers(_slot, 1, &_d3d_buffer);
+	if(_binds & CBBindFlag_vs)
+		_engine->context->VSSetConstantBuffers(_slot, 1, &_d3d_buffer);
+
+	if (_binds & CBBindFlag_ps)
+		_engine->context->PSSetConstantBuffers(_slot, 1, &_d3d_buffer);
 }

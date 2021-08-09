@@ -42,27 +42,17 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 
 	_samplerState = new Render::SamplerState(this);
 	
-	_vertexShader = new Render::VertexShader(this);
 	_pixelShader  = new Render::PixelShader(this);
-	_vertexShader3d = new Render::VertexShader(this);
 
 	auto* _texture_ps = new Render::PixelShader(this);
 	auto* _texture_vs = new Render::VertexShader(this);
 	ID3D11InputLayout* _texture_layout=nullptr;
-	
-	_vertexShader->read_file(L"d3d11\\shaders.cso");
-	_vertexShader->create_input_layout(Render::VertexLayout, ARRAYSIZE(Render::VertexLayout), &_inputLayout);
-	_vertexShader->release_blob();
-
-	_vertexShader3d->read_file(L"d3d11\\vertex_3d_vs.cso");
-	_vertexShader3d->release_blob();
 
 	_pixelShader->read_file(L"d3d11\\pixel_shader.cso");
 	_pixelShader->release_blob();
 
-
 	_texture_vs->read_file(L"d3d11\\texture_vs.cso");
-	_texture_vs->create_input_layout(Render::TextureLayout, ARRAYSIZE(Render::TextureLayout), &_texture_layout);
+	_texture_vs->create_input_layout(Render::VertexLayout, ARRAYSIZE(Render::VertexLayout), &_inputLayout);
 	_texture_vs->release_blob();
 
 	_texture_ps->read_file(L"d3d11\\texture_ps.cso");
@@ -70,8 +60,8 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 
 	_spriteEngine = new Render::SpriteEngine(
 		this, 
-		_texture_ps, _texture_vs, _texture_layout,
-		_pixelShader,_vertexShader,_inputLayout
+		_texture_ps, _texture_vs, _inputLayout,
+		_pixelShader,_texture_vs,_inputLayout
 	);
 	
 	_viewport.Width  = _screen_resolution.width;
@@ -136,6 +126,7 @@ void Core::GraphicsContext::clear(Color3 color)
 void Core::GraphicsContext::new_frame()
 {
 	clear(Color3::black());
+	_spriteEngine->begin_color_mode();
 	context->RSSetViewports(1, &_viewport);
 	context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 }
@@ -149,14 +140,10 @@ void Core::GraphicsContext::present_frame()
 void Core::GraphicsContext::begin_2d()
 {
 	context->IASetInputLayout(_inputLayout);
-	_vertexShader->bind();
-	_pixelShader->bind();
 }
 
 void Core::GraphicsContext::begin_3d()
 {
-	_vertexShader3d->bind();
-	_pixelShader->bind();
 	context->IASetInputLayout(_inputLayout);
 }
 

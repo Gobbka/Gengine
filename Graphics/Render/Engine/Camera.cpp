@@ -185,7 +185,7 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 
 	matrix_buffer = new ConstantBuffer(_context, &_matrix_buffer_struct, sizeof(_matrix_buffer_struct), 0);
 
-	control_buffer = new ConstantBuffer(context, &_control_buffer_struct, sizeof(_control_buffer_struct), 1);
+	control_buffer = new ConstantBuffer(context, &_control_buffer_struct, sizeof(_control_buffer_struct), 1, ConstantBuffer::CBBindFlag_vs| ConstantBuffer::CBBindFlag_ps);
 
 	_projectionMatrix = create_proj_matrix();
 	

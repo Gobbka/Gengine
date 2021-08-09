@@ -14,13 +14,16 @@ void Render::VertexShader::construct(ID3DBlob* shader_blob)
 void Render::VertexShader::create_input_layout(const D3D11_INPUT_ELEMENT_DESC* elements, UINT num_elements,
 	ID3D11InputLayout** layout)
 {
-	_engine->device->CreateInputLayout(
+
+	auto hresult = _engine->device->CreateInputLayout(
 		elements,
 		num_elements,
 		_blob->GetBufferPointer(),
 		_blob->GetBufferSize(),
 		layout
 	);
+	
+	assert(SUCCEEDED(hresult));
 }
 
 Render::VertexShader::VertexShader(Core::GraphicsContext* engine)

@@ -1,13 +1,8 @@
-cbuffer ConstantBuffer2D : register(b0)
-{
-	float4x4 viewMatrix;
-}
-
 // PSI (PixelShaderInput)
 struct PSI
 {
 	float4 pos : SV_POSITION;
-	float3 texCoord : TEXCOORD;
+	float3 texCoord : COLOR;
 };
 
 Texture2D objTexture : TEXTURE: register(t0);

@@ -13,15 +13,15 @@ cbuffer ControlBuffer : register(b1)
 struct PSI
 {
 	float4 pos : SV_POSITION;
-	float3 texCoord : TEXCOORD;
+	float3 texCoord : COLOR;
 };
 
 // VertexShader
-PSI VS(float4 pos : POSITION, float3 texcoord : TEXCOORD)
+PSI VS(float3 pos : POSITION, float3 texcoord : COLOR)
 {
 	PSI psi;
 	psi.texCoord = texcoord;
-	psi.pos = mul(float4(pos.x, pos.y, pos.z, 1.f), viewMatrix);
+	psi.pos = mul(float4(pos, 1.f), viewMatrix);
 	psi.pos.x += c_offset.x;
 	psi.pos.y += c_offset.y;
 	

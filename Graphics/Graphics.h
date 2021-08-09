@@ -44,8 +44,8 @@ namespace Core
 		Render::SamplerState* _samplerState;
 		
 		Render::PixelShader* _pixelShader;
-		Render::VertexShader* _vertexShader;
-		Render::VertexShader* _vertexShader3d;
+		//Render::VertexShader* _vertexShader;
+		//Render::VertexShader* _vertexShader3d;
 		
 		ID3D11InputLayout* _inputLayout;
 
@@ -84,7 +84,6 @@ namespace Core
 
 		void begin_2d();
 		void begin_3d();
-		void bind_input_layout(ID3D11InputLayout* layout);
 	public:
 		Render::Texture* create_texture(Render::Material* material);
 		

@@ -41,5 +41,5 @@ void Render::SpriteEngine::begin_color_mode()
 
 void Render::SpriteEngine::end()
 {
-	_drawMode = DrawMode::none;
+	//_drawMode = DrawMode::none;
 }

@@ -27,9 +27,11 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Texture textu
 	assert(SUCCEEDED(context->device->CreateRenderTargetView(texture.texture(), nullptr, &_targetView)));
 }
 
-Render::RenderTarget* Render::RenderTarget::create_texture(Core::GraphicsContext* context)
+Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Surface texture_resolution)
+	: _context(context),
+	_texture(context, texture_resolution, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET)
 {
-	return new RenderTarget(context,Texture(context, { 1400,780 }, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET));
+	assert(SUCCEEDED(context->device->CreateRenderTargetView(_texture.texture(), nullptr, &_targetView)));
 }
 
 ID3D11Resource* Render::RenderTarget::get_resource()

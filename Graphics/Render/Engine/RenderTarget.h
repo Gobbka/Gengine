@@ -19,10 +19,12 @@ namespace Render {
 		Core::GraphicsContext* _context;
 		Texture _texture;
 	public:
+		// create render target from IDXGISwapChain
 		RenderTarget(Core::GraphicsContext* context, IDXGISwapChain* swap);
+		// create render target from texture. Texture must have RenderTarget bind flag
 		RenderTarget(Core::GraphicsContext* context, Texture texture);
-
-		static RenderTarget* create_texture(Core::GraphicsContext* context);
+		// create render target from empty texture
+		RenderTarget(Core::GraphicsContext* context, Surface texture_resolution);
 		
 		ID3D11Resource* get_resource();
 		Texture* get_texture();

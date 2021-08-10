@@ -93,6 +93,9 @@ namespace Render
 		void register_canvas_2d(Canvas::Canvas2DLayer* layer);
 
 		void set_render_target(RenderTarget* target);
+
+		Model*  point_to_world(Vector2 screen_coordinate);
+		Vector2 point_to_screen(Vector3 world_coordinate);
 	public:
 		CameraOptions* options();
 		Core::GraphicsContext* graphics_context();

@@ -108,9 +108,8 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	
 	_folder_texture = get_graphics_context()->create_texture( load_png(L"assets\\folder.png"));
 	_file_texture = get_graphics_context()->create_texture(load_png(L"assets\\file.png"));
-	auto* _matiko_texture = get_graphics_context()->create_texture(load_png(L"assets\\matiko.png"));
 
-	auto worldTexture = Render::RenderTarget::create_texture(get_graphics_context());
+	auto worldTexture = new Render::RenderTarget(get_graphics_context(),{1400,780});
 	_worldCamera = get_graphics_context()->create_camera(worldTexture);
 	auto* cam_options = _worldCamera->options();
 	cam_options->render_2d = false;

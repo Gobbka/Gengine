@@ -87,8 +87,8 @@ int WINAPI wWinMain(
     auto* texture = form->get_graphics_context()->create_texture(material);
 
     auto* world = ECS::World::createWorld();
-	
-	
+    auto* ent = world->create();
+    auto ch = ent->assign<Render::Model>();
 	
     auto cube = Render::Model();
     auto cube_mesh = Render::Cube(Position3::null(), form->get_graphics_context());
@@ -128,7 +128,7 @@ int WINAPI wWinMain(
         auto now = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(now - time);
 		
-        world->tick(duration.count());
+        world->tick((float)duration.count());
 
         time = now;
 	}

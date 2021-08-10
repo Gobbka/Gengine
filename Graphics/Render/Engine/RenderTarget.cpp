@@ -23,6 +23,7 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Texture textu
 	: _context(context),
 	_texture(texture)
 {
+	assert(texture.is_render_target());	
 	assert(SUCCEEDED(context->device->CreateRenderTargetView(texture.texture(), nullptr, &_targetView)));
 }
 
@@ -33,7 +34,7 @@ Render::RenderTarget* Render::RenderTarget::create_texture(Core::GraphicsContext
 
 ID3D11Resource* Render::RenderTarget::get_resource()
 {
-	return _texture.get_texture();
+	return _texture.texture();
 }
 
 Render::Texture* Render::RenderTarget::get_texture()

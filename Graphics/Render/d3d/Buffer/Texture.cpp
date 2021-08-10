@@ -2,6 +2,13 @@
 #include "../../Engine/Camera.h"
 #include "../../../Graphics/Material/Material.h"
 
+D3D11_TEXTURE2D_DESC Render::Texture::get_desc()
+{
+	D3D11_TEXTURE2D_DESC desc;
+	_texture->GetDesc(&desc);
+	return D3D11_TEXTURE2D_DESC(desc);
+}
+
 ID3D11Texture2D* Render::Texture::texture()
 {
 	return _texture;
@@ -79,26 +86,19 @@ Render::Texture::Texture(Core::GraphicsContext* context)
 {
 }
 
-void Render::Texture::create_shader_resource()
-{
-	D3D11_TEXTURE2D_DESC texture_desc;
-	_texture->GetDesc(&texture_desc);
-	
-	D3D11_SHADER_RESOURCE_VIEW_DESC rvDesc;
-	rvDesc.Format = DXGI_FORMAT_UNKNOWN;
-	rvDesc.Texture2D.MipLevels = texture_desc.MipLevels;
-	rvDesc.Texture2D.MostDetailedMip = texture_desc.MipLevels - 1;
-	rvDesc.ViewDimension = D3D_SRV_DIMENSION_TEXTURE2D;
-}
-
 void Render::Texture::bind()
 {
 	_engine->context->PSSetShaderResources(0, 1, &_resource);
 }
 
-ID3D11Texture2D* Render::Texture::get_texture()
+bool Render::Texture::is_render_target()
 {
-	return _texture;
+	return get_desc().BindFlags & D3D11_BIND_RENDER_TARGET;
+}
+
+bool Render::Texture::is_shader_resource()
+{
+	return get_desc().BindFlags & D3D11_BIND_SHADER_RESOURCE;
 }
 
 char* Render::Texture::get_data(size_t* lpsize)

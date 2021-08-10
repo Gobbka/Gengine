@@ -11,7 +11,7 @@ namespace Render {
 	{
 	private:
 		virtual UINT bind_flags() { return D3D11_BIND_SHADER_RESOURCE; }
-		
+		D3D11_TEXTURE2D_DESC get_desc();
 	public:
 		ID3D11Texture2D* _texture;
 		ID3D11ShaderResourceView* _resource;
@@ -25,11 +25,10 @@ namespace Render {
 		Texture(Core::GraphicsContext* context, ID3D11Texture2D* texture);
 		Texture(Core::GraphicsContext* context);
 		
-		void create_shader_resource();
-		
 		void bind() override;
 
-		ID3D11Texture2D* get_texture();
+		bool is_render_target();
+		bool is_shader_resource();
 		
 		char* get_data(size_t* lpsize=nullptr);
 		

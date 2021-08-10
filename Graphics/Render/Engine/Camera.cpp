@@ -207,8 +207,7 @@ void Render::Camera::render()
 		_context->begin_3d();
 
 		_control_buffer_struct.offset = Position2(0, 0);
-		_control_buffer_struct.opacity = 1.f;
-		control_buffer->update();
+		set_alpha(1.f);
 
 		// render all world objects
 		DrawEvent3D event3d(graphics_context(), this, _viewMatrix * _projectionMatrix);

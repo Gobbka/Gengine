@@ -150,6 +150,7 @@
     <ClInclude Include="Canvas\Objects\Rectangle\Rectangle.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Graphics\IBuffers\IIndexBuffer.h" />
+    <ClInclude Include="Graphics\IBuffers\ITexture2D.h" />
     <ClInclude Include="Graphics\IBuffers\IVertexBuffer.h" />
     <ClInclude Include="Graphics\Material\Material.h" />
     <ClInclude Include="Render\d3d\Bindable.h" />

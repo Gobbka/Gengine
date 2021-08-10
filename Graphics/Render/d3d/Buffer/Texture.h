@@ -2,21 +2,24 @@
 #include "../Bindable.h"
 #include <d3d11.h>
 
+#include "../../../Graphics/IBuffers/ITexture2D.h"
+
 struct Surface;
 
 namespace Render {
 	class Material;
 
-	class __declspec(dllexport) Texture : Bindable
+	class __declspec(dllexport) Texture : public ITexture2D
 	{
 	private:
-		virtual UINT bind_flags() { return D3D11_BIND_SHADER_RESOURCE; }
+		Core::GraphicsContext* _context;
+		
 		D3D11_TEXTURE2D_DESC get_desc();
-	public:
+
 		ID3D11Texture2D* _texture;
 		ID3D11ShaderResourceView* _resource;
-		UINT width;
-		UINT height;
+		UINT _width;
+		UINT _height;
 	public:
 		ID3D11Texture2D* texture();
 
@@ -24,15 +27,22 @@ namespace Render {
 		Texture(Core::GraphicsContext* context, Material material);
 		Texture(Core::GraphicsContext* context, ID3D11Texture2D* texture);
 		Texture(Core::GraphicsContext* context);
-		
+
 		void bind() override;
 
-		bool is_render_target();
-		bool is_shader_resource();
+		bool is_render_target() override;
+		bool is_shader_resource() override;
 		
-		char* get_data(size_t* lpsize=nullptr);
+		char* get_data(size_t* lpsize=nullptr) override;
 		
 		void copy_to(Texture* target);
 		void copy_to(ID3D11Resource* target);
+
+		unsigned width() override { return _width; }
+		unsigned height() override { return _height; }
+
+
+
+		
 	};
 }

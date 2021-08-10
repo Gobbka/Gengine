@@ -15,12 +15,12 @@ ID3D11Texture2D* Render::Texture::texture()
 }
 
 Render::Texture::Texture(Core::GraphicsContext* context, Surface resolution, UINT bind_flags, DXGI_FORMAT format)
-	: Bindable(context)
+	: _context(context)
 {
 	D3D11_TEXTURE2D_DESC texture_desc;
 	texture_desc.BindFlags = bind_flags;
-	texture_desc.Width = width = resolution.width;
-	texture_desc.Height = height = resolution.height;
+	texture_desc.Width = _width = resolution.width;
+	texture_desc.Height = _height = resolution.height;
 	texture_desc.MipLevels = 1;
 	texture_desc.ArraySize = 1;
 	texture_desc.Format = format;
@@ -37,19 +37,18 @@ Render::Texture::Texture(Core::GraphicsContext* context, Surface resolution, UIN
 
 	D3D11_SUBRESOURCE_DATA sb{ new char[resolution.width * resolution.height * 4],resolution.width * 4,0 };
 
-	assert(SUCCEEDED(_engine->device->CreateTexture2D(&texture_desc, &sb, &_texture)));
+	assert(SUCCEEDED(_context->device->CreateTexture2D(&texture_desc, &sb, &_texture)));
 
-	assert(SUCCEEDED(_engine->device->CreateShaderResourceView(_texture, &rvDesc, &_resource)));
+	assert(SUCCEEDED(_context->device->CreateShaderResourceView(_texture, &rvDesc, &_resource)));
 }
 
 Render::Texture::Texture(Core::GraphicsContext* engine,Material material)
-	: Bindable(engine)
+	: _context(engine)
 {
-	
 	D3D11_TEXTURE2D_DESC texture_desc;
 	texture_desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
-	texture_desc.Width = width = material.width();
-	texture_desc.Height = height = material.height();
+	texture_desc.Width = _width = material.width();
+	texture_desc.Height = _height = material.height();
 	texture_desc.MipLevels = 1;
 	texture_desc.ArraySize = 1;
 	texture_desc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
@@ -72,23 +71,23 @@ Render::Texture::Texture(Core::GraphicsContext* engine,Material material)
 }
 
 Render::Texture::Texture(Core::GraphicsContext* context, ID3D11Texture2D* texture)
-	: Bindable(context)
+	: _context(context)
 {
 	_texture = texture;
 	D3D11_TEXTURE2D_DESC desc;
 	_texture->GetDesc(&desc);
-	width = desc.Width;
-	height = desc.Height;
+	_width = desc.Width;
+	_height = desc.Height;
 }
 
 Render::Texture::Texture(Core::GraphicsContext* context)
-	: Bindable(context)
+	: _context(context)
 {
 }
 
 void Render::Texture::bind()
 {
-	_engine->context->PSSetShaderResources(0, 1, &_resource);
+	_context->context->PSSetShaderResources(0, 1, &_resource);
 }
 
 bool Render::Texture::is_render_target()
@@ -105,19 +104,19 @@ char* Render::Texture::get_data(size_t* lpsize)
 {
 	D3D11_MAPPED_SUBRESOURCE mp;
 	
-	_engine->context->Map(_texture, 0, D3D11_MAP_READ, 0, &mp);
+	_context->context->Map(_texture, 0, D3D11_MAP_READ, 0, &mp);
 	
-	_engine->context->Unmap(_texture, 0);
+	_context->context->Unmap(_texture, 0);
 
 	return nullptr;
 }
 
 void Render::Texture::copy_to(Texture* target)
 {
-	_engine->context->CopyResource(target->_texture, _texture);
+	_context->context->CopyResource(target->_texture, _texture);
 }
 
 void Render::Texture::copy_to(ID3D11Resource* target)
 {
-	_engine->context->CopyResource(target, _texture);
+	_context->context->CopyResource(target, _texture);
 }

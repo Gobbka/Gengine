@@ -40,9 +40,5 @@ namespace Render {
 
 		unsigned width() override { return _width; }
 		unsigned height() override { return _height; }
-
-
-
-		
 	};
 }

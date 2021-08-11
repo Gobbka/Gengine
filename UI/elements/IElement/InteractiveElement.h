@@ -37,7 +37,7 @@ namespace UI {
 		{
 			row,
 			column,
-		} flex_direction;
+		} flex_direction = FlexDirectionType::row;
 		
 		DirectX::XMFLOAT4 margin = { 0,0,0,0 };
 	};

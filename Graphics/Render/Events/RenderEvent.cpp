@@ -88,7 +88,7 @@ void Render::DrawEvent3D::draw_object(Model* object)
 	// object->transform.get_world_matrix();
 }
 
-Render::DrawEvent2D::DrawEvent2D(Camera* camera, ILayer* layer)
+Render::DrawEvent2D::DrawEvent2D(Camera* camera, Canvas::Canvas2DLayer* layer)
 	: DrawEvent(camera)
 {
 	this->layer = layer;

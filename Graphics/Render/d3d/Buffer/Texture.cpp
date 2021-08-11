@@ -35,7 +35,7 @@ Render::Texture::Texture(Core::GraphicsContext* context, Surface resolution, UIN
 	rvDesc.Texture2D.MostDetailedMip = texture_desc.MipLevels - 1;
 	rvDesc.ViewDimension = D3D_SRV_DIMENSION_TEXTURE2D;
 
-	D3D11_SUBRESOURCE_DATA sb{ new char[resolution.width * resolution.height * 4],resolution.width * 4,0 };
+	D3D11_SUBRESOURCE_DATA sb{ new char[(UINT)resolution.width * (UINT)resolution.height * 4],(UINT)resolution.width * 4,0 };
 
 	assert(SUCCEEDED(_context->device->CreateTexture2D(&texture_desc, &sb, &_texture)));
 
@@ -78,11 +78,16 @@ Render::Texture::Texture(Core::GraphicsContext* context, ID3D11Texture2D* textur
 	_texture->GetDesc(&desc);
 	_width = desc.Width;
 	_height = desc.Height;
+	_resource = nullptr;
 }
 
 Render::Texture::Texture(Core::GraphicsContext* context)
 	: _context(context)
 {
+	_width = 0;
+	_height = 0;
+	_resource = nullptr;
+	_texture = nullptr;
 }
 
 void Render::Texture::bind()

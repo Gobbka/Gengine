@@ -4,7 +4,6 @@
 #include "../../Graphics.h"
 #include "../d3d/Buffer/ConstantBuffer.h"
 #include "../I3DObject/Object3D.h"
-#include "../Layer/ILayer.h"
 #include "Types/Transform.h"
 
 struct Surface;

@@ -4,6 +4,7 @@
 #include "../../../Graphics.h"
 #include "../../d3d/Buffer/IndexBuffer.h"
 #include "../../d3d/Buffer/Texture.h"
+#include "../../Events/RenderEvent.h"
 
 namespace Render {
 	class IndexBuffer;

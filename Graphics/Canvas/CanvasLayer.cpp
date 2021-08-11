@@ -1,6 +1,6 @@
 #include "CanvasLayer.h"
 #include "Objects/I2DCanvasObject.h"
-#include "../Render/d3d/Buffer/VertexBuffer.h"
+#include "../Render/Events/RenderEvent.h"
 
 void Canvas::Canvas2DLayer::render_components(Render::DrawEvent2D* event)
 {

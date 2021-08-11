@@ -23,7 +23,7 @@ namespace UI {
 			InteractiveElement* element;
 		};
 	private:
-		std::vector<UI::InteractiveElement*> childs;
+		std::vector<UI::InteractiveElement*> _childs;
 		void render_components(Render::DrawEvent2D* event) override;
 
 		Position2* _cursor_position;

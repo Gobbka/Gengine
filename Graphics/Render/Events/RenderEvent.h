@@ -8,6 +8,7 @@ namespace Core {
 
 namespace Canvas
 {
+	class Canvas2DLayer;
 	class I2DCanvasObject;
 }
 
@@ -15,7 +16,6 @@ namespace Render {
 	class Model;
 	class SpriteEngine;
 	class Camera;
-	class ILayer;
 
 	struct __declspec(dllexport) DrawEvent {
 	protected:
@@ -44,8 +44,8 @@ namespace Render {
 	private:
 		UINT _draw_index = 0u;
 	public:
-		ILayer* layer;
-		DrawEvent2D(Camera* camera,ILayer*layer);
+		Canvas::Canvas2DLayer* layer;
+		DrawEvent2D(Camera* camera, Canvas::Canvas2DLayer*layer);
 		
 		void draw_vertex(UINT count, UINT start = 0) const;
 		void draw_object(Canvas::I2DCanvasObject* object);

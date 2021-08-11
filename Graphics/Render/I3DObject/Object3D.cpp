@@ -5,6 +5,7 @@
 #include "../../Graphics.h"
 #include "../d3d/Buffer/IndexBuffer.h"
 #include "../d3d/Buffer/VertexBuffer.h"
+#include "../Events/RenderEvent.h"
 
 void Render::Object3D::update_buffer()
 {

@@ -91,20 +91,19 @@ int WINAPI wWinMain(
     auto ch = ent->assign<Render::Model>();
 	
     auto cube = Render::Model();
+    auto platform = Render::Model();
+    platform.transform.set_position(Position3{ 0,-7,0 });
+	
     auto cube_mesh = Render::Cube(Position3::null(), form->get_graphics_context());
     auto nigga_mesh = Render::Parallelepiped(Position3(15,15,0), form->get_graphics_context(),Vector3{9,3,9});
+	
     cube_mesh.set_texture(texture);
 
     cube.add_mesh(&cube_mesh);
-    cube.add_mesh(&nigga_mesh);
-
-    auto paral = Render::Parallelepiped(Position3(-15, -7, -15), form->get_graphics_context(), Vector3(30, 1, 30));
-	paral.set_texture(texture);
-	
-    PhysicsModule module;
+    platform.add_mesh(&nigga_mesh);
 	
     form->get_graphics_context()->worldspace()->add_object(&cube);
-    //form->get_graphics_context()->worldspace()->add_object(&paral);
+    form->get_graphics_context()->worldspace()->add_object(&platform);
 
     CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);
 	

@@ -9,7 +9,7 @@ using namespace UI;
 
 void InteractiveForm::render_components(Render::DrawEvent2D* event)
 {
-	for(auto*element:this->childs)
+	for(auto*element:this->_childs)
 	{
 		if (element->styles.display != ElementStyles::DisplayType::none)
 			element->draw(event);
@@ -18,7 +18,7 @@ void InteractiveForm::render_components(Render::DrawEvent2D* event)
 
 void InteractiveForm::foreach(std::function<void(UI::InteractiveElement* element)> callback)
 {
-	for(auto*element:this->childs)
+	for(auto*element:this->_childs)
 		callback(element);
 }
 
@@ -42,7 +42,7 @@ void InteractiveForm::free_drag_move()
 
 bool InteractiveForm::has_element(UI::InteractiveElement* element)
 {
-	for (auto* in_element : this->childs)
+	for (auto* in_element : this->_childs)
 		if (element == in_element)
 			return true;
 	return false;
@@ -51,7 +51,7 @@ bool InteractiveForm::has_element(UI::InteractiveElement* element)
 
 InteractiveForm* InteractiveForm::add_element(UI::InteractiveElement* element)
 {
-	this->childs.push_back(element);
+	this->_childs.push_back(element);
 	element->initialize(this);
 	return this;
 }
@@ -82,9 +82,9 @@ Interaction::EventStatus InteractiveForm::on_mouse_move(int mx,int my)
 
 	auto e_handled = Interaction::EventStatus::none;
 
-	for (auto i = this->childs.size(); i --> 0;)
+	for (auto i = this->_childs.size(); i --> 0;)
 	{
-		auto* element = this->childs[i];
+		auto* element = this->_childs[i];
 		
 		if (
 			element->styles.display != ElementStyles::DisplayType::none &&

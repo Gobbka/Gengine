@@ -199,7 +199,7 @@ void Render::Camera::render()
 	_cameraOptions.renderTarget->bind(_maskEngine->get_view());
 	
 	_blendEngine->bind();
-	_maskEngine->set_state_force(_maskEngine->get_disabledState());
+	_maskEngine->set_state(_maskEngine->get_disabledState());
 
 	matrix_buffer->bind();
 	control_buffer->bind();

@@ -21,7 +21,6 @@
 
 #include "Debugger/PipeServer.h"
 #include "Render/d3d/Buffer/IndexBuffer.h"
-#include "Render/d3d/Buffer/VertexBuffer.h"
 
 #include <Ecs/Ecs.h>
 #include <chrono>

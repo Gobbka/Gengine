@@ -7,8 +7,63 @@ D3D11_DEPTH_STENCILOP_DESC create_depth_stencilop_desc(D3D11_COMPARISON_FUNC ste
 	return D3D11_DEPTH_STENCILOP_DESC{ D3D11_STENCIL_OP_KEEP,D3D11_STENCIL_OP_KEEP,success_func,stencil_func };
 }
 
+Render::Stencil::Stencil(Core::GraphicsContext* context, StencilUsage usage)
+{
+	_context = context->context;
+
+	D3D11_DEPTH_STENCIL_DESC depthstencildesc = {};
+
+	// i dont know why, but ui wont work when DepthEnable equals true
+	depthstencildesc.DepthEnable = false;
+	depthstencildesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+	depthstencildesc.DepthFunc = D3D11_COMPARISON_LESS;
+
+	depthstencildesc.StencilEnable = 1;
+	depthstencildesc.StencilReadMask = 0XFF;
+	depthstencildesc.StencilWriteMask = 0XFF;
+
+	if(usage == StencilUsage::write)
+	{
+		// COMPARISON_ALWAYS
+		depthstencildesc.FrontFace = create_depth_stencilop_desc(D3D11_COMPARISON_EQUAL, D3D11_STENCIL_OP_INCR);
+		depthstencildesc.BackFace = create_depth_stencilop_desc(D3D11_COMPARISON_NEVER, D3D11_STENCIL_OP_KEEP);
+	}
+
+	if(usage == StencilUsage::mask)
+	{
+		// COMPARISON_ALWAYS
+		depthstencildesc.BackFace = create_depth_stencilop_desc(D3D11_COMPARISON_NEVER, D3D11_STENCIL_OP_KEEP);
+		depthstencildesc.FrontFace = create_depth_stencilop_desc(D3D11_COMPARISON_EQUAL, D3D11_STENCIL_OP_KEEP);
+	}
+
+	if(usage == StencilUsage::normal)
+	{
+		depthstencildesc = CD3D11_DEPTH_STENCIL_DESC();
+		depthstencildesc.DepthEnable = true;
+		depthstencildesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+		depthstencildesc.DepthFunc = D3D11_COMPARISON_LESS;
+	}
+
+	assert(SUCCEEDED(context->device->CreateDepthStencilState(&depthstencildesc, &_state)));
+}
+
+void Render::Stencil::bind(UINT reference)
+{
+	_context->OMSetDepthStencilState(_state, reference);
+}
+
+Render::Stencil::~Stencil()
+{
+	if (_state)
+		_state->Release();
+}
+
 Render::MaskEngine::MaskEngine(Render::Camera* target)
-	: Bindable(target->graphics_context())
+	: Bindable(target->graphics_context()),
+	_drawState(target->graphics_context(), StencilUsage::write),
+	_discardState(target->graphics_context(), StencilUsage::mask),
+	_disabledState(target->graphics_context(), StencilUsage::normal),
+	_currentState(nullptr)
 {
 	auto screen_resolution = target->get_screen_resolution();
 	auto* device = _engine->device;
@@ -34,47 +89,15 @@ Render::MaskEngine::MaskEngine(Render::Camera* target)
 	descDSV.Texture2D.MipSlice = 0;
 
 	assert(SUCCEEDED(device->CreateDepthStencilView(_buffer, &descDSV, &_view)));
-
-	D3D11_DEPTH_STENCIL_DESC depthstencildesc = {};
-	// i dont know why, but ui wont work when DepthEnable equals true
-	depthstencildesc.DepthEnable = false;
-	depthstencildesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-	depthstencildesc.DepthFunc = D3D11_COMPARISON_LESS;
-
-	depthstencildesc.StencilEnable = 1;
-	depthstencildesc.StencilReadMask = 0XFF;
-	depthstencildesc.StencilWriteMask = 0XFF;
-	// COMPARISON_ALWAYS
-	depthstencildesc.FrontFace = create_depth_stencilop_desc(D3D11_COMPARISON_EQUAL, D3D11_STENCIL_OP_INCR);
-	depthstencildesc.BackFace = create_depth_stencilop_desc(D3D11_COMPARISON_NEVER, D3D11_STENCIL_OP_KEEP);
-	
-	assert(SUCCEEDED(device->CreateDepthStencilState(&depthstencildesc, &_drawState)));
-	
-	depthstencildesc.FrontFace = create_depth_stencilop_desc(D3D11_COMPARISON_EQUAL, D3D11_STENCIL_OP_KEEP);
-	
-	assert(SUCCEEDED(device->CreateDepthStencilState(&depthstencildesc, &_discardState)));
-	
-	CD3D11_DEPTH_STENCIL_DESC defstate(D3D11_DEFAULT);
-	defstate.DepthEnable = true;
-	defstate.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-	defstate.DepthFunc = D3D11_COMPARISON_LESS;
-	
-	assert(SUCCEEDED(device->CreateDepthStencilState(&defstate, &_disabledState)));
-	
-	set_state(_disabledState);
 }
 
-void Render::MaskEngine::set_state(ID3D11DepthStencilState* state, UINT reference)
+void Render::MaskEngine::set_state(Stencil* state, UINT reference)
 {
-	if (_currentState == state)
-		return;
-	set_state_force(state, reference);
-}
+	//if (_currentState == state)
+	//	return;
 
-void Render::MaskEngine::set_state_force(ID3D11DepthStencilState* state, UINT reference)
-{
 	_currentState = state;
-	_engine->context->OMSetDepthStencilState(state, reference);
+	_currentState->bind(reference);
 }
 
 void Render::MaskEngine::clear_buffer()

@@ -4,7 +4,7 @@
 
 namespace Render {
 
-	class __declspec(dllexport) ConstantBuffer : Render::Bindable
+	class ConstantBuffer : Render::Bindable
 	{
 	public:
 		enum CBBindFlag : BYTE

@@ -166,7 +166,7 @@ void Forms::MainForm::draw_frame()
 
 void Forms::MainForm::update()
 {
-	static float scale = 1.f;
+	static float scale = 90.f;
 	auto* camera = _worldCamera;
 	
 	if (Keyboard::pressed(VirtualKey::KEY_W)) // W
@@ -187,13 +187,13 @@ void Forms::MainForm::update()
 	}
 	if (Keyboard::pressed(VirtualKey::SPACE))
 	{
-		camera->set_scale(scale);
-		scale += 0.01f;
+		camera->set_fov(scale);
+		scale += 0.1f;
 	}
 	if (Keyboard::pressed(VirtualKey::CONTROL))
 	{
-		camera->set_scale(scale);
-		scale -= 0.01f;
+		camera->set_fov(scale);
+		scale -= 0.1f;
 	}
 
 	if (Keyboard::pressed(VirtualKey::LEFT))

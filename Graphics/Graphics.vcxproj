@@ -176,6 +176,7 @@
     <ClInclude Include="Render\I3DObject\Object3D.h" />
     <ClInclude Include="Render\I3DObject\Parallelepiped\Parallelepiped.h" />
     <ClInclude Include="Canvas\ILayer.h" />
+    <ClInclude Include="Render\Light\DirectionLight.h" />
     <ClInclude Include="Render\Model\Model.h" />
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +206,7 @@
     <ClCompile Include="Render\I3DObject\Cube\Cube.cpp" />
     <ClCompile Include="Render\I3DObject\Object3D.cpp" />
     <ClCompile Include="Render\I3DObject\Parallelepiped\Parallelepiped.cpp" />
+    <ClCompile Include="Render\Light\DirectionLight.cpp" />
     <ClCompile Include="Render\Model\Model.cpp" />
   </ItemGroup>
   <ItemGroup>

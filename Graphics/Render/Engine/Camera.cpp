@@ -215,6 +215,7 @@ void Render::Camera::render()
 		DrawEvent3D event3d(graphics_context(), this, _viewMatrix * _projectionMatrix);
 
 		auto objects = _context->worldspace()->objects;
+		
 		for (auto* object : objects)
 		{
 			this->draw_object(object, event3d);

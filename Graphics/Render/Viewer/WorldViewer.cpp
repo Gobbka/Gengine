@@ -52,7 +52,8 @@ DirectX::XMMATRIX Render::WorldViewer::create_proj_matrix()
 
 Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* target)
 	: _transform({-4,0,0}),
-	_resolution(target->get_texture()->width(), target->get_texture()->height())
+	_resolution(target->get_texture()->width(), target->get_texture()->height()),
+	matrix_buffer(context,&_matrix_buffer_struct,sizeof(_matrix_buffer_struct))
 {
 	this->context = context;
 
@@ -62,6 +63,12 @@ Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* t
 
 void Render::WorldViewer::view(Model* model)
 {
+	auto modelMatrix = model->transform.get_world_matrix();
+	_matrix_buffer_struct = { DirectX::XMMatrixTranspose(
+		modelMatrix * _viewMatrix * _projectionMatrix
+	) };
+	matrix_buffer.update();
+	
 	model->draw(DrawEvent3D(context));
 }
 

@@ -132,8 +132,6 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 	_matrix2d_buffer_struct = { DirectX::XMMatrixScaling(1.f / (_resolution.width / 2),1.f / (_resolution.height / 2),1.f) };
 	matrix2d_buffer = new ConstantBuffer(context, &_matrix2d_buffer_struct, sizeof(_matrix2d_buffer_struct), 0);
 
-	matrix_buffer = new ConstantBuffer(context, &_matrix_buffer_struct, sizeof(_matrix_buffer_struct), 0);
-
 	control_buffer = new ConstantBuffer(context, &_control_buffer_struct, sizeof(_control_buffer_struct), 1, ConstantBuffer::CBBindFlag_vs| ConstantBuffer::CBBindFlag_ps);
 	
 	update_position();
@@ -146,7 +144,7 @@ void Render::Camera::render()
 	_blendEngine->bind();
 	_maskEngine->set_state(_maskEngine->get_disabledState(),0,true);
 
-	matrix_buffer->bind();
+	matrix_buffer.bind();
 	control_buffer->bind();
 
 	if(_cameraOptions.render_3d)
@@ -162,12 +160,6 @@ void Render::Camera::render()
 		
 		for (auto* object : objects)
 		{
-			auto modelMatrix = object->transform.get_world_matrix();
-			_matrix_buffer_struct = { DirectX::XMMatrixTranspose(
-				modelMatrix * _viewMatrix * _projectionMatrix
-			) };
-			matrix_buffer->update();
-			
 			this->view(object);
 		}
 

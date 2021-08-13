@@ -28,12 +28,6 @@ namespace Render
 	private:
 
 		__declspec(align(16))
-		struct
-		{
-			DirectX::XMMATRIX _MVPMatrix;
-		} _matrix_buffer_struct;
-
-		__declspec(align(16))
 			struct
 		{
 			DirectX::XMMATRIX _viewMatrix;
@@ -46,7 +40,6 @@ namespace Render
 			float opacity = 1.f;
 		} _control_buffer_struct;
 
-		ConstantBuffer* matrix_buffer;
 		ConstantBuffer* matrix2d_buffer;
 		ConstantBuffer* control_buffer;
 

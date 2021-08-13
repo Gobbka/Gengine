@@ -2,6 +2,8 @@
 #include <DirectXMath.h>
 
 
+
+#include "../d3d/Buffer/ConstantBuffer.h"
 #include "Types/Transform.h"
 #include "Types/Types.h"
 
@@ -16,6 +18,12 @@ namespace Render
 
 	class __declspec(dllexport) WorldViewer
 	{
+		__declspec(align(16))
+			struct
+		{
+			DirectX::XMMATRIX _MVPMatrix;
+		} _matrix_buffer_struct;
+		
 	protected:
 		void update_position();
 		void update_rotation();
@@ -23,16 +31,20 @@ namespace Render
 	private:
 		DirectX::XMMATRIX create_view_matrix();
 		DirectX::XMMATRIX create_proj_matrix();
-	protected:
+	private:
 		DirectX::XMMATRIX _projectionMatrix;
 		DirectX::XMMATRIX _viewMatrix;
 		DirectX::XMVECTOR _xm_camPosition;
+	protected:
 
 		Core::Transform _transform;
+
+		ConstantBuffer matrix_buffer;
 	private:
 		float _fov = 90.f;
 		float _scale = 1.f;
 		Surface _resolution;
+
 	protected:
 		Core::GraphicsContext* context;
 

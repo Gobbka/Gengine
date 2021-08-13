@@ -10,6 +10,7 @@ D3D11_DEPTH_STENCILOP_DESC create_depth_stencilop_desc(D3D11_COMPARISON_FUNC ste
 Render::Stencil::Stencil(Core::GraphicsContext* context, StencilUsage usage)
 {
 	_context = context->context;
+	_state = nullptr;
 
 	D3D11_DEPTH_STENCIL_DESC depthstencildesc = {};
 
@@ -22,32 +23,28 @@ Render::Stencil::Stencil(Core::GraphicsContext* context, StencilUsage usage)
 	depthstencildesc.StencilReadMask = 0XFF;
 	depthstencildesc.StencilWriteMask = 0XFF;
 
-	if(usage == StencilUsage::write)
+	switch(usage)
 	{
+	case StencilUsage::write:
 		// COMPARISON_ALWAYS
 		depthstencildesc.FrontFace = create_depth_stencilop_desc(D3D11_COMPARISON_EQUAL, D3D11_STENCIL_OP_INCR);
 		depthstencildesc.BackFace = create_depth_stencilop_desc(D3D11_COMPARISON_NEVER, D3D11_STENCIL_OP_KEEP);
-	}
-
-	if(usage == StencilUsage::mask)
-	{
+	break;
+	case StencilUsage::mask:
 		// COMPARISON_ALWAYS
 		depthstencildesc.BackFace = create_depth_stencilop_desc(D3D11_COMPARISON_NEVER, D3D11_STENCIL_OP_KEEP);
 		depthstencildesc.FrontFace = create_depth_stencilop_desc(D3D11_COMPARISON_EQUAL, D3D11_STENCIL_OP_KEEP);
-	}
-
-	if(usage == StencilUsage::normal)
-	{
-		depthstencildesc = CD3D11_DEPTH_STENCIL_DESC();
+	break;
+	case StencilUsage::normal:
+		depthstencildesc.StencilEnable = false;
 		depthstencildesc.DepthEnable = true;
-		depthstencildesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-		depthstencildesc.DepthFunc = D3D11_COMPARISON_LESS;
+	break;
 	}
 
 	assert(SUCCEEDED(context->device->CreateDepthStencilState(&depthstencildesc, &_state)));
 }
 
-void Render::Stencil::bind(UINT reference)
+void Render::Stencil::bind(UINT reference) const
 {
 	_context->OMSetDepthStencilState(_state, reference);
 }
@@ -60,10 +57,11 @@ Render::Stencil::~Stencil()
 
 Render::MaskEngine::MaskEngine(Render::Camera* target)
 	: Bindable(target->graphics_context()),
+	_disabledState(target->graphics_context(), StencilUsage::normal),
 	_drawState(target->graphics_context(), StencilUsage::write),
 	_discardState(target->graphics_context(), StencilUsage::mask),
-	_disabledState(target->graphics_context(), StencilUsage::normal),
-	_currentState(nullptr)
+	_currentState(nullptr),
+	_view(nullptr)
 {
 	auto screen_resolution = target->get_screen_resolution();
 	auto* device = _engine->device;
@@ -91,16 +89,16 @@ Render::MaskEngine::MaskEngine(Render::Camera* target)
 	assert(SUCCEEDED(device->CreateDepthStencilView(_buffer, &descDSV, &_view)));
 }
 
-void Render::MaskEngine::set_state(Stencil* state, UINT reference)
+void Render::MaskEngine::set_state(Stencil* state, UINT reference,bool force)
 {
-	//if (_currentState == state)
-	//	return;
+	if (_currentState == state && !force)
+		return;
 
 	_currentState = state;
 	_currentState->bind(reference);
 }
 
-void Render::MaskEngine::clear_buffer()
+void Render::MaskEngine::clear_buffer() const
 {
 	_engine->context->ClearDepthStencilView(_view, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 }

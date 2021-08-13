@@ -6,7 +6,7 @@
 
 namespace Render {
 
-	enum class StencilUsage
+	enum class StencilUsage : __int8
 	{
 		normal,
 		write,
@@ -20,7 +20,7 @@ namespace Render {
 	public:
 		Stencil(Core::GraphicsContext* context, StencilUsage usage);
 
-		void bind(UINT reference = 0);
+		void bind(UINT reference = 0) const;
 
 		~Stencil();
 	};
@@ -38,8 +38,8 @@ namespace Render {
 	public:
 		MaskEngine(Render::Camera* target);
 
-		void set_state(Stencil* state,UINT reference = 0);
-		void clear_buffer();
+		void set_state(Stencil* state,UINT reference = 0,bool force = false);
+		void clear_buffer() const;
 		
 		void bind() override;
 

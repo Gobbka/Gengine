@@ -22,26 +22,22 @@ Render::Stencil::Stencil(Core::GraphicsContext* context, StencilUsage usage)
 	depthstencildesc.StencilReadMask = 0XFF;
 	depthstencildesc.StencilWriteMask = 0XFF;
 
-	if(usage == StencilUsage::write)
+	switch(usage)
 	{
+	case StencilUsage::write:
 		// COMPARISON_ALWAYS
 		depthstencildesc.FrontFace = create_depth_stencilop_desc(D3D11_COMPARISON_EQUAL, D3D11_STENCIL_OP_INCR);
 		depthstencildesc.BackFace = create_depth_stencilop_desc(D3D11_COMPARISON_NEVER, D3D11_STENCIL_OP_KEEP);
-	}
-
-	if(usage == StencilUsage::mask)
-	{
+	break;
+	case StencilUsage::mask:
 		// COMPARISON_ALWAYS
 		depthstencildesc.BackFace = create_depth_stencilop_desc(D3D11_COMPARISON_NEVER, D3D11_STENCIL_OP_KEEP);
 		depthstencildesc.FrontFace = create_depth_stencilop_desc(D3D11_COMPARISON_EQUAL, D3D11_STENCIL_OP_KEEP);
-	}
-
-	if(usage == StencilUsage::normal)
-	{
-		depthstencildesc = CD3D11_DEPTH_STENCIL_DESC();
+	break;
+	default:
+		depthstencildesc.StencilEnable = false;
 		depthstencildesc.DepthEnable = true;
-		depthstencildesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-		depthstencildesc.DepthFunc = D3D11_COMPARISON_LESS;
+	break;
 	}
 
 	assert(SUCCEEDED(context->device->CreateDepthStencilState(&depthstencildesc, &_state)));

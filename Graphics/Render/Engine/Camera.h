@@ -4,6 +4,7 @@
 #include "../../Graphics.h"
 #include "../d3d/Buffer/ConstantBuffer.h"
 #include "../I3DObject/Object3D.h"
+#include "../Viewer/WorldViewer.h"
 #include "Types/Transform.h"
 
 struct Surface;
@@ -22,10 +23,9 @@ namespace Render
 		RenderTarget* renderTarget = nullptr;
 	};
 
-	class __declspec(dllexport) Camera
+	class __declspec(dllexport) Camera : public WorldViewer
 	{
 	private:
-		Core::GraphicsContext* _context;
 
 		__declspec(align(16))
 		struct
@@ -53,27 +53,13 @@ namespace Render
 		BlendEngine* _blendEngine;
 		MaskEngine*  _maskEngine;
 
-		Core::Transform _transform;
-
-		DirectX::XMVECTOR _xm_camPosition;
-		DirectX::XMVECTOR _xm_lookAt;
-		
-		float _fov = 90.f;
-		float _scale = 1.f;
-		Surface _resolution;
-
 		CameraOptions _cameraOptions;
 
 		std::vector<Canvas::Canvas2DLayer*> _canvas2DLayers;
 	private:
-		void update_position();
 		void draw_object(Model* object,DrawEvent3D event3d);
 		
-		DirectX::XMMATRIX create_view_matrix();
-		DirectX::XMMATRIX create_proj_matrix();
-		
-		DirectX::XMMATRIX _projectionMatrix;
-		DirectX::XMMATRIX _viewMatrix;
+
 	public:
 		void set_position(Position3 pos);
 		void adjust_position(Position3 pos);
@@ -85,8 +71,7 @@ namespace Render
 		void set_resolution(Surface new_resolution);
 		void set_alpha(float alpha);
 
-		void set_scale(float scale);
-		void set_fov(float fov);
+
 
 		Canvas::Canvas2DLayer* create_canvas_2d();
 		void register_canvas_2d(Canvas::Canvas2DLayer* layer);
@@ -98,7 +83,6 @@ namespace Render
 	public:
 		CameraOptions* options();
 		Core::GraphicsContext* graphics_context();
-		ID3D11DeviceContext* context() const;
 		ID3D11Device* device() const;
 		RenderTarget* get_target_view() const;
 		MaskEngine* mask_engine() const;

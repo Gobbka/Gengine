@@ -57,7 +57,7 @@ void Render::DrawEvent::set_alpha(float alpha)
 
 void Render::DrawEvent2D::draw_vertex(UINT count, UINT start) const
 {
-	_camera->context()->Draw(count, start + _draw_index);
+	_camera->graphics_context()->context->Draw(count, start + _draw_index);
 }
 
 void Render::DrawEvent2D::draw_object(Canvas::I2DCanvasObject* object)

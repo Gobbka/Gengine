@@ -178,6 +178,7 @@
     <ClInclude Include="Canvas\ILayer.h" />
     <ClInclude Include="Render\Light\DirectionLight.h" />
     <ClInclude Include="Render\Model\Model.h" />
+    <ClInclude Include="Render\Viewer\WorldViewer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Canvas\CanvasLayer.cpp" />
@@ -208,6 +209,7 @@
     <ClCompile Include="Render\I3DObject\Parallelepiped\Parallelepiped.cpp" />
     <ClCompile Include="Render\Light\DirectionLight.cpp" />
     <ClCompile Include="Render\Model\Model.cpp" />
+    <ClCompile Include="Render\Viewer\WorldViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Render\d3d\hlsl\pixel_shader.hlsl">

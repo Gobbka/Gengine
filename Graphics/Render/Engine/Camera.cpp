@@ -15,13 +15,6 @@ const static DirectX::XMVECTOR DEFAULT_BACKWARD_VECTOR = DirectX::XMVectorSet(0.
 const static DirectX::XMVECTOR DEFAULT_LEFT_VECTOR = DirectX::XMVectorSet(-1.0f, 0.0f, 0.0f, 0.0f);
 const static DirectX::XMVECTOR DEFAULT_RIGHT_VECTOR = DirectX::XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f);
 
-void Render::Camera::update_position()
-{
-	auto camPos = _transform.get_position();
-	_xm_camPosition = DirectX::XMVectorSet(camPos.z, camPos.y, camPos.x, 0.f);
-	_viewMatrix = create_view_matrix();
-}
-
 void Render::Camera::draw_object(Model* object, DrawEvent3D event3d)
 {
 	auto modelMatrix = object->transform.get_world_matrix();
@@ -30,34 +23,6 @@ void Render::Camera::draw_object(Model* object, DrawEvent3D event3d)
 	) };
 	matrix_buffer->update();
 	object->draw(event3d);
-}
-
-DirectX::XMMATRIX Render::Camera::create_view_matrix()
-{
-	auto rotation = _transform.get_rotation();
-	
-	auto camRotMatrix = DirectX::XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
-	auto camTarget = DirectX::XMVector3TransformCoord(DEFAULT_FORWARD_VECTOR, camRotMatrix);
-
-	camTarget = DirectX::XMVectorAdd(camTarget, _xm_camPosition);
-	
-	auto upDir = DirectX::XMVector3TransformCoord(DEFAULT_UP_VECTOR, camRotMatrix);
-
-	return DirectX::XMMatrixLookAtLH(
-		_xm_camPosition,
-		camTarget,
-		upDir
-	);
-}
-
-DirectX::XMMATRIX Render::Camera::create_proj_matrix()
-{
-	auto forRadians = (_fov / 360.f) * DirectX::XM_2PI;
-
-	auto res = _resolution;
-	auto aspectRatio = res.width / res.height;
-
-	return DirectX::XMMatrixPerspectiveFovLH(forRadians, aspectRatio, 0.1f, 120.f) * DirectX::XMMatrixScaling(_scale,_scale,1.f);
 }
 
 void Render::Camera::set_position(Position3 pos)
@@ -81,14 +46,14 @@ void Render::Camera::adjust_position_relative(Position3 pos)
 void Render::Camera::adjust_rotation(Vector3 rot)
 {
 	_transform.adjust_rotation(rot);
-	_viewMatrix = create_view_matrix();
+	update_rotation();
 }
 
 void Render::Camera::set_resolution(Surface resolution)
 {
-	_resolution = resolution;
+	//_resolution = resolution;
 	_matrix2d_buffer_struct = { DirectX::XMMatrixScaling(1.f / (resolution.width / 2),1.f / (resolution.height / 2),1.f) };
-	_projectionMatrix = create_proj_matrix();
+	//_projectionMatrix = create_proj_matrix();
 	
 	matrix2d_buffer->update();
 }
@@ -102,21 +67,10 @@ void Render::Camera::set_alpha(float alpha)
 	control_buffer->update();
 }
 
-void Render::Camera::set_scale(float scale)
-{
-	_scale = scale;
-	_projectionMatrix = create_proj_matrix();
-}
-
-void Render::Camera::set_fov(float fov)
-{
-	_fov = fov;
-	_projectionMatrix = create_proj_matrix();
-}
 
 Canvas::Canvas2DLayer* Render::Camera::create_canvas_2d()
 {
-	auto* layer = new Canvas::Canvas2DLayer(_context);
+	auto* layer = new Canvas::Canvas2DLayer(context);
 	register_canvas_2d(layer);
 	return layer;
 }
@@ -138,17 +92,12 @@ Render::CameraOptions* Render::Camera::options()
 
 Core::GraphicsContext* Render::Camera::graphics_context()
 {
-	return _context;
-}
-
-ID3D11DeviceContext* Render::Camera::context() const
-{
-	return _context->context;
+	return context;
 }
 
 ID3D11Device* Render::Camera::device() const
 {
-	return _context->device;
+	return context->device;
 }
 
 Render::RenderTarget* Render::Camera::get_target_view() const
@@ -168,28 +117,24 @@ Render::BlendEngine* Render::Camera::blend_engine() const
 
 Surface Render::Camera::get_screen_resolution() const
 {
-	return _context->get_screen_resolution();
+	return context->get_screen_resolution();
 }
 
 Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 	:
-	_transform(Position3(-4.f, 0, 0)),
-	_resolution(0,0)
+	WorldViewer(context,target)
 {
-	_context = context;
 	_cameraOptions.renderTarget = target;
-	_blendEngine = new BlendEngine(_context);
+	_blendEngine = new BlendEngine(context);
 	_maskEngine  = new MaskEngine(this);
 	
-	_resolution = context->get_screen_resolution();
+	auto _resolution = get_view_resolution();
 	_matrix2d_buffer_struct = { DirectX::XMMatrixScaling(1.f / (_resolution.width / 2),1.f / (_resolution.height / 2),1.f) };
-	matrix2d_buffer = new ConstantBuffer(_context, &_matrix2d_buffer_struct, sizeof(_matrix2d_buffer_struct), 0);
+	matrix2d_buffer = new ConstantBuffer(context, &_matrix2d_buffer_struct, sizeof(_matrix2d_buffer_struct), 0);
 
-	matrix_buffer = new ConstantBuffer(_context, &_matrix_buffer_struct, sizeof(_matrix_buffer_struct), 0);
+	matrix_buffer = new ConstantBuffer(context, &_matrix_buffer_struct, sizeof(_matrix_buffer_struct), 0);
 
 	control_buffer = new ConstantBuffer(context, &_control_buffer_struct, sizeof(_control_buffer_struct), 1, ConstantBuffer::CBBindFlag_vs| ConstantBuffer::CBBindFlag_ps);
-
-	_projectionMatrix = create_proj_matrix();
 	
 	update_position();
 }
@@ -206,7 +151,7 @@ void Render::Camera::render()
 
 	if(_cameraOptions.render_3d)
 	{
-		_context->begin_3d();
+		context->begin_3d();
 
 		_control_buffer_struct.offset = Position2(0, 0);
 		set_alpha(1.f);
@@ -214,7 +159,7 @@ void Render::Camera::render()
 		// render all world objects
 		DrawEvent3D event3d(graphics_context(), this, _viewMatrix * _projectionMatrix);
 
-		auto objects = _context->worldspace()->objects;
+		auto objects = context->worldspace()->objects;
 		
 		for (auto* object : objects)
 		{
@@ -228,7 +173,7 @@ void Render::Camera::render()
 	{
 		// then render canvas
 
-		_context->begin_2d();
+		context->begin_2d();
 
 		matrix2d_buffer->bind();
 

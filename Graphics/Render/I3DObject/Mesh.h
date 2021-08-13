@@ -12,7 +12,7 @@ namespace Render
 	class IndexBuffer;
 	class VertexBuffer;
 
-	class __declspec(dllexport) Object3D
+	class __declspec(dllexport) Mesh
 	{
 		VertexBuffer* _buffer;
 		IndexBuffer* _index_buffer;
@@ -25,10 +25,10 @@ namespace Render
 
 		void bind();
 	public:
-		virtual ~Object3D() = default;
+		virtual ~Mesh() = default;
 		
-		Object3D(Core::GraphicsContext*context,size_t vertex_size,IndexBuffer*index_buffer,Position3 pos = { 0,0,0 });
-		Object3D(Core::GraphicsContext* context, VertexBuffer* buffer, IndexBuffer* index_buffer,Position3 pos = {0,0,0});
+		Mesh(Core::GraphicsContext*context,size_t vertex_size,IndexBuffer*index_buffer,Position3 pos = { 0,0,0 });
+		Mesh(Core::GraphicsContext* context, VertexBuffer* buffer, IndexBuffer* index_buffer,Position3 pos = {0,0,0});
 		
 		virtual void draw(DrawEvent3D event3d);
 	};

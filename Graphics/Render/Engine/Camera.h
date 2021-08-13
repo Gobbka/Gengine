@@ -3,7 +3,7 @@
 
 #include "../../Graphics.h"
 #include "../d3d/Buffer/ConstantBuffer.h"
-#include "../I3DObject/Object3D.h"
+#include "../I3DObject/Mesh.h"
 #include "../Viewer/WorldViewer.h"
 #include "Types/Transform.h"
 

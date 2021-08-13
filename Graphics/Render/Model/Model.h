@@ -1,12 +1,12 @@
 #pragma once
 #include <vector>
 
-#include "../I3DObject/Object3D.h"
+#include "../I3DObject/Mesh.h"
 
 namespace Render
 {
 	struct DrawEvent3D;
-	typedef Object3D Mesh;
+	typedef Mesh Mesh;
 	
 	class __declspec(dllexport) Model
 	{

@@ -16,7 +16,7 @@ UINT PARALLELEPIPED_INDEX_ARRAY[]{
 };
 
 Render::Parallelepiped::Parallelepiped(Position3 pos, Core::GraphicsContext* context, Vector3 resolution)
-	: Object3D(context, 8, new IndexBuffer(context, PARALLELEPIPED_INDEX_ARRAY, ARRAYSIZE(PARALLELEPIPED_INDEX_ARRAY)),pos)
+	: Mesh(context, 8, new IndexBuffer(context, PARALLELEPIPED_INDEX_ARRAY, ARRAYSIZE(PARALLELEPIPED_INDEX_ARRAY)),pos)
 {
 	auto* ptr = vertices();
 
@@ -66,7 +66,7 @@ void Render::Parallelepiped::set_texture(Render::Texture* texture)
 
 void Render::Parallelepiped::draw(DrawEvent3D event3d)
 {
-	Object3D::bind();
+	Mesh::bind();
 	auto* engine = _context->get_sprite_engine();
 
 	if (this->texture != nullptr)

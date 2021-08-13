@@ -1,4 +1,4 @@
-#include "Object3D.h"
+#include "Mesh.h"
 
 
 
@@ -7,23 +7,23 @@
 #include "../d3d/Buffer/VertexBuffer.h"
 #include "../Events/RenderEvent.h"
 
-void Render::Object3D::update_buffer()
+void Render::Mesh::update_buffer()
 {
 	_buffer->update();
 }
 
-Render::Vertex* Render::Object3D::vertices()
+Render::Vertex* Render::Mesh::vertices()
 {
 	return _buffer->data;
 }
 
-void Render::Object3D::bind()
+void Render::Mesh::bind()
 {
 	_buffer->bind();
 	_index_buffer->bind();
 }
 
-Render::Object3D::Object3D(Core::GraphicsContext* context, size_t vertex_size, IndexBuffer* index_buffer,
+Render::Mesh::Mesh(Core::GraphicsContext* context, size_t vertex_size, IndexBuffer* index_buffer,
 	Position3 pos)
 {
 	_context = context;
@@ -31,7 +31,7 @@ Render::Object3D::Object3D(Core::GraphicsContext* context, size_t vertex_size, I
 	_index_buffer = index_buffer;
 }
 
-Render::Object3D::Object3D(Core::GraphicsContext* context, VertexBuffer* buffer, IndexBuffer* index_buffer,
+Render::Mesh::Mesh(Core::GraphicsContext* context, VertexBuffer* buffer, IndexBuffer* index_buffer,
 	Position3 pos)
 {
 	_context = context;
@@ -39,7 +39,7 @@ Render::Object3D::Object3D(Core::GraphicsContext* context, VertexBuffer* buffer,
 	_index_buffer = index_buffer;
 }
 
-void Render::Object3D::draw(DrawEvent3D event3d)
+void Render::Mesh::draw(DrawEvent3D event3d)
 {
 	bind();
 	event3d.draw_indexed(_index_buffer->size());

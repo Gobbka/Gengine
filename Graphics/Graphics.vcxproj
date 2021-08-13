@@ -173,7 +173,7 @@
     <ClInclude Include="Render\Engine\SpriteEngine.h" />
     <ClInclude Include="Render\Events\RenderEvent.h" />
     <ClInclude Include="Render\I3DObject\Cube\Cube.h" />
-    <ClInclude Include="Render\I3DObject\Object3D.h" />
+    <ClInclude Include="Render\I3DObject\Mesh.h" />
     <ClInclude Include="Render\I3DObject\Parallelepiped\Parallelepiped.h" />
     <ClInclude Include="Canvas\ILayer.h" />
     <ClInclude Include="Render\Light\DirectionLight.h" />
@@ -205,7 +205,7 @@
     <ClCompile Include="Render\Engine\SpriteEngine.cpp" />
     <ClCompile Include="Render\Events\RenderEvent.cpp" />
     <ClCompile Include="Render\I3DObject\Cube\Cube.cpp" />
-    <ClCompile Include="Render\I3DObject\Object3D.cpp" />
+    <ClCompile Include="Render\I3DObject\Mesh.cpp" />
     <ClCompile Include="Render\I3DObject\Parallelepiped\Parallelepiped.cpp" />
     <ClCompile Include="Render\Light\DirectionLight.cpp" />
     <ClCompile Include="Render\Model\Model.cpp" />

@@ -17,12 +17,12 @@ const static DirectX::XMVECTOR DEFAULT_RIGHT_VECTOR = DirectX::XMVectorSet(1.0f,
 
 void Render::Camera::draw_object(Model* object, DrawEvent3D event3d)
 {
-	auto modelMatrix = object->transform.get_world_matrix();
-	_matrix_buffer_struct = { DirectX::XMMatrixTranspose(
-		modelMatrix * event3d.VPMatrix
-	) };
-	matrix_buffer->update();
-	object->draw(event3d);
+	//auto modelMatrix = object->transform.get_world_matrix();
+	//_matrix_buffer_struct = { DirectX::XMMatrixTranspose(
+	//	modelMatrix * event3d.VPMatrix
+	//) };
+	//matrix_buffer->update();
+	//object->draw(event3d);
 }
 
 void Render::Camera::set_position(Position3 pos)
@@ -157,13 +157,18 @@ void Render::Camera::render()
 		set_alpha(1.f);
 
 		// render all world objects
-		DrawEvent3D event3d(graphics_context(), this, _viewMatrix * _projectionMatrix);
 
 		auto objects = context->worldspace()->objects;
 		
 		for (auto* object : objects)
 		{
-			this->draw_object(object, event3d);
+			auto modelMatrix = object->transform.get_world_matrix();
+			_matrix_buffer_struct = { DirectX::XMMatrixTranspose(
+				modelMatrix * _viewMatrix * _projectionMatrix
+			) };
+			matrix_buffer->update();
+			
+			this->view(object);
 		}
 
 		_maskEngine->clear_buffer();

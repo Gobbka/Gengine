@@ -11,6 +11,7 @@ namespace Core {
 
 namespace Render
 {
+	class Model;
 	class RenderTarget;
 
 	class __declspec(dllexport) WorldViewer
@@ -25,12 +26,9 @@ namespace Render
 	protected:
 		DirectX::XMMATRIX _projectionMatrix;
 		DirectX::XMMATRIX _viewMatrix;
-		Core::Transform _transform;
-
-	private:
 		DirectX::XMVECTOR _xm_camPosition;
-		DirectX::XMVECTOR _xm_lookAt;
 
+		Core::Transform _transform;
 	private:
 		float _fov = 90.f;
 		float _scale = 1.f;
@@ -40,6 +38,8 @@ namespace Render
 
 	protected:
 		WorldViewer(Core::GraphicsContext* context, RenderTarget* target);
+
+		void view(Model* model);
 	public:
 		void set_scale(float scale);
 		void set_fov(float fov);

@@ -1,6 +1,8 @@
 #include "WorldViewer.h"
 
 #include "../Engine/RenderTarget.h"
+#include "../Events/RenderEvent.h"
+#include "../Model/Model.h"
 
 const static DirectX::XMVECTOR DEFAULT_FORWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
 const static DirectX::XMVECTOR DEFAULT_UP_VECTOR = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
@@ -56,6 +58,11 @@ Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* t
 
 	_viewMatrix = create_view_matrix();
 	_projectionMatrix = create_proj_matrix();
+}
+
+void Render::WorldViewer::view(Model* model)
+{
+	model->draw(DrawEvent3D(context));
 }
 
 void Render::WorldViewer::set_scale(float scale)

@@ -51,13 +51,12 @@ namespace Render {
 		void draw_object(Canvas::I2DCanvasObject* object);
 	};
 
-	struct DrawEvent3D : public DrawEvent
+	struct DrawEvent3D
 	{
 		Core::GraphicsContext* _context;
 	public:
-		DirectX::XMMATRIX VPMatrix;
 		
-		DrawEvent3D(Core::GraphicsContext* context,Camera*camera,DirectX::XMMATRIX VPMatrix);
+		DrawEvent3D(Core::GraphicsContext* context);
 
 		void draw(UINT count,UINT start_location = 0);
 		void draw_indexed(UINT count,UINT start_location = 0);

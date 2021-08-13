@@ -84,9 +84,6 @@
     <ClInclude Include="Render\I3DObject\Parallelepiped\Parallelepiped.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\I3DObject\Object3D.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Render\Model\Model.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -115,6 +112,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Render\Viewer\WorldViewer.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\I3DObject\Mesh.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
@@ -188,9 +188,6 @@
     <ClCompile Include="Render\I3DObject\Parallelepiped\Parallelepiped.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\I3DObject\Object3D.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Render\Model\Model.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -204,6 +201,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Render\Viewer\WorldViewer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\I3DObject\Mesh.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

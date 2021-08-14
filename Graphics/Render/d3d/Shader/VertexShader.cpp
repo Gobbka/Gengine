@@ -3,7 +3,7 @@
 
 void Render::VertexShader::construct(ID3DBlob* shader_blob)
 {
-	_engine->device->CreateVertexShader(
+	context->device->CreateVertexShader(
 		shader_blob->GetBufferPointer(),
 		shader_blob->GetBufferSize(),
 		nullptr,
@@ -15,7 +15,7 @@ void Render::VertexShader::create_input_layout(const D3D11_INPUT_ELEMENT_DESC* e
 	ID3D11InputLayout** layout)
 {
 
-	auto hresult = _engine->device->CreateInputLayout(
+	auto hresult = context->device->CreateInputLayout(
 		elements,
 		num_elements,
 		_blob->GetBufferPointer(),
@@ -34,5 +34,5 @@ Render::VertexShader::VertexShader(Core::GraphicsContext* engine)
 
 void Render::VertexShader::bind()
 {
-	_engine->context->VSSetShader(_shader, nullptr, 0);
+	context->context->VSSetShader(_shader, nullptr, 0);
 }

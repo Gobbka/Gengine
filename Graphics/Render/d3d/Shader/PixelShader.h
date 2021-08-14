@@ -7,10 +7,8 @@ namespace Render {
 		ID3D11PixelShader* _shader;
 		void construct(ID3DBlob* shader_blob) override;
 	public:
+		ID3D11PixelShader* get_d3d11_ps() { return _shader; }
+		
 		PixelShader(Core::GraphicsContext* engine);
-
-		void bind() override;
-
-		static void unbind(Core::GraphicsContext* context);
 	};
 }

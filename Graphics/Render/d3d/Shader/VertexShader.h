@@ -13,6 +13,6 @@ namespace Render {
 		
 		VertexShader(Core::GraphicsContext* engine);
 
-		void bind() override;
+		void bind();
 	};
 }

@@ -8,6 +8,8 @@
 #include "Render/Engine/SpriteEngine.h"
 #include "Render/Model/Model.h"
 
+#include "Graphics/Layouts/PixelShaderLayout.h"
+
 
 // TODO-LIST:
 // Rename D3DEngine to Camera and replace all D3DEngine* dependency to Graphic*
@@ -58,6 +60,7 @@ namespace Core
 	public:
 		Render::IBufferAllocator* buffer_allocator() const;
 
+		Render::PixelShaderLayout pixel_shader;
 		
 		WorldSpace* worldspace();
 		

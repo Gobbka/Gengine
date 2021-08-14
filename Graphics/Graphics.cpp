@@ -28,7 +28,8 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	: context(context),
 	device(dev),
 	_screen_resolution(0,0),
-	_targetView(this,swap)
+	_targetView(this,swap),
+	pixel_shader(this)
 {
 	_swap = swap;
 

@@ -28,8 +28,9 @@ void Render::SpriteEngine::begin_sprite_mode()
 {
 	if (_drawMode == DrawMode::sprite)
 		return;
-	
-	_texture_ps->bind();
+
+	if (_ps_active)
+		_texture_ps->bind();
 	_texture_vs->bind();
 	_graphicsContext->context->IASetInputLayout(_texture_layout);
 
@@ -40,8 +41,9 @@ void Render::SpriteEngine::begin_color_mode()
 {
 	if (_drawMode == DrawMode::color)
 		return;
-	
-	_color_ps->bind();
+
+	if(_ps_active)
+		_color_ps->bind();
 	_color_vs->bind();
 	_graphicsContext->context->IASetInputLayout(_color_layout);
 
@@ -51,4 +53,20 @@ void Render::SpriteEngine::begin_color_mode()
 void Render::SpriteEngine::end()
 {
 	//_drawMode = DrawMode::none;
+}
+
+void Render::SpriteEngine::set_ps_state(bool active)
+{
+	_ps_active = active;
+
+	if (_ps_active)
+	{
+		if (_drawMode == DrawMode::color)
+			_color_ps->bind();
+		if (_drawMode == DrawMode::sprite)
+			_texture_ps->bind();
+	}else
+	{
+		PixelShader::unbind(_graphicsContext);
+	}
 }

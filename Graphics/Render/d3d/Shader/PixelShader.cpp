@@ -21,3 +21,8 @@ void Render::PixelShader::bind()
 {
 	_engine->context->PSSetShader(_shader, nullptr, 0);
 }
+
+void Render::PixelShader::unbind(Core::GraphicsContext*context)
+{
+	context->context->PSSetShader(nullptr, nullptr, 0);
+}

@@ -34,6 +34,9 @@ namespace Render {
 		ID3D11InputLayout* _color_layout;
 
 		DrawMode _drawMode;
+
+		bool _ps_active = true;
+		
 	public:
 		SpriteEngine(
 			Core::GraphicsContext* context,
@@ -45,7 +48,9 @@ namespace Render {
 
 		void begin_sprite_mode();
 		void begin_color_mode();
-		void end();
 		
+		void end();
+
+		void set_ps_state(bool active);
 	};
 }

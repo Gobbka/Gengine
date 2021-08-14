@@ -57,7 +57,8 @@ namespace Render
 		void set_fov(float fov);
 
 		Core::GraphicsContext* graphics_context();
-		
+
+		RenderTarget* get_render_target();
 		Surface get_view_resolution();
 	};
 }

@@ -20,11 +20,12 @@ namespace Render {
 	struct __declspec(dllexport) DrawEvent {
 	protected:
 		Camera* _camera;
+		SpriteEngine* _spriteEngine;
 	private:
 		UINT _stencil_layer = 0u;
 		
 	public:
-		DrawEvent(Camera* engine);
+		DrawEvent(Camera* engine,SpriteEngine*sprite_engine);
 
 	public:
 		SpriteEngine* sprite_engine();

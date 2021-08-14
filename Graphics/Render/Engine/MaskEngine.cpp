@@ -63,8 +63,12 @@ Render::MaskEngine::MaskEngine(WorldViewer* target, MaskEngineUsage usage)
 	_currentState(nullptr),
 	_view(nullptr)
 {
+	_target = target->get_render_target();
+	
 	auto screen_resolution = target->get_view_resolution();
 	auto* device = _engine->device;
+
+	
 	
 	D3D11_TEXTURE2D_DESC texture_2d_desc{};
 	

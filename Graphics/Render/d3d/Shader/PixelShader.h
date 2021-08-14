@@ -10,5 +10,7 @@ namespace Render {
 		PixelShader(Core::GraphicsContext* engine);
 
 		void bind() override;
+
+		static void unbind(Core::GraphicsContext* context);
 	};
 }

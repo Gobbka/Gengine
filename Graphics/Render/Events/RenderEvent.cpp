@@ -3,14 +3,15 @@
 #include "../Engine/Camera.h"
 #include "../Engine/MaskEngine.h"
 
-Render::DrawEvent::DrawEvent(Camera* engine)
+Render::DrawEvent::DrawEvent(Camera* engine,SpriteEngine*sprite_engine)
 {
 	_camera = engine;
+	_spriteEngine = sprite_engine;
 }
 
 Render::SpriteEngine* Render::DrawEvent::sprite_engine()
 {
-	return _camera->graphics_context()->get_sprite_engine();
+	return _spriteEngine;
 }
 
 void Render::DrawEvent::mask_draw_begin() const
@@ -87,7 +88,7 @@ void Render::DrawEvent3D::draw_object(Model* object)
 }
 
 Render::DrawEvent2D::DrawEvent2D(Camera* camera, Canvas::Canvas2DLayer* layer)
-	: DrawEvent(camera)
+	: DrawEvent(camera,camera->graphics_context()->get_sprite_engine())
 {
 	this->layer = layer;
 }

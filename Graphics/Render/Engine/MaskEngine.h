@@ -5,6 +5,7 @@
 
 
 namespace Render {
+	class RenderTarget;
 	class WorldViewer;
 
 	enum class StencilUsage : __int8
@@ -42,6 +43,7 @@ namespace Render {
 
 		ID3D11Texture2D* _buffer;
 		ID3D11DepthStencilView* _view;
+		RenderTarget* _target;
 	public:
 		MaskEngine(WorldViewer* target, MaskEngineUsage usage = MaskEngineUsage::DepthStencil);
 

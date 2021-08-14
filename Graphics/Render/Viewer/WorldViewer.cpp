@@ -90,6 +90,11 @@ Core::GraphicsContext* Render::WorldViewer::graphics_context()
 	return context;
 }
 
+Render::RenderTarget* Render::WorldViewer::get_render_target()
+{
+	return render_target;
+}
+
 Surface Render::WorldViewer::get_view_resolution()
 {
 	return _resolution;

@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "../Events/RenderEvent.h"
+#include "../Light/DirectionLight.h"
 
 const static DirectX::XMVECTOR DEFAULT_FORWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
 const static DirectX::XMVECTOR DEFAULT_UP_VECTOR = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
@@ -129,8 +130,8 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 
 void Render::Camera::render()
 {
-	//if(test_light)
-	//	test_light->create_shadowmap();
+	if(test_light)
+		test_light->create_shadowmap();
 	
 	_cameraOptions.renderTarget->bind(_maskEngine->get_view());
 	

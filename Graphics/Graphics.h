@@ -44,8 +44,6 @@ namespace Core
 		Render::SamplerState* _samplerState;
 		
 		Render::PixelShader* _pixelShader;
-		//Render::VertexShader* _vertexShader;
-		//Render::VertexShader* _vertexShader3d;
 		
 		ID3D11InputLayout* _inputLayout;
 

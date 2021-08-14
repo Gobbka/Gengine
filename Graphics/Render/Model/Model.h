@@ -6,7 +6,6 @@
 namespace Render
 {
 	struct DrawEvent3D;
-	typedef Mesh Mesh;
 	
 	class __declspec(dllexport) Model
 	{

@@ -5,6 +5,7 @@
 
 
 namespace Render {
+	class WorldViewer;
 
 	enum class StencilUsage : __int8
 	{
@@ -24,6 +25,12 @@ namespace Render {
 
 		~Stencil();
 	};
+
+	enum class MaskEngineUsage
+	{
+		Depth,
+		DepthStencil,
+	};
 	
 	class MaskEngine : public Bindable
 	{
@@ -36,7 +43,7 @@ namespace Render {
 		ID3D11Texture2D* _buffer;
 		ID3D11DepthStencilView* _view;
 	public:
-		MaskEngine(Render::Camera* target);
+		MaskEngine(WorldViewer* target, MaskEngineUsage usage = MaskEngineUsage::DepthStencil);
 
 		void set_state(Stencil* state,UINT reference = 0,bool force = false);
 		void clear_buffer() const;

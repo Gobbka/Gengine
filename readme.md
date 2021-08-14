@@ -1,3 +1,7 @@
 ##TODO:
 
-merge texture_ps and pixel_shader into one shader. I think solution is create field in cbuffer like "bool texture_mode"
+На завтра:
+
+1) переписать всё под ECS
+2) решить конфликт RenderTarget и MaskEngine (см DirectionLight)
+3) добавить TextureComponent и ColorComponent

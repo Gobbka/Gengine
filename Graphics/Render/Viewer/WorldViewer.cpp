@@ -40,25 +40,26 @@ DirectX::XMMATRIX Render::WorldViewer::create_view_matrix()
 	);
 }
 
-DirectX::XMMATRIX Render::WorldViewer::create_proj_matrix()
+DirectX::XMMATRIX Render::WorldViewer::create_projection_matrix(Surface resolution, float fov, float scale)
 {
-	auto forRadians = (_fov / 360.f) * DirectX::XM_2PI;
+	auto forRadians = (fov / 360.f) * DirectX::XM_2PI;
 
-	auto res = _resolution;
+	auto res = resolution;
 	auto aspectRatio = res.width / res.height;
 
-	return DirectX::XMMatrixPerspectiveFovLH(forRadians, aspectRatio, 0.1f, 120.f) * DirectX::XMMatrixScaling(_scale, _scale, 1.f);
+	return DirectX::XMMatrixPerspectiveFovLH(forRadians, aspectRatio, 0.1f, 120.f) * DirectX::XMMatrixScaling(scale, scale, 1.f);
 }
 
 Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* target)
 	: _transform({-4,0,0}),
-	_resolution(target->get_texture()->width(), target->get_texture()->height()),
-	matrix_buffer(context,&_matrix_buffer_struct,sizeof(_matrix_buffer_struct))
+	matrix_buffer(context,&_matrix_buffer_struct,sizeof(_matrix_buffer_struct)),
+	_resolution(target->get_texture()->width(), target->get_texture()->height())
 {
 	this->context = context;
-
+	render_target = target;
+	
 	_viewMatrix = create_view_matrix();
-	_projectionMatrix = create_proj_matrix();
+	_projectionMatrix = create_projection_matrix(_resolution,_fov,_scale);
 }
 
 void Render::WorldViewer::view(Model* model)
@@ -75,13 +76,18 @@ void Render::WorldViewer::view(Model* model)
 void Render::WorldViewer::set_scale(float scale)
 {
 	_scale = scale;
-	_projectionMatrix = create_proj_matrix();
+	_projectionMatrix = create_projection_matrix(_resolution,_fov,_scale);
 }
 
 void Render::WorldViewer::set_fov(float fov)
 {
 	_fov = fov;
-	_projectionMatrix = create_proj_matrix();
+	_projectionMatrix = create_projection_matrix(_resolution, _fov, _scale);
+}
+
+Core::GraphicsContext* Render::WorldViewer::graphics_context()
+{
+	return context;
 }
 
 Surface Render::WorldViewer::get_view_resolution()

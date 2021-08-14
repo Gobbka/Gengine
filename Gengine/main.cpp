@@ -112,7 +112,6 @@ int WINAPI wWinMain(
 	
 	while(true)
 	{
-        
 		
 		if(PeekMessage(&msg, nullptr,0, 0, PM_REMOVE))
 		{

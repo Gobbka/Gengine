@@ -11,6 +11,7 @@ struct Surface;
 
 namespace Render
 {
+	class DirectionLight;
 	class Cube;
 	class MaskEngine;
 	class BlendEngine;
@@ -50,10 +51,10 @@ namespace Render
 
 		std::vector<Canvas::Canvas2DLayer*> _canvas2DLayers;
 	private:
-		void draw_object(Model* object,DrawEvent3D event3d);
-		
-
+		DirectionLight* test_light;
 	public:
+		void set_light(DirectionLight* light) { test_light = light; }
+		
 		void set_position(Position3 pos);
 		void adjust_position(Position3 pos);
 		void adjust_position_relative(Position3 pos);
@@ -63,8 +64,6 @@ namespace Render
 		
 		void set_resolution(Surface new_resolution);
 		void set_alpha(float alpha);
-
-
 
 		Canvas::Canvas2DLayer* create_canvas_2d();
 		void register_canvas_2d(Canvas::Canvas2DLayer* layer);

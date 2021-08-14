@@ -1,6 +1,7 @@
 #include "Model.h"
 
 #include "../Events/RenderEvent.h"
+#include "Ecs/Ecs.h"
 
 Render::Model::Model()
 	: transform({0,0,0})

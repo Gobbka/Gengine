@@ -1,4 +1,5 @@
 #pragma once
+#include "../Viewer/WorldViewer.h"
 #include "Types/Transform.h"
 
 namespace Core {
@@ -7,12 +8,15 @@ namespace Core {
 
 namespace Render
 {
-	class DirectionLight
+	class MaskEngine;
+
+	class __declspec(dllexport) DirectionLight : public WorldViewer
 	{
-		Core::GraphicsContext* _context;
+		MaskEngine* _mask_engine;
 	public:
-		Core::Transform transform;
 
 		DirectionLight(Core::GraphicsContext* context);
+
+		void create_shadowmap();
 	};
 }

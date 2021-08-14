@@ -55,22 +55,22 @@ Render::Stencil::~Stencil()
 		_state->Release();
 }
 
-Render::MaskEngine::MaskEngine(Render::Camera* target)
+Render::MaskEngine::MaskEngine(WorldViewer* target, MaskEngineUsage usage)
 	: Bindable(target->graphics_context()),
 	_disabledState(target->graphics_context(), StencilUsage::normal),
-	_drawState(target->graphics_context(), StencilUsage::write),
-	_discardState(target->graphics_context(), StencilUsage::mask),
+	_drawState(target->graphics_context(), usage == MaskEngineUsage::DepthStencil ? StencilUsage::write : StencilUsage::normal),
+	_discardState(target->graphics_context(), usage == MaskEngineUsage::DepthStencil ? StencilUsage::mask : StencilUsage::normal),
 	_currentState(nullptr),
 	_view(nullptr)
 {
-	auto screen_resolution = target->get_screen_resolution();
+	auto screen_resolution = target->get_view_resolution();
 	auto* device = _engine->device;
 	
 	D3D11_TEXTURE2D_DESC texture_2d_desc{};
 	
 	texture_2d_desc.Width = (UINT)screen_resolution.width;
 	texture_2d_desc.Height = (UINT)screen_resolution.height;
-	texture_2d_desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	texture_2d_desc.Format = usage == MaskEngineUsage::DepthStencil ? DXGI_FORMAT_D24_UNORM_S8_UINT : DXGI_FORMAT_D32_FLOAT;
 	texture_2d_desc.ArraySize = 1;
 	texture_2d_desc.MipLevels = 1;
 	texture_2d_desc.SampleDesc = { 1,0 };

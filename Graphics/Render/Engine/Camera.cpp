@@ -15,16 +15,6 @@ const static DirectX::XMVECTOR DEFAULT_BACKWARD_VECTOR = DirectX::XMVectorSet(0.
 const static DirectX::XMVECTOR DEFAULT_LEFT_VECTOR = DirectX::XMVectorSet(-1.0f, 0.0f, 0.0f, 0.0f);
 const static DirectX::XMVECTOR DEFAULT_RIGHT_VECTOR = DirectX::XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f);
 
-void Render::Camera::draw_object(Model* object, DrawEvent3D event3d)
-{
-	//auto modelMatrix = object->transform.get_world_matrix();
-	//_matrix_buffer_struct = { DirectX::XMMatrixTranspose(
-	//	modelMatrix * event3d.VPMatrix
-	//) };
-	//matrix_buffer->update();
-	//object->draw(event3d);
-}
-
 void Render::Camera::set_position(Position3 pos)
 {
 	_transform.set_position(pos);
@@ -139,6 +129,9 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 
 void Render::Camera::render()
 {
+	//if(test_light)
+	//	test_light->create_shadowmap();
+	
 	_cameraOptions.renderTarget->bind(_maskEngine->get_view());
 	
 	_blendEngine->bind();
@@ -155,7 +148,7 @@ void Render::Camera::render()
 		set_alpha(1.f);
 
 		// render all world objects
-
+		
 		auto objects = context->worldspace()->objects;
 		
 		for (auto* object : objects)

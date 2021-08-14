@@ -30,13 +30,13 @@ namespace Render
 		
 	private:
 		DirectX::XMMATRIX create_view_matrix();
-		DirectX::XMMATRIX create_proj_matrix();
+	 	static DirectX::XMMATRIX create_projection_matrix(Surface resolution,float fov,float scale=1.f);
 	private:
 		DirectX::XMMATRIX _projectionMatrix;
 		DirectX::XMMATRIX _viewMatrix;
 		DirectX::XMVECTOR _xm_camPosition;
 	protected:
-
+		RenderTarget* render_target;
 		Core::Transform _transform;
 
 		ConstantBuffer matrix_buffer;
@@ -56,6 +56,8 @@ namespace Render
 		void set_scale(float scale);
 		void set_fov(float fov);
 
+		Core::GraphicsContext* graphics_context();
+		
 		Surface get_view_resolution();
 	};
 }

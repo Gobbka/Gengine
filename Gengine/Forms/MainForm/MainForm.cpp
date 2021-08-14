@@ -16,6 +16,8 @@
 #include <InteractiveForm.h>
 #include <UIManager.h>
 
+#include "Render/Light/DirectionLight.h"
+
 
 namespace UI
 {
@@ -114,6 +116,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	auto* cam_options = _worldCamera->options();
 	cam_options->render_2d = false;
 	cam_options->render_3d = true;
+	_worldCamera->set_light(new Render::DirectionLight(get_graphics_context()));
 
 	_render_panel->set_texture(worldTexture->get_texture());
 

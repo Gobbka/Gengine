@@ -45,7 +45,6 @@ namespace Render
 		ConstantBuffer* control_buffer;
 
 		BlendEngine* _blendEngine;
-		MaskEngine*  _maskEngine;
 
 		CameraOptions _cameraOptions;
 
@@ -77,7 +76,7 @@ namespace Render
 		Core::GraphicsContext* graphics_context();
 		ID3D11Device* device() const;
 		RenderTarget* get_target_view() const;
-		MaskEngine* mask_engine() const;
+		MaskEngine* get_mask_engine() const;
 		BlendEngine* blend_engine() const;
 
 		Surface get_screen_resolution() const;

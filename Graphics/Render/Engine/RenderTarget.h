@@ -13,6 +13,11 @@ namespace Core {
 namespace Render {
 	class Texture;
 
+	enum class RenderTargetUsage
+	{
+		null
+	};
+	
 	class __declspec(dllexport) RenderTarget
 	{
 		ID3D11RenderTargetView* _targetView;
@@ -25,6 +30,9 @@ namespace Render {
 		RenderTarget(Core::GraphicsContext* context, Texture texture);
 		// create render target from empty texture
 		RenderTarget(Core::GraphicsContext* context, Surface texture_resolution);
+
+		RenderTarget(Core::GraphicsContext* context, RenderTargetUsage usage);
+		
 		
 		ID3D11Resource* get_resource();
 		Texture* get_texture();

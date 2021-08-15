@@ -34,6 +34,16 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Surface textu
 	assert(SUCCEEDED(context->device->CreateRenderTargetView(_texture.texture(), nullptr, &_targetView)));
 }
 
+Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, RenderTargetUsage usage)
+	: _context(context),
+	_texture(context)
+{
+	if(usage == RenderTargetUsage::null)
+	{
+		_targetView = nullptr;
+	}
+}
+
 ID3D11Resource* Render::RenderTarget::get_resource()
 {
 	return _texture.texture();
@@ -46,7 +56,8 @@ Render::Texture* Render::RenderTarget::get_texture()
 
 void Render::RenderTarget::bind(ID3D11DepthStencilView* stencil) const
 {
-	_context->context->OMSetRenderTargets(1, &_targetView, stencil);
+	auto num = _targetView == nullptr ? 0 : 1;
+	_context->context->OMSetRenderTargets(num, _targetView == nullptr ? nullptr : &_targetView, stencil);
 }
 
 void Render::RenderTarget::clear(Color3 color)

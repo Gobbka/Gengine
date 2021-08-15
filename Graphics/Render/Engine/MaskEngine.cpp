@@ -55,7 +55,7 @@ Render::Stencil::~Stencil()
 		_state->Release();
 }
 
-Render::MaskEngine::MaskEngine(WorldViewer* target, MaskEngineUsage usage)
+Render::MaskEngine::MaskEngine(WorldViewer* target, MaskEngineUsage usage,Surface*resolution)
 	: Bindable(target->graphics_context()),
 	_disabledState(target->graphics_context(), StencilUsage::normal),
 	_drawState(target->graphics_context(), usage == MaskEngineUsage::DepthStencil ? StencilUsage::write : StencilUsage::normal),
@@ -65,10 +65,8 @@ Render::MaskEngine::MaskEngine(WorldViewer* target, MaskEngineUsage usage)
 {
 	_target = target->get_render_target();
 	
-	auto screen_resolution = target->get_view_resolution();
+	auto screen_resolution = resolution == nullptr ? target->get_view_resolution() : *resolution;
 	auto* device = _engine->device;
-
-	
 	
 	D3D11_TEXTURE2D_DESC texture_2d_desc{};
 	
@@ -109,5 +107,5 @@ void Render::MaskEngine::clear_buffer() const
 
 void Render::MaskEngine::bind()
 {
-	_engine->get_render_target_view()->bind(_view);
+	_target->bind(_view);
 }

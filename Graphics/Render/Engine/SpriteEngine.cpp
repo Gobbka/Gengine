@@ -52,23 +52,27 @@ void Render::SpriteEngine::begin_color_mode()
 	_drawMode = DrawMode::color;
 }
 
-void Render::SpriteEngine::end()
+bool Render::SpriteEngine::set_ps_state(bool active)
 {
-	//_drawMode = DrawMode::none;
-}
-
-void Render::SpriteEngine::set_ps_state(bool active)
-{
+	bool current_status = _ps_active;
 	_ps_active = active;
 
 	if (_ps_active)
 	{
-		if (_drawMode == DrawMode::color)
+		switch (_drawMode)
+		{
+		case DrawMode::color:
 			_graphicsContext->pixel_shader.bind(_color_ps);
-		if (_drawMode == DrawMode::sprite)
+		break;
+		case DrawMode::sprite:
 			_graphicsContext->pixel_shader.bind(_texture_ps);
+		break;
+		case DrawMode::none: break;
+		}	
 	}else
 	{
 		_graphicsContext->pixel_shader.remove();
 	}
+	
+	return current_status;
 }

@@ -96,9 +96,9 @@ Render::RenderTarget* Render::Camera::get_target_view() const
 	return _cameraOptions.renderTarget;
 }
 
-Render::MaskEngine* Render::Camera::mask_engine() const
+Render::MaskEngine* Render::Camera::get_mask_engine() const
 {
-	return _maskEngine;
+	return mask_engine;
 }
 
 Render::BlendEngine* Render::Camera::blend_engine() const
@@ -117,13 +117,14 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 {
 	_cameraOptions.renderTarget = target;
 	_blendEngine = new BlendEngine(context);
-	_maskEngine  = new MaskEngine(this);
 	
 	auto _resolution = get_view_resolution();
 	_matrix2d_buffer_struct = { DirectX::XMMatrixScaling(1.f / (_resolution.width / 2),1.f / (_resolution.height / 2),1.f) };
 	matrix2d_buffer = new ConstantBuffer(context, &_matrix2d_buffer_struct, sizeof(_matrix2d_buffer_struct), 0);
 
 	control_buffer = new ConstantBuffer(context, &_control_buffer_struct, sizeof(_control_buffer_struct), 1, ConstantBuffer::CBBindFlag_vs| ConstantBuffer::CBBindFlag_ps);
+
+	mask_engine = new MaskEngine(this);
 	
 	update_position();
 }
@@ -133,10 +134,10 @@ void Render::Camera::render()
 	if(test_light)
 		test_light->create_shadowmap();
 	
-	_cameraOptions.renderTarget->bind(_maskEngine->get_view());
+	_cameraOptions.renderTarget->bind(mask_engine->get_view());
 	
 	_blendEngine->bind();
-	_maskEngine->set_state(_maskEngine->get_disabledState(),0,true);
+	mask_engine->set_state(mask_engine->get_disabledState(),0,true);
 
 	matrix_buffer.bind();
 	control_buffer->bind();
@@ -157,7 +158,7 @@ void Render::Camera::render()
 			this->view(object);
 		}
 
-		_maskEngine->clear_buffer();
+		mask_engine->clear_buffer();
 	}
 	
 	if(_cameraOptions.render_2d)
@@ -182,6 +183,6 @@ void Render::Camera::render()
 			layer->render(&event);
 		}
 
-		_maskEngine->clear_buffer();
+		mask_engine->clear_buffer();
 	}
 }

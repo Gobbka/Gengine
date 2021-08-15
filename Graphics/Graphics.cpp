@@ -114,9 +114,6 @@ void Core::GraphicsContext::set_resolution(Surface new_resolution)
 
 	_viewport.Width = _screen_resolution.width;
 	_viewport.Height = _screen_resolution.height;
-
-	// TODO: make draw event where pass screen resolution
-	//_main_camera->set_resolution(new_resolution);
 }
 
 void Core::GraphicsContext::new_frame()
@@ -127,7 +124,6 @@ void Core::GraphicsContext::new_frame()
 
 void Core::GraphicsContext::present_frame()
 {
-	_spriteEngine->end();
 	_swap->Present(1u, 0u);
 }
 

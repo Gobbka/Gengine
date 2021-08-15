@@ -48,9 +48,7 @@ namespace Render {
 
 		void begin_sprite_mode();
 		void begin_color_mode();
-		
-		void end();
 
-		void set_ps_state(bool active);
+		bool set_ps_state(bool active);
 	};
 }

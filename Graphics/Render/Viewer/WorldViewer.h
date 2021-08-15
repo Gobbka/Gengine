@@ -13,6 +13,7 @@ namespace Core {
 
 namespace Render
 {
+	class MaskEngine;
 	class Model;
 	class RenderTarget;
 
@@ -37,6 +38,8 @@ namespace Render
 		DirectX::XMVECTOR _xm_camPosition;
 	protected:
 		RenderTarget* render_target;
+		MaskEngine* mask_engine;
+		
 		Core::Transform _transform;
 
 		ConstantBuffer matrix_buffer;
@@ -60,5 +63,7 @@ namespace Render
 
 		RenderTarget* get_render_target();
 		Surface get_view_resolution();
+
+		void bind();
 	};
 }

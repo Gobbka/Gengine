@@ -4,6 +4,8 @@
 #include "../d3d/Bindable.h"
 
 
+struct Surface;
+
 namespace Render {
 	class RenderTarget;
 	class WorldViewer;
@@ -45,7 +47,7 @@ namespace Render {
 		ID3D11DepthStencilView* _view;
 		RenderTarget* _target;
 	public:
-		MaskEngine(WorldViewer* target, MaskEngineUsage usage = MaskEngineUsage::DepthStencil);
+		MaskEngine(WorldViewer* target, MaskEngineUsage usage = MaskEngineUsage::DepthStencil,Surface* resolution=nullptr);
 
 		void set_state(Stencil* state,UINT reference = 0,bool force = false);
 		void clear_buffer() const;

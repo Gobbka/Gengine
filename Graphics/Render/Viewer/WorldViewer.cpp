@@ -1,5 +1,9 @@
 #include "WorldViewer.h"
 
+
+
+#include "../../Graphics.h"
+#include "../Engine/MaskEngine.h"
 #include "../Engine/RenderTarget.h"
 #include "../Events/RenderEvent.h"
 #include "../Model/Model.h"
@@ -53,10 +57,15 @@ DirectX::XMMATRIX Render::WorldViewer::create_projection_matrix(Surface resoluti
 Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* target)
 	: _transform({-4,0,0}),
 	matrix_buffer(context,&_matrix_buffer_struct,sizeof(_matrix_buffer_struct)),
-	_resolution(target->get_texture()->width(), target->get_texture()->height())
+	_resolution(0,0)
 {
 	this->context = context;
-	render_target = target;
+
+	if(target != nullptr)
+	{
+		_resolution = Surface(target->get_texture()->width(), target->get_texture()->height());
+		render_target = target;
+	}
 	
 	_viewMatrix = create_view_matrix();
 	_projectionMatrix = create_projection_matrix(_resolution,_fov,_scale);
@@ -98,4 +107,12 @@ Render::RenderTarget* Render::WorldViewer::get_render_target()
 Surface Render::WorldViewer::get_view_resolution()
 {
 	return _resolution;
+}
+
+void Render::WorldViewer::bind()
+{
+	auto* mask_view = mask_engine != nullptr ? mask_engine->get_view() : nullptr;
+	
+	render_target->bind(mask_view);
+	
 }

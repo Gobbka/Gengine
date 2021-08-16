@@ -16,10 +16,9 @@ Render::DirectionLight::DirectionLight(Core::GraphicsContext* gcontext)
 
 void Render::DirectionLight::create_shadowmap()
 {
-	//graphics_context()->get_sprite_engine()->set_ps_state(false);
+	graphics_context()->get_sprite_engine()->set_ps_state(false);
 	
 	context->begin_3d();
-	
 
 	matrix_buffer.bind();
 	

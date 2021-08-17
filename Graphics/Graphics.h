@@ -42,6 +42,7 @@ namespace Core
 		
 		IDXGISwapChain* _swap;
 		Render::RenderTarget _targetView;
+		Render::RenderTarget _shadowRenderTarget;
 
 		Render::SamplerState* _samplerState;
 		
@@ -68,7 +69,7 @@ namespace Core
 		
 		Surface get_screen_resolution() const;
 		Render::RenderTarget* get_render_target_view();
-
+		Render::RenderTarget* get_shadow_render_target();
 		/// <summary>
 		/// create and returns camera pointer
 		/// </summary>

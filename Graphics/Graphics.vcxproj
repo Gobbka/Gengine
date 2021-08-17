@@ -151,11 +151,14 @@
     <ClInclude Include="Canvas\Objects\I2DCanvasObject.h" />
     <ClInclude Include="Canvas\Objects\Rectangle\Rectangle.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Graphics\Channels.h" />
     <ClInclude Include="Graphics\IBuffers\IIndexBuffer.h" />
     <ClInclude Include="Graphics\IBuffers\ITexture2D.h" />
     <ClInclude Include="Graphics\IBuffers\IVertexBuffer.h" />
     <ClInclude Include="Graphics\Layouts\PixelShaderLayout.h" />
     <ClInclude Include="Graphics\Material\Material.h" />
+    <ClInclude Include="Graphics\Technique\Step.h" />
+    <ClInclude Include="Graphics\Technique\Technique.h" />
     <ClInclude Include="Render\d3d\Bindable.h" />
     <ClInclude Include="Render\d3d\Buffer\ConstantBuffer.h" />
     <ClInclude Include="Render\d3d\Buffer\D3D11BufferAllocator.h" />
@@ -189,6 +192,8 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Graphics\Layouts\PixelShaderLayout.cpp" />
     <ClCompile Include="Graphics\Material\Material.cpp" />
+    <ClCompile Include="Graphics\Technique\Step.cpp" />
+    <ClCompile Include="Graphics\Technique\Technique.cpp" />
     <ClCompile Include="Render\d3d\Bindable.cpp" />
     <ClCompile Include="Render\d3d\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Render\d3d\Buffer\D3D11BufferAllocator.cpp" />

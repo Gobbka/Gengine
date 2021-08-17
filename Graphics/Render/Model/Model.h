@@ -19,5 +19,6 @@ namespace Render
 		void add_mesh(Mesh* mesh);
 		
 		void draw(DrawEvent3D event3d);
+		
 	};
 }

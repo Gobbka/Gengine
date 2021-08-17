@@ -6,7 +6,7 @@
 #include "../Engine/RenderTarget.h"
 
 Render::DirectionLight::DirectionLight(Core::GraphicsContext* gcontext)
-	: WorldViewer(gcontext,new RenderTarget(gcontext,gcontext->get_screen_resolution()))
+	: WorldViewer(gcontext,gcontext->get_shadow_render_target())
 {
 	auto scr_res = gcontext->get_screen_resolution();
 	_mask_engine = new MaskEngine(this,MaskEngineUsage::Depth,&scr_res);

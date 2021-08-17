@@ -29,6 +29,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	device(dev),
 	_screen_resolution(0,0),
 	_targetView(this,swap),
+	_shadowRenderTarget(this,Render::RenderTargetUsage::null),
 	pixel_shader(this)
 {
 	_swap = swap;
@@ -38,6 +39,8 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 		swap->GetDesc(&desc);
 		_screen_resolution = Surface(desc.BufferDesc.Width,desc.BufferDesc.Height);
 	}
+
+	_shadowRenderTarget = Render::RenderTarget(this, _screen_resolution);
 
 	_bufferAllocator = new Render::D3D11BufferAllocator(this);
 
@@ -100,6 +103,11 @@ Surface Core::GraphicsContext::get_screen_resolution() const
 Render::RenderTarget* Core::GraphicsContext::get_render_target_view()
 {
 	return &_targetView;
+}
+
+Render::RenderTarget* Core::GraphicsContext::get_shadow_render_target()
+{
+	return &_shadowRenderTarget;
 }
 
 Render::Camera* Core::GraphicsContext::create_camera(Render::RenderTarget* target)

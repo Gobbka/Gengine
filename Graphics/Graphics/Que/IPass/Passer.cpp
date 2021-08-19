@@ -1,11 +1,19 @@
 ﻿#include "Passer.h"
 
-void Render::Passer::add_pass(IPass*pass)
+void Render::Passer::add_pass(IPass*pass, PassStep step)
 {
-	_body_passes.push_back(pass);
+	switch (step)
+	{
+	case PassStep::draw:
+		_draw_passes.push_back(pass);
+	break;
+	case PassStep::probe:
+		_probe_passes.push_back(pass);
+	break;
+	}	
 }
 
-std::vector<Render::IPass*>& Render::Passer::get_passes()
+void Render::Passer::remove_pass(IPass*, PassStep step)
 {
-	return _body_passes;
+	
 }

@@ -52,6 +52,7 @@ namespace Render
 	private:
 		DirectionLight* test_light;
 	public:
+		void clear(Color3 color = Color3(0, 0, 0));
 		void set_light(DirectionLight* light) { test_light = light; }
 		
 		void set_position(Position3 pos);

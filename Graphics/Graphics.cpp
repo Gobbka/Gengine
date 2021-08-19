@@ -125,10 +125,12 @@ void Core::GraphicsContext::set_resolution(Surface new_resolution)
 	_viewport.Height = _screen_resolution.height;
 }
 
-void Core::GraphicsContext::new_frame()
+Render::RenderQueuePass Core::GraphicsContext::new_frame()
 {
 	context->RSSetViewports(1, &_viewport);
 	context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+
+	return Render::RenderQueuePass();
 }
 
 void Core::GraphicsContext::present_frame()

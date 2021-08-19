@@ -17,7 +17,6 @@ void Render::Technique::submit(Model* model, size_t channel)
 			//model->draw();
 		}
 	}
-		
 }
 
 void Render::Technique::add_step(Step step)

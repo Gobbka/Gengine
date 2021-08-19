@@ -157,6 +157,9 @@
     <ClInclude Include="Graphics\IBuffers\IVertexBuffer.h" />
     <ClInclude Include="Graphics\Layouts\PixelShaderLayout.h" />
     <ClInclude Include="Graphics\Material\Material.h" />
+    <ClInclude Include="Graphics\Que\IPass\IPass.h" />
+    <ClInclude Include="Graphics\Que\IPass\Passer.h" />
+    <ClInclude Include="Graphics\Que\RenderQueuePass\RenderQueuePass.h" />
     <ClInclude Include="Graphics\Technique\Step.h" />
     <ClInclude Include="Graphics\Technique\Technique.h" />
     <ClInclude Include="Render\d3d\Bindable.h" />
@@ -192,6 +195,8 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Graphics\Layouts\PixelShaderLayout.cpp" />
     <ClCompile Include="Graphics\Material\Material.cpp" />
+    <ClCompile Include="Graphics\Que\IPass\Passer.cpp" />
+    <ClCompile Include="Graphics\Que\RenderQueuePass\RenderQueuePass.cpp" />
     <ClCompile Include="Graphics\Technique\Step.cpp" />
     <ClCompile Include="Graphics\Technique\Technique.cpp" />
     <ClCompile Include="Render\d3d\Bindable.cpp" />

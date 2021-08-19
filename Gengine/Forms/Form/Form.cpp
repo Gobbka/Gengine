@@ -10,7 +10,7 @@ void Core::Form::handle_resize(Surface rect)
     WindowsWindow::handle_resize(rect);
 }
 
-void Core::Form::draw_frame()
+void Core::Form::draw_frame(Render::RenderQueuePass)
 {
     main_camera->render();
 }
@@ -42,10 +42,10 @@ void Core::Form::drag_move()
 
 void Core::Form::force_draw()
 {
-    _graphics->new_frame();
+    auto que_pass = _graphics->new_frame();
 	
-    main_camera->get_target_view()->clear(Color3(0.1f, 0.1f, 0.1f));
-    draw_frame();
+    main_camera->clear(Color3(0.1f, 0.1f, 0.1f));
+    draw_frame(que_pass);
 	
     _graphics->present_frame();
 }

@@ -3,6 +3,7 @@
 #include "Types/Types.h"
 
 namespace Render {
+	class RenderQueuePass;
 	class Camera;
 }
 
@@ -18,7 +19,7 @@ namespace Core
 		Render::Camera* main_camera;
 		void handle_resize(Surface rect) override;
 
-		virtual void draw_frame();
+		virtual void draw_frame(Render::RenderQueuePass);
 	protected:
 		Form(HINSTANCE hinst, UINT width, UINT height);
 		virtual ~Form();

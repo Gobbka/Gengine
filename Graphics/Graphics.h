@@ -9,6 +9,7 @@
 #include "Render/Model/Model.h"
 
 #include "Graphics/Layouts/PixelShaderLayout.h"
+#include "Graphics/Que/RenderQueuePass/RenderQueuePass.h"
 
 
 // TODO-LIST:
@@ -79,7 +80,7 @@ namespace Core
 	public:
 		void set_resolution(Surface new_resolution);
 
-		void new_frame();
+		Render::RenderQueuePass new_frame();
 		void present_frame();
 
 		void begin_2d();

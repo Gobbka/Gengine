@@ -16,6 +16,11 @@ const static DirectX::XMVECTOR DEFAULT_BACKWARD_VECTOR = DirectX::XMVectorSet(0.
 const static DirectX::XMVECTOR DEFAULT_LEFT_VECTOR = DirectX::XMVectorSet(-1.0f, 0.0f, 0.0f, 0.0f);
 const static DirectX::XMVECTOR DEFAULT_RIGHT_VECTOR = DirectX::XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f);
 
+void Render::Camera::clear(Color3 color)
+{
+	render_target->clear(color);
+}
+
 void Render::Camera::set_position(Position3 pos)
 {
 	_transform.set_position(pos);

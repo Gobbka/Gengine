@@ -49,7 +49,7 @@ DirectX::XMMATRIX Render::WorldViewer::create_projection_matrix(Surface resoluti
 	auto forRadians = (fov / 360.f) * DirectX::XM_2PI;
 
 	auto res = resolution;
-	auto aspectRatio = res.width / res.height;
+	auto aspectRatio = (float)(res.width / res.height);
 
 	return DirectX::XMMatrixPerspectiveFovLH(forRadians, aspectRatio, 0.1f, 120.f) * DirectX::XMMatrixScaling(scale, scale, 1.f);
 }

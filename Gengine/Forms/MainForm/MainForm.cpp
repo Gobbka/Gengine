@@ -159,12 +159,12 @@ void Forms::MainForm::handle_resize(Surface rect)
 	Form::handle_resize(rect);
 }
 
-void Forms::MainForm::draw_frame()
+void Forms::MainForm::draw_frame(Render::RenderQueuePass pass)
 {
 	_worldCamera->get_target_view()->clear(Color3{ 0,0,0 });
 	_worldCamera->render();
 
-	Form::draw_frame();
+	Form::draw_frame(pass);
 }
 
 void Forms::MainForm::update()

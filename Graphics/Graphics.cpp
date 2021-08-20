@@ -19,6 +19,7 @@
 
 #include "Graphics/Material/Material.h"
 #include "Graphics/Que/IPass/IPass.h"
+#include "Graphics/Que/RenderQueuePass/RenderQueuePass.h"
 #include "Render/d3d/Buffer/D3D11BufferAllocator.h"
 
 void Core::WorldSpace::add_object(Render::Model* object)
@@ -72,6 +73,9 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	);
 
 	_worldSpace = ECS::World::createWorld();
+
+	_passer._begin_passes.push_back(new Render::ClearPass());
+	_passer._end_passes.push_back(new Render::RenderQueuePass());
 	
 	_viewport.Width  = _screen_resolution.width;
 	_viewport.Height = _screen_resolution.height;
@@ -118,10 +122,6 @@ ECS::ComponentHandle<Render::Camera> Core::GraphicsContext::create_camera(Render
 {
 	auto entt = _worldSpace->create();
 	return entt->assign<Render::Camera>(this, target == nullptr ? &_targetView : target);
-	
-	//return target == nullptr ?
-	//	new Render::Camera(this, &_targetView) :
-	//	new Render::Camera(this, target);
 }
 
 void Core::GraphicsContext::set_resolution(Surface new_resolution)

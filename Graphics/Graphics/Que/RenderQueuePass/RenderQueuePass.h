@@ -12,7 +12,12 @@ namespace Render
 	class MaskEngine;
 	class RenderTarget;
 
-	class __declspec(dllexport) RenderQueuePass : IPass
+	class ClearPass : public IPass
+	{
+		void execute(Core::GraphicsContext* context) override;
+	};
+	
+	class __declspec(dllexport) RenderQueuePass : public IPass
 	{
 
 	public:

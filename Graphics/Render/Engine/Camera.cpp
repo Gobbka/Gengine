@@ -173,10 +173,7 @@ void Render::Camera::render()
 
 		context->begin_2d();
 		mask_engine->get_discardState()->bind(0);
-
-		auto resolution = get_view_resolution();
-		matrix2d_buffer->data = { DirectX::XMMatrixScaling(1.f / (resolution.width / 2),1.f / (resolution.height / 2),1.f) };
-		matrix2d_buffer->update();
+		
 		matrix2d_buffer->bind();
 
 		control_buffer->data.offset = Position2(-1, 1);

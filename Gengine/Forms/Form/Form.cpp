@@ -12,7 +12,7 @@ void Core::Form::handle_resize(Surface rect)
 
 void Core::Form::draw_frame()
 {
-    main_camera->render();
+    //main_camera->render();
 }
 
 Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
@@ -44,7 +44,7 @@ void Core::Form::force_draw()
 {
     _graphics->make_frame();
 	
-    main_camera->clear(Color3(0.1f, 0.1f, 0.1f));
+    //main_camera->clear(Color3(0.1f, 0.1f, 0.1f));
     draw_frame();
 	
     _graphics->present_frame();

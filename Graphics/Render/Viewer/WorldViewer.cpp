@@ -66,6 +66,9 @@ Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* t
 		_resolution = Surface(target->get_texture()->width(), target->get_texture()->height());
 		render_target = target;
 	}
+
+	update_position();
+	update_rotation();
 	
 	_viewMatrix = create_view_matrix();
 	_projectionMatrix = create_projection_matrix(_resolution,_fov,_scale);

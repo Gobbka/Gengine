@@ -34,7 +34,7 @@ namespace Forms
 		void scan_assets_directory();
 
 		void handle_resize(Surface rect) override;
-		void draw_frame(Render::RenderQueuePass) override;
+		void draw_frame() override;
 
 		void update() override;
 	};

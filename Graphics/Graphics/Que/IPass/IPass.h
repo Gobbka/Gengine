@@ -1,5 +1,9 @@
 #pragma once
 
+namespace Core {
+	class GraphicsContext;
+}
+
 namespace Render
 {
 	enum class PassStep
@@ -11,6 +15,6 @@ namespace Render
 	class __declspec(dllexport) IPass
 	{
 	public:
-		virtual void execute() = 0;
+		virtual void execute(Core::GraphicsContext*context) = 0;
 	};
 }

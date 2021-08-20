@@ -130,6 +130,8 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 	control_buffer = new ConstantBuffer(context, &_control_buffer_struct, sizeof(_control_buffer_struct), 1, ConstantBuffer::CBBindFlag_vs| ConstantBuffer::CBBindFlag_ps);
 
 	mask_engine = new MaskEngine(this);
+
+	test_light = nullptr;
 	
 	update_position();
 }

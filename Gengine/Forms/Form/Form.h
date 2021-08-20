@@ -19,7 +19,7 @@ namespace Core
 		Render::Camera* main_camera;
 		void handle_resize(Surface rect) override;
 
-		virtual void draw_frame(Render::RenderQueuePass);
+		virtual void draw_frame();
 	protected:
 		Form(HINSTANCE hinst, UINT width, UINT height);
 		virtual ~Form();

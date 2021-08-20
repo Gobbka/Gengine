@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "Canvas/CanvasLayer.h"
+#include "Ecs/Ecs.h"
 #include "Types/Types.h"
 #include "Render/d3d/Buffer/Texture.h"
 #include "Render/Engine/Camera.h"
@@ -17,6 +18,7 @@
 #include "Render/d3d/Shader/VertexShader.h"
 
 #include "Graphics/Material/Material.h"
+#include "Graphics/Que/IPass/IPass.h"
 #include "Render/d3d/Buffer/D3D11BufferAllocator.h"
 
 void Core::WorldSpace::add_object(Render::Model* object)
@@ -68,6 +70,8 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 		_texture_ps, _texture_vs, _inputLayout,
 		_pixelShader,_texture_vs,_inputLayout
 	);
+
+	//_worldSpace = ECS::World::createWorld();
 	
 	_viewport.Width  = _screen_resolution.width;
 	_viewport.Height = _screen_resolution.height;
@@ -114,7 +118,7 @@ Render::Camera* Core::GraphicsContext::create_camera(Render::RenderTarget* targe
 {
 	return target == nullptr ?
 		new Render::Camera(this, &_targetView) :
-		new Render::Camera(this,target);
+		new Render::Camera(this, target);
 }
 
 void Core::GraphicsContext::set_resolution(Surface new_resolution)
@@ -125,12 +129,33 @@ void Core::GraphicsContext::set_resolution(Surface new_resolution)
 	_viewport.Height = _screen_resolution.height;
 }
 
-Render::RenderQueuePass Core::GraphicsContext::new_frame()
+void Core::GraphicsContext::make_frame()
 {
+	// begin passes
 	context->RSSetViewports(1, &_viewport);
 	context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-	return Render::RenderQueuePass();
+	for (Render::IPass* pass : _passer._begin_passes)
+	{
+		pass->execute(this);
+	}
+	
+	// probe,update,collection pass
+	for(Render::IPass*pass :_passer._probe_passes)
+	{
+		pass->execute(this);
+	}
+
+	// render pass
+	for (Render::IPass* pass : _passer._draw_passes)
+	{
+		pass->execute(this);
+	}
+
+	for (Render::IPass* pass : _passer._end_passes)
+	{
+		pass->execute(this);
+	}
 }
 
 void Core::GraphicsContext::present_frame()

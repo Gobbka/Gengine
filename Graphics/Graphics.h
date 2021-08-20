@@ -3,13 +3,14 @@
 
 #include "BufferAllocator.h"
 #include "Canvas/CanvasLayer.h"
+#include "Ecs/Ecs.h"
 #include "Graphics/Material/Material.h"
 #include "Render/Engine/RenderTarget.h"
 #include "Render/Engine/SpriteEngine.h"
 #include "Render/Model/Model.h"
 
 #include "Graphics/Layouts/PixelShaderLayout.h"
-#include "Graphics/Que/RenderQueuePass/RenderQueuePass.h"
+#include "Graphics/Que/IPass/Passer.h"
 
 
 // TODO-LIST:
@@ -59,6 +60,7 @@ namespace Core
 		Render::SpriteEngine* _spriteEngine;
 		
 		WorldSpace _worldSpace;
+		Render::Passer _passer;
 	public:
 		Render::IBufferAllocator* buffer_allocator() const;
 
@@ -80,7 +82,7 @@ namespace Core
 	public:
 		void set_resolution(Surface new_resolution);
 
-		Render::RenderQueuePass new_frame();
+		void make_frame();
 		void present_frame();
 
 		void begin_2d();

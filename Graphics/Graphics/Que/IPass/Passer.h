@@ -1,7 +1,9 @@
 ﻿#pragma once
-#include "../../../Graphics.h"
+#include <vector>
+#include "IPass.h"
 
 namespace Render {
+	
 	class Passer
 	{
 		std::vector<IPass*> _begin_passes;

@@ -16,6 +16,6 @@ namespace Render
 	{
 
 	public:
-		void execute() override;
+		void execute(Core::GraphicsContext* context) override;
 	};
 }

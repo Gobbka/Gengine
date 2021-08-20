@@ -29,20 +29,20 @@ namespace Render
 	private:
 
 		__declspec(align(16))
-			struct
+		struct MatrixStruct
 		{
 			DirectX::XMMATRIX _viewMatrix;
-		} _matrix2d_buffer_struct;
+		};
 		
 		__declspec(align(16))
-		struct
+		struct ControlStruct
 		{
 			Position2 offset = Position2(0,0);
 			float opacity = 1.f;
-		} _control_buffer_struct;
+		};
 
-		ConstantBuffer* matrix2d_buffer;
-		ConstantBuffer* control_buffer;
+		ConstantBuffer<MatrixStruct>* matrix2d_buffer;
+		ConstantBuffer<ControlStruct>* control_buffer;
 
 		BlendEngine* _blendEngine;
 

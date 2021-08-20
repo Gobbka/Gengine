@@ -91,7 +91,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	options->render_2d = true;
 	options->render_3d = false;
 	
-	auto* uicanvas = UI::UIManager::instance()->create_layer(main_camera);
+	auto* uicanvas = UI::UIManager::instance()->create_layer(main_camera.get_ptr());
 
 	_topbar_panel = new UI::Panel({ 0,0 }, { (float)width,30 }, { RGB_TO_FLOAT(26,26,26),1.f });
 	_worldspace_panel = new UI::Panel({ 0,-30 }, { 250,(float)height - 30.f }, { RGB_TO_FLOAT(20,20,20),1.f });
@@ -111,14 +111,14 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_folder_texture = get_graphics_context()->create_texture( load_png(L"assets\\folder.png"));
 	_file_texture = get_graphics_context()->create_texture(load_png(L"assets\\file.png"));
 
-	auto worldTexture = new Render::RenderTarget(get_graphics_context(),{1400,780});
-	_worldCamera = get_graphics_context()->create_camera(worldTexture);
-	auto* cam_options = _worldCamera->options();
-	cam_options->render_2d = false;
-	cam_options->render_3d = true;
-	_worldCamera->set_light(new Render::DirectionLight(get_graphics_context()));
+	//auto worldTexture = new Render::RenderTarget(get_graphics_context(),{1400,780});
+	//_worldCamera = get_graphics_context()->create_camera(worldTexture);
+	//auto* cam_options = _worldCamera->options();
+	//cam_options->render_2d = false;
+	//cam_options->render_3d = true;
+	//_worldCamera->set_light(new Render::DirectionLight(get_graphics_context()));
 
-	_render_panel->set_texture(worldTexture->get_texture());
+	//_render_panel->set_texture(worldTexture->get_texture());
 
 	_worldspace_panel->unique_id = 228;
 	
@@ -161,8 +161,8 @@ void Forms::MainForm::handle_resize(Surface rect)
 
 void Forms::MainForm::draw_frame()
 {
-	_worldCamera->get_target_view()->clear(Color3{ 0,0,0 });
-	_worldCamera->render();
+	//_worldCamera->get_target_view()->clear(Color3{ 0,0,0 });
+	//_worldCamera->render();
 
 	Form::draw_frame();
 }
@@ -170,7 +170,7 @@ void Forms::MainForm::draw_frame()
 void Forms::MainForm::update()
 {
 	static float scale = 90.f;
-	auto* camera = _worldCamera;
+	auto camera = _worldCamera;
 	
 	if (Keyboard::pressed(VirtualKey::KEY_W)) // W
 	{

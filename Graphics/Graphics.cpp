@@ -71,7 +71,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 		_pixelShader,_texture_vs,_inputLayout
 	);
 
-	//_worldSpace = ECS::World::createWorld();
+	_worldSpace = ECS::World::createWorld();
 	
 	_viewport.Width  = _screen_resolution.width;
 	_viewport.Height = _screen_resolution.height;
@@ -89,9 +89,9 @@ Render::IBufferAllocator* Core::GraphicsContext::buffer_allocator() const
 	return _bufferAllocator;
 }
 
-Core::WorldSpace* Core::GraphicsContext::worldspace()
+ECS::World* Core::GraphicsContext::worldspace()
 {
-	return &_worldSpace;
+	return _worldSpace;
 }
 
 Render::SpriteEngine* Core::GraphicsContext::get_sprite_engine()
@@ -114,11 +114,14 @@ Render::RenderTarget* Core::GraphicsContext::get_shadow_render_target()
 	return &_shadowRenderTarget;
 }
 
-Render::Camera* Core::GraphicsContext::create_camera(Render::RenderTarget* target)
+ECS::ComponentHandle<Render::Camera> Core::GraphicsContext::create_camera(Render::RenderTarget* target)
 {
-	return target == nullptr ?
-		new Render::Camera(this, &_targetView) :
-		new Render::Camera(this, target);
+	auto entt = _worldSpace->create();
+	return entt->assign<Render::Camera>(this, target == nullptr ? &_targetView : target);
+	
+	//return target == nullptr ?
+	//	new Render::Camera(this, &_targetView) :
+	//	new Render::Camera(this, target);
 }
 
 void Core::GraphicsContext::set_resolution(Surface new_resolution)

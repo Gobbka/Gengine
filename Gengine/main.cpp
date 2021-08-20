@@ -101,8 +101,8 @@ int WINAPI wWinMain(
     cube.add_mesh(&cube_mesh);
     platform.add_mesh(&nigga_mesh);
 	
-    form->get_graphics_context()->worldspace()->add_object(&cube);
-    form->get_graphics_context()->worldspace()->add_object(&platform);
+    //form->get_graphics_context()->worldspace()->add_object(&cube);
+    //form->get_graphics_context()->worldspace()->add_object(&platform);
 
     CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);
 	

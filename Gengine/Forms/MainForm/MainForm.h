@@ -1,5 +1,6 @@
 #pragma once
 #include "../Form/Form.h"
+#include "Ecs/Ecs.h"
 
 namespace Render {
 	class Camera;
@@ -27,7 +28,7 @@ namespace Forms
 
 		Render::Texture* _folder_texture;
 		Render::Texture* _file_texture;
-		Render::Camera* _worldCamera;
+		ECS::ComponentHandle<Render::Camera> _worldCamera;
 	public:
 		MainForm(HINSTANCE hinst, UINT width, UINT height);
 

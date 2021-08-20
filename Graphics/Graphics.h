@@ -59,14 +59,14 @@ namespace Core
 		
 		Render::SpriteEngine* _spriteEngine;
 		
-		WorldSpace _worldSpace;
+		ECS::World* _worldSpace;
 		Render::Passer _passer;
 	public:
 		Render::IBufferAllocator* buffer_allocator() const;
 
 		Render::PixelShaderLayout pixel_shader;
 		
-		WorldSpace* worldspace();
+		ECS::World* worldspace();
 		
 		Render::SpriteEngine* get_sprite_engine();
 		
@@ -78,7 +78,7 @@ namespace Core
 		/// </summary>
 		/// <param name="target">pointer to render target.If nullptr passed,camera will create from swap chain</param>
 		/// <returns></returns>
-		Render::Camera* create_camera(Render::RenderTarget*target);
+		ECS::ComponentHandle<Render::Camera> create_camera(Render::RenderTarget*target);
 	public:
 		void set_resolution(Surface new_resolution);
 

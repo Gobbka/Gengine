@@ -48,7 +48,7 @@ void Render::Camera::adjust_rotation(Vector3 rot)
 void Render::Camera::set_resolution(Surface resolution)
 {
 	//_resolution = resolution;
-	_matrix2d_buffer_struct = { DirectX::XMMatrixScaling(1.f / (resolution.width / 2),1.f / (resolution.height / 2),1.f) };
+	matrix2d_buffer->data = { DirectX::XMMatrixScaling(1.f / (resolution.width / 2),1.f / (resolution.height / 2),1.f) };
 	//_projectionMatrix = create_proj_matrix();
 	
 	matrix2d_buffer->update();
@@ -56,10 +56,10 @@ void Render::Camera::set_resolution(Surface resolution)
 
 void Render::Camera::set_alpha(float alpha)
 {
-	if (alpha == _control_buffer_struct.opacity)
+	if (alpha == control_buffer->data.opacity)
 		return;
 	
-	_control_buffer_struct.opacity = alpha;
+	control_buffer->data.opacity = alpha;
 	control_buffer->update();
 }
 
@@ -124,27 +124,26 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 	_blendEngine = new BlendEngine(context);
 	
 	auto _resolution = get_view_resolution();
-	_matrix2d_buffer_struct = { DirectX::XMMatrixScaling(1.f / (_resolution.width / 2),1.f / (_resolution.height / 2),1.f) };
-	matrix2d_buffer = new ConstantBuffer(context, &_matrix2d_buffer_struct, sizeof(_matrix2d_buffer_struct), 0);
-
-	control_buffer = new ConstantBuffer(context, &_control_buffer_struct, sizeof(_control_buffer_struct), 1, ConstantBuffer::CBBindFlag_vs| ConstantBuffer::CBBindFlag_ps);
+	matrix2d_buffer = new ConstantBuffer<MatrixStruct>(context, 0);
+	matrix2d_buffer->data = { DirectX::XMMatrixScaling(1.f / (_resolution.width / 2),1.f / (_resolution.height / 2),1.f) };
+	matrix2d_buffer->update();
+	
+	control_buffer = new ConstantBuffer<ControlStruct>(context, 1, (UINT)(CBBindFlag::CBBindFlag_vs | CBBindFlag::CBBindFlag_ps));
 
 	mask_engine = new MaskEngine(this);
 
 	test_light = nullptr;
-	
-	update_position();
 }
 
 void Render::Camera::render()
 {
 	if(test_light)
 		test_light->create_shadowmap();
-	
-	_cameraOptions.renderTarget->bind(mask_engine->get_view());
+
+	render_target->bind(mask_engine->get_view());
 	
 	_blendEngine->bind();
-	mask_engine->set_state(mask_engine->get_disabledState(),0,true);
+	mask_engine->get_disabledState()->bind(0);
 
 	matrix_buffer.bind();
 	control_buffer->bind();
@@ -153,17 +152,17 @@ void Render::Camera::render()
 	{
 		context->begin_3d();
 
-		_control_buffer_struct.offset = Position2(0, 0);
+		control_buffer->data.offset = Position2(0, 0);
 		set_alpha(1.f);
 
 		// render all world objects
 		
-		auto objects = context->worldspace()->objects;
+		//auto objects = context->worldspace()->objects;
 		
-		for (auto* object : objects)
-		{
-			this->view(object);
-		}
+		//for (auto* object : objects)
+		//{
+		//	this->view(object);
+		//}
 
 		mask_engine->clear_buffer();
 	}
@@ -173,11 +172,15 @@ void Render::Camera::render()
 		// then render canvas
 
 		context->begin_2d();
+		mask_engine->get_discardState()->bind(0);
 
+		auto resolution = get_view_resolution();
+		matrix2d_buffer->data = { DirectX::XMMatrixScaling(1.f / (resolution.width / 2),1.f / (resolution.height / 2),1.f) };
+		matrix2d_buffer->update();
 		matrix2d_buffer->bind();
 
-		_control_buffer_struct.offset = Position2(-1, 1);
-		_control_buffer_struct.opacity = 1.f;
+		control_buffer->data.offset = Position2(-1, 1);
+		control_buffer->data.opacity = 1.f;
 		control_buffer->update();
 
 		DrawEvent2D event(this, nullptr);

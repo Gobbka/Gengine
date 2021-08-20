@@ -28,12 +28,12 @@ void Render::DirectionLight::create_shadowmap()
 
 	_mask_engine->get_disabledState()->bind();
 
-	auto objects = context->worldspace()->objects;
+	//auto objects = context->worldspace()->objects;
 
-	for (auto* object : objects)
-	{
-		this->view(object);
-	}
+	//for (auto* object : objects)
+	//{
+	//	this->view(object);
+	//}
 
 	graphics_context()->get_sprite_engine()->set_ps_state(true);
 }

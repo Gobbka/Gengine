@@ -275,6 +275,11 @@ namespace ECS
 			return *component;
 		}
 
+		T* get_ptr()
+		{
+			return component;
+		}
+
 		bool isValid() const
 		{
 			return component != nullptr;

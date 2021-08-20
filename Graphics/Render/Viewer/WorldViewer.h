@@ -20,10 +20,10 @@ namespace Render
 	class __declspec(dllexport) WorldViewer
 	{
 		__declspec(align(16))
-			struct
+		struct MatrixStruct
 		{
 			DirectX::XMMATRIX _MVPMatrix;
-		} _matrix_buffer_struct;
+		};
 		
 	protected:
 		void update_position();
@@ -42,7 +42,7 @@ namespace Render
 		
 		Core::Transform _transform;
 
-		ConstantBuffer matrix_buffer;
+		ConstantBuffer<MatrixStruct> matrix_buffer;
 	private:
 		float _fov = 90.f;
 		float _scale = 1.f;

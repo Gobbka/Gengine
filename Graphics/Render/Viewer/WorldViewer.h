@@ -19,11 +19,6 @@ namespace Render
 
 	class __declspec(dllexport) WorldViewer
 	{
-		__declspec(align(16))
-		struct MatrixStruct
-		{
-			DirectX::XMMATRIX _MVPMatrix;
-		};
 		
 	protected:
 		void update_position();
@@ -41,8 +36,6 @@ namespace Render
 		MaskEngine* mask_engine;
 		
 		Core::Transform _transform;
-
-		ConstantBuffer<MatrixStruct> matrix_buffer;
 	private:
 		float _fov = 90.f;
 		float _scale = 1.f;
@@ -54,8 +47,9 @@ namespace Render
 	protected:
 		WorldViewer(Core::GraphicsContext* context, RenderTarget* target);
 
-		void view(Model* model);
 	public:
+		void view(Model* model);
+		
 		void set_scale(float scale);
 		void set_fov(float fov);
 
@@ -63,6 +57,8 @@ namespace Render
 
 		RenderTarget* get_render_target();
 		Surface get_view_resolution();
+
+		DirectX::XMMATRIX world_to_screen_matrix();
 
 		void bind();
 	};

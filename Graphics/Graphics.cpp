@@ -75,7 +75,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_worldSpace = ECS::World::createWorld();
 
 	_passer._begin_passes.push_back(new Render::ClearPass());
-	_passer._end_passes.push_back(new Render::RenderQueuePass());
+	_passer._end_passes.push_back(new Render::RenderQueuePass(this));
 	
 	_viewport.Width  = _screen_resolution.width;
 	_viewport.Height = _screen_resolution.height;

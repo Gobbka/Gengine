@@ -47,20 +47,20 @@ void Render::Camera::adjust_rotation(Vector3 rot)
 
 void Render::Camera::set_resolution(Surface resolution)
 {
-	//_resolution = resolution;
-	matrix2d_buffer->data = { DirectX::XMMatrixScaling(1.f / (resolution.width / 2),1.f / (resolution.height / 2),1.f) };
-	//_projectionMatrix = create_proj_matrix();
-	
-	matrix2d_buffer->update();
+	////_resolution = resolution;
+	//matrix2d_buffer->data = { DirectX::XMMatrixScaling(1.f / (resolution.width / 2),1.f / (resolution.height / 2),1.f) };
+	////_projectionMatrix = create_proj_matrix();
+	//
+	//matrix2d_buffer->update();
 }
 
 void Render::Camera::set_alpha(float alpha)
 {
-	if (alpha == control_buffer->data.opacity)
-		return;
-	
-	control_buffer->data.opacity = alpha;
-	control_buffer->update();
+	//if (alpha == control_buffer->data.opacity)
+	//	return;
+	//
+	//control_buffer->data.opacity = alpha;
+	//control_buffer->update();
 }
 
 
@@ -124,11 +124,6 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 	_blendEngine = new BlendEngine(context);
 	
 	auto _resolution = get_view_resolution();
-	matrix2d_buffer = new ConstantBuffer<MatrixStruct>(context, 0);
-	matrix2d_buffer->data = { DirectX::XMMatrixScaling(1.f / (_resolution.width / 2),1.f / (_resolution.height / 2),1.f) };
-	matrix2d_buffer->update();
-	
-	control_buffer = new ConstantBuffer<ControlStruct>(context, 1, (UINT)(CBBindFlag::CBBindFlag_vs | CBBindFlag::CBBindFlag_ps));
 
 	mask_engine = new MaskEngine(this);
 
@@ -137,32 +132,32 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 
 void Render::Camera::render()
 {
-	if(test_light)
-		test_light->create_shadowmap();
+	//if(test_light)
+	//	test_light->create_shadowmap();
 
-	render_target->bind(mask_engine->get_view());
-	
-	_blendEngine->bind();
-	mask_engine->get_disabledState()->bind(0);
+	//render_target->bind(mask_engine->get_view());
+	//
+	//_blendEngine->bind();
+	//mask_engine->get_disabledState()->bind(0);
 
-	matrix_buffer.bind();
-	control_buffer->bind();
+	//matrix_buffer.bind();
+	//control_buffer->bind();
 
 	if(_cameraOptions.render_3d)
 	{
-		context->begin_3d();
+		//context->begin_3d();
 
-		control_buffer->data.offset = Position2(0, 0);
-		set_alpha(1.f);
+		//control_buffer->data.offset = Position2(0, 0);
+		//set_alpha(1.f);
 
-		// render all world objects
+		//// render all world objects
 
-		context->worldspace()->each<Model>([this](ECS::Entity* ent, ECS::ComponentHandle<Model> model)
-		{
-			this->view(model.get_ptr());
-		});
+		//context->worldspace()->each<Model>([this](ECS::Entity* ent, ECS::ComponentHandle<Model> model)
+		//{
+		//	this->view(model.get_ptr());
+		//});
 
-		mask_engine->clear_buffer();
+		//mask_engine->clear_buffer();
 	}
 	
 	if(_cameraOptions.render_2d)
@@ -171,12 +166,13 @@ void Render::Camera::render()
 
 		context->begin_2d();
 		mask_engine->get_discardState()->bind(0);
+		mask_engine->clear_buffer();
 		
-		matrix2d_buffer->bind();
+		//matrix2d_buffer->bind();
 
-		control_buffer->data.offset = Position2(-1, 1);
-		control_buffer->data.opacity = 1.f;
-		control_buffer->update();
+		//control_buffer->data.offset = Position2(-1, 1);
+		//control_buffer->data.opacity = 1.f;
+		//control_buffer->update();
 
 		DrawEvent2D event(this, nullptr);
 		for (auto* layer : _canvas2DLayers)
@@ -190,4 +186,14 @@ void Render::Camera::render()
 
 		mask_engine->clear_buffer();
 	}
+}
+
+void Render::Camera::bind()
+{
+	render_target->bind(mask_engine->get_view());
+
+	_blendEngine->bind();
+
+	mask_engine->clear_buffer();
+	mask_engine->get_disabledState()->bind(0);
 }

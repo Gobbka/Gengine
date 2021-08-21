@@ -27,23 +27,6 @@ namespace Render
 	class __declspec(dllexport) Camera : public WorldViewer
 	{
 	private:
-
-		__declspec(align(16))
-		struct MatrixStruct
-		{
-			DirectX::XMMATRIX _viewMatrix;
-		};
-		
-		__declspec(align(16))
-		struct ControlStruct
-		{
-			Position2 offset = Position2(0,0);
-			float opacity = 1.f;
-		};
-
-		ConstantBuffer<MatrixStruct>* matrix2d_buffer;
-		ConstantBuffer<ControlStruct>* control_buffer;
-
 		BlendEngine* _blendEngine;
 
 		CameraOptions _cameraOptions;
@@ -86,5 +69,6 @@ namespace Render
 		Camera(Core::GraphicsContext* context,RenderTarget*target);
 
 		void render();
+		void bind();
 	};
 }

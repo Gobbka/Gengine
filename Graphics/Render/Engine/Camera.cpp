@@ -132,33 +132,6 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 
 void Render::Camera::render()
 {
-	//if(test_light)
-	//	test_light->create_shadowmap();
-
-	//render_target->bind(mask_engine->get_view());
-	//
-	//_blendEngine->bind();
-	//mask_engine->get_disabledState()->bind(0);
-
-	//matrix_buffer.bind();
-	//control_buffer->bind();
-
-	if(_cameraOptions.render_3d)
-	{
-		//context->begin_3d();
-
-		//control_buffer->data.offset = Position2(0, 0);
-		//set_alpha(1.f);
-
-		//// render all world objects
-
-		//context->worldspace()->each<Model>([this](ECS::Entity* ent, ECS::ComponentHandle<Model> model)
-		//{
-		//	this->view(model.get_ptr());
-		//});
-
-		//mask_engine->clear_buffer();
-	}
 	
 	if(_cameraOptions.render_2d)
 	{

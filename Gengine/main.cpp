@@ -101,7 +101,7 @@ int WINAPI wWinMain(
     cube->assign<Render::TextureComponent>(texture);
 	
     platform->get<Render::Model>()->add_mesh(&nigga_mesh);
-    platform->assign<Render::ColorComponent>();
+    platform->assign<Render::TextureComponent>(texture);
 
     CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);
 	

@@ -12,8 +12,6 @@ namespace Render
 	public:
 		Parallelepiped(Position3 pos, Core::GraphicsContext* context,Vector3 resolution);
 
-		void set_texture(Render::Texture* texture);
-
 		void draw(DrawEvent3D event3d) override;
 	};
 }

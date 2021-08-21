@@ -21,4 +21,5 @@ void Render::PixelShaderLayout::bind(PixelShader* shader)
 void Render::PixelShaderLayout::remove()
 {
 	_context->context->PSSetShader(nullptr, nullptr, 0);
+	_ps = nullptr;
 }

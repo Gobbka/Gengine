@@ -12,6 +12,12 @@ void Render::ClearPass::execute(Core::GraphicsContext* context)
 
 void Render::RenderQueuePass::execute(Core::GraphicsContext* context)
 {
+	// € думаю стоит сделать следующую реализацию
+	// camera->bind();
+	// TechniquePasses->execute();
+	// DrawPass3D->execute();
+	// DrawPass2D->execute();
+	
 	auto* main_camera = context->get_main_camera();
 	ECS::ComponentHandle<Camera> hMainCamera;
 	context->worldspace()->each<Camera>([&](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)

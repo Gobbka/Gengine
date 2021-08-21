@@ -7,6 +7,7 @@
 Render::PixelShaderLayout::PixelShaderLayout(Core::GraphicsContext* context)
 {
 	_context = context;
+	_ps = nullptr;
 }
 
 void Render::PixelShaderLayout::bind(PixelShader* shader)

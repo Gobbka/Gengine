@@ -152,6 +152,8 @@
     <ClInclude Include="Canvas\Objects\Rectangle\Rectangle.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Graphics\Channels.h" />
+    <ClInclude Include="Graphics\Components\ColorComponent.h" />
+    <ClInclude Include="Graphics\Components\TextureComponent.h" />
     <ClInclude Include="Graphics\IBuffers\IIndexBuffer.h" />
     <ClInclude Include="Graphics\IBuffers\ITexture2D.h" />
     <ClInclude Include="Graphics\IBuffers\IVertexBuffer.h" />

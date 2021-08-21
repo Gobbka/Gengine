@@ -125,10 +125,11 @@ ECS::Entity* Core::GraphicsContext::create_camera(Render::RenderTarget* target)
 	return entt;
 }
 
-ECS::ComponentHandle<Render::Model> Core::GraphicsContext::create_model()
+ECS::Entity* Core::GraphicsContext::create_model()
 {
 	auto entt = _worldSpace->create();
-	return entt->assign<Render::Model>();
+	entt->assign<Render::Model>();
+	return entt;
 }
 
 void Core::GraphicsContext::bind_main_camera(ECS::Entity* ent)

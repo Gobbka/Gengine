@@ -81,7 +81,7 @@ namespace Core
 		/// <param name="target">pointer to render target.If nullptr passed,camera will create from swap chain</param>
 		/// <returns></returns>
 		ECS::Entity* create_camera(Render::RenderTarget*target);
-		ECS::ComponentHandle<Render::Model> create_model();
+		ECS::Entity* create_model();
 
 		void bind_main_camera(ECS::Entity* ent);
 		ECS::Entity* get_main_camera();

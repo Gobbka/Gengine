@@ -25,6 +25,9 @@
 #include <Ecs/Ecs.h>
 #include <chrono>
 
+#include "Graphics/Components/ColorComponent.h"
+#include "Graphics/Components/TextureComponent.h"
+
 Render::Model* load_model(const wchar_t*path,Core::GraphicsContext*context)
 {
     Assimp::Importer importer;
@@ -86,25 +89,19 @@ int WINAPI wWinMain(
     auto* graphics = form->get_graphics_context();
 	
     auto* texture = form->get_graphics_context()->create_texture(material);
-
-    auto* world = ECS::World::createWorld();
-    auto* ent = world->create();
-    auto ch = ent->assign<Render::Model>();
 	
-    auto cube = graphics->create_model();// Render::Model();
-    auto platform = graphics->create_model();//  Render::Model();
-    platform->transform.set_position(Position3{ 0,-7,0 });
+    auto cube = graphics->create_model();
+    auto platform = graphics->create_model();
+    platform->get<Render::Model>()->transform.set_position(Position3{ 0,-7,0 });
 	
     auto cube_mesh = Render::Cube(Position3::null(), form->get_graphics_context());
     auto nigga_mesh = Render::Parallelepiped(Position3(15,15,0), form->get_graphics_context(),Vector3{9,3,9});
-	
-    cube_mesh.set_texture(texture);
 
-    cube->add_mesh(&cube_mesh);
-    platform->add_mesh(&nigga_mesh);
+    cube->get<Render::Model>()->add_mesh(&cube_mesh);
+    cube->assign<Render::TextureComponent>(texture);
 	
-    //form->get_graphics_context()->worldspace()->add_object(&cube);
-    //form->get_graphics_context()->worldspace()->add_object(&platform);
+    platform->get<Render::Model>()->add_mesh(&nigga_mesh);
+    platform->assign<Render::ColorComponent>();
 
     CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);
 	
@@ -127,7 +124,6 @@ int WINAPI wWinMain(
         auto now = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(now - time);
 		
-        world->tick((float)duration.count());
 
         time = now;
 	}

@@ -1,6 +1,8 @@
 #include "RenderQueuePass.h"
 #include "../../../Render/Engine/Camera.h"
 #include "../../../Graphics.h"
+#include "../../Components/ColorComponent.h"
+#include "../../Components/TextureComponent.h"
 
 void Render::ClearPass::execute(Core::GraphicsContext* context)
 {
@@ -27,9 +29,11 @@ void Render::RenderQueuePass::camera_render(ECS::ComponentHandle<Camera>camera, 
 		_control_buffer.data.offset = Position2{ 0,0 };
 		_control_buffer.update();
 
-		world->each<Model>(
-	 [&](ECS::Entity* ent, ECS::ComponentHandle<Model> model)
+		auto*sprite_engine = camera->graphics_context()->get_sprite_engine();
+		sprite_engine->begin_color_mode();
+		world->each<Model, ColorComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<Model> model, ECS::ComponentHandle<ColorComponent>color)
 			{
+				
 				auto modelMatrix = model->transform.get_world_matrix();
 				_matrix_buffer.data.VPMatrix = DirectX::XMMatrixTranspose(
 					modelMatrix * world_to_screen
@@ -37,8 +41,20 @@ void Render::RenderQueuePass::camera_render(ECS::ComponentHandle<Camera>camera, 
 				_matrix_buffer.update();
 
 				camera->view(model.get_ptr());
-			}
-		);
+			});
+		sprite_engine->begin_sprite_mode();
+		world->each<Model, TextureComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<Model> model, ECS::ComponentHandle<TextureComponent>texture)
+			{
+				sprite_engine->bind_texture(texture->texture);
+			
+				auto modelMatrix = model->transform.get_world_matrix();
+				_matrix_buffer.data.VPMatrix = DirectX::XMMatrixTranspose(
+					modelMatrix * world_to_screen
+				);
+				_matrix_buffer.update();
+
+				camera->view(model.get_ptr());
+			});
 	}
 	
 	// on 2d draw

@@ -67,16 +67,6 @@ void Render::Parallelepiped::set_texture(Render::Texture* texture)
 void Render::Parallelepiped::draw(DrawEvent3D event3d)
 {
 	Mesh::bind();
-	auto* engine = _context->get_sprite_engine();
-
-	if (this->texture != nullptr)
-	{
-		engine->begin_sprite_mode();
-		engine->bind_texture(texture);
-	}else
-	{
-		engine->begin_color_mode();
-	}
 	
 	event3d.draw_indexed(8);
 	event3d.draw_indexed(8,8);

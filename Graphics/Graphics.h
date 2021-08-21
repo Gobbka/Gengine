@@ -60,7 +60,9 @@ namespace Core
 		Render::SpriteEngine* _spriteEngine;
 		
 		ECS::World* _worldSpace;
+		ECS::Entity* _main_camera;
 		Render::Passer _passer;
+		
 	public:
 		Render::IBufferAllocator* buffer_allocator() const;
 
@@ -78,7 +80,11 @@ namespace Core
 		/// </summary>
 		/// <param name="target">pointer to render target.If nullptr passed,camera will create from swap chain</param>
 		/// <returns></returns>
-		ECS::ComponentHandle<Render::Camera> create_camera(Render::RenderTarget*target);
+		ECS::Entity* create_camera(Render::RenderTarget*target);
+		ECS::ComponentHandle<Render::Model> create_model();
+
+		void bind_main_camera(ECS::Entity* ent);
+		ECS::Entity* get_main_camera();
 	public:
 		void set_resolution(Surface new_resolution);
 

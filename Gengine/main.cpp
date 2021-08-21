@@ -83,23 +83,25 @@ int WINAPI wWinMain(
     auto* material = load_png(L"assets\\mine4ok.png");
     auto* negr = load_png(L"assets\\workspace_background.png");
 
+    auto* graphics = form->get_graphics_context();
+	
     auto* texture = form->get_graphics_context()->create_texture(material);
 
     auto* world = ECS::World::createWorld();
     auto* ent = world->create();
     auto ch = ent->assign<Render::Model>();
 	
-    auto cube = Render::Model();
-    auto platform = Render::Model();
-    platform.transform.set_position(Position3{ 0,-7,0 });
+    auto cube = graphics->create_model();// Render::Model();
+    auto platform = graphics->create_model();//  Render::Model();
+    platform->transform.set_position(Position3{ 0,-7,0 });
 	
     auto cube_mesh = Render::Cube(Position3::null(), form->get_graphics_context());
     auto nigga_mesh = Render::Parallelepiped(Position3(15,15,0), form->get_graphics_context(),Vector3{9,3,9});
 	
     cube_mesh.set_texture(texture);
 
-    cube.add_mesh(&cube_mesh);
-    platform.add_mesh(&nigga_mesh);
+    cube->add_mesh(&cube_mesh);
+    platform->add_mesh(&nigga_mesh);
 	
     //form->get_graphics_context()->worldspace()->add_object(&cube);
     //form->get_graphics_context()->worldspace()->add_object(&platform);

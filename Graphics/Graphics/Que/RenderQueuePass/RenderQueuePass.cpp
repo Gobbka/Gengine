@@ -12,8 +12,20 @@ void Render::ClearPass::execute(Core::GraphicsContext* context)
 
 void Render::RenderQueuePass::execute(Core::GraphicsContext* context)
 {
-	context->worldspace()->each<Camera>([](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)
+	auto* main_camera = context->get_main_camera();
+	ECS::ComponentHandle<Camera> hMainCamera;
+	context->worldspace()->each<Camera>([&](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)
 		{
-			camera->render();
+			if(main_camera == entity)
+			{
+				hMainCamera = camera;
+			}else
+			{
+				camera->render();
+			}
 		});
+	if(hMainCamera.isValid())
+	{
+		hMainCamera->render();
+	}
 }

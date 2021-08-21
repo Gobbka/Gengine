@@ -156,13 +156,11 @@ void Render::Camera::render()
 		set_alpha(1.f);
 
 		// render all world objects
-		
-		//auto objects = context->worldspace()->objects;
-		
-		//for (auto* object : objects)
-		//{
-		//	this->view(object);
-		//}
+
+		context->worldspace()->each<Model>([this](ECS::Entity* ent, ECS::ComponentHandle<Model> model)
+		{
+			this->view(model.get_ptr());
+		});
 
 		mask_engine->clear_buffer();
 	}

@@ -17,7 +17,7 @@ namespace Core
 	private:
 		GraphicsContext* _graphics;
 	protected:
-		ECS::ComponentHandle<Render::Camera> main_camera;
+		ECS::Entity* main_camera;
 		void handle_resize(Surface rect) override;
 
 		virtual void draw_frame();

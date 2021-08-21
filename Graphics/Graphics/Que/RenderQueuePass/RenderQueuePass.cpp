@@ -30,8 +30,10 @@ void Render::RenderQueuePass::camera_render(ECS::ComponentHandle<Camera>camera, 
 		world->each<Model>(
 	 [&](ECS::Entity* ent, ECS::ComponentHandle<Model> model)
 			{
-				auto matrix = world_to_screen * model->transform.get_world_matrix();
-				_matrix_buffer.data.VPMatrix = matrix;
+				auto modelMatrix = model->transform.get_world_matrix();
+				_matrix_buffer.data.VPMatrix = DirectX::XMMatrixTranspose(
+					modelMatrix * world_to_screen
+				);
 				_matrix_buffer.update();
 
 				camera->view(model.get_ptr());

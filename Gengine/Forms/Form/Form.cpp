@@ -21,7 +21,7 @@ Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
 	WindowsManager::instance()->register_window(this);
 	
 	_graphics = GraphicsContext::new_context(WindowsWindow::hwnd(),WindowsWindow::size());
-    main_camera = _graphics->create_camera(nullptr);
+    main_camera = _graphics->get_device()->create_camera(nullptr);
     _graphics->bind_main_camera(main_camera);
 }
 

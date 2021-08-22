@@ -1,14 +1,19 @@
 ﻿#include "PhysicsModule.h"
 
-void PhysicsModule::add_element(RigidBody element)
+void PhysicsModule::tick(ECS::World* world, ECS::DefaultTickData data)
 {
-	_physics_elements.push_back(element);
-}
+	world->each<RigidBody>([&](ECS::Entity* ent, ECS::ComponentHandle<RigidBody> body)
+		{
+			body->target->adjust_position(Position3(body->force.x * data, body->force.y * data, 0));
 
-void PhysicsModule::tick()
-{
-	for(auto element:_physics_elements)
-	{
-		element.target->adjust_position(element.force);
-	}
+			body->force.y -= gravity_const * data;
+			if(body->force.x > 0.5f)
+			{
+				body->force.x *= 1.f - air_resistance_coefficient;
+			}else
+			{
+				body->force.x = 0;
+			}
+			
+		});
 }

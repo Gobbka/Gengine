@@ -1,13 +1,14 @@
 ﻿#pragma once
 #include <vector>
+#include <Ecs/Ecs.h>
 
 #include "RigidBody.h"
 
-class __declspec(dllexport) PhysicsModule
+class __declspec(dllexport) PhysicsModule : public ECS::EntitySystem
 {
-	std::vector<RigidBody> _physics_elements;
 public:
-	void add_element(RigidBody element);
-
-	void tick();
+	float gravity_const = 10.f;
+	float air_resistance_coefficient = 0.2f;
+	
+	void tick(ECS::World* world, ECS::DefaultTickData data) override;
 };

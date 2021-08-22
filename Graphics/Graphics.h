@@ -2,6 +2,7 @@
 #include <d3d11.h>
 
 #include "BufferAllocator.h"
+#include "IGDevice.h"
 #include "Canvas/CanvasLayer.h"
 #include "Ecs/Ecs.h"
 #include "Graphics/Material/Material.h"
@@ -53,6 +54,7 @@ namespace Core
 		ID3D11InputLayout* _inputLayout;
 
 		D3D11_VIEWPORT _viewport;
+		Render::IGDevice* _gdevice;
 		Render::IBufferAllocator* _bufferAllocator;
 	private:
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
@@ -75,13 +77,9 @@ namespace Core
 		Surface get_screen_resolution() const;
 		Render::RenderTarget* get_render_target_view();
 		Render::RenderTarget* get_shadow_render_target();
-		/// <summary>
-		/// create and returns camera pointer
-		/// </summary>
-		/// <param name="target">pointer to render target.If nullptr passed,camera will create from swap chain</param>
-		/// <returns></returns>
-		ECS::Entity* create_camera(Render::RenderTarget*target);
-		ECS::Entity* create_model();
+
+
+		Render::IGDevice* get_device();
 
 		void bind_main_camera(ECS::Entity* ent);
 		ECS::Entity* get_main_camera();

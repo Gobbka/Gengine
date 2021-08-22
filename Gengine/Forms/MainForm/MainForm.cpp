@@ -113,7 +113,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_file_texture = get_graphics_context()->create_texture(load_png(L"assets\\file.png"));
 
 	auto worldTexture = new Render::RenderTarget(get_graphics_context(),{1400,780});
-	_worldCamera = get_graphics_context()->create_camera(worldTexture);
+	_worldCamera = get_graphics_context()->get_device()->create_camera(worldTexture);
 	auto cam = _worldCamera->get<Render::Camera>();
 	auto* cam_options = cam->options();
 	cam_options->render_2d = false;

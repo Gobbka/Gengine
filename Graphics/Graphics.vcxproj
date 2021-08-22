@@ -72,13 +72,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)Build\Out</OutDir>
+    <OutDir>$(SolutionDir)Build\Out\</OutDir>
     <IncludePath>$(SolutionDir)Core;$(IncludePath)</IncludePath>
     <IntDir>$(SolutionDir)Build\Temp\$(ProjectName)\$(Configuration)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)Build\Out</OutDir>
+    <OutDir>$(SolutionDir)Build\Out\</OutDir>
     <IncludePath>$(SolutionDir)Core;$(IncludePath)</IncludePath>
     <IntDir>$(SolutionDir)Build\Temp\$(ProjectName)\$(Configuration)</IntDir>
   </PropertyGroup>
@@ -154,6 +154,7 @@
     <ClInclude Include="Graphics\Channels.h" />
     <ClInclude Include="Graphics\Components\ColorComponent.h" />
     <ClInclude Include="Graphics\Components\TextureComponent.h" />
+    <ClInclude Include="Graphics\GDevice\D11GDevice.h" />
     <ClInclude Include="Graphics\IBuffers\IIndexBuffer.h" />
     <ClInclude Include="Graphics\IBuffers\ITexture2D.h" />
     <ClInclude Include="Graphics\IBuffers\IVertexBuffer.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Graphics\Que\RenderQueuePass\RenderQueuePass.h" />
     <ClInclude Include="Graphics\Technique\Step.h" />
     <ClInclude Include="Graphics\Technique\Technique.h" />
+    <ClInclude Include="IGDevice.h" />
     <ClInclude Include="Render\d3d\Bindable.h" />
     <ClInclude Include="Render\d3d\Buffer\ConstantBuffer.h" />
     <ClInclude Include="Render\d3d\Buffer\D3D11BufferAllocator.h" />
@@ -195,6 +197,7 @@
     <ClCompile Include="Canvas\Objects\I2DCanvasObject.cpp" />
     <ClCompile Include="Canvas\Objects\Rectangle\Rectangle.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Graphics\GDevice\D11GDevice.cpp" />
     <ClCompile Include="Graphics\Layouts\PixelShaderLayout.cpp" />
     <ClCompile Include="Graphics\Material\Material.cpp" />
     <ClCompile Include="Graphics\Que\IPass\Passer.cpp" />

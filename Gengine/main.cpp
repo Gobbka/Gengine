@@ -89,9 +89,11 @@ int WINAPI wWinMain(
     auto* graphics = form->get_graphics_context();
 	
     auto* texture = form->get_graphics_context()->create_texture(material);
+
+    auto* device = graphics->get_device();
 	
-    auto cube = graphics->create_model();
-    auto platform = graphics->create_model();
+    auto cube = device->create_model();
+    auto platform = device->create_model();
     platform->get<Render::Model>()->transform.set_position(Position3{ 0,-7,0 });
 	
     auto cube_mesh = Render::Cube(Position3::null(), form->get_graphics_context());
@@ -104,6 +106,8 @@ int WINAPI wWinMain(
     platform->assign<Render::TextureComponent>(texture);
 
     CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);
+
+    graphics->worldspace()->registerSystem(new PhysicsModule());
 	
     MSG msg;
 
@@ -122,8 +126,9 @@ int WINAPI wWinMain(
         form->force_draw();
 
         auto now = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(now - time);
-		
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - time);
+
+        graphics->worldspace()->tick(1.f/duration.count());
 
         time = now;
 	}

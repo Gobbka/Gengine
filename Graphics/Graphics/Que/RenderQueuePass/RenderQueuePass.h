@@ -44,6 +44,8 @@ namespace Render
 		
 		void render_camera_3d(ECS::ComponentHandle<Camera> camera, ECS::World* world);
 		void render_camera_2d(ECS::ComponentHandle<Camera> camera);
+
+		void render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<Model> model,DirectX::XMMATRIX matrix);
 		inline void render_camera(ECS::ComponentHandle<Camera> camera, ECS::World* world);
 	public:
 		RenderQueuePass(Core::GraphicsContext* context);

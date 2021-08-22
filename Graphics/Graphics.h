@@ -90,9 +90,6 @@ namespace Core
 
 		void make_frame();
 		void present_frame();
-
-		void begin_2d();
-		void begin_3d();
 	public:
 		Render::Texture* create_texture(Render::Material* material);
 		

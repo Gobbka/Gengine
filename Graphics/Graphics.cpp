@@ -74,6 +74,8 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 
 	_worldSpace = ECS::World::createWorld();
 
+	context->IASetInputLayout(_inputLayout);
+
 	_passer._begin_passes.push_back(new Render::ClearPass());
 	_passer._end_passes.push_back(new Render::RenderQueuePass(this));
 	
@@ -182,16 +184,6 @@ void Core::GraphicsContext::make_frame()
 void Core::GraphicsContext::present_frame()
 {
 	_swap->Present(1u, 0u);
-}
-
-void Core::GraphicsContext::begin_2d()
-{
-	context->IASetInputLayout(_inputLayout);
-}
-
-void Core::GraphicsContext::begin_3d()
-{
-	context->IASetInputLayout(_inputLayout);
 }
 
 Render::Texture* Core::GraphicsContext::create_texture(Render::Material* material)

@@ -12,48 +12,41 @@ void Render::ClearPass::execute(Core::GraphicsContext* context)
 		});
 }
 
+void Render::RenderQueuePass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<Model> model, DirectX::XMMATRIX matrix)
+{
+	_matrix_buffer.data.VPMatrix = DirectX::XMMatrixTranspose(
+		matrix
+	);
+	_matrix_buffer.update();
+
+	camera->view(model.get_ptr());
+}
+
 void Render::RenderQueuePass::render_camera_3d(ECS::ComponentHandle<Camera> camera, ECS::World* world)
 {
-	camera->bind();
-	camera->graphics_context()->begin_3d();
+	auto world_to_screen = camera->world_to_screen_matrix();
 
-	if (camera->options()->render_3d)
-	{
-		auto world_to_screen = camera->world_to_screen_matrix();
+	_control_buffer.data.offset = Position2{ 0,0 };
+	_control_buffer.update();
+	auto* sprite_engine = camera->graphics_context()->get_sprite_engine();
 
-		_control_buffer.data.offset = Position2{ 0,0 };
-		_control_buffer.update();
+	sprite_engine->begin_color_mode();
+	world->each<Model, ColorComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<Model> model, ECS::ComponentHandle<ColorComponent>color)
+		{
+			auto modelMatrix = model->transform.get_world_matrix();
+			render_model(camera, model, modelMatrix * world_to_screen);
+		}
+	);
 
-		auto* sprite_engine = camera->graphics_context()->get_sprite_engine();
-		sprite_engine->begin_color_mode();
-		world->each<Model, ColorComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<Model> model, ECS::ComponentHandle<ColorComponent>color)
-			{
+	sprite_engine->begin_sprite_mode();
+	world->each<Model, TextureComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<Model> model, ECS::ComponentHandle<TextureComponent>texture)
+		{
+			sprite_engine->bind_texture(texture->texture);
 
-				auto modelMatrix = model->transform.get_world_matrix();
-				_matrix_buffer.data.VPMatrix = DirectX::XMMatrixTranspose(
-					modelMatrix * world_to_screen
-				);
-				_matrix_buffer.update();
-
-				camera->view(model.get_ptr());
-			}
-		);
-
-		sprite_engine->begin_sprite_mode();
-		world->each<Model, TextureComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<Model> model, ECS::ComponentHandle<TextureComponent>texture)
-			{
-				sprite_engine->bind_texture(texture->texture);
-
-				auto modelMatrix = model->transform.get_world_matrix();
-				_matrix_buffer.data.VPMatrix = DirectX::XMMatrixTranspose(
-					modelMatrix * world_to_screen
-				);
-				_matrix_buffer.update();
-
-				camera->view(model.get_ptr());
-			}
-		);
-	}
+			auto modelMatrix = model->transform.get_world_matrix();
+			render_model(camera, model, modelMatrix * world_to_screen);
+		}
+	);
 }
 
 void Render::RenderQueuePass::render_camera_2d(ECS::ComponentHandle<Camera> camera)
@@ -72,7 +65,10 @@ void Render::RenderQueuePass::render_camera_2d(ECS::ComponentHandle<Camera> came
 
 inline void Render::RenderQueuePass::render_camera(ECS::ComponentHandle<Camera> camera, ECS::World* world)
 {
-	render_camera_3d(camera, world);
+	camera->bind();
+
+	if (camera->options()->render_3d)
+		render_camera_3d(camera, world);
 	render_camera_2d(camera);
 }
 

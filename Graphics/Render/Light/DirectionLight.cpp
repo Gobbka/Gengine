@@ -18,8 +18,6 @@ void Render::DirectionLight::create_shadowmap()
 {
 	graphics_context()->get_sprite_engine()->set_ps_state(false);
 	
-	context->begin_3d();
-	
 	_mask_engine->clear_buffer();
 	render_target->clear(Color3::black());
 	render_target->bind(_mask_engine->get_view());

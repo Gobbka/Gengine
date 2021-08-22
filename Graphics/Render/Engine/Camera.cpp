@@ -133,8 +133,6 @@ void Render::Camera::render2d()
 	if(_cameraOptions.render_2d)
 	{
 		// then render canvas
-
-		context->begin_2d();
 		mask_engine->get_discardState()->bind(0);
 		mask_engine->clear_buffer();
 

@@ -126,13 +126,10 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 	auto _resolution = get_view_resolution();
 
 	mask_engine = new MaskEngine(this);
-
-	test_light = nullptr;
 }
 
-void Render::Camera::render()
+void Render::Camera::render2d()
 {
-	
 	if(_cameraOptions.render_2d)
 	{
 		// then render canvas
@@ -140,12 +137,6 @@ void Render::Camera::render()
 		context->begin_2d();
 		mask_engine->get_discardState()->bind(0);
 		mask_engine->clear_buffer();
-		
-		//matrix2d_buffer->bind();
-
-		//control_buffer->data.offset = Position2(-1, 1);
-		//control_buffer->data.opacity = 1.f;
-		//control_buffer->update();
 
 		DrawEvent2D event(this, nullptr);
 		for (auto* layer : _canvas2DLayers)

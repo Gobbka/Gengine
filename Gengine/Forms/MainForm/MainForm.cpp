@@ -118,7 +118,6 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	auto* cam_options = cam->options();
 	cam_options->render_2d = false;
 	cam_options->render_3d = true;
-	cam->set_light(new Render::DirectionLight(get_graphics_context()));
 
 	_render_panel->set_texture(worldTexture->get_texture());
 

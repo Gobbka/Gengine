@@ -42,8 +42,9 @@ namespace Render
 		ConstantBuffer<MatrixBufferStruct> _matrix_buffer;
 		ConstantBuffer<ControlBufferStruct> _control_buffer;
 		
-		
-		void camera_render(ECS::ComponentHandle<Camera>camera,ECS::World*world);
+		void render_camera_3d(ECS::ComponentHandle<Camera> camera, ECS::World* world);
+		void render_camera_2d(ECS::ComponentHandle<Camera> camera);
+		inline void render_camera(ECS::ComponentHandle<Camera> camera, ECS::World* world);
 	public:
 		RenderQueuePass(Core::GraphicsContext* context);
 		

@@ -145,7 +145,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BufferAllocator.h" />
     <ClInclude Include="Canvas\CanvasLayer.h" />
     <ClInclude Include="Canvas\D3D11Canvas.h" />
     <ClInclude Include="Canvas\Objects\I2DCanvasObject.h" />
@@ -168,7 +167,6 @@
     <ClInclude Include="IGDevice.h" />
     <ClInclude Include="Render\d3d\Bindable.h" />
     <ClInclude Include="Render\d3d\Buffer\ConstantBuffer.h" />
-    <ClInclude Include="Render\d3d\Buffer\D3D11BufferAllocator.h" />
     <ClInclude Include="Render\d3d\Buffer\IndexBuffer.h" />
     <ClInclude Include="Render\d3d\Buffer\Texture.h" />
     <ClInclude Include="Render\d3d\Buffer\VertexBuffer.h" />
@@ -206,7 +204,6 @@
     <ClCompile Include="Graphics\Technique\Technique.cpp" />
     <ClCompile Include="Render\d3d\Bindable.cpp" />
     <ClCompile Include="Render\d3d\Buffer\ConstantBuffer.cpp" />
-    <ClCompile Include="Render\d3d\Buffer\D3D11BufferAllocator.cpp" />
     <ClCompile Include="Render\d3d\Buffer\IndexBuffer.cpp" />
     <ClCompile Include="Render\d3d\Buffer\Texture.cpp" />
     <ClCompile Include="Render\d3d\Buffer\VertexBuffer.cpp" />

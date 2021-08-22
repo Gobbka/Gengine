@@ -1,7 +1,6 @@
 #pragma once
 #include <d3d11.h>
 
-#include "BufferAllocator.h"
 #include "IGDevice.h"
 #include "Canvas/CanvasLayer.h"
 #include "Ecs/Ecs.h"
@@ -55,7 +54,6 @@ namespace Core
 
 		D3D11_VIEWPORT _viewport;
 		Render::IGDevice* _gdevice;
-		Render::IBufferAllocator* _bufferAllocator;
 	private:
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 		
@@ -66,7 +64,6 @@ namespace Core
 		Render::Passer _passer;
 		
 	public:
-		Render::IBufferAllocator* buffer_allocator() const;
 
 		Render::PixelShaderLayout pixel_shader;
 		
@@ -79,7 +76,7 @@ namespace Core
 		Render::RenderTarget* get_shadow_render_target();
 
 
-		Render::IGDevice* get_device();
+		inline Render::IGDevice* get_device();
 
 		void bind_main_camera(ECS::Entity* ent);
 		ECS::Entity* get_main_camera();
@@ -89,7 +86,6 @@ namespace Core
 		void make_frame();
 		void present_frame();
 	public:
-		Render::Texture* create_texture(Render::Material* material);
 		
 		static GraphicsContext* new_context(HWND hwnd,Surface size);
 	};

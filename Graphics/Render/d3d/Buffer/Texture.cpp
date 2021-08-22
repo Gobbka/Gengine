@@ -35,9 +35,13 @@ Render::Texture::Texture(Core::GraphicsContext* context, Surface resolution, UIN
 	rvDesc.Texture2D.MostDetailedMip = texture_desc.MipLevels - 1;
 	rvDesc.ViewDimension = D3D_SRV_DIMENSION_TEXTURE2D;
 
-	D3D11_SUBRESOURCE_DATA sb{ new char[(UINT)resolution.width * (UINT)resolution.height * 4],(UINT)resolution.width * 4,0 };
+	assert(SUCCEEDED(_context->device->CreateTexture2D(&texture_desc, nullptr, &_texture)));
 
-	assert(SUCCEEDED(_context->device->CreateTexture2D(&texture_desc, &sb, &_texture)));
+	_context->context->UpdateSubresource(
+		_texture, 0, nullptr, 
+		new char[(UINT)resolution.width * (UINT)resolution.height * 4], 
+		(UINT)resolution.width * 4, 0
+	);
 
 	assert(SUCCEEDED(_context->device->CreateShaderResourceView(_texture, &rvDesc, &_resource)));
 }
@@ -62,10 +66,10 @@ Render::Texture::Texture(Core::GraphicsContext* engine,Material material)
 	rvDesc.Texture2D.MipLevels = texture_desc.MipLevels;
 	rvDesc.Texture2D.MostDetailedMip = texture_desc.MipLevels - 1;
 	rvDesc.ViewDimension = D3D_SRV_DIMENSION_TEXTURE2D;
-	
-	D3D11_SUBRESOURCE_DATA sb{material.pSysMem(),(UINT)material.width() * 4,0};
-	
-	assert(SUCCEEDED(engine->device->CreateTexture2D(&texture_desc, &sb, &_texture)));
+
+	assert(SUCCEEDED(engine->device->CreateTexture2D(&texture_desc, nullptr, &_texture)));
+
+	engine->context->UpdateSubresource(_texture, 0, nullptr, material.pSysMem(), (UINT)material.width() * 4,0);
 
 	assert(SUCCEEDED(engine->device->CreateShaderResourceView(_texture, &rvDesc, &_resource)));
 }

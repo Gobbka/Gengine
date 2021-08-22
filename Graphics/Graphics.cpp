@@ -21,7 +21,6 @@
 #include "Graphics/Material/Material.h"
 #include "Graphics/Que/IPass/IPass.h"
 #include "Graphics/Que/RenderQueuePass/RenderQueuePass.h"
-#include "Render/d3d/Buffer/D3D11BufferAllocator.h"
 
 void Core::WorldSpace::add_object(Render::Model* object)
 {
@@ -45,8 +44,6 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	}
 
 	_shadowRenderTarget = Render::RenderTarget(this, _screen_resolution);
-
-	_bufferAllocator = new Render::D3D11BufferAllocator(this);
 
 	_samplerState = new Render::SamplerState(this);
 	
@@ -93,11 +90,6 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_samplerState->bind();
 }
 
-Render::IBufferAllocator* Core::GraphicsContext::buffer_allocator() const
-{
-	return _bufferAllocator;
-}
-
 ECS::World* Core::GraphicsContext::worldspace()
 {
 	return _worldSpace;
@@ -123,7 +115,7 @@ Render::RenderTarget* Core::GraphicsContext::get_shadow_render_target()
 	return &_shadowRenderTarget;
 }
 
-Render::IGDevice* Core::GraphicsContext::get_device()
+inline Render::IGDevice* Core::GraphicsContext::get_device()
 {
 	return _gdevice;
 }
@@ -178,11 +170,6 @@ void Core::GraphicsContext::make_frame()
 void Core::GraphicsContext::present_frame()
 {
 	_swap->Present(1u, 0u);
-}
-
-Render::Texture* Core::GraphicsContext::create_texture(Render::Material* material)
-{
-	return new Render::Texture(this, *material);
 }
 
 Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd,Surface size)

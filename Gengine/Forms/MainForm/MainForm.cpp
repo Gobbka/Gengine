@@ -109,8 +109,8 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 
 	_assets_panel_wrapper->add_element(_assets_panel);
 	
-	_folder_texture = get_graphics_context()->create_texture( load_png(L"assets\\folder.png"));
-	_file_texture = get_graphics_context()->create_texture(load_png(L"assets\\file.png"));
+	_folder_texture = get_graphics_context()->get_device()->create_texture( load_png(L"assets\\folder.png"));
+	_file_texture = get_graphics_context()->get_device()->create_texture(load_png(L"assets\\file.png"));
 
 	auto worldTexture = new Render::RenderTarget(get_graphics_context(),{1400,780});
 	_worldCamera = get_graphics_context()->get_device()->create_camera(worldTexture);

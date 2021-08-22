@@ -38,7 +38,7 @@ Render::Model* load_model(const wchar_t*path,Core::GraphicsContext*context)
     for (UINT i = 0; i < scene->mRootNode->mNumMeshes; i++)
     {
         auto* mesh = scene->mMeshes[scene->mRootNode->mMeshes[i]];
-        auto* vert = context->buffer_allocator()->alloc_vertex_buffer(context,mesh->mNumVertices);
+        auto* vert = context->get_device()->alloc_vertex_buffer(context,mesh->mNumVertices);
     }
 
     return nullptr;
@@ -88,7 +88,7 @@ int WINAPI wWinMain(
 
     auto* graphics = form->get_graphics_context();
 	
-    auto* texture = form->get_graphics_context()->create_texture(material);
+    auto* texture = form->get_graphics_context()->get_device()->create_texture(material);
 
     auto* device = graphics->get_device();
 	

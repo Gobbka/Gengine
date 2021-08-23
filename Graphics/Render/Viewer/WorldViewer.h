@@ -37,7 +37,7 @@ namespace Render
 		
 		Core::Transform _transform;
 	private:
-		float _fov = 90.f;
+		float _fov = 45.f;
 		float _scale = 1.f;
 		Surface _resolution;
 

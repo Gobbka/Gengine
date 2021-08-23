@@ -162,7 +162,7 @@ void Forms::MainForm::handle_resize(Surface rect)
 
 void Forms::MainForm::update()
 {
-	static float scale = 90.f;
+	static float scale = 45.f;
 	auto camera = _worldCamera->get<Render::Camera>();
 	
 	if (Keyboard::pressed(VirtualKey::KEY_W)) // W

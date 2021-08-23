@@ -14,5 +14,5 @@ static const float3 lightpos = {0,0,0};
 float4 main(PSI input) : SV_TARGET
 {
 	float4 pixelColor = objTexture.Sample(objSamplerState,input.texCoord);
-	return float4(pixelColor);
+	return pixelColor;
 }

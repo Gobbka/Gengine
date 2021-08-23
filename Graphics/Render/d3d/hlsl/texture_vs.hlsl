@@ -13,6 +13,7 @@ cbuffer ControlBuffer : register(b1)
 struct PSI
 {
 	float4 pos : SV_POSITION;
+	float3 worldPos : Position;
 	float3 texCoord : COLOR;
 };
 
@@ -24,6 +25,7 @@ PSI VS(float3 pos : POSITION, float3 texcoord : COLOR)
 	psi.pos = mul(float4(pos, 1.f), viewMatrix);
 	psi.pos.x += c_offset.x;
 	psi.pos.y += c_offset.y;
+	psi.worldPos = pos;
 	
 	return psi;
 }

@@ -1,7 +1,8 @@
 struct PSI
 {
 	float4 pos : SV_POSITION;
-	float3 color : COLOR;
+	float3 worldPos : Position;
+	float3 texCoord : COLOR;
 };
 
 cbuffer ControlBuffer : register(b1)
@@ -13,5 +14,5 @@ cbuffer ControlBuffer : register(b1)
 // PixelShader
 float4 PS(PSI psi) : SV_TARGET
 {
-	return float4(psi.color,c_opacity);
+	return float4(psi.texCoord,c_opacity);
 }

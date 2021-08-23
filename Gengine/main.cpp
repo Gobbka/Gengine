@@ -83,12 +83,13 @@ int WINAPI wWinMain(
         UI::UIManager::instance()->window_proc(msg, wp, lp);
     };
 
-    auto* material = load_png(L"assets\\mine4ok.png");
-    auto* negr = load_png(L"assets\\workspace_background.png");
+    auto* material = load_png(L"assets\\stone.png");
+    auto* negr = load_png(L"assets\\wood.png");
 
     auto* graphics = form->get_graphics_context();
 	
     auto* texture = form->get_graphics_context()->get_device()->create_texture(material);
+    auto* negr_texture = form->get_graphics_context()->get_device()->create_texture(negr);
 
     auto* device = graphics->get_device();
 	
@@ -100,7 +101,7 @@ int WINAPI wWinMain(
     auto nigga_mesh = Render::Parallelepiped(Position3(15,15,0), form->get_graphics_context(),Vector3{9,3,9});
 
     cube->get<Render::Model>()->add_mesh(&cube_mesh);
-    cube->assign<Render::TextureComponent>(texture);
+    cube->assign<Render::TextureComponent>(negr_texture);
 	
     platform->get<Render::Model>()->add_mesh(&nigga_mesh);
     platform->assign<Render::TextureComponent>(texture);
@@ -129,7 +130,7 @@ int WINAPI wWinMain(
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - time);
 
         graphics->worldspace()->tick(1.f/duration.count());
-
+		
         time = now;
 	}
 }

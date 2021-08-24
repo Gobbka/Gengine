@@ -15,10 +15,11 @@ struct PSI
 	float4 pos : SV_POSITION;
 	float3 worldPos : Position;
 	float3 texCoord : COLOR;
+	float3 normal : NORMAL;
 };
 
 // VertexShader
-PSI VS(float3 pos : POSITION, float3 texcoord : COLOR)
+PSI VS(float3 pos : POSITION, float3 texcoord : COLOR, float3 normal : NORMAL)
 {
 	PSI psi;
 	psi.texCoord = texcoord;

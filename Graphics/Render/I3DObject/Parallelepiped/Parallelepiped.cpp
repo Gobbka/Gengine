@@ -35,6 +35,16 @@ Render::Parallelepiped::Parallelepiped(Position3 pos, Core::GraphicsContext* con
 	ptr[5].pos = { x + width,y,length };
 	ptr[6].pos = { x,y - height,length };
 	ptr[7].pos = { x + width,y - height,length };
+
+	ptr[0].normal = { -1.f,1.f,-1.f };
+	ptr[1].normal = { -1.f,1.f,1.f };
+	ptr[2].normal = { -1.f,-1.f,-1.f };
+	ptr[3].normal = { -1.f,-1.f,1.f };
+
+	ptr[4].normal = { 1.f,1.f,-1.f };
+	ptr[5].normal = { 1.f,1.f,1.f };
+	ptr[6].normal = { 1.f,-1.f,-1.f };
+	ptr[7].normal = { 1.f,-1.f,1.f };
 	
 	ptr[2].color = { 0,0,0 };
 	ptr[3].color = { 1,0,0 };

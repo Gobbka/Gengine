@@ -53,6 +53,8 @@ namespace Render
 		void set_scale(float scale);
 		void set_fov(float fov);
 
+		inline MaskEngine* get_mask_engine();
+
 		Core::GraphicsContext* graphics_context();
 
 		RenderTarget* get_render_target();

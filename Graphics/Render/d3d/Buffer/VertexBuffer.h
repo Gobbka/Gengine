@@ -12,11 +12,8 @@ namespace Render
 	private:
 		ID3D11Buffer* _buffer = nullptr;
 	public:
-		Vertex* data = nullptr;
-		UINT size = 0;
-
-		void copy_to(VertexBuffer* buffer) const;
-		void copy_to(void* buffer, UINT size) const;
+		void copy_to(IVertexBuffer* buffer) override;
+		void copy_to(void* buffer, UINT size) override;
 	public:
 		
 		VertexBuffer(Core::GraphicsContext* engine, Vertex* data, UINT size, bool dynamic = true);

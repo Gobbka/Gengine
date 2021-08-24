@@ -3,8 +3,13 @@
 
 
 #include "Animation/Animator.h"
+#include "Ecs/Ecs.h"
 #include "Events/WinIntEventHandler.h"
 #include "Types/Types.h"
+
+namespace Core {
+	class GraphicsContext;
+}
 
 namespace Render {
 	class Camera;
@@ -23,7 +28,8 @@ namespace UI {
 		UIManager();
 	public:
 		static UIManager* instance();
-		InteractiveForm* create_layer(Render::Camera* engine);
+		ECS::Entity* create_layer(Core::GraphicsContext*gfx);
+		void register_to(Core::GraphicsContext* context);
 
 		Animator* animator();
 	protected:

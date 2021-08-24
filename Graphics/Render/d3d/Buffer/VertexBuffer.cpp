@@ -2,20 +2,20 @@
 #include "../../Engine/Camera.h"
 #include "../Vertex.h"
 
-void Render::VertexBuffer::copy_to(VertexBuffer* buffer) const
-{
-	const auto copy_size = min(this->size, buffer->size);
-
-	memcpy(buffer->data, this->data, copy_size * sizeof(Vertex));
-}
-
-void Render::VertexBuffer::copy_to(void* buffer, UINT size) const
+void Render::VertexBuffer::copy_to(void* buffer, UINT size)
 {
 	memcpy(buffer, this->data, size * sizeof(Vertex));
 }
 
+void Render::VertexBuffer::copy_to(IVertexBuffer* buffer)
+{
+	const auto copy_size = min(this->size, buffer->get_size());
+
+	memcpy(buffer->data, this->data, copy_size * sizeof(Vertex));
+}
+
 Render::VertexBuffer::VertexBuffer(Core::GraphicsContext* engine, Vertex* data, UINT size, bool dynamic)
-	: IVertexBuffer(engine)
+	: IVertexBuffer(engine,size)
 {
 	this->data = data;
 	this->size = size;

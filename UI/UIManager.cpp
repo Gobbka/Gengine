@@ -3,6 +3,33 @@
 #include <iostream>
 #include "Render/Engine/Camera.h"
 #include "InteractiveForm.h"
+#include "Render/Engine/MaskEngine.h"
+#include "Render/Events/RenderEvent.h"
+
+class UIPasser : public Render::IPass
+{
+public:
+	void execute(Core::GraphicsContext* context) override
+	{
+		auto* camera = context->get_main_camera()->get<Render::Camera>().get_ptr();
+		auto* mask_engine = camera->get_mask_engine();
+		Render::DrawEvent2D event(camera,nullptr);
+
+		mask_engine->get_discardState()->bind(0);
+		mask_engine->clear_buffer();
+		
+		context->worldspace()->each<UI::InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<UI::InteractiveForm>form)
+			{
+				event.layer = form.get_ptr();
+				event.set_alpha(1.f);
+
+				form->update();
+				form->render(&event);
+			});
+
+		mask_engine->clear_buffer();
+	}
+};
 
 UI::UIManager::UIManager()
 	: _cursor(0, 0)
@@ -16,14 +43,16 @@ UI::UIManager* UI::UIManager::instance()
 	return instance;
 }
 
-UI::InteractiveForm* UI::UIManager::create_layer(Render::Camera* camera)
+ECS::Entity* UI::UIManager::create_layer(Core::GraphicsContext* gfx)
 {
-	auto* form = new InteractiveForm(camera->graphics_context(), &_cursor);
-	
-	camera->register_canvas_2d(form);
-	_forms.push_back(form);
-	
-	return form;
+	auto* ent = gfx->worldspace()->create();
+	auto handle = ent->assign<InteractiveForm>(gfx, &_cursor);
+	return ent;
+}
+
+void UI::UIManager::register_to(Core::GraphicsContext* context)
+{
+	context->get_passer()->add_pass(new UIPasser(), Render::PassStep::overlay);
 }
 
 UI::Animator* UI::UIManager::animator()

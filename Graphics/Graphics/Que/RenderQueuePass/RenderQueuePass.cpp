@@ -59,8 +59,6 @@ void Render::RenderQueuePass::render_camera_2d(ECS::ComponentHandle<Camera> came
 	_control_buffer.data.offset = Vector2(-1, 1);
 	_control_buffer.data.opacity = 1.f;
 	_control_buffer.update();
-
-	camera->render2d();
 }
 
 inline void Render::RenderQueuePass::render_camera(ECS::ComponentHandle<Camera> camera, ECS::World* world)

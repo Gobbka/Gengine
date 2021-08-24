@@ -17,7 +17,7 @@ namespace Render {
 		mask,
 	};
 	
-	class Stencil
+	class __declspec(dllexport) Stencil
 	{
 		ID3D11DeviceContext* _context;
 		ID3D11DepthStencilState* _state;
@@ -35,7 +35,7 @@ namespace Render {
 		DepthStencil,
 	};
 	
-	class MaskEngine : public Bindable
+	class __declspec(dllexport) MaskEngine : public Bindable
 	{
 	private:
 		Stencil _disabledState;

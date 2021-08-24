@@ -45,9 +45,6 @@ namespace Render
 		void set_resolution(Surface new_resolution);
 		void set_alpha(float alpha);
 
-		Canvas::Canvas2DLayer* create_canvas_2d();
-		void register_canvas_2d(Canvas::Canvas2DLayer* layer);
-
 		void set_render_target(RenderTarget* target);
 
 		Model*  point_to_world(Vector2 screen_coordinate);
@@ -65,7 +62,6 @@ namespace Render
 		
 		Camera(Core::GraphicsContext* context,RenderTarget*target);
 
-		void render2d();
 		void bind();
 	};
 }

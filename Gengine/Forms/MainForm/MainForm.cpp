@@ -91,8 +91,9 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	auto* options = main_cam->options();
 	options->render_2d = true;
 	options->render_3d = false;
-	
-	auto* uicanvas = UI::UIManager::instance()->create_layer(main_cam.get_ptr());
+
+	UI::UIManager::instance()->register_to(get_graphics_context());
+	auto* uicanvas_entity = UI::UIManager::instance()->create_layer(get_graphics_context());
 
 	_topbar_panel = new UI::Panel({ 0,0 }, { (float)width,30 }, { RGB_TO_FLOAT(26,26,26),1.f });
 	_worldspace_panel = new UI::Panel({ 0,-30 }, { 250,(float)height - 30.f }, { RGB_TO_FLOAT(20,20,20),1.f });
@@ -122,6 +123,8 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_render_panel->set_texture(worldTexture->get_texture());
 
 	_worldspace_panel->unique_id = 228;
+
+	auto uicanvas = uicanvas_entity->get<UI::InteractiveForm>();
 	
 	uicanvas
 		->add_element(_topbar_panel)

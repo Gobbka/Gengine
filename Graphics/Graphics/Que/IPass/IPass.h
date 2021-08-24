@@ -9,7 +9,8 @@ namespace Render
 	enum class PassStep
 	{
 		probe,
-		draw
+		draw,
+		overlay
 	};
 	
 	class __declspec(dllexport) IPass

@@ -75,7 +75,7 @@ namespace Core
 		Render::RenderTarget* get_render_target_view();
 		Render::RenderTarget* get_shadow_render_target();
 
-
+		inline Render::Passer* get_passer();
 		inline Render::IGDevice* get_device();
 
 		void bind_main_camera(ECS::Entity* ent);

@@ -1,6 +1,8 @@
 #pragma once
 #include <Windows.h>
 
+
+#include "../Graphics/IBuffers/IVertexBuffer.h"
 #include "../Render/d3d/Vertex.h"
 
 namespace Core {
@@ -31,10 +33,10 @@ namespace Render
 		Core::GraphicsContext* _engine;
 		Allocator _allocator;
 
-		VertexBuffer* alloc_vbuffer(UINT size) const;
-		void set_vbuffer(::Render::VertexBuffer* buffer);
+		IVertexBuffer* alloc_vbuffer(UINT size) const;
+		void set_vbuffer(IVertexBuffer* buffer);
 
-		VertexBuffer* _vertex_buffer;
+		IVertexBuffer* _vertex_buffer;
 
 	public:
 		UINT buffer_size() const;
@@ -48,11 +50,11 @@ namespace Render
 
 	public:
 		Vertex* get_ptr() const;
-		VertexBuffer* get_vbuffer() const;
+		IVertexBuffer* get_vbuffer() const;
 
 		void bind();
 
-		D3D11Canvas(Core::GraphicsContext* pEngine, VertexBuffer* buffer);
+		D3D11Canvas(Core::GraphicsContext* pEngine, IVertexBuffer* buffer);
 		explicit D3D11Canvas(Core::GraphicsContext* pEngine);
 
 		virtual ~D3D11Canvas();

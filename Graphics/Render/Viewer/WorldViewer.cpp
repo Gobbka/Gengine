@@ -88,6 +88,11 @@ void Render::WorldViewer::set_fov(float fov)
 	_projectionMatrix = create_projection_matrix(_resolution, _fov, _scale);
 }
 
+Render::MaskEngine* Render::WorldViewer::get_mask_engine()
+{
+	return mask_engine;
+}
+
 Core::GraphicsContext* Render::WorldViewer::graphics_context()
 {
 	return context;

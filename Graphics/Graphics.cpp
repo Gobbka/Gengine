@@ -115,6 +115,11 @@ Render::RenderTarget* Core::GraphicsContext::get_shadow_render_target()
 	return &_shadowRenderTarget;
 }
 
+inline Render::Passer* Core::GraphicsContext::get_passer()
+{
+	return &_passer;
+}
+
 inline Render::IGDevice* Core::GraphicsContext::get_device()
 {
 	return _gdevice;
@@ -162,6 +167,11 @@ void Core::GraphicsContext::make_frame()
 	}
 
 	for (Render::IPass* pass : _passer._end_passes)
+	{
+		pass->execute(this);
+	}
+
+	for (Render::IPass* pass : _passer._overlay_passes)
 	{
 		pass->execute(this);
 	}

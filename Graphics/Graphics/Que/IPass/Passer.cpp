@@ -10,6 +10,9 @@ void Render::Passer::add_pass(IPass*pass, PassStep step)
 	case PassStep::probe:
 		_probe_passes.push_back(pass);
 	break;
+	case PassStep::overlay:
+		_overlay_passes.push_back(pass);
+	break;
 	}	
 }
 

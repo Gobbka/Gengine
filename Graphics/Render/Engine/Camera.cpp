@@ -63,19 +63,6 @@ void Render::Camera::set_alpha(float alpha)
 	//control_buffer->update();
 }
 
-
-Canvas::Canvas2DLayer* Render::Camera::create_canvas_2d()
-{
-	auto* layer = new Canvas::Canvas2DLayer(context);
-	register_canvas_2d(layer);
-	return layer;
-}
-
-void Render::Camera::register_canvas_2d(Canvas::Canvas2DLayer* layer)
-{
-	_canvas2DLayers.push_back(layer);
-}
-
 void Render::Camera::set_render_target(RenderTarget* target)
 {
 	_cameraOptions.renderTarget = target;
@@ -126,28 +113,6 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 	auto _resolution = get_view_resolution();
 
 	mask_engine = new MaskEngine(this);
-}
-
-void Render::Camera::render2d()
-{
-	if(_cameraOptions.render_2d)
-	{
-		// then render canvas
-		mask_engine->get_discardState()->bind(0);
-		mask_engine->clear_buffer();
-
-		DrawEvent2D event(this, nullptr);
-		for (auto* layer : _canvas2DLayers)
-		{
-			event.layer = layer;
-			event.set_alpha(1.f);
-
-			layer->update();
-			layer->render(&event);
-		}
-
-		mask_engine->clear_buffer();
-	}
 }
 
 void Render::Camera::bind()

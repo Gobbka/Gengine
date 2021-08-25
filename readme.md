@@ -2,9 +2,20 @@
 
 На завтра:
 
-1) вынести отрисовку канваса в отдельный RenderPass
-2) вынести 2DLayer в ECS
-3) Добавить нормали и PointLight
+1) Сделать два общих буфера одними для всех
+думаю, это можно разместить в GContext
+
+MatrixBuffer{
+	ModelMatrix
+	ViewProjectionMatrix
+}
+ControlBuffer{
+	float Alpha
+}
+
+2) Продолжить переносить UI в ECS
+3) Убрать костыль не удаления вертекса вершин (Canvas2D)
+4) Вынести свет в ConstantBuffer
 
 ## 2
 

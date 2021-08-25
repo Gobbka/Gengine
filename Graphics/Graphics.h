@@ -18,6 +18,7 @@
 //
 
 namespace Render {
+	class IGContext;
 	class RenderTarget;
 	class Texture;
 	class SamplerState;
@@ -54,6 +55,7 @@ namespace Core
 
 		D3D11_VIEWPORT _viewport;
 		Render::IGDevice* _gdevice;
+		Render::IGContext* _gcontext;
 	private:
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 		
@@ -77,6 +79,7 @@ namespace Core
 
 		inline Render::Passer* get_passer();
 		inline Render::IGDevice* get_device();
+		inline Render::IGContext* get_context();
 
 		void bind_main_camera(ECS::Entity* ent);
 		ECS::Entity* get_main_camera();

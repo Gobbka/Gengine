@@ -26,21 +26,7 @@ namespace Render
 	
 	class __declspec(dllexport) RenderQueuePass : public IPass
 	{
-		__declspec(align(16))
-		struct MatrixBufferStruct
-		{
-			DirectX::XMMATRIX VPMatrix;
-		};
-
-		__declspec(align(16))
-		struct ControlBufferStruct
-		{
-			Position2 offset = Position2(0, 0);
-			float opacity = 1.f;
-		};
-
-		ConstantBuffer<MatrixBufferStruct> _matrix_buffer;
-		ConstantBuffer<ControlBufferStruct> _control_buffer;
+		Core::GraphicsContext* _context;
 		
 		void render_camera_3d(ECS::ComponentHandle<Camera> camera, ECS::World* world);
 		void render_camera_2d(ECS::ComponentHandle<Camera> camera);

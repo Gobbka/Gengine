@@ -1,6 +1,7 @@
 cbuffer ConstantBuffer2D : register(b0)
 {
-	float4x4 viewMatrix;
+	float4x4 ModelViewProjectionMatrix;
+	float4x4 ModelMatrix;
 }
 
 cbuffer ControlBuffer : register(b1)
@@ -23,10 +24,10 @@ PSI VS(float3 pos : POSITION, float3 texcoord : COLOR, float3 normal : NORMAL)
 {
 	PSI psi;
 	psi.texCoord = texcoord;
-	psi.pos = mul(float4(pos, 1.f), viewMatrix);
+	psi.pos = mul(float4(pos, 1.f), ModelViewProjectionMatrix);
 	psi.pos.x += c_offset.x;
 	psi.pos.y += c_offset.y;
-	psi.worldPos = pos;
+	psi.worldPos = mul(float4(pos,1.f),ModelMatrix);
 	
 	return psi;
 }

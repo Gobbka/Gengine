@@ -10,7 +10,7 @@ struct PSI
 Texture2D objTexture : TEXTURE: register(t0);
 SamplerState objSamplerState : SAMPLER: register(s0);
 
-static const float3 lightpos = {0,0,0};
+static const float3 lightpos = {0,-2.5,0};
 
 // dynamic light code =======
 // float4 pixelColor = objTexture.Sample(objSamplerState, input.texCoord);
@@ -23,5 +23,9 @@ static const float3 lightpos = {0,0,0};
 float4 main(PSI input) : SV_TARGET
 {
 	float4 pixelColor = objTexture.Sample(objSamplerState,input.texCoord);
-	return pixelColor;
+	float distToL = distance(lightpos, input.worldPos);
+	 
+	float lightTaken = 1.f - distToL * .3f;
+	float satured = saturate(lightTaken) + 0.2f;
+	return float4((float3)pixelColor * satured, 1.f);
 }

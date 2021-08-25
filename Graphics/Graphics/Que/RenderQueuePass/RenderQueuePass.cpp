@@ -1,6 +1,7 @@
 #include "RenderQueuePass.h"
 #include "../../../Render/Engine/Camera.h"
 #include "../../../Graphics.h"
+#include "../../../IGContext.h"
 #include "../../Components/ColorComponent.h"
 #include "../../Components/TextureComponent.h"
 
@@ -12,12 +13,13 @@ void Render::ClearPass::execute(Core::GraphicsContext* context)
 		});
 }
 
-void Render::RenderQueuePass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<Model> model, DirectX::XMMATRIX matrix)
+void Render::RenderQueuePass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<Model> model, DirectX::XMMATRIX MVPMatrix)
 {
-	_matrix_buffer.data.VPMatrix = DirectX::XMMatrixTranspose(
-		matrix
-	);
-	_matrix_buffer.update();
+	auto* gcontext = _context->get_context();
+	
+	gcontext->matrix_buffer.data.VPMatrix = DirectX::XMMatrixTranspose(MVPMatrix);
+	gcontext->matrix_buffer.data.ModelMatrix = DirectX::XMMatrixTranspose(model->transform.get_world_matrix());
+	gcontext->matrix_buffer.update();
 
 	camera->view(model.get_ptr());
 }
@@ -25,9 +27,9 @@ void Render::RenderQueuePass::render_model(ECS::ComponentHandle<Camera> camera,E
 void Render::RenderQueuePass::render_camera_3d(ECS::ComponentHandle<Camera> camera, ECS::World* world)
 {
 	auto world_to_screen = camera->world_to_screen_matrix();
-
-	_control_buffer.data.offset = Position2{ 0,0 };
-	_control_buffer.update();
+	auto* gcontext = _context->get_context();
+	gcontext->control_buffer.data.offset = Position2{ 0,0 };
+	gcontext->control_buffer.update();
 	auto* sprite_engine = camera->graphics_context()->get_sprite_engine();
 
 	sprite_engine->begin_color_mode();
@@ -53,12 +55,13 @@ void Render::RenderQueuePass::render_camera_2d(ECS::ComponentHandle<Camera> came
 {
 	// on 2d draw
 	auto resolution = camera->get_view_resolution();
-	_matrix_buffer.data.VPMatrix = DirectX::XMMatrixScaling(1.f / (resolution.width / 2), 1.f / (resolution.height / 2), 1.f);
-	_matrix_buffer.update();
+	auto* gcontext = _context->get_context();
+	gcontext->matrix_buffer.data.VPMatrix = DirectX::XMMatrixScaling(1.f / (resolution.width / 2), 1.f / (resolution.height / 2), 1.f);
+	gcontext->matrix_buffer.update();
 
-	_control_buffer.data.offset = Vector2(-1, 1);
-	_control_buffer.data.opacity = 1.f;
-	_control_buffer.update();
+	gcontext->control_buffer.data.offset = Vector2(-1, 1);
+	gcontext->control_buffer.data.opacity = 1.f;
+	gcontext->control_buffer.update();
 }
 
 inline void Render::RenderQueuePass::render_camera(ECS::ComponentHandle<Camera> camera, ECS::World* world)
@@ -71,10 +74,8 @@ inline void Render::RenderQueuePass::render_camera(ECS::ComponentHandle<Camera> 
 }
 
 Render::RenderQueuePass::RenderQueuePass(Core::GraphicsContext* context)
-	: _matrix_buffer(context,0),
-	_control_buffer(context,1, (UINT)(CBBindFlag::CBBindFlag_vs | CBBindFlag::CBBindFlag_ps))
 {
-	
+	_context = context;
 }
 
 void Render::RenderQueuePass::execute(Core::GraphicsContext* context)
@@ -84,8 +85,9 @@ void Render::RenderQueuePass::execute(Core::GraphicsContext* context)
 	// TechniquePasses->execute();
 	// DrawPass3D->execute();
 	// DrawPass2D->execute();
-	_matrix_buffer.bind();
-	_control_buffer.bind();
+	auto* gcontext = _context->get_context();
+	gcontext->matrix_buffer.bind();
+	gcontext->control_buffer.bind();
 	
 	auto* main_camera = context->get_main_camera();
 	ECS::ComponentHandle<Camera> hMainCamera;

@@ -9,6 +9,7 @@
 
 #include "Canvas/CanvasLayer.h"
 #include "Ecs/Ecs.h"
+#include "Graphics/GDevice/D11GContext.h"
 #include "Graphics/GDevice/D11GDevice.h"
 #include "Types/Types.h"
 #include "Render/d3d/Buffer/Texture.h"
@@ -75,6 +76,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	context->IASetInputLayout(_inputLayout);
 
 	_gdevice = new Render::D11GDevice(device, this);
+	_gcontext = new Render::D11GContext(this,context);
 
 	_passer._begin_passes.push_back(new Render::ClearPass());
 	_passer._end_passes.push_back(new Render::RenderQueuePass(this));
@@ -123,6 +125,11 @@ inline Render::Passer* Core::GraphicsContext::get_passer()
 inline Render::IGDevice* Core::GraphicsContext::get_device()
 {
 	return _gdevice;
+}
+
+inline Render::IGContext* Core::GraphicsContext::get_context()
+{
+	return _gcontext;
 }
 
 void Core::GraphicsContext::bind_main_camera(ECS::Entity* ent)

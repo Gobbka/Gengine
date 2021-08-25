@@ -20,6 +20,7 @@ namespace Render {
 	struct __declspec(dllexport) DrawEvent {
 	protected:
 		Camera* _camera;
+		Core::GraphicsContext* _context;
 		SpriteEngine* _spriteEngine;
 	private:
 		UINT _stencil_layer = 0u;

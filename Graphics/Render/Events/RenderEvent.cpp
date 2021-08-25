@@ -1,4 +1,6 @@
 #include "RenderEvent.h"
+
+#include "../../IGContext.h"
 #include "../../Canvas/Objects/I2DCanvasObject.h"
 #include "../Engine/Camera.h"
 #include "../Engine/MaskEngine.h"
@@ -6,6 +8,7 @@
 Render::DrawEvent::DrawEvent(Camera* engine,SpriteEngine*sprite_engine)
 {
 	_camera = engine;
+	_context = _camera->graphics_context();
 	_spriteEngine = sprite_engine;
 }
 
@@ -53,7 +56,9 @@ void Render::DrawEvent::mask_clear()
 
 void Render::DrawEvent::set_alpha(float alpha)
 {
-	_camera->set_alpha(alpha);
+	auto* context = _context->get_context();
+	context->control_buffer.data.opacity = alpha;
+	context->control_buffer.update();
 }
 
 void Render::DrawEvent2D::draw_vertex(UINT count, UINT start) const

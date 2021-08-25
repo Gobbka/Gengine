@@ -3,16 +3,16 @@
 #include "../d3d/Shader/VertexShader.h"
 #include "../../Graphics.h"
 
-Render::SpriteEngine::SpriteEngine(Core::GraphicsContext* context, PixelShader* texture_ps, VertexShader* texture_vs,
-	ID3D11InputLayout* texture_layout, PixelShader* color_ps, VertexShader* color_vs, ID3D11InputLayout* color_layout)
+Render::SpriteEngine::SpriteEngine(Core::GraphicsContext* context,
+	PixelShader* texture_ps, PixelShader* phong_ps, PixelShader* color_ps, VertexShader* texture_vs,
+	ID3D11InputLayout* input_layout)
 {
 	_graphicsContext = context;
 	_texture_ps = texture_ps;
 	_texture_vs = texture_vs;
 	_color_ps = color_ps;
-	_color_vs = color_vs;
-	_texture_layout = texture_layout;
-	_color_layout = color_layout;
+	_phong_ps = phong_ps;
+	_inputLayout = input_layout;
 }
 
 void Render::SpriteEngine::bind_texture(Texture* texture)
@@ -24,32 +24,28 @@ void Render::SpriteEngine::bind_texture(Texture* texture)
 	}
 }
 
-void Render::SpriteEngine::begin_sprite_mode()
+void Render::SpriteEngine::begin_sprite_mode(bool light)
 {
-	if (_drawMode == DrawMode::sprite)
-		return;
-
+	auto* ps = light ? _phong_ps : _texture_ps;
+	
 	if (_ps_active)
 	{
-		_graphicsContext->pixel_shader.bind(_texture_ps);
+		_graphicsContext->pixel_shader.bind(ps);
 	}
 	_texture_vs->bind();
-	_graphicsContext->context->IASetInputLayout(_texture_layout);
+	_graphicsContext->context->IASetInputLayout(_inputLayout);
 
-	_drawMode = DrawMode::sprite;
+	_current_ps = ps;
 }
 
 void Render::SpriteEngine::begin_color_mode()
 {
-	if (_drawMode == DrawMode::color)
-		return;
-
 	if(_ps_active)
 		_graphicsContext->pixel_shader.bind(_color_ps);
-	_color_vs->bind();
-	_graphicsContext->context->IASetInputLayout(_color_layout);
+	_texture_vs->bind();
+	_graphicsContext->context->IASetInputLayout(_inputLayout);
 
-	_drawMode = DrawMode::color;
+	_current_ps = _color_ps;
 }
 
 bool Render::SpriteEngine::set_ps_state(bool active)
@@ -59,16 +55,7 @@ bool Render::SpriteEngine::set_ps_state(bool active)
 
 	if (_ps_active)
 	{
-		switch (_drawMode)
-		{
-		case DrawMode::color:
-			_graphicsContext->pixel_shader.bind(_color_ps);
-		break;
-		case DrawMode::sprite:
-			_graphicsContext->pixel_shader.bind(_texture_ps);
-		break;
-		case DrawMode::none: break;
-		}	
+		_graphicsContext->pixel_shader.bind(_current_ps);
 	}else
 	{
 		_graphicsContext->pixel_shader.remove();

@@ -27,26 +27,25 @@ namespace Render {
 		PixelShader*  _texture_ps;
 		VertexShader* _texture_vs;
 
+		PixelShader* _phong_ps;
 		PixelShader*  _color_ps;
-		VertexShader* _color_vs;
-		
-		ID3D11InputLayout* _texture_layout;
-		ID3D11InputLayout* _color_layout;
 
-		DrawMode _drawMode;
+		ID3D11InputLayout* _inputLayout;
+
+		PixelShader* _current_ps;
 
 		bool _ps_active = true;
 		
 	public:
 		SpriteEngine(
 			Core::GraphicsContext* context,
-			PixelShader* texture_ps, VertexShader* texture_vs, ID3D11InputLayout* texture_layout,
-			PixelShader* color_ps, VertexShader* color_vs, ID3D11InputLayout* color_layout
+			PixelShader* texture_ps,PixelShader*phong_ps,PixelShader*color_ps, VertexShader* texture_vs, 
+			ID3D11InputLayout* input_layout
 		);
 
 		void bind_texture(Texture* texture);
 
-		void begin_sprite_mode();
+		void begin_sprite_mode(bool light = false);
 		void begin_color_mode();
 
 		bool set_ps_state(bool active);

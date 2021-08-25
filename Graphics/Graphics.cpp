@@ -50,7 +50,9 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	
 	_pixelShader  = new Render::PixelShader(this);
 
+	auto* _phong_ps = new Render::PixelShader(this);
 	auto* _texture_ps = new Render::PixelShader(this);
+	
 	auto* _texture_vs = new Render::VertexShader(this);
 
 	ID3D11InputLayout* _texture_layout=nullptr;
@@ -62,13 +64,15 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_texture_vs->create_input_layout(Render::VertexLayout, ARRAYSIZE(Render::VertexLayout), &_inputLayout);
 	_texture_vs->release_blob();
 
+	_phong_ps->read_file(L"d3d11\\phong_ps.cso");
+	_phong_ps->release_blob();
+
 	_texture_ps->read_file(L"d3d11\\texture_ps.cso");
 	_texture_ps->release_blob();
 
 	_spriteEngine = new Render::SpriteEngine(
-		this, 
-		_texture_ps, _texture_vs, _inputLayout,
-		_pixelShader,_texture_vs,_inputLayout
+		this,
+		_texture_ps,_phong_ps,_pixelShader,_texture_vs,_inputLayout
 	);
 
 	_worldSpace = ECS::World::createWorld();

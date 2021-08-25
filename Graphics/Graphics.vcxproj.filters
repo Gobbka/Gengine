@@ -260,7 +260,8 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Render\d3d\hlsl\pixel_shader.hlsl" />
-    <FxCompile Include="Render\d3d\hlsl\texture_ps.hlsl" />
+    <FxCompile Include="Render\d3d\hlsl\phong_ps.hlsl" />
     <FxCompile Include="Render\d3d\hlsl\texture_vs.hlsl" />
+    <FxCompile Include="Render\d3d\hlsl\texture_ps.hlsl" />
   </ItemGroup>
 </Project>

@@ -6,12 +6,9 @@ namespace Render
 	class Texture;
 	struct DrawEvent;
 
-	class __declspec(dllexport) Parallelepiped : public Mesh
+	class __declspec(dllexport) Parallelepiped
 	{
-		Texture* texture;
 	public:
-		Parallelepiped(Position3 pos, Core::GraphicsContext* context,Vector3 resolution);
-
-		void draw(DrawEvent3D event3d) override;
+		static Mesh make(Core::GraphicsContext*context,Position3 pos, Vector3 resolution);
 	};
 }

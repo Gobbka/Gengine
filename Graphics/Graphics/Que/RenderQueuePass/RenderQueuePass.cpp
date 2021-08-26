@@ -40,7 +40,7 @@ void Render::RenderQueuePass::render_camera_3d(ECS::ComponentHandle<Camera> came
 		}
 	);
 
-	sprite_engine->begin_sprite_mode();
+	sprite_engine->begin_sprite_mode(true);
 	world->each<Model, TextureComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<Model> model, ECS::ComponentHandle<TextureComponent>texture)
 		{
 			sprite_engine->bind_texture(texture->texture);
@@ -51,26 +51,12 @@ void Render::RenderQueuePass::render_camera_3d(ECS::ComponentHandle<Camera> came
 	);
 }
 
-void Render::RenderQueuePass::render_camera_2d(ECS::ComponentHandle<Camera> camera)
-{
-	// on 2d draw
-	auto resolution = camera->get_view_resolution();
-	auto* gcontext = _context->get_context();
-	gcontext->matrix_buffer.data.VPMatrix = DirectX::XMMatrixScaling(1.f / (resolution.width / 2), 1.f / (resolution.height / 2), 1.f);
-	gcontext->matrix_buffer.update();
-
-	gcontext->control_buffer.data.offset = Vector2(-1, 1);
-	gcontext->control_buffer.data.opacity = 1.f;
-	gcontext->control_buffer.update();
-}
-
 inline void Render::RenderQueuePass::render_camera(ECS::ComponentHandle<Camera> camera, ECS::World* world)
 {
 	camera->bind();
 
 	if (camera->options()->render_3d)
 		render_camera_3d(camera, world);
-	render_camera_2d(camera);
 }
 
 Render::RenderQueuePass::RenderQueuePass(Core::GraphicsContext* context)

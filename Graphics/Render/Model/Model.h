@@ -10,13 +10,13 @@ namespace Render
 	class __declspec(dllexport) Model
 	{
 	private:
-		std::vector<Mesh*> _meshes;
+		std::vector<Mesh> _meshes;
 	public:
 		Core::Transform transform;
 		
 		Model();
 
-		void add_mesh(Mesh* mesh);
+		void add_mesh(Mesh mesh);
 		
 		void draw(DrawEvent3D event3d);
 		

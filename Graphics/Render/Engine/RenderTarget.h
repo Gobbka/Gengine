@@ -3,6 +3,7 @@
 
 #include "../d3d/Bindable.h"
 #include "../d3d/Buffer/Texture.h"
+#include "Types/Types.h"
 
 struct Color3;
 
@@ -24,6 +25,8 @@ namespace Render {
 		Core::GraphicsContext* _context;
 		Texture _texture;
 	public:
+		Color4 clear_color = Color4(0, 0, 0,1.f);
+		
 		// create render target from IDXGISwapChain
 		RenderTarget(Core::GraphicsContext* context, IDXGISwapChain* swap);
 		// create render target from texture. Texture must have RenderTarget bind flag
@@ -38,7 +41,9 @@ namespace Render {
 		Texture* get_texture();
 
 		void bind(ID3D11DepthStencilView* stencil=nullptr) const;
+		void clear(Color4 color);
 		void clear(Color3 color);
+		void clear();
 
 		void release();
 	};

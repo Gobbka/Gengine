@@ -88,6 +88,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	: Form(hinst, width, height)
 {
 	auto main_cam = main_camera->get<Render::Camera>();
+	main_cam->get_render_target()->clear_color = Color3(.1f, .1f, .1f);
 	auto* options = main_cam->options();
 	options->render_2d = true;
 	options->render_3d = false;
@@ -116,6 +117,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	auto worldTexture = new Render::RenderTarget(get_graphics_context(),{1400,780});
 	_worldCamera = get_graphics_context()->get_device()->create_camera(worldTexture);
 	auto cam = _worldCamera->get<Render::Camera>();
+	cam->get_target_view()->clear_color.a = 0.f;
 	auto* cam_options = cam->options();
 	cam_options->render_2d = false;
 	cam_options->render_3d = true;
@@ -123,6 +125,12 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_render_panel->set_texture(worldTexture->get_texture());
 
 	_worldspace_panel->unique_id = 228;
+	
+	_render_panel->onMouseDown = [&](UI::UIElementEventArgs args)
+	{
+		auto camera = _worldCamera->get<Render::Camera>();
+		
+	};
 
 	auto uicanvas = uicanvas_entity->get<UI::InteractiveForm>();
 	

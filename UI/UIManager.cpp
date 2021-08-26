@@ -1,22 +1,33 @@
 ﻿#include "UIManager.h"
 
 #include <iostream>
+
+#include "IGContext.h"
 #include "Render/Engine/Camera.h"
 #include "InteractiveForm.h"
 #include "Render/Engine/MaskEngine.h"
 #include "Render/Events/RenderEvent.h"
 
-class UIPasser : public Render::IPass
+class DrawUIPass : public Render::IPass
 {
 public:
 	void execute(Core::GraphicsContext* context) override
 	{
 		auto* camera = context->get_main_camera()->get<Render::Camera>().get_ptr();
+
+		auto resolution = camera->get_view_resolution();
+		auto* gcontext = context->get_context();
+		gcontext->matrix_buffer.data.VPMatrix = DirectX::XMMatrixScaling(1.f / (resolution.width / 2), 1.f / (resolution.height / 2), 1.f);
+		gcontext->matrix_buffer.update();
+
+		gcontext->control_buffer.data.offset = Vector2(-1, 1);
+		gcontext->control_buffer.data.opacity = 1.f;
+		gcontext->control_buffer.update();
+		
 		auto* mask_engine = camera->get_mask_engine();
 		Render::DrawEvent2D event(camera,nullptr);
 
 		mask_engine->get_discardState()->bind(0);
-		mask_engine->clear_buffer();
 		
 		context->worldspace()->each<UI::InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<UI::InteractiveForm>form)
 			{
@@ -52,7 +63,7 @@ ECS::Entity* UI::UIManager::create_layer(Core::GraphicsContext* gfx)
 
 void UI::UIManager::register_to(Core::GraphicsContext* context)
 {
-	context->get_passer()->add_pass(new UIPasser(), Render::PassStep::overlay);
+	context->get_passer()->add_pass(new DrawUIPass(), Render::PassStep::overlay);
 }
 
 UI::Animator* UI::UIManager::animator()

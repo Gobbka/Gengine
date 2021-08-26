@@ -2,10 +2,8 @@
 #include "../../../Graphics.h"
 
 Render::IndexBuffer::IndexBuffer(Core::GraphicsContext* graphics_context, UINT* index, size_t size)
-	: IIndexBuffer(graphics_context)
+	: IIndexBuffer(graphics_context,size,index)
 {
-	_index = index;
-	_size = size;
 	
 	D3D11_BUFFER_DESC desc;
 	desc.BindFlags = D3D11_BIND_INDEX_BUFFER;

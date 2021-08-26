@@ -1,16 +1,14 @@
 #pragma once
 #include "../Mesh.h"
-#include "../Parallelepiped/Parallelepiped.h"
-#include "Types/Types.h"
 
 namespace Render
 {
 	class Texture;
 	struct DrawEvent;
 
-	class __declspec(dllexport) Cube : public Parallelepiped
+	class __declspec(dllexport) Cube
 	{
 	public:
-		Cube(Position3 pos, Core::GraphicsContext* context);
+		static Mesh make(Core::GraphicsContext* context, Position3 pos, int size);
 	};
 }

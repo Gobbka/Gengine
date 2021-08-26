@@ -9,15 +9,15 @@ Render::Model::Model()
 
 }
 
-void Render::Model::add_mesh(Mesh* mesh)
+void Render::Model::add_mesh(Mesh mesh)
 {
 	_meshes.push_back(mesh);
 }
 
 void Render::Model::draw(DrawEvent3D event3d)
 {	
-	for(auto* mesh : _meshes)
+	for(auto mesh : _meshes)
 	{
-		mesh->draw(event3d);
+		mesh.draw(event3d);
 	}
 }

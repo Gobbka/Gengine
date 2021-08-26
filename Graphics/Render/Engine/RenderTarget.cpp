@@ -60,11 +60,25 @@ void Render::RenderTarget::bind(ID3D11DepthStencilView* stencil) const
 	_context->context->OMSetRenderTargets(num, _targetView == nullptr ? nullptr : &_targetView, stencil);
 }
 
+void Render::RenderTarget::clear(Color4 color)
+{
+	auto float_color = color.to_float4();
+
+	if (_targetView != nullptr)
+		_context->context->ClearRenderTargetView(_targetView, (FLOAT*)&float_color);
+}
+
 void Render::RenderTarget::clear(Color3 color)
 {
 	auto float_color = Color4(color).to_float4();
+	
 	if(_targetView != nullptr)
 		_context->context->ClearRenderTargetView(_targetView, (FLOAT*)&float_color);
+}
+
+void Render::RenderTarget::clear()
+{
+	clear(clear_color);
 }
 
 void Render::RenderTarget::release()

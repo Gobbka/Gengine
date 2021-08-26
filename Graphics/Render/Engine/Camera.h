@@ -33,7 +33,8 @@ namespace Render
 
 		std::vector<Canvas::Canvas2DLayer*> _canvas2DLayers;
 	public:
-		void clear(Color3 color = Color3(0, 0, 0));
+		void clear(Color3 color);
+		void clear();
 		
 		void set_position(Position3 pos);
 		void adjust_position(Position3 pos);

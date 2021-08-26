@@ -27,6 +27,7 @@
 
 #include "Graphics/Components/ColorComponent.h"
 #include "Graphics/Components/TextureComponent.h"
+#include "Render/I3DObject/Parallelepiped/Parallelepiped.h"
 
 Render::Model* load_model(const wchar_t*path,Core::GraphicsContext*context)
 {
@@ -66,7 +67,6 @@ int WINAPI wWinMain(
     _In_ int nShowCmd
 )
 {
-	
     AllocConsole();
     freopen("CONIN$", "r", stdin);
     freopen("CONOUT$", "w", stdout);
@@ -93,17 +93,14 @@ int WINAPI wWinMain(
 
     auto* device = graphics->get_device();
 	
-    auto cube = device->create_model();
-    auto platform = device->create_model();
+    auto* cube = device->create_model();
+    auto* platform = device->create_model();
     platform->get<Render::Model>()->transform.set_position(Position3{ 0,-7,0 });
-	
-    auto cube_mesh = Render::Cube(Position3::null(), form->get_graphics_context());
-    auto nigga_mesh = Render::Parallelepiped(Position3(15,15,0), form->get_graphics_context(),Vector3{9,3,9});
 
-    cube->get<Render::Model>()->add_mesh(&cube_mesh);
+    cube->get<Render::Model>()->add_mesh(Render::Cube::make(form->get_graphics_context(), Position3::null(), 5));
     cube->assign<Render::TextureComponent>(negr_texture);
 	
-    platform->get<Render::Model>()->add_mesh(&nigga_mesh);
+    platform->get<Render::Model>()->add_mesh(Render::Parallelepiped::make(form->get_graphics_context(), Position3(15, 15, 0), Vector3{ 9,3,9 }));
     platform->assign<Render::TextureComponent>(texture);
 
     CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);

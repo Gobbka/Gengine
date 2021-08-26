@@ -21,6 +21,11 @@ void Render::Camera::clear(Color3 color)
 	render_target->clear(color);
 }
 
+void Render::Camera::clear()
+{
+	render_target->clear();
+}
+
 void Render::Camera::set_position(Position3 pos)
 {
 	_transform.set_position(pos);

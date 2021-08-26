@@ -18,18 +18,17 @@ namespace Render {
 namespace UI {
 	class InteractiveForm;
 
-	class __declspec(dllexport) UIManager : public Interaction::WinIntEventHandler
+	class __declspec(dllexport) UIContext : public Interaction::WinIntEventHandler
 	{
 	private:
 		std::vector<InteractiveForm*> _forms;
+		Core::GraphicsContext* _gfx;
 		Vector2 _cursor;
 		Animator _animator;
-
-		UIManager();
 	public:
-		static UIManager* instance();
-		ECS::Entity* create_layer(Core::GraphicsContext*gfx);
-		void register_to(Core::GraphicsContext* context);
+		explicit UIContext(Core::GraphicsContext*gfx);
+		
+		ECS::Entity* create_layer();
 
 		Animator* animator();
 	protected:

@@ -13,7 +13,7 @@ namespace Canvas
 }
 
 namespace Render {
-	class Model;
+	class MeshContainerComponent;
 	class SpriteEngine;
 	class Camera;
 
@@ -63,6 +63,6 @@ namespace Render {
 		void draw(UINT count,UINT start_location = 0);
 		void draw_indexed(UINT count,UINT start_location = 0);
 		
-		void draw_object(Model* object);
+		void draw_object(MeshContainerComponent* object);
 	};
 }

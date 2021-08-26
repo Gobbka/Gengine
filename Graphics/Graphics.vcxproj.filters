@@ -84,7 +84,7 @@
     <ClInclude Include="Render\I3DObject\Parallelepiped\Parallelepiped.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Model\Model.h">
+    <ClInclude Include="Render\Model\MeshContainerComponent.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\IBuffers\IVertexBuffer.h">
@@ -221,7 +221,7 @@
     <ClCompile Include="Render\I3DObject\Parallelepiped\Parallelepiped.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Model\Model.cpp">
+    <ClCompile Include="Render\Model\MeshContainerComponent.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Render\Engine\RenderTarget.cpp">

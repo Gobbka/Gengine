@@ -3,7 +3,7 @@
 
 namespace Render
 {
-	class Model;
+	class MeshContainerComponent;
 
 	class Technique
 	{
@@ -13,7 +13,7 @@ namespace Render
 
 		std::vector<Step> _steps;
 	public:
-		void submit(Model* model,size_t channel);
+		void submit(MeshContainerComponent* model,size_t channel);
 		void add_step(Step step);
 	public:
 		virtual ~Technique() = default;

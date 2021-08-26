@@ -9,7 +9,7 @@
 #include <fstream>
 
 #include "PhysicsModule.h"
-#include "UIManager.h"
+#include "UIContext.h"
 #include "Forms/MainForm/MainForm.h"
 #include "Render/Engine/Camera.h"
 #include "Render/I3DObject/Cube/Cube.h"
@@ -29,7 +29,7 @@
 #include "Graphics/Components/TextureComponent.h"
 #include "Render/I3DObject/Parallelepiped/Parallelepiped.h"
 
-Render::Model* load_model(const wchar_t*path,Core::GraphicsContext*context)
+Render::MeshContainerComponent* load_model(const wchar_t*path,Core::GraphicsContext*context)
 {
     Assimp::Importer importer;
     auto* scene = importer.ReadFile("assets\\gun.obj", aiProcess_Triangulate | aiProcess_ConvertToLeftHanded);
@@ -80,7 +80,7 @@ int WINAPI wWinMain(
 
     form->on_wndproc = [&](UINT msg, WPARAM wp, LPARAM lp)
     {
-        UI::UIManager::instance()->window_proc(msg, wp, lp);
+    	form->get_ui()->window_proc(msg, wp, lp);
     };
 
     auto* material = load_png(L"assets\\stone.png");
@@ -95,12 +95,12 @@ int WINAPI wWinMain(
 	
     auto* cube = device->create_model();
     auto* platform = device->create_model();
-    platform->get<Render::Model>()->transform.set_position(Position3{ 0,-7,0 });
+    platform->get<Render::MeshContainerComponent>()->transform.set_position(Position3{ 0,-7,0 });
 
-    cube->get<Render::Model>()->add_mesh(Render::Cube::make(form->get_graphics_context(), Position3::null(), 5));
+    cube->get<Render::MeshContainerComponent>()->add_mesh(Render::Cube::make(form->get_graphics_context(), Position3::null(), 5));
     cube->assign<Render::TextureComponent>(negr_texture);
 	
-    platform->get<Render::Model>()->add_mesh(Render::Parallelepiped::make(form->get_graphics_context(), Position3(15, 15, 0), Vector3{ 9,3,9 }));
+    platform->get<Render::MeshContainerComponent>()->add_mesh(Render::Parallelepiped::make(form->get_graphics_context(), Position3::null(), Vector3{ 9,3,9 }));
     platform->assign<Render::TextureComponent>(texture);
 
     CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);

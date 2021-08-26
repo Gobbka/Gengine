@@ -48,7 +48,7 @@ namespace Render
 
 		void set_render_target(RenderTarget* target);
 
-		Model*  point_to_world(Vector2 screen_coordinate);
+		MeshContainerComponent*  point_to_world(Vector2 screen_coordinate);
 		Vector2 point_to_screen(Vector3 world_coordinate);
 	public:
 		CameraOptions* options();

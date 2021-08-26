@@ -7,7 +7,7 @@
 #include "Graphics/Material/Material.h"
 #include "Render/Engine/RenderTarget.h"
 #include "Render/Engine/SpriteEngine.h"
-#include "Render/Model/Model.h"
+#include "Render/Model/MeshContainerComponent.h"
 
 #include "Graphics/Layouts/PixelShaderLayout.h"
 #include "Graphics/Que/IPass/Passer.h"
@@ -30,9 +30,9 @@ namespace Render {
 namespace Core
 {
 	struct __declspec(dllexport) WorldSpace {
-		std::vector<Render::Model*> objects;
+		std::vector<Render::MeshContainerComponent*> objects;
 
-		void add_object(Render::Model* object);
+		void add_object(Render::MeshContainerComponent* object);
 	};
 	
 	class __declspec(dllexport) GraphicsContext

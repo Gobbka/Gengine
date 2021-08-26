@@ -21,7 +21,7 @@ ECS::Entity* Render::D11GDevice::create_camera(RenderTarget* target)
 ECS::Entity* Render::D11GDevice::create_model()
 {
 	auto entt = _gfx->worldspace()->create();
-	entt->assign<Model>();
+	entt->assign<MeshContainerComponent>();
 
 	return entt;
 }

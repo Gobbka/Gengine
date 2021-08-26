@@ -14,7 +14,7 @@
 #include <Render/Engine/Camera.h>
 #include <elements/Panel/Panel.h>
 #include <InteractiveForm.h>
-#include <UIManager.h>
+#include <UIContext.h>
 
 #include "Render/Light/DirectionLight.h"
 
@@ -93,8 +93,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	options->render_2d = true;
 	options->render_3d = false;
 
-	UI::UIManager::instance()->register_to(get_graphics_context());
-	auto* uicanvas_entity = UI::UIManager::instance()->create_layer(get_graphics_context());
+	auto* uicanvas_entity = get_ui()->create_layer();
 
 	_topbar_panel = new UI::Panel({ 0,0 }, { (float)width,30 }, { RGB_TO_FLOAT(26,26,26),1.f });
 	_worldspace_panel = new UI::Panel({ 0,-30 }, { 250,(float)height - 30.f }, { RGB_TO_FLOAT(20,20,20),1.f });

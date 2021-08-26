@@ -87,7 +87,7 @@ void Render::DrawEvent3D::draw_indexed(UINT count, UINT start_location)
 	_context->context->DrawIndexed(count, start_location, 0);
 }
 
-void Render::DrawEvent3D::draw_object(Model* object)
+void Render::DrawEvent3D::draw_object(MeshContainerComponent* object)
 {
 	// object->transform.get_world_matrix();
 }

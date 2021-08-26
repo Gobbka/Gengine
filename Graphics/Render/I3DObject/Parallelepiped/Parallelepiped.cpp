@@ -17,8 +17,8 @@ namespace Render {
 	Mesh Parallelepiped::make(Core::GraphicsContext* context,Position3 pos, Vector3 resolution)
 	{
 		auto* device = context->get_device();
-		auto x = 0.f;
-		auto y = 0.f;
+		auto x = pos.x;
+		auto y = pos.y;
 		auto width = resolution.x;
 		auto height = resolution.y;
 		auto length = resolution.z;

@@ -5,25 +5,20 @@
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"D3DCompiler.lib")
 
-#include <iostream>
-
-#include "Canvas/CanvasLayer.h"
 #include "Ecs/Ecs.h"
 #include "Graphics/GDevice/D11GContext.h"
 #include "Graphics/GDevice/D11GDevice.h"
 #include "Types/Types.h"
-#include "Render/d3d/Buffer/Texture.h"
 #include "Render/Engine/Camera.h"
 
 #include "Render/d3d/Shader/SamplerState.h"
 #include "Render/d3d/Shader/PixelShader.h"
 #include "Render/d3d/Shader/VertexShader.h"
 
-#include "Graphics/Material/Material.h"
 #include "Graphics/Que/IPass/IPass.h"
 #include "Graphics/Que/RenderQueuePass/RenderQueuePass.h"
 
-void Core::WorldSpace::add_object(Render::Model* object)
+void Core::WorldSpace::add_object(Render::MeshContainerComponent* object)
 {
 	objects.push_back(object);
 }
@@ -159,8 +154,6 @@ void Core::GraphicsContext::make_frame()
 	// begin passes
 	context->RSSetViewports(1, &_viewport);
 	_gcontext->set_topology(Render::PrimitiveTopology::TRIANGLESTRIP);
-	//context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-
 
 	for (Render::IPass* pass : _passer._begin_passes)
 	{

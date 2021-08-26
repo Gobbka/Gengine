@@ -1,4 +1,4 @@
-﻿#include "UIManager.h"
+﻿#include "UIContext.h"
 
 #include <iostream>
 
@@ -43,57 +43,50 @@ public:
 	}
 };
 
-UI::UIManager::UIManager()
-	: _cursor(0, 0)
+ECS::Entity* UI::UIContext::create_layer()
 {
-	_animator.start();
-}
-
-UI::UIManager* UI::UIManager::instance()
-{
-	static auto* instance = new UIManager();
-	return instance;
-}
-
-ECS::Entity* UI::UIManager::create_layer(Core::GraphicsContext* gfx)
-{
-	auto* ent = gfx->worldspace()->create();
-	auto handle = ent->assign<InteractiveForm>(gfx, &_cursor);
+	auto* ent = _gfx->worldspace()->create();
+	auto handle = ent->assign<InteractiveForm>(_gfx, &_cursor);
 	return ent;
 }
 
-void UI::UIManager::register_to(Core::GraphicsContext* context)
+UI::UIContext::UIContext(Core::GraphicsContext* gfx)
+	: WinIntEventHandler(),
+	_cursor(0,0)
 {
-	context->get_passer()->add_pass(new DrawUIPass(), Render::PassStep::overlay);
+	_gfx = gfx;
+	_animator.start();
+
+	gfx->get_passer()->add_pass(new DrawUIPass(), Render::PassStep::overlay);
 }
 
-UI::Animator* UI::UIManager::animator()
+UI::Animator* UI::UIContext::animator()
 {
 	return &_animator;
 }
 
-void UI::UIManager::on_lbmouse_down()
+void UI::UIContext::on_lbmouse_down()
 {
 	for (auto* form : _forms)
 		if (form->on_lbmouse_down() == Interaction::EventStatus::handled)
 			return;
 }
 
-void UI::UIManager::on_lbmouse_up()
+void UI::UIContext::on_lbmouse_up()
 {
 	for (auto* form : _forms)
 		if (form->on_lbmouse_up() == Interaction::EventStatus::handled)
 			return;
 }
 
-void UI::UIManager::on_mouse_scroll(short direction)
+void UI::UIContext::on_mouse_scroll(short direction)
 {
 	for (auto* form : _forms)
 		if (form->on_mouse_scroll(direction) == Interaction::EventStatus::handled)
 			return;
 }
 
-void UI::UIManager::on_mouse_move(int mx, int my)
+void UI::UIContext::on_mouse_move(int mx, int my)
 {
 	_cursor = Position2(mx, my);
 	
@@ -106,7 +99,7 @@ void UI::UIManager::on_mouse_move(int mx, int my)
 	}
 }
 
-void UI::UIManager::on_db_click()
+void UI::UIContext::on_db_click()
 {
 	for (auto iteration = _forms.size(); iteration-- > 0;)
 	{

@@ -6,7 +6,7 @@
 #include "../Engine/MaskEngine.h"
 #include "../Engine/RenderTarget.h"
 #include "../Events/RenderEvent.h"
-#include "../Model/Model.h"
+#include "../Model/MeshContainerComponent.h"
 
 const static DirectX::XMVECTOR DEFAULT_FORWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
 const static DirectX::XMVECTOR DEFAULT_UP_VECTOR = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
@@ -71,7 +71,7 @@ Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* t
 	_projectionMatrix = create_projection_matrix(_resolution,_fov,_scale);
 }
 
-void Render::WorldViewer::view(Model* model)
+void Render::WorldViewer::view(MeshContainerComponent* model)
 {	
 	model->draw(DrawEvent3D(context));
 }

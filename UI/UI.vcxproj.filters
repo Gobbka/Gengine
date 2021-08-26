@@ -30,7 +30,7 @@
     <ClCompile Include="elements\IElement\InteractiveElement.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="UIManager.cpp">
+    <ClCompile Include="UIContext.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Animation\Animator.cpp">
@@ -59,7 +59,7 @@
     <ClInclude Include="elements\IElement\InteractiveElement.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="UIManager.h">
+    <ClInclude Include="UIContext.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Animation\Animator.h">

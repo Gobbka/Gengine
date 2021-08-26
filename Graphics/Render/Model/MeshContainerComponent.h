@@ -7,14 +7,13 @@ namespace Render
 {
 	struct DrawEvent3D;
 	
-	class __declspec(dllexport) Model
+	class __declspec(dllexport) MeshContainerComponent
 	{
-	private:
-		std::vector<Mesh> _meshes;
 	public:
+		std::vector<Mesh> meshes;
 		Core::Transform transform;
 		
-		Model();
+		MeshContainerComponent();
 
 		void add_mesh(Mesh mesh);
 		

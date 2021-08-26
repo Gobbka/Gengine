@@ -14,7 +14,7 @@ namespace Core {
 namespace Render
 {
 	class MaskEngine;
-	class Model;
+	class MeshContainerComponent;
 	class RenderTarget;
 
 	class __declspec(dllexport) WorldViewer
@@ -48,7 +48,7 @@ namespace Render
 		WorldViewer(Core::GraphicsContext* context, RenderTarget* target);
 
 	public:
-		void view(Model* model);
+		void view(MeshContainerComponent* model);
 		
 		void set_scale(float scale);
 		void set_fov(float fov);

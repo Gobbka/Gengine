@@ -3,8 +3,12 @@
 #include "../../Events/RenderEvent.h"
 
 UINT PARALLELEPIPED_INDEX_ARRAY[]{
-	0,1,2,3,6,7,4,5,
-	2,6,0,4,1,5,3,7
+	0,1,2,1,3,2, // front
+	1,5,3,5,7,3, // right
+	5,4,7,4,6,7, // back
+	4,0,6,0,2,6, // left
+	4,5,0,5,1,0, // up
+	2,3,6,3,7,6, // down
 };
 
 namespace Render {

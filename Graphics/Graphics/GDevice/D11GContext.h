@@ -7,5 +7,7 @@ namespace Render {
 		ID3D11DeviceContext* _d11context;
 	public:
 		D11GContext(Core::GraphicsContext* context,ID3D11DeviceContext*d11context);
+
+		void set_topology(PrimitiveTopology topology) override;
 	};
 }

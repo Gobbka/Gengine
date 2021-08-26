@@ -158,7 +158,9 @@ void Core::GraphicsContext::make_frame()
 {
 	// begin passes
 	context->RSSetViewports(1, &_viewport);
-	context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+	_gcontext->set_topology(Render::PrimitiveTopology::TRIANGLESTRIP);
+	//context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+
 
 	for (Render::IPass* pass : _passer._begin_passes)
 	{

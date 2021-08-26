@@ -17,6 +17,7 @@ public:
 
 		auto resolution = camera->get_view_resolution();
 		auto* gcontext = context->get_context();
+		gcontext->set_topology(Render::PrimitiveTopology::TRIANGLESTRIP);
 		gcontext->matrix_buffer.data.VPMatrix = DirectX::XMMatrixScaling(1.f / (resolution.width / 2), 1.f / (resolution.height / 2), 1.f);
 		gcontext->matrix_buffer.update();
 

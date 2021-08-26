@@ -4,6 +4,12 @@
 
 namespace Render
 {
+	enum class PrimitiveTopology
+	{
+		TRIANGLESTRIP,
+		TRIANGLELIST
+	};
+	
 	class IGContext
 	{
 	protected:
@@ -30,6 +36,6 @@ namespace Render
 		ConstantBuffer<MatrixBufferStruct> matrix_buffer;
 		ConstantBuffer<ControlBufferStruct> control_buffer;
 
-		
+		virtual void set_topology(PrimitiveTopology topology) =0;
 	};
 }

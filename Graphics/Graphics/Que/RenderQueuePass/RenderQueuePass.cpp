@@ -72,6 +72,7 @@ void Render::RenderQueuePass::execute(Core::GraphicsContext* context)
 	// DrawPass3D->execute();
 	// DrawPass2D->execute();
 	auto* gcontext = _context->get_context();
+	gcontext->set_topology(PrimitiveTopology::TRIANGLELIST);
 	gcontext->matrix_buffer.bind();
 	gcontext->control_buffer.bind();
 	

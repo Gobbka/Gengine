@@ -13,7 +13,7 @@ class DrawUIPass : public Render::IPass
 public:
 	void execute(Core::GraphicsContext* context) override
 	{
-		auto* camera = context->get_main_camera()->get<Render::Camera>().get_ptr();
+		auto* camera = context->active_scene->get_main_camera()->get<Render::Camera>().get_ptr();
 
 		auto resolution = camera->get_view_resolution();
 		auto* gcontext = context->get_context();

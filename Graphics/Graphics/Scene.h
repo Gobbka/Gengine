@@ -13,10 +13,10 @@ namespace Render {
 	{
 		ECS::World* _world;
 		Core::GraphicsContext* _context;
-		Camera* _main_camera;
+		ECS::Entity* _main_camera;
 	public:
-		Camera* get_main_camera();
-		void set_main_camera(Camera*);
+		ECS::Entity* get_main_camera();
+		void set_main_camera(ECS::Entity*);
 
 		ECS::Entity* create_camera(RenderTarget* target);
 		ECS::Entity* create_model();

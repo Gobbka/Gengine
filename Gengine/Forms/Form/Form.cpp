@@ -13,7 +13,6 @@ void Core::Form::handle_resize(Surface rect)
 
 void Core::Form::draw_frame()
 {
-    //main_camera->render();
 }
 
 Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
@@ -21,11 +20,12 @@ Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
 	_graphics(GraphicsContext::new_context(WindowsWindow::hwnd(), WindowsWindow::size())),
 	main_scene(_graphics)
 {
-	WindowsManager::instance()->register_window(this);
-    _graphics->active_scene = &main_scene;
     _uicontext = new UI::UIContext(_graphics);
     main_camera = main_scene.create_camera(_graphics->get_render_target_view());
-    _graphics->bind_main_camera(main_camera);
+
+    main_scene.set_main_camera(main_camera);
+    _graphics->active_scene = &main_scene;
+
 }
 
 Core::Form::~Form()
@@ -53,7 +53,6 @@ void Core::Form::force_draw()
 {
     _graphics->make_frame();
 	
-    //main_camera->clear(Color3(0.1f, 0.1f, 0.1f));
     draw_frame();
 	
     _graphics->present_frame();

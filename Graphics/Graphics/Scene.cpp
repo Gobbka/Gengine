@@ -4,12 +4,12 @@
 #include "../Render/Engine/Camera.h"
 #include "../Render/Model/MeshContainerComponent.h"
 
-Render::Camera* Render::Scene::get_main_camera()
+ECS::Entity* Render::Scene::get_main_camera()
 {
 	return _main_camera;
 }
 
-void Render::Scene::set_main_camera(Camera*cam)
+void Render::Scene::set_main_camera(ECS::Entity* cam)
 {
 	_main_camera = cam;
 }

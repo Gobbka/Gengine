@@ -119,16 +119,6 @@ inline Render::IGContext* Core::GraphicsContext::get_context()
 	return _gcontext;
 }
 
-void Core::GraphicsContext::bind_main_camera(ECS::Entity* ent)
-{
-	_main_camera = ent;
-}
-
-ECS::Entity* Core::GraphicsContext::get_main_camera()
-{
-	return _main_camera;
-}
-
 void Core::GraphicsContext::set_resolution(Surface new_resolution)
 {
 	_screen_resolution = new_resolution;

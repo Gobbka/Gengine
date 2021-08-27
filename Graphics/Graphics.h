@@ -56,8 +56,6 @@ namespace Core
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 		
 		Render::SpriteEngine* _spriteEngine;
-
-		ECS::Entity* _main_camera;
 		Render::Passer _passer;
 		
 	public:
@@ -74,9 +72,6 @@ namespace Core
 		inline Render::Passer* get_passer();
 		inline Render::IGDevice* get_device();
 		inline Render::IGContext* get_context();
-
-		void bind_main_camera(ECS::Entity* ent);
-		ECS::Entity* get_main_camera();
 	public:
 		void set_resolution(Surface new_resolution);
 

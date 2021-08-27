@@ -96,13 +96,10 @@ Core::WindowsWindow::WindowsWindow(HINSTANCE hint, UINT width, UINT height)
 		0
 	);
 
-	if(_hwnd == 0)
-	{
-		auto error = GetLastError();
-		error = 228;
-	}
+	assert(_hwnd != nullptr);
 
 	_size = Surface(width, height);
+	WindowsManager::instance()->register_window(this);
 }
 
 void Core::WindowsWindow::show()

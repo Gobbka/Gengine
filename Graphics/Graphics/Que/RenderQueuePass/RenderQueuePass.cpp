@@ -76,7 +76,7 @@ void Render::RenderQueuePass::execute(Core::GraphicsContext* context)
 	gcontext->matrix_buffer.bind();
 	gcontext->control_buffer.bind();
 	
-	auto* main_camera = context->get_main_camera();
+	auto* main_camera = context->active_scene->get_main_camera();
 	ECS::ComponentHandle<Camera> hMainCamera;
 	auto* world = context->active_scene->world();
 	

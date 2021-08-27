@@ -17,9 +17,6 @@ namespace Render
 		Core::GraphicsContext* _gfx;
 	public:
 		D11GDevice(ID3D11Device* device,Core::GraphicsContext*context);
-		
-		ECS::Entity* create_camera(RenderTarget* target) override;
-		ECS::Entity* create_model() override;
 
 		IIndexBuffer* alloc_index_buffer(unsigned size) override;
 		IIndexBuffer* alloc_index_buffer(void* data, unsigned size) override;

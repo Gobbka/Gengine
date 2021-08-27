@@ -17,13 +17,14 @@ void Core::Form::draw_frame()
 }
 
 Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
-	: WindowsWindow(hinst,width,height)
+	: WindowsWindow(hinst,width,height),
+	_graphics(GraphicsContext::new_context(WindowsWindow::hwnd(), WindowsWindow::size())),
+	main_scene(_graphics)
 {
 	WindowsManager::instance()->register_window(this);
-	
-	_graphics = GraphicsContext::new_context(WindowsWindow::hwnd(),WindowsWindow::size());
+    _graphics->active_scene = &main_scene;
     _uicontext = new UI::UIContext(_graphics);
-    main_camera = _graphics->get_device()->create_camera(nullptr);
+    main_camera = main_scene.create_camera(_graphics->get_render_target_view());
     _graphics->bind_main_camera(main_camera);
 }
 

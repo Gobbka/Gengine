@@ -10,22 +10,6 @@ Render::D11GDevice::D11GDevice(ID3D11Device* device,Core::GraphicsContext* gfx)
 	_gfx = gfx;
 }
 
-ECS::Entity* Render::D11GDevice::create_camera(RenderTarget* target)
-{
-	auto entt = _gfx->worldspace()->create();
-	entt->assign<Camera>(_gfx, target == nullptr ? _gfx->get_render_target_view() : target);
-	
-	return entt;
-}
-
-ECS::Entity* Render::D11GDevice::create_model()
-{
-	auto entt = _gfx->worldspace()->create();
-	entt->assign<MeshContainerComponent>();
-
-	return entt;
-}
-
 Render::IIndexBuffer* Render::D11GDevice::alloc_index_buffer(unsigned size)
 {
 	return new IndexBuffer(_gfx, new UINT[size], size);

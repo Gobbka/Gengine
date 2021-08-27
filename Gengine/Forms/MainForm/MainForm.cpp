@@ -114,7 +114,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_file_texture = get_graphics_context()->get_device()->create_texture(load_png(L"assets\\file.png"));
 
 	auto worldTexture = new Render::RenderTarget(get_graphics_context(),{1400,780});
-	_worldCamera = get_graphics_context()->get_device()->create_camera(worldTexture);
+	_worldCamera = main_scene.create_camera(worldTexture);
 	auto cam = _worldCamera->get<Render::Camera>();
 	cam->get_target_view()->clear_color.a = 0.f;
 	auto* cam_options = cam->options();

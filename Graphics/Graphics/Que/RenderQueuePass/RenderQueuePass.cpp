@@ -7,7 +7,7 @@
 
 void Render::ClearPass::execute(Core::GraphicsContext* context)
 {
-	context->worldspace()->each<Camera>([](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)
+	context->active_scene->world()->each<Camera>([](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)
 		{
 			camera->clear();
 		});
@@ -78,9 +78,9 @@ void Render::RenderQueuePass::execute(Core::GraphicsContext* context)
 	
 	auto* main_camera = context->get_main_camera();
 	ECS::ComponentHandle<Camera> hMainCamera;
-	auto world = context->worldspace();
+	auto* world = context->active_scene->world();
 	
-	context->worldspace()->each<Camera>([&](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)
+	world->each<Camera>([&](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)
 		{
 			if(main_camera == entity)
 			{

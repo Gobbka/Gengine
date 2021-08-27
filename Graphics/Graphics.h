@@ -4,6 +4,7 @@
 #include "IGDevice.h"
 #include "Canvas/CanvasLayer.h"
 #include "Ecs/Ecs.h"
+#include "Graphics/Scene.h"
 #include "Graphics/Material/Material.h"
 #include "Render/Engine/RenderTarget.h"
 #include "Render/Engine/SpriteEngine.h"
@@ -29,11 +30,6 @@ namespace Render {
 
 namespace Core
 {
-	struct __declspec(dllexport) WorldSpace {
-		std::vector<Render::MeshContainerComponent*> objects;
-
-		void add_object(Render::MeshContainerComponent* object);
-	};
 	
 	class __declspec(dllexport) GraphicsContext
 	{
@@ -60,16 +56,14 @@ namespace Core
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 		
 		Render::SpriteEngine* _spriteEngine;
-		
-		ECS::World* _worldSpace;
+
 		ECS::Entity* _main_camera;
 		Render::Passer _passer;
 		
 	public:
-
-		Render::PixelShaderLayout pixel_shader;
+		Render::Scene* active_scene;
 		
-		ECS::World* worldspace();
+		Render::PixelShaderLayout pixel_shader;
 		
 		Render::SpriteEngine* get_sprite_engine();
 		

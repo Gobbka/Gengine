@@ -30,7 +30,7 @@ public:
 
 		mask_engine->get_discardState()->bind(0);
 		
-		context->worldspace()->each<UI::InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<UI::InteractiveForm>form)
+		context->active_scene->world()->each<UI::InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<UI::InteractiveForm>form)
 			{
 				event.layer = form.get_ptr();
 				event.set_alpha(1.f);
@@ -45,7 +45,7 @@ public:
 
 ECS::Entity* UI::UIContext::create_layer()
 {
-	auto* ent = _gfx->worldspace()->create();
+	auto* ent = _gfx->active_scene->world()->create();
 	auto handle = ent->assign<InteractiveForm>(_gfx, &_cursor);
 	return ent;
 }

@@ -18,11 +18,6 @@
 #include "Graphics/Que/IPass/IPass.h"
 #include "Graphics/Que/RenderQueuePass/RenderQueuePass.h"
 
-void Core::WorldSpace::add_object(Render::MeshContainerComponent* object)
-{
-	objects.push_back(object);
-}
-
 Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11DeviceContext* context)
 	: context(context),
 	device(dev),
@@ -70,8 +65,6 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 		_texture_ps,_phong_ps,_pixelShader,_texture_vs,_inputLayout
 	);
 
-	_worldSpace = ECS::World::createWorld();
-
 	context->IASetInputLayout(_inputLayout);
 
 	_gdevice = new Render::D11GDevice(device, this);
@@ -89,11 +82,6 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	context->RSSetViewports(1, &_viewport);
 
 	_samplerState->bind();
-}
-
-ECS::World* Core::GraphicsContext::worldspace()
-{
-	return _worldSpace;
 }
 
 Render::SpriteEngine* Core::GraphicsContext::get_sprite_engine()

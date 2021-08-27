@@ -93,8 +93,8 @@ int WINAPI wWinMain(
 
     auto* device = graphics->get_device();
 	
-    auto* cube = device->create_model();
-    auto* platform = device->create_model();
+    auto* cube = form->main_scene.create_model();
+    auto* platform = form->main_scene.create_model();
     platform->get<Render::MeshContainerComponent>()->transform.set_position(Position3{ 0,-7,0 });
 
     cube->get<Render::MeshContainerComponent>()->add_mesh(Render::Cube::make(form->get_graphics_context(), Position3::null(), 5));
@@ -105,7 +105,7 @@ int WINAPI wWinMain(
 
     CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);
 
-    graphics->worldspace()->registerSystem(new PhysicsModule());
+    form->main_scene.world()->registerSystem(new PhysicsModule());
 	
     MSG msg;
 
@@ -126,7 +126,7 @@ int WINAPI wWinMain(
         auto now = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - time);
 
-        graphics->worldspace()->tick(1.f/duration.count());
+        form->main_scene.world()->tick(1.f/duration.count());
 		
         time = now;
 	}

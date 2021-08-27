@@ -21,7 +21,7 @@ namespace Render {
 		ECS::Entity* create_camera(RenderTarget* target);
 		ECS::Entity* create_model();
 		
-		inline ECS::World* world() const { return _world; }
+		__forceinline ECS::World* world() const { return _world; }
 		
 		Scene(Core::GraphicsContext*context);
 		void destroy() const;

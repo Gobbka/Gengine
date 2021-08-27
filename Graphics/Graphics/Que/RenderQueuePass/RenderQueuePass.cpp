@@ -76,13 +76,13 @@ void Render::RenderQueuePass::execute(Core::GraphicsContext* context)
 	gcontext->matrix_buffer.bind();
 	gcontext->control_buffer.bind();
 	
-	auto* main_camera = context->active_scene->get_main_camera();
+	auto main_camera_id = context->active_scene->get_main_camera()->getEntityId();
 	ECS::ComponentHandle<Camera> hMainCamera;
 	auto* world = context->active_scene->world();
 	
 	world->each<Camera>([&](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)
 		{
-			if(main_camera == entity)
+			if(main_camera_id == entity->getEntityId())
 			{
 				hMainCamera = camera;
 			}else

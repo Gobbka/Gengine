@@ -263,6 +263,9 @@
     <ClCompile Include="Graphics\Scene.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\IBuffers\IVertexBuffer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Render\d3d\hlsl\pixel_shader.hlsl" />

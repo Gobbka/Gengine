@@ -200,6 +200,7 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Graphics\GDevice\D11GContext.cpp" />
     <ClCompile Include="Graphics\GDevice\D11GDevice.cpp" />
+    <ClCompile Include="Graphics\IBuffers\IVertexBuffer.cpp" />
     <ClCompile Include="Graphics\Layouts\PixelShaderLayout.cpp" />
     <ClCompile Include="Graphics\Material\Material.cpp" />
     <ClCompile Include="Graphics\Que\IPass\Passer.cpp" />

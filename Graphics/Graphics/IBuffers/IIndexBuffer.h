@@ -7,9 +7,14 @@ namespace Render
 	{
 	protected:
 		size_t size;
-		UINT* data;
+		unsigned* data;
 	public:
-		IIndexBuffer(Core::GraphicsContext* context,size_t size,UINT*data) : Bindable(context)
+		unsigned& operator[](unsigned index)
+		{
+			return data[index];
+		}
+		
+		IIndexBuffer(Core::GraphicsContext* context,size_t size,unsigned*data) : Bindable(context)
 		{
 			this->size = size;
 			this->data = data;

@@ -10,5 +10,6 @@ namespace Render
 	{
 	public:
 		static Mesh make(Core::GraphicsContext* context, Position3 pos, int size);
+		static Mesh make_independent(Core::GraphicsContext* context, Position3 pos, int size);
 	};
 }

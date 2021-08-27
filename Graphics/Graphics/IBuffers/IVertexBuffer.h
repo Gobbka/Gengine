@@ -3,6 +3,7 @@
 
 namespace Render
 {
+	class IIndexBuffer;
 	struct Vertex;
 
 	class __declspec(dllexport) IVertexBuffer : public Bindable
@@ -20,8 +21,10 @@ namespace Render
 		}
 
 		virtual void copy_to(IVertexBuffer* buffer) =0;
-		virtual void copy_to(void* buffer, UINT size) =0;
+		virtual void copy_to(void* buffer, unsigned size) =0;
 
 		virtual void update(unsigned update_size = -1) = 0;
+
+		void count_normals(IIndexBuffer*buffer);
 	};
 }

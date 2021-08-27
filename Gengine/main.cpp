@@ -97,10 +97,10 @@ int WINAPI wWinMain(
     auto* platform = form->main_scene.create_model();
     platform->get<Render::MeshContainerComponent>()->transform.set_position(Position3{ 0,-7,0 });
 
-    cube->get<Render::MeshContainerComponent>()->add_mesh(Render::Cube::make(form->get_graphics_context(), Position3::null(), 5));
+    cube->get<Render::MeshContainerComponent>()->add_mesh(Render::Cube::make_independent(form->get_graphics_context(), Position3::null(), 5));
     cube->assign<Render::TextureComponent>(negr_texture);
 	
-    platform->get<Render::MeshContainerComponent>()->add_mesh(Render::Parallelepiped::make(form->get_graphics_context(), Position3::null(), Vector3{ 9,3,9 }));
+    platform->get<Render::MeshContainerComponent>()->add_mesh(Render::Parallelepiped::make_independent(form->get_graphics_context(), Position3::null(), Vector3{ 9,3,9 }));
     platform->assign<Render::TextureComponent>(texture);
 
     CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);

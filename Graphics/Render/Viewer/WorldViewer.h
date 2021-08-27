@@ -26,7 +26,7 @@ namespace Render
 		
 	private:
 		DirectX::XMMATRIX create_view_matrix();
-	 	static DirectX::XMMATRIX create_projection_matrix(Surface resolution,float fov,float scale=1.f);
+	 	static DirectX::XMMATRIX create_projection_matrix(Surface resolution,float fov,float farz,float scale=1.f);
 	private:
 		DirectX::XMMATRIX _projectionMatrix;
 		DirectX::XMMATRIX _viewMatrix;
@@ -39,6 +39,7 @@ namespace Render
 	private:
 		float _fov = 45.f;
 		float _scale = 1.f;
+		float _far_z = 120.f;
 		Surface _resolution;
 
 	protected:
@@ -52,6 +53,7 @@ namespace Render
 		
 		void set_scale(float scale);
 		void set_fov(float fov);
+		void set_farz(float farz);
 
 		inline MaskEngine* get_mask_engine();
 

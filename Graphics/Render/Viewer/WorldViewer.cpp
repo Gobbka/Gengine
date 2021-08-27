@@ -44,14 +44,14 @@ DirectX::XMMATRIX Render::WorldViewer::create_view_matrix()
 	);
 }
 
-DirectX::XMMATRIX Render::WorldViewer::create_projection_matrix(Surface resolution, float fov, float scale)
+DirectX::XMMATRIX Render::WorldViewer::create_projection_matrix(Surface resolution, float fov, float farz, float scale)
 {
 	auto forRadians = (fov / 360.f) * DirectX::XM_2PI;
 
 	auto res = resolution;
 	auto aspectRatio = (float)(res.width / res.height);
 
-	return DirectX::XMMatrixPerspectiveFovLH(forRadians, aspectRatio, 0.1f, 120.f) * DirectX::XMMatrixScaling(scale, scale, 1.f);
+	return DirectX::XMMatrixPerspectiveFovLH(forRadians, aspectRatio, 0.1f, farz) * DirectX::XMMatrixScaling(scale, scale, 1.f);
 }
 
 Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* target)
@@ -68,7 +68,7 @@ Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* t
 
 	update_position();
 	
-	_projectionMatrix = create_projection_matrix(_resolution,_fov,_scale);
+	_projectionMatrix = create_projection_matrix(_resolution, _fov, _far_z, _scale);
 }
 
 void Render::WorldViewer::view(MeshContainerComponent* model)
@@ -85,7 +85,13 @@ void Render::WorldViewer::set_scale(float scale)
 void Render::WorldViewer::set_fov(float fov)
 {
 	_fov = fov;
-	_projectionMatrix = create_projection_matrix(_resolution, _fov, _scale);
+	_projectionMatrix = create_projection_matrix(_resolution, _fov, _far_z, _scale);
+}
+
+void Render::WorldViewer::set_farz(float farz)
+{
+	_far_z = farz;
+	_projectionMatrix = create_projection_matrix(_resolution, _fov, _far_z, _scale);
 }
 
 Render::MaskEngine* Render::WorldViewer::get_mask_engine()

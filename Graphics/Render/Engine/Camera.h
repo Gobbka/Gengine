@@ -44,7 +44,6 @@ namespace Render
 		void adjust_rotation(Vector3 rot);
 		
 		void set_resolution(Surface new_resolution);
-		void set_alpha(float alpha);
 
 		void set_render_target(RenderTarget* target);
 

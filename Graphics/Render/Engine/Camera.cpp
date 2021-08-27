@@ -7,15 +7,6 @@
 #include <DirectXMath.h>
 #include <iostream>
 
-#include "../Events/RenderEvent.h"
-#include "../Light/DirectionLight.h"
-
-const static DirectX::XMVECTOR DEFAULT_FORWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
-const static DirectX::XMVECTOR DEFAULT_UP_VECTOR = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-const static DirectX::XMVECTOR DEFAULT_BACKWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f);
-const static DirectX::XMVECTOR DEFAULT_LEFT_VECTOR = DirectX::XMVectorSet(-1.0f, 0.0f, 0.0f, 0.0f);
-const static DirectX::XMVECTOR DEFAULT_RIGHT_VECTOR = DirectX::XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f);
-
 void Render::Camera::clear(Color3 color)
 {
 	render_target->clear(color);
@@ -57,15 +48,6 @@ void Render::Camera::set_resolution(Surface resolution)
 	////_projectionMatrix = create_proj_matrix();
 	//
 	//matrix2d_buffer->update();
-}
-
-void Render::Camera::set_alpha(float alpha)
-{
-	//if (alpha == control_buffer->data.opacity)
-	//	return;
-	//
-	//control_buffer->data.opacity = alpha;
-	//control_buffer->update();
 }
 
 void Render::Camera::set_render_target(RenderTarget* target)
@@ -122,10 +104,9 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 
 void Render::Camera::bind()
 {
-	render_target->bind(mask_engine->get_view());
-
 	_blendEngine->bind();
 
 	mask_engine->clear_buffer();
 	mask_engine->get_disabledState()->bind(0);
+	WorldViewer::bind();
 }

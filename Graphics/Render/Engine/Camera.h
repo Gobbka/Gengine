@@ -11,7 +11,7 @@ struct Surface;
 
 namespace Render
 {
-	class DirectionLight;
+	class DirectionLightComponent;
 	class Cube;
 	class MaskEngine;
 	class BlendEngine;

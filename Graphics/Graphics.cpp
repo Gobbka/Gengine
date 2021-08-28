@@ -8,6 +8,7 @@
 #include "Ecs/Ecs.h"
 #include "Graphics/GDevice/D11GContext.h"
 #include "Graphics/GDevice/D11GDevice.h"
+#include "Graphics/Que/CreateShadowmapPass/CreateShadowMapPass.h"
 #include "Types/Types.h"
 #include "Render/Engine/Camera.h"
 
@@ -71,6 +72,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_gcontext = new Render::D11GContext(this,context);
 
 	_passer._begin_passes.push_back(new Render::ClearPass());
+	_passer._probe_passes.push_back(new Render::CreateShadowMapPass());
 	_passer._end_passes.push_back(new Render::RenderQueuePass(this));
 	
 	_viewport.Width  = _screen_resolution.width;

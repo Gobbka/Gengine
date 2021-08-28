@@ -4,6 +4,8 @@
 
 namespace Render
 {
+	class MaskEngine;
+
 	enum class PrimitiveTopology
 	{
 		TRIANGLESTRIP,
@@ -37,5 +39,9 @@ namespace Render
 		ConstantBuffer<ControlBufferStruct> control_buffer;
 
 		virtual void set_topology(PrimitiveTopology topology) =0;
+		virtual void set_pixel_shader(PixelShader* ps) =0;
+		virtual void set_mask_engine(MaskEngine* mask) =0;
+
+		virtual PixelShader* get_pixel_shader() =0;
 	};
 }

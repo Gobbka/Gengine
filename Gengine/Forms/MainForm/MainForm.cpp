@@ -16,7 +16,7 @@
 #include <InteractiveForm.h>
 #include <UIContext.h>
 
-#include "Render/Light/DirectionLight.h"
+#include "Render/Light/DirectionLightComponent.h"
 
 
 namespace UI

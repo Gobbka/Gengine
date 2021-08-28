@@ -10,13 +10,12 @@ namespace Render
 {
 	class MaskEngine;
 
-	class __declspec(dllexport) DirectionLight : public WorldViewer
+	class __declspec(dllexport) DirectionLightComponent : public WorldViewer
 	{
-		MaskEngine* _mask_engine;
 	public:
 
-		DirectionLight(Core::GraphicsContext* context);
+		DirectionLightComponent(Core::GraphicsContext* context);
 
-		void create_shadowmap();
+		void bind();
 	};
 }

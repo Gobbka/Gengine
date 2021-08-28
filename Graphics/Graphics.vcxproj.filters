@@ -102,7 +102,7 @@
     <ClInclude Include="Canvas\ILayer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Light\DirectionLight.h">
+    <ClInclude Include="Render\Light\DirectionLightComponent.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Render\Viewer\WorldViewer.h">
@@ -151,6 +151,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Scene.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
@@ -230,7 +233,7 @@
     <ClCompile Include="Render\Engine\RenderTarget.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Light\DirectionLight.cpp">
+    <ClCompile Include="Render\Light\DirectionLightComponent.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Render\Viewer\WorldViewer.cpp">
@@ -264,6 +267,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\IBuffers\IVertexBuffer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

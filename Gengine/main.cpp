@@ -1,10 +1,8 @@
 #include <iostream>
 #include <Windows.h>
 #include "Graphics.h"
-#include "WindowsManager.h"
 
 #include "FreeImage.h"
-#include "Render/d3d/Buffer/Texture.h"
 
 #include <fstream>
 
@@ -25,7 +23,6 @@
 #include <Ecs/Ecs.h>
 #include <chrono>
 
-#include "Graphics/Components/ColorComponent.h"
 #include "Graphics/Components/TextureComponent.h"
 #include "Render/I3DObject/Parallelepiped/Parallelepiped.h"
 
@@ -91,6 +88,8 @@ int WINAPI wWinMain(
 	
     auto* texture = form->get_graphics_context()->get_device()->create_texture(stone_material);
     auto* negr_texture = form->get_graphics_context()->get_device()->create_texture(wood_material);
+
+    form->main_scene.create_direction_light();
 	
     auto* cube = form->main_scene.create_model();
     auto* platform = form->main_scene.create_model();

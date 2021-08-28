@@ -160,6 +160,7 @@
     <ClInclude Include="Graphics\IBuffers\IVertexBuffer.h" />
     <ClInclude Include="Graphics\Layouts\PixelShaderLayout.h" />
     <ClInclude Include="Graphics\Material\Material.h" />
+    <ClInclude Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.h" />
     <ClInclude Include="Graphics\Que\IPass\IPass.h" />
     <ClInclude Include="Graphics\Que\IPass\Passer.h" />
     <ClInclude Include="Graphics\Que\RenderQueuePass\RenderQueuePass.h" />
@@ -188,7 +189,7 @@
     <ClInclude Include="Render\I3DObject\Mesh.h" />
     <ClInclude Include="Render\I3DObject\Parallelepiped\Parallelepiped.h" />
     <ClInclude Include="Canvas\ILayer.h" />
-    <ClInclude Include="Render\Light\DirectionLight.h" />
+    <ClInclude Include="Render\Light\DirectionLightComponent.h" />
     <ClInclude Include="Render\Model\MeshContainerComponent.h" />
     <ClInclude Include="Render\Viewer\WorldViewer.h" />
   </ItemGroup>
@@ -203,6 +204,7 @@
     <ClCompile Include="Graphics\IBuffers\IVertexBuffer.cpp" />
     <ClCompile Include="Graphics\Layouts\PixelShaderLayout.cpp" />
     <ClCompile Include="Graphics\Material\Material.cpp" />
+    <ClCompile Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.cpp" />
     <ClCompile Include="Graphics\Que\IPass\Passer.cpp" />
     <ClCompile Include="Graphics\Que\RenderQueuePass\RenderQueuePass.cpp" />
     <ClCompile Include="Graphics\Scene.cpp" />
@@ -227,7 +229,7 @@
     <ClCompile Include="Render\I3DObject\Cube\Cube.cpp" />
     <ClCompile Include="Render\I3DObject\Mesh.cpp" />
     <ClCompile Include="Render\I3DObject\Parallelepiped\Parallelepiped.cpp" />
-    <ClCompile Include="Render\Light\DirectionLight.cpp" />
+    <ClCompile Include="Render\Light\DirectionLightComponent.cpp" />
     <ClCompile Include="Render\Model\MeshContainerComponent.cpp" />
     <ClCompile Include="Render\Viewer\WorldViewer.cpp" />
   </ItemGroup>

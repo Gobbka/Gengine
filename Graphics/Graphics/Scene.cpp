@@ -2,6 +2,7 @@
 
 
 #include "../Render/Engine/Camera.h"
+#include "../Render/Light/DirectionLightComponent.h"
 #include "../Render/Model/MeshContainerComponent.h"
 
 ECS::Entity* Render::Scene::get_main_camera()
@@ -29,6 +30,13 @@ ECS::Entity* Render::Scene::create_model()
 	entt->assign<MeshContainerComponent>();
 
 	return entt;
+}
+
+ECS::Entity* Render::Scene::create_direction_light()
+{
+	auto ent = _world->create();
+	ent->assign<DirectionLightComponent>(_context);
+	return ent;
 }
 
 Render::Scene::Scene(Core::GraphicsContext* context)

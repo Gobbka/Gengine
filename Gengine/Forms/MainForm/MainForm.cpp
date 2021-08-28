@@ -70,8 +70,6 @@ Render::Material* load_png(const wchar_t*path)
 
 	auto bitmap = FreeImage_LoadFromMemory(FIF_PNG, (FIMEMORY*)fmemory, ICO_MAKEALPHA);
 	auto* nigger = FreeImage_GetBits(bitmap);
-	
-	auto gabka = FreeImage_GetColorType(bitmap);
 
 	auto* material = 
 		new Render::Material(nigger, Surface((float)FreeImage_GetWidth(bitmap), (float)FreeImage_GetHeight(bitmap)));
@@ -81,6 +79,8 @@ Render::Material* load_png(const wchar_t*path)
 	FreeImage_Unload(bitmap);
 	FreeImage_CloseMemory(fmemory);
 
+	material->reflect();
+	
 	return material;
 }
 

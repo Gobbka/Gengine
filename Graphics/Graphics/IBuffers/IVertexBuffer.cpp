@@ -3,8 +3,6 @@
 
 #include <cassert>
 
-
-
 void Render::IVertexBuffer::count_normals(IIndexBuffer* buffer)
 {
 	auto index_size = buffer->get_size();

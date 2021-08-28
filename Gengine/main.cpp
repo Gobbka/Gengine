@@ -84,15 +84,10 @@ int WINAPI wWinMain(
     };
 
     auto* material = load_png(L"assets\\stone.png");
-    material->reflect();
     auto* negr = load_png(L"assets\\wood.png");
-
-    auto* graphics = form->get_graphics_context();
 	
     auto* texture = form->get_graphics_context()->get_device()->create_texture(material);
     auto* negr_texture = form->get_graphics_context()->get_device()->create_texture(negr);
-
-    auto* device = graphics->get_device();
 	
     auto* cube = form->main_scene.create_model();
     auto* platform = form->main_scene.create_model();

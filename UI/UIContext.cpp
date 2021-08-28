@@ -18,8 +18,9 @@ public:
 		auto resolution = camera->get_view_resolution();
 		auto* gcontext = context->get_context();
 		gcontext->set_topology(Render::PrimitiveTopology::TRIANGLESTRIP);
-		gcontext->matrix_buffer.data.VPMatrix = 
-			DirectX::XMMatrixTranspose(DirectX::XMMatrixOrthographicLH(resolution.width,resolution.height,0.0,1.f));
+		gcontext->matrix_buffer.data.VPMatrix = DirectX::XMMatrixTranspose(
+			DirectX::XMMatrixOrthographicLH(resolution.width,resolution.height,0.0,1.f)
+		);
 		gcontext->matrix_buffer.update();
 
 		gcontext->control_buffer.data.offset = Vector2(-1, 1);
@@ -33,6 +34,8 @@ public:
 		
 		context->active_scene->world()->each<UI::InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<UI::InteractiveForm>form)
 			{
+				if (form->hidden())
+					return;
 				event.layer = form.get_ptr();
 				event.set_alpha(1.f);
 
@@ -48,6 +51,7 @@ ECS::Entity* UI::UIContext::create_layer()
 {
 	auto* ent = _gfx->active_scene->world()->create();
 	auto handle = ent->assign<InteractiveForm>(_gfx, &_cursor);
+	handle->show();
 	return ent;
 }
 
@@ -68,45 +72,42 @@ UI::Animator* UI::UIContext::animator()
 
 void UI::UIContext::on_lbmouse_down()
 {
-	for (auto* form : _forms)
-		if (form->on_lbmouse_down() == Interaction::EventStatus::handled)
-			return;
+	_gfx->active_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
+		{
+			form->on_lbmouse_down();
+		});
 }
 
 void UI::UIContext::on_lbmouse_up()
 {
-	for (auto* form : _forms)
-		if (form->on_lbmouse_up() == Interaction::EventStatus::handled)
-			return;
+	_gfx->active_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
+		{
+			form->on_lbmouse_up();
+		});
 }
 
 void UI::UIContext::on_mouse_scroll(short direction)
 {
-	for (auto* form : _forms)
-		if (form->on_mouse_scroll(direction) == Interaction::EventStatus::handled)
-			return;
+	_gfx->active_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
+		{
+			form->on_mouse_scroll(direction);
+		});
 }
 
 void UI::UIContext::on_mouse_move(int mx, int my)
 {
 	_cursor = Position2(mx, my);
-	
-	for (auto iteration = _forms.size(); iteration --> 0;)
-	{
-		if (_forms[iteration]->on_mouse_move(mx,my) == Interaction::EventStatus::handled)
+
+	_gfx->active_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
 		{
-			return;
-		}
-	}
+			form->on_mouse_move(mx, my);
+		});
 }
 
 void UI::UIContext::on_db_click()
 {
-	for (auto iteration = _forms.size(); iteration-- > 0;)
-	{
-		if (_forms[iteration]->on_db_click() == Interaction::EventStatus::handled)
+	_gfx->active_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
 		{
-			return;
-		}
-	}
+			form->on_db_click();
+		});
 }

@@ -47,15 +47,17 @@ void Render::Material::swap_channels(RGBChannel _first, RGBChannel _second) cons
 
 void Render::Material::reflect()
 {
-	auto WIDTH = _resolution.width;
-	auto HEIGHT = _resolution.height;
-	
-	for (int row = 0; row < WIDTH / 2; row++)
-	{
-		for (int col = 0; col < HEIGHT; col++)
-		{
-			//*(int*)((char*)(_pSysMem[row]) + col) = 0xFFFFFFFF;
+	auto WIDTH = (int)_resolution.width;
+	auto HEIGHT = (int)_resolution.height;
 
-		}
+	auto* buffer = new BYTE[WIDTH * 4];
+	
+	for (int col = 0; col < HEIGHT / 2; col++)
+	{
+		memcpy(buffer, _pSysMem + col * WIDTH * 4, WIDTH * 4);
+		memcpy(_pSysMem + col * WIDTH * 4,_pSysMem + WIDTH * (HEIGHT - 1 - col) * 4,WIDTH * 4);
+		memcpy(_pSysMem + WIDTH * (HEIGHT - 1 - col) * 4, buffer, WIDTH * 4);
 	}
+
+	free(buffer);
 }

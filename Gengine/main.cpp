@@ -84,6 +84,7 @@ int WINAPI wWinMain(
     };
 
     auto* material = load_png(L"assets\\stone.png");
+    material->reflect();
     auto* negr = load_png(L"assets\\wood.png");
 
     auto* graphics = form->get_graphics_context();
@@ -100,7 +101,7 @@ int WINAPI wWinMain(
     cube->get<Render::MeshContainerComponent>()->add_mesh(Render::Cube::make_independent(form->get_graphics_context(), Position3::null(), 5));
     cube->assign<Render::TextureComponent>(negr_texture);
 	
-    platform->get<Render::MeshContainerComponent>()->add_mesh(Render::Parallelepiped::make_independent(form->get_graphics_context(), Position3::null(), Vector3{ 9,3,9 }));
+    platform->get<Render::MeshContainerComponent>()->add_mesh(Render::Parallelepiped::make_independent(form->get_graphics_context(), Position3::null(), Vector3{ 27,3,27 }));
     platform->assign<Render::TextureComponent>(texture);
 
     CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);

@@ -44,3 +44,18 @@ void Render::Material::swap_channels(RGBChannel _first, RGBChannel _second) cons
 		color[second] = buffer;
 	}
 }
+
+void Render::Material::reflect()
+{
+	auto WIDTH = _resolution.width;
+	auto HEIGHT = _resolution.height;
+	
+	for (int row = 0; row < WIDTH / 2; row++)
+	{
+		for (int col = 0; col < HEIGHT; col++)
+		{
+			//*(int*)((char*)(_pSysMem[row]) + col) = 0xFFFFFFFF;
+
+		}
+	}
+}

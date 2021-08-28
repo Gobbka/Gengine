@@ -10,7 +10,7 @@ struct PSI
 Texture2D objTexture : TEXTURE: register(t0);
 SamplerState objSamplerState : SAMPLER: register(s0);
 
-static const float3 lightpos = {0,1,0};
+static const float3 lightpos = {3,1,3};
 static const float3 ambientLightColor = { 1.f,1.f,1.f };
 static const float ambientLightIntensity = 0.3f;
 

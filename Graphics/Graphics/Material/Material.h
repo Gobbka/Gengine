@@ -35,5 +35,6 @@ namespace Render
 		~Material();
 
 		void swap_channels(RGBChannel first, RGBChannel second) const;
+		void reflect();
 	};
 }

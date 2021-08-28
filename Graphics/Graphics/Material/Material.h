@@ -26,10 +26,10 @@ namespace Render
 			alpha = 3,
 		};
 		
-		void* pSysMem() { return _pSysMem; };
+		void* pSysMem() const { return _pSysMem; }
 
-		auto width() { return _resolution.width; }
-		auto height() { return _resolution.height; }
+		auto width() const { return _resolution.width; }
+		auto height() const { return _resolution.height; }
 		
 		Material(BYTE* pSysMem, Surface resolution,bool alpha = true);
 		Material();

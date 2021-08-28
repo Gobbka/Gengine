@@ -7,21 +7,14 @@
 Render::Material::Material(BYTE* pSysMem, Surface resolution,bool alpha)
 	: _resolution(resolution)
 {
-	_pSysMem = (BYTE*)malloc(resolution.width * resolution.height * 4);// pSysMem;
-	if(alpha || true)
-		memcpy(_pSysMem, pSysMem, resolution.width * resolution.height * 4);
-	else
-	{
-		for(int i = 0;i < resolution.width * resolution.height;i++)
-		{
-			auto dst = (Color4Byte*)_pSysMem;
-			auto src = (Color3Byte*)pSysMem;
+	_pSysMem = new BYTE[resolution.width * resolution.height * 4];
+	memcpy(_pSysMem, pSysMem, resolution.width * resolution.height * 4);
+}
 
-			auto pixel = src[i];
-			
-			dst[i] = Color4Byte{ pixel.r,pixel.g,pixel.b,(char)0xff };
-		}
-	}
+Render::Material::Material()
+	: _pSysMem(nullptr),
+	_resolution(0,0)
+{
 }
 
 Render::Material::~Material()
@@ -60,4 +53,11 @@ void Render::Material::reflect()
 	}
 
 	free(buffer);
+}
+
+void Render::Material::load_bitmap(BYTE* pSysMem, Surface resolution)
+{
+	_pSysMem = new BYTE[resolution.width * resolution.height * 4];
+	memcpy(_pSysMem, pSysMem, resolution.width * resolution.height * 4);
+	_resolution = resolution;
 }

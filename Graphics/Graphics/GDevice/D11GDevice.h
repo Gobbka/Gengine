@@ -24,6 +24,6 @@ namespace Render
 		IVertexBuffer* alloc_vertex_buffer(unsigned size, bool dynamic) override;
 		IVertexBuffer* alloc_vertex_buffer(void* data, unsigned size, bool dynamic) override;
 
-		Texture* create_texture(Render::Material* material) override;
+		Texture* create_texture(Material& material) override;
 	};
 }

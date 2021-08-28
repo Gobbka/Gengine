@@ -45,7 +45,7 @@ Render::MeshContainerComponent* load_model(const wchar_t*path,Core::GraphicsCont
     return nullptr;
 }
 
-extern Render::Material* load_png(const wchar_t* path);
+extern void load_png(const wchar_t* path, Render::Material& material);
 
 void debugger_loop()
 {
@@ -83,11 +83,14 @@ int WINAPI wWinMain(
     	form->get_ui()->window_proc(msg, wp, lp);
     };
 
-    auto* material = load_png(L"assets\\stone.png");
-    auto* negr = load_png(L"assets\\wood.png");
+    auto stone_material = Render::Material();
+    auto wood_material = Render::Material();
 	
-    auto* texture = form->get_graphics_context()->get_device()->create_texture(material);
-    auto* negr_texture = form->get_graphics_context()->get_device()->create_texture(negr);
+    load_png(L"assets\\stone.png",stone_material);
+    load_png(L"assets\\wood.png",wood_material);
+	
+    auto* texture = form->get_graphics_context()->get_device()->create_texture(stone_material);
+    auto* negr_texture = form->get_graphics_context()->get_device()->create_texture(wood_material);
 	
     auto* cube = form->main_scene.create_model();
     auto* platform = form->main_scene.create_model();

@@ -32,9 +32,12 @@ namespace Render
 		auto height() { return _resolution.height; }
 		
 		Material(BYTE* pSysMem, Surface resolution,bool alpha = true);
+		Material();
 		~Material();
 
 		void swap_channels(RGBChannel first, RGBChannel second) const;
 		void reflect();
+
+		void load_bitmap(BYTE*pSysMem,Surface resolution);
 	};
 }

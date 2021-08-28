@@ -62,7 +62,7 @@ namespace UI
 	};
 }
 
-Render::Material* load_png(const wchar_t*path)
+void load_png(const wchar_t* path, Render::Material& material)
 {
 	auto file = FS::FSFile::read_file((wchar_t*)path);
 
@@ -71,17 +71,14 @@ Render::Material* load_png(const wchar_t*path)
 	auto bitmap = FreeImage_LoadFromMemory(FIF_PNG, (FIMEMORY*)fmemory, ICO_MAKEALPHA);
 	auto* nigger = FreeImage_GetBits(bitmap);
 
-	auto* material = 
-		new Render::Material(nigger, Surface((float)FreeImage_GetWidth(bitmap), (float)FreeImage_GetHeight(bitmap)));
+	material.load_bitmap(nigger, Surface((float)FreeImage_GetWidth(bitmap), (float)FreeImage_GetHeight(bitmap)));
 	// we need to swap it cuz driver returns BGR but we need RGB
 	//material->swap_channels(Render::Material::RGBChannel::red, Render::Material::RGBChannel::blue);
 
 	FreeImage_Unload(bitmap);
 	FreeImage_CloseMemory(fmemory);
 
-	material->reflect();
-	
-	return material;
+	material.reflect();
 }
 
 Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
@@ -109,9 +106,15 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_assets_panel->styles.display = UI::ElementStyles::DisplayType::flex;
 
 	_assets_panel_wrapper->add_element(_assets_panel);
+
+	auto folder_material = Render::Material();
+	auto file_material = Render::Material();
 	
-	_folder_texture = get_graphics_context()->get_device()->create_texture( load_png(L"assets\\folder.png"));
-	_file_texture = get_graphics_context()->get_device()->create_texture(load_png(L"assets\\file.png"));
+	load_png(L"assets\\folder.png", folder_material);
+	load_png(L"assets\\file.png", file_material);
+	
+	_folder_texture = get_graphics_context()->get_device()->create_texture(folder_material);
+	_file_texture = get_graphics_context()->get_device()->create_texture(file_material);
 
 	auto worldTexture = new Render::RenderTarget(get_graphics_context(),{1400,780});
 	_worldCamera = main_scene.create_camera(worldTexture);

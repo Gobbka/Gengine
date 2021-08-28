@@ -20,7 +20,7 @@ namespace Render
 		virtual IIndexBuffer* alloc_index_buffer(unsigned size) = 0;
 		virtual IIndexBuffer* alloc_index_buffer(void* data, unsigned size) = 0;
 
-		virtual Texture* create_texture(Render::Material* material) =0;
+		virtual Texture* create_texture(Material& material) =0;
 	};
 }
 

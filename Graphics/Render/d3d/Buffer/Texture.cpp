@@ -46,7 +46,7 @@ Render::Texture::Texture(Core::GraphicsContext* context, Surface resolution, UIN
 	assert(SUCCEEDED(_context->device->CreateShaderResourceView(_texture, &rvDesc, &_resource)));
 }
 
-Render::Texture::Texture(Core::GraphicsContext* engine,Material material)
+Render::Texture::Texture(Core::GraphicsContext* engine,Material& material)
 	: _context(engine)
 {
 	D3D11_TEXTURE2D_DESC texture_desc;

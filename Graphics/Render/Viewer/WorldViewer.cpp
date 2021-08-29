@@ -55,7 +55,7 @@ DirectX::XMMATRIX Render::WorldViewer::create_projection_matrix(Surface resoluti
 }
 
 Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* target)
-	: _transform({-4,0,0}),
+	: _transform({0,0,0}),
 	_resolution(0,0)
 {
 	this->context = context;
@@ -64,6 +64,9 @@ Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* t
 	{
 		_resolution = Surface(target->get_texture()->width(), target->get_texture()->height());
 		render_target = target;
+	}else
+	{
+		_resolution = context->get_screen_resolution();
 	}
 
 	update_position();
@@ -112,6 +115,12 @@ Render::RenderTarget* Render::WorldViewer::get_render_target()
 Surface Render::WorldViewer::get_view_resolution()
 {
 	return _resolution;
+}
+
+void Render::WorldViewer::set_view_resolution(Surface surface)
+{
+	_resolution = surface;
+	_projectionMatrix = create_projection_matrix(_resolution, _fov, _far_z, _scale);
 }
 
 DirectX::XMMATRIX Render::WorldViewer::world_to_screen_matrix()

@@ -1,6 +1,7 @@
 ﻿#include "D11GContext.h"
 
 #include "../../Render/d3d/Shader/PixelShader.h"
+#include "../../Render/d3d/Shader/VertexShader.h"
 #include "../../Render/Engine/MaskEngine.h"
 
 Render::D11GContext::D11GContext(Core::GraphicsContext* context, ID3D11DeviceContext* d11context)
@@ -29,6 +30,14 @@ void Render::D11GContext::set_pixel_shader(PixelShader* ps)
 	auto* shader = ps == nullptr ? nullptr : ps->get_d3d11_ps();
 	_d11context->PSSetShader(shader, nullptr, 0);
 	_current_ps = ps;
+}
+
+void Render::D11GContext::set_vertex_shader(VertexShader* vs)
+{
+	if (vs == _currect_vs)
+		return;
+	_d11context->VSSetShader(vs->get_d11_vs(), nullptr, 0);
+	_currect_vs = vs;
 }
 
 void Render::D11GContext::set_mask_engine(MaskEngine* mask)

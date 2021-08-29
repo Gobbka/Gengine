@@ -34,6 +34,9 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 		_screen_resolution = Surface(desc.BufferDesc.Width,desc.BufferDesc.Height);
 	}
 
+	_gdevice = new Render::D11GDevice(device, this);
+	_gcontext = new Render::D11GContext(this, context);
+	
 	_shadowRenderTarget = Render::RenderTarget(this, _screen_resolution);
 
 	_samplerState = new Render::SamplerState(this);
@@ -65,14 +68,15 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 		_texture_ps,_phong_ps,_pixelShader,_texture_vs,_inputLayout
 	);
 
-	context->IASetInputLayout(_inputLayout);
+	_texture_vs->bind();
 
-	_gdevice = new Render::D11GDevice(device, this);
-	_gcontext = new Render::D11GContext(this,context);
+	context->IASetInputLayout(_inputLayout);
 
 	_passer._begin_passes.push_back(new Render::ClearPass());
 	_passer._probe_passes.push_back(new Render::CreateShadowMapPass());
 	_passer._end_passes.push_back(new Render::RenderQueuePass(this));
+
+	_gcontext->set_topology(Render::PrimitiveTopology::TRIANGLESTRIP);
 	
 	_viewport.Width  = _screen_resolution.width;
 	_viewport.Height = _screen_resolution.height;
@@ -132,7 +136,6 @@ void Core::GraphicsContext::make_frame()
 {
 	// begin passes
 	context->RSSetViewports(1, &_viewport);
-	_gcontext->set_topology(Render::PrimitiveTopology::TRIANGLESTRIP);
 
 	for (Render::IPass* pass : _passer._begin_passes)
 	{

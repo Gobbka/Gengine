@@ -57,8 +57,11 @@ void Render::DrawEvent::mask_clear()
 void Render::DrawEvent::set_alpha(float alpha)
 {
 	auto* context = _context->get_context();
-	context->control_buffer.data.opacity = alpha;
-	context->control_buffer.update();
+	if(context->control_buffer.data.opacity != alpha)
+	{
+		context->control_buffer.data.opacity = alpha;
+		context->control_buffer.update();
+	}
 }
 
 void Render::DrawEvent2D::draw_vertex(UINT count, UINT start) const

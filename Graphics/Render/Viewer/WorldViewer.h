@@ -61,6 +61,7 @@ namespace Render
 
 		RenderTarget* get_render_target();
 		Surface get_view_resolution();
+		void set_view_resolution(Surface surface);
 
 		DirectX::XMMATRIX world_to_screen_matrix();
 

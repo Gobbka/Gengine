@@ -9,6 +9,8 @@ namespace Render {
 		ID3D11VertexShader* _shader;
 	public:
 
+		ID3D11VertexShader* get_d11_vs();
+		
 		void create_input_layout(const D3D11_INPUT_ELEMENT_DESC*elements,UINT num_elements,ID3D11InputLayout**layout);
 		
 		VertexShader(Core::GraphicsContext* engine);

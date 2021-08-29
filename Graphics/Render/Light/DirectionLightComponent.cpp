@@ -11,14 +11,13 @@ Render::DirectionLightComponent::DirectionLightComponent(Core::GraphicsContext* 
 {
 	auto scr_res = gcontext->get_screen_resolution();
 	mask_engine = new MaskEngine(this,MaskEngineUsage::Depth,&scr_res);
-	_transform.adjust_position(Position3(0, -5, 0));
+	_transform.adjust_position(Position3(-2, -2, -2));
+
 	update_position();
 }
 
 void Render::DirectionLightComponent::bind()
 {
-	mask_engine->clear_buffer();
 	context->get_context()->set_mask_engine(mask_engine);
 	mask_engine->get_disabledState()->bind();
-	
 }

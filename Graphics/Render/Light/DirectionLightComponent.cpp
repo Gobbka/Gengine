@@ -16,6 +16,18 @@ Render::DirectionLightComponent::DirectionLightComponent(Core::GraphicsContext* 
 	update_position();
 }
 
+void Render::DirectionLightComponent::set_position(Position3 pos)
+{
+	_transform.set_position(pos);
+	update_position();
+}
+
+void Render::DirectionLightComponent::set_rotation(Vector3 rot)
+{
+	_transform.set_rotation(rot);
+	update_position();
+}
+
 void Render::DirectionLightComponent::bind()
 {
 	context->get_context()->set_mask_engine(mask_engine);

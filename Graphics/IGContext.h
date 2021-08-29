@@ -8,6 +8,7 @@ namespace Render
 
 	enum class PrimitiveTopology
 	{
+		NONE,
 		TRIANGLESTRIP,
 		TRIANGLELIST
 	};

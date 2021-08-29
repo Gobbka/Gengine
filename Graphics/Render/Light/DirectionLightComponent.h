@@ -15,7 +15,8 @@ namespace Render
 	public:
 
 		DirectionLightComponent(Core::GraphicsContext* context);
-
+		void set_position(Position3 pos);
+		void set_rotation(Vector3 rot);
 		void bind();
 	};
 }

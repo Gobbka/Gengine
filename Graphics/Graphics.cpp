@@ -48,8 +48,6 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	
 	auto* _texture_vs = new Render::VertexShader(this);
 
-	ID3D11InputLayout* _texture_layout=nullptr;
-
 	_pixelShader->read_file(L"d3d11\\pixel_shader.cso");
 	_pixelShader->release_blob();
 
@@ -65,7 +63,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 
 	_spriteEngine = new Render::SpriteEngine(
 		this,
-		_texture_ps,_phong_ps,_pixelShader,_texture_vs,_inputLayout
+		_texture_ps,_phong_ps,_pixelShader,_texture_vs
 	);
 
 	_texture_vs->bind();

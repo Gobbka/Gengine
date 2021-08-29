@@ -13,12 +13,12 @@ void Render::ClearPass::execute(Core::GraphicsContext* context)
 		});
 }
 
-void Render::RenderQueuePass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshContainerComponent> model, DirectX::XMMATRIX MVPMatrix)
+void Render::RenderQueuePass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshContainerComponent> model, DirectX::XMMATRIX VPMatrix)
 {
 	auto* gcontext = _context->get_context();
-	
-	gcontext->matrix_buffer.data.VPMatrix = DirectX::XMMatrixTranspose(MVPMatrix);
-	gcontext->matrix_buffer.data.ModelMatrix = DirectX::XMMatrixTranspose(model->transform.get_world_matrix());
+	auto model_matrix = model->transform.get_world_matrix();
+	gcontext->matrix_buffer.data.VPMatrix = DirectX::XMMatrixTranspose(model_matrix * VPMatrix);
+	gcontext->matrix_buffer.data.ModelMatrix = DirectX::XMMatrixTranspose(model_matrix);
 	gcontext->matrix_buffer.update();
 
 	camera->view(model.get_ptr());
@@ -35,8 +35,7 @@ void Render::RenderQueuePass::render_camera_3d(ECS::ComponentHandle<Camera> came
 	sprite_engine->begin_color_mode();
 	world->each<MeshContainerComponent, ColorComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<MeshContainerComponent> model, ECS::ComponentHandle<ColorComponent>color)
 		{
-			auto modelMatrix = model->transform.get_world_matrix();
-			render_model(camera, model, modelMatrix * world_to_screen);
+			render_model(camera, model,world_to_screen);
 		}
 	);
 
@@ -44,9 +43,7 @@ void Render::RenderQueuePass::render_camera_3d(ECS::ComponentHandle<Camera> came
 	world->each<MeshContainerComponent, TextureComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<MeshContainerComponent> model, ECS::ComponentHandle<TextureComponent>texture)
 		{
 			sprite_engine->bind_texture(texture->texture);
-
-			auto modelMatrix = model->transform.get_world_matrix();
-			render_model(camera, model, modelMatrix * world_to_screen);
+			render_model(camera, model, world_to_screen);
 		}
 	);
 }

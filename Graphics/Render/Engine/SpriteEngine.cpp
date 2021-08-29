@@ -5,15 +5,13 @@
 #include "../../IGContext.h"
 
 Render::SpriteEngine::SpriteEngine(Core::GraphicsContext* context,
-                                   PixelShader* texture_ps, PixelShader* phong_ps, PixelShader* color_ps, VertexShader* texture_vs,
-                                   ID3D11InputLayout* input_layout)
+                                   PixelShader* texture_ps, PixelShader* phong_ps, PixelShader* color_ps, VertexShader* texture_vs)
 {
 	_graphicsContext = context;
 	_texture_ps = texture_ps;
 	_texture_vs = texture_vs;
 	_color_ps = color_ps;
 	_phong_ps = phong_ps;
-	_inputLayout = input_layout;
 }
 
 void Render::SpriteEngine::bind_texture(Texture* texture)
@@ -34,7 +32,6 @@ void Render::SpriteEngine::begin_sprite_mode(bool light)
 		_graphicsContext->get_context()->set_pixel_shader(ps);
 	}
 	_texture_vs->bind();
-	_graphicsContext->context->IASetInputLayout(_inputLayout);
 
 	_current_ps = ps;
 }
@@ -44,7 +41,6 @@ void Render::SpriteEngine::begin_color_mode()
 	if(_ps_active)
 		_graphicsContext->get_context()->set_pixel_shader(_color_ps);
 	_texture_vs->bind();
-	_graphicsContext->context->IASetInputLayout(_inputLayout);
 
 	_current_ps = _color_ps;
 }

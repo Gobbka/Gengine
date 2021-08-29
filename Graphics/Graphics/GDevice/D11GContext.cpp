@@ -12,6 +12,9 @@ Render::D11GContext::D11GContext(Core::GraphicsContext* context, ID3D11DeviceCon
 
 void Render::D11GContext::set_topology(PrimitiveTopology topology)
 {
+	if (topology == _current_topology)
+		return;
+	
 	switch (topology)
 	{
 	case PrimitiveTopology::TRIANGLELIST:
@@ -21,6 +24,7 @@ void Render::D11GContext::set_topology(PrimitiveTopology topology)
 		_d11context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 		break;
 	}
+	_current_topology = topology;
 }
 
 void Render::D11GContext::set_pixel_shader(PixelShader* ps)

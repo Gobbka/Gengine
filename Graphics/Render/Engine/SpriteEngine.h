@@ -39,8 +39,7 @@ namespace Render {
 	public:
 		SpriteEngine(
 			Core::GraphicsContext* context,
-			PixelShader* texture_ps,PixelShader*phong_ps,PixelShader*color_ps, VertexShader* texture_vs, 
-			ID3D11InputLayout* input_layout
+			PixelShader* texture_ps,PixelShader*phong_ps,PixelShader*color_ps, VertexShader* texture_vs
 		);
 
 		void bind_texture(Texture* texture);

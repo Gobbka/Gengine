@@ -25,6 +25,7 @@
 
 #include "Graphics/Components/TextureComponent.h"
 #include "Render/I3DObject/Parallelepiped/Parallelepiped.h"
+#include "Render/Light/DirectionLightComponent.h"
 
 Render::MeshContainerComponent* load_model(const wchar_t*path,Core::GraphicsContext*context)
 {
@@ -89,7 +90,10 @@ int WINAPI wWinMain(
     auto* texture = form->get_graphics_context()->get_device()->create_texture(stone_material);
     auto* negr_texture = form->get_graphics_context()->get_device()->create_texture(wood_material);
 
-    form->main_scene.create_direction_light();
+    auto*light = form->main_scene.create_direction_light();
+    auto component = light->get<Render::DirectionLightComponent>();
+    component->set_position(Position3(-4.14113426f, 2.09657478f, -4.79795313f));
+    component->set_rotation(Vector3(0.519999862f, 0.880000114f, 0));
 	
     auto* cube = form->main_scene.create_model();
     auto* platform = form->main_scene.create_model();

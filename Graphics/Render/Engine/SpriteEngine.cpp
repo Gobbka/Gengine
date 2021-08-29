@@ -2,10 +2,11 @@
 #include "../d3d/Shader/PixelShader.h"
 #include "../d3d/Shader/VertexShader.h"
 #include "../../Graphics.h"
+#include "../../IGContext.h"
 
 Render::SpriteEngine::SpriteEngine(Core::GraphicsContext* context,
-	PixelShader* texture_ps, PixelShader* phong_ps, PixelShader* color_ps, VertexShader* texture_vs,
-	ID3D11InputLayout* input_layout)
+                                   PixelShader* texture_ps, PixelShader* phong_ps, PixelShader* color_ps, VertexShader* texture_vs,
+                                   ID3D11InputLayout* input_layout)
 {
 	_graphicsContext = context;
 	_texture_ps = texture_ps;
@@ -30,7 +31,7 @@ void Render::SpriteEngine::begin_sprite_mode(bool light)
 	
 	if (_ps_active)
 	{
-		_graphicsContext->pixel_shader.bind(ps);
+		_graphicsContext->get_context()->set_pixel_shader(ps);
 	}
 	_texture_vs->bind();
 	_graphicsContext->context->IASetInputLayout(_inputLayout);
@@ -41,7 +42,7 @@ void Render::SpriteEngine::begin_sprite_mode(bool light)
 void Render::SpriteEngine::begin_color_mode()
 {
 	if(_ps_active)
-		_graphicsContext->pixel_shader.bind(_color_ps);
+		_graphicsContext->get_context()->set_pixel_shader(_color_ps);
 	_texture_vs->bind();
 	_graphicsContext->context->IASetInputLayout(_inputLayout);
 
@@ -55,10 +56,10 @@ bool Render::SpriteEngine::set_ps_state(bool active)
 
 	if (_ps_active)
 	{
-		_graphicsContext->pixel_shader.bind(_current_ps);
+		_graphicsContext->get_context()->set_pixel_shader(_current_ps);
 	}else
 	{
-		_graphicsContext->pixel_shader.remove();
+		_graphicsContext->get_context()->set_pixel_shader(nullptr);
 	}
 	
 	return current_status;

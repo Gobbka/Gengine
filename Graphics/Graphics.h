@@ -61,8 +61,6 @@ namespace Core
 	public:
 		Render::Scene* active_scene;
 		
-		Render::PixelShaderLayout pixel_shader;
-		
 		Render::SpriteEngine* get_sprite_engine();
 		
 		Surface get_screen_resolution() const;

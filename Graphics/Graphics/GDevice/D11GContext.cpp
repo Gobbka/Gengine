@@ -26,7 +26,7 @@ void Render::D11GContext::set_pixel_shader(PixelShader* ps)
 {
 	if (ps == _current_ps)
 		return;
-	auto* shader = ps->get_d3d11_ps();
+	auto* shader = ps == nullptr ? nullptr : ps->get_d3d11_ps();
 	_d11context->PSSetShader(shader, nullptr, 0);
 	_current_ps = ps;
 }

@@ -7,7 +7,6 @@ struct PSI
 
 cbuffer ControlBuffer : register(b1)
 {
-	float2 c_offset;
 	float c_opacity;
 }
 

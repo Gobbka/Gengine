@@ -27,9 +27,6 @@ void Render::RenderQueuePass::render_model(ECS::ComponentHandle<Camera> camera,E
 void Render::RenderQueuePass::render_camera_3d(ECS::ComponentHandle<Camera> camera, ECS::World* world)
 {
 	auto world_to_screen = camera->world_to_screen_matrix();
-	auto* gcontext = _context->get_context();
-	gcontext->control_buffer.data.offset = Position2{ 0,0 };
-	gcontext->control_buffer.update();
 	auto* sprite_engine = camera->graphics_context()->get_sprite_engine();
 
 	sprite_engine->begin_color_mode();

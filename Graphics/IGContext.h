@@ -31,7 +31,6 @@ namespace Render
 		__declspec(align(16))
 			struct ControlBufferStruct
 		{
-			Position2 offset = Position2(0, 0);
 			float opacity = 1.f;
 		};
 		

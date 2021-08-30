@@ -6,7 +6,6 @@ cbuffer ConstantBuffer2D : register(b0)
 
 cbuffer ControlBuffer : register(b1)
 {
-	float2 c_offset;
 	float c_opacity;
 }
 
@@ -25,8 +24,6 @@ PSI VS(float3 pos : POSITION, float3 texcoord : COLOR, float3 normal : NORMAL)
 	PSI psi;
 	psi.texCoord = texcoord;
 	psi.pos = mul(float4(pos, 1.f), ModelViewProjectionMatrix);
-	psi.pos.x += c_offset.x;
-	psi.pos.y += c_offset.y;
 	psi.worldPos = mul(float4(pos,1.f),ModelMatrix);
 	psi.normal = normal;
 	

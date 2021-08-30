@@ -19,11 +19,10 @@ public:
 		auto* gcontext = context->get_context();
 		gcontext->set_topology(Render::PrimitiveTopology::TRIANGLESTRIP);
 		gcontext->matrix_buffer.data.VPMatrix = DirectX::XMMatrixTranspose(
-			DirectX::XMMatrixOrthographicLH(resolution.width,resolution.height,0.0,1.f)
+			DirectX::XMMatrixOrthographicLH(resolution.width,resolution.height,0.0,1.f) * DirectX::XMMatrixTranslation(-1,1,0)
 		);
 		gcontext->matrix_buffer.update();
 
-		gcontext->control_buffer.data.offset = Vector2(-1, 1);
 		gcontext->control_buffer.data.opacity = 1.f;
 		gcontext->control_buffer.update();
 		

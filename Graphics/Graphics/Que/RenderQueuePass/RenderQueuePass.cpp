@@ -14,7 +14,7 @@ void Render::ClearPass::execute(Core::GraphicsContext* context)
 }
 
 void Render::RenderQueuePass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshContainerComponent> model, DirectX::XMMATRIX VPMatrix)
-{
+{	
 	auto* gcontext = _context->get_context();
 	auto model_matrix = model->transform.get_world_matrix();
 	gcontext->matrix_buffer.data.VPMatrix = DirectX::XMMatrixTranspose(model_matrix * VPMatrix);

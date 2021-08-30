@@ -8,7 +8,7 @@ Render::SamplerState::SamplerState(Core::GraphicsContext* engine)
 	desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 	desc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	desc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-	desc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	desc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
 	desc.ComparisonFunc = D3D11_COMPARISON_NEVER;
 	desc.MaxLOD = D3D11_FLOAT32_MAX;
 	desc.MinLOD = 0;

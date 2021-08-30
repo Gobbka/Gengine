@@ -28,7 +28,7 @@ Render::Texture::Texture(Core::GraphicsContext* context, Surface resolution, UIN
 	texture_desc.CPUAccessFlags = 0;
 	texture_desc.MiscFlags = 0;
 	texture_desc.Usage = D3D11_USAGE_DEFAULT;
-
+	
 	D3D11_SHADER_RESOURCE_VIEW_DESC rvDesc;
 	rvDesc.Format = DXGI_FORMAT_UNKNOWN;
 	rvDesc.Texture2D.MipLevels = texture_desc.MipLevels;
@@ -42,7 +42,7 @@ Render::Texture::Texture(Core::GraphicsContext* context, Surface resolution, UIN
 		new char[(UINT)resolution.width * (UINT)resolution.height * 4], 
 		(UINT)resolution.width * 4, 0
 	);
-
+	
 	assert(SUCCEEDED(_context->device->CreateShaderResourceView(_texture, &rvDesc, &_resource)));
 }
 

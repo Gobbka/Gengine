@@ -44,7 +44,7 @@ void Render::VertexBuffer::bind()
 {
 	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
-	
+
 	_engine->context->IASetVertexBuffers(0, 1, &_buffer, &stride, &offset);
 }
 

@@ -39,7 +39,6 @@ namespace Render {
 		void mask_clear();
 
 		void set_alpha(float alpha);
-		
 	};
 
 	struct __declspec(dllexport) DrawEvent2D : public DrawEvent{
@@ -57,12 +56,9 @@ namespace Render {
 	{
 		Core::GraphicsContext* _context;
 	public:
-		
 		DrawEvent3D(Core::GraphicsContext* context);
 
 		void draw(UINT count,UINT start_location = 0);
 		void draw_indexed(UINT count,UINT start_location = 0);
-		
-		void draw_object(MeshContainerComponent* object);
 	};
 }

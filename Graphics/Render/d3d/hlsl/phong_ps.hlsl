@@ -10,7 +10,9 @@ struct PSI
 Texture2D objTexture : TEXTURE: register(t0);
 SamplerState objSamplerState : SAMPLER: register(s0);
 
-static const float3 lightpos = {3,1,3};
+static const float3 lightpos = {-1,-1,-1};
+static const float pointLightIntensity = 7.f;
+
 static const float3 ambientLightColor = { 1.f,1.f,1.f };
 static const float ambientLightIntensity = 0.3f;
 
@@ -24,8 +26,8 @@ float4 main(PSI input) : SV_TARGET
 
 	float3 vectorToLight = normalize(lightpos - input.worldPos);
 	float3 diffuseLightIntensity = max(dot(vectorToLight, input.normal), 0.f);
-	float3 diffuseLight = diffuseLightIntensity * .5f;
-	appliedLight += diffuseLight;
+	float3 diffuseLight = diffuseLightIntensity;
+	appliedLight += diffuseLight * max(pointLightIntensity - length(lightpos - input.worldPos),0);
 	float3 finalColor = pixelColor * appliedLight;
 
 	return float4(finalColor, 1.f);

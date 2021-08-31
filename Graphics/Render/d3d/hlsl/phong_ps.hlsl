@@ -24,10 +24,13 @@ float4 main(PSI input) : SV_TARGET
 
 	float3 appliedLight = ambientLight;
 
-	float3 vectorToLight = normalize(lightpos - input.worldPos);
-	float3 diffuseLightIntensity = max(dot(vectorToLight, input.normal), 0.f);
+	float3 vectorToLight = lightpos - input.worldPos;
+	float distToLight = length(vectorToLight);
+	float3 normalizedVector = vectorToLight / distToLight; // normalize
+	
+	float3 diffuseLightIntensity = max(dot(normalizedVector, input.normal), 0.f);
 	float3 diffuseLight = diffuseLightIntensity;
-	appliedLight += diffuseLight * max(pointLightIntensity - length(lightpos - input.worldPos),0);
+	appliedLight += diffuseLight * max(pointLightIntensity - distToLight,0);
 	float3 finalColor = pixelColor * appliedLight;
 
 	return float4(finalColor, 1.f);

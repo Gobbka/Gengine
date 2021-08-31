@@ -55,6 +55,11 @@ void Render::D11GContext::set_mask_engine(MaskEngine* mask)
 	_d11context->OMSetRenderTargets(num_view,pp_target, mask->get_view());
 }
 
+void Render::D11GContext::draw_indexed(UINT count, UINT start_location)
+{
+	_d11context->DrawIndexed(count, start_location, 0);
+}
+
 Render::PixelShader* Render::D11GContext::get_pixel_shader()
 {
 	return _current_ps;

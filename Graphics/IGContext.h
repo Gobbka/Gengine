@@ -1,17 +1,10 @@
 #pragma once
 #include "Render/d3d/Buffer/ConstantBuffer.h"
-#include "Types/Types.h"
+#include "Graphics/PrimitiveTopology.h"
 
 namespace Render
 {
 	class MaskEngine;
-
-	enum class PrimitiveTopology
-	{
-		NONE,
-		TRIANGLESTRIP,
-		TRIANGLELIST
-	};
 	
 	class IGContext
 	{
@@ -42,6 +35,7 @@ namespace Render
 		virtual void set_pixel_shader(PixelShader* ps) =0;
 		virtual void set_vertex_shader(VertexShader* vs) = 0;
 		virtual void set_mask_engine(MaskEngine* mask) =0;
+		virtual void draw_indexed(UINT count, UINT start_location=0) = 0;
 
 		virtual PixelShader* get_pixel_shader() =0;
 	};

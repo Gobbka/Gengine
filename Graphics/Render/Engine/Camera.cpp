@@ -93,8 +93,6 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 {
 	_cameraOptions.renderTarget = target;
 	_blendEngine = new BlendEngine(context);
-	
-	auto _resolution = get_view_resolution();
 
 	mask_engine = new MaskEngine(this);
 }

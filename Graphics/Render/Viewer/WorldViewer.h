@@ -49,7 +49,6 @@ namespace Render
 		WorldViewer(Core::GraphicsContext* context, RenderTarget* target);
 
 	public:
-		void view(MeshContainerComponent* model);
 		
 		void set_scale(float scale);
 		void set_fov(float fov);

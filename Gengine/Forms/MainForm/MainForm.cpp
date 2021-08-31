@@ -17,7 +17,7 @@
 #include <UIContext.h>
 
 #include "Render/Light/DirectionLightComponent.h"
-
+#include "Graphics/Material/Material.h"
 
 namespace UI
 {

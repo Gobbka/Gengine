@@ -20,8 +20,14 @@ void Render::RenderQueuePass::render_model(ECS::ComponentHandle<Camera> camera,E
 	gcontext->matrix_buffer.data.VPMatrix = DirectX::XMMatrixTranspose(model_matrix * VPMatrix);
 	gcontext->matrix_buffer.data.ModelMatrix = DirectX::XMMatrixTranspose(model_matrix);
 	gcontext->matrix_buffer.update();
-
-	camera->view(model.get_ptr());
+	
+	for(auto mesh : model->meshes)
+	{
+		mesh.index_buffer->bind();
+		mesh.buffer->bind();
+		gcontext->set_topology(mesh.topology);
+		gcontext->draw_indexed(mesh.index_buffer->get_size());
+	}
 }
 
 void Render::RenderQueuePass::render_camera_3d(ECS::ComponentHandle<Camera> camera, ECS::World* world)

@@ -1,5 +1,10 @@
 #pragma once
 #include "../Mesh.h"
+#include "Types/Types.h"
+
+namespace Core {
+	class GraphicsContext;
+}
 
 namespace Render
 {

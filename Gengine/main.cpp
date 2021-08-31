@@ -24,6 +24,7 @@
 #include <chrono>
 
 #include "Graphics/Components/TextureComponent.h"
+#include "Graphics/Material/Material.h"
 #include "Render/I3DObject/Parallelepiped/Parallelepiped.h"
 #include "Render/Light/DirectionLightComponent.h"
 

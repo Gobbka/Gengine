@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
-
 #include "../I3DObject/Mesh.h"
+#include "Types/Transform.h"
 
 namespace Render
 {
@@ -16,8 +16,5 @@ namespace Render
 		MeshContainerComponent();
 
 		void add_mesh(Mesh mesh);
-		
-		void draw(DrawEvent3D event3d);
-		
 	};
 }

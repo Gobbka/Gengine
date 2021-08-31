@@ -29,7 +29,13 @@ void Render::CreateShadowMapPass::execute(Core::GraphicsContext* context)
 					gcontext->matrix_buffer.data.ModelMatrix = DirectX::XMMatrixTranspose(modelMatrix);
 					gcontext->matrix_buffer.update();
 
-					component->draw(DrawEvent3D(context));
+					for(auto mesh : component->meshes)
+					{
+						mesh.index_buffer->bind();
+						mesh.buffer->bind();
+						gcontext->set_topology(mesh.topology);
+						gcontext->draw_indexed(mesh.index_buffer->get_size());
+					}
 				});
 		});
 

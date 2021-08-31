@@ -2,15 +2,10 @@
 #include <d3d11.h>
 
 #include "IGDevice.h"
-#include "Canvas/CanvasLayer.h"
-#include "Ecs/Ecs.h"
 #include "Graphics/Scene.h"
-#include "Graphics/Material/Material.h"
 #include "Render/Engine/RenderTarget.h"
 #include "Render/Engine/SpriteEngine.h"
 #include "Render/Model/MeshContainerComponent.h"
-
-#include "Graphics/Layouts/PixelShaderLayout.h"
 #include "Graphics/Que/IPass/Passer.h"
 
 

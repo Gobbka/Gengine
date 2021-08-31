@@ -156,6 +156,9 @@
     <ClInclude Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\PrimitiveTopology.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp">

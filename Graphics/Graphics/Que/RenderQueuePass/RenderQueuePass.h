@@ -1,11 +1,8 @@
 #pragma once
 #include <DirectXMath.h>
-
-
-#include "../../../Render/d3d/Buffer/ConstantBuffer.h"
+#include "../../../Render/Model/MeshContainerComponent.h"
 #include "../IPass/IPass.h"
 #include "Ecs/Ecs.h"
-#include "Types/Types.h"
 
 namespace Core {
 	class GraphicsContext;

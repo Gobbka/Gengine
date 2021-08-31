@@ -18,6 +18,7 @@
 
 #include "Graphics/Que/IPass/IPass.h"
 #include "Graphics/Que/RenderQueuePass/RenderQueuePass.h"
+#include "Render/d3d/Vertex.h"
 
 Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11DeviceContext* context)
 	: context(context),
@@ -74,7 +75,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_passer._probe_passes.push_back(new Render::CreateShadowMapPass());
 	_passer._end_passes.push_back(new Render::RenderQueuePass(this));
 
-	_gcontext->set_topology(Render::PrimitiveTopology::TRIANGLESTRIP);
+	_gcontext->set_topology(PrimitiveTopology::TRIANGLESTRIP);
 	
 	_viewport.Width  = _screen_resolution.width;
 	_viewport.Height = _screen_resolution.height;

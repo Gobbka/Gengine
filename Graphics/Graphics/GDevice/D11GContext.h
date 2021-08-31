@@ -16,6 +16,8 @@ namespace Render {
 		void set_vertex_shader(VertexShader* vs) override;
 		void set_mask_engine(MaskEngine* mask) override;
 
+		void draw_indexed(UINT count, UINT start_location=0) override;
+
 		PixelShader* get_pixel_shader() override;
 	};
 }

@@ -74,11 +74,6 @@ Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* t
 	_projectionMatrix = create_projection_matrix(_resolution, _fov, _far_z, _scale);
 }
 
-void Render::WorldViewer::view(MeshContainerComponent* model)
-{	
-	model->draw(DrawEvent3D(context));
-}
-
 void Render::WorldViewer::set_scale(float scale)
 {
 	_scale = scale;

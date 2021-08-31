@@ -30,8 +30,6 @@ namespace Render
 		BlendEngine* _blendEngine;
 
 		CameraOptions _cameraOptions;
-
-		std::vector<Canvas::Canvas2DLayer*> _canvas2DLayers;
 	public:
 		void clear(Color3 color);
 		void clear();
@@ -40,7 +38,7 @@ namespace Render
 		void adjust_position(Position3 pos);
 		void adjust_position_relative(Position3 pos);
 		
-		void set_rotation(Core::Quaternion3 quat);
+		void set_rotation(Vector3 quat);
 		void adjust_rotation(Vector3 rot);
 		
 		void set_resolution(Surface new_resolution);
@@ -52,7 +50,6 @@ namespace Render
 	public:
 		CameraOptions* options();
 		Core::GraphicsContext* graphics_context();
-		ID3D11Device* device() const;
 		RenderTarget* get_target_view() const;
 		MaskEngine* get_mask_engine() const;
 		BlendEngine* blend_engine() const;

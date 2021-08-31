@@ -35,6 +35,12 @@ void Render::Camera::adjust_position_relative(Position3 pos)
 	update_position();
 }
 
+void Render::Camera::set_rotation(Vector3 quat)
+{
+	_transform.set_rotation(quat);
+	update_position();
+}
+
 void Render::Camera::adjust_rotation(Vector3 rot)
 {
 	_transform.adjust_rotation(rot);
@@ -43,11 +49,7 @@ void Render::Camera::adjust_rotation(Vector3 rot)
 
 void Render::Camera::set_resolution(Surface resolution)
 {
-	////_resolution = resolution;
-	//matrix2d_buffer->data = { DirectX::XMMatrixScaling(1.f / (resolution.width / 2),1.f / (resolution.height / 2),1.f) };
-	////_projectionMatrix = create_proj_matrix();
-	//
-	//matrix2d_buffer->update();
+	WorldViewer::set_view_resolution(resolution);
 }
 
 void Render::Camera::set_render_target(RenderTarget* target)
@@ -63,11 +65,6 @@ Render::CameraOptions* Render::Camera::options()
 Core::GraphicsContext* Render::Camera::graphics_context()
 {
 	return context;
-}
-
-ID3D11Device* Render::Camera::device() const
-{
-	return context->device;
 }
 
 Render::RenderTarget* Render::Camera::get_target_view() const

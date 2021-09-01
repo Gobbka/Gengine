@@ -158,7 +158,6 @@
     <ClInclude Include="Graphics\IBuffers\IIndexBuffer.h" />
     <ClInclude Include="Graphics\IBuffers\ITexture2D.h" />
     <ClInclude Include="Graphics\IBuffers\IVertexBuffer.h" />
-    <ClInclude Include="Graphics\Layouts\PixelShaderLayout.h" />
     <ClInclude Include="Graphics\Material\Material.h" />
     <ClInclude Include="Graphics\PrimitiveTopology.h" />
     <ClInclude Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.h" />
@@ -166,8 +165,6 @@
     <ClInclude Include="Graphics\Que\IPass\Passer.h" />
     <ClInclude Include="Graphics\Que\RenderQueuePass\RenderQueuePass.h" />
     <ClInclude Include="Graphics\Scene.h" />
-    <ClInclude Include="Graphics\Technique\Step.h" />
-    <ClInclude Include="Graphics\Technique\Technique.h" />
     <ClInclude Include="IGContext.h" />
     <ClInclude Include="IGDevice.h" />
     <ClInclude Include="Render\d3d\Bindable.h" />
@@ -189,7 +186,6 @@
     <ClInclude Include="Render\I3DObject\Cube\Cube.h" />
     <ClInclude Include="Render\I3DObject\Mesh.h" />
     <ClInclude Include="Render\I3DObject\Parallelepiped\Parallelepiped.h" />
-    <ClInclude Include="Canvas\ILayer.h" />
     <ClInclude Include="Render\Light\DirectionLightComponent.h" />
     <ClInclude Include="Render\Model\MeshContainerComponent.h" />
     <ClInclude Include="Render\Viewer\WorldViewer.h" />
@@ -203,14 +199,11 @@
     <ClCompile Include="Graphics\GDevice\D11GContext.cpp" />
     <ClCompile Include="Graphics\GDevice\D11GDevice.cpp" />
     <ClCompile Include="Graphics\IBuffers\IVertexBuffer.cpp" />
-    <ClCompile Include="Graphics\Layouts\PixelShaderLayout.cpp" />
     <ClCompile Include="Graphics\Material\Material.cpp" />
     <ClCompile Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.cpp" />
     <ClCompile Include="Graphics\Que\IPass\Passer.cpp" />
     <ClCompile Include="Graphics\Que\RenderQueuePass\RenderQueuePass.cpp" />
     <ClCompile Include="Graphics\Scene.cpp" />
-    <ClCompile Include="Graphics\Technique\Step.cpp" />
-    <ClCompile Include="Graphics\Technique\Technique.cpp" />
     <ClCompile Include="Render\d3d\Bindable.cpp" />
     <ClCompile Include="Render\d3d\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Render\d3d\Buffer\IndexBuffer.cpp" />

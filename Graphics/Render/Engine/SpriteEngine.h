@@ -30,8 +30,6 @@ namespace Render {
 		PixelShader* _phong_ps;
 		PixelShader*  _color_ps;
 
-		ID3D11InputLayout* _inputLayout;
-
 		PixelShader* _current_ps;
 
 		bool _ps_active = true;

@@ -7,10 +7,12 @@
 
 void Render::ClearPass::execute(Core::GraphicsContext* context)
 {
-	context->active_scene->world()->each<Camera>([](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)
+	for (auto* scene : context->scenes) {
+		scene->world()->each<Camera>([](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)
 		{
 			camera->clear();
 		});
+	}
 }
 
 void Render::RenderQueuePass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshContainerComponent> model, DirectX::XMMATRIX VPMatrix)
@@ -59,6 +61,29 @@ inline void Render::RenderQueuePass::render_camera(ECS::ComponentHandle<Camera> 
 		render_camera_3d(camera, world);
 }
 
+inline void Render::RenderQueuePass::execute_scene(Render::Scene* scene)
+{
+	auto main_camera_id = scene->get_main_camera()->getEntityId();
+	ECS::ComponentHandle<Camera> hMainCamera;
+	auto* world = scene->world();
+
+	world->each<Camera>([&](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)
+		{
+			if (main_camera_id == entity->getEntityId())
+			{
+				hMainCamera = camera;
+			}
+			else
+			{
+				render_camera(camera, world);
+			}
+		});
+	if (hMainCamera.isValid())
+	{
+		render_camera(hMainCamera, world);
+	}
+}
+
 Render::RenderQueuePass::RenderQueuePass(Core::GraphicsContext* context)
 {
 	_context = context;
@@ -75,23 +100,14 @@ void Render::RenderQueuePass::execute(Core::GraphicsContext* context)
 	gcontext->set_topology(PrimitiveTopology::TRIANGLELIST);
 	gcontext->matrix_buffer.bind();
 	gcontext->control_buffer.bind();
-	
-	auto main_camera_id = context->active_scene->get_main_camera()->getEntityId();
-	ECS::ComponentHandle<Camera> hMainCamera;
-	auto* world = context->active_scene->world();
-	
-	world->each<Camera>([&](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)
-		{
-			if(main_camera_id == entity->getEntityId())
-			{
-				hMainCamera = camera;
-			}else
-			{
-				render_camera(camera, world);
-			}
-		});
-	if(hMainCamera.isValid())
-	{
-		render_camera(hMainCamera, world);
+
+	for (auto* scene : context->scenes) {
+
+		if (!scene->active||scene == context->main_scene)
+			continue;
+
+		execute_scene(scene);
 	}
+
+	execute_scene(context->main_scene);
 }

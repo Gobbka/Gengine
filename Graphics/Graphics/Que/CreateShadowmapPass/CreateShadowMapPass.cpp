@@ -13,31 +13,36 @@ void Render::CreateShadowMapPass::execute(Core::GraphicsContext* context)
 
 	gcontext->set_pixel_shader(nullptr);
 	
-	context->active_scene->world()->each<DirectionLightComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<DirectionLightComponent> handle)
-		{
-			handle->bind();
-			handle->get_mask_engine()->clear_buffer();
-		
-			// do stuff here
+	for (auto* scene : context->scenes) {
+		if (!scene->active)
+			continue;
 
-			auto world_matrix = handle->world_to_screen_matrix();
-			context->active_scene->world()->each<MeshContainerComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<MeshContainerComponent>component)
-				{
-					auto modelMatrix = component->transform.get_world_matrix();
-					auto final_matrix = DirectX::XMMatrixMultiplyTranspose(modelMatrix,world_matrix);
-					gcontext->matrix_buffer.data.VPMatrix = final_matrix;
-					gcontext->matrix_buffer.data.ModelMatrix = DirectX::XMMatrixTranspose(modelMatrix);
-					gcontext->matrix_buffer.update();
+		scene->world()->each<DirectionLightComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<DirectionLightComponent> handle)
+			{
+				handle->bind();
+				handle->get_mask_engine()->clear_buffer();
 
-					for(auto mesh : component->meshes)
+				// do stuff here
+
+				auto world_matrix = handle->world_to_screen_matrix();
+				scene->world()->each<MeshContainerComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<MeshContainerComponent>component)
 					{
-						mesh.index_buffer->bind();
-						mesh.buffer->bind();
-						gcontext->set_topology(mesh.topology);
-						gcontext->draw_indexed(mesh.index_buffer->get_size());
-					}
-				});
-		});
+						auto modelMatrix = component->transform.get_world_matrix();
+						auto final_matrix = DirectX::XMMatrixMultiplyTranspose(modelMatrix, world_matrix);
+						gcontext->matrix_buffer.data.VPMatrix = final_matrix;
+						gcontext->matrix_buffer.data.ModelMatrix = DirectX::XMMatrixTranspose(modelMatrix);
+						gcontext->matrix_buffer.update();
+
+						for (auto mesh : component->meshes)
+						{
+							mesh.index_buffer->bind();
+							mesh.buffer->bind();
+							gcontext->set_topology(mesh.topology);
+							gcontext->draw_indexed(mesh.index_buffer->get_size());
+						}
+					});
+			});
+	}
 
 	// clean up
 	gcontext->set_pixel_shader(old_ps);

@@ -31,7 +31,7 @@ namespace Core
 		Form(HINSTANCE hinst, UINT width, UINT height);
 		virtual ~Form();
 	public:
-		Render::Scene main_scene;
+		Render::Scene* main_scene;
 
 		UI::UIContext* get_ui();
 		

@@ -72,8 +72,6 @@ void load_png(const wchar_t* path, Render::Material& material)
 	auto* nigger = FreeImage_GetBits(bitmap);
 
 	material.load_bitmap(nigger, Surface((float)FreeImage_GetWidth(bitmap), (float)FreeImage_GetHeight(bitmap)));
-	// we need to swap it cuz driver returns BGR but we need RGB
-	//material->swap_channels(Render::Material::RGBChannel::red, Render::Material::RGBChannel::blue);
 
 	FreeImage_Unload(bitmap);
 	FreeImage_CloseMemory(fmemory);
@@ -117,7 +115,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_file_texture = get_graphics_context()->get_device()->create_texture(file_material);
 
 	auto worldTexture = new Render::RenderTarget(get_graphics_context(),{1400,780});
-	_worldCamera = main_scene.create_camera(worldTexture);
+	_worldCamera = main_scene->create_camera(worldTexture);
 	auto cam = _worldCamera->get<Render::Camera>();
 	cam->get_target_view()->clear_color.a = 0.f;
 	auto* cam_options = cam->options();

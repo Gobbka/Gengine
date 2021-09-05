@@ -13,7 +13,7 @@ class DrawUIPass : public Render::IPass
 public:
 	void execute(Core::GraphicsContext* context) override
 	{
-		auto* camera = context->active_scene->get_main_camera()->get<Render::Camera>().get_ptr();
+		auto* camera = context->main_scene->get_main_camera()->get<Render::Camera>().get_ptr();
 
 		auto resolution = camera->get_view_resolution();
 		auto* gcontext = context->get_context();
@@ -31,7 +31,7 @@ public:
 
 		mask_engine->get_discardState()->bind(0);
 		
-		context->active_scene->world()->each<UI::InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<UI::InteractiveForm>form)
+		context->main_scene->world()->each<UI::InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<UI::InteractiveForm>form)
 			{
 				if (form->hidden())
 					return;
@@ -48,7 +48,7 @@ public:
 
 ECS::Entity* UI::UIContext::create_layer()
 {
-	auto* ent = _gfx->active_scene->world()->create();
+	auto* ent = _gfx->main_scene->world()->create();
 	auto handle = ent->assign<InteractiveForm>(_gfx, &_cursor);
 	handle->show();
 	return ent;
@@ -71,7 +71,7 @@ UI::Animator* UI::UIContext::animator()
 
 void UI::UIContext::on_lbmouse_down()
 {
-	_gfx->active_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
+	_gfx->main_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
 		{
 			form->on_lbmouse_down();
 		});
@@ -79,7 +79,7 @@ void UI::UIContext::on_lbmouse_down()
 
 void UI::UIContext::on_lbmouse_up()
 {
-	_gfx->active_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
+	_gfx->main_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
 		{
 			form->on_lbmouse_up();
 		});
@@ -87,7 +87,7 @@ void UI::UIContext::on_lbmouse_up()
 
 void UI::UIContext::on_mouse_scroll(short direction)
 {
-	_gfx->active_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
+	_gfx->main_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
 		{
 			form->on_mouse_scroll(direction);
 		});
@@ -97,7 +97,7 @@ void UI::UIContext::on_mouse_move(int mx, int my)
 {
 	_cursor = Position2(mx, my);
 
-	_gfx->active_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
+	_gfx->main_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
 		{
 			form->on_mouse_move(mx, my);
 		});
@@ -105,7 +105,7 @@ void UI::UIContext::on_mouse_move(int mx, int my)
 
 void UI::UIContext::on_db_click()
 {
-	_gfx->active_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
+	_gfx->main_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
 		{
 			form->on_db_click();
 		});

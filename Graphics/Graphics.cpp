@@ -88,6 +88,15 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_samplerState->bind();
 }
 
+Render::Scene* Core::GraphicsContext::create_scene()
+{
+	auto* scene = new Render::Scene(this);
+	this->scenes.push_back(scene);
+	if (main_scene == nullptr)
+		main_scene = scene;
+	return scene;
+}
+
 Render::SpriteEngine* Core::GraphicsContext::get_sprite_engine()
 {
 	return _spriteEngine;
@@ -193,14 +202,14 @@ Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd,Surface size
 	
 	auto hr = D3D11CreateDeviceAndSwapChain(
 		nullptr,
-	#ifdef _DEBUG
-		//D3D_DRIVER_TYPE_REFERENCE,
 		D3D_DRIVER_TYPE_HARDWARE,
-	#else
-		D3D_DRIVER_TYPE_HARDWARE,
-	#endif
 		nullptr,
-		D3D11_CREATE_DEVICE_DEBUG,
+#ifdef _DEBUG 
+		D3D11_CREATE_DEVICE_DEBUG 
+#else 
+		0 
+#endif
+		,
 		nullptr,
 		0,
 		D3D11_SDK_VERSION,
@@ -210,7 +219,6 @@ Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd,Surface size
 		nullptr,
 		&context
 	);
-	
 	assert(SUCCEEDED(hr));
 
 	return new GraphicsContext(device, pswap, context);

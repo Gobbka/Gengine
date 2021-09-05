@@ -91,13 +91,13 @@ int WINAPI wWinMain(
     auto* texture = form->get_graphics_context()->get_device()->create_texture(stone_material);
     auto* negr_texture = form->get_graphics_context()->get_device()->create_texture(wood_material);
 
-    auto*light = form->main_scene.create_direction_light();
+    auto*light = form->main_scene->create_direction_light();
     auto component = light->get<Render::DirectionLightComponent>();
     component->set_position(Position3(-4.14113426f, 2.09657478f, -4.79795313f));
     component->set_rotation(Vector3(0.519999862f, 0.880000114f, 0));
 	
-    auto* cube = form->main_scene.create_model();
-    auto* platform = form->main_scene.create_model();
+    auto* cube = form->main_scene->create_model();
+    auto* platform = form->main_scene->create_model();
     platform->get<Render::MeshContainerComponent>()->transform.set_position(Position3{ 0,-7,0 });
 
     cube->get<Render::MeshContainerComponent>()->add_mesh(Render::Cube::make_independent(form->get_graphics_context(), Position3::null(), 5));
@@ -108,7 +108,7 @@ int WINAPI wWinMain(
 
     CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);
 
-    form->main_scene.world()->registerSystem(new PhysicsModule());
+    form->main_scene->world()->registerSystem(new PhysicsModule());
 	
     MSG msg;
 
@@ -129,7 +129,7 @@ int WINAPI wWinMain(
         auto now = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - time);
 
-        form->main_scene.world()->tick(1.f/duration.count());
+        form->main_scene->world()->tick(1.f/duration.count());
 		
         time = now;
 	}

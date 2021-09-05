@@ -18,14 +18,12 @@ void Core::Form::draw_frame()
 Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
 	: WindowsWindow(hinst,width,height),
 	_graphics(GraphicsContext::new_context(WindowsWindow::hwnd(), WindowsWindow::size())),
-	main_scene(_graphics)
+	main_scene(_graphics->create_scene())
 {
     _uicontext = new UI::UIContext(_graphics);
-    main_camera = main_scene.create_camera(_graphics->get_render_target_view());
+    main_camera = main_scene->create_camera(_graphics->get_render_target_view());
 
-    main_scene.set_main_camera(main_camera);
-    _graphics->active_scene = &main_scene;
-
+    main_scene->set_main_camera(main_camera);
 }
 
 Core::Form::~Form()

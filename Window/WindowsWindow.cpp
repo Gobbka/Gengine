@@ -24,8 +24,6 @@ LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam
 
 		std::cout << window_width << " " << window_height << '\n';
 		window->handle_resize(Surface(window_width,window_height));
-		/*if(window->on_resize)
-			window->on_resize(Surface((float)window_width, (float)window_height));*/
 	}
 	
 	if (msg == WM_SIZING)
@@ -68,8 +66,8 @@ Core::WindowsWindow::WindowsWindow(HINSTANCE hint, UINT width, UINT height)
 		class_name,
 		nullptr
 	};
-
-	assert(RegisterClassExW(&wndClass) != 0);
+	auto result = RegisterClassExW(&wndClass);
+	assert(result != 0);
 
 	int centerScreenX = GetSystemMetrics(SM_CXSCREEN) / 2 - width / 2;
 	int centerScreenY = GetSystemMetrics(SM_CYSCREEN) / 2 - height / 2;

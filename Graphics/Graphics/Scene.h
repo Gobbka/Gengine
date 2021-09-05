@@ -15,6 +15,8 @@ namespace Render {
 		Core::GraphicsContext* _context;
 		ECS::Entity* _main_camera;
 	public:
+		bool active = true;
+
 		ECS::Entity* get_main_camera();
 		void set_main_camera(ECS::Entity*);
 

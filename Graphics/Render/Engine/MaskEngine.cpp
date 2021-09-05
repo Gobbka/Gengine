@@ -26,12 +26,10 @@ Render::Stencil::Stencil(Core::GraphicsContext* context, StencilUsage usage)
 	switch(usage)
 	{
 	case StencilUsage::write:
-		// COMPARISON_ALWAYS
 		depthstencildesc.FrontFace = create_depth_stencilop_desc(D3D11_COMPARISON_EQUAL, D3D11_STENCIL_OP_INCR);
 		depthstencildesc.BackFace = create_depth_stencilop_desc(D3D11_COMPARISON_NEVER, D3D11_STENCIL_OP_KEEP);
 	break;
 	case StencilUsage::mask:
-		// COMPARISON_ALWAYS
 		depthstencildesc.BackFace = create_depth_stencilop_desc(D3D11_COMPARISON_NEVER, D3D11_STENCIL_OP_KEEP);
 		depthstencildesc.FrontFace = create_depth_stencilop_desc(D3D11_COMPARISON_EQUAL, D3D11_STENCIL_OP_KEEP);
 	break;

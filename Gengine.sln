@@ -18,9 +18,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BE2E1F3B-F3C1-4DDA-BC3B-A6050AD57C33}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+		Точечный рисунок1.bmp = Точечный рисунок1.bmp
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GengineApi", "GengineApi\GengineApi.vcxproj", "{D6007364-C335-49FB-9706-0AF582AED6E5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RuntimeApi", "GengineApi\GengineApi.vcxproj", "{D6007364-C335-49FB-9706-0AF582AED6E5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GBuilder", "GBuilder\GBuilder.vcxproj", "{6D2F38EE-EC82-4466-B7F4-430D11ED5584}"
 EndProject

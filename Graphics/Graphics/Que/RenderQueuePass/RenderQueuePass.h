@@ -3,6 +3,7 @@
 #include "../../../Render/Model/MeshContainerComponent.h"
 #include "../IPass/IPass.h"
 #include "Ecs/Ecs.h"
+#include "../../Scene.h"
 
 namespace Core {
 	class GraphicsContext;
@@ -29,9 +30,10 @@ namespace Render
 
 		void render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshContainerComponent> model,DirectX::XMMATRIX VPMatrix);
 		inline void render_camera(ECS::ComponentHandle<Camera> camera, ECS::World* world);
+		inline void execute_scene(Render::Scene* scene);
 	public:
 		RenderQueuePass(Core::GraphicsContext* context);
-		
+
 		void execute(Core::GraphicsContext* context) override;
 	};
 }

@@ -54,7 +54,9 @@ namespace Core
 		Render::Passer _passer;
 		
 	public:
-		Render::Scene* active_scene;
+		Render::Scene* create_scene();
+		std::vector<Render::Scene*> scenes;
+		Render::Scene* main_scene;
 		
 		Render::SpriteEngine* get_sprite_engine();
 		

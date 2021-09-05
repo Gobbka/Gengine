@@ -17,6 +17,12 @@ namespace Render
 	class MeshContainerComponent;
 	class RenderTarget;
 
+	enum class WVProjectionType
+	{
+		Orthographic,
+		Perspective,
+	};
+	
 	class __declspec(dllexport) WorldViewer
 	{
 		
@@ -26,16 +32,16 @@ namespace Render
 		
 	private:
 		DirectX::XMMATRIX create_view_matrix();
-	 	static DirectX::XMMATRIX create_projection_matrix(Surface resolution,float fov,float farz,float scale=1.f);
+	 	static DirectX::XMMATRIX create_projection_matrix(WVProjectionType projection,Surface resolution,float fov,float farz,float scale=1.f);
 	private:
 		DirectX::XMMATRIX _projectionMatrix;
 		DirectX::XMMATRIX _viewMatrix;
-		DirectX::XMVECTOR _xm_camPosition;
 	protected:
 		RenderTarget* render_target;
 		MaskEngine* mask_engine;
 		
 		Core::Transform _transform;
+		WVProjectionType projection = WVProjectionType::Perspective;
 	private:
 		float _fov = 45.f;
 		float _scale = 1.f;
@@ -47,7 +53,6 @@ namespace Render
 
 	protected:
 		WorldViewer(Core::GraphicsContext* context, RenderTarget* target);
-
 	public:
 		
 		void set_scale(float scale);

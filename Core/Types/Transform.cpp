@@ -65,6 +65,11 @@ void Core::Transform::set_rotation(Vector3 rotation)
 	update_world_matrix();
 }
 
+Position3 Core::Transform::get_position_lh()
+{
+	return Position3(_pos.z, _pos.y, _pos.x);
+}
+
 Position3 Core::Transform::get_position()
 {
 	return _pos;

@@ -1,12 +1,9 @@
 #include "WorldViewer.h"
 
-
-
 #include "../../Graphics.h"
 #include "../Engine/MaskEngine.h"
 #include "../Engine/RenderTarget.h"
 #include "../Events/RenderEvent.h"
-#include "../Model/MeshContainerComponent.h"
 
 const static DirectX::XMVECTOR DEFAULT_FORWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
 const static DirectX::XMVECTOR DEFAULT_UP_VECTOR = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
@@ -16,8 +13,6 @@ const static DirectX::XMVECTOR DEFAULT_RIGHT_VECTOR = DirectX::XMVectorSet(1.0f,
 
 void Render::WorldViewer::update_position()
 {
-	auto camPos = _transform.get_position();
-	_xm_camPosition = DirectX::XMVectorSet(camPos.z, camPos.y, camPos.x, 0.f);
 	_viewMatrix = create_view_matrix();
 }
 
@@ -30,28 +25,44 @@ DirectX::XMMATRIX Render::WorldViewer::create_view_matrix()
 {
 	auto rotation = _transform.get_rotation();
 
+	auto pos = _transform.get_position();
+	auto xm_cam_pos = DirectX::XMVectorSet(pos.z, pos.y, pos.x, 0.f);
 	auto camRotMatrix = DirectX::XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
 	auto camTarget = DirectX::XMVector3TransformCoord(DEFAULT_FORWARD_VECTOR, camRotMatrix);
 
-	camTarget = DirectX::XMVectorAdd(camTarget, _xm_camPosition);
+	camTarget = DirectX::XMVectorAdd(camTarget, xm_cam_pos);
 
 	auto upDir = DirectX::XMVector3TransformCoord(DEFAULT_UP_VECTOR, camRotMatrix);
 
 	return DirectX::XMMatrixLookAtLH(
-		_xm_camPosition,
+		xm_cam_pos,
 		camTarget,
 		upDir
 	);
 }
 
-DirectX::XMMATRIX Render::WorldViewer::create_projection_matrix(Surface resolution, float fov, float farz, float scale)
+DirectX::XMMATRIX Render::WorldViewer::create_projection_matrix(WVProjectionType projection, Surface resolution, float fov, float farz, float scale)
 {
-	auto forRadians = (fov / 360.f) * DirectX::XM_2PI;
+	DirectX::XMMATRIX proj_matrix;
 
-	auto res = resolution;
-	auto aspectRatio = (float)(res.width / res.height);
+	switch (projection)
+	{
+	case WVProjectionType::Orthographic:
+		proj_matrix = DirectX::XMMatrixOrthographicLH(resolution.width, resolution.height, 0.0, farz);
+	break;
+	case WVProjectionType::Perspective:
+		proj_matrix = DirectX::XMMatrixPerspectiveFovLH(
+			(fov / 360.f) * DirectX::XM_2PI,
+			resolution.width / resolution.height,
+			0.1f,
+			farz
+		);
+	break;
+	}
 
-	return DirectX::XMMatrixPerspectiveFovLH(forRadians, aspectRatio, 0.1f, farz) * DirectX::XMMatrixScaling(scale, scale, 1.f);
+	return proj_matrix * DirectX::XMMatrixScaling(
+		scale, scale, 1.f
+	);
 }
 
 Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* target)
@@ -71,25 +82,25 @@ Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* t
 
 	update_position();
 	
-	_projectionMatrix = create_projection_matrix(_resolution, _fov, _far_z, _scale);
+	_projectionMatrix = create_projection_matrix(projection,_resolution, _fov, _far_z, _scale);
 }
 
 void Render::WorldViewer::set_scale(float scale)
 {
 	_scale = scale;
-	_projectionMatrix = create_projection_matrix(_resolution,_fov,_scale);
+	_projectionMatrix = create_projection_matrix(projection,_resolution,_fov,_scale);
 }
 
 void Render::WorldViewer::set_fov(float fov)
 {
 	_fov = fov;
-	_projectionMatrix = create_projection_matrix(_resolution, _fov, _far_z, _scale);
+	_projectionMatrix = create_projection_matrix(projection,_resolution, _fov, _far_z, _scale);
 }
 
 void Render::WorldViewer::set_farz(float farz)
 {
 	_far_z = farz;
-	_projectionMatrix = create_projection_matrix(_resolution, _fov, _far_z, _scale);
+	_projectionMatrix = create_projection_matrix(projection,_resolution, _fov, _far_z, _scale);
 }
 
 Render::MaskEngine* Render::WorldViewer::get_mask_engine()
@@ -115,7 +126,7 @@ Surface Render::WorldViewer::get_view_resolution()
 void Render::WorldViewer::set_view_resolution(Surface surface)
 {
 	_resolution = surface;
-	_projectionMatrix = create_projection_matrix(_resolution, _fov, _far_z, _scale);
+	_projectionMatrix = create_projection_matrix(projection,_resolution, _fov, _far_z, _scale);
 }
 
 DirectX::XMMATRIX Render::WorldViewer::world_to_screen_matrix()

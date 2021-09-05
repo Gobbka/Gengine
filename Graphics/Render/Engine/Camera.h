@@ -53,8 +53,6 @@ namespace Render
 		RenderTarget* get_target_view() const;
 		MaskEngine* get_mask_engine() const;
 		BlendEngine* blend_engine() const;
-
-		Surface get_screen_resolution() const;
 	public:
 		
 		Camera(Core::GraphicsContext* context,RenderTarget*target);

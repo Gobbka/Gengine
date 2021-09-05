@@ -25,4 +25,6 @@ void Render::IndexBuffer::bind()
 
 Render::IndexBuffer::~IndexBuffer()
 {
+	if(_index_buffer)
+		_index_buffer->Release();
 }

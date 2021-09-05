@@ -26,6 +26,7 @@ namespace Core
 		void adjust_rotation(Vector3 rotation);
 		void set_rotation(Vector3 rotation);
 
+		Position3 get_position_lh();
 		Position3 get_position();
 		Vector3 get_rotation();
 	};

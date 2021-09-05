@@ -4,6 +4,7 @@
 #include "../Render/Engine/Camera.h"
 #include "../Render/Light/DirectionLightComponent.h"
 #include "../Render/Model/MeshContainerComponent.h"
+#include "Components/GameEntityComponent.h"
 
 ECS::Entity* Render::Scene::get_main_camera()
 {
@@ -15,21 +16,28 @@ void Render::Scene::set_main_camera(ECS::Entity* cam)
 	_main_camera = cam;
 }
 
+ECS::Entity* Render::Scene::create_entity(ECS::Entity* parent)
+{
+	auto* ent = _world->create();
+	ent->assign<Core::GameEntityComponent>(parent);
+	return ent;
+}
+
 ECS::Entity* Render::Scene::create_camera(RenderTarget* target)
 {
-	auto entt = _world->create();
+	auto* ent = create_entity();
 	
-	entt->assign<Camera>(_context,target);
+	ent->assign<Camera>(_context,target);
 
-	return entt;
+	return ent;
 }
 
 ECS::Entity* Render::Scene::create_model()
 {
-	auto entt = _world->create();
-	entt->assign<MeshContainerComponent>();
+	auto* ent = create_entity();
+	ent->assign<MeshContainerComponent>();
 
-	return entt;
+	return ent;
 }
 
 ECS::Entity* Render::Scene::create_direction_light()

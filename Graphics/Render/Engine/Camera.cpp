@@ -82,11 +82,6 @@ Render::BlendEngine* Render::Camera::blend_engine() const
 	return _blendEngine;
 }
 
-Surface Render::Camera::get_screen_resolution() const
-{
-	return context->get_screen_resolution();
-}
-
 Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 	:
 	WorldViewer(context,target)

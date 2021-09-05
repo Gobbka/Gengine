@@ -18,6 +18,7 @@ namespace Render {
 		ECS::Entity* get_main_camera();
 		void set_main_camera(ECS::Entity*);
 
+		ECS::Entity* create_entity(ECS::Entity*parent=nullptr);
 		ECS::Entity* create_camera(RenderTarget* target);
 		ECS::Entity* create_model();
 		ECS::Entity* create_direction_light();

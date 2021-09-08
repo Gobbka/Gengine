@@ -21,8 +21,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Точечный рисунок1.bmp = Точечный рисунок1.bmp
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RuntimeApi", "GengineApi\GengineApi.vcxproj", "{D6007364-C335-49FB-9706-0AF582AED6E5}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GBuilder", "GBuilder\GBuilder.vcxproj", "{6D2F38EE-EC82-4466-B7F4-430D11ED5584}"
 EndProject
 Global
@@ -81,14 +79,6 @@ Global
 		{95C169A4-3E79-46EB-B13C-E89F793E0B13}.Release|x64.Build.0 = Release|x64
 		{95C169A4-3E79-46EB-B13C-E89F793E0B13}.Release|x86.ActiveCfg = Release|Win32
 		{95C169A4-3E79-46EB-B13C-E89F793E0B13}.Release|x86.Build.0 = Release|Win32
-		{D6007364-C335-49FB-9706-0AF582AED6E5}.Debug|x64.ActiveCfg = Debug|x64
-		{D6007364-C335-49FB-9706-0AF582AED6E5}.Debug|x64.Build.0 = Debug|x64
-		{D6007364-C335-49FB-9706-0AF582AED6E5}.Debug|x86.ActiveCfg = Debug|Win32
-		{D6007364-C335-49FB-9706-0AF582AED6E5}.Debug|x86.Build.0 = Debug|Win32
-		{D6007364-C335-49FB-9706-0AF582AED6E5}.Release|x64.ActiveCfg = Release|x64
-		{D6007364-C335-49FB-9706-0AF582AED6E5}.Release|x64.Build.0 = Release|x64
-		{D6007364-C335-49FB-9706-0AF582AED6E5}.Release|x86.ActiveCfg = Release|Win32
-		{D6007364-C335-49FB-9706-0AF582AED6E5}.Release|x86.Build.0 = Release|Win32
 		{6D2F38EE-EC82-4466-B7F4-430D11ED5584}.Debug|x64.ActiveCfg = Debug|x64
 		{6D2F38EE-EC82-4466-B7F4-430D11ED5584}.Debug|x64.Build.0 = Debug|x64
 		{6D2F38EE-EC82-4466-B7F4-430D11ED5584}.Debug|x86.ActiveCfg = Debug|Win32

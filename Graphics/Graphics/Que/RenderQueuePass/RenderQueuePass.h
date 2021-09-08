@@ -1,8 +1,8 @@
 #pragma once
 #include <DirectXMath.h>
+
 #include "../../../Render/Model/MeshContainerComponent.h"
 #include "../IPass/IPass.h"
-#include "Ecs/Ecs.h"
 #include "../../Scene.h"
 
 namespace Core {

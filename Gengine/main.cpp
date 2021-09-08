@@ -23,26 +23,12 @@
 #include <Ecs/Ecs.h>
 #include <chrono>
 
-#include "Graphics/Components/TextureComponent.h"
-#include "Graphics/Material/Material.h"
-#include "Render/I3DObject/Parallelepiped/Parallelepiped.h"
-#include "Render/Light/DirectionLightComponent.h"
-
-Render::MeshContainerComponent* load_model(const wchar_t*path,Core::GraphicsContext*context)
-{
-    Assimp::Importer importer;
-    auto* scene = importer.ReadFile("assets\\gun.obj", aiProcess_Triangulate | aiProcess_ConvertToLeftHanded);
-	
-    assert(scene != nullptr);
-
-    for (UINT i = 0; i < scene->mRootNode->mNumMeshes; i++)
-    {
-        auto* mesh = scene->mMeshes[scene->mRootNode->mMeshes[i]];
-        auto* vert = context->get_device()->alloc_vertex_buffer(context,mesh->mNumVertices);
-    }
-
-    return nullptr;
-}
+#include <BinaryReader.h>
+#include <Graphics/SpriteFont.h>
+#include <Graphics/Components/TextureComponent.h>
+#include <Graphics/Material/Material.h>
+#include <Render/I3DObject/Parallelepiped/Parallelepiped.h>
+#include <Render/Light/DirectionLightComponent.h>
 
 extern void load_png(const wchar_t* path, Render::Material& material);
 
@@ -87,6 +73,9 @@ int WINAPI wWinMain(
 	
     load_png(L"assets\\stone.png",stone_material);
     load_png(L"assets\\wood.png",wood_material);
+
+    BinaryReader reader(L"visby.spritefont");
+    Render::SpriteFont font(form->get_graphics_context(),reader);
 	
     auto* texture = form->get_graphics_context()->get_device()->create_texture(stone_material);
     auto* negr_texture = form->get_graphics_context()->get_device()->create_texture(wood_material);
@@ -96,12 +85,12 @@ int WINAPI wWinMain(
     component->set_position(Position3(-4.14113426f, 2.09657478f, -4.79795313f));
     component->set_rotation(Vector3(0.519999862f, 0.880000114f, 0));
 	
-    auto* cube = form->main_scene->create_model();
-    auto* platform = form->main_scene->create_model();
+    auto* cube = form->main_scene->instantiate<Render::MeshContainerComponent>();
+    auto* platform = form->main_scene->instantiate<Render::MeshContainerComponent>();
     platform->get<Render::MeshContainerComponent>()->transform.set_position(Position3{ 0,-7,0 });
 
     cube->get<Render::MeshContainerComponent>()->add_mesh(Render::Cube::make_independent(form->get_graphics_context(), Position3::null(), 5));
-    cube->assign<Render::TextureComponent>(negr_texture);
+    cube->assign<Render::TextureComponent>(font.font_texture);
 	
     platform->get<Render::MeshContainerComponent>()->add_mesh(Render::Parallelepiped::make_independent(form->get_graphics_context(), Position3::null(), Vector3{ 27,3,27 }));
     platform->assign<Render::TextureComponent>(texture);

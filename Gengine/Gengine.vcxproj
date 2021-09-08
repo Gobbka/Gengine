@@ -74,7 +74,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Build\Out\</OutDir>
-    <IncludePath>$(SolutionDir)Window;$(SolutionDir)Graphics;$(SolutionDir)UI;$(SolutionDir)Libs/FreeImage/;$(SolutionDir)GengineApi;$(SolutionDir)Core;$(SolutionDir)Libs/Assimp;$(SolutionDir)Physics;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Window;$(SolutionDir)Graphics;$(SolutionDir)UI;$(SolutionDir)Libs/FreeImage/;$(SolutionDir)Core;$(SolutionDir)Libs/Assimp;$(SolutionDir)Physics;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)out;$(LibraryPath)</LibraryPath>
     <IntDir>$(SolutionDir)Build\Temp\$(ProjectName)\$(Configuration)</IntDir>
   </PropertyGroup>

@@ -73,7 +73,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Build\Out\</OutDir>
-    <IncludePath>$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)GengineApi;$(SolutionDir)Core;$(IncludePath)</IncludePath>
     <IntDir>$(SolutionDir)Build\Temp\$(ProjectName)\$(Configuration)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -152,6 +152,8 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Graphics\Channels.h" />
     <ClInclude Include="Graphics\Components\ColorComponent.h" />
+    <ClInclude Include="Graphics\Components\GameEntityComponent.h" />
+    <ClInclude Include="Graphics\Components\TextComponent.h" />
     <ClInclude Include="Graphics\Components\TextureComponent.h" />
     <ClInclude Include="Graphics\GDevice\D11GContext.h" />
     <ClInclude Include="Graphics\GDevice\D11GDevice.h" />
@@ -165,6 +167,7 @@
     <ClInclude Include="Graphics\Que\IPass\Passer.h" />
     <ClInclude Include="Graphics\Que\RenderQueuePass\RenderQueuePass.h" />
     <ClInclude Include="Graphics\Scene.h" />
+    <ClInclude Include="Graphics\SpriteFont.h" />
     <ClInclude Include="IGContext.h" />
     <ClInclude Include="IGDevice.h" />
     <ClInclude Include="Render\d3d\Bindable.h" />
@@ -204,6 +207,7 @@
     <ClCompile Include="Graphics\Que\IPass\Passer.cpp" />
     <ClCompile Include="Graphics\Que\RenderQueuePass\RenderQueuePass.cpp" />
     <ClCompile Include="Graphics\Scene.cpp" />
+    <ClCompile Include="Graphics\SpriteFont.cpp" />
     <ClCompile Include="Render\d3d\Bindable.cpp" />
     <ClCompile Include="Render\d3d\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Render\d3d\Buffer\IndexBuffer.cpp" />

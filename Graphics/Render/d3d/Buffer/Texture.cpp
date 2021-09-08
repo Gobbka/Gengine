@@ -55,7 +55,7 @@ Render::Texture::Texture(Core::GraphicsContext* engine,Material& material)
 	texture_desc.Height = _height = material.height();
 	texture_desc.MipLevels = 1;
 	texture_desc.ArraySize = 1;
-	texture_desc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+	texture_desc.Format = material.format;
 	texture_desc.SampleDesc = { 1,0 };
 	texture_desc.CPUAccessFlags = 0;
 	texture_desc.MiscFlags = 0;

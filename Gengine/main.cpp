@@ -72,13 +72,12 @@ int WINAPI wWinMain(
     load_png(L"assets\\stone.png",stone_material);
     load_png(L"assets\\wood.png",wood_material);
 
-    BinaryReader reader(L"visby.spritefont");
-    Render::SpriteFont font(form->get_graphics_context(),reader);
+    Render::SpriteFont font(form->get_graphics_context(), L"visby.spritefont");
 
     auto* text = form->main_scene->create_entity();
     auto text_comp = text->assign<Render::TextComponent>(form->get_graphics_context());
     text_comp->font = &font;
-    text_comp->set_text((wchar_t*)L"5igger");
+    text_comp->set_text((wchar_t*)L"niggers\nare stuped");
 	
     auto* texture = form->get_graphics_context()->get_device()->create_texture(stone_material);
     auto* negr_texture = form->get_graphics_context()->get_device()->create_texture(wood_material);
@@ -93,7 +92,7 @@ int WINAPI wWinMain(
     platform->get<Render::MeshContainerComponent>()->transform.set_position(Position3{ 0,-7,0 });
 
     cube->get<Render::MeshContainerComponent>()->add_mesh(Render::Cube::make_independent(form->get_graphics_context(), Position3::null(), 5));
-    cube->assign<Render::TextureComponent>(font.font_texture);
+    cube->assign<Render::TextureComponent>(negr_texture);
 	
     platform->get<Render::MeshContainerComponent>()->add_mesh(Render::Parallelepiped::make_independent(form->get_graphics_context(), Position3::null(), Vector3{ 27,3,27 }));
     platform->assign<Render::TextureComponent>(texture);

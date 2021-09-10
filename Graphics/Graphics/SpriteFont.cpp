@@ -39,16 +39,22 @@ Render::SpriteFont::SpriteFont(Core::GraphicsContext* context,BinaryReader& read
 
     auto textureData = reader.ReadArray<uint8_t>(static_cast<size_t>(dataSize));
 
-    ITexture2DDesc desc;
-    desc.pSysMem = (void*)textureData;
-    desc.rows = textureRows;
-    desc.stride = textureStride;
-    desc.format = textureFormat;
-    desc.height = textureHeight;
-    desc.width = textureWidth;
+    this->font_texture = context->get_device()->create_texture(
+	    ITexture2DDesc {
+	        textureFormat,
+    		textureWidth,
+    		textureHeight,
+    		textureStride,
+    		textureRows,
+    		(void*)textureData
+	    }
+    );
+}
 
-    this->font_texture = context->get_device()->create_texture(desc);
-
+Render::SpriteFont::SpriteFont(Core::GraphicsContext* context, const wchar_t* file_name)
+{
+    BinaryReader reader(file_name);
+    *this = SpriteFont(context, reader);
 }
 
 Render::Glyph Render::SpriteFont::default_glyph()

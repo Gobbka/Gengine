@@ -18,7 +18,7 @@ namespace Render
 		BYTE* _pSysMem;
 		Surface _resolution;
 	public:
-		DXGI_FORMAT format = DXGI_FORMAT_R8G8B8A8_UNORM;
+		DXGI_FORMAT format = DXGI_FORMAT_B8G8R8A8_UNORM;
 
 		enum class RGBChannel
 		{

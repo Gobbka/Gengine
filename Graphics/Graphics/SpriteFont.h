@@ -31,6 +31,8 @@ namespace Render {
 		Texture* font_texture;
 
 		SpriteFont(Core::GraphicsContext*context,BinaryReader& reader);
+		SpriteFont(Core::GraphicsContext*context,const wchar_t*file_name);
+
 		Glyph default_glyph();
 		Glyph find_glyph(uint32_t character);
 	};

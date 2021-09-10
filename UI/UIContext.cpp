@@ -54,11 +54,12 @@ class DrawTextPass : public Render::IPass
 	{
 		context->main_scene->world()->each<Render::TextComponent>([&](ECS::Entity*, ECS::ComponentHandle<Render::TextComponent>comp)
 			{
+				context->get_context()->set_topology(PrimitiveTopology::TRIANGLELIST);
 				comp->vbuffer->bind();
 				comp->ibuffer->bind();
 				comp->font->font_texture->bind();
 
-				context->get_context()->draw_indexed(6);
+				context->get_context()->draw_indexed(comp->ibuffer->get_size());
 			});
 	}
 };

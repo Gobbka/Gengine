@@ -56,6 +56,23 @@ struct __declspec(dllexport) Vector3 : public Vector2 {
 	static Vector3 null();
 };
 
+struct __declspec(dllexport) Vector4 : public Vector3 {
+	float w;
+
+	Vector4(float x, float y, float z, float w);
+
+	float length();
+	Vector4 normalize();
+
+	static Vector4 null();
+};
+
+struct __declspec(dllexport) Vector4Int {
+	int x, y, z, w;
+
+	Vector4Int(int x,int y,int z,int w);
+};
+
 typedef __declspec(dllexport) Vector2 Position2;
 typedef __declspec(dllexport) Vector3 Position3;
 

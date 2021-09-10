@@ -26,5 +26,7 @@ namespace Render
 		virtual void update(unsigned update_size = -1) = 0;
 
 		void count_normals(IIndexBuffer*buffer);
+
+		Vertex& at(unsigned index);
 	};
 }

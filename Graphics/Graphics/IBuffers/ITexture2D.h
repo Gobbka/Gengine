@@ -2,6 +2,18 @@
 
 namespace Render
 {
+	struct ITexture2DDesc
+	{
+		DXGI_FORMAT format;
+		UINT32 width;
+		UINT32 height;
+
+		UINT32 stride;
+		UINT32 rows;
+
+		void* pSysMem;
+	};
+
 	class ITexture2D
 	{
 	public:

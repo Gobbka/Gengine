@@ -12,11 +12,7 @@
 #include "Render/Engine/Camera.h"
 #include "Render/I3DObject/Cube/Cube.h"
 
-#include <assimp/importer.hpp>
 #include <assimp/scene.h>
-#include <assimp/postprocess.h>
-#include <assimp/mesh.h>
-
 #include "Debugger/PipeServer.h"
 #include "Render/d3d/Buffer/IndexBuffer.h"
 
@@ -29,6 +25,8 @@
 #include <Graphics/Material/Material.h>
 #include <Render/I3DObject/Parallelepiped/Parallelepiped.h>
 #include <Render/Light/DirectionLightComponent.h>
+
+#include "Graphics/Components/TextComponent.h"
 
 extern void load_png(const wchar_t* path, Render::Material& material);
 
@@ -76,6 +74,11 @@ int WINAPI wWinMain(
 
     BinaryReader reader(L"visby.spritefont");
     Render::SpriteFont font(form->get_graphics_context(),reader);
+
+    auto* text = form->main_scene->create_entity();
+    auto text_comp = text->assign<Render::TextComponent>(form->get_graphics_context());
+    text_comp->font = &font;
+    text_comp->set_text((wchar_t*)L"5igger");
 	
     auto* texture = form->get_graphics_context()->get_device()->create_texture(stone_material);
     auto* negr_texture = form->get_graphics_context()->get_device()->create_texture(wood_material);

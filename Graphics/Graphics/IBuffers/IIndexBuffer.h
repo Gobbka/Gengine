@@ -20,6 +20,8 @@ namespace Render
 			this->data = data;
 		}
 
+		virtual void update() = 0;
+
 		size_t get_size() const { return size; }
 	};
 }

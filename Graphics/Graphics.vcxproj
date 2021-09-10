@@ -199,6 +199,7 @@
     <ClCompile Include="Canvas\Objects\I2DCanvasObject.cpp" />
     <ClCompile Include="Canvas\Objects\Rectangle\Rectangle.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Graphics\Components\TextComponent.cpp" />
     <ClCompile Include="Graphics\GDevice\D11GContext.cpp" />
     <ClCompile Include="Graphics\GDevice\D11GDevice.cpp" />
     <ClCompile Include="Graphics\IBuffers\IVertexBuffer.cpp" />

@@ -5,6 +5,8 @@
 #include "IGContext.h"
 #include "Render/Engine/Camera.h"
 #include "InteractiveForm.h"
+#include "Graphics/SpriteFont.h"
+#include "Graphics/Components/TextComponent.h"
 #include "Render/Engine/MaskEngine.h"
 #include "Render/Events/RenderEvent.h"
 
@@ -46,6 +48,21 @@ public:
 	}
 };
 
+class DrawTextPass : public Render::IPass
+{
+	void execute(Core::GraphicsContext* context) override
+	{
+		context->main_scene->world()->each<Render::TextComponent>([&](ECS::Entity*, ECS::ComponentHandle<Render::TextComponent>comp)
+			{
+				comp->vbuffer->bind();
+				comp->ibuffer->bind();
+				comp->font->font_texture->bind();
+
+				context->get_context()->draw_indexed(6);
+			});
+	}
+};
+
 ECS::Entity* UI::UIContext::create_layer()
 {
 	auto* ent = _gfx->main_scene->world()->create();
@@ -62,6 +79,7 @@ UI::UIContext::UIContext(Core::GraphicsContext* gfx)
 	_animator.start();
 
 	gfx->get_passer()->add_pass(new DrawUIPass(), Render::PassStep::overlay);
+	gfx->get_passer()->add_pass(new DrawTextPass(), Render::PassStep::overlay);
 }
 
 UI::Animator* UI::UIContext::animator()

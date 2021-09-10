@@ -31,8 +31,8 @@ Render::IVertexBuffer* Render::D11GDevice::alloc_vertex_buffer(void* data, unsig
 	return new VertexBuffer(_gfx, (Vertex*)data, size, dynamic);
 }
 
-Render::Texture* Render::D11GDevice::create_texture(Material& material)
+Render::Texture* Render::D11GDevice::create_texture(ITexture2DDesc desc)
 {
-	return new Texture(_gfx, material);
+	return new Texture(_gfx, desc);
 }
 

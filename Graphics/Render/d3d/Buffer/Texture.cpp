@@ -15,7 +15,10 @@ ID3D11Texture2D* Render::Texture::texture()
 }
 
 Render::Texture::Texture(Core::GraphicsContext* context, Surface resolution, UINT bind_flags, DXGI_FORMAT format)
-	: _context(context)
+	:
+	_context(context),
+	_texture(nullptr),
+	_resource(nullptr)
 {
 	D3D11_TEXTURE2D_DESC texture_desc;
 	texture_desc.BindFlags = bind_flags;
@@ -47,7 +50,10 @@ Render::Texture::Texture(Core::GraphicsContext* context, Surface resolution, UIN
 }
 
 Render::Texture::Texture(Core::GraphicsContext* engine,Material& material)
-	: _context(engine)
+	:
+	_context(engine),
+	_texture(nullptr),
+	_resource(nullptr)
 {
 	D3D11_TEXTURE2D_DESC texture_desc;
 	texture_desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
@@ -83,6 +89,41 @@ Render::Texture::Texture(Core::GraphicsContext* context, ID3D11Texture2D* textur
 	_width = desc.Width;
 	_height = desc.Height;
 	_resource = nullptr;
+}
+
+Render::Texture::Texture(Core::GraphicsContext* context, ITexture2DDesc texture)
+	:
+	_context(context),
+	_texture(nullptr),
+	_resource(nullptr)
+{
+	D3D11_TEXTURE2D_DESC texture_desc;
+	texture_desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+	texture_desc.Width = _width = texture.width;
+	texture_desc.Height = _height = texture.height;
+	texture_desc.MipLevels = 1;
+	texture_desc.ArraySize = 1;
+	texture_desc.Format = texture.format;
+	texture_desc.SampleDesc = { 1,0 };
+	texture_desc.CPUAccessFlags = 0;
+	texture_desc.MiscFlags = 0;
+	texture_desc.Usage = D3D11_USAGE_DEFAULT;
+
+	D3D11_SHADER_RESOURCE_VIEW_DESC rvDesc;
+	rvDesc.Format = DXGI_FORMAT_UNKNOWN;
+	rvDesc.Texture2D.MipLevels = texture_desc.MipLevels;
+	rvDesc.Texture2D.MostDetailedMip = texture_desc.MipLevels - 1;
+	rvDesc.ViewDimension = D3D_SRV_DIMENSION_TEXTURE2D;
+
+	assert(SUCCEEDED(context->device->CreateTexture2D(&texture_desc, nullptr, &_texture)));
+
+	auto slice = texture.stride;
+	if (slice == 0)
+		slice = (unsigned)texture.width * 4;
+
+	context->context->UpdateSubresource(_texture, 0, nullptr, texture.pSysMem, slice, 0);
+
+	assert(SUCCEEDED(context->device->CreateShaderResourceView(_texture, &rvDesc, &_resource)));
 }
 
 Render::Texture::Texture(Core::GraphicsContext* context)

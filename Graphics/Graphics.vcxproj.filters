@@ -266,6 +266,9 @@
     <ClCompile Include="Graphics\SpriteFont.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Components\TextComponent.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Render\d3d\hlsl\pixel_shader.hlsl" />

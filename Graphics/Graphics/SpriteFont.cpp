@@ -2,21 +2,10 @@
 #include <BinaryReader.h>
 #include <dxgiformat.h>
 #include <exception>
-#include <Windows.h>
 
 #include "../Graphics.h"
-#include "Material/Material.h"
 
 static const char spriteFontMagic[] = "DXTKfont";
-
-struct Glyph
-{
-    uint32_t Character;
-    RECT Subrect;
-    float XOffset;
-    float YOffset;
-    float XAdvance;
-};
 
 Render::SpriteFont::SpriteFont(Core::GraphicsContext* context,BinaryReader& reader)
 {
@@ -30,7 +19,12 @@ Render::SpriteFont::SpriteFont(Core::GraphicsContext* context,BinaryReader& read
     }
 
     auto glyphCount = reader.Read<uint32_t>();
-    auto glyphData = reader.ReadArray<Glyph>(glyphCount);
+    auto* glyphData = reader.ReadArray<Glyph>(glyphCount);
+
+    for(uint32_t i =0;i < glyphCount;i++)
+    {
+        glyphs.push_back(glyphData[i]);
+    }
 
     line_spacings = reader.Read<float>();
     default_character = reader.Read<uint32_t>();
@@ -45,7 +39,30 @@ Render::SpriteFont::SpriteFont(Core::GraphicsContext* context,BinaryReader& read
 
     auto textureData = reader.ReadArray<uint8_t>(static_cast<size_t>(dataSize));
 
-    Material mat((BYTE*)textureData, Surface(textureWidth, textureHeight));
-    mat.format = textureFormat;
-    this->font_texture = context->get_device()->create_texture(mat);
+    ITexture2DDesc desc;
+    desc.pSysMem = (void*)textureData;
+    desc.rows = textureRows;
+    desc.stride = textureStride;
+    desc.format = textureFormat;
+    desc.height = textureHeight;
+    desc.width = textureWidth;
+
+    this->font_texture = context->get_device()->create_texture(desc);
+
+}
+
+Render::Glyph Render::SpriteFont::default_glyph()
+{
+    return glyphs[0];
+}
+
+Render::Glyph Render::SpriteFont::find_glyph(uint32_t character)
+{
+    for(const auto glyph : glyphs)
+    {
+        if (glyph.Character == character)
+            return glyph;
+    }
+    
+    return default_glyph();
 }

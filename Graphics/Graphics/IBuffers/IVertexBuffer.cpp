@@ -2,6 +2,7 @@
 #include "IIndexBuffer.h"
 
 #include <cassert>
+#include "../../Render/d3d/Vertex.h"
 
 void Render::IVertexBuffer::count_normals(IIndexBuffer* buffer)
 {
@@ -14,4 +15,9 @@ void Render::IVertexBuffer::count_normals(IIndexBuffer* buffer)
 	{
 		
 	}
+}
+
+Render::Vertex& Render::IVertexBuffer::at(unsigned index)
+{
+	return data[index];
 }

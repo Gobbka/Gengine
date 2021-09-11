@@ -52,24 +52,14 @@ void Render::Camera::set_resolution(Surface resolution)
 	WorldViewer::set_view_resolution(resolution);
 }
 
-void Render::Camera::set_render_target(RenderTarget* target)
-{
-	_cameraOptions.renderTarget = target;
-}
-
-Render::CameraOptions* Render::Camera::options()
-{
-	return &_cameraOptions;
-}
-
 Core::GraphicsContext* Render::Camera::graphics_context()
 {
 	return context;
 }
 
-Render::RenderTarget* Render::Camera::get_target_view() const
+Render::RenderTarget* Render::Camera::get_target_view()
 {
-	return _cameraOptions.renderTarget;
+	return WorldViewer::get_render_target();
 }
 
 Render::MaskEngine* Render::Camera::get_mask_engine() const
@@ -86,7 +76,6 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 	:
 	WorldViewer(context,target)
 {
-	_cameraOptions.renderTarget = target;
 	_blendEngine = new BlendEngine(context);
 
 	mask_engine = new MaskEngine(this);

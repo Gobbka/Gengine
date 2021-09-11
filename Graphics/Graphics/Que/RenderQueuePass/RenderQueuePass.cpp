@@ -57,9 +57,7 @@ void Render::RenderQueuePass::render_camera_3d(ECS::ComponentHandle<Camera> came
 inline void Render::RenderQueuePass::render_camera(ECS::ComponentHandle<Camera> camera, ECS::World* world)
 {
 	camera->bind();
-
-	if (camera->options()->render_3d)
-		render_camera_3d(camera, world);
+	render_camera_3d(camera, world);
 }
 
 inline void Render::RenderQueuePass::execute_scene(Render::Scene* scene)

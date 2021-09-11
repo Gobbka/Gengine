@@ -28,8 +28,10 @@ namespace Forms
 
 		Render::Texture* _folder_texture;
 		Render::Texture* _file_texture;
-		ECS::Entity* _worldCamera;
 	public:
+		Render::Scene* editorScene;
+
+
 		MainForm(HINSTANCE hinst, UINT width, UINT height);
 
 		void scan_assets_directory();

@@ -82,11 +82,8 @@ void load_png(const wchar_t* path, Render::Material& material)
 Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	: Form(hinst, width, height)
 {
-	auto main_cam = main_camera->get<Render::Camera>();
+	auto main_cam = main_scene->get_main_camera()->get<Render::Camera>();
 	main_cam->get_render_target()->clear_color = Color3(.1f, .1f, .1f);
-	auto* options = main_cam->options();
-	options->render_2d = true;
-	options->render_3d = false;
 
 	auto* uicanvas_entity = get_ui()->create_layer();
 
@@ -114,23 +111,14 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_folder_texture = get_graphics_context()->get_device()->create_texture(folder_material);
 	_file_texture = get_graphics_context()->get_device()->create_texture(file_material);
 
+	editorScene = get_graphics_context()->create_scene();
 	auto worldTexture = new Render::RenderTarget(get_graphics_context(),{1400,780});
-	_worldCamera = main_scene->create_camera(worldTexture);
-	auto cam = _worldCamera->get<Render::Camera>();
+	auto* editorCam = editorScene->create_camera(worldTexture);
+	editorScene->set_main_camera(editorCam);
+	auto cam = editorCam->get<Render::Camera>();
 	cam->get_target_view()->clear_color.a = 0.f;
-	auto* cam_options = cam->options();
-	cam_options->render_2d = false;
-	cam_options->render_3d = true;
 
 	_render_panel->set_texture(worldTexture->get_texture());
-
-	_worldspace_panel->unique_id = 228;
-	
-	_render_panel->onMouseDown = [&](UI::UIElementEventArgs args)
-	{
-		auto camera = _worldCamera->get<Render::Camera>();
-		
-	};
 
 	auto uicanvas = uicanvas_entity->get<UI::InteractiveForm>();
 	
@@ -174,7 +162,7 @@ void Forms::MainForm::handle_resize(Surface rect)
 void Forms::MainForm::update()
 {
 	static float scale = 45.f;
-	auto camera = _worldCamera->get<Render::Camera>();
+	auto camera = editorScene->get_main_camera()->get<Render::Camera>();
 	
 	if (Keyboard::pressed(VirtualKey::KEY_W)) // W
 	{

@@ -21,9 +21,7 @@ Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
 	main_scene(_graphics->create_scene())
 {
     _uicontext = new UI::UIContext(_graphics);
-    main_camera = main_scene->create_camera(_graphics->get_render_target_view());
-
-    main_scene->set_main_camera(main_camera);
+    main_scene->set_main_camera(main_scene->create_camera(_graphics->get_render_target_view()));
 }
 
 Core::Form::~Form()

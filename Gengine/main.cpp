@@ -82,13 +82,13 @@ int WINAPI wWinMain(
     auto* texture = form->get_graphics_context()->get_device()->create_texture(stone_material);
     auto* negr_texture = form->get_graphics_context()->get_device()->create_texture(wood_material);
 
-    auto*light = form->main_scene->create_direction_light();
+    auto*light = form->editorScene->create_direction_light();
     auto component = light->get<Render::DirectionLightComponent>();
     component->set_position(Position3(-4.14113426f, 2.09657478f, -4.79795313f));
     component->set_rotation(Vector3(0.519999862f, 0.880000114f, 0));
 	
-    auto* cube = form->main_scene->instantiate<Render::MeshContainerComponent>();
-    auto* platform = form->main_scene->instantiate<Render::MeshContainerComponent>();
+    auto* cube = form->editorScene->instantiate<Render::MeshContainerComponent>();
+    auto* platform = form->editorScene->instantiate<Render::MeshContainerComponent>();
     platform->get<Render::MeshContainerComponent>()->transform.set_position(Position3{ 0,-7,0 });
 
     cube->get<Render::MeshContainerComponent>()->add_mesh(Render::Cube::make_independent(form->get_graphics_context(), Position3::null(), 5));

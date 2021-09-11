@@ -16,20 +16,10 @@ namespace Render
 	class MaskEngine;
 	class BlendEngine;
 
-	struct CameraOptions
-	{
-		bool render_2d = true;
-		bool render_3d = true;
-		bool shadows   = true;
-		RenderTarget* renderTarget = nullptr;
-	};
-
 	class __declspec(dllexport) Camera : public WorldViewer
 	{
 	private:
 		BlendEngine* _blendEngine;
-
-		CameraOptions _cameraOptions;
 	public:
 		void clear(Color3 color);
 		void clear();
@@ -43,14 +33,11 @@ namespace Render
 		
 		void set_resolution(Surface new_resolution);
 
-		void set_render_target(RenderTarget* target);
-
 		MeshContainerComponent*  point_to_world(Vector2 screen_coordinate);
 		Vector2 point_to_screen(Vector3 world_coordinate);
 	public:
-		CameraOptions* options();
 		Core::GraphicsContext* graphics_context();
-		RenderTarget* get_target_view() const;
+		RenderTarget* get_target_view();
 		MaskEngine* get_mask_engine() const;
 		BlendEngine* blend_engine() const;
 	public:

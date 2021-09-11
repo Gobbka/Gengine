@@ -23,7 +23,6 @@ namespace Core
 		UI::UIContext* _uicontext;
 		
 	protected:
-		ECS::Entity* main_camera;
 		void handle_resize(Surface rect) override;
 
 		virtual void draw_frame();

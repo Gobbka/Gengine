@@ -1,4 +1,5 @@
 #pragma once
+#include "WindowsManager.h"
 #include "WindowsWindow.h"
 #include "Graphics/Scene.h"
 #include "Types/Types.h"
@@ -44,4 +45,5 @@ namespace Core
 
 		virtual void update() PURE;
 	};
+
 }

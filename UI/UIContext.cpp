@@ -52,8 +52,22 @@ class DrawTextPass : public Render::IPass
 {
 	void execute(Core::GraphicsContext* context) override
 	{
+		auto* matrix = &context->get_context()->matrix_buffer;
+
+		auto resolution = context->get_screen_resolution();
+		auto worldMatrix = 
+			DirectX::XMMatrixOrthographicLH(resolution.width, resolution.height, 0.0, 1.f) *
+			DirectX::XMMatrixTranslation(-1,1,0)
+		;
+
 		context->main_scene->world()->each<Render::TextComponent>([&](ECS::Entity*, ECS::ComponentHandle<Render::TextComponent>comp)
 			{
+				matrix->data.MVPMatrix = DirectX::XMMatrixTranspose(
+					DirectX::XMMatrixTranslation(0,-0,0) * 
+					worldMatrix
+				);
+				matrix->update();
+
 				context->get_context()->set_topology(PrimitiveTopology::TRIANGLELIST);
 				comp->vbuffer->bind();
 				comp->ibuffer->bind();

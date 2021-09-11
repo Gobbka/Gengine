@@ -11,7 +11,7 @@ void Render::IVertexBuffer::count_normals(IIndexBuffer* buffer)
 	// we count only triangles
 	assert(index_size % 3 == 0);
 	
-	for(size_t i = 0;i < index_size / 3;i++)
+	for(size_t i = 0;i < index_size;i+=3)
 	{
 		
 	}

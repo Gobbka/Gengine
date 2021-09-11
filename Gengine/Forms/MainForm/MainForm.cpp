@@ -17,7 +17,9 @@
 #include <UIContext.h>
 
 #include "Render/Light/DirectionLightComponent.h"
-#include "Graphics/Material/Material.h"
+#include <Types/Material.h>
+
+#include "Loaders/AssetsLoader.h"
 
 namespace UI
 {
@@ -62,23 +64,6 @@ namespace UI
 	};
 }
 
-void load_png(const wchar_t* path, Render::Material& material)
-{
-	auto file = FS::FSFile::read_file((wchar_t*)path);
-
-	auto* fmemory = FreeImage_OpenMemory((BYTE*)file.data(), file.size());
-
-	auto bitmap = FreeImage_LoadFromMemory(FIF_PNG, (FIMEMORY*)fmemory, ICO_MAKEALPHA);
-	auto* nigger = FreeImage_GetBits(bitmap);
-
-	material.load_bitmap(nigger, Surface((float)FreeImage_GetWidth(bitmap), (float)FreeImage_GetHeight(bitmap)));
-
-	FreeImage_Unload(bitmap);
-	FreeImage_CloseMemory(fmemory);
-
-	material.reflect();
-}
-
 Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	: Form(hinst, width, height)
 {
@@ -104,9 +89,9 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 
 	auto folder_material = Render::Material();
 	auto file_material = Render::Material();
-	
-	load_png(L"assets\\folder.png", folder_material);
-	load_png(L"assets\\file.png", file_material);
+
+	AssetsLoader::load_png(L"assets\\folder.png", folder_material);
+	AssetsLoader::load_png(L"assets\\file.png", file_material);
 	
 	_folder_texture = get_graphics_context()->get_device()->create_texture(folder_material);
 	_file_texture = get_graphics_context()->get_device()->create_texture(file_material);

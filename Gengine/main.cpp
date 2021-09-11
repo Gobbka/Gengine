@@ -22,13 +22,13 @@
 #include <BinaryReader.h>
 #include <Graphics/SpriteFont.h>
 #include <Graphics/Components/TextureComponent.h>
-#include <Graphics/Material/Material.h>
 #include <Render/I3DObject/Parallelepiped/Parallelepiped.h>
 #include <Render/Light/DirectionLightComponent.h>
 
 #include "Graphics/Components/TextComponent.h"
-
-extern void load_png(const wchar_t* path, Render::Material& material);
+#include "Loaders/AssetsLoader.h"
+#include "Logger/Logger.h"
+#include "Types/Material.h"
 
 void debugger_loop()
 {
@@ -50,12 +50,8 @@ int WINAPI wWinMain(
     _In_ int nShowCmd
 )
 {
-    AllocConsole();
-    freopen("CONIN$", "r", stdin);
-    freopen("CONOUT$", "w", stdout);
-    freopen("CONOUT$", "w", stderr);    
-
-    std::wcout << lpCmdLine<<'\n';
+    AllocLoggerConsole();
+    LogW(lpCmdLine);
 	
     auto*form = new Forms::MainForm(hInstance, 1400, 780);
     form->show();
@@ -68,9 +64,9 @@ int WINAPI wWinMain(
 
     auto stone_material = Render::Material();
     auto wood_material = Render::Material();
-	
-    load_png(L"assets\\stone.png",stone_material);
-    load_png(L"assets\\wood.png",wood_material);
+
+    AssetsLoader::load_png(L"assets\\stone.png", stone_material);
+    AssetsLoader::load_png(L"assets\\wood.png", wood_material);
 
     Render::SpriteFont font(form->get_graphics_context(), L"visby.spritefont");
 

@@ -1,8 +1,5 @@
 #include "Material.h"
-#include <fstream>
-
-#include "../../../Libs/FreeImage/FreeImage.h"
-#include "Types/Types.h"
+#include "Types.h"
 
 Render::Material::Material(BYTE* pSysMem, Surface resolution,bool alpha)
 	: _resolution(resolution)

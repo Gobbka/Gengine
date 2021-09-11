@@ -74,6 +74,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Build\Out\</OutDir>
     <IntDir>$(SolutionDir)Build\Temp\$(ProjectName)\$(Configuration)</IntDir>
+    <IncludePath>$(SolutionDir)Libs/FreeImage/;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -96,6 +97,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(SolutionDir)Libs\FreeImage\FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -148,6 +150,9 @@
     <ClInclude Include="FS\FSDirectory.h" />
     <ClInclude Include="FS\FSFile.h" />
     <ClInclude Include="FS\FSObject.h" />
+    <ClInclude Include="Loaders\AssetsLoader.h" />
+    <ClInclude Include="Logger\Logger.h" />
+    <ClInclude Include="Types\Material.h" />
     <ClInclude Include="Types\Transform.h" />
     <ClInclude Include="Types\Types.h" />
   </ItemGroup>
@@ -156,6 +161,8 @@
     <ClCompile Include="FS\FSDirectory.cpp" />
     <ClCompile Include="FS\FSFile.cpp" />
     <ClCompile Include="FS\FSObject.cpp" />
+    <ClCompile Include="Loaders\AssetsLoader.cpp" />
+    <ClCompile Include="Types\Material.cpp" />
     <ClCompile Include="Types\Transform.cpp" />
     <ClCompile Include="Types\Types.cpp" />
   </ItemGroup>

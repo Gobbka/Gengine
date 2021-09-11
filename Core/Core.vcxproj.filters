@@ -36,6 +36,15 @@
     <ClInclude Include="BinaryReader.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Logger\Logger.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Loaders\AssetsLoader.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Types\Material.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Types\Transform.cpp">
@@ -54,6 +63,12 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="BinaryReader.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Types\Material.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Loaders\AssetsLoader.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

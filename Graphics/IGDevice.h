@@ -1,8 +1,7 @@
 ﻿#pragma once
-#include "Ecs/Ecs.h"
 #include "Graphics/IBuffers/IIndexBuffer.h"
 #include "Graphics/IBuffers/IVertexBuffer.h"
-#include "Graphics/Material/Material.h"
+#include <Types/Material.h>
 #include "Render/d3d/Buffer/Texture.h"
 
 namespace Render

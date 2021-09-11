@@ -160,7 +160,6 @@
     <ClInclude Include="Graphics\IBuffers\IIndexBuffer.h" />
     <ClInclude Include="Graphics\IBuffers\ITexture2D.h" />
     <ClInclude Include="Graphics\IBuffers\IVertexBuffer.h" />
-    <ClInclude Include="Graphics\Material\Material.h" />
     <ClInclude Include="Graphics\PrimitiveTopology.h" />
     <ClInclude Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.h" />
     <ClInclude Include="Graphics\Que\IPass\IPass.h" />
@@ -203,7 +202,6 @@
     <ClCompile Include="Graphics\GDevice\D11GContext.cpp" />
     <ClCompile Include="Graphics\GDevice\D11GDevice.cpp" />
     <ClCompile Include="Graphics\IBuffers\IVertexBuffer.cpp" />
-    <ClCompile Include="Graphics\Material\Material.cpp" />
     <ClCompile Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.cpp" />
     <ClCompile Include="Graphics\Que\IPass\Passer.cpp" />
     <ClCompile Include="Graphics\Que\RenderQueuePass\RenderQueuePass.cpp" />

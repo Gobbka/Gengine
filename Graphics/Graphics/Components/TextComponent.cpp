@@ -25,7 +25,7 @@ Render::TextComponent::~TextComponent()
 	delete ibuffer;
 }
 
-void Render::TextComponent::set_text(wchar_t* text)
+void Render::TextComponent::set_text(const wchar_t* text)
 {
 	auto length = wcslen(text);
 

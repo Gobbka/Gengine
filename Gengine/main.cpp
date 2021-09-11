@@ -77,7 +77,7 @@ int WINAPI wWinMain(
     auto* text = form->main_scene->create_entity();
     auto text_comp = text->assign<Render::TextComponent>(form->get_graphics_context());
     text_comp->font = &font;
-    text_comp->set_text((wchar_t*)L"niggers\nare stuped");
+    text_comp->set_text(L"GEngine");
 	
     auto* texture = form->get_graphics_context()->get_device()->create_texture(stone_material);
     auto* negr_texture = form->get_graphics_context()->get_device()->create_texture(wood_material);
@@ -100,20 +100,12 @@ int WINAPI wWinMain(
     CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);
 
     form->main_scene->world()->registerSystem(new PhysicsModule());
-	
-    MSG msg;
 
     auto time = std::chrono::high_resolution_clock::now();
 	
 	while(true)
 	{
-		
-		if(PeekMessage(&msg, nullptr,0, 0, PM_REMOVE))
-		{
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-		}
-
+        form->peek();
         form->update();
         form->force_draw();
 

@@ -110,6 +110,17 @@ void Core::WindowsWindow::hide()
 	ShowWindow(_hwnd, SW_HIDE);
 }
 
+void Core::WindowsWindow::peek()
+{
+	MSG msg;
+
+	if (PeekMessage(&msg, _hwnd, 0, 0, PM_REMOVE))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+}
+
 HWND Core::WindowsWindow::hwnd()
 {
 	return _hwnd;

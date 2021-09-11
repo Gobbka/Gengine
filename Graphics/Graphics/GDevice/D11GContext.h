@@ -2,7 +2,7 @@
 #include "../../IGContext.h"
 
 namespace Render {
-	class D11GContext final : public Render::IGContext
+	class D11GContext final : public IGContext
 	{
 		PrimitiveTopology _current_topology = PrimitiveTopology::NONE;
 		ID3D11DeviceContext* _d11context;

@@ -14,10 +14,12 @@ namespace Render
 			control_buffer(context,1,CBBindFlag_vs | CBBindFlag_ps)
 		{}
 	public:
+		virtual ~IGContext() = default;
+
 		__declspec(align(16))
 			struct MatrixBufferStruct
 		{
-			DirectX::XMMATRIX VPMatrix;
+			DirectX::XMMATRIX MVPMatrix;
 			DirectX::XMMATRIX ModelMatrix;
 		};
 

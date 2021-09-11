@@ -29,7 +29,7 @@ void Render::CreateShadowMapPass::execute(Core::GraphicsContext* context)
 					{
 						auto modelMatrix = component->transform.get_world_matrix();
 						auto final_matrix = DirectX::XMMatrixMultiplyTranspose(modelMatrix, world_matrix);
-						gcontext->matrix_buffer.data.VPMatrix = final_matrix;
+						gcontext->matrix_buffer.data.MVPMatrix = final_matrix;
 						gcontext->matrix_buffer.data.ModelMatrix = DirectX::XMMatrixTranspose(modelMatrix);
 						gcontext->matrix_buffer.update();
 

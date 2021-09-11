@@ -32,6 +32,8 @@ namespace Core {
 		void show();
 		void hide();
 
+		void peek();
+
 		HWND hwnd();
 		Surface size();
 	};

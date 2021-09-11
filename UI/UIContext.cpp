@@ -20,7 +20,7 @@ public:
 		auto resolution = camera->get_view_resolution();
 		auto* gcontext = context->get_context();
 		gcontext->set_topology(PrimitiveTopology::TRIANGLESTRIP);
-		gcontext->matrix_buffer.data.VPMatrix = DirectX::XMMatrixTranspose(
+		gcontext->matrix_buffer.data.MVPMatrix = DirectX::XMMatrixTranspose(
 			DirectX::XMMatrixOrthographicLH(resolution.width,resolution.height,0.0,1.f) * DirectX::XMMatrixTranslation(-1,1,0)
 		);
 		gcontext->matrix_buffer.update();

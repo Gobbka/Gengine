@@ -25,6 +25,6 @@ namespace Render
 		TextComponent(Core::GraphicsContext* context);
 		~TextComponent();
 
-		void set_text(wchar_t* text);
+		void set_text(const wchar_t* text);
 	};
 }

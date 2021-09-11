@@ -20,7 +20,7 @@ void Render::RenderQueuePass::render_model(ECS::ComponentHandle<Camera> camera,E
 {	
 	auto* gcontext = _context->get_context();
 	auto model_matrix = model->transform.get_world_matrix();
-	gcontext->matrix_buffer.data.VPMatrix = DirectX::XMMatrixTranspose(model_matrix * VPMatrix);
+	gcontext->matrix_buffer.data.MVPMatrix = DirectX::XMMatrixTranspose(model_matrix * VPMatrix);
 	gcontext->matrix_buffer.data.ModelMatrix = DirectX::XMMatrixTranspose(model_matrix);
 	gcontext->matrix_buffer.update();
 	

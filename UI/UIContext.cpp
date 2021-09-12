@@ -56,8 +56,8 @@ class DrawTextPass : public Render::IPass
 
 		auto resolution = context->get_screen_resolution();
 		auto worldMatrix = 
-			DirectX::XMMatrixOrthographicLH(resolution.width, resolution.height, 0.0, 1.f) *
-			DirectX::XMMatrixTranslation(-1,1,0)
+			DirectX::XMMatrixOrthographicLH(resolution.width, resolution.height, 0.0, 1.f) * 
+			DirectX::XMMatrixTranslation(-1,1,0) // move count point to top-left corner
 		;
 
 		context->main_scene->world()->each<Render::TextComponent>([&](ECS::Entity*, ECS::ComponentHandle<Render::TextComponent>comp)

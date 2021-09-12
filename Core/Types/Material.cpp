@@ -8,6 +8,17 @@ Render::Material::Material(BYTE* pSysMem, Surface resolution,bool alpha)
 	memcpy(_pSysMem, pSysMem, resolution.width * resolution.height * 4);
 }
 
+Render::Material::Material(Color3 color)
+	: _resolution(1,1)
+{
+	_pSysMem = new BYTE[4];
+	_pSysMem[0] = color.r * 255.f;
+	_pSysMem[1] = color.g * 255.f;
+	_pSysMem[2] = color.b * 255.f;
+	_pSysMem[3] = 255;
+	format = DXGI_FORMAT_R8G8B8A8_UNORM;
+}
+
 Render::Material::Material()
 	: _pSysMem(nullptr),
 	_resolution(0,0)

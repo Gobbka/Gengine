@@ -7,7 +7,7 @@
 
 static const char spriteFontMagic[] = "DXTKfont";
 
-Render::SpriteFont::SpriteFont(Core::GraphicsContext* context,BinaryReader& reader)
+Render::SpriteFont::SpriteFont(IGDevice* device,BinaryReader& reader)
 {
     // Validate the header.
     for (char const* magic = spriteFontMagic; *magic; magic++)
@@ -39,7 +39,7 @@ Render::SpriteFont::SpriteFont(Core::GraphicsContext* context,BinaryReader& read
 
     auto textureData = reader.ReadArray<uint8_t>(static_cast<size_t>(dataSize));
 
-    this->font_texture = context->get_device()->create_texture(
+    this->font_texture = device->create_texture(
 	    ITexture2DDesc {
 	        textureFormat,
     		textureWidth,
@@ -51,10 +51,10 @@ Render::SpriteFont::SpriteFont(Core::GraphicsContext* context,BinaryReader& read
     );
 }
 
-Render::SpriteFont::SpriteFont(Core::GraphicsContext* context, const wchar_t* file_name)
+Render::SpriteFont::SpriteFont(IGDevice* device, const wchar_t* file_name)
 {
     BinaryReader reader(file_name);
-    *this = SpriteFont(context, reader);
+    *this = SpriteFont(device, reader);
 }
 
 Render::Glyph Render::SpriteFont::default_glyph()

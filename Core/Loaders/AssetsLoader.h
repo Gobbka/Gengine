@@ -1,5 +1,6 @@
 #pragma once
 #include "../Types/Material.h"
+
 class __declspec(dllexport) AssetsLoader
 {
 public:

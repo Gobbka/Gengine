@@ -11,6 +11,7 @@ namespace Core
 class BinaryReader;
 
 namespace Render {
+	class IGDevice;
 
 	struct Glyph
 	{
@@ -30,8 +31,8 @@ namespace Render {
 		wchar_t default_character;
 		Texture* font_texture;
 
-		SpriteFont(Core::GraphicsContext*context,BinaryReader& reader);
-		SpriteFont(Core::GraphicsContext*context,const wchar_t*file_name);
+		SpriteFont(IGDevice*device,BinaryReader& reader);
+		SpriteFont(IGDevice*device,const wchar_t*file_name);
 
 		Glyph default_glyph();
 		Glyph find_glyph(uint32_t character);

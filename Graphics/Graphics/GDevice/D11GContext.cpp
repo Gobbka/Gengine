@@ -1,6 +1,7 @@
 ﻿#include "D11GContext.h"
 
 #include "../../Render/d3d/Shader/PixelShader.h"
+#include "../../Render/d3d/Shader/SamplerState.h"
 #include "../../Render/d3d/Shader/VertexShader.h"
 #include "../../Render/Engine/MaskEngine.h"
 
@@ -53,6 +54,16 @@ void Render::D11GContext::set_mask_engine(MaskEngine* mask)
 	auto* pp_target = target_view == nullptr ? nullptr : &target_view;
 	
 	_d11context->OMSetRenderTargets(num_view,pp_target, mask->get_view());
+}
+
+void Render::D11GContext::set_sampler_state(SamplerState* sampler)
+{
+	if(sampler != _current_sampler)
+	{
+		sampler->bind();
+	}
+
+	_current_sampler = sampler;
 }
 
 void Render::D11GContext::draw_indexed(UINT count, UINT start_location)

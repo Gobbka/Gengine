@@ -129,6 +129,31 @@ void Render::WorldViewer::set_view_resolution(Surface surface)
 	_projectionMatrix = create_projection_matrix(projection,_resolution, _fov, _far_z, _scale);
 }
 
+Vector3 Render::WorldViewer::point_to_world(Vector2 screen_coordinate)
+{
+	// TODO: handle that depth stencil texture2d can have D24_S8 format or D32 format
+
+	BYTE depth;
+	ID3D11Resource* view_resource;
+	D3D11_TEXTURE2D_DESC texture_desc;
+
+	mask_engine->get_view()->GetResource(&view_resource);
+	((ID3D11Texture2D*)view_resource)->GetDesc(&texture_desc);
+	
+	
+
+	D3D11_MAPPED_SUBRESOURCE map;
+
+	context->context->Map(view_resource, 0, D3D11_MAP_READ, 0, &map);
+	depth = ((BYTE*)map.pData)[(UINT)screen_coordinate.x * texture_desc.Width + (UINT)screen_coordinate.y];
+	context->context->Unmap(view_resource, 0);
+
+	if (texture_desc.Format == DXGI_FORMAT_D24_UNORM_S8_UINT)
+		depth = depth >> 8;
+
+	return Vector3(screen_coordinate.x, screen_coordinate.y, depth * _far_z);
+}
+
 DirectX::XMMATRIX Render::WorldViewer::world_to_screen_matrix()
 {
 	return _viewMatrix * _projectionMatrix;

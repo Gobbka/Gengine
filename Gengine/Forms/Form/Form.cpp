@@ -47,6 +47,12 @@ void Core::Form::drag_move()
 
 void Core::Form::force_draw()
 {
+    if (WindowsWindow::size().width == 0.f)
+    {
+        Sleep(17);
+        return;
+    }
+
     _graphics->make_frame();
 	
     draw_frame();

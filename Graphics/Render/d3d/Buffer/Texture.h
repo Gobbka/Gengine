@@ -29,6 +29,8 @@ namespace Render {
 		Texture(Core::GraphicsContext* context, ITexture2DDesc texture);
 		Texture(Core::GraphicsContext* context);
 
+		ITexture2DDesc get_texture_desc();
+
 		void bind() override;
 
 		bool is_render_target() override;

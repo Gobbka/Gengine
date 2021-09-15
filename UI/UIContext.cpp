@@ -91,15 +91,9 @@ UI::UIContext::UIContext(Core::GraphicsContext* gfx)
 	_cursor(0,0)
 {
 	_gfx = gfx;
-	_animator.start();
 
 	gfx->get_passer()->add_pass(new DrawUIPass(), Render::PassStep::overlay);
 	gfx->get_passer()->add_pass(new DrawTextPass(), Render::PassStep::overlay);
-}
-
-UI::Animator* UI::UIContext::animator()
-{
-	return &_animator;
 }
 
 void UI::UIContext::on_lbmouse_down()

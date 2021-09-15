@@ -24,19 +24,15 @@ namespace UI {
 		std::vector<InteractiveForm*> _forms;
 		Core::GraphicsContext* _gfx;
 		Vector2 _cursor;
-		Animator _animator;
 	public:
 		explicit UIContext(Core::GraphicsContext*gfx);
 		
 		ECS::Entity* create_layer();
-
-		Animator* animator();
 	protected:
 		void on_lbmouse_down() override;
 		void on_lbmouse_up() override;
 		void on_mouse_scroll(short direction) override;
 		void on_mouse_move(int mx, int my) override;
 		void on_db_click() override;
-		
 	};
 }

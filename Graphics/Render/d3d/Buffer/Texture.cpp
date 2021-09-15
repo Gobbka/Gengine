@@ -135,6 +135,22 @@ Render::Texture::Texture(Core::GraphicsContext* context)
 	_texture = nullptr;
 }
 
+Render::ITexture2DDesc Render::Texture::get_texture_desc()
+{
+	D3D11_TEXTURE2D_DESC textDesc;
+	_texture->GetDesc(&textDesc);
+
+	return ITexture2DDesc{
+		textDesc.Usage == D3D11_USAGE_DEFAULT ? ITexture2DDesc::Usage::DEFAULT : ITexture2DDesc::Usage::STAGING,
+		textDesc.Format,
+		textDesc.Width,
+		textDesc.Height,
+		0,
+		0,
+		nullptr
+	};
+}
+
 void Render::Texture::bind()
 {
 	_context->context->PSSetShaderResources(0, 1, &_resource);

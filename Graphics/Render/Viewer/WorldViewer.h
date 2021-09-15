@@ -67,6 +67,7 @@ namespace Render
 		Surface get_view_resolution();
 		void set_view_resolution(Surface surface);
 
+		Vector3 point_to_world(Vector2 screen_coordinate);
 		DirectX::XMMATRIX world_to_screen_matrix();
 
 		void bind();

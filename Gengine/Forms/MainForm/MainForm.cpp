@@ -20,6 +20,7 @@
 #include <Types/Material.h>
 
 #include "Loaders/AssetsLoader.h"
+#include "Logger/Logger.h"
 
 namespace UI
 {
@@ -67,6 +68,7 @@ namespace UI
 Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	: Form(hinst, width, height)
 {
+	main_scene->register_system(new UI::HandleAnimationSystem());
 	auto main_cam = main_scene->get_main_camera()->get<Render::Camera>();
 	main_cam->get_render_target()->clear_color = Color3(.1f, .1f, .1f);
 
@@ -191,5 +193,10 @@ void Forms::MainForm::update()
 	if (Keyboard::pressed(VirtualKey::DOWN))
 	{
 		camera->adjust_rotation((Vector3(0.04f, 0, 0)));
+	}
+	if(Keyboard::pressed(VirtualKey::F1))
+	{
+		auto res = camera->get_view_resolution();
+		LogA("DEPTH: " << camera->point_to_world(Vector2(res.width / 2, res.height / 2)).z);
 	}
 }

@@ -143,6 +143,9 @@ void Core::GraphicsContext::set_resolution(Surface new_resolution)
 void Core::GraphicsContext::make_frame()
 {
 	// begin passes
+	if (_viewport.Width == 0.f || _viewport.Height == 0.f)
+		return;
+
 	context->RSSetViewports(1, &_viewport);
 
 	for (Render::IPass* pass : _passer._begin_passes)

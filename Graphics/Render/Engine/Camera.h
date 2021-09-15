@@ -33,7 +33,7 @@ namespace Render
 		
 		void set_resolution(Surface new_resolution);
 
-		MeshContainerComponent*  point_to_world(Vector2 screen_coordinate);
+		
 		Vector2 point_to_screen(Vector3 world_coordinate);
 	public:
 		Core::GraphicsContext* graphics_context();

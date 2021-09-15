@@ -43,10 +43,12 @@ LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }
 
-void Core::WindowsWindow::handle_resize(Surface lprect)
+void Core::WindowsWindow::handle_resize(Surface rect)
 {
+	_size = rect;
+
 	if(this->on_resize)
-		this->on_resize(lprect);
+		this->on_resize(rect);
 }
 
 Core::WindowsWindow::WindowsWindow(HINSTANCE hint, UINT width, UINT height)

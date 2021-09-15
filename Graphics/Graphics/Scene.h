@@ -20,6 +20,8 @@ namespace Render {
 		ECS::Entity* get_main_camera();
 		void set_main_camera(ECS::Entity*);
 
+		void register_system(ECS::EntitySystem*system);
+
 		ECS::Entity* create_entity(ECS::Entity*parent=nullptr);
 		ECS::Entity* create_camera(RenderTarget* target);
 		template<typename Component>

@@ -112,7 +112,7 @@ int WINAPI wWinMain(
         auto now = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - time);
 
-        form->main_scene->world()->tick(1.f/duration.count());
+        form->main_scene->world()->tick(1.f/(float)duration.count());
 		
         time = now;
 	}

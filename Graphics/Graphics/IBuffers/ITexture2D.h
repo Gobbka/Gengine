@@ -4,6 +4,12 @@ namespace Render
 {
 	struct ITexture2DDesc
 	{
+		enum class Usage
+		{
+			DEFAULT,
+			STAGING
+		} usage = Usage::DEFAULT;
+
 		DXGI_FORMAT format;
 		UINT32 width;
 		UINT32 height;

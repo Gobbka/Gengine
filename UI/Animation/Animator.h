@@ -3,6 +3,8 @@
 #include <vector>
 #include <Windows.h>
 
+#include "Ecs/Ecs.h"
+
 namespace UI
 {
 
@@ -15,7 +17,7 @@ namespace UI
 	};
 	
 	
-	struct __declspec(dllexport) Animation
+	struct __declspec(dllexport) AnimationComponent
 	{
 	public:
 		typedef std::function<void(float value)> tSetFunction;
@@ -30,32 +32,17 @@ namespace UI
 
 		float _step;
 		float _value;
-		int _during;
-		int _end_time;
+		float _during;
+		float _end_time;
 	public:
-		Animation(float from_value,float to_value, UINT during_ms, Animation::tSetFunction set_function, Animation::tAnimFunc anim_handle = AnimFunction::linear);
+		AnimationComponent(float from_value,float to_value, UINT during_ms, AnimationComponent::tSetFunction set_function, AnimationComponent::tAnimFunc anim_handle = AnimFunction::linear);
 
-		bool play_step(int delta_time);
+		bool play_step(float delta_time);
 	};
-
 	
-	
-	class __declspec(dllexport) Animator
+	class __declspec(dllexport) HandleAnimationSystem : public ECS::EntitySystem
 	{
-		std::vector<Animation*> _animations;
-		bool _playing = false;
-		HANDLE _thread;
-
-		static void handle_animations(Animator*animator);
-	public:
-		Animator();
-		~Animator() = default;
 		
-		void add_animation(Animation*animation);
-		void remove_anim(UINT index);
-
-		void start();
-		void end();
-
+		void tick(ECS::World* world, ECS_TICK_TYPE data) override;
 	};
 }

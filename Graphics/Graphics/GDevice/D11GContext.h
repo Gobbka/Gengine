@@ -8,6 +8,7 @@ namespace Render {
 		ID3D11DeviceContext* _d11context;
 		PixelShader* _current_ps;
 		VertexShader* _currect_vs;
+		SamplerState* _current_sampler;
 	public:
 		D11GContext(Core::GraphicsContext* context,ID3D11DeviceContext*d11context);
 
@@ -15,7 +16,7 @@ namespace Render {
 		void set_pixel_shader(PixelShader* ps) override;
 		void set_vertex_shader(VertexShader* vs) override;
 		void set_mask_engine(MaskEngine* mask) override;
-
+		void set_sampler_state(SamplerState* sampler) override;
 		void draw_indexed(UINT count, UINT start_location=0) override;
 
 		PixelShader* get_pixel_shader() override;

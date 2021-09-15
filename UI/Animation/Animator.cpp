@@ -3,7 +3,7 @@
 #include <utility>
 
 
-UI::Animation::Animation(float from_value, float to_value, UINT during, Animation::tSetFunction set_function, Animation::tAnimFunc anim_handle)
+UI::AnimationComponent::AnimationComponent(float from_value, float to_value, UINT during, AnimationComponent::tSetFunction set_function, AnimationComponent::tAnimFunc anim_handle)
 {
 	_end_time = during;
 	_during = 0;
@@ -14,7 +14,7 @@ UI::Animation::Animation(float from_value, float to_value, UINT during, Animatio
 	_anim_func = anim_handle;
 }
 
-bool UI::Animation::play_step(int delta_time)
+bool UI::AnimationComponent::play_step(float delta_time)
 {
 	if(_during < _end_time)
 	{
@@ -29,51 +29,13 @@ bool UI::Animation::play_step(int delta_time)
 	return false;
 }
 
-void UI::Animator::handle_animations(Animator* animator)
+void UI::HandleAnimationSystem::tick(ECS::World* world, ECS::DefaultTickData tick_data)
 {
-	while(animator->_playing)
-	{
-		for(int i = 0;i<animator->_animations.size();i++)
+	world->each<AnimationComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<AnimationComponent> hComp)
 		{
-			auto* anim = animator->_animations[i];
-			if(!anim->play_step(10))
+			if(!hComp->play_step(tick_data))
 			{
-				// remove animation from anim list;
-				animator->remove_anim(i);
+				ent->remove<AnimationComponent>();
 			}
-		}
-		Sleep(10);
-	}
-
-	ExitThread(0);
-}
-
-UI::Animator::Animator()
-{
-	_thread = nullptr;
-}
-
-void UI::Animator::add_animation(Animation* animation)
-{
-	_animations.push_back(animation);
-}
-
-void UI::Animator::remove_anim(UINT index)
-{
-	delete _animations[index];
-	_animations.erase(_animations.begin() + index);
-}
-
-void UI::Animator::start()
-{
-	if(_playing==false)
-	{
-		_playing = true;
-		CreateThread(nullptr, NULL, (LPTHREAD_START_ROUTINE)handle_animations, this, NULL, nullptr);
-	}
-}
-
-void UI::Animator::end()
-{
-	_playing = false;
+		});
 }

@@ -16,6 +16,12 @@ void Render::Scene::set_main_camera(ECS::Entity* cam)
 	_main_camera = cam;
 }
 
+void Render::Scene::register_system(ECS::EntitySystem* system)
+{
+	_world->registerSystem(system);
+}
+
+
 ECS::Entity* Render::Scene::create_entity(ECS::Entity* parent)
 {
 	auto* ent = _world->create();

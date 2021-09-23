@@ -60,12 +60,14 @@ void Render::Material::reflect()
 		memcpy(_pSysMem + WIDTH * (HEIGHT - 1 - col) * 4, buffer, WIDTH * 4);
 	}
 
-	free(buffer);
+	delete[] buffer;
 }
 
 void Render::Material::load_bitmap(BYTE* pSysMem, Surface resolution)
 {
-	_pSysMem = new BYTE[resolution.width * resolution.height * 4];
-	memcpy(_pSysMem, pSysMem, resolution.width * resolution.height * 4);
+	auto width = (UINT)resolution.width;
+	auto height = (UINT)resolution.height;
+	_pSysMem = new BYTE[width * height * 4];
+	memcpy(_pSysMem, pSysMem, width * height * 4);
 	_resolution = resolution;
 }

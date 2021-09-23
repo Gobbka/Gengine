@@ -153,6 +153,9 @@
     <ClInclude Include="Graphics\SpriteFont.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\States\RasterizeState.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp">
@@ -261,6 +264,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Components\TextComponent.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\States\RasterizeState.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

@@ -37,6 +37,7 @@ namespace UI {
 		InteractiveForm* add_element(UI::InteractiveElement* element);
 	public:
 		InteractiveForm(Core::GraphicsContext* pEngine,Position2*cursor_position);
+		//InteractiveForm(InteractiveForm&& other) noexcept;
 		virtual ~InteractiveForm();
 	public:
 		Interaction::EventStatus on_lbmouse_up();

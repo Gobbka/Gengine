@@ -167,6 +167,7 @@
     <ClInclude Include="Graphics\Que\RenderQueuePass\RenderQueuePass.h" />
     <ClInclude Include="Graphics\Scene.h" />
     <ClInclude Include="Graphics\SpriteFont.h" />
+    <ClInclude Include="Graphics\States\RasterizeState.h" />
     <ClInclude Include="IGContext.h" />
     <ClInclude Include="IGDevice.h" />
     <ClInclude Include="Render\d3d\Bindable.h" />
@@ -207,6 +208,7 @@
     <ClCompile Include="Graphics\Que\RenderQueuePass\RenderQueuePass.cpp" />
     <ClCompile Include="Graphics\Scene.cpp" />
     <ClCompile Include="Graphics\SpriteFont.cpp" />
+    <ClCompile Include="Graphics\States\RasterizeState.cpp" />
     <ClCompile Include="Render\d3d\Bindable.cpp" />
     <ClCompile Include="Render\d3d\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Render\d3d\Buffer\IndexBuffer.cpp" />

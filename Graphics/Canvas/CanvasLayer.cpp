@@ -20,9 +20,16 @@ Canvas::Canvas2DLayer::Canvas2DLayer(Core::GraphicsContext* engine)
 	
 }
 
+//Canvas::Canvas2DLayer::Canvas2DLayer(Canvas2DLayer&& other) noexcept
+//	: _canvas()
+//{
+//
+//}
+
 void Canvas::Canvas2DLayer::update()
 {
 	_canvas.update();
+	
 }
 
 void Canvas::Canvas2DLayer::render(Render::DrawEvent2D* event)

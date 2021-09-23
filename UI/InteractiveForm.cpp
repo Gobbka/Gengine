@@ -62,6 +62,12 @@ InteractiveForm::InteractiveForm(Core::GraphicsContext* pEngine, Position2* curs
 	_cursor_position = cursor_position;
 }
 
+//InteractiveForm::InteractiveForm(InteractiveForm&& other) noexcept
+//	: Canvas2DLayer((Canvas2DLayer)other)
+//{
+//
+//}
+
 InteractiveForm::~InteractiveForm()
 {
 	

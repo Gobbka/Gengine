@@ -60,7 +60,7 @@ DirectX::XMMATRIX Render::WorldViewer::create_projection_matrix(WVProjectionType
 	break;
 	}
 
-	return proj_matrix * DirectX::XMMatrixScaling(
+	return scale == 1.f ? proj_matrix : proj_matrix * DirectX::XMMatrixScaling(
 		scale, scale, 1.f
 	);
 }

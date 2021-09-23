@@ -10,7 +10,7 @@ namespace Core
 		
 		DirectX::XMMATRIX _world_matrix;
 	private:
-		void update_world_matrix();
+		DirectX::XMMATRIX create_world_matrix();
 
 		DirectX::XMVECTOR _forward_vector;
 		DirectX::XMVECTOR _up_vector;
@@ -29,6 +29,10 @@ namespace Core
 		Position3 get_position_lh();
 		Position3 get_position();
 		Vector3 get_rotation();
+
+		static inline DirectX::XMVECTOR up();
+		static inline DirectX::XMVECTOR right();
+		static inline DirectX::XMVECTOR forward();
 	};
 
 	class __declspec(dllexport) Quaternion3 {

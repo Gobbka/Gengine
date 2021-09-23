@@ -17,6 +17,7 @@ namespace Canvas {
 		Render::Vertex* vertices() const;
 		
 		Canvas2DLayer(Core::GraphicsContext*engine);
+		//Canvas2DLayer(Canvas2DLayer&&other) noexcept;
 		
 		void update();
 		void render(Render::DrawEvent2D* event);

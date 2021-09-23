@@ -2,15 +2,12 @@
 
 #include <iostream>
 
-DirectX::XMVECTOR DEFAULT_FORWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
-DirectX::XMVECTOR DEFAULT_UP_VECTOR = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 DirectX::XMVECTOR DEFAULT_BACKWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f);
 DirectX::XMVECTOR DEFAULT_LEFT_VECTOR = DirectX::XMVectorSet(-1.0f, 0.0f, 0.0f, 0.0f);
-DirectX::XMVECTOR DEFAULT_RIGHT_VECTOR = DirectX::XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f);
 
-void Core::Transform::update_world_matrix()
+DirectX::XMMATRIX Core::Transform::create_world_matrix()
 {
-	_world_matrix = DirectX::XMMatrixRotationRollPitchYaw(_rotation.x,_rotation.y,_rotation.z) * DirectX::XMMatrixTranslation(_pos.x, _pos.y, _pos.z);
+	return DirectX::XMMatrixRotationRollPitchYaw(_rotation.x,_rotation.y,_rotation.z) * DirectX::XMMatrixTranslation(_pos.x, _pos.y, _pos.z);
 }
 
 DirectX::XMMATRIX Core::Transform::get_world_matrix() const
@@ -20,12 +17,12 @@ DirectX::XMMATRIX Core::Transform::get_world_matrix() const
 
 Core::Transform::Transform(Position3 pos)
 	: _pos(pos),
-	_rotation(0,0,0),
-	_forward_vector(DEFAULT_FORWARD_VECTOR),
-	_up_vector(DEFAULT_UP_VECTOR),
-	_right_vector(DEFAULT_RIGHT_VECTOR)
+	_rotation(0, 0, 0),
+	_world_matrix(create_world_matrix()),
+	_forward_vector(Transform::forward()),
+	_up_vector(Transform::up()),
+	_right_vector(Transform::right())
 {
-	update_world_matrix();
 }
 
 void Core::Transform::adjust_position(Position3 pos)
@@ -37,14 +34,14 @@ void Core::Transform::adjust_position(Position3 pos)
 	XMStoreFloat3(&forw, nigga);
 	
 	_pos += Position3(forw.z,forw.y,forw.x);
-	update_world_matrix();
+	_world_matrix = create_world_matrix();
 }
 
 void Core::Transform::set_position(Position3 pos)
 {
 	_pos = pos;
 	
-	update_world_matrix();
+	_world_matrix = create_world_matrix();
 }
 
 void Core::Transform::adjust_rotation(Vector3 rotation)
@@ -52,17 +49,17 @@ void Core::Transform::adjust_rotation(Vector3 rotation)
 	_rotation += rotation;
 
 	auto rotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(_rotation.x, _rotation.y, 0);
-	_forward_vector = DirectX::XMVector3TransformCoord(DEFAULT_FORWARD_VECTOR, rotationMatrix);
-	_right_vector = DirectX::XMVector3TransformCoord(DEFAULT_RIGHT_VECTOR, rotationMatrix);
-	_up_vector = DirectX::XMVector3TransformCoord(DEFAULT_UP_VECTOR, rotationMatrix);
+	_forward_vector = DirectX::XMVector3TransformCoord(Transform::forward(), rotationMatrix);
+	_right_vector = DirectX::XMVector3TransformCoord(Transform::right(), rotationMatrix);
+	_up_vector = DirectX::XMVector3TransformCoord(Transform::up(), rotationMatrix);
 	
-	update_world_matrix();
+	_world_matrix = create_world_matrix();
 }
 
 void Core::Transform::set_rotation(Vector3 rotation)
 {
 	_rotation = rotation;
-	update_world_matrix();
+	_world_matrix = create_world_matrix();
 }
 
 Position3 Core::Transform::get_position_lh()
@@ -78,6 +75,21 @@ Position3 Core::Transform::get_position()
 Vector3 Core::Transform::get_rotation()
 {
 	return _rotation;
+}
+
+DirectX::XMVECTOR Core::Transform::up()
+{
+	return DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+}
+
+DirectX::XMVECTOR Core::Transform::right()
+{
+	return DirectX::XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f);
+}
+
+DirectX::XMVECTOR Core::Transform::forward()
+{
+	return DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
 }
 
 Core::Quaternion3::Quaternion3(Vector3 rotation)

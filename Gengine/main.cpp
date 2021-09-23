@@ -65,8 +65,10 @@ int WINAPI wWinMain(
     };
 
     auto stone_material = Render::Material();
-    auto wood_material = Render::Material();
+    auto wood_material  = Render::Material();
     auto black_material = Render::Material(Color3::from_rgb(255, 50, 50));
+
+    __m128{0, 0, 0, 0};
 
     AssetsLoader::load_png(L"assets\\stone.png", stone_material);
     AssetsLoader::load_png(L"assets\\wood.png", wood_material);

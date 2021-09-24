@@ -24,7 +24,7 @@ namespace Render
 		virtual Texture* create_texture(ITexture2DDesc desc) =0;
 		
 	};
-
+	
 	inline Texture* IGDevice::create_texture(Material& material)
 	{
 		ITexture2DDesc desc;

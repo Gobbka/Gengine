@@ -1,6 +1,5 @@
 #include "DirectionLightComponent.h"
 
-
 #include "../../Graphics.h"
 #include "../../IGContext.h"
 #include "../Engine/MaskEngine.h"

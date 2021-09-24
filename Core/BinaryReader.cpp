@@ -20,8 +20,7 @@ BinaryReader::BinaryReader(_In_reads_bytes_(dataSize) uint8_t const* dataBlob, s
 	: mPos(dataBlob),
 	mEnd(dataBlob + dataSize),
 	mOwnedData(nullptr)
-{
-}
+{}
 
 bool BinaryReader::ReadEntireFile(_In_z_ wchar_t const* fileName, _Inout_ uint8_t** data, size_t* dataSize)
 {

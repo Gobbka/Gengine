@@ -2,21 +2,27 @@
 #include <cassert>
 #include <cstdint>
 
+namespace FS
+{
+	class FSFile;
+}
+
 class __declspec(dllexport) BinaryReader
 {
 public:
     explicit BinaryReader(_In_z_ wchar_t const* fileName) noexcept(false);
+    explicit BinaryReader(FS::FSFile file);
     BinaryReader(_In_reads_bytes_(dataSize) uint8_t const* dataBlob, size_t dataSize) noexcept;
 
     BinaryReader(BinaryReader const&) = delete;
     BinaryReader& operator= (BinaryReader const&) = delete;
+    BinaryReader& operator= (BinaryReader&& other) noexcept;
 
     // Reads a single value.
     template<typename T> T const& Read()
     {
         return *ReadArray<T>(1);
     }
-
 
     // Reads an array of values.
     template<typename T> T const* ReadArray(size_t elementCount)
@@ -33,6 +39,10 @@ public:
         return result;
     }
 
+    auto available()
+    {
+        return mEnd - mPos;
+    }
 
     // Lower level helper reads directly from the filesystem into memory.
     static bool ReadEntireFile(_In_z_ wchar_t const* fileName, _Inout_ uint8_t** data, size_t* dataSize);

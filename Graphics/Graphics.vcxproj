@@ -194,7 +194,7 @@
     <ClInclude Include="Render\I3DObject\Mesh.h" />
     <ClInclude Include="Render\I3DObject\Parallelepiped\Parallelepiped.h" />
     <ClInclude Include="Render\Light\DirectionLightComponent.h" />
-    <ClInclude Include="Render\Model\MeshRenderer.h" />
+    <ClInclude Include="Graphics\Components\MeshRenderer.h" />
     <ClInclude Include="Render\Viewer\WorldViewer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -214,7 +214,6 @@
     <ClCompile Include="Graphics\SpriteFont.cpp" />
     <ClCompile Include="Graphics\States\RasterizeState.cpp" />
     <ClCompile Include="Render\d3d\Bindable.cpp" />
-    <ClCompile Include="Render\d3d\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Render\d3d\Buffer\IndexBuffer.cpp" />
     <ClCompile Include="Render\d3d\Buffer\Texture.cpp" />
     <ClCompile Include="Render\d3d\Buffer\VertexBuffer.cpp" />
@@ -233,7 +232,7 @@
     <ClCompile Include="Render\I3DObject\Mesh.cpp" />
     <ClCompile Include="Render\I3DObject\Parallelepiped\Parallelepiped.cpp" />
     <ClCompile Include="Render\Light\DirectionLightComponent.cpp" />
-    <ClCompile Include="Render\Model\MeshRenderer.cpp" />
+    <ClCompile Include="Graphics\Components\MeshRenderer.cpp" />
     <ClCompile Include="Render\Viewer\WorldViewer.cpp" />
   </ItemGroup>
   <ItemGroup>

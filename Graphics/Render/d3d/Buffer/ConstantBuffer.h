@@ -17,10 +17,6 @@ namespace Render {
 	template<typename T>
 	class __declspec(dllexport) ConstantBuffer : Render::Bindable
 	{
-	public:
-
-		
-	private:
 		ID3D11Buffer* _d3d_buffer;
 		UINT _slot = 0;
 		BYTE _binds = 0;

@@ -2,14 +2,14 @@
 #include "../../Engine/Camera.h"
 
 
-D3D11_TEXTURE2D_DESC Render::Texture::get_desc()
+D3D11_TEXTURE2D_DESC Render::Texture::get_desc() const
 {
 	D3D11_TEXTURE2D_DESC desc;
 	_texture->GetDesc(&desc);
 	return D3D11_TEXTURE2D_DESC(desc);
 }
 
-ID3D11Texture2D* Render::Texture::texture()
+ID3D11Texture2D* Render::Texture::texture() const
 {
 	return _texture;
 }
@@ -174,7 +174,7 @@ Render::Texture& Render::Texture::operator=(Texture&& other) noexcept
 	return *this;
 }
 
-Render::ITexture2DDesc Render::Texture::get_texture_desc()
+Render::ITexture2DDesc Render::Texture::get_texture_desc() const
 {
 	D3D11_TEXTURE2D_DESC textDesc;
 	_texture->GetDesc(&textDesc);
@@ -216,12 +216,12 @@ char* Render::Texture::get_data(size_t* lpsize)
 	return nullptr;
 }
 
-void Render::Texture::copy_to(Texture* target)
+void Render::Texture::copy_to(Texture* target) const
 {
 	_context->context->CopyResource(target->_texture, _texture);
 }
 
-void Render::Texture::copy_to(ID3D11Resource* target)
+void Render::Texture::copy_to(ID3D11Resource* target) const
 {
 	_context->context->CopyResource(target, _texture);
 }

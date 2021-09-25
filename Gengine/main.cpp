@@ -24,6 +24,7 @@
 #include <Render/I3DObject/Parallelepiped/Parallelepiped.h>
 #include <Render/Light/DirectionLightComponent.h>
 
+#include "Graphics/Components/MeshRenderer.h"
 #include "Graphics/Components/TextComponent.h"
 #include "Loaders/AssetsLoader.h"
 #include "Logger/Logger.h"

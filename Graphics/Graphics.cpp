@@ -168,7 +168,7 @@ void Core::GraphicsContext::make_frame()
 	}
 }
 
-void Core::GraphicsContext::present_frame()
+void Core::GraphicsContext::present_frame() const
 {
 	_swap->Present(1u, 0u);
 }

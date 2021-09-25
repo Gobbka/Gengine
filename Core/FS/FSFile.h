@@ -1,20 +1,15 @@
 ﻿#pragma once
 #include <string>
-
 #include "FSObject.h"
 
 namespace FS {
 	class  __declspec(dllexport) FSFile : public FSObject
 	{
 		size_t _file_size;
-		char* _data;
 	public:
 		FSFile(std::wstring file_path,size_t file_size,char*data);
-		~FSFile();
+		~FSFile() = default;
 
-		auto* data() { return _data; }
-		auto size() { return _file_size; }
-		
-		static FSFile read_file(wchar_t* file_path);
+		auto size() const { return _file_size; }
 	};
 }

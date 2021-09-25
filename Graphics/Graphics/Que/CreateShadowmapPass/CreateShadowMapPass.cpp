@@ -1,10 +1,13 @@
 #include "CreateShadowMapPass.h"
 
+#include "../../Components/MeshRenderer.h"
 #include "../../../Graphics.h"
 #include "../../../IGContext.h"
 #include "../../../Render/Engine/MaskEngine.h"
 #include "../../../Render/Events/RenderEvent.h"
 #include "../../../Render/Light/DirectionLightComponent.h"
+#include "../../../Render/I3DObject/Mesh.h"
+
 
 void Render::CreateShadowMapPass::execute(Core::GraphicsContext* context)
 {
@@ -33,7 +36,7 @@ void Render::CreateShadowMapPass::execute(Core::GraphicsContext* context)
 						gcontext->matrix_buffer.data.ModelMatrix = DirectX::XMMatrixTranspose(modelMatrix);
 						gcontext->matrix_buffer.update();
 
-						for (auto mesh : component->meshes)
+						for (const auto mesh : component->meshes)
 						{
 							mesh.index_buffer->bind();
 							mesh.buffer->bind();

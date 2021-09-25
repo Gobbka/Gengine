@@ -1,7 +1,6 @@
 #pragma once
 #include <DirectXMath.h>
 
-#include "../../../Render/Model/MeshRenderer.h"
 #include "../IPass/IPass.h"
 #include "../../Scene.h"
 
@@ -11,6 +10,7 @@ namespace Core {
 
 namespace Render
 {
+	class MeshRenderer;
 	class Camera;
 	class VertexShader;
 	class PixelShader;

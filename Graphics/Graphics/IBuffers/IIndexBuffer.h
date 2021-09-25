@@ -9,7 +9,7 @@ namespace Render
 		size_t size;
 		unsigned* data;
 	public:
-		unsigned& operator[](unsigned index)
+		auto& operator[](unsigned index) const
 		{
 			return data[index];
 		}
@@ -19,6 +19,7 @@ namespace Render
 			this->size = size;
 			this->data = data;
 		}
+		IIndexBuffer() = delete;
 
 		virtual void update() = 0;
 

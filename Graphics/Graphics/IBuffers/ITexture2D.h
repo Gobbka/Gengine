@@ -23,6 +23,7 @@ namespace Render
 	class ITexture2D
 	{
 	public:
+		virtual ~ITexture2D() = default;
 		virtual unsigned width() PURE;
 		virtual unsigned height() PURE;
 		

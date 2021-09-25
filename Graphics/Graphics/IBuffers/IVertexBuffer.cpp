@@ -17,7 +17,7 @@ void Render::IVertexBuffer::count_normals(IIndexBuffer* buffer)
 	}
 }
 
-Render::Vertex& Render::IVertexBuffer::at(unsigned index)
+Render::Vertex& Render::IVertexBuffer::at(unsigned index) const
 {
 	return data[index];
 }

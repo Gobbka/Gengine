@@ -5,7 +5,6 @@
 #include "Graphics/Scene.h"
 #include "Render/Engine/RenderTarget.h"
 #include "Render/Engine/SpriteEngine.h"
-#include "Render/Model/MeshRenderer.h"
 #include "Graphics/Que/IPass/Passer.h"
 
 
@@ -69,7 +68,7 @@ namespace Core
 		void set_resolution(Surface new_resolution);
 
 		void make_frame();
-		void present_frame();
+		void present_frame() const;
 	public:
 		
 		static GraphicsContext* new_context(HWND hwnd,Surface size);

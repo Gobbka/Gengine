@@ -1,13 +1,15 @@
 #include "AssetsLoader.h"
 
 #include <FreeImage.h>
+#include "../BinaryReader.h"
 #include "../FS/FSFile.h"
 
 void AssetsLoader::load_png(const wchar_t* path, Render::Material& material)
 {
-	auto file = FS::FSFile::read_file((wchar_t*)path);
+	BinaryReader reader(path);
+	const auto size = reader.available();
 
-	auto* fmemory = FreeImage_OpenMemory((BYTE*)file.data(), file.size());
+	auto* fmemory = FreeImage_OpenMemory((BYTE*)reader.ReadArray<BYTE>(size), size);
 
 	auto bitmap = FreeImage_LoadFromMemory(FIF_PNG, (FIMEMORY*)fmemory, ICO_MAKEALPHA);
 	auto* nigger = FreeImage_GetBits(bitmap);

@@ -4,7 +4,7 @@
 Render::Material::Material(BYTE* pSysMem, Surface resolution,bool alpha)
 	: _resolution(resolution)
 {
-	auto res_int = resolution.to_vector2int();
+	const auto res_int = resolution.to_vector2int();
 	_pSysMem = new BYTE[res_int.x * res_int.y * 4];
 	memcpy(_pSysMem, pSysMem, res_int.x * res_int.y * 4);
 }
@@ -66,7 +66,7 @@ void Render::Material::swap_channels(RGBChannel _first, RGBChannel _second) cons
 	}
 }
 
-void Render::Material::reflect()
+void Render::Material::reflect() const
 {
 	auto WIDTH = (int)_resolution.width;
 	auto HEIGHT = (int)_resolution.height;

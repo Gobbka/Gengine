@@ -1,4 +1,5 @@
 #include "MeshRenderer.h"
+#include "../../Render/I3DObject/Mesh.h"
 
 Render::MeshRenderer::MeshRenderer(Texture* texture)
 	: transform(Position3::null())

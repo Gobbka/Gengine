@@ -81,7 +81,7 @@
     <ClInclude Include="Render\I3DObject\Parallelepiped\Parallelepiped.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Model\MeshRenderer.h">
+    <ClInclude Include="Graphics\Components\MeshRenderer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\IBuffers\IVertexBuffer.h">
@@ -179,9 +179,6 @@
     <ClCompile Include="Canvas\Objects\Rectangle\Rectangle.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\d3d\Buffer\ConstantBuffer.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Render\Engine\BlendEngine.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -218,7 +215,7 @@
     <ClCompile Include="Render\I3DObject\Parallelepiped\Parallelepiped.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Model\MeshRenderer.cpp">
+    <ClCompile Include="Graphics\Components\MeshRenderer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Render\Engine\RenderTarget.cpp">

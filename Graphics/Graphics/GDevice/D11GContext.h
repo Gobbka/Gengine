@@ -4,7 +4,7 @@
 namespace Render {
 	class D11GContext final : public IGContext
 	{
-		PrimitiveTopology _current_topology = PrimitiveTopology::NONE;
+		PrimitiveTopology _current_topology ;
 		ID3D11DeviceContext* _d11context;
 		PixelShader* _current_ps;
 		VertexShader* _currect_vs;

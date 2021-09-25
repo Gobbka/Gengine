@@ -41,7 +41,7 @@ namespace Render
 		~Material();
 
 		void swap_channels(RGBChannel first, RGBChannel second) const;
-		void reflect();
+		void reflect() const;
 
 		void load_bitmap(BYTE*pSysMem,Surface resolution);
 	};

@@ -6,10 +6,9 @@
 #include "../../Render/Engine/Camera.h"
 
 Render::D11GDevice::D11GDevice(ID3D11Device* device,Core::GraphicsContext* gfx)
-{
-	_device = device;
-	_gfx = gfx;
-}
+	: _device(device),
+	_gfx(gfx)
+{}
 
 Render::IIndexBuffer* Render::D11GDevice::alloc_index_buffer(unsigned size)
 {

@@ -1,7 +1,8 @@
 ﻿#include "BinaryReader.h"
+
 #include <fstream>
 #include <winerror.h>
-
+#include "FS/FSFile.h"
 
 BinaryReader::BinaryReader(_In_z_ wchar_t const* fileName) noexcept(false)
 {
@@ -16,11 +17,32 @@ BinaryReader::BinaryReader(_In_z_ wchar_t const* fileName) noexcept(false)
 	mEnd = mOwnedData + dataSize;
 }
 
+BinaryReader::BinaryReader(FS::FSFile file)
+	: mPos(nullptr),
+	mEnd(nullptr),
+	mOwnedData(nullptr)
+{
+	*this = BinaryReader(file.path());
+}
+
 BinaryReader::BinaryReader(_In_reads_bytes_(dataSize) uint8_t const* dataBlob, size_t dataSize) noexcept
 	: mPos(dataBlob),
 	mEnd(dataBlob + dataSize),
 	mOwnedData(nullptr)
 {}
+
+BinaryReader& BinaryReader::operator=(BinaryReader&& other) noexcept
+{
+	mOwnedData = other.mOwnedData;
+	mPos = other.mPos;
+	mEnd = other.mEnd;
+
+	other.mOwnedData = nullptr;
+	other.mPos = nullptr;
+	other.mEnd = nullptr;
+
+	return *this;
+}
 
 bool BinaryReader::ReadEntireFile(_In_z_ wchar_t const* fileName, _Inout_ uint8_t** data, size_t* dataSize)
 {

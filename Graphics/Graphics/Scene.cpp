@@ -1,9 +1,8 @@
 ﻿#include "Scene.h"
 
-
 #include "../Render/Engine/Camera.h"
 #include "../Render/Light/DirectionLightComponent.h"
-#include "../Render/Model/MeshRenderer.h"
+#include "Components/MeshRenderer.h"
 #include "Components/GameEntityComponent.h"
 
 ECS::Entity* Render::Scene::get_main_camera()

@@ -6,10 +6,13 @@
 #include "../../Render/Engine/MaskEngine.h"
 
 Render::D11GContext::D11GContext(Core::GraphicsContext* context, ID3D11DeviceContext* d11context)
-	: IGContext(context)
-{
-	_d11context = d11context;
-}
+	: IGContext(context),
+	_current_topology(PrimitiveTopology::NONE),
+	_d11context(d11context),
+	_current_ps(nullptr),
+	_currect_vs(nullptr),
+	_current_sampler(nullptr)
+{}
 
 void Render::D11GContext::set_topology(PrimitiveTopology topology)
 {
@@ -24,6 +27,8 @@ void Render::D11GContext::set_topology(PrimitiveTopology topology)
 	case PrimitiveTopology::TRIANGLESTRIP:
 		_d11context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 		break;
+	default:
+		_d11context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	}
 	_current_topology = topology;
 }
@@ -50,8 +55,8 @@ void Render::D11GContext::set_mask_engine(MaskEngine* mask)
 	ID3D11RenderTargetView* target_view;
 	_d11context->OMGetRenderTargets(1, &target_view, nullptr);
 
-	auto num_view = target_view == nullptr ? 0 : 1;
-	auto* pp_target = target_view == nullptr ? nullptr : &target_view;
+	const auto num_view = target_view == nullptr ? 0 : 1;
+	const auto* pp_target = target_view == nullptr ? nullptr : &target_view;
 	
 	_d11context->OMSetRenderTargets(num_view,pp_target, mask->get_view());
 }

@@ -27,6 +27,6 @@ namespace Render
 
 		void count_normals(IIndexBuffer*buffer);
 
-		Vertex& at(unsigned index);
+		Vertex& at(unsigned index) const;
 	};
 }

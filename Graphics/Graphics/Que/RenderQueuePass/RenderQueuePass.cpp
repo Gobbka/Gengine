@@ -3,8 +3,6 @@
 #include "../../../Render/Engine/Camera.h"
 #include "../../../Graphics.h"
 #include "../../../IGContext.h"
-#include "../../Components/ColorComponent.h"
-#include "../../Components/TextureComponent.h"
 
 void Render::ClearPass::execute(Core::GraphicsContext* context)
 {
@@ -16,7 +14,7 @@ void Render::ClearPass::execute(Core::GraphicsContext* context)
 	}
 }
 
-void Render::RenderQueuePass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshContainerComponent> model, DirectX::XMMATRIX VPMatrix)
+void Render::RenderQueuePass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshRenderer> model, DirectX::XMMATRIX VPMatrix)
 {	
 	auto* gcontext = _context->get_context();
 	auto model_matrix = model->transform.get_world_matrix();
@@ -38,17 +36,10 @@ void Render::RenderQueuePass::render_camera_3d(ECS::ComponentHandle<Camera> came
 	auto world_to_screen = camera->world_to_screen_matrix();
 	auto* sprite_engine = camera->graphics_context()->get_sprite_engine();
 
-	sprite_engine->begin_color_mode();
-	world->each<MeshContainerComponent, ColorComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<MeshContainerComponent> model, ECS::ComponentHandle<ColorComponent>color)
-		{
-			render_model(camera, model,world_to_screen);
-		}
-	);
-
 	sprite_engine->begin_sprite_mode(true);
-	world->each<MeshContainerComponent, TextureComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<MeshContainerComponent> model, ECS::ComponentHandle<TextureComponent>texture)
+	world->each<MeshRenderer>([&](ECS::Entity* ent, ECS::ComponentHandle<MeshRenderer> model)
 		{
-			sprite_engine->bind_texture(texture->texture);
+			sprite_engine->bind_texture(model->texture);
 			render_model(camera, model, world_to_screen);
 		}
 	);

@@ -21,7 +21,6 @@
 
 #include <BinaryReader.h>
 #include <Graphics/SpriteFont.h>
-#include <Graphics/Components/TextureComponent.h>
 #include <Render/I3DObject/Parallelepiped/Parallelepiped.h>
 #include <Render/Light/DirectionLightComponent.h>
 
@@ -66,31 +65,27 @@ int WINAPI wWinMain(
 
     auto stone_material = Render::Material();
     auto wood_material  = Render::Material();
-    auto black_material = Render::Material(Color3::from_rgb(255, 50, 50));
-
-    __m128{0, 0, 0, 0};
+    auto red_material = Render::Material(Color3::from_rgb(255, 50, 50));
 
     AssetsLoader::load_png(L"assets\\stone.png", stone_material);
     AssetsLoader::load_png(L"assets\\wood.png", wood_material);
 	
-    auto* texture = context->get_device()->create_texture(stone_material);
-    auto* negr_texture = context->get_device()->create_texture(wood_material);
-    auto* black_texture = context->get_device()->create_texture(black_material);
+    auto* stone_texture = context->get_device()->create_texture(stone_material);
+    auto* wood_texture = context->get_device()->create_texture(wood_material);
+    auto* red_texture = context->get_device()->create_texture(red_material);
 
     auto*light = form->editorScene->create_direction_light();
     auto component = light->get<Render::DirectionLightComponent>();
     component->set_position(Position3(-4.14113426f, 2.09657478f, -4.79795313f));
     component->set_rotation(Vector3(0.519999862f, 0.880000114f, 0));
 	
-    auto* cube = form->editorScene->instantiate<Render::MeshContainerComponent>();
-    auto* platform = form->editorScene->instantiate<Render::MeshContainerComponent>();
-    platform->get<Render::MeshContainerComponent>()->transform.set_position(Position3{ 0,-7,0 });
+    auto* cube = form->editorScene->create_model(red_texture);
+    auto* platform = form->editorScene->create_model(stone_texture);
+    platform->get<Render::MeshRenderer>()->transform.set_position(Position3{ 0,-7,0 });
 
-    cube->get<Render::MeshContainerComponent>()->add_mesh(Render::Cube::make_independent(context, Position3::null(), 5));
-    cube->assign<Render::TextureComponent>(black_texture);
+    cube->get<Render::MeshRenderer>()->add_mesh(Render::Cube::make_independent(context, Position3::null(), 5));
 	
-    platform->get<Render::MeshContainerComponent>()->add_mesh(Render::Parallelepiped::make_independent(context, Position3::null(), Vector3{ 27,3,27 }));
-    platform->assign<Render::TextureComponent>(texture);
+    platform->get<Render::MeshRenderer>()->add_mesh(Render::Parallelepiped::make_independent(context, Position3::null(), Vector3{ 27,3,27 }));
 
     Render::SpriteFont font(context->get_device(), L"visby.spritefont");
 

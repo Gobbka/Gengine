@@ -6,6 +6,7 @@ namespace Core {
 }
 
 namespace Render {
+	class Texture;
 	class RenderTarget;
 	class Camera;
 
@@ -28,7 +29,7 @@ namespace Render {
 		ECS::Entity* instantiate(Component&component);
 		template<typename Component>
 		ECS::Entity* instantiate();
-		ECS::Entity* create_model();
+		ECS::Entity* create_model(Texture*texture);
 		ECS::Entity* create_direction_light();
 		
 		__forceinline ECS::World* world() const { return _world; }

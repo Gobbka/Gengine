@@ -81,7 +81,7 @@
     <ClInclude Include="Render\I3DObject\Parallelepiped\Parallelepiped.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Model\MeshContainerComponent.h">
+    <ClInclude Include="Render\Model\MeshRenderer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\IBuffers\IVertexBuffer.h">
@@ -115,12 +115,6 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Que\IPass\Passer.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Components\ColorComponent.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Components\TextureComponent.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="IGDevice.h">
@@ -224,7 +218,7 @@
     <ClCompile Include="Render\I3DObject\Parallelepiped\Parallelepiped.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Model\MeshContainerComponent.cpp">
+    <ClCompile Include="Render\Model\MeshRenderer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Render\Engine\RenderTarget.cpp">

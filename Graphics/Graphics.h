@@ -5,7 +5,7 @@
 #include "Graphics/Scene.h"
 #include "Render/Engine/RenderTarget.h"
 #include "Render/Engine/SpriteEngine.h"
-#include "Render/Model/MeshContainerComponent.h"
+#include "Render/Model/MeshRenderer.h"
 #include "Graphics/Que/IPass/Passer.h"
 
 

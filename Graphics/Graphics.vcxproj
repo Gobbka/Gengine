@@ -157,10 +157,8 @@
     <ClInclude Include="Canvas\Objects\Rectangle\Rectangle.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Graphics\Channels.h" />
-    <ClInclude Include="Graphics\Components\ColorComponent.h" />
     <ClInclude Include="Graphics\Components\GameEntityComponent.h" />
     <ClInclude Include="Graphics\Components\TextComponent.h" />
-    <ClInclude Include="Graphics\Components\TextureComponent.h" />
     <ClInclude Include="Graphics\GDevice\D11GContext.h" />
     <ClInclude Include="Graphics\GDevice\D11GDevice.h" />
     <ClInclude Include="Graphics\IBuffers\IIndexBuffer.h" />
@@ -196,7 +194,7 @@
     <ClInclude Include="Render\I3DObject\Mesh.h" />
     <ClInclude Include="Render\I3DObject\Parallelepiped\Parallelepiped.h" />
     <ClInclude Include="Render\Light\DirectionLightComponent.h" />
-    <ClInclude Include="Render\Model\MeshContainerComponent.h" />
+    <ClInclude Include="Render\Model\MeshRenderer.h" />
     <ClInclude Include="Render\Viewer\WorldViewer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -235,7 +233,7 @@
     <ClCompile Include="Render\I3DObject\Mesh.cpp" />
     <ClCompile Include="Render\I3DObject\Parallelepiped\Parallelepiped.cpp" />
     <ClCompile Include="Render\Light\DirectionLightComponent.cpp" />
-    <ClCompile Include="Render\Model\MeshContainerComponent.cpp" />
+    <ClCompile Include="Render\Model\MeshRenderer.cpp" />
     <ClCompile Include="Render\Viewer\WorldViewer.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@
 
 #include "../Render/Engine/Camera.h"
 #include "../Render/Light/DirectionLightComponent.h"
-#include "../Render/Model/MeshContainerComponent.h"
+#include "../Render/Model/MeshRenderer.h"
 #include "Components/GameEntityComponent.h"
 
 ECS::Entity* Render::Scene::get_main_camera()
@@ -38,10 +38,10 @@ ECS::Entity* Render::Scene::create_camera(RenderTarget* target)
 	return ent;
 }
 
-ECS::Entity* Render::Scene::create_model()
+ECS::Entity* Render::Scene::create_model(Texture* texture)
 {
 	auto* ent = create_entity();
-	ent->assign<MeshContainerComponent>();
+	ent->assign<MeshRenderer>(texture);
 
 	return ent;
 }

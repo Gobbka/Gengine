@@ -14,7 +14,7 @@ namespace Core {
 namespace Render
 {
 	class MaskEngine;
-	class MeshContainerComponent;
+	class MeshRenderer;
 	class RenderTarget;
 
 	enum class WVProjectionType

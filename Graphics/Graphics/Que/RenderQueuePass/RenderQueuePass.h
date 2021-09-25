@@ -1,7 +1,7 @@
 #pragma once
 #include <DirectXMath.h>
 
-#include "../../../Render/Model/MeshContainerComponent.h"
+#include "../../../Render/Model/MeshRenderer.h"
 #include "../IPass/IPass.h"
 #include "../../Scene.h"
 
@@ -28,7 +28,7 @@ namespace Render
 		
 		void render_camera_3d(ECS::ComponentHandle<Camera> camera, ECS::World* world);
 
-		void render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshContainerComponent> model,DirectX::XMMATRIX VPMatrix);
+		void render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshRenderer> model,DirectX::XMMATRIX VPMatrix);
 		inline void render_camera(ECS::ComponentHandle<Camera> camera, ECS::World* world);
 		inline void execute_scene(Render::Scene* scene);
 	public:

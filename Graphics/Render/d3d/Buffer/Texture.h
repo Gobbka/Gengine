@@ -28,6 +28,8 @@ namespace Render {
 		Texture(Core::GraphicsContext* context, ID3D11Texture2D* texture);
 		Texture(Core::GraphicsContext* context, ITexture2DDesc texture);
 		Texture(Core::GraphicsContext* context);
+		// Texture(Texture&& move) noexcept;
+		~Texture();
 
 		ITexture2DDesc get_texture_desc();
 

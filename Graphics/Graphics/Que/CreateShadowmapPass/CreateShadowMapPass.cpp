@@ -25,7 +25,7 @@ void Render::CreateShadowMapPass::execute(Core::GraphicsContext* context)
 				// do stuff here
 
 				auto world_matrix = handle->world_to_screen_matrix();
-				scene->world()->each<MeshContainerComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<MeshContainerComponent>component)
+				scene->world()->each<MeshRenderer>([&](ECS::Entity* ent, ECS::ComponentHandle<MeshRenderer>component)
 					{
 						auto modelMatrix = component->transform.get_world_matrix();
 						auto final_matrix = DirectX::XMMatrixMultiplyTranspose(modelMatrix, world_matrix);

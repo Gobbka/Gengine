@@ -135,6 +135,26 @@ Render::Texture::Texture(Core::GraphicsContext* context)
 	_texture = nullptr;
 }
 
+//Render::Texture::Texture(Texture&& move) noexcept
+//{
+//	_width = move._width;
+//	_height = move._height;
+//	_resource = move._resource;
+//	_texture = move._texture;
+//	_context = move._context;
+//
+//	move._resource = nullptr;
+//	move._texture = nullptr;
+//}
+
+Render::Texture::~Texture()
+{
+	//if (_texture)
+	//	_texture->Release();
+	//if (_resource)
+	//	_resource->Release();
+}
+
 Render::ITexture2DDesc Render::Texture::get_texture_desc()
 {
 	D3D11_TEXTURE2D_DESC textDesc;

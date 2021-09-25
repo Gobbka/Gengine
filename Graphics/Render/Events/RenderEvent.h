@@ -13,7 +13,7 @@ namespace Canvas
 }
 
 namespace Render {
-	class MeshContainerComponent;
+	class MeshRenderer;
 	class SpriteEngine;
 	class Camera;
 

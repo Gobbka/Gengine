@@ -84,14 +84,12 @@ int WINAPI wWinMain(
     platform->get<Render::MeshRenderer>()->transform.set_position(Position3{ 0,-7,0 });
 
     cube->get<Render::MeshRenderer>()->add_mesh(Render::Cube::make_independent(context, Position3::null(), 5));
-	
     platform->get<Render::MeshRenderer>()->add_mesh(Render::Parallelepiped::make_independent(context, Position3::null(), Vector3{ 27,3,27 }));
 
     Render::SpriteFont font(context->get_device(), L"visby.spritefont");
 
     auto* text = form->main_scene->create_entity();
-    auto text_comp = text->assign<Render::TextComponent>(context);
-    text_comp->font = &font;
+    auto text_comp = text->assign<Render::TextComponent>(context,&font);
     text_comp->set_text(L"GEngine is the best engine");
 
     CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);

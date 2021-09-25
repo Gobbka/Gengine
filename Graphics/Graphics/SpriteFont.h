@@ -33,6 +33,10 @@ namespace Render {
 
 		SpriteFont(IGDevice*device,BinaryReader& reader);
 		SpriteFont(IGDevice*device,const wchar_t*file_name);
+		SpriteFont(SpriteFont&& other) noexcept;
+		SpriteFont& operator=(SpriteFont&& other) noexcept;
+
+		~SpriteFont();
 
 		Glyph default_glyph();
 		Glyph find_glyph(uint32_t character);

@@ -14,13 +14,14 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, IDXGISwapChai
 	((ID3D11Texture2D*)back_buffer)->GetDesc(&desc);
 	
 	assert(SUCCEEDED(context->device->CreateRenderTargetView(back_buffer, nullptr, &_targetView)));
-	_texture = std::move(Texture(context, (ID3D11Texture2D*)back_buffer));
+	_texture = Texture(context, (ID3D11Texture2D*)back_buffer);
 	
 	back_buffer->Release();
 }
 
 Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Texture texture)
-	: _context(context),
+	: _targetView(nullptr),
+	_context(context),
 	_texture(std::move(texture))
 {
 	assert(texture.is_render_target());	
@@ -28,20 +29,18 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Texture textu
 }
 
 Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Surface texture_resolution)
-	: _context(context),
+	: _targetView(nullptr),
+	_context(context),
 	_texture(context, texture_resolution, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET)
 {
 	assert(SUCCEEDED(context->device->CreateRenderTargetView(_texture.texture(), nullptr, &_targetView)));
 }
 
-Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, RenderTargetUsage usage)
-	: _context(context),
+Render::RenderTarget::RenderTarget(Core::GraphicsContext* context)
+	: _targetView(nullptr),
+	_context(context),
 	_texture(context)
 {
-	if(usage == RenderTargetUsage::null)
-	{
-		_targetView = nullptr;
-	}
 }
 
 Render::RenderTarget::RenderTarget(RenderTarget&& other) noexcept
@@ -50,7 +49,17 @@ Render::RenderTarget::RenderTarget(RenderTarget&& other) noexcept
 {
 	_context = other._context;
 	_targetView = other._targetView;
+	clear_color = other.clear_color;
 
+	other._targetView = nullptr;
+	other._context = nullptr;
+	other._texture = Texture(_context);
+}
+
+Render::RenderTarget::~RenderTarget()
+{
+	if (_targetView)
+		_targetView->Release();
 }
 
 Render::RenderTarget& Render::RenderTarget::operator=(RenderTarget&& other) noexcept
@@ -78,11 +87,11 @@ Render::Texture* Render::RenderTarget::get_texture()
 
 void Render::RenderTarget::bind(ID3D11DepthStencilView* stencil) const
 {
-	auto num = _targetView == nullptr ? 0 : 1;
+	const auto num = _targetView == nullptr ? 0 : 1;
 	_context->context->OMSetRenderTargets(num, _targetView == nullptr ? nullptr : &_targetView, stencil);
 }
 
-void Render::RenderTarget::clear(Color4 color)
+void Render::RenderTarget::clear(Color4 color) const
 {
 	auto float_color = color.to_float4();
 
@@ -90,7 +99,7 @@ void Render::RenderTarget::clear(Color4 color)
 		_context->context->ClearRenderTargetView(_targetView, (FLOAT*)&float_color);
 }
 
-void Render::RenderTarget::clear(Color3 color)
+void Render::RenderTarget::clear(Color3 color) const
 {
 	auto float_color = Color4(color).to_float4();
 	
@@ -98,13 +107,7 @@ void Render::RenderTarget::clear(Color3 color)
 		_context->context->ClearRenderTargetView(_targetView, (FLOAT*)&float_color);
 }
 
-void Render::RenderTarget::clear()
+void Render::RenderTarget::clear() const
 {
 	clear(clear_color);
-}
-
-void Render::RenderTarget::release()
-{
-	if(_targetView)
-		_targetView->Release();
 }

@@ -21,7 +21,6 @@ ID3D11VertexShader* Render::VertexShader::get_d11_vs()
 void Render::VertexShader::create_input_layout(const D3D11_INPUT_ELEMENT_DESC* elements, UINT num_elements,
                                                ID3D11InputLayout** layout)
 {
-
 	auto hresult = context->device->CreateInputLayout(
 		elements,
 		num_elements,

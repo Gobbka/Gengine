@@ -27,14 +27,6 @@ struct __declspec(dllexport) Color4 : Color3
 	DirectX::XMFLOAT4 to_float4() const;
 };
 
-struct __declspec(dllexport) Surface {
-	float width;
-	float height;
-
-	Surface(float w, float h);
-	Surface(RECT rect);
-};
-
 struct __declspec(dllexport) Vector2 {
 	float x;
 	float y;
@@ -71,6 +63,25 @@ struct __declspec(dllexport) Vector4Int {
 	int x, y, z, w;
 
 	Vector4Int(int x,int y,int z,int w);
+};
+
+struct __declspec(dllexport) Vector2Int {
+	int x, y;
+
+	Vector2Int(int x, int y) : x(x),y(y) {}
+};
+
+struct __declspec(dllexport) Surface {
+	float width;
+	float height;
+
+	Surface(float w, float h);
+	Surface(RECT rect);
+
+	Vector2Int to_vector2int() const
+	{
+		return {(int)width, (int)height};
+	}
 };
 
 typedef __declspec(dllexport) Vector2 Position2;

@@ -11,13 +11,13 @@ UINT text_indices[]
 	0,1,2,1,3,2
 };
 
-Render::TextComponent::TextComponent(Core::GraphicsContext* context)
-{
-	_device = context->get_device();
-
-	ibuffer = nullptr;
-	vbuffer = nullptr;
-}
+Render::TextComponent::TextComponent(Core::GraphicsContext* context,SpriteFont*font)
+	:
+	_device(context->get_device()),
+	font(font),
+	vbuffer(nullptr),
+	ibuffer(nullptr)
+{}
 
 Render::TextComponent::~TextComponent()
 {

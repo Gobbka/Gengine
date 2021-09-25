@@ -1,4 +1,5 @@
 #pragma once
+#include "../SpriteFont.h"
 
 namespace Core
 {
@@ -10,7 +11,6 @@ namespace Render
 	class IIndexBuffer;
 	class IVertexBuffer;
 	class IGDevice;
-	struct SpriteFont;
 
 	struct __declspec(dllexport) TextComponent
 	{
@@ -22,7 +22,7 @@ namespace Render
 		IVertexBuffer* vbuffer;
 		IIndexBuffer* ibuffer;
 
-		TextComponent(Core::GraphicsContext* context);
+		TextComponent(Core::GraphicsContext* context,SpriteFont* font);
 		~TextComponent();
 
 		void set_text(const wchar_t* text);

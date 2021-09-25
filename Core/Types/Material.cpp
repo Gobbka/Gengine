@@ -4,8 +4,28 @@
 Render::Material::Material(BYTE* pSysMem, Surface resolution,bool alpha)
 	: _resolution(resolution)
 {
-	_pSysMem = new BYTE[resolution.width * resolution.height * 4];
-	memcpy(_pSysMem, pSysMem, resolution.width * resolution.height * 4);
+	auto res_int = resolution.to_vector2int();
+	_pSysMem = new BYTE[res_int.x * res_int.y * 4];
+	memcpy(_pSysMem, pSysMem, res_int.x * res_int.y * 4);
+}
+
+Render::Material::Material(Material& other)
+	:
+	_resolution(other._resolution)
+{
+	auto resolution = _resolution.to_vector2int();
+	_pSysMem = new BYTE[resolution.x * resolution.y * 4];
+	memcpy(_pSysMem, other._pSysMem, resolution.x * resolution.y * 4);
+}
+
+Render::Material::Material(Material&& other) noexcept
+	:
+	_resolution(other._resolution)
+{
+	_pSysMem = other._pSysMem;
+
+	other._pSysMem = nullptr;
+	other._resolution = Surface(0, 0);
 }
 
 Render::Material::Material(Color3 color)

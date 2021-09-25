@@ -24,8 +24,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	: context(context),
 	device(dev),
 	_screen_resolution(0,0),
-	_targetView(this,swap),
-	_shadowRenderTarget(this,Render::RenderTargetUsage::null)
+	_targetView(this,swap)
 {
 	_swap = swap;
 
@@ -37,8 +36,6 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 
 	_gdevice = new Render::D11GDevice(device, this);
 	_gcontext = new Render::D11GContext(this, context);
-	
-	_shadowRenderTarget = Render::RenderTarget(this, _screen_resolution);
 
 	_samplerState = new Render::SamplerState(this);
 	
@@ -67,7 +64,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 		_texture_ps,_phong_ps,_pixelShader,_texture_vs
 	);
 
-	_texture_vs->bind();
+	_gcontext->set_vertex_shader(_texture_vs);
 
 	context->IASetInputLayout(_inputLayout);
 
@@ -107,14 +104,9 @@ Surface Core::GraphicsContext::get_screen_resolution() const
 	return _screen_resolution;
 }
 
-Render::RenderTarget* Core::GraphicsContext::get_render_target_view()
+inline Render::RenderTarget* Core::GraphicsContext::get_render_target_view()
 {
 	return &_targetView;
-}
-
-Render::RenderTarget* Core::GraphicsContext::get_shadow_render_target()
-{
-	return &_shadowRenderTarget;
 }
 
 inline Render::Passer* Core::GraphicsContext::get_passer()

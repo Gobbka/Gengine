@@ -34,6 +34,8 @@ namespace Render
 		auto height() const { return _resolution.height; }
 		
 		Material(BYTE* pSysMem, Surface resolution,bool alpha = true);
+		Material(Material& other);
+		Material(Material&& other) noexcept;
 		Material(Color3 color);
 		Material();
 		~Material();

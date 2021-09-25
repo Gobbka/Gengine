@@ -36,7 +36,6 @@ namespace Core
 		
 		IDXGISwapChain* _swap;
 		Render::RenderTarget _targetView;
-		Render::RenderTarget _shadowRenderTarget;
 
 		Render::SamplerState* _samplerState;
 		
@@ -61,8 +60,7 @@ namespace Core
 		Render::SpriteEngine* get_sprite_engine();
 		
 		Surface get_screen_resolution() const;
-		Render::RenderTarget* get_render_target_view();
-		Render::RenderTarget* get_shadow_render_target();
+		inline Render::RenderTarget* get_render_target_view();
 
 		inline Render::Passer* get_passer();
 		inline Render::IGDevice* get_device();

@@ -14,11 +14,6 @@ namespace Core {
 namespace Render {
 	class Texture;
 
-	enum class RenderTargetUsage
-	{
-		null
-	};
-	
 	class __declspec(dllexport) RenderTarget
 	{
 		ID3D11RenderTargetView* _targetView;
@@ -34,9 +29,10 @@ namespace Render {
 		// create render target from empty texture
 		RenderTarget(Core::GraphicsContext* context, Surface texture_resolution);
 
-		RenderTarget(Core::GraphicsContext* context, RenderTargetUsage usage);
+		RenderTarget(Core::GraphicsContext* context);
 
 		RenderTarget(RenderTarget&& other) noexcept;
+		~RenderTarget();
 
 		RenderTarget& operator=(RenderTarget&& other) noexcept;
 		
@@ -44,10 +40,8 @@ namespace Render {
 		Texture* get_texture();
 
 		void bind(ID3D11DepthStencilView* stencil=nullptr) const;
-		void clear(Color4 color);
-		void clear(Color3 color);
-		void clear();
-
-		void release();
+		void clear(Color4 color) const;
+		void clear(Color3 color) const;
+		void clear() const;
 	};
 }

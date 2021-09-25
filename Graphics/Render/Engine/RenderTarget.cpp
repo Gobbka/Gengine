@@ -14,14 +14,14 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, IDXGISwapChai
 	((ID3D11Texture2D*)back_buffer)->GetDesc(&desc);
 	
 	assert(SUCCEEDED(context->device->CreateRenderTargetView(back_buffer, nullptr, &_targetView)));
-	_texture = Texture(context, (ID3D11Texture2D*)back_buffer);
+	_texture = std::move(Texture(context, (ID3D11Texture2D*)back_buffer));
 	
 	back_buffer->Release();
 }
 
 Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Texture texture)
 	: _context(context),
-	_texture(texture)
+	_texture(std::move(texture))
 {
 	assert(texture.is_render_target());	
 	assert(SUCCEEDED(context->device->CreateRenderTargetView(texture.texture(), nullptr, &_targetView)));
@@ -42,6 +42,28 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, RenderTargetU
 	{
 		_targetView = nullptr;
 	}
+}
+
+Render::RenderTarget::RenderTarget(RenderTarget&& other) noexcept
+	:
+	_texture(std::move(other._texture))
+{
+	_context = other._context;
+	_targetView = other._targetView;
+
+}
+
+Render::RenderTarget& Render::RenderTarget::operator=(RenderTarget&& other) noexcept
+{
+	if (_targetView)
+		_targetView->Release();
+
+	_context = other._context;
+	clear_color = other.clear_color;
+	_texture = std::move(other._texture);
+	_targetView = other._targetView;
+
+	return *this;
 }
 
 ID3D11Resource* Render::RenderTarget::get_resource()

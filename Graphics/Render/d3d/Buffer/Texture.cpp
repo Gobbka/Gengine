@@ -135,24 +135,43 @@ Render::Texture::Texture(Core::GraphicsContext* context)
 	_texture = nullptr;
 }
 
-//Render::Texture::Texture(Texture&& move) noexcept
-//{
-//	_width = move._width;
-//	_height = move._height;
-//	_resource = move._resource;
-//	_texture = move._texture;
-//	_context = move._context;
-//
-//	move._resource = nullptr;
-//	move._texture = nullptr;
-//}
+Render::Texture::Texture(Texture&& move) noexcept
+{
+	_width = move._width;
+	_height = move._height;
+	_resource = move._resource;
+	_texture = move._texture;
+	_context = move._context;
+
+	move._resource = nullptr;
+	move._texture = nullptr;
+}
 
 Render::Texture::~Texture()
 {
-	//if (_texture)
-	//	_texture->Release();
-	//if (_resource)
-	//	_resource->Release();
+	if (_texture)
+		_texture->Release();
+	if (_resource)
+		_resource->Release();
+}
+
+Render::Texture& Render::Texture::operator=(Texture&& other) noexcept
+{
+	if (_texture)
+		_texture->Release();
+	if (_resource)
+		_resource->Release();
+
+	_width = other._width;
+	_height = other._height;
+	_resource = other._resource;
+	_texture = other._texture;
+	_context = other._context;
+
+	other._resource = nullptr;
+	other._texture = nullptr;
+
+	return *this;
 }
 
 Render::ITexture2DDesc Render::Texture::get_texture_desc()

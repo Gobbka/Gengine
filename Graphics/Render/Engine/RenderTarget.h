@@ -35,7 +35,10 @@ namespace Render {
 		RenderTarget(Core::GraphicsContext* context, Surface texture_resolution);
 
 		RenderTarget(Core::GraphicsContext* context, RenderTargetUsage usage);
-		
+
+		RenderTarget(RenderTarget&& other) noexcept;
+
+		RenderTarget& operator=(RenderTarget&& other) noexcept;
 		
 		ID3D11Resource* get_resource();
 		Texture* get_texture();

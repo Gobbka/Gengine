@@ -1,5 +1,5 @@
 #pragma once
-#include "../../Graphics/PrimitiveTopology.h"
+#include "PrimitiveTopology.h"
 
 namespace Render
 {

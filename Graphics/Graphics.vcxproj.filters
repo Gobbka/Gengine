@@ -102,7 +102,7 @@
     <ClInclude Include="Render\Viewer\WorldViewer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\I3DObject\Mesh.h">
+    <ClInclude Include="Graphics\Mesh.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Channels.h">
@@ -227,7 +227,7 @@
     <ClCompile Include="Render\Viewer\WorldViewer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\I3DObject\Mesh.cpp">
+    <ClCompile Include="Graphics\Mesh.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Que\RenderQueuePass\RenderQueuePass.cpp">

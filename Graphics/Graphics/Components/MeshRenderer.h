@@ -1,10 +1,10 @@
 #pragma once
 #include <vector>
+#include "../Mesh.h"
 #include "Types/Transform.h"
 
 namespace Render
 {
-	struct Mesh;
 	class Texture;
 	struct DrawEvent3D;
 	

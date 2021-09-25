@@ -11,12 +11,9 @@ class __declspec(dllexport) BinaryReader
 {
 public:
     explicit BinaryReader(_In_z_ wchar_t const* fileName) noexcept(false);
-    explicit BinaryReader(FS::FSFile file);
     BinaryReader(_In_reads_bytes_(dataSize) uint8_t const* dataBlob, size_t dataSize) noexcept;
 
     BinaryReader(BinaryReader const&) = delete;
-    BinaryReader& operator= (BinaryReader const&) = delete;
-    BinaryReader& operator= (BinaryReader&& other) noexcept;
 
     // Reads a single value.
     template<typename T> T const& Read()

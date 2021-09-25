@@ -1,5 +1,4 @@
 #pragma once
-#include "../Mesh.h"
 #include "Types/Types.h"
 
 namespace Core {
@@ -8,6 +7,7 @@ namespace Core {
 
 namespace Render
 {
+	struct Mesh;
 	class Texture;
 	struct DrawEvent;
 

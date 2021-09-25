@@ -3,6 +3,7 @@
 #include "../../../Render/Engine/Camera.h"
 #include "../../../Graphics.h"
 #include "../../../IGContext.h"
+#include "../../Mesh.h"
 
 void Render::ClearPass::execute(Core::GraphicsContext* context)
 {

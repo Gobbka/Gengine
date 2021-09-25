@@ -22,8 +22,8 @@ Render::Texture::Texture(Core::GraphicsContext* context, Surface resolution, UIN
 {
 	D3D11_TEXTURE2D_DESC texture_desc;
 	texture_desc.BindFlags = bind_flags;
-	texture_desc.Width = _width = resolution.width;
-	texture_desc.Height = _height = resolution.height;
+	texture_desc.Width = _width = (UINT)resolution.width;
+	texture_desc.Height = _height = (UINT)resolution.height;
 	texture_desc.MipLevels = 1;
 	texture_desc.ArraySize = 1;
 	texture_desc.Format = format;
@@ -57,8 +57,8 @@ Render::Texture::Texture(Core::GraphicsContext* engine,Material& material)
 {
 	D3D11_TEXTURE2D_DESC texture_desc;
 	texture_desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
-	texture_desc.Width = _width = material.width();
-	texture_desc.Height = _height = material.height();
+	texture_desc.Width = _width = (UINT)material.width();
+	texture_desc.Height = _height = (UINT)material.height();
 	texture_desc.MipLevels = 1;
 	texture_desc.ArraySize = 1;
 	texture_desc.Format = material.format;

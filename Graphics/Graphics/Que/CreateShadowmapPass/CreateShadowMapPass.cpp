@@ -6,7 +6,7 @@
 #include "../../../Render/Engine/MaskEngine.h"
 #include "../../../Render/Events/RenderEvent.h"
 #include "../../../Render/Light/DirectionLightComponent.h"
-#include "../../../Render/I3DObject/Mesh.h"
+#include "../../Mesh.h"
 
 
 void Render::CreateShadowMapPass::execute(Core::GraphicsContext* context)

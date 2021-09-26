@@ -41,6 +41,11 @@ public:
         return mEnd - mPos;
     }
 
+    auto valid()
+    {
+        return mOwnedData != nullptr;
+    }
+
     // Lower level helper reads directly from the filesystem into memory.
     static bool ReadEntireFile(_In_z_ wchar_t const* fileName, _Inout_ uint8_t** data, size_t* dataSize);
 

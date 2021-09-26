@@ -87,7 +87,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)Window;$(SolutionDir)Graphics;$(SolutionDir)UI;$(SolutionDir)Libs/FreeImage/;$(SolutionDir)Core;$(SolutionDir)Libs/Assimp;$(SolutionDir)Physics;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Window;$(SolutionDir)Graphics;$(SolutionDir)UI;$(SolutionDir)Libs/$(Platform)/FreeImage/;$(SolutionDir)Core;$(SolutionDir)Libs/Assimp;$(SolutionDir)Physics;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)Build\Out\</OutDir>
     <IntDir>$(SolutionDir)Build\Temp\$(ProjectName)\$(Configuration)</IntDir>
@@ -95,7 +95,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)Window;$(SolutionDir)Graphics;$(SolutionDir)UI;$(SolutionDir)Libs/FreeImage/;$(SolutionDir)Core;$(SolutionDir)Libs/Assimp;$(SolutionDir)Physics;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Window;$(SolutionDir)Graphics;$(SolutionDir)UI;$(SolutionDir)Libs/$(Platform)/FreeImage/;$(SolutionDir)Core;$(SolutionDir)Libs/Assimp;$(SolutionDir)Physics;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)Build\Out\</OutDir>
     <IntDir>$(SolutionDir)Build\Temp\$(ProjectName)\$(Configuration)</IntDir>
@@ -147,7 +147,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)Libs\FreeImage\FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)Libs\$(Platform)\FreeImage\FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -165,7 +165,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)Libs\FreeImage\FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)Libs\$(Platform)\FreeImage\FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

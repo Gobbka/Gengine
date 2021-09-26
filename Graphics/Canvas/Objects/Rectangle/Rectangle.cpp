@@ -9,7 +9,7 @@ Canvas::I2DCanvasObject::INDEX Canvas::Rectangle::size()
 	return 4;
 }
 
-void Canvas::Rectangle::apply_rectangle()
+void Canvas::Rectangle::apply_rectangle() const
 {
 	if (this->layer() == nullptr)
 		return;
@@ -55,6 +55,7 @@ void Canvas::Rectangle::on_initialize()
 
 Canvas::Rectangle::Rectangle(Color4XM background, Position2 position, Surface resolution)
 	: _background_color(background),
+	_background_texture(nullptr),
 	_position(position),
 	_resolution(resolution)
 {}

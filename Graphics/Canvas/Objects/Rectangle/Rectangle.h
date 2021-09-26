@@ -19,7 +19,7 @@ namespace Canvas
 		Surface _resolution;
 
 	private:
-		void apply_rectangle();
+		void apply_rectangle() const;
 		void apply_color();
 		
 		void on_initialize() override;

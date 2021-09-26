@@ -3,15 +3,10 @@
 #include "Graphics.h"
 
 #include "FreeImage.h"
-
-#include <fstream>
-
 #include "PhysicsModule.h"
 #include "UIContext.h"
 #include "Forms/MainForm/MainForm.h"
 #include "Render/I3DObject/Cube/Cube.h"
-
-#include <assimp/scene.h>
 #include "Debugger/PipeServer.h"
 #include "Render/d3d/Buffer/IndexBuffer.h"
 

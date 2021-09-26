@@ -59,6 +59,9 @@ Render::SpriteFont::SpriteFont(IGDevice* device, const wchar_t* file_name)
 	font_texture(nullptr)
 {
     BinaryReader reader(file_name);
+    if (!reader.valid())
+        throw "Cannot read sprite file";
+
     *this = SpriteFont(device, reader);
 }
 

@@ -1,9 +1,6 @@
 #pragma once
 #include <DirectXMath.h>
 
-
-
-#include "../d3d/Buffer/ConstantBuffer.h"
 #include "Types/Transform.h"
 #include "Types/Types.h"
 

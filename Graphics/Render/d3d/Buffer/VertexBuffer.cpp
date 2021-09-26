@@ -1,5 +1,6 @@
 ﻿#include "VertexBuffer.h"
-#include "../../Engine/Camera.h"
+
+#include "../../../Graphics.h"
 #include "../Vertex.h"
 
 void Render::VertexBuffer::copy_to(void* buffer, UINT size)

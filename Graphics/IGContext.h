@@ -1,10 +1,14 @@
 #pragma once
 #include "Render/d3d/Buffer/ConstantBuffer.h"
 #include "Graphics/PrimitiveTopology.h"
+#include <DirectXMath.h>
 
 namespace Render
 {
 	class MaskEngine;
+	class PixelShader;
+	class VertexShader;
+	class SamplerState;
 	
 	class IGContext
 	{

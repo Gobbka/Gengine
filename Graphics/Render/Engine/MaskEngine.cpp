@@ -1,4 +1,6 @@
 ﻿#include "MaskEngine.h"
+
+#include "../../Graphics.h"
 #include "Camera.h"
 #include "Types/Types.h"
 

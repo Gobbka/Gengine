@@ -1,4 +1,6 @@
 ﻿#include "SamplerState.h"
+
+#include "../../../Graphics.h"
 #include "../../Engine/Camera.h"
 
 D3D11_FILTER SamplerFilterToD3D11Filter(Render::SamplerFilter filter)

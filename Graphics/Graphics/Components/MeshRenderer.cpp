@@ -1,5 +1,4 @@
 #include "MeshRenderer.h"
-#include "../Mesh.h"
 
 Render::MeshRenderer::MeshRenderer(Texture* texture)
 	: transform(Position3::null())

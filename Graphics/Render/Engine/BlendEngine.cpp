@@ -1,4 +1,6 @@
 ﻿#include "BlendEngine.h"
+
+#include "../../Graphics.h"
 #include "Camera.h"
 
 Render::BlendEngine::BlendEngine(Core::GraphicsContext* engine)

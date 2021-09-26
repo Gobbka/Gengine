@@ -1,7 +1,7 @@
 ﻿#include "VertexShader.h"
 
 #include "../../../IGContext.h"
-#include "../../../Render/Engine/Camera.h"
+#include "../../../Graphics.h"
 
 void Render::VertexShader::construct(ID3DBlob* shader_blob)
 {

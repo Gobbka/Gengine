@@ -1,5 +1,6 @@
 #include "RenderEvent.h"
 
+#include "../../Graphics.h"
 #include "../../IGContext.h"
 #include "../../Canvas/Objects/I2DCanvasObject.h"
 #include "../Engine/Camera.h"

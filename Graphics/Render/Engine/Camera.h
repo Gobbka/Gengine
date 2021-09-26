@@ -1,15 +1,10 @@
 #pragma once
-#include "../../Graphics.h"
-#include "../d3d/Buffer/ConstantBuffer.h"
 #include "../Viewer/WorldViewer.h"
 
 struct Surface;
 
 namespace Render
 {
-	class DirectionLightComponent;
-	class Cube;
-	class MaskEngine;
 	class BlendEngine;
 
 	class __declspec(dllexport) Camera : public WorldViewer
@@ -29,7 +24,6 @@ namespace Render
 		
 		void set_resolution(Surface new_resolution);
 
-		
 		Vector2 point_to_screen(Vector3 world_coordinate);
 	public:
 		Core::GraphicsContext* graphics_context();

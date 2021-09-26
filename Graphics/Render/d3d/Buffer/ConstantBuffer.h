@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "../Bindable.h"
-#include "../../../Graphics.h"
 
+#include "../../../Graphics.h"
 #include <cassert>
 #include <d3d11.h>
 

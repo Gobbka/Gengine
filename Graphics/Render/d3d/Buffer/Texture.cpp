@@ -1,6 +1,6 @@
 ﻿#include "Texture.h"
 #include "../../Engine/Camera.h"
-
+#include "../../../Graphics.h"
 
 D3D11_TEXTURE2D_DESC Render::Texture::get_desc() const
 {

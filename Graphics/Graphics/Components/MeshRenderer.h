@@ -6,7 +6,6 @@
 namespace Render
 {
 	class Texture;
-	struct DrawEvent3D;
 	
 	class __declspec(dllexport) MeshRenderer
 	{

@@ -1,5 +1,6 @@
 #include "D3D11Canvas.h"
-#include "../Render/Engine/Camera.h"
+
+#include "../Graphics.h"
 #include "../Render/d3d/Buffer/VertexBuffer.h"
 
 Render::IVertexBuffer* Render::D3D11Canvas::alloc_vbuffer(UINT size) const

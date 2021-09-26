@@ -2,11 +2,13 @@
 
 #include <iostream>
 
+#include "Graphics.h"
 #include "IGContext.h"
 #include "Render/Engine/Camera.h"
 #include "InteractiveForm.h"
 #include "Graphics/SpriteFont.h"
 #include "Graphics/Components/TextComponent.h"
+#include "Graphics/Que/IPass/IPass.h"
 #include "Render/Engine/MaskEngine.h"
 #include "Render/Events/RenderEvent.h"
 

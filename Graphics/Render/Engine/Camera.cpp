@@ -2,10 +2,8 @@
 
 #include "BlendEngine.h"
 #include "MaskEngine.h"
+#include "RenderTarget.h"
 #include "Types/Types.h"
-
-#include <DirectXMath.h>
-#include <iostream>
 
 void Render::Camera::clear(Color3 color)
 {

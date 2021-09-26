@@ -2,6 +2,10 @@
 #include "../../IGContext.h"
 
 namespace Render {
+	class SamplerState;
+	class VertexShader;
+	class PixelShader;
+
 	class D11GContext final : public IGContext
 	{
 		PrimitiveTopology _current_topology ;

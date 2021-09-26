@@ -1,5 +1,6 @@
 ﻿#include "PixelShader.h"
-#include "../../Engine/Camera.h"
+
+#include "../../../Graphics.h"
 
 void Render::PixelShader::construct(ID3DBlob* shader_blob)
 {

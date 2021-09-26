@@ -3,13 +3,6 @@
 #include "../../Graphics.h"
 #include "../Engine/MaskEngine.h"
 #include "../Engine/RenderTarget.h"
-#include "../Events/RenderEvent.h"
-
-const static DirectX::XMVECTOR DEFAULT_FORWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f);
-const static DirectX::XMVECTOR DEFAULT_UP_VECTOR = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-const static DirectX::XMVECTOR DEFAULT_BACKWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f);
-const static DirectX::XMVECTOR DEFAULT_LEFT_VECTOR = DirectX::XMVectorSet(-1.0f, 0.0f, 0.0f, 0.0f);
-const static DirectX::XMVECTOR DEFAULT_RIGHT_VECTOR = DirectX::XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f);
 
 void Render::WorldViewer::update_position()
 {
@@ -28,11 +21,11 @@ DirectX::XMMATRIX Render::WorldViewer::create_view_matrix()
 	auto pos = _transform.get_position();
 	auto xm_cam_pos = DirectX::XMVectorSet(pos.z, pos.y, pos.x, 0.f);
 	auto camRotMatrix = DirectX::XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
-	auto camTarget = DirectX::XMVector3TransformCoord(DEFAULT_FORWARD_VECTOR, camRotMatrix);
+	auto camTarget = DirectX::XMVector3TransformCoord(Core::Transform::forward(), camRotMatrix);
 
 	camTarget = DirectX::XMVectorAdd(camTarget, xm_cam_pos);
 
-	auto upDir = DirectX::XMVector3TransformCoord(DEFAULT_UP_VECTOR, camRotMatrix);
+	auto upDir = DirectX::XMVector3TransformCoord(Core::Transform::up(), camRotMatrix);
 
 	return DirectX::XMMatrixLookAtLH(
 		xm_cam_pos,

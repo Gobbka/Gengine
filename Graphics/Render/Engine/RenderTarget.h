@@ -3,7 +3,7 @@
 #include "../d3d/Buffer/Texture.h"
 #include "Types/Types.h"
 
-struct Color3;
+struct Color3XM;
 
 namespace Core {
 	class GraphicsContext;
@@ -18,7 +18,7 @@ namespace Render {
 		Core::GraphicsContext* _context;
 		Texture _texture;
 	public:
-		Color4 clear_color = Color4(0, 0, 0,1.f);
+		Color4XM clear_color = Color4XM(0, 0, 0,1.f);
 		
 		// create render target from IDXGISwapChain
 		RenderTarget(Core::GraphicsContext* context, IDXGISwapChain* swap);
@@ -38,8 +38,8 @@ namespace Render {
 		Texture* get_texture();
 
 		void bind(ID3D11DepthStencilView* stencil=nullptr) const;
-		void clear(Color4 color) const;
-		void clear(Color3 color) const;
+		void clear(Color4XM color) const;
+		void clear(Color3XM color) const;
 		void clear() const;
 	};
 }

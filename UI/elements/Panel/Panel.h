@@ -19,15 +19,15 @@ namespace UI
 		void draw(Render::DrawEvent2D* event) override;
 		void on_initialize() override;
 	public:
-		Color4 get_color() override;
+		Color4XM get_color() override;
 		
 		ElementDescription get_desc() override;
 
-		Panel(Vector2 position, Surface resolution, Color4 color);
+		Panel(Vector2 position, Surface resolution, Color4XM color);
 
 		bool point_belongs(Position2 point) override;
 		void set_position(Position2 pos) override;
-		void set_color(Color4 color) override;
+		void set_color(Color4XM color) override;
 
 		void move_by(Position2 pos) override;
 		void scale(float value) override;

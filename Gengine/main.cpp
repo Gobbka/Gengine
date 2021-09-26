@@ -9,7 +9,6 @@
 #include "PhysicsModule.h"
 #include "UIContext.h"
 #include "Forms/MainForm/MainForm.h"
-#include "Render/Engine/Camera.h"
 #include "Render/I3DObject/Cube/Cube.h"
 
 #include <assimp/scene.h>
@@ -66,7 +65,7 @@ int WINAPI wWinMain(
 
     auto stone_material = Render::Material();
     auto wood_material  = Render::Material();
-    auto red_material = Render::Material(Color3::from_rgb(255, 50, 50));
+    auto red_material = Render::Material(Color3XM::from_rgb(255, 50, 50));
 
     AssetsLoader::load_png(L"assets\\stone.png", stone_material);
     AssetsLoader::load_png(L"assets\\wood.png", wood_material);

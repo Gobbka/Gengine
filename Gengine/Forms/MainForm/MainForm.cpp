@@ -70,7 +70,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 {
 	main_scene->register_system(new UI::HandleAnimationSystem());
 	auto main_cam = main_scene->get_main_camera()->get<Render::Camera>();
-	main_cam->get_render_target()->clear_color = Color3(.1f, .1f, .1f);
+	main_cam->get_render_target()->clear_color = Color3XM(.1f, .1f, .1f);
 
 	auto* uicanvas_entity = get_ui()->create_layer();
 

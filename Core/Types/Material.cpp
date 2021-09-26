@@ -28,7 +28,7 @@ Render::Material::Material(Material&& other) noexcept
 	other._resolution = Surface(0, 0);
 }
 
-Render::Material::Material(Color3 color)
+Render::Material::Material(Color3XM color)
 	: _resolution(1,1)
 {
 	_pSysMem = new BYTE[4];

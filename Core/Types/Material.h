@@ -36,7 +36,8 @@ namespace Render
 		Material(BYTE* pSysMem, Surface resolution,bool alpha = true);
 		Material(Material& other);
 		Material(Material&& other) noexcept;
-		Material(Color3 color);
+		Material(Color3XM color);
+		Material(Color3XM start_color, Color3XM end_color);
 		Material();
 		~Material();
 

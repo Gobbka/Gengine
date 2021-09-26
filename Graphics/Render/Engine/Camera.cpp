@@ -5,7 +5,7 @@
 #include "RenderTarget.h"
 #include "Types/Types.h"
 
-void Render::Camera::clear(Color3 color)
+void Render::Camera::clear(Color3XM color)
 {
 	render_target->clear(color);
 }

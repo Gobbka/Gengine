@@ -35,7 +35,7 @@ namespace Core
 
 		UI::UIContext* get_ui();
 		
-		Color3 background{0,0,0};
+		Color3XM background{0,0,0};
 		
 		GraphicsContext* get_graphics_context() const;
 

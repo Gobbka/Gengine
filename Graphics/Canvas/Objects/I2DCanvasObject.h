@@ -34,8 +34,8 @@ namespace Canvas {
 
 		virtual void    set_texture(Render::Texture* texture) PURE;
 
-		virtual void    set_color(Color4 color) = 0;
-		virtual Color4  get_color() = 0;
+		virtual void    set_color(Color4XM color) = 0;
+		virtual Color4XM  get_color() = 0;
 
 		virtual void    scale(float value) =0;
 

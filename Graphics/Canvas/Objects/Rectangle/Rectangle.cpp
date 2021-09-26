@@ -45,8 +45,6 @@ void Canvas::Rectangle::apply_color()
 		for (INDEX i = 0; i < size(); i++)
 			vertices()[i].color = _background_color.to_float3();
 	}
-	
-	
 }
 
 void Canvas::Rectangle::on_initialize()
@@ -55,13 +53,11 @@ void Canvas::Rectangle::on_initialize()
 	apply_color();
 }
 
-Canvas::Rectangle::Rectangle(Color4 background, Position2 position, Surface resolution)
+Canvas::Rectangle::Rectangle(Color4XM background, Position2 position, Surface resolution)
 	: _background_color(background),
 	_position(position),
 	_resolution(resolution)
-{
-	
-}
+{}
 
 
 void Canvas::Rectangle::draw(Render::DrawEvent2D* draw_event)
@@ -111,7 +107,7 @@ void Canvas::Rectangle::move_by(Position2 pos)
 	apply_rectangle();
 }
 
-void Canvas::Rectangle::set_color(Color4 color)
+void Canvas::Rectangle::set_color(Color4XM color)
 {
 	_background_color = color;
 	_background_texture = nullptr;
@@ -119,7 +115,7 @@ void Canvas::Rectangle::set_color(Color4 color)
 	apply_color();
 }
 
-Color4 Canvas::Rectangle::get_color()
+Color4XM Canvas::Rectangle::get_color()
 {
 	return _background_color;
 }

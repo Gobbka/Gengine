@@ -12,7 +12,7 @@ namespace Render
 	private:
 		BlendEngine* _blendEngine;
 	public:
-		void clear(Color3 color);
+		void clear(Color3XM color);
 		void clear();
 		
 		void set_position(Position3 pos);

@@ -144,7 +144,7 @@ void UI::Parent::draw(::Render::DrawEvent2D* event)
 	});
 }
 
-void UI::Parent::set_color(Color4 color)
+void UI::Parent::set_color(Color4XM color)
 {
 	this->_children.foreach([&](UI::InteractiveElement* element) {
 		element->set_color(color);

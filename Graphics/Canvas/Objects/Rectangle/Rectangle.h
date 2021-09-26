@@ -12,7 +12,7 @@ namespace Canvas
 	public:
 		INDEX size() override;
 	private:
-		Color4 _background_color;
+		Color4XM _background_color;
 		Render::Texture* _background_texture;
 		
 		Position2 _position;
@@ -24,7 +24,7 @@ namespace Canvas
 		
 		void on_initialize() override;
 	public:
-		Rectangle(Color4 background,Position2 position,Surface resolution);
+		Rectangle(Color4XM background,Position2 position,Surface resolution);
 		
 		void draw(Render::DrawEvent2D*draw_event) override;
 		void set_position(Position2 pos) override;
@@ -32,8 +32,8 @@ namespace Canvas
 		void set_resolution(Surface surface) override;
 		Surface get_resolution() override;
 		void move_by(Position2) override;
-		void set_color(Color4 color) override;
-		Color4 get_color() override;
+		void set_color(Color4XM color) override;
+		Color4XM get_color() override;
 
 		void set_texture(Render::Texture* texture) override;
 	};

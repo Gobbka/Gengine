@@ -35,7 +35,7 @@ void UI::Panel::on_initialize()
 	Parent::on_initialize();
 }
 
-Color4 UI::Panel::get_color()
+Color4XM UI::Panel::get_color()
 {
 	return rect.get_color();
 }
@@ -45,7 +45,7 @@ UI::ElementDescription UI::Panel::get_desc()
 	return ElementDescription(true, "PANEL");
 }
 
-UI::Panel::Panel(Vector2 position,Surface resolution, Color4 color)
+UI::Panel::Panel(Vector2 position,Surface resolution, Color4XM color)
 	:
 	Parent(position),
 	rect(color,position,resolution)
@@ -70,7 +70,7 @@ void UI::Panel::set_position(Position2 pos)
 	this->move_by(Position2(pos.x - local_pos.x, pos.y - local_pos.y));
 }
 
-void UI::Panel::set_color(Color4 color)
+void UI::Panel::set_color(Color4XM color)
 {
 	this->rect.set_color(color);
 }

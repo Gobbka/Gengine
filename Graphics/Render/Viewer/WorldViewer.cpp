@@ -41,7 +41,7 @@ DirectX::XMMATRIX Render::WorldViewer::create_projection_matrix(WVProjectionType
 	switch (projection)
 	{
 	case WVProjectionType::Orthographic:
-		proj_matrix = DirectX::XMMatrixOrthographicLH(resolution.width, resolution.height, 0.0, farz);
+		proj_matrix = DirectX::XMMatrixOrthographicLH(1, 1, 0.0, farz);
 	break;
 	case WVProjectionType::Perspective:
 		proj_matrix = DirectX::XMMatrixPerspectiveFovLH(
@@ -76,6 +76,12 @@ Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* t
 	update_position();
 	
 	_projectionMatrix = create_projection_matrix(projection,_resolution, _fov, _far_z, _scale);
+}
+
+void Render::WorldViewer::set_projection_type(WVProjectionType type)
+{
+	projection = type;
+	_projectionMatrix = create_projection_matrix(projection, _resolution, _fov, _far_z,_scale);
 }
 
 void Render::WorldViewer::set_scale(float scale)

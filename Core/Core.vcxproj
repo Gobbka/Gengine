@@ -162,6 +162,7 @@
     <ClInclude Include="FS\FSObject.h" />
     <ClInclude Include="Loaders\AssetsLoader.h" />
     <ClInclude Include="Logger\Logger.h" />
+    <ClInclude Include="Types\Colors.h" />
     <ClInclude Include="Types\Material.h" />
     <ClInclude Include="Types\Transform.h" />
     <ClInclude Include="Types\Types.h" />

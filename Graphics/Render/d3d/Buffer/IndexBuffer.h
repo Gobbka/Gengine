@@ -1,7 +1,5 @@
 ﻿#pragma once
 #include <d3d11.h>
-
-#include "../Bindable.h"
 #include "../../../Graphics/IBuffers/IIndexBuffer.h"
 
 namespace Render {

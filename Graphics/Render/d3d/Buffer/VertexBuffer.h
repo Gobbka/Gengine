@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include <d3d11.h>
-#include "../Bindable.h"
 #include "../../../Graphics/IBuffers/IVertexBuffer.h"
 
 namespace Render

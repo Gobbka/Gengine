@@ -1,9 +1,9 @@
 #include "D11GDevice.h"
+
 #include "../../Graphics.h"
 #include "../../Render/d3d/Vertex.h"
 #include "../../Render/d3d/Buffer/IndexBuffer.h"
 #include "../../Render/d3d/Buffer/VertexBuffer.h"
-#include "../../Render/Engine/Camera.h"
 
 Render::D11GDevice::D11GDevice(ID3D11Device* device,Core::GraphicsContext* gfx)
 	: _device(device),

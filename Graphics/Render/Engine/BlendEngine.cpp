@@ -1,10 +1,10 @@
 ﻿#include "BlendEngine.h"
 
 #include "../../Graphics.h"
-#include "Camera.h"
 
 Render::BlendEngine::BlendEngine(Core::GraphicsContext* engine)
-	: Bindable(engine)
+	: Bindable(engine),
+	_blend(nullptr)
 {
 	D3D11_BLEND_DESC blendDesc;
 	ZeroMemory(&blendDesc, sizeof(blendDesc));

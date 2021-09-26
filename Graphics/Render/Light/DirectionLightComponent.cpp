@@ -3,7 +3,6 @@
 #include "../../Graphics.h"
 #include "../../IGContext.h"
 #include "../Engine/MaskEngine.h"
-#include "../Engine/RenderTarget.h"
 
 Render::DirectionLightComponent::DirectionLightComponent(Core::GraphicsContext* gcontext)
 	: WorldViewer(gcontext,nullptr)

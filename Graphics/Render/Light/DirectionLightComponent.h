@@ -1,6 +1,5 @@
 #pragma once
 #include "../Viewer/WorldViewer.h"
-#include "Types/Transform.h"
 
 namespace Core {
 	class GraphicsContext;

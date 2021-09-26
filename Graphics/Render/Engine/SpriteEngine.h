@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include <d3d11.h>
 
 namespace Core {
 	class GraphicsContext;
@@ -29,10 +28,6 @@ namespace Render {
 
 		PixelShader* _phong_ps;
 		PixelShader*  _color_ps;
-
-		PixelShader* _current_ps;
-
-		bool _ps_active = true;
 		
 	public:
 		SpriteEngine(
@@ -44,7 +39,5 @@ namespace Render {
 
 		void begin_sprite_mode(bool light = false);
 		void begin_color_mode();
-
-		bool set_ps_state(bool active);
 	};
 }

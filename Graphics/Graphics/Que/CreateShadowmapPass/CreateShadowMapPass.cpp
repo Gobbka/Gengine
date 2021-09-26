@@ -4,7 +4,6 @@
 #include "../../../Graphics.h"
 #include "../../../IGContext.h"
 #include "../../../Render/Engine/MaskEngine.h"
-#include "../../../Render/Events/RenderEvent.h"
 #include "../../../Render/Light/DirectionLightComponent.h"
 #include "../../Mesh.h"
 

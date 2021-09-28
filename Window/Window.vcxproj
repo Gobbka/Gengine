@@ -85,13 +85,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Build\Out\native $(Platform)</OutDir>
-    <IntDir>$(SolutionDir)Build\Temp\$(ProjectName)\$(Configuration)</IntDir>
+    <IntDir>$(SolutionDir)Build\Temp\$(ProjectName)\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Build\Out\native $(Platform)</OutDir>
-    <IntDir>$(SolutionDir)Build\Temp\$(ProjectName)\$(Configuration)</IntDir>
+    <IntDir>$(SolutionDir)Build\Temp\$(ProjectName)\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

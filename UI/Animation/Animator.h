@@ -10,7 +10,7 @@ namespace UI
 
 	struct __declspec(dllexport) AnimFunction
 	{
-		static float linear(int time)
+		static float linear(float time)
 		{
 			return 1.f;
 		}
@@ -23,7 +23,7 @@ namespace UI
 		typedef std::function<void(float value)> tSetFunction;
 
 		// returns 0 <= value <= 1
-		typedef float(*tAnimFunc)(int time);
+		typedef float(*tAnimFunc)(float time);
 
 	private:
 		
@@ -42,7 +42,6 @@ namespace UI
 	
 	class __declspec(dllexport) HandleAnimationSystem : public ECS::EntitySystem
 	{
-		
 		void tick(ECS::World* world, ECS_TICK_TYPE data) override;
 	};
 }

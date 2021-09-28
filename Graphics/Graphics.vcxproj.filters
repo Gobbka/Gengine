@@ -108,7 +108,7 @@
     <ClInclude Include="Graphics\Channels.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Que\RenderQueuePass\RenderQueuePass.h">
+    <ClInclude Include="Graphics\Que\RenderQueuePass\RenderMeshPass.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Que\IPass\IPass.h">
@@ -230,7 +230,7 @@
     <ClCompile Include="Graphics\Mesh.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Que\RenderQueuePass\RenderQueuePass.cpp">
+    <ClCompile Include="Graphics\Que\RenderQueuePass\RenderMeshPass.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Que\IPass\Passer.cpp">

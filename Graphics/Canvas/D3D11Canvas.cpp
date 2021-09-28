@@ -72,7 +72,7 @@ Render::D3D11Canvas::D3D11Canvas(Core::GraphicsContext* pEngine, IVertexBuffer* 
 {
 	_engine = pEngine;
 	_vertex_buffer = buffer;
-	_allocator.allocated = buffer->get_size();
+	_allocator.allocated = (UINT)buffer->get_size();
 }
 
 Render::D3D11Canvas::D3D11Canvas(Core::GraphicsContext* pEngine)

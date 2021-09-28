@@ -32,9 +32,9 @@ Render::Material::Material(Color3XM color)
 	: _resolution(1,1)
 {
 	_pSysMem = new BYTE[4];
-	_pSysMem[0] = color.r * 255.f;
-	_pSysMem[1] = color.g * 255.f;
-	_pSysMem[2] = color.b * 255.f;
+	_pSysMem[0] = (BYTE)(color.r * 255.f);
+	_pSysMem[1] = (BYTE)(color.g * 255.f);
+	_pSysMem[2] = (BYTE)(color.b * 255.f);
 	_pSysMem[3] = 255;
 	format = DXGI_FORMAT_R8G8B8A8_UNORM;
 }

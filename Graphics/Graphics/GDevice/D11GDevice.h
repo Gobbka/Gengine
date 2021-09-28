@@ -20,6 +20,7 @@ namespace Render
 
 		IIndexBuffer* alloc_index_buffer(unsigned size) override;
 		IIndexBuffer* alloc_index_buffer(void* data, unsigned size) override;
+		IVertexBuffer* alloc_vertex_buffer(void* data, IVertexBufferDesc desc) override;
 
 		IVertexBuffer* alloc_vertex_buffer(unsigned size, bool dynamic) override;
 		IVertexBuffer* alloc_vertex_buffer(void* data, unsigned size, bool dynamic) override;

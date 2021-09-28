@@ -15,7 +15,7 @@ namespace Render
 		void copy_to(void* buffer, UINT size) override;
 	public:
 		
-		VertexBuffer(Core::GraphicsContext* engine, Vertex* data, UINT size, bool dynamic = true);
+		VertexBuffer(Core::GraphicsContext* engine, Vertex* data, IVertexBufferDesc desc);
 		~VertexBuffer() override;
 
 		void bind() override;

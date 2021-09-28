@@ -5,7 +5,7 @@
 
 UI::AnimationComponent::AnimationComponent(float from_value, float to_value, UINT during, AnimationComponent::tSetFunction set_function, AnimationComponent::tAnimFunc anim_handle)
 {
-	_end_time = during;
+	_end_time = (float)during;
 	_during = 0;
 	_value = from_value;
 	_step = (to_value - from_value) / (float)during;
@@ -16,6 +16,9 @@ UI::AnimationComponent::AnimationComponent(float from_value, float to_value, UIN
 
 bool UI::AnimationComponent::play_step(float delta_time)
 {
+	// v1 * A + (1-A)v2
+	// A = 1 - (t - t1)/(t2-t1)
+
 	if(_during < _end_time)
 	{
 		_value += _step * _anim_func(_during) * delta_time;

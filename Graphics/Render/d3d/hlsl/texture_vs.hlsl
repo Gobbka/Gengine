@@ -24,8 +24,8 @@ PSI VS(float3 pos : POSITION, float3 texcoord : COLOR, float3 normal : NORMAL)
 	PSI psi;
 	psi.texCoord = texcoord;
 	psi.pos = mul(float4(pos, 1.f), ModelViewProjectionMatrix);
-	psi.worldPos = mul(float4(pos,1.f),ModelMatrix);
+	psi.worldPos = mul(float4(pos,1.f),ModelMatrix).xyz;
 	psi.normal = normal;
-
+	
 	return psi;
 }

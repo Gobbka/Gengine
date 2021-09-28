@@ -86,13 +86,13 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir)GengineApi;$(SolutionDir)Core;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)Build\Out\</OutDir>
-    <IntDir>$(SolutionDir)Build\Temp\$(ProjectName)\$(Configuration)</IntDir>
+    <IntDir>$(SolutionDir)Build\Temp\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir)GengineApi;$(SolutionDir)Core;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)Build\Out\</OutDir>
-    <IntDir>$(SolutionDir)Build\Temp\$(ProjectName)\$(Configuration)</IntDir>
+    <IntDir>$(SolutionDir)Build\Temp\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -168,7 +168,7 @@
     <ClInclude Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.h" />
     <ClInclude Include="Graphics\Que\IPass\IPass.h" />
     <ClInclude Include="Graphics\Que\IPass\Passer.h" />
-    <ClInclude Include="Graphics\Que\RenderQueuePass\RenderQueuePass.h" />
+    <ClInclude Include="Graphics\Que\RenderQueuePass\RenderMeshPass.h" />
     <ClInclude Include="Graphics\Scene.h" />
     <ClInclude Include="Graphics\SpriteFont.h" />
     <ClInclude Include="Graphics\States\RasterizeState.h" />
@@ -209,7 +209,7 @@
     <ClCompile Include="Graphics\IBuffers\IVertexBuffer.cpp" />
     <ClCompile Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.cpp" />
     <ClCompile Include="Graphics\Que\IPass\Passer.cpp" />
-    <ClCompile Include="Graphics\Que\RenderQueuePass\RenderQueuePass.cpp" />
+    <ClCompile Include="Graphics\Que\RenderQueuePass\RenderMeshPass.cpp" />
     <ClCompile Include="Graphics\Scene.cpp" />
     <ClCompile Include="Graphics\SpriteFont.cpp" />
     <ClCompile Include="Graphics\States\RasterizeState.cpp" />

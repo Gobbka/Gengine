@@ -6,14 +6,25 @@ namespace Render
 	class IIndexBuffer;
 	struct Vertex;
 
+	struct __declspec(dllexport) IVertexBufferDesc {
+		enum class Usage
+		{
+			classic,
+			immutable,
+			dynamic
+		}   usage = Usage::classic;
+		size_t size = 0;
+
+	};
+
 	class __declspec(dllexport) IVertexBuffer : public Bindable
 	{
 	protected:
 		size_t size;
+
+		IVertexBuffer(Core::GraphicsContext* engine, size_t size) : Bindable(engine), size(size), data(nullptr) {}
 	public:
 		Vertex* data;
-		
-		IVertexBuffer(Core::GraphicsContext* engine,size_t size) : Bindable(engine),size(size),data(nullptr) {}
 
 		inline size_t get_size()
 		{

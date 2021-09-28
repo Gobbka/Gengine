@@ -20,14 +20,26 @@ Render::IIndexBuffer* Render::D11GDevice::alloc_index_buffer(void* data, unsigne
 	return new IndexBuffer(_gfx, (UINT*)data, size);
 }
 
+Render::IVertexBuffer* Render::D11GDevice::alloc_vertex_buffer(void* data, IVertexBufferDesc desc)
+{
+	return new VertexBuffer(_gfx, new Vertex[desc.size], desc);
+}
+
 Render::IVertexBuffer* Render::D11GDevice::alloc_vertex_buffer(unsigned size, bool dynamic)
 {
-	return new VertexBuffer(_gfx, new Vertex[size], size, dynamic);
+	IVertexBufferDesc buffer_desc;
+	buffer_desc.size = size;
+	buffer_desc.usage = dynamic ? IVertexBufferDesc::Usage::dynamic : IVertexBufferDesc::Usage::classic;
+	return new VertexBuffer(_gfx, new Vertex[size], buffer_desc);
 }
 
 Render::IVertexBuffer* Render::D11GDevice::alloc_vertex_buffer(void* data, unsigned size, bool dynamic)
 {
-	return new VertexBuffer(_gfx, (Vertex*)data, size, dynamic);
+	IVertexBufferDesc buffer_desc;
+	buffer_desc.size = size;
+	buffer_desc.usage = dynamic ? IVertexBufferDesc::Usage::dynamic : IVertexBufferDesc::Usage::classic;
+
+	return new VertexBuffer(_gfx, (Vertex*)data, buffer_desc);
 }
 
 Render::Texture* Render::D11GDevice::create_texture(ITexture2DDesc desc)

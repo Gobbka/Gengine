@@ -16,6 +16,7 @@ namespace Render
 
 		virtual IVertexBuffer* alloc_vertex_buffer(unsigned size, bool dynamic = true) = 0;
 		virtual IVertexBuffer* alloc_vertex_buffer(void* data, unsigned size, bool dynamic = true) = 0;
+		virtual IVertexBuffer* alloc_vertex_buffer(void* data, IVertexBufferDesc desc) = 0;
 
 		virtual IIndexBuffer* alloc_index_buffer(unsigned size) = 0;
 		virtual IIndexBuffer* alloc_index_buffer(void* data, unsigned size) = 0;
@@ -29,9 +30,9 @@ namespace Render
 	{
 		ITexture2DDesc desc;
 		desc.format = material.format;
-		desc.height = material.height();
-		desc.width = material.width();
-		desc.rows = 0;
+		desc.height = (UINT)material.height();
+		desc.width  = (UINT)material.width();
+		desc.rows   = 0;
 		desc.stride = 0;
 		desc.pSysMem = material.pSysMem();
 		return this->create_texture(desc);

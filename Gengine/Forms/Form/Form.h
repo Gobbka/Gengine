@@ -9,7 +9,7 @@ namespace UI {
 }
 
 namespace Render {
-	class RenderQueuePass;
+	class RenderMeshPass;
 	class Camera;
 }
 

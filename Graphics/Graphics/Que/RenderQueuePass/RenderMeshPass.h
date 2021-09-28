@@ -22,17 +22,15 @@ namespace Render
 		void execute(Core::GraphicsContext* context) override;
 	};
 	
-	class __declspec(dllexport) RenderQueuePass : public IPass
+	class __declspec(dllexport) RenderMeshPass : public IPass
 	{
 		Core::GraphicsContext* _context;
-		
-		void render_camera_3d(ECS::ComponentHandle<Camera> camera, ECS::World* world);
 
 		void render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshRenderer> model,DirectX::XMMATRIX VPMatrix);
 		inline void render_camera(ECS::ComponentHandle<Camera> camera, ECS::World* world);
 		inline void execute_scene(Render::Scene* scene);
 	public:
-		RenderQueuePass(Core::GraphicsContext* context);
+		RenderMeshPass(Core::GraphicsContext* context);
 
 		void execute(Core::GraphicsContext* context) override;
 	};

@@ -1,4 +1,4 @@
-#include "RenderQueuePass.h"
+#include "RenderMeshPass.h"
 
 #include "../../Components/MeshRenderer.h"
 #include "../../../Render/Engine/Camera.h"
@@ -16,7 +16,7 @@ void Render::ClearPass::execute(Core::GraphicsContext* context)
 	}
 }
 
-void Render::RenderQueuePass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshRenderer> model, DirectX::XMMATRIX VPMatrix)
+void Render::RenderMeshPass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshRenderer> model, DirectX::XMMATRIX VPMatrix)
 {	
 	auto* gcontext = _context->get_context();
 	auto model_matrix = model->transform.get_world_matrix();
@@ -33,8 +33,10 @@ void Render::RenderQueuePass::render_model(ECS::ComponentHandle<Camera> camera,E
 	}
 }
 
-void Render::RenderQueuePass::render_camera_3d(ECS::ComponentHandle<Camera> camera, ECS::World* world)
+inline void Render::RenderMeshPass::render_camera(ECS::ComponentHandle<Camera> camera, ECS::World* world)
 {
+	camera->bind();
+
 	auto world_to_screen = camera->world_to_screen_matrix();
 	auto* sprite_engine = camera->graphics_context()->get_sprite_engine();
 
@@ -47,13 +49,7 @@ void Render::RenderQueuePass::render_camera_3d(ECS::ComponentHandle<Camera> came
 	);
 }
 
-inline void Render::RenderQueuePass::render_camera(ECS::ComponentHandle<Camera> camera, ECS::World* world)
-{
-	camera->bind();
-	render_camera_3d(camera, world);
-}
-
-inline void Render::RenderQueuePass::execute_scene(Render::Scene* scene)
+inline void Render::RenderMeshPass::execute_scene(Render::Scene* scene)
 {
 	auto main_camera_id = scene->get_main_camera()->getEntityId();
 	ECS::ComponentHandle<Camera> hMainCamera;
@@ -76,18 +72,13 @@ inline void Render::RenderQueuePass::execute_scene(Render::Scene* scene)
 	}
 }
 
-Render::RenderQueuePass::RenderQueuePass(Core::GraphicsContext* context)
+Render::RenderMeshPass::RenderMeshPass(Core::GraphicsContext* context)
 {
 	_context = context;
 }
 
-void Render::RenderQueuePass::execute(Core::GraphicsContext* context)
+void Render::RenderMeshPass::execute(Core::GraphicsContext* context)
 {
-	// € думаю стоит сделать следующую реализацию
-	// camera->bind();
-	// TechniquePasses->execute();
-	// DrawPass3D->execute();
-	// DrawPass2D->execute();
 	auto* gcontext = _context->get_context();
 	gcontext->set_topology(PrimitiveTopology::TRIANGLELIST);
 	gcontext->matrix_buffer.bind();

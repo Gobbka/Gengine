@@ -1,13 +1,12 @@
 #pragma once
 #include <vector>
-
 #include "D3D11Canvas.h"
 #include "Objects/I2DCanvasObject.h"
 
 namespace Canvas {
 	class __declspec(dllexport) Canvas2DLayer {
 	private:
-		Render::D3D11Canvas _canvas;
+		Render::D3D11Canvas* _canvas;
 		std::vector<I2DCanvasObject*> _objects;
 
 		bool _hidden;
@@ -18,7 +17,8 @@ namespace Canvas {
 		
 		Canvas2DLayer(Core::GraphicsContext*engine);
 		//Canvas2DLayer(Canvas2DLayer&&other) noexcept;
-		
+		virtual ~Canvas2DLayer();
+
 		void update();
 		void render(Render::DrawEvent2D* event);
 

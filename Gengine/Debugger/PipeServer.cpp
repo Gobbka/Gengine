@@ -8,12 +8,6 @@
 
 PipeServer::PipeServer(LPCWSTR address)
 {
-	// NamedPipe Local Variable
-	char szInputBuffer[1023];
-	char szOutputBuffer[1];
-	DWORD dwszInputBuffer = sizeof(szInputBuffer);
-	DWORD dwszOutputBuffer = sizeof(szOutputBuffer);
-
 	// CreateNamedPipe - Step 1
 	_hCreateNamedPipe = CreateNamedPipe(
 		address,
@@ -38,8 +32,7 @@ PipeServer::~PipeServer()
 
 PipeServer* PipeServer::create(LPCWSTR address)
 {
-	auto* server = new PipeServer(address);
-	return server;
+	return new PipeServer(address);
 }
 
 DWORD PipeServer::receive(char** buffer) const

@@ -29,9 +29,6 @@ Render::Material::Material(Material&& other) noexcept
 	:
 	_resolution(other._resolution)
 {
-	if (_pSysMem != other._pSysMem)
-		delete[] _pSysMem;
-
 	_pSysMem = other._pSysMem;
 
 	other._pSysMem = nullptr;

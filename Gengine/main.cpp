@@ -26,7 +26,7 @@
 
 void debugger_loop()
 {
-    auto* server = PipeServer::create(L"\\\\.\\pipe\\GENGINE_DBG");
+	const auto* server = PipeServer::create(L"\\\\.\\pipe\\GENGINE_DBG");
 
 	while(true)
 	{

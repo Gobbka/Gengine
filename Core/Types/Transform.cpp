@@ -1,10 +1,5 @@
 #include "Transform.h"
 
-#include <iostream>
-
-DirectX::XMVECTOR DEFAULT_BACKWARD_VECTOR = DirectX::XMVectorSet(0.0f, 0.0f, -1.0f, 0.0f);
-DirectX::XMVECTOR DEFAULT_LEFT_VECTOR = DirectX::XMVectorSet(-1.0f, 0.0f, 0.0f, 0.0f);
-
 DirectX::XMMATRIX Core::Transform::create_world_matrix()
 {
 	return DirectX::XMMatrixRotationRollPitchYaw(_rotation.x,_rotation.y,_rotation.z) * DirectX::XMMatrixTranslation(_pos.x, _pos.y, _pos.z);
@@ -38,7 +33,6 @@ void Core::Transform::adjust_position(Position3 pos)
 void Core::Transform::set_position(Position3 pos)
 {
 	_pos = pos;
-	
 	_world_matrix = create_world_matrix();
 }
 

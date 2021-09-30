@@ -89,12 +89,9 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 
 	_assets_panel_wrapper->add_element(_assets_panel);
 
-	auto folder_material = Render::Material();
-	auto file_material = Render::Material();
+	auto folder_material = AssetsLoader::load_png(L"assets\\folder.png");
+	auto file_material = AssetsLoader::load_png(L"assets\\file.png");
 
-	AssetsLoader::load_png(L"assets\\folder.png", folder_material);
-	AssetsLoader::load_png(L"assets\\file.png", file_material);
-	
 	_folder_texture = get_graphics_context()->get_device()->create_texture(folder_material);
 	_file_texture = get_graphics_context()->get_device()->create_texture(file_material);
 

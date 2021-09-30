@@ -28,12 +28,10 @@ Core::Transform::Transform(Position3 pos)
 void Core::Transform::adjust_position(Position3 pos)
 {
 	using namespace DirectX;
+
 	auto nigga = (_forward_vector * pos.x) + (_right_vector * pos.z) + (_up_vector * pos.y);
 
-	XMFLOAT3 forw;
-	XMStoreFloat3(&forw, nigga);
-	
-	_pos += Position3(forw.z,forw.y,forw.x);
+	_pos += Position3(nigga.m128_f32[2], nigga.m128_f32[1], nigga.m128_f32[0]);
 	_world_matrix = create_world_matrix();
 }
 

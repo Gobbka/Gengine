@@ -58,12 +58,9 @@ int WINAPI wWinMain(
     	form->get_ui()->window_proc(msg, wp, lp);
     };
 
-    auto stone_material = Render::Material();
-    auto wood_material  = Render::Material();
-    auto red_material   = Render::Material(Color3XM::from_rgb(255, 50, 50));
-
-    AssetsLoader::load_png(L"assets\\stone.png", stone_material);
-    AssetsLoader::load_png(L"assets\\wood.png", wood_material);
+    auto stone_material = AssetsLoader::load_png(L"assets\\stone.png");
+    auto wood_material = AssetsLoader::load_png(L"assets\\wood.png");
+    Render::Material red_material(Color3XM::from_rgb(255, 50, 50));
 	
     auto* stone_texture = context->get_device()->create_texture(stone_material);
     auto* wood_texture = context->get_device()->create_texture(wood_material);

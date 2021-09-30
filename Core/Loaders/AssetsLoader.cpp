@@ -4,20 +4,22 @@
 #include "../BinaryReader.h"
 #include "../FS/FSFile.h"
 
-void AssetsLoader::load_png(const wchar_t* path, Render::Material& material)
+Render::Material AssetsLoader::load_png(const wchar_t* path)
 {
 	BinaryReader reader(path);
 	const auto size = reader.available();
 
 	auto* fmemory = FreeImage_OpenMemory((BYTE*)reader.ReadArray<BYTE>(size), size);
 
-	auto bitmap = FreeImage_LoadFromMemory(FIF_PNG, (FIMEMORY*)fmemory, ICO_MAKEALPHA);
-	auto* nigger = FreeImage_GetBits(bitmap);
+	const auto  bitmap = FreeImage_LoadFromMemory(FIF_PNG, fmemory, ICO_MAKEALPHA);
+	const auto* nigger = FreeImage_GetBits(bitmap);
 
-	material.load_bitmap(nigger, Surface((float)FreeImage_GetWidth(bitmap), (float)FreeImage_GetHeight(bitmap)));
+	Render::Material material(nigger, Surface((float)FreeImage_GetWidth(bitmap), (float)FreeImage_GetHeight(bitmap)));
 
 	FreeImage_Unload(bitmap);
 	FreeImage_CloseMemory(fmemory);
 
 	material.reflect();
+
+	return (Render::Material&&)material;
 }

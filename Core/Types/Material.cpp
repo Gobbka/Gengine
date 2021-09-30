@@ -1,27 +1,37 @@
 #include "Material.h"
 #include "Types.h"
 
-Render::Material::Material(BYTE* pSysMem, Surface resolution,bool alpha)
-	: _resolution(resolution)
+Render::Material::Material(const BYTE* pSysMem, const Surface resolution,bool alpha)
+	: _pSysMem(nullptr),
+	_resolution(resolution)
 {
 	const auto res_int = resolution.to_vector2int();
-	_pSysMem = new BYTE[res_int.x * res_int.y * 4];
-	memcpy(_pSysMem, pSysMem, res_int.x * res_int.y * 4);
+	const auto square = res_int.x * res_int.y * 4;
+
+	_pSysMem = new BYTE[square];
+	memcpy(_pSysMem, pSysMem, square);
 }
 
 Render::Material::Material(Material& other)
 	:
 	_resolution(other._resolution)
 {
-	auto resolution = _resolution.to_vector2int();
-	_pSysMem = new BYTE[resolution.x * resolution.y * 4];
-	memcpy(_pSysMem, other._pSysMem, resolution.x * resolution.y * 4);
+	if (_pSysMem != other._pSysMem)
+		delete[] _pSysMem;
+
+	const auto resolution_int = _resolution.to_vector2int();
+	const auto square = (resolution_int.x * resolution_int.y) * 4;
+	_pSysMem = new BYTE[square];
+	memcpy(_pSysMem, other._pSysMem, square);
 }
 
 Render::Material::Material(Material&& other) noexcept
 	:
 	_resolution(other._resolution)
 {
+	if (_pSysMem != other._pSysMem)
+		delete[] _pSysMem;
+
 	_pSysMem = other._pSysMem;
 
 	other._pSysMem = nullptr;
@@ -39,12 +49,6 @@ Render::Material::Material(Color3XM color)
 	format = DXGI_FORMAT_R8G8B8A8_UNORM;
 }
 
-Render::Material::Material()
-	: _pSysMem(nullptr),
-	_resolution(0,0)
-{
-}
-
 Render::Material::~Material()
 {
 	delete[] _pSysMem;
@@ -56,8 +60,9 @@ void Render::Material::swap_channels(RGBChannel _first, RGBChannel _second) cons
 	
 	const auto first = (UINT)_first;
 	const auto second = (UINT)_second;
-	
-	for(auto i = 0;i < _resolution.width * _resolution.height;i++)
+	const auto square = (int)(_resolution.width * _resolution.height);
+
+	for(auto i = 0;i < square;i++)
 	{
 		auto* color = (BYTE*)&memory[i];
 		const auto buffer = color[first];
@@ -68,26 +73,17 @@ void Render::Material::swap_channels(RGBChannel _first, RGBChannel _second) cons
 
 void Render::Material::reflect() const
 {
-	auto WIDTH = (int)_resolution.width;
-	auto HEIGHT = (int)_resolution.height;
+	const auto width = (__int64)(int)_resolution.width;
+	const auto height = (__int64)(int)_resolution.height;
 
-	auto* buffer = new BYTE[WIDTH * 4];
+	auto* buffer = new BYTE[width * 4];
 	
-	for (int col = 0; col < HEIGHT / 2; col++)
+	for (int col = 0; col < height / 2; col++)
 	{
-		memcpy(buffer, _pSysMem + col * WIDTH * 4, WIDTH * 4);
-		memcpy(_pSysMem + col * WIDTH * 4,_pSysMem + WIDTH * (HEIGHT - 1 - col) * 4,WIDTH * 4);
-		memcpy(_pSysMem + WIDTH * (HEIGHT - 1 - col) * 4, buffer, WIDTH * 4);
+		memcpy(buffer, _pSysMem + col * width * 4, width * 4);
+		memcpy(_pSysMem + col * width * 4,_pSysMem + width * (height - 1 - col) * 4,width * 4);
+		memcpy(_pSysMem + width * (height - 1 - col) * 4, buffer, width * 4);
 	}
 
 	delete[] buffer;
-}
-
-void Render::Material::load_bitmap(BYTE* pSysMem, Surface resolution)
-{
-	auto width = (UINT)resolution.width;
-	auto height = (UINT)resolution.height;
-	_pSysMem = new BYTE[width * height * 4];
-	memcpy(_pSysMem, pSysMem, width * height * 4);
-	_resolution = resolution;
 }

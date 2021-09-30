@@ -32,18 +32,15 @@ namespace Render
 
 		auto width() const { return _resolution.width; }
 		auto height() const { return _resolution.height; }
-		
-		Material(BYTE* pSysMem, Surface resolution,bool alpha = true);
+
+		explicit Material(Color3XM color);
+		Material(const BYTE* pSysMem, Surface resolution,bool alpha = true);
 		Material(Material& other);
 		Material(Material&& other) noexcept;
-		Material(Color3XM color);
-		Material(Color3XM start_color, Color3XM end_color);
-		Material();
+		Material() = delete;
 		~Material();
 
 		void swap_channels(RGBChannel first, RGBChannel second) const;
 		void reflect() const;
-
-		void load_bitmap(BYTE*pSysMem,Surface resolution);
 	};
 }

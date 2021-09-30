@@ -148,11 +148,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="builders\assets_packer\assets_packer.cpp" />
+    <ClCompile Include="builders\project_builder\project_builder.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="builders\assets_packer\assets_file_struct.h" />
     <ClInclude Include="builders\assets_packer\assets_packer.h" />
+    <ClInclude Include="builders\project_builder\project_builder.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

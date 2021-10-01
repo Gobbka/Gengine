@@ -17,3 +17,10 @@ Render::PixelShader::PixelShader(Core::GraphicsContext* engine)
 {
 	_shader = nullptr;
 }
+
+Render::PixelShader::PixelShader(Core::GraphicsContext* engine, const wchar_t* path)
+	: Shader(engine)
+{
+	read_file(path);
+	release_blob();
+}

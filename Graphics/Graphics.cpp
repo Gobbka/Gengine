@@ -5,28 +5,30 @@
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"D3DCompiler.lib")
 
-#include "Ecs/Ecs.h"
 #include "Graphics/GDevice/D11GContext.h"
 #include "Graphics/GDevice/D11GDevice.h"
 #include "Graphics/Que/CreateShadowmapPass/CreateShadowMapPass.h"
 #include "Types/Types.h"
-#include "Render/Engine/Camera.h"
 
 #include "Render/d3d/Shader/SamplerState.h"
-#include "Render/d3d/Shader/PixelShader.h"
 #include "Render/d3d/Shader/VertexShader.h"
 
-#include "Graphics/Que/IPass/IPass.h"
 #include "Graphics/Que/RenderQueuePass/RenderMeshPass.h"
 #include "Render/d3d/Vertex.h"
+#include "Render/Engine/RenderTarget.h"
+#include "Render/Engine/SpriteEngine.h"
 
 Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11DeviceContext* context)
 	: context(context),
 	device(dev),
 	_screen_resolution(0,0),
+	shader_collection(this),
 	_targetView(this,swap)
 {
 	_swap = swap;
+
+	_gdevice = new Render::D11GDevice(dev, this);
+	_gcontext = new Render::D11GContext(this, context);
 
 	{
 		DXGI_SWAP_CHAIN_DESC desc;
@@ -34,34 +36,16 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 		_screen_resolution = Surface(desc.BufferDesc.Width,desc.BufferDesc.Height);
 	}
 
-	_gdevice = new Render::D11GDevice(device, this);
-	_gcontext = new Render::D11GContext(this, context);
-
 	_samplerState = new Render::SamplerState(this);
 	
-	_pixelShader  = new Render::PixelShader(this);
-
-	auto* _phong_ps = new Render::PixelShader(this);
-	auto* _texture_ps = new Render::PixelShader(this);
-	
 	auto* _texture_vs = new Render::VertexShader(this);
-
-	_pixelShader->read_file(L"d3d11\\pixel_shader.cso");
-	_pixelShader->release_blob();
-
 	_texture_vs->read_file(L"d3d11\\texture_vs.cso");
 	_texture_vs->create_input_layout(Render::VertexLayout, ARRAYSIZE(Render::VertexLayout), &_inputLayout);
 	_texture_vs->release_blob();
-
-	_phong_ps->read_file(L"d3d11\\phong_ps.cso");
-	_phong_ps->release_blob();
-
-	_texture_ps->read_file(L"d3d11\\texture_ps.cso");
-	_texture_ps->release_blob();
+	shader_collection.insert(L"d3d11\\texture_vs.cso", _texture_vs);
 
 	_spriteEngine = new Render::SpriteEngine(
-		this,
-		_texture_ps,_phong_ps,_pixelShader,_texture_vs
+		this
 	);
 
 	_gcontext->set_vertex_shader(_texture_vs);

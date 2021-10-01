@@ -22,17 +22,9 @@ namespace Render {
 	private:
 		Core::GraphicsContext* _graphicsContext;
 		Texture* _binded_texture;
-
-		PixelShader*  _texture_ps;
-		VertexShader* _texture_vs;
-
-		PixelShader* _phong_ps;
-		PixelShader*  _color_ps;
-		
 	public:
 		SpriteEngine(
-			Core::GraphicsContext* context,
-			PixelShader* texture_ps,PixelShader*phong_ps,PixelShader*color_ps, VertexShader* texture_vs
+			Core::GraphicsContext* context
 		);
 
 		void bind_texture(Texture* texture);

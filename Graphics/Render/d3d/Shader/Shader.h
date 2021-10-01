@@ -10,9 +10,9 @@ namespace Render {
 		Core::GraphicsContext* context;
 
 		virtual void construct(ID3DBlob* shader_blob) PURE;
-		
-		explicit Shader(Core::GraphicsContext* engine) : context(engine){}
+		explicit Shader(Core::GraphicsContext* engine) : context(engine) {}
 	public:
+
 		void read_file(const wchar_t* file_name);
 		void release_blob() const;
 	};

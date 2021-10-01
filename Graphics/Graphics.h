@@ -3,6 +3,7 @@
 
 #include "IGDevice.h"
 #include "Graphics/Scene.h"
+#include "Graphics/ShaderCollection.h"
 #include "Render/Engine/RenderTarget.h"
 #include "Render/Engine/SpriteEngine.h"
 #include "Graphics/Que/IPass/Passer.h"
@@ -52,6 +53,8 @@ namespace Core
 		Render::Passer _passer;
 		
 	public:
+		ShaderCollection shader_collection;
+
 		Render::Scene* create_scene();
 		std::vector<Render::Scene*> scenes;
 		Render::Scene* main_scene;

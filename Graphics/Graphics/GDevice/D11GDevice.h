@@ -1,9 +1,6 @@
 #pragma once
 #include <d3d11.h>
-
 #include "../../IGDevice.h"
-#include "../IBuffers/IIndexBuffer.h"
-#include "../IBuffers/IVertexBuffer.h"
 
 namespace Core {
 	class GraphicsContext;

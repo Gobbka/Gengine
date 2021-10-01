@@ -1,5 +1,11 @@
 ﻿#pragma once
+#include <d3d11.h>
 #include "../../IGContext.h"
+
+namespace Core
+{
+	class GraphicsContext;
+}
 
 namespace Render {
 	class SamplerState;

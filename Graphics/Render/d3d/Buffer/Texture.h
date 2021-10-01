@@ -1,8 +1,12 @@
 ﻿#pragma once
-#include "../Bindable.h"
 #include <d3d11.h>
 
 #include "../../../Graphics/IBuffers/ITexture2D.h"
+
+namespace Core
+{
+	class GraphicsContext;
+}
 
 struct Surface;
 

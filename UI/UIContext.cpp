@@ -11,6 +11,7 @@
 #include "Graphics/Que/IPass/IPass.h"
 #include "Render/Engine/MaskEngine.h"
 #include "Render/Events/RenderEvent.h"
+#include <Render/d3d/Buffer/ConstantBuffer.h>
 
 class DrawUIPass : public Render::IPass
 {

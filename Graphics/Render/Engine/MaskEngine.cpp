@@ -3,6 +3,7 @@
 #include "../../Graphics.h"
 #include "Camera.h"
 #include "Types/Types.h"
+#include "RenderTarget.h"
 
 D3D11_DEPTH_STENCILOP_DESC create_depth_stencilop_desc(D3D11_COMPARISON_FUNC stencil_func,D3D11_STENCIL_OP success_func)
 {

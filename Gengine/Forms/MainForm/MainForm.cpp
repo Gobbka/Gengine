@@ -5,7 +5,6 @@
 #include <iostream>
 
 #include <Keyboard.h>
-#include <FS/FSFile.h>
 #include <FS/FSObject.h>
 #include <FS/FSDirectory.h>
 
@@ -21,6 +20,7 @@
 
 #include "Loaders/AssetsLoader.h"
 #include "Logger/Logger.h"
+#include "Render/Engine/RenderTarget.h"
 
 namespace UI
 {

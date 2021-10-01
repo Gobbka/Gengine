@@ -13,6 +13,7 @@ void Render::Camera::clear(Color3XM color)
 void Render::Camera::clear()
 {
 	render_target->clear();
+	_normalsRT->clear();
 }
 
 void Render::Camera::set_position(Position3 pos)
@@ -60,6 +61,11 @@ Render::RenderTarget* Render::Camera::get_target_view()
 	return WorldViewer::get_render_target();
 }
 
+Render::RenderTarget* Render::Camera::get_normals_rt()
+{
+	return _normalsRT;
+}
+
 Render::MaskEngine* Render::Camera::get_mask_engine() const
 {
 	return mask_engine;
@@ -75,7 +81,7 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 	WorldViewer(context,target)
 {
 	_blendEngine = new BlendEngine(context);
-
+	_normalsRT = new RenderTarget(graphics_context(), get_view_resolution());
 	mask_engine = new MaskEngine(this);
 }
 

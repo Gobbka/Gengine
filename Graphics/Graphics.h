@@ -8,18 +8,10 @@
 #include "Render/Engine/SpriteEngine.h"
 #include "Graphics/Que/IPass/Passer.h"
 
-
-// TODO-LIST:
-// Rename D3DEngine to Camera and replace all D3DEngine* dependency to Graphic*
-//
-
 namespace Render {
 	class IGContext;
 	class RenderTarget;
-	class Texture;
 	class SamplerState;
-	class VertexShader;
-	class PixelShader;
 	class Camera;
 }
 

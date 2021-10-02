@@ -31,10 +31,8 @@ namespace Render {
 		auto width = resolution.x;
 		auto height = resolution.y;
 		auto length = resolution.z;
-
-		auto* vbuffer = device->alloc_vertex_buffer(8);
-		auto* ptr = vbuffer->data;
-
+		
+		auto* ptr = new Vertex[8];
 		ptr[0].pos = { x,y,0 };
 		ptr[1].pos = { x + width,y,0 };
 		ptr[2].pos = { x,y - height,0 };
@@ -63,8 +61,12 @@ namespace Render {
 		ptr[6].color = { 1,0,0 };
 		ptr[5].color = { 0,1,0 };
 		ptr[4].color = { 1,1,0 };
-		vbuffer->update();
 
+		IVertexBufferDesc desc;
+		desc.usage = IVertexBufferDesc::Usage::immutable;
+		desc.size = 8;
+
+		auto* vbuffer = device->alloc_vertex_buffer(ptr,desc);
 		static auto* index_buffer = device->alloc_index_buffer(PARALLELEPIPED_INDEX_ARRAY, ARRAYSIZE(PARALLELEPIPED_INDEX_ARRAY));
 		
 		return Mesh(vbuffer, index_buffer);
@@ -80,8 +82,8 @@ namespace Render {
 		auto height = resolution.y;
 		auto length = resolution.z;
 
-		auto* vbuffer = device->alloc_vertex_buffer(24);
-		auto* ptr = vbuffer->data;
+		auto* ptr = new Vertex[24];
+
 		// front
 		ptr[0] = Vertex({ x,y,z }, { 0,0,0 }, { 0,0,-1 });
 		ptr[1] = Vertex({ x + width,y,z }, { 1,0,0 }, { 0,0,-1 });
@@ -112,9 +114,12 @@ namespace Render {
 		ptr[21] = Vertex({ x + width,y - height,z + length }, { 1,0,0 }, { 0,-1,0 });
 		ptr[22] = Vertex({ x,y - height,z }, { 0,1,0 }, { 0,-1,0 });
 		ptr[23] = Vertex({ x + width,y - height,z }, { 1,1,0 }, { 0,-1,0 });
-		
-		vbuffer->update();
 
+		IVertexBufferDesc desc;
+		desc.usage = IVertexBufferDesc::Usage::immutable;
+		desc.size = 24;
+
+		auto* vbuffer = device->alloc_vertex_buffer(ptr, desc);
 		static auto* index_buffer = device->alloc_index_buffer(PARALLELEPIPED_INDEPENDENT_INDEX_ARRAY, ARRAYSIZE(PARALLELEPIPED_INDEPENDENT_INDEX_ARRAY));
 
 		return Mesh(vbuffer, index_buffer);

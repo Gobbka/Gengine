@@ -16,7 +16,7 @@ namespace Render
 
 		virtual IVertexBuffer* alloc_vertex_buffer(unsigned size, bool dynamic = true) = 0;
 		virtual IVertexBuffer* alloc_vertex_buffer(void* data, unsigned size, bool dynamic = true) = 0;
-		virtual IVertexBuffer* alloc_vertex_buffer(void* data, IVertexBufferDesc desc) = 0;
+		virtual IVertexBuffer* alloc_vertex_buffer(Vertex* data, IVertexBufferDesc desc) = 0;
 
 		virtual IIndexBuffer* alloc_index_buffer(unsigned size) = 0;
 		virtual IIndexBuffer* alloc_index_buffer(void* data, unsigned size) = 0;
@@ -24,7 +24,7 @@ namespace Render
 		Texture* create_texture(Material& material);
 		virtual Texture* create_texture(ITexture2DDesc desc) =0;
 	};
-	
+
 	inline Texture* IGDevice::create_texture(Material& material)
 	{
 		ITexture2DDesc desc;

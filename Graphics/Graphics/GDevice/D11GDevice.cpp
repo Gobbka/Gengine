@@ -20,9 +20,9 @@ Render::IIndexBuffer* Render::D11GDevice::alloc_index_buffer(void* data, unsigne
 	return new IndexBuffer(_gfx, (UINT*)data, size);
 }
 
-Render::IVertexBuffer* Render::D11GDevice::alloc_vertex_buffer(void* data, IVertexBufferDesc desc)
+Render::IVertexBuffer* Render::D11GDevice::alloc_vertex_buffer(Vertex* data, IVertexBufferDesc desc)
 {
-	return new VertexBuffer(_gfx, new Vertex[desc.size], desc);
+	return new VertexBuffer(_gfx, data, desc);
 }
 
 Render::IVertexBuffer* Render::D11GDevice::alloc_vertex_buffer(unsigned size, bool dynamic)

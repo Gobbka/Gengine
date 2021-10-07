@@ -10,7 +10,7 @@ void Render::CreateNormalsMapPass::execute(Core::GraphicsContext* context)
 {
 	auto* gcontext = context->get_context();
 
-	context->main_scene->world()->each<Camera,NormalsRenderTarget>([&](ECS::Entity* ent, ECS::ComponentHandle<Camera> cam,ECS::ComponentHandle<NormalsRenderTarget> nrt)
+	context->main_scene->world()->each<NormalsRenderTarget,Camera>([&](ECS::Entity* ent, ECS::ComponentHandle<NormalsRenderTarget> nrt,ECS::ComponentHandle<Camera> cam)
 		{
 			nrt->rt->bind();
 			// do stuff here

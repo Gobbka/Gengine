@@ -1,7 +1,5 @@
 #pragma once
-#include <DirectXMath.h>
 #include <d3d11.h>
-
 #include "Colors.h"
 
 struct __declspec(dllexport) Vector2 {
@@ -10,7 +8,8 @@ struct __declspec(dllexport) Vector2 {
 
 	void operator +=(Vector2 pos);
 	void operator -=(Vector2 pos);
-	
+	Vector2 lerp(Vector2 vector,float t) const;
+
 	Vector2(float x, float y);
 };
 

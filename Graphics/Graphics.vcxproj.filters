@@ -156,7 +156,7 @@
     <ClInclude Include="Graphics\ShaderCollection.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\d3d\Buffer\Cb.h">
+    <ClInclude Include="Graphics\Components\NormalsRenderTarget.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
@@ -273,9 +273,6 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\ShaderCollection.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="IGContext.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

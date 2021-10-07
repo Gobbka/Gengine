@@ -34,6 +34,14 @@ void Vector2::operator-=(Vector2 pos)
 	y -= pos.y;
 }
 
+Vector2 Vector2::lerp(Vector2 vector,float t) const
+{
+	auto T = DirectX::XMVectorSet(x, y, 0, 0);
+	auto O = DirectX::XMVectorSet(vector.x, vector.y, 0, 0);
+	auto result = DirectX::XMVectorLerp(T, O, t);
+	return { result.m128_f32[0], result.m128_f32[1] };
+}
+
 Vector2::Vector2(float x, float y)
 {
 	this->x = x;

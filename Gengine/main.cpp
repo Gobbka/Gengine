@@ -59,15 +59,13 @@ int WINAPI wWinMain(
     };
 
     auto stone_material = AssetsLoader::load_png(L"assets\\stone.png");
-    auto wood_material = AssetsLoader::load_png(L"assets\\wood.png");
     Render::Material red_material(Color3XM::from_rgb(255, 50, 50));
 	
     auto* stone_texture = context->get_device()->create_texture(stone_material);
-    auto* wood_texture = context->get_device()->create_texture(wood_material);
     auto* red_texture = context->get_device()->create_texture(red_material);
 
     auto*light = form->editorScene->create_direction_light();
-    auto component = light->get<Render::DirectionLightComponent>();
+    const auto component = light->get<Render::DirectionLightComponent>();
     component->set_position(Position3(-4.14113426f, 2.09657478f, -4.79795313f));
     component->set_rotation(Vector3(0.519999862f, 0.880000114f, 0));
 	

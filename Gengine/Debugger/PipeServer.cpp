@@ -1,7 +1,5 @@
 #include "PipeServer.h"
 
-
-
 #include <iostream>
 #include <string>
 #include <Windows.h>

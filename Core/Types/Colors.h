@@ -1,5 +1,5 @@
 #pragma once
-
+#include <DirectXMath.h>
 #define RGB_TO_FLOAT(r,g,b) (r)/255.f, (g)/255.f, (b)/255.f
 
 template<typename T>

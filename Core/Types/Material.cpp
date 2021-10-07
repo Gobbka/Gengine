@@ -16,9 +16,6 @@ Render::Material::Material(Material& other)
 	:
 	_resolution(other._resolution)
 {
-	if (_pSysMem != other._pSysMem)
-		delete[] _pSysMem;
-
 	const auto resolution_int = _resolution.to_vector2int();
 	const auto square = (resolution_int.x * resolution_int.y) * 4;
 	_pSysMem = new BYTE[square];

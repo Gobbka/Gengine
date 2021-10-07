@@ -4,19 +4,15 @@
 #include "../../Components/MeshRenderer.h"
 #include "../../../IGContext.h"
 #include "../../../Render/d3d/Buffer/ConstantBuffer.h"
-#include "../../../Render/Engine/RenderTarget.h"
-namespace Render
-{
-	class MeshRenderer;
-}
+#include "../../Components/NormalsRenderTarget.h"
 
 void Render::CreateNormalsMapPass::execute(Core::GraphicsContext* context)
 {
 	auto* gcontext = context->get_context();
 
-	context->main_scene->world()->each<Camera>([&](ECS::Entity* ent, ECS::ComponentHandle<Camera> cam)
+	context->main_scene->world()->each<Camera,NormalsRenderTarget>([&](ECS::Entity* ent, ECS::ComponentHandle<Camera> cam,ECS::ComponentHandle<NormalsRenderTarget> nrt)
 		{
-			cam->get_normals_rt()->bind();
+			nrt->rt->bind();
 			// do stuff here
 			
 			auto world_matrix = cam->world_to_screen_matrix();

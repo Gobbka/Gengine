@@ -11,7 +11,6 @@ namespace Render
 	{
 	private:
 		BlendEngine* _blendEngine;
-		RenderTarget* _normalsRT;
 	public:
 
 
@@ -31,7 +30,6 @@ namespace Render
 	public:
 		Core::GraphicsContext* graphics_context();
 		RenderTarget* get_target_view();
-		RenderTarget* get_normals_rt();
 		MaskEngine* get_mask_engine() const;
 		BlendEngine* blend_engine() const;
 	public:

@@ -1,4 +1,6 @@
 #pragma once
+#include <algorithm>
+
 #include "../Viewer/WorldViewer.h"
 
 namespace Core {
@@ -12,8 +14,10 @@ namespace Render
 	class __declspec(dllexport) DirectionLightComponent : public WorldViewer
 	{
 	public:
+		explicit DirectionLightComponent(Core::GraphicsContext* context);
+		DirectionLightComponent(DirectionLightComponent&& other) noexcept;
+		DirectionLightComponent& operator=(DirectionLightComponent&& other) noexcept;
 
-		DirectionLightComponent(Core::GraphicsContext* context);
 		void set_position(Position3 pos);
 		void set_rotation(Vector3 rot);
 		void bind();

@@ -78,6 +78,51 @@ Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* t
 	_projectionMatrix = create_projection_matrix(projection,_resolution, _fov, _far_z, _scale);
 }
 
+Render::WorldViewer::WorldViewer(WorldViewer&& other) noexcept
+	:
+	render_target(other.render_target),
+	mask_engine(other.mask_engine),
+	_transform(other._transform),
+	projection(other.projection),
+	_fov(other._fov),
+	_scale(other._scale),
+	_far_z(other._far_z),
+	_resolution(other._resolution),
+	context(other.context)
+{
+	_projectionMatrix = create_projection_matrix(projection, _resolution, _fov, _far_z, _scale);
+	_viewMatrix = create_view_matrix();
+
+	other.render_target = nullptr;
+	other.mask_engine = nullptr;
+}
+
+Render::WorldViewer& Render::WorldViewer::operator=(WorldViewer&& other) noexcept
+{
+	if (render_target != other.render_target)
+		delete render_target;
+	if (mask_engine != other.mask_engine)
+		delete mask_engine;
+
+	render_target=(other.render_target);
+	mask_engine=(other.mask_engine);
+	_transform=(other._transform);
+	projection=(other.projection);
+	_fov=(other._fov);
+	_scale=(other._scale);
+	_far_z=(other._far_z);
+	_resolution=(other._resolution);
+	context=(other.context);
+
+	_projectionMatrix = create_projection_matrix(projection, _resolution, _fov, _far_z, _scale);
+	_viewMatrix = create_view_matrix();
+
+	other.render_target = nullptr;
+	other.mask_engine = nullptr;
+
+	return*this;
+}
+
 void Render::WorldViewer::set_projection_type(WVProjectionType type)
 {
 	projection = type;

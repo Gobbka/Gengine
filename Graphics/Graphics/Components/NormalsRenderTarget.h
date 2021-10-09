@@ -1,11 +1,13 @@
 #pragma once
+#include "../../Render/Engine/RenderTarget.h"
 
 namespace Render
 {
-	class RenderTarget;
 
-	struct NormalsRenderTarget
+	struct __declspec(dllexport) NormalsRenderTarget final : RenderTarget
 	{
-		RenderTarget* rt;
+		NormalsRenderTarget(Core::GraphicsContext*context,Surface resolution)
+			: RenderTarget(context,resolution)
+		{}
 	};
 }

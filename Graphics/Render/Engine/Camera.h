@@ -12,8 +12,6 @@ namespace Render
 	private:
 		BlendEngine* _blendEngine;
 	public:
-
-
 		void clear(Color3XM color);
 		void clear();
 		
@@ -33,7 +31,8 @@ namespace Render
 		MaskEngine* get_mask_engine() const;
 		BlendEngine* blend_engine() const;
 	public:
-		
+		Camera& operator=(Camera&& other) noexcept;
+		Camera(Camera&& other) noexcept;
 		Camera(Core::GraphicsContext* context,RenderTarget*target);
 
 		void bind();

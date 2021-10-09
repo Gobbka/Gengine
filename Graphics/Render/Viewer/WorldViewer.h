@@ -51,6 +51,9 @@ namespace Render
 	protected:
 		WorldViewer(Core::GraphicsContext* context, RenderTarget* target);
 	public:
+		WorldViewer(WorldViewer&& other) noexcept;
+		WorldViewer& operator=(WorldViewer&& other) noexcept;
+
 		void set_projection_type(WVProjectionType type);
 		void set_scale(float scale);
 		void set_fov(float fov);

@@ -1,5 +1,7 @@
 #include "Camera.h"
 
+#include <algorithm>
+
 #include "BlendEngine.h"
 #include "MaskEngine.h"
 #include "RenderTarget.h"
@@ -69,6 +71,29 @@ Render::BlendEngine* Render::Camera::blend_engine() const
 {
 	return _blendEngine;
 }
+
+Render::Camera& Render::Camera::operator=(Camera&& other) noexcept
+{
+	if (_blendEngine != other._blendEngine)
+		delete _blendEngine;
+
+	_blendEngine = other._blendEngine;
+
+	*(WorldViewer*)this = std::move((WorldViewer&)other);
+
+	return*this;
+}
+
+
+Render::Camera::Camera(Camera&& other) noexcept
+	:
+	WorldViewer(std::move(other))
+{
+	_blendEngine = other._blendEngine;
+
+	other._blendEngine = nullptr;
+}
+
 
 Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 	:

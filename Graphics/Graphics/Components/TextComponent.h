@@ -23,6 +23,8 @@ namespace Render
 		IIndexBuffer* ibuffer;
 
 		TextComponent(Core::GraphicsContext* context,SpriteFont* font);
+		TextComponent(TextComponent&& other) noexcept;
+		TextComponent& operator=(TextComponent&& other) noexcept;
 		~TextComponent();
 
 		void set_text(const wchar_t* text);

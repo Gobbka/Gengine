@@ -146,6 +146,25 @@ Render::Texture::Texture(Texture&& move) noexcept
 	move._texture = nullptr;
 }
 
+Render::Texture::Texture(Texture& other)
+{
+	_width = other._width;
+	_height = other._height;
+	_context = other._context;
+	_texture = nullptr;
+
+	auto d3ddesc = other.get_desc();
+	_context->device->CreateTexture2D(&d3ddesc, nullptr, &_texture);
+	other.copy_to(this);
+
+	if(other._resource && _texture)
+	{
+		D3D11_SHADER_RESOURCE_VIEW_DESC rv_desc;
+		other._resource->GetDesc(&rv_desc);
+		_context->device->CreateShaderResourceView(_texture, &rv_desc, &_resource);
+	}
+}
+
 Render::Texture::~Texture()
 {
 	if (_texture)

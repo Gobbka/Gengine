@@ -19,9 +19,11 @@
 #include <Render/Light/DirectionLightComponent.h>
 
 #include "Graphics/Components/MeshRenderer.h"
+#include "Graphics/Components/NormalsRenderTarget.h"
 #include "Graphics/Components/TextComponent.h"
 #include "Loaders/AssetsLoader.h"
 #include "Logger/Logger.h"
+#include "Render/Engine/Camera.h"
 #include "Types/Material.h"
 
 void debugger_loop()
@@ -77,6 +79,12 @@ int WINAPI wWinMain(
     platform->get<Render::MeshRenderer>()->add_mesh(Render::Parallelepiped::make_independent(context, Position3::null(), Vector3{ 27,3,27 }));
 
     Render::SpriteFont font(context->get_device(), L"visby.spritefont");
+
+    form->main_scene->get_main_camera()
+		->assign<Render::NormalsRenderTarget>(
+            context,
+            form->main_scene->get_main_camera()->get<Render::Camera>()->get_view_resolution()
+	);
 
     auto* text = form->main_scene->create_entity();
     auto text_comp = text->assign<Render::TextComponent>(context,&font);

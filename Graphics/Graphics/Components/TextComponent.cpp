@@ -19,6 +19,41 @@ Render::TextComponent::TextComponent(Core::GraphicsContext* context,SpriteFont*f
 	ibuffer(nullptr)
 {}
 
+Render::TextComponent::TextComponent(TextComponent&& other) noexcept
+{
+	_device = other._device;
+	_text = other._text;
+	vbuffer = other.vbuffer;
+	ibuffer = other.ibuffer;
+	font = other.font;
+
+	other.font = nullptr;
+	other.vbuffer = nullptr;
+	other.ibuffer = nullptr;
+	other._text = nullptr;
+}
+
+Render::TextComponent& Render::TextComponent::operator=(TextComponent&& other) noexcept
+{
+	if (vbuffer != other.vbuffer)
+		delete vbuffer;
+	if (ibuffer != other.ibuffer)
+		delete ibuffer;
+
+	_device = other._device;
+	_text = other._text;
+	vbuffer = other.vbuffer;
+	ibuffer = other.ibuffer;
+	font = other.font;
+
+	other.font = nullptr;
+	other.vbuffer = nullptr;
+	other.ibuffer = nullptr;
+	other._text = nullptr;
+
+	return*this;
+}
+
 Render::TextComponent::~TextComponent()
 {
 	delete vbuffer;

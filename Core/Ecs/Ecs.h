@@ -922,7 +922,9 @@ namespace ECS
 		struct ComponentContainer : public BaseComponentContainer
 		{
 			ComponentContainer() {}
-			ComponentContainer(const T& data) : data(data) {}
+			ComponentContainer(T&& data)
+				: data(std::move(data))
+			{ }
 
 			T data;
 
@@ -1082,7 +1084,7 @@ namespace ECS
 		if (found != components.end())
 		{
 			Internal::ComponentContainer<T>* container = reinterpret_cast<Internal::ComponentContainer<T>*>(found->second);
-			container->data = T(args...);
+			container->data = std::move(T(args...));
 
 			auto handle = ComponentHandle<T>(&container->data);
 			world->emit<Events::OnComponentAssigned<T>>({ this, handle });

@@ -12,7 +12,8 @@ void Render::CreateNormalsMapPass::execute(Core::GraphicsContext* context)
 
 	context->main_scene->world()->each<NormalsRenderTarget,Camera>([&](ECS::Entity* ent, ECS::ComponentHandle<NormalsRenderTarget> nrt,ECS::ComponentHandle<Camera> cam)
 		{
-			nrt->rt->bind();
+			gcontext->set_pixel_shader(context->shader_collection.get<PixelShader>(L"d3d11\\normals_ps.cso"));
+			nrt->bind();
 			// do stuff here
 			
 			auto world_matrix = cam->world_to_screen_matrix();

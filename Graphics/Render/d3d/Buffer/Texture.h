@@ -33,6 +33,7 @@ namespace Render {
 		Texture(Core::GraphicsContext* context, ITexture2DDesc texture);
 		Texture(Core::GraphicsContext* context);
 		Texture(Texture&& move) noexcept;
+		Texture(Texture& other);
 		~Texture();
 
 		Texture& operator=(Texture&& other) noexcept;

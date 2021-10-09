@@ -14,6 +14,19 @@ Render::DirectionLightComponent::DirectionLightComponent(Core::GraphicsContext* 
 	update_position();
 }
 
+Render::DirectionLightComponent::DirectionLightComponent(DirectionLightComponent&&other) noexcept
+	: WorldViewer(std::move(other))
+{
+	
+}
+
+Render::DirectionLightComponent& Render::DirectionLightComponent::operator=(DirectionLightComponent&& other) noexcept
+{
+	*(WorldViewer*)this = std::move((WorldViewer&)other);
+
+	return*this;
+}
+
 void Render::DirectionLightComponent::set_position(Position3 pos)
 {
 	_transform.set_position(pos);

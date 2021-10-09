@@ -175,9 +175,9 @@ Render::Texture::~Texture()
 
 Render::Texture& Render::Texture::operator=(Texture&& other) noexcept
 {
-	if (_texture)
+	if (_texture != other._texture)
 		_texture->Release();
-	if (_resource)
+	if (_resource != other._resource)
 		_resource->Release();
 
 	_width = other._width;
@@ -189,7 +189,7 @@ Render::Texture& Render::Texture::operator=(Texture&& other) noexcept
 	other._resource = nullptr;
 	other._texture = nullptr;
 
-	return *this;
+	return*this;
 }
 
 Render::ITexture2DDesc Render::Texture::get_texture_desc() const

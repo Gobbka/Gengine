@@ -194,6 +194,5 @@ void Forms::MainForm::update()
 	if(Keyboard::pressed(VirtualKey::F1))
 	{
 		auto res = camera->get_view_resolution();
-		LogA("DEPTH: " << camera->point_to_world(Vector2(res.width / 2, res.height / 2)).z);
 	}
 }

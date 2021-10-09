@@ -51,11 +51,19 @@ DirectX::XMMATRIX Render::WorldViewer::create_projection_matrix(WVProjectionType
 			farz
 		);
 	break;
+	default:
+		proj_matrix = DirectX::XMMatrixIdentity();
+	break;
 	}
 
 	return scale == 1.f ? proj_matrix : proj_matrix * DirectX::XMMatrixScaling(
 		scale, scale, 1.f
 	);
+}
+
+DirectX::XMMATRIX Render::WorldViewer::create_projection_matrix() const
+{
+	return create_projection_matrix(projection, _resolution, _fov, _far_z, _scale);
 }
 
 Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* target)
@@ -75,7 +83,7 @@ Render::WorldViewer::WorldViewer(Core::GraphicsContext* context, RenderTarget* t
 
 	update_position();
 	
-	_projectionMatrix = create_projection_matrix(projection,_resolution, _fov, _far_z, _scale);
+	_projectionMatrix = create_projection_matrix();
 }
 
 Render::WorldViewer::WorldViewer(WorldViewer&& other) noexcept
@@ -90,7 +98,7 @@ Render::WorldViewer::WorldViewer(WorldViewer&& other) noexcept
 	_resolution(other._resolution),
 	context(other.context)
 {
-	_projectionMatrix = create_projection_matrix(projection, _resolution, _fov, _far_z, _scale);
+	_projectionMatrix = create_projection_matrix();
 	_viewMatrix = create_view_matrix();
 
 	other.render_target = nullptr;
@@ -114,7 +122,7 @@ Render::WorldViewer& Render::WorldViewer::operator=(WorldViewer&& other) noexcep
 	_resolution=(other._resolution);
 	context=(other.context);
 
-	_projectionMatrix = create_projection_matrix(projection, _resolution, _fov, _far_z, _scale);
+	_projectionMatrix = create_projection_matrix();
 	_viewMatrix = create_view_matrix();
 
 	other.render_target = nullptr;
@@ -126,25 +134,25 @@ Render::WorldViewer& Render::WorldViewer::operator=(WorldViewer&& other) noexcep
 void Render::WorldViewer::set_projection_type(WVProjectionType type)
 {
 	projection = type;
-	_projectionMatrix = create_projection_matrix(projection, _resolution, _fov, _far_z,_scale);
+	_projectionMatrix = create_projection_matrix();
 }
 
 void Render::WorldViewer::set_scale(float scale)
 {
 	_scale = scale;
-	_projectionMatrix = create_projection_matrix(projection,_resolution,_fov,_scale);
+	_projectionMatrix = create_projection_matrix();
 }
 
 void Render::WorldViewer::set_fov(float fov)
 {
 	_fov = fov;
-	_projectionMatrix = create_projection_matrix(projection,_resolution, _fov, _far_z, _scale);
+	_projectionMatrix = create_projection_matrix();
 }
 
 void Render::WorldViewer::set_farz(float farz)
 {
 	_far_z = farz;
-	_projectionMatrix = create_projection_matrix(projection,_resolution, _fov, _far_z, _scale);
+	_projectionMatrix = create_projection_matrix();
 }
 
 Render::MaskEngine* Render::WorldViewer::get_mask_engine()
@@ -162,7 +170,7 @@ Render::RenderTarget* Render::WorldViewer::get_render_target()
 	return render_target;
 }
 
-Surface Render::WorldViewer::get_view_resolution()
+Surface Render::WorldViewer::get_view_resolution() const
 {
 	return _resolution;
 }
@@ -173,31 +181,19 @@ void Render::WorldViewer::set_view_resolution(Surface surface)
 	_projectionMatrix = create_projection_matrix(projection,_resolution, _fov, _far_z, _scale);
 }
 
-Vector3 Render::WorldViewer::point_to_world(Vector2 screen_coordinate)
-{
-	// TODO: handle that depth stencil texture2d can have D24_S8 format or D32 format
-
-	ID3D11Resource* view_resource;
-	D3D11_TEXTURE2D_DESC texture_desc;
-
-	mask_engine->get_view()->GetResource(&view_resource);
-	((ID3D11Texture2D*)view_resource)->GetDesc(&texture_desc);
-
-	D3D11_MAPPED_SUBRESOURCE map;
-
-	context->context->Map(view_resource, 0, D3D11_MAP_READ, 0, &map);
-	unsigned depth = ((unsigned*)map.pData)[(UINT)screen_coordinate.x * texture_desc.Width + (UINT)screen_coordinate.y];
-	context->context->Unmap(view_resource, 0);
-
-	if (texture_desc.Format == DXGI_FORMAT_D24_UNORM_S8_UINT)
-		depth = depth >> 8;
-
-	return Vector3(screen_coordinate.x, screen_coordinate.y, depth * _far_z);
-}
-
-DirectX::XMMATRIX Render::WorldViewer::world_to_screen_matrix()
+DirectX::XMMATRIX Render::WorldViewer::world_to_screen_matrix() const
 {
 	return _viewMatrix * _projectionMatrix;
+}
+
+DirectX::XMMATRIX Render::WorldViewer::view_matrix() const
+{
+	return _viewMatrix;
+}
+
+DirectX::XMMATRIX Render::WorldViewer::projection_matrix() const
+{
+	return _projectionMatrix;
 }
 
 void Render::WorldViewer::bind()

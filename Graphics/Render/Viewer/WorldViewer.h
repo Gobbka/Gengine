@@ -22,14 +22,13 @@ namespace Render
 	
 	class __declspec(dllexport) WorldViewer
 	{
-		
 	protected:
 		void update_position();
 		void update_rotation();
-		
 	private:
 		DirectX::XMMATRIX create_view_matrix();
 	 	static DirectX::XMMATRIX create_projection_matrix(WVProjectionType projection,Surface resolution,float fov,float farz,float scale=1.f);
+		DirectX::XMMATRIX create_projection_matrix() const;
 	private:
 		DirectX::XMMATRIX _projectionMatrix;
 		DirectX::XMMATRIX _viewMatrix;
@@ -64,11 +63,12 @@ namespace Render
 		Core::GraphicsContext* graphics_context();
 
 		RenderTarget* get_render_target();
-		Surface get_view_resolution();
+		Surface get_view_resolution() const;
 		void set_view_resolution(Surface surface);
 
-		Vector3 point_to_world(Vector2 screen_coordinate);
-		DirectX::XMMATRIX world_to_screen_matrix();
+		DirectX::XMMATRIX world_to_screen_matrix() const;
+		DirectX::XMMATRIX view_matrix() const;
+		DirectX::XMMATRIX projection_matrix() const;
 
 		void bind();
 	};

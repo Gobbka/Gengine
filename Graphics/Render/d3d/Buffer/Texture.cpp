@@ -175,9 +175,9 @@ Render::Texture::~Texture()
 
 Render::Texture& Render::Texture::operator=(Texture&& other) noexcept
 {
-	if (_texture != other._texture)
+	if (_texture && _texture != other._texture)
 		_texture->Release();
-	if (_resource != other._resource)
+	if (_resource && _resource != other._resource)
 		_resource->Release();
 
 	_width = other._width;

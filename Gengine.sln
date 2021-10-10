@@ -18,6 +18,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BE2E1F3B-F3C1-4DDA-BC3B-A6050AD57C33}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+		todo.md = todo.md
 		Точечный рисунок1.bmp = Точечный рисунок1.bmp
 	EndProjectSection
 EndProject

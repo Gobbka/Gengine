@@ -66,9 +66,9 @@ namespace Render
 		Surface get_view_resolution() const;
 		void set_view_resolution(Surface surface);
 
-		DirectX::XMMATRIX world_to_screen_matrix() const;
-		DirectX::XMMATRIX view_matrix() const;
-		DirectX::XMMATRIX projection_matrix() const;
+		inline DirectX::XMMATRIX world_to_screen_matrix() const;
+		inline DirectX::XMMATRIX view_matrix() const;
+		inline DirectX::XMMATRIX projection_matrix() const;
 
 		void bind();
 	};

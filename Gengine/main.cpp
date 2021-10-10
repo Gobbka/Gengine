@@ -85,7 +85,7 @@ int WINAPI wWinMain(
             context,
             form->main_scene->get_main_camera()->get<Render::Camera>()->get_view_resolution()
 	);
-
+    
     auto* text = form->main_scene->create_entity();
     auto text_comp = text->assign<Render::TextComponent>(context,&font);
     text_comp->set_text(L"GEngine is the best engine");

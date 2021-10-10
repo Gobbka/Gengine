@@ -7,6 +7,7 @@
 #include "Types/Types.h"
 #include "../../Graphics.h"
 
+
 void Render::Camera::clear(Color3XM color)
 {
 	_render_target->clear(color);

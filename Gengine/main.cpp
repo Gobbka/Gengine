@@ -1,3 +1,15 @@
+#ifdef _MSC_VER
+#include <CodeAnalysis/Warnings.h>
+#pragma  warning(push)
+#pragma warning(disable : ALL_CODE_ANALYSIS_WARNINGS)
+#endif
+#include <python/Python.h>
+#include <pybind11/embed.h>
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
+
+
 #include <iostream>
 #include <Windows.h>
 #include "Graphics.h"
@@ -39,6 +51,18 @@ void debugger_loop()
 	}
 }
 
+void some_fn(char*str)
+{
+    LogA("[NIGGA]: " << str);
+}
+
+PYBIND11_EMBEDDED_MODULE(nigga,handle)
+{
+    handle.doc() = "This is nigger";
+    
+    handle.def("say", &some_fn);
+}
+
 int WINAPI wWinMain(
     _In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
@@ -48,7 +72,13 @@ int WINAPI wWinMain(
 {
     AllocLoggerConsole();
     LogW(lpCmdLine);
-	
+
+    BinaryReader reader(L"python\\test.py");
+    auto* script = reader.to_string();
+    pybind11::scoped_interpreter guard{};
+    pybind11::exec(script);
+    delete[] script;
+
     auto*form = new Forms::MainForm(hInstance, 1400, 780);
     form->show();
     form->background = { 17,17,17 };

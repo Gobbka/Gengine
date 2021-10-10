@@ -23,6 +23,14 @@ BinaryReader::BinaryReader(_In_reads_bytes_(dataSize) uint8_t const* dataBlob, s
 	mOwnedData(nullptr)
 {}
 
+char* BinaryReader::to_string()
+{
+	char* new_ = new char[available()+1];
+	new_[available()] = '\0';
+	memcpy(new_, mOwnedData, mEnd - mOwnedData);
+	return new_;
+}
+
 bool BinaryReader::ReadEntireFile(_In_z_ wchar_t const* fileName, _Inout_ uint8_t** data, size_t* dataSize)
 {
 	std::ifstream ifs(fileName,std::ios::binary | std::ios::ate);

@@ -1,50 +1,20 @@
 #include "Camera.h"
 
 #include <algorithm>
-
 #include "BlendEngine.h"
 #include "MaskEngine.h"
 #include "RenderTarget.h"
 #include "Types/Types.h"
+#include "../../Graphics.h"
 
 void Render::Camera::clear(Color3XM color)
 {
-	render_target->clear(color);
+	_render_target->clear(color);
 }
 
 void Render::Camera::clear()
 {
-	render_target->clear();
-}
-
-void Render::Camera::set_position(Position3 pos)
-{
-	_transform.set_position(pos);
-	update_position();
-}
-
-void Render::Camera::adjust_position(Position3 pos)
-{
-	_transform.adjust_position(pos);
-	update_position();
-}
-
-void Render::Camera::adjust_position_relative(Position3 pos)
-{
-	_transform.adjust_position(pos);
-	update_position();
-}
-
-void Render::Camera::set_rotation(Vector3 quat)
-{
-	_transform.set_rotation(quat);
-	update_position();
-}
-
-void Render::Camera::adjust_rotation(Vector3 rot)
-{
-	_transform.adjust_rotation(rot);
-	update_rotation();
+	_render_target->clear();
 }
 
 void Render::Camera::set_resolution(Surface resolution)
@@ -54,17 +24,17 @@ void Render::Camera::set_resolution(Surface resolution)
 
 Core::GraphicsContext* Render::Camera::graphics_context()
 {
-	return context;
+	return _context;
 }
 
 Render::RenderTarget* Render::Camera::get_target_view()
 {
-	return WorldViewer::get_render_target();
+	return _render_target;
 }
 
 Render::MaskEngine* Render::Camera::get_mask_engine() const
 {
-	return mask_engine;
+	return _mask_engine;
 }
 
 Render::BlendEngine* Render::Camera::blend_engine() const
@@ -76,8 +46,15 @@ Render::Camera& Render::Camera::operator=(Camera&& other) noexcept
 {
 	if (_blendEngine != other._blendEngine)
 		delete _blendEngine;
+	if (_mask_engine != other._mask_engine)
+		delete _mask_engine;
+	if (_render_target != other._render_target)
+		delete _render_target;
 
 	_blendEngine = other._blendEngine;
+	_mask_engine = other._mask_engine;
+	_render_target = other._render_target;
+	_context = other._context;
 
 	*(WorldViewer*)this = std::move((WorldViewer&)other);
 
@@ -87,27 +64,36 @@ Render::Camera& Render::Camera::operator=(Camera&& other) noexcept
 
 Render::Camera::Camera(Camera&& other) noexcept
 	:
-	WorldViewer(std::move(other))
+	WorldViewer(other)
 {
 	_blendEngine = other._blendEngine;
+	_mask_engine = other._mask_engine;
+	_render_target = other._render_target;
+	_context = other._context;
 
 	other._blendEngine = nullptr;
+	other._mask_engine = nullptr;
+	other._render_target = nullptr;
 }
 
 
 Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
-	:
-	WorldViewer(context,target)
 {
+	WorldViewer::set_view_resolution(Surface(target->get_texture()->width(), target->get_texture()->height()));
+
+	_render_target = target;
 	_blendEngine = new BlendEngine(context);
-	mask_engine = new MaskEngine(this);
+	_mask_engine = new MaskEngine(_render_target);
+	_context = context;
 }
 
-void Render::Camera::bind()
+void Render::Camera::bind() const
 {
 	_blendEngine->bind();
 
-	mask_engine->clear_buffer();
-	mask_engine->get_disabledState()->bind(0);
-	WorldViewer::bind();
+	_mask_engine->clear_buffer();
+	_mask_engine->get_disabledState()->bind(0);
+	auto* mask_view = _mask_engine != nullptr ? _mask_engine->get_view() : nullptr;
+
+	_render_target->bind(mask_view);
 }

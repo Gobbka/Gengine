@@ -33,9 +33,10 @@ namespace Render {
 		DepthStencil,
 	};
 	
-	class __declspec(dllexport) MaskEngine : public Bindable
+	class __declspec(dllexport) MaskEngine
 	{
 	private:
+		Core::GraphicsContext* _context;
 		Stencil _disabledState;
 		Stencil _drawState;
 		Stencil _discardState;
@@ -45,12 +46,11 @@ namespace Render {
 		ID3D11DepthStencilView* _view;
 		RenderTarget* _target;
 	public:
-		MaskEngine(WorldViewer* target, MaskEngineUsage usage = MaskEngineUsage::DepthStencil,Surface* resolution=nullptr);
+		MaskEngine(RenderTarget* target, MaskEngineUsage usage = MaskEngineUsage::DepthStencil);
+		explicit MaskEngine(Core::GraphicsContext* context,Surface resolution, MaskEngineUsage usage = MaskEngineUsage::DepthStencil);
 
 		void set_state(Stencil* state,UINT reference = 0,bool force = false);
 		void clear_buffer() const;
-		
-		void bind() override;
 
 		auto get_view() { return _view; }
 

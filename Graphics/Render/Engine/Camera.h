@@ -11,20 +11,14 @@ namespace Render
 	{
 	private:
 		BlendEngine* _blendEngine;
+		RenderTarget* _render_target;
+		MaskEngine* _mask_engine;
+		Core::GraphicsContext* _context;
 	public:
 		void clear(Color3XM color);
 		void clear();
 		
-		void set_position(Position3 pos);
-		void adjust_position(Position3 pos);
-		void adjust_position_relative(Position3 pos);
-		
-		void set_rotation(Vector3 quat);
-		void adjust_rotation(Vector3 rot);
-		
 		void set_resolution(Surface new_resolution);
-
-		Vector2 point_to_screen(Vector3 world_coordinate);
 	public:
 		Core::GraphicsContext* graphics_context();
 		RenderTarget* get_target_view();
@@ -35,6 +29,6 @@ namespace Render
 		Camera(Camera&& other) noexcept;
 		Camera(Core::GraphicsContext* context,RenderTarget*target);
 
-		void bind();
+		void bind() const;
 	};
 }

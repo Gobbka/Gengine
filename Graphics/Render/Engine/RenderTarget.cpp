@@ -75,6 +75,11 @@ Render::RenderTarget& Render::RenderTarget::operator=(RenderTarget&& other) noex
 	return *this;
 }
 
+Core::GraphicsContext* Render::RenderTarget::get_context()
+{
+	return _context;
+}
+
 ID3D11Resource* Render::RenderTarget::get_resource()
 {
 	return _texture.texture();

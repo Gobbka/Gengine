@@ -33,7 +33,8 @@ namespace Render {
 		~RenderTarget();
 
 		RenderTarget& operator=(RenderTarget&& other) noexcept;
-		
+
+		Core::GraphicsContext* get_context();
 		ID3D11Resource* get_resource();
 		Texture* get_texture();
 

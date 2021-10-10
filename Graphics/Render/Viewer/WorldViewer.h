@@ -22,20 +22,11 @@ namespace Render
 	
 	class __declspec(dllexport) WorldViewer
 	{
-	protected:
-		void update_position();
-		void update_rotation();
 	private:
 		DirectX::XMMATRIX create_view_matrix();
 	 	static DirectX::XMMATRIX create_projection_matrix(WVProjectionType projection,Surface resolution,float fov,float farz,float scale=1.f);
 		DirectX::XMMATRIX create_projection_matrix() const;
-	private:
-		DirectX::XMMATRIX _projectionMatrix;
-		DirectX::XMMATRIX _viewMatrix;
 	protected:
-		RenderTarget* render_target;
-		MaskEngine* mask_engine;
-		
 		Core::Transform _transform;
 		WVProjectionType projection = WVProjectionType::Perspective;
 	private:
@@ -44,25 +35,18 @@ namespace Render
 		float _far_z = 120.f;
 		Surface _resolution;
 
-	protected:
-		Core::GraphicsContext* context;
-
-	protected:
-		WorldViewer(Core::GraphicsContext* context, RenderTarget* target);
+		DirectX::XMMATRIX _projectionMatrix;
+		DirectX::XMMATRIX _viewMatrix;
 	public:
-		WorldViewer(WorldViewer&& other) noexcept;
-		WorldViewer& operator=(WorldViewer&& other) noexcept;
+		WorldViewer();
+		WorldViewer(WorldViewer& other);
+		
 
 		void set_projection_type(WVProjectionType type);
 		void set_scale(float scale);
 		void set_fov(float fov);
 		void set_farz(float farz);
 
-		inline MaskEngine* get_mask_engine();
-
-		Core::GraphicsContext* graphics_context();
-
-		RenderTarget* get_render_target();
 		Surface get_view_resolution() const;
 		void set_view_resolution(Surface surface);
 
@@ -70,6 +54,11 @@ namespace Render
 		inline DirectX::XMMATRIX view_matrix() const;
 		inline DirectX::XMMATRIX projection_matrix() const;
 
-		void bind();
+		void set_position(Position3 pos);
+		void adjust_position(Position3 pos);
+		void adjust_position_relative(Position3 pos);
+
+		void set_rotation(Vector3 quat);
+		void adjust_rotation(Vector3 rot);
 	};
 }

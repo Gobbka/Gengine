@@ -22,7 +22,7 @@ void Render::CreateShadowMapPass::execute(Core::GraphicsContext* context)
 		scene->world()->each<DirectionLightComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<DirectionLightComponent> handle)
 			{
 				handle->bind();
-				handle->get_mask_engine()->clear_buffer();
+				handle->mask_engine->clear_buffer();
 
 				// do stuff here
 

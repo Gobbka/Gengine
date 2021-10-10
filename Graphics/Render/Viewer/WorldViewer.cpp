@@ -52,10 +52,10 @@ DirectX::XMMATRIX Render::WorldViewer::create_projection_matrix() const
 	return create_projection_matrix(projection, _resolution, _fov, _far_z, _scale);
 }
 
-Render::WorldViewer::WorldViewer()
+Render::WorldViewer::WorldViewer(Surface resolution)
 	:
-	_transform({ 0,0,0 }),
-	_resolution(0, 0)
+	_transform({0,0,0}),
+	_resolution(resolution)
 {
 	_viewMatrix = create_view_matrix();
 	_projectionMatrix = create_projection_matrix();

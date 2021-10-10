@@ -78,9 +78,8 @@ Render::Camera::Camera(Camera&& other) noexcept
 
 
 Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
+	: WorldViewer(Surface(target->get_texture()->width(), target->get_texture()->height()))
 {
-	WorldViewer::set_view_resolution(Surface(target->get_texture()->width(), target->get_texture()->height()));
-
 	_render_target = target;
 	_blendEngine = new BlendEngine(context);
 	_mask_engine = new MaskEngine(_render_target);

@@ -38,7 +38,7 @@ namespace Render
 		DirectX::XMMATRIX _projectionMatrix;
 		DirectX::XMMATRIX _viewMatrix;
 	public:
-		WorldViewer();
+		explicit WorldViewer(Surface resolution = Surface(0, 0));
 		WorldViewer(WorldViewer& other);
 		
 

@@ -5,6 +5,7 @@
 #include "../Engine/MaskEngine.h"
 
 Render::DirectionLightComponent::DirectionLightComponent(Core::GraphicsContext* gcontext)
+	: WorldViewer(gcontext->get_screen_resolution())
 {
 	context = gcontext;
 	auto scr_res = context->get_screen_resolution();

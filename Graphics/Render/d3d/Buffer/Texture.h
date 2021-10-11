@@ -39,6 +39,7 @@ namespace Render {
 		Texture& operator=(Texture&& other) noexcept;
 
 		ITexture2DDesc get_texture_desc() const;
+		Surface resolution() const;
 
 		void bind() override;
 

@@ -1,1 +1,2 @@
-def say(message:object) -> None: ...
+def say(message:object)->None:
+    pass

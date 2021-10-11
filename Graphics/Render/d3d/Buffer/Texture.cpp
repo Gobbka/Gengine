@@ -208,6 +208,11 @@ Render::ITexture2DDesc Render::Texture::get_texture_desc() const
 	};
 }
 
+Surface Render::Texture::resolution() const
+{
+	return { _width,_height };
+}
+
 void Render::Texture::bind()
 {
 	_context->context->PSSetShaderResources(0, 1, &_resource);

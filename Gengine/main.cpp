@@ -110,7 +110,7 @@ int WINAPI wWinMain(
 
     Render::SpriteFont font(context->get_device(), L"visby.spritefont");
 
-    form->main_scene->get_main_camera()
+    form->editorScene->get_main_camera()
 		->assign<Render::NormalsRenderTarget>(
             context,
             form->main_scene->get_main_camera()->get<Render::Camera>()->get_view_resolution()

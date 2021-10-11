@@ -160,6 +160,7 @@
     <ClInclude Include="Graphics\Components\GameEntityComponent.h" />
     <ClInclude Include="Graphics\Components\NormalsRenderTarget.h" />
     <ClInclude Include="Graphics\Components\TextComponent.h" />
+    <ClInclude Include="Graphics\DepthStencilStatesCollection.h" />
     <ClInclude Include="Graphics\GDevice\D11GContext.h" />
     <ClInclude Include="Graphics\GDevice\D11GDevice.h" />
     <ClInclude Include="Graphics\IBuffers\IIndexBuffer.h" />
@@ -189,6 +190,7 @@
     <ClInclude Include="Render\d3d\Vertex.h" />
     <ClInclude Include="Render\Engine\BlendEngine.h" />
     <ClInclude Include="Render\Engine\Camera.h" />
+    <ClInclude Include="Render\Engine\DepthStencil.h" />
     <ClInclude Include="Render\Engine\MaskEngine.h" />
     <ClInclude Include="Render\Engine\RenderTarget.h" />
     <ClInclude Include="Render\Engine\SpriteEngine.h" />
@@ -207,6 +209,7 @@
     <ClCompile Include="Canvas\Objects\Rectangle\Rectangle.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Graphics\Components\TextComponent.cpp" />
+    <ClCompile Include="Graphics\DepthStencilStatesCollection.cpp" />
     <ClCompile Include="Graphics\GDevice\D11GContext.cpp" />
     <ClCompile Include="Graphics\GDevice\D11GDevice.cpp" />
     <ClCompile Include="Graphics\IBuffers\IVertexBuffer.cpp" />
@@ -229,6 +232,7 @@
     <ClCompile Include="Render\d3d\Vertex.cpp" />
     <ClCompile Include="Render\Engine\BlendEngine.cpp" />
     <ClCompile Include="Render\Engine\Camera.cpp" />
+    <ClCompile Include="Render\Engine\DepthStencil.cpp" />
     <ClCompile Include="Render\Engine\MaskEngine.cpp" />
     <ClCompile Include="Render\Engine\RenderTarget.cpp" />
     <ClCompile Include="Render\Engine\SpriteEngine.cpp" />

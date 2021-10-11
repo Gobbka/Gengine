@@ -5,69 +5,14 @@
 #include "Types/Types.h"
 #include "RenderTarget.h"
 
-D3D11_DEPTH_STENCILOP_DESC create_depth_stencilop_desc(D3D11_COMPARISON_FUNC stencil_func,D3D11_STENCIL_OP success_func)
-{
-	return D3D11_DEPTH_STENCILOP_DESC{ D3D11_STENCIL_OP_KEEP,D3D11_STENCIL_OP_KEEP,success_func,stencil_func };
-}
-
-Render::Stencil::Stencil(Core::GraphicsContext* context, StencilUsage usage)
-{
-	_context = context->context;
-	_state = nullptr;
-
-	D3D11_DEPTH_STENCIL_DESC depthstencildesc = {};
-
-	// i dont know why, but ui wont work when DepthEnable equals true
-	depthstencildesc.DepthEnable = false;
-	depthstencildesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-	depthstencildesc.DepthFunc = D3D11_COMPARISON_LESS;
-
-	depthstencildesc.StencilEnable = 1;
-	depthstencildesc.StencilReadMask = 0XFF;
-	depthstencildesc.StencilWriteMask = 0XFF;
-
-	switch(usage)
-	{
-	case StencilUsage::write:
-		depthstencildesc.FrontFace = create_depth_stencilop_desc(D3D11_COMPARISON_EQUAL, D3D11_STENCIL_OP_INCR);
-		depthstencildesc.BackFace = create_depth_stencilop_desc(D3D11_COMPARISON_NEVER, D3D11_STENCIL_OP_KEEP);
-	break;
-	case StencilUsage::mask:
-		depthstencildesc.BackFace = create_depth_stencilop_desc(D3D11_COMPARISON_NEVER, D3D11_STENCIL_OP_KEEP);
-		depthstencildesc.FrontFace = create_depth_stencilop_desc(D3D11_COMPARISON_EQUAL, D3D11_STENCIL_OP_KEEP);
-	break;
-	case StencilUsage::normal:
-		depthstencildesc.StencilEnable = false;
-		depthstencildesc.DepthEnable = true;
-	break;
-	}
-
-	assert(SUCCEEDED(context->device->CreateDepthStencilState(&depthstencildesc, &_state)));
-}
-
-void Render::Stencil::bind(UINT reference) const
-{
-	_context->OMSetDepthStencilState(_state, reference);
-}
-
-Render::Stencil::~Stencil()
-{
-	if (_state)
-		_state->Release();
-}
-
 Render::MaskEngine::MaskEngine(RenderTarget* target, MaskEngineUsage usage)
 	:
 	_context(target->get_context()),
-	_disabledState(_context, StencilUsage::normal),
-	_drawState(_context, usage == MaskEngineUsage::DepthStencil ? StencilUsage::write : StencilUsage::normal),
-	_discardState(_context, usage == MaskEngineUsage::DepthStencil ? StencilUsage::mask : StencilUsage::normal),
-	_currentState(nullptr),
-	_view(nullptr)
+	_buffer(nullptr),
+	_view(nullptr),
+	_target(target)
 {
-	_target = target;
-	
-	auto screen_resolution = Surface(_target->get_texture()->width(),_target->get_texture()->height());
+	const auto screen_resolution = _target->get_texture()->resolution();
 	auto* device = _context->device;
 	
 	D3D11_TEXTURE2D_DESC texture_2d_desc{};
@@ -95,11 +40,9 @@ Render::MaskEngine::MaskEngine(RenderTarget* target, MaskEngineUsage usage)
 
 Render::MaskEngine::MaskEngine(Core::GraphicsContext* context, Surface resolution, MaskEngineUsage usage)
 	: _context(context),
-	_disabledState(context, StencilUsage::normal),
-	_drawState(context, usage == MaskEngineUsage::DepthStencil ? StencilUsage::write : StencilUsage::normal),
-	_discardState(context, usage == MaskEngineUsage::DepthStencil ? StencilUsage::mask : StencilUsage::normal),
-	_currentState(nullptr),
-	_view(nullptr)
+	_buffer(nullptr),
+	_view(nullptr),
+	_target(nullptr)
 {
 
 	auto* device = context->device;
@@ -125,15 +68,6 @@ Render::MaskEngine::MaskEngine(Core::GraphicsContext* context, Surface resolutio
 	descDSV.Texture2D.MipSlice = 0;
 
 	assert(SUCCEEDED(device->CreateDepthStencilView(_buffer, &descDSV, &_view)));
-}
-
-void Render::MaskEngine::set_state(Stencil* state, UINT reference,bool force)
-{
-	if (_currentState == state && !force)
-		return;
-
-	_currentState = state;
-	_currentState->bind(reference);
 }
 
 void Render::MaskEngine::clear_buffer() const

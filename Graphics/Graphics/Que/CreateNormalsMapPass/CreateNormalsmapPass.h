@@ -5,6 +5,7 @@ namespace Render
 {
 	class CreateNormalsMapPass : public IPass
 	{
+
 		void execute(Core::GraphicsContext* context) override;
 	};
 }

@@ -23,7 +23,7 @@ Render::DepthStencil::DepthStencil(Core::GraphicsContext* context, DepthStencilD
 	depthstencildesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
 	depthstencildesc.DepthFunc = D3D11_COMPARISON_LESS;
 
-	depthstencildesc.StencilEnable = 1;
+	depthstencildesc.StencilEnable = desc.stencil_usage != StencilUsage::none;
 	depthstencildesc.StencilReadMask = 0XFF;
 	depthstencildesc.StencilWriteMask = 0XFF;
 
@@ -41,9 +41,8 @@ Render::DepthStencil::DepthStencil(Core::GraphicsContext* context, DepthStencilD
 		depthstencildesc.BackFace = create_depth_stencilop_desc(D3D11_COMPARISON_NEVER, D3D11_STENCIL_OP_KEEP);
 		depthstencildesc.FrontFace = create_depth_stencilop_desc(D3D11_COMPARISON_NEVER, D3D11_STENCIL_OP_KEEP);
 		break;
-	default:
-		depthstencildesc.StencilEnable = 0;
-		break;
+	case StencilUsage::none: break;
+	default: ;
 	}
 
 	context->device->CreateDepthStencilState(&depthstencildesc, &_state);

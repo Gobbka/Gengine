@@ -9,6 +9,7 @@ namespace Core
 namespace Render {
 	enum class StencilUsage : __int8
 	{
+		none = 0,
 		normal = 1,
 		mask = 2,
 		write = 3

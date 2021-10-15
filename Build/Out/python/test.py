@@ -1,4 +1,7 @@
-import nigga
+def gapka(digger: int) -> int:
+    return digger + 228
 
-nigga.say("gapka")
 
+nigger: int = gapka(2)
+
+print(nigger)

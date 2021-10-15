@@ -34,7 +34,7 @@ public:
 		auto* mask_engine = camera->get_mask_engine();
 		Render::DrawEvent2D event(camera,nullptr);
 
-		mask_engine->get_discardState()->bind(0);
+		context->dss_collection[(Render::DSBitSet)Render::DepthStencilUsage::stencil_mask].bind(0);
 		
 		context->main_scene->world()->each<UI::InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<UI::InteractiveForm>form)
 			{

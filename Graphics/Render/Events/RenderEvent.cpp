@@ -21,7 +21,7 @@ Render::SpriteEngine* Render::DrawEvent::sprite_engine()
 void Render::DrawEvent::mask_draw_begin() const
 {
 	auto* mask = _camera->get_mask_engine();
-	mask->set_state(mask->get_drawState(), _stencil_layer);
+	_context->dss_collection[(DSBitSet)DepthStencilUsage::stencil_write].bind(_stencil_layer);
 }
 
 void Render::DrawEvent::mask_discard_begin(bool increase_layer)
@@ -29,7 +29,7 @@ void Render::DrawEvent::mask_discard_begin(bool increase_layer)
 	if (increase_layer)
 		this->_stencil_layer++;
 	auto* mask = _camera->get_mask_engine();
-	mask->set_state(mask->get_discardState(), _stencil_layer);
+	_context->dss_collection[(DSBitSet)DepthStencilUsage::stencil_mask].bind(_stencil_layer);
 }
 
 void Render::DrawEvent::mask_discard_end(bool decrease_layer)
@@ -37,7 +37,7 @@ void Render::DrawEvent::mask_discard_end(bool decrease_layer)
 	if (decrease_layer)
 		this->_stencil_layer--;
 	auto* mask = _camera->get_mask_engine();
-	mask->set_state(mask->get_discardState(), _stencil_layer);
+	_context->dss_collection[(DSBitSet)DepthStencilUsage::stencil_mask].bind(_stencil_layer);
 }
 
 void Render::DrawEvent::mask_set_stencil(BYTE new_index)

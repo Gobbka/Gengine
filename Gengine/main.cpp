@@ -40,6 +40,7 @@
 
 void debugger_loop()
 {
+    sizeof(int);
 	const auto* server = PipeServer::create(L"\\\\.\\pipe\\GENGINE_DBG");
 
 	while(true)

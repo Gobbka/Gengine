@@ -8,13 +8,6 @@ namespace Render {
 	class RenderTarget;
 	class WorldViewer;
 
-	enum class StencilUsage : __int8
-	{
-		normal,
-		write,
-		mask,
-	};
-
 	enum class MaskEngineUsage
 	{
 		Depth,

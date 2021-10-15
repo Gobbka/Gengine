@@ -1,6 +1,6 @@
 #include "Transform.h"
 
-DirectX::XMMATRIX Core::Transform::create_world_matrix()
+DirectX::XMMATRIX Core::Transform::create_world_matrix() const
 {
 	return DirectX::XMMatrixRotationRollPitchYaw(_rotation.x,_rotation.y,_rotation.z) * DirectX::XMMatrixTranslation(_pos.x, _pos.y, _pos.z);
 }
@@ -24,9 +24,9 @@ void Core::Transform::adjust_position(Position3 pos)
 {
 	using namespace DirectX;
 
-	auto nigga = (_forward_vector * pos.x) + (_right_vector * pos.z) + (_up_vector * pos.y);
+	const auto vector = (_forward_vector * pos.x) + (_right_vector * pos.z) + (_up_vector * pos.y);
 
-	_pos += Position3(nigga.m128_f32[2], nigga.m128_f32[1], nigga.m128_f32[0]);
+	_pos += Position3(vector.m128_f32[2], vector.m128_f32[1], vector.m128_f32[0]);
 	_world_matrix = create_world_matrix();
 }
 
@@ -40,7 +40,7 @@ void Core::Transform::adjust_rotation(Vector3 rotation)
 {
 	_rotation += rotation;
 
-	auto rotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(_rotation.x, _rotation.y, 0);
+	const auto rotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(_rotation.x, _rotation.y, 0);
 	_forward_vector = DirectX::XMVector3TransformCoord(Transform::forward(), rotationMatrix);
 	_right_vector = DirectX::XMVector3TransformCoord(Transform::right(), rotationMatrix);
 	_up_vector = DirectX::XMVector3TransformCoord(Transform::up(), rotationMatrix);
@@ -54,17 +54,17 @@ void Core::Transform::set_rotation(Vector3 rotation)
 	_world_matrix = create_world_matrix();
 }
 
-Position3 Core::Transform::get_position_lh()
+Position3 Core::Transform::get_position_lh() const
 {
-	return Position3(_pos.z, _pos.y, _pos.x);
+	return { _pos.z, _pos.y, _pos.x };
 }
 
-Position3 Core::Transform::get_position()
+Position3 Core::Transform::get_position() const
 {
 	return _pos;
 }
 
-Vector3 Core::Transform::get_rotation()
+Vector3 Core::Transform::get_rotation() const
 {
 	return _rotation;
 }
@@ -95,7 +95,7 @@ void Core::Quaternion3::adjust_rotation(Vector3 rot)
 	
 }
 
-Vector3 Core::Quaternion3::get_rotation()
+Vector3 Core::Quaternion3::get_rotation() const
 {
 	return _rotation;
 }

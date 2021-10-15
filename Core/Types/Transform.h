@@ -10,7 +10,7 @@ namespace Core
 		
 		DirectX::XMMATRIX _world_matrix;
 	private:
-		DirectX::XMMATRIX create_world_matrix();
+		DirectX::XMMATRIX create_world_matrix() const;
 
 		DirectX::XMVECTOR _forward_vector;
 		DirectX::XMVECTOR _up_vector;
@@ -26,9 +26,9 @@ namespace Core
 		void adjust_rotation(Vector3 rotation);
 		void set_rotation(Vector3 rotation);
 
-		Position3 get_position_lh();
-		Position3 get_position();
-		Vector3 get_rotation();
+		Position3 get_position_lh() const;
+		Position3 get_position() const;
+		Vector3 get_rotation() const;
 
 		static inline DirectX::XMVECTOR up();
 		static inline DirectX::XMVECTOR right();
@@ -42,6 +42,6 @@ namespace Core
 
 		void adjust_rotation(Vector3 rot);
 
-		Vector3 get_rotation();
+		Vector3 get_rotation() const;
 	};
 };

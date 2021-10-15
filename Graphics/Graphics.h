@@ -2,6 +2,7 @@
 #include <d3d11.h>
 
 #include "IGDevice.h"
+#include "Graphics/DepthStencilStatesCollection.h"
 #include "Graphics/Scene.h"
 #include "Graphics/ShaderCollection.h"
 #include "Render/Engine/RenderTarget.h"
@@ -17,7 +18,6 @@ namespace Render {
 
 namespace Core
 {
-	
 	class __declspec(dllexport) GraphicsContext
 	{
 	public:
@@ -30,8 +30,6 @@ namespace Core
 		Render::RenderTarget _targetView;
 
 		Render::SamplerState* _samplerState;
-		
-		Render::PixelShader* _pixelShader;
 		
 		ID3D11InputLayout* _inputLayout;
 
@@ -46,6 +44,7 @@ namespace Core
 		
 	public:
 		ShaderCollection shader_collection;
+		Render::DepthStencilStatesCollection dss_collection;
 
 		Render::Scene* create_scene();
 		std::vector<Render::Scene*> scenes;

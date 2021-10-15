@@ -92,7 +92,7 @@ void Render::Camera::bind() const
 	_blendEngine->bind();
 
 	_mask_engine->clear_buffer();
-	_mask_engine->get_disabledState()->bind(0);
+	_context->dss_collection[(DSBitSet)DepthStencilUsage::depth].bind(0);
 	auto* mask_view = _mask_engine != nullptr ? _mask_engine->get_view() : nullptr;
 
 	_render_target->bind(mask_view);

@@ -23,10 +23,11 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	: context(context),
 	device(dev),
 	_screen_resolution(0,0),
+	_swap(swap),
+	_targetView(this,swap),
 	shader_collection(this),
-	_targetView(this,swap)
+	dss_collection(this)
 {
-	_swap = swap;
 
 	_gdevice = new Render::D11GDevice(dev, this);
 	_gcontext = new Render::D11GContext(this, context);
@@ -45,9 +46,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_texture_vs->release_blob();
 	shader_collection.insert(L"d3d11\\texture_vs.cso", _texture_vs);
 
-	_spriteEngine = new Render::SpriteEngine(
-		this
-	);
+	_spriteEngine = new Render::SpriteEngine(this);
 
 	_gcontext->set_vertex_shader(_texture_vs);
 

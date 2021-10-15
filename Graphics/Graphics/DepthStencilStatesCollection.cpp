@@ -6,15 +6,17 @@ Render::DepthStencilStatesCollection::DepthStencilStatesCollection(Core::Graphic
 	_context = context;
 }
 
-Render::DepthStencil* Render::DepthStencilStatesCollection::operator[](DSBitSet index)
+Render::DepthStencil Render::DepthStencilStatesCollection::operator[](DSBitSet index)
 {
-	auto* element = &_map[index];
-	if(element == nullptr)
+	auto element = _map[index];
+	if(!element.valid())
 	{
 		DepthStencilDesc ds_desc;
 		ds_desc.depth = index & (DSBitSet)DepthStencilUsage::depth;
 		ds_desc.stencil_usage = (StencilUsage)(index >> 1);
-		_map[index] = std::move(DepthStencil(_context, ds_desc));
+
+		element = DepthStencil(_context, ds_desc);
+		_map[index] = element;
 	}
 	return element;
 }

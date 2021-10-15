@@ -33,5 +33,5 @@ Render::DirectionLightComponent& Render::DirectionLightComponent::operator=(Dire
 void Render::DirectionLightComponent::bind() const
 {
 	context->get_context()->set_mask_engine(mask_engine);
-	mask_engine->get_disabledState()->bind();
+	context->dss_collection[(DSBitSet)DepthStencilUsage::depth].bind(0);
 }

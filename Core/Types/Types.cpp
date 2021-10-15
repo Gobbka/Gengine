@@ -1,6 +1,6 @@
 #include "Types.h"
 
-DirectX::XMFLOAT3 Color3XM::to_float3()
+DirectX::XMFLOAT3 Color3XM::to_float3() const
 {
 	return DirectX::XMFLOAT3(r, g, b);
 }
@@ -32,6 +32,11 @@ void Vector2::operator-=(Vector2 pos)
 {
 	x -= pos.x;
 	y -= pos.y;
+}
+
+bool Vector2::operator==(Vector2 vector) const
+{
+	return x == vector.x && y == vector.y;
 }
 
 Vector2 Vector2::lerp(Vector2 vector,float t) const
@@ -67,7 +72,7 @@ Vector3::Vector3(float x, float y, float z)
 
 inline Vector3 Vector3::null()
 {
-	return Vector3(0, 0, 0);
+	return { 0, 0, 0};
 }
 
 Vector4::Vector4(float x, float y, float z, float w)
@@ -83,12 +88,12 @@ float Vector4::length() const
 Vector4 Vector4::normalize() const
 {
 	auto vector = DirectX::XMVector4Normalize(DirectX::XMVectorSet(x, y, z, w));
-	return Vector4(vector.m128_f32[0], vector.m128_f32[1], vector.m128_f32[2], vector.m128_f32[3]);
+	return { vector.m128_f32[0], vector.m128_f32[1], vector.m128_f32[2], vector.m128_f32[3] };
 }
 
 inline Vector4 Vector4::null()
 {
-	return Vector4(0, 0, 0, 0);
+	return { 0, 0, 0, 0 };
 }
 
 Vector4Int::Vector4Int(int x, int y, int z, int w)

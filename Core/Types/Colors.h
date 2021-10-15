@@ -25,7 +25,7 @@ struct __declspec(dllexport) Color3XM
 	const static Color3XM black() { return Color3XM(0, 0, 0); }
 	static Color3XM from_rgb(float r, float g, float b) { return Color3XM(RGB_TO_FLOAT(r,g,b)); }
 
-	DirectX::XMFLOAT3 to_float3();
+	DirectX::XMFLOAT3 to_float3() const;
 
 	Color3XM inverse() const
 	{

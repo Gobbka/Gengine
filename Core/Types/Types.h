@@ -6,8 +6,10 @@ struct __declspec(dllexport) Vector2 {
 	float x;
 	float y;
 
-	void operator +=(Vector2 pos);
-	void operator -=(Vector2 pos);
+	void operator +=(Vector2 vector);
+	void operator -=(Vector2 vector);
+	bool operator ==(Vector2 vector) const;
+
 	Vector2 lerp(Vector2 vector,float t) const;
 
 	Vector2(float x, float y);

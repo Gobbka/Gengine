@@ -210,7 +210,7 @@ Render::ITexture2DDesc Render::Texture::get_texture_desc() const
 
 Surface Render::Texture::resolution() const
 {
-	return { _width,_height };
+	return { (float)_width,(float)_height };
 }
 
 void Render::Texture::bind()

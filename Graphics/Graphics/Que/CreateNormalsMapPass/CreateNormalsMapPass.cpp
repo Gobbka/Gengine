@@ -24,7 +24,7 @@ void Render::CreateNormalsMapPass::execute(Core::GraphicsContext* context)
 				nrt->clear();
 				cam->get_mask_engine()->clear_buffer();
 				gcontext->set_mask_engine(cam->get_mask_engine());
-				cam->get_mask_engine()->set_state(cam->get_mask_engine()->get_disabledState());
+				context->dss_collection[(DSBitSet)DepthStencilUsage::depth].bind();
 				// do stuff here
 
 				auto world_matrix = cam->world_to_screen_matrix();

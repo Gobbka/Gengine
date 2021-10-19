@@ -8,5 +8,5 @@ struct PSI
 
 float4 main(PSI psi) : SV_TARGET
 {
-	return float4(psi.normal, 1.0f);
+	return float4(mul(psi.normal,0.5f) + 0.5f, 1.0f);
 }

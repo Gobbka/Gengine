@@ -10,6 +10,7 @@ namespace Render
 			STAGING
 		} usage = Usage::DEFAULT;
 
+		UINT bind_flag = D3D11_BIND_SHADER_RESOURCE;
 		DXGI_FORMAT format;
 		UINT32 width;
 		UINT32 height;

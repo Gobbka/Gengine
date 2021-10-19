@@ -61,7 +61,7 @@ Render::Texture::Texture(Core::GraphicsContext* engine,Material& material)
 	texture_desc.MipLevels = 1;
 	texture_desc.ArraySize = 1;
 	texture_desc.Format = material.format;
-	texture_desc.SampleDesc = { 1,0 };
+	texture_desc.SampleDesc= { 1,0 };
 	texture_desc.CPUAccessFlags = 0;
 	texture_desc.MiscFlags = 0;
 	texture_desc.Usage = D3D11_USAGE_DEFAULT;
@@ -97,7 +97,7 @@ Render::Texture::Texture(Core::GraphicsContext* context, ITexture2DDesc texture)
 	_resource(nullptr)
 {
 	D3D11_TEXTURE2D_DESC texture_desc;
-	texture_desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+	texture_desc.BindFlags = texture.bind_flag;
 	texture_desc.Width = _width = texture.width;
 	texture_desc.Height = _height = texture.height;
 	texture_desc.MipLevels = 1;
@@ -120,7 +120,8 @@ Render::Texture::Texture(Core::GraphicsContext* context, ITexture2DDesc texture)
 	if (slice == 0)
 		slice = (unsigned)texture.width * 4;
 
-	context->context->UpdateSubresource(_texture, 0, nullptr, texture.pSysMem, slice, 0);
+	if(texture.pSysMem)
+		context->context->UpdateSubresource(_texture, 0, nullptr, texture.pSysMem, slice, 0);
 
 	assert(SUCCEEDED(context->device->CreateShaderResourceView(_texture, &rvDesc, &_resource)));
 }
@@ -147,12 +148,12 @@ Render::Texture::Texture(Texture&& move) noexcept
 }
 
 Render::Texture::Texture(Texture& other)
+	: _context(other._context)
+	, _texture(nullptr)
+	, _resource(nullptr)
+	, _width(other.width())
+	, _height(other._height)
 {
-	_width = other._width;
-	_height = other._height;
-	_context = other._context;
-	_texture = nullptr;
-
 	auto d3ddesc = other.get_desc();
 	_context->device->CreateTexture2D(&d3ddesc, nullptr, &_texture);
 	other.copy_to(this);
@@ -199,6 +200,7 @@ Render::ITexture2DDesc Render::Texture::get_texture_desc() const
 
 	return ITexture2DDesc{
 		textDesc.Usage == D3D11_USAGE_DEFAULT ? ITexture2DDesc::Usage::DEFAULT : ITexture2DDesc::Usage::STAGING,
+		textDesc.BindFlags,
 		textDesc.Format,
 		textDesc.Width,
 		textDesc.Height,

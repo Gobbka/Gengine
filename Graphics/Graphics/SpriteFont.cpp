@@ -42,6 +42,7 @@ Render::SpriteFont::SpriteFont(IGDevice* device,BinaryReader& reader)
     this->font_texture = device->create_texture(
 	    ITexture2DDesc {
             ITexture2DDesc::Usage::DEFAULT,
+            D3D11_BIND_SHADER_RESOURCE,
 	        textureFormat,
     		textureWidth,
     		textureHeight,

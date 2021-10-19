@@ -53,7 +53,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	context->IASetInputLayout(_inputLayout);
 
 	_passer._begin_passes.push_back(new Render::ClearPass());
-	_passer._probe_passes.push_back(new Render::CreateShadowMapPass());
+	//_passer._probe_passes.push_back(new Render::CreateShadowMapPass());
 	_passer._probe_passes.push_back(new Render::CreateNormalsMapPass());
 	_passer._end_passes.push_back(new Render::RenderMeshPass(this));
 

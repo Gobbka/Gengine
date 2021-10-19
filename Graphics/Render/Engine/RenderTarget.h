@@ -26,6 +26,7 @@ namespace Render {
 		RenderTarget(Core::GraphicsContext* context, Texture texture);
 		// create render target from empty texture
 		RenderTarget(Core::GraphicsContext* context, Surface texture_resolution);
+		RenderTarget(Core::GraphicsContext* context, ITexture2DDesc texture_desc);
 
 		RenderTarget(Core::GraphicsContext* context);
 

@@ -36,6 +36,14 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Surface textu
 	assert(SUCCEEDED(context->device->CreateRenderTargetView(_texture.texture(), nullptr, &_targetView)));
 }
 
+Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, ITexture2DDesc texture_desc)
+	: _targetView(nullptr),
+	_context(context),
+	_texture(context,texture_desc)
+{
+	assert(SUCCEEDED(context->device->CreateRenderTargetView(_texture.texture(), nullptr, &_targetView)));
+}
+
 Render::RenderTarget::RenderTarget(Core::GraphicsContext* context)
 	: _targetView(nullptr),
 	_context(context),

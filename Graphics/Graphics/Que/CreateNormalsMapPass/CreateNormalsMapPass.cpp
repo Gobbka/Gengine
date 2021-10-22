@@ -7,6 +7,7 @@
 #include "../../Components/NormalsRenderTarget.h"
 #include "../../../Render/Engine/MaskEngine.h"
 
+
 void Render::CreateNormalsMapPass::execute(Core::GraphicsContext* context)
 {
 	auto* gcontext = context->get_context();

@@ -11,7 +11,7 @@ GeModule* GELoadModule(wchar_t* path)
 	{
 		return nullptr;
 	}
-	const auto module_main = (GEModuleMain)GetProcAddress(handle, "GEMain");
+	const auto module_main = (GEModuleMain)GetProcAddress(handle, "GEModuleMain");
 	if(module_main != nullptr)
 	{
 		GeModule ge_module;

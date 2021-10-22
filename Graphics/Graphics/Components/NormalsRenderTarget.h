@@ -8,6 +8,8 @@ namespace Render
 	{
 		NormalsRenderTarget(Core::GraphicsContext*context,Surface resolution)
 			: RenderTarget(context,resolution)
-		{}
+		{
+			clear_color = { 0.5,0.5,0.5,1 };
+		}
 	};
 }

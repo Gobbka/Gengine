@@ -5,7 +5,7 @@ D3D11_TEXTURE2D_DESC Render::Texture::get_desc() const
 {
 	D3D11_TEXTURE2D_DESC desc;
 	_texture->GetDesc(&desc);
-	return D3D11_TEXTURE2D_DESC(desc);
+	return desc;
 }
 
 ID3D11Texture2D* Render::Texture::texture() const

@@ -31,7 +31,7 @@
 #include <Render/Light/DirectionLightComponent.h>
 
 #include "Graphics/Components/MeshRenderer.h"
-#include "Graphics/Components/NormalsRenderTarget.h"
+#include "Graphics/Components/LightViewer.h"
 #include "Graphics/Components/TextComponent.h"
 #include "Loaders/AssetsLoader.h"
 #include "Logger/Logger.h"
@@ -111,7 +111,7 @@ int WINAPI wWinMain(
     Render::SpriteFont font(context->get_device(), L"visby.spritefont");
 
     form->editorScene->get_main_camera()
-		->assign<Render::NormalsRenderTarget>(
+		->assign<Render::LightViewer>(
             context,
             form->main_scene->get_main_camera()->get<Render::Camera>()->get_view_resolution()
 	);

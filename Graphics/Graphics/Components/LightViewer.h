@@ -10,8 +10,8 @@ namespace Render
 		RenderTarget light_map;
 
 		LightViewer(Core::GraphicsContext*context,Surface resolution)
-			: normals_map(context,resolution)
-			, light_map(context,resolution)
+			: normals_map(context,resolution),
+			light_map(context,resolution)
 		{
 			normals_map.clear_color = { .5f,.5f,.5f,1.f };
 		}

@@ -4,7 +4,7 @@
 #include "../../Components/MeshRenderer.h"
 #include "../../../IGContext.h"
 #include "../../../Render/d3d/Buffer/ConstantBuffer.h"
-#include "../../Components/NormalsRenderTarget.h"
+#include "../../Components/LightViewer.h"
 #include "../../../Render/Engine/MaskEngine.h"
 
 
@@ -18,11 +18,11 @@ void Render::CreateNormalsMapPass::execute(Core::GraphicsContext* context)
 			continue;
 		auto* world = scene->world();
 
-		world->each<NormalsRenderTarget, Camera>([&](ECS::Entity* ent, ECS::ComponentHandle<NormalsRenderTarget> nrt, ECS::ComponentHandle<Camera> cam)
+		world->each<LightViewer, Camera>([&](ECS::Entity* ent, ECS::ComponentHandle<LightViewer> nrt, ECS::ComponentHandle<Camera> cam)
 			{
 				gcontext->set_pixel_shader(context->shader_collection.get<PixelShader>(L"d3d11\\normals_ps.cso"));
-				nrt->bind();
-				nrt->clear();
+				nrt->normals_map.bind();
+				nrt->normals_map.clear();
 				cam->get_mask_engine()->clear_buffer();
 				gcontext->set_mask_engine(cam->get_mask_engine());
 				context->dss_collection[(DSBitSet)DepthStencilUsage::depth].bind();

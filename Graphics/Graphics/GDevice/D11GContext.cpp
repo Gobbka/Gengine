@@ -71,6 +71,34 @@ void Render::D11GContext::set_sampler_state(SamplerState* sampler)
 	_current_sampler = sampler;
 }
 
+void Render::D11GContext::set_render_target(RenderTarget* target, MaskEngine* mask)
+{
+	auto* mask_view = mask == nullptr ? nullptr : mask->get_view();
+	if(target == nullptr)
+	{
+		_d11context->OMSetRenderTargets(0, nullptr, mask_view);
+	}else
+	{
+		auto* view = target->get_view();
+		_d11context->OMSetRenderTargets(1, &view, mask_view);
+	}
+}
+
+void Render::D11GContext::set_render_target(RenderTarget* target)
+{
+	ID3D11DepthStencilView* old_view;
+	_d11context->OMGetRenderTargets(0, nullptr, &old_view);
+
+	if(target == nullptr)
+	{
+		_d11context->OMSetRenderTargets(0, nullptr, old_view);
+	}else
+	{
+		auto* r_view = target->get_view();
+		_d11context->OMSetRenderTargets(1, &r_view, old_view);
+	}
+}
+
 void Render::D11GContext::draw_indexed(UINT count, UINT start_location)
 {
 	_d11context->DrawIndexed(count, start_location, 0);

@@ -68,7 +68,7 @@ void Canvas::Rectangle::draw(Render::DrawEvent2D* draw_event)
 	if(_background_texture)
 	{
 		sprite->begin_sprite_mode();
-		sprite->bind_texture(_background_texture);
+		sprite->bind_texture(_background_texture,0);
 	}else
 	{
 		sprite->begin_color_mode();

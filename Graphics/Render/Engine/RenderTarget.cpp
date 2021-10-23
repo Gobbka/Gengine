@@ -88,6 +88,11 @@ Core::GraphicsContext* Render::RenderTarget::get_context()
 	return _context;
 }
 
+ID3D11RenderTargetView* Render::RenderTarget::get_view()
+{
+	return _targetView;
+}
+
 ID3D11Resource* Render::RenderTarget::get_resource()
 {
 	return _texture.texture();

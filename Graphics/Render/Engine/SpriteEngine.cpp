@@ -4,16 +4,15 @@
 
 Render::SpriteEngine::SpriteEngine(Core::GraphicsContext* context)
 {
-	_binded_texture = nullptr;
 	_graphicsContext = context;
 }
 
-void Render::SpriteEngine::bind_texture(Texture* texture)
+void Render::SpriteEngine::bind_texture(Texture* texture,unsigned slot)
 {
-	if(texture != _binded_texture)
+	if(texture != _binded_texture[slot])
 	{
-		texture->bind();
-		_binded_texture = texture;
+		texture->bind(slot);
+		_binded_texture[slot] = texture;
 	}
 }
 

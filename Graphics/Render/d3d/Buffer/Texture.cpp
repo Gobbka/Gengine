@@ -215,9 +215,9 @@ Surface Render::Texture::resolution() const
 	return { (float)_width,(float)_height };
 }
 
-void Render::Texture::bind()
+void Render::Texture::bind(UINT slot)
 {
-	_context->context->PSSetShaderResources(0, 1, &_resource);
+	_context->context->PSSetShaderResources(slot, 1, &_resource);
 }
 
 bool Render::Texture::is_render_target()

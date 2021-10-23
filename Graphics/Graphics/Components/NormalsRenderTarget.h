@@ -14,6 +14,7 @@ namespace Render
 			, light_map(context,resolution)
 		{
 			normals_map.clear_color = { .5f,.5f,.5f,1.f };
+			light_map.clear_color = {.5f,.5f,.5f,1.f};
 		}
 	};
 }

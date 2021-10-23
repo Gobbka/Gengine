@@ -21,13 +21,13 @@ namespace Render {
 		
 	private:
 		Core::GraphicsContext* _graphicsContext;
-		Texture* _binded_texture;
+		Texture* _binded_texture[16]{};
 	public:
 		SpriteEngine(
 			Core::GraphicsContext* context
 		);
 
-		void bind_texture(Texture* texture);
+		void bind_texture(Texture* texture,unsigned slot);
 
 		void begin_sprite_mode(bool light = false);
 		void begin_color_mode();

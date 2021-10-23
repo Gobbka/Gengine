@@ -36,6 +36,7 @@ namespace Render {
 		RenderTarget& operator=(RenderTarget&& other) noexcept;
 
 		Core::GraphicsContext* get_context();
+		ID3D11RenderTargetView* get_view();
 		ID3D11Resource* get_resource();
 		Texture* get_texture();
 

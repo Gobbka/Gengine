@@ -41,7 +41,7 @@ namespace Render {
 		ITexture2DDesc get_texture_desc() const;
 		Surface resolution() const;
 
-		void bind() override;
+		void bind(UINT slot=0) override;
 
 		bool is_render_target() override;
 		bool is_shader_resource() override;

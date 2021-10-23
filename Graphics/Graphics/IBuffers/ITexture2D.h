@@ -33,6 +33,6 @@ namespace Render
 		virtual bool is_render_target() PURE;
 		virtual bool is_shader_resource() PURE;
 
-		virtual void bind() PURE;
+		virtual void bind(UINT slot=0) PURE;
 	};
 }

@@ -6,9 +6,9 @@
 #include "../../../IGContext.h"
 #include "../../Mesh.h"
 
-void Render::ClearPass::execute(Core::GraphicsContext* context)
+void Render::ClearPass::execute()
 {
-	for (auto* scene : context->scenes) {
+	for (auto* scene : _context->scenes) {
 		scene->world()->each<Camera>([](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)
 		{
 			camera->clear();
@@ -77,20 +77,20 @@ Render::RenderMeshPass::RenderMeshPass(Core::GraphicsContext* context)
 	_context = context;
 }
 
-void Render::RenderMeshPass::execute(Core::GraphicsContext* context)
+void Render::RenderMeshPass::execute()
 {
 	auto* gcontext = _context->get_context();
 	gcontext->set_topology(PrimitiveTopology::TRIANGLELIST);
 	gcontext->matrix_buffer.bind();
 	gcontext->control_buffer.bind();
 
-	for (auto* scene : context->scenes) {
+	for (auto* scene : _context->scenes) {
 
-		if (!scene->active||scene == context->main_scene)
+		if (!scene->active||scene == _context->main_scene)
 			continue;
 
 		execute_scene(scene);
 	}
 
-	execute_scene(context->main_scene);
+	execute_scene(_context->main_scene);
 }

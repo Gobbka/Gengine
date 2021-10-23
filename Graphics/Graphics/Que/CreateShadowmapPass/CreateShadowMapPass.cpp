@@ -8,14 +8,14 @@
 #include "../../Mesh.h"
 
 
-void Render::CreateShadowMapPass::execute(Core::GraphicsContext* context)
+void Render::CreateShadowMapPass::execute()
 {
-	auto* gcontext = context->get_context();
+	auto* gcontext = _context->get_context();
 	auto* old_ps = gcontext->get_pixel_shader();
 
 	gcontext->set_pixel_shader(nullptr);
 	
-	for (auto* scene : context->scenes) {
+	for (auto* scene : _context->scenes) {
 		if (!scene->active)
 			continue;
 

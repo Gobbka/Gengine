@@ -2,6 +2,11 @@
 #include <vector>
 #include "IPass.h"
 
+namespace Core
+{
+	class GraphicsContext;
+}
+
 namespace Render {
 	
 	class __declspec(dllexport) Passer

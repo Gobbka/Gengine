@@ -52,9 +52,9 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 
 	context->IASetInputLayout(_inputLayout);
 
-	_passer._begin_passes.push_back(new Render::ClearPass());
+	_passer._begin_passes.push_back(new Render::ClearPass(this));
 	//_passer._probe_passes.push_back(new Render::CreateShadowMapPass());
-	_passer._probe_passes.push_back(new Render::CreateNormalsMapPass());
+	_passer._probe_passes.push_back(new Render::CreateNormalsMapPass(this));
 	_passer._end_passes.push_back(new Render::RenderMeshPass(this));
 
 	_gcontext->set_topology(PrimitiveTopology::TRIANGLESTRIP);
@@ -127,29 +127,29 @@ void Core::GraphicsContext::make_frame()
 
 	for (Render::IPass* pass : _passer._begin_passes)
 	{
-		pass->execute(this);
+		pass->execute();
 	}
 	
 	// probe,update,collection pass
 	for(Render::IPass*pass :_passer._probe_passes)
 	{
-		pass->execute(this);
+		pass->execute();
 	}
 
 	// render pass
 	for (Render::IPass* pass : _passer._draw_passes)
 	{
-		pass->execute(this);
+		pass->execute();
 	}
 
 	for (Render::IPass* pass : _passer._end_passes)
 	{
-		pass->execute(this);
+		pass->execute();
 	}
 
 	for (Render::IPass* pass : _passer._overlay_passes)
 	{
-		pass->execute(this);
+		pass->execute();
 	}
 }
 

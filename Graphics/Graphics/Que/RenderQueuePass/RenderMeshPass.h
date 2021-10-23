@@ -19,7 +19,12 @@ namespace Render
 
 	class ClearPass : public IPass
 	{
-		void execute(Core::GraphicsContext* context) override;
+		Core::GraphicsContext* _context;
+		void execute() override;
+	public:
+		ClearPass(Core::GraphicsContext* context)
+			: _context(context)
+		{}
 	};
 	
 	class __declspec(dllexport) RenderMeshPass : public IPass
@@ -32,6 +37,6 @@ namespace Render
 	public:
 		RenderMeshPass(Core::GraphicsContext* context);
 
-		void execute(Core::GraphicsContext* context) override;
+		void execute() override;
 	};
 }

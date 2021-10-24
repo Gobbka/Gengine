@@ -15,5 +15,17 @@ namespace Render
 		{
 			normals_map.clear_color = { .5f,.5f,.5f,1.f };
 		}
+
+		LightViewer(LightViewer&& other) noexcept
+			: normals_map(std::move(other.normals_map))
+		    , light_map(std::move(other.light_map))
+		{}
+
+		LightViewer& operator=(LightViewer&&other) noexcept
+		{
+			normals_map = std::move(other.normals_map);
+			light_map = std::move(other.light_map);
+			return *this;
+		}
 	};
 }

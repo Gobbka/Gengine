@@ -42,6 +42,7 @@ inline void Render::RenderMeshPass::render_camera(ECS::ComponentHandle<Camera> c
 	auto* sprite_engine = camera->graphics_context()->get_sprite_engine();
 
 	sprite_engine->begin_sprite_mode(true);
+	
 	world->each<MeshRenderer>([&](ECS::Entity* ent, ECS::ComponentHandle<MeshRenderer> model)
 		{
 			sprite_engine->bind_texture(model->texture,0);

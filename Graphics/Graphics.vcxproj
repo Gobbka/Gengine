@@ -158,6 +158,7 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Graphics\Channels.h" />
     <ClInclude Include="Graphics\Components\GameEntityComponent.h" />
+    <ClInclude Include="Graphics\Components\LightViewer.h" />
     <ClInclude Include="Graphics\Components\NormalsRenderTarget.h" />
     <ClInclude Include="Graphics\Components\TextComponent.h" />
     <ClInclude Include="Graphics\DepthStencilStatesCollection.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Graphics\IBuffers\ITexture2D.h" />
     <ClInclude Include="Graphics\IBuffers\IVertexBuffer.h" />
     <ClInclude Include="Graphics\PrimitiveTopology.h" />
+    <ClInclude Include="Graphics\Que\CreateLightMapPass\CreateLightMapPass.h" />
     <ClInclude Include="Graphics\Que\CreateNormalsMapPass\CreateNormalsmapPass.h" />
     <ClInclude Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.h" />
     <ClInclude Include="Graphics\Que\IPass\IPass.h" />
@@ -213,6 +215,7 @@
     <ClCompile Include="Graphics\GDevice\D11GContext.cpp" />
     <ClCompile Include="Graphics\GDevice\D11GDevice.cpp" />
     <ClCompile Include="Graphics\IBuffers\IVertexBuffer.cpp" />
+    <ClCompile Include="Graphics\Que\CreateLightMapPass\CreateLightMapPass.cpp" />
     <ClCompile Include="Graphics\Que\CreateNormalsMapPass\CreateNormalsMapPass.cpp" />
     <ClCompile Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.cpp" />
     <ClCompile Include="Graphics\Que\IPass\Passer.cpp" />

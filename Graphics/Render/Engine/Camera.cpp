@@ -6,16 +6,19 @@
 #include "RenderTarget.h"
 #include "Types/Types.h"
 #include "../../Graphics.h"
+#include "../../IGContext.h"
 
 
 void Render::Camera::clear(Color3XM color)
 {
 	_render_target->clear(color);
+	_mask_engine->clear_buffer();
 }
 
 void Render::Camera::clear()
 {
 	_render_target->clear();
+	_mask_engine->clear_buffer();
 }
 
 void Render::Camera::set_resolution(Surface resolution)
@@ -90,10 +93,5 @@ Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
 void Render::Camera::bind() const
 {
 	_blendEngine->bind();
-
-	_mask_engine->clear_buffer();
-	_context->dss_collection[(DSBitSet)DepthStencilUsage::depth].bind(0);
-	auto* mask_view = _mask_engine != nullptr ? _mask_engine->get_view() : nullptr;
-
-	_render_target->bind(mask_view);
+	_context->get_context()->set_render_target(_render_target, _mask_engine);
 }

@@ -21,6 +21,5 @@ namespace Render {
 		friend Core::GraphicsContext;
 	public:
 		void add_pass(IPass*,PassStep step=PassStep::draw);
-		void remove_pass(IPass*, PassStep from = PassStep::draw);
 	};
 }

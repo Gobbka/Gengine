@@ -15,8 +15,3 @@ void Render::Passer::add_pass(IPass*pass, PassStep step)
 	break;
 	}	
 }
-
-void Render::Passer::remove_pass(IPass*, PassStep step)
-{
-	
-}

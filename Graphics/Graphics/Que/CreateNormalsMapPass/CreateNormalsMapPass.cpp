@@ -11,8 +11,8 @@
 void Render::CreateNormalsMapPass::execute()
 {
 	auto* gcontext = _context->get_context();
-
-	for(auto*scene : _context->scenes)
+	_context->dss_collection[(DSBitSet)DepthStencilUsage::depth].bind();
+	for(const auto*scene : _context->scenes)
 	{
 		if(!scene->active)
 			continue;
@@ -23,7 +23,7 @@ void Render::CreateNormalsMapPass::execute()
 				gcontext->set_pixel_shader(_context->shader_collection.get<PixelShader>(L"d3d11\\normals_ps.cso"));
 				nrt->normals_map.bind();
 				nrt->normals_map.clear();
-				cam->get_mask_engine()->clear_buffer();
+
 				gcontext->set_mask_engine(cam->get_mask_engine());
 				_context->dss_collection[(DSBitSet)DepthStencilUsage::depth].bind();
 				// do stuff here

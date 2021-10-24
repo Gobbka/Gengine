@@ -1,6 +1,19 @@
 ﻿#include "DepthStencil.h"
 #include "../../Graphics.h"
 
+D3D11_COMPARISON_FUNC get_d3d11_comparison_func(Render::DepthFunc func)
+{
+	switch (func)
+	{
+	case Render::DepthFunc::none:
+		return D3D11_COMPARISON_NEVER;
+	case Render::DepthFunc::depth_less:
+		return D3D11_COMPARISON_LESS;
+	case Render::DepthFunc::depth_equal:
+		return D3D11_COMPARISON_EQUAL;
+	}
+}
+
 D3D11_DEPTH_STENCILOP_DESC create_depth_stencilop_desc(D3D11_COMPARISON_FUNC stencil_func, D3D11_STENCIL_OP success_func)
 {
 	return D3D11_DEPTH_STENCILOP_DESC{ D3D11_STENCIL_OP_KEEP,D3D11_STENCIL_OP_KEEP,success_func,stencil_func };
@@ -19,9 +32,9 @@ Render::DepthStencil::DepthStencil(Core::GraphicsContext* context, DepthStencilD
 {
 	D3D11_DEPTH_STENCIL_DESC depthstencildesc = {};
 
-	depthstencildesc.DepthEnable = desc.depth;
+	depthstencildesc.DepthEnable = desc.depth != DepthFunc::none;
 	depthstencildesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-	depthstencildesc.DepthFunc = D3D11_COMPARISON_LESS;
+	depthstencildesc.DepthFunc = get_d3d11_comparison_func(desc.depth);
 
 	depthstencildesc.StencilEnable = desc.stencil_usage != StencilUsage::none;
 	depthstencildesc.StencilReadMask = 0XFF;

@@ -11,27 +11,26 @@ Texture2D objTexture : TEXTURE: register(t0);
 SamplerState objSamplerState : SAMPLER: register(s0);
 
 static const float3 lightpos = {4,-5,4};
-static const float pointLightIntensity = 5.f;
+static const float pointLightIntensity = 1.f;
 
 static const float3 ambientLightColor = { 1.f,1.f,1.f };
-static const float ambientLightIntensity = 0.3f;
+static const float ambientLightIntensity = 0.0f;
 
 float4 main(PSI input) : SV_TARGET
 {
-	float4 pixelColor = objTexture.Sample(objSamplerState,input.texCoord);
+	float4 texColor = objTexture.Sample(objSamplerState,input.texCoord);
 
 	float3 ambientLight = ambientLightIntensity * ambientLightColor;
 
 	float3 appliedLight = ambientLight;
 
 	float3 vectorToLight = lightpos - input.worldPos;
-	float distToLight = length(vectorToLight);
-	float3 normalizedVector = vectorToLight / distToLight; // normalize
+	float3 normalizedVector = normalize(vectorToLight);
 	
-	float3 diffuseLightIntensity = max(dot(normalizedVector, input.normal), 0.f);
-	float3 diffuseLight = diffuseLightIntensity;
-	appliedLight += diffuseLight * max(pointLightIntensity - distToLight,0);
-	float3 finalColor = pixelColor * appliedLight;
+	float3 diffuseLight = max(dot(normalizedVector, input.normal), 0.f) * pointLightIntensity;
+
+	appliedLight += diffuseLight;
+	float3 finalColor = texColor * appliedLight;
 
 	return float4(finalColor, 1.f);
 }

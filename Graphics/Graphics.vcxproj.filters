@@ -171,6 +171,9 @@
     <ClInclude Include="Graphics\Components\LightViewer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp">
@@ -303,5 +306,10 @@
     <FxCompile Include="Render\d3d\hlsl\texture_vs.hlsl" />
     <FxCompile Include="Render\d3d\hlsl\texture_ps.hlsl" />
     <FxCompile Include="Render\d3d\hlsl\normals_ps.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Graphics.rc">
+      <Filter>Файлы ресурсов</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -25,11 +25,13 @@ namespace Render {
 	struct __declspec(dllexport) DepthStencilDesc {
 		DepthFunc depth = DepthFunc::depth_less;
 		StencilUsage stencil_usage = StencilUsage::normal;
+		bool write = true;
 
 		DepthStencilDesc() = default;
-		DepthStencilDesc(DepthFunc depth,StencilUsage stencil_usage)
-			: depth(depth),
-			stencil_usage(stencil_usage)
+		DepthStencilDesc(DepthFunc depth,StencilUsage stencil_usage,bool write = true)
+			: depth(depth)
+			, stencil_usage(stencil_usage)
+			, write(write)
 		{}
 	};
 

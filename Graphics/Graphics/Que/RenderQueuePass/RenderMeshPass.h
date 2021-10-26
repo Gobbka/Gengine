@@ -10,6 +10,7 @@ namespace Core {
 
 namespace Render
 {
+	struct LightViewer;
 	class MeshRenderer;
 	class Camera;
 	class VertexShader;
@@ -32,7 +33,7 @@ namespace Render
 		Core::GraphicsContext* _context;
 
 		void render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshRenderer> model,DirectX::XMMATRIX VPMatrix);
-		inline void render_camera(ECS::ComponentHandle<Camera> camera, ECS::World* world);
+		inline void render_camera(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<LightViewer> lview, ECS::World* world);
 		inline void execute_scene(Render::Scene* scene);
 	public:
 		RenderMeshPass(Core::GraphicsContext* context);

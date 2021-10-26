@@ -21,6 +21,7 @@ public:
 	void execute() override
 	{
 		auto* camera = _context->main_scene->get_main_camera()->get<Render::Camera>().get_ptr();
+		camera->bind();
 
 		auto resolution = camera->get_view_resolution();
 		auto* gcontext = _context->get_context();

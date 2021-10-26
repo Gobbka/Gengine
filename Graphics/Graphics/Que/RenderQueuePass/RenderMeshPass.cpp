@@ -5,6 +5,7 @@
 #include "../../../Graphics.h"
 #include "../../../IGContext.h"
 #include "../../Mesh.h"
+#include "../../Components/LightViewer.h"
 
 void Render::ClearPass::execute()
 {
@@ -33,7 +34,7 @@ void Render::RenderMeshPass::render_model(ECS::ComponentHandle<Camera> camera,EC
 	}
 }
 
-inline void Render::RenderMeshPass::render_camera(ECS::ComponentHandle<Camera> camera, ECS::World* world)
+inline void Render::RenderMeshPass::render_camera(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<LightViewer>lview, ECS::World* world)
 {
 	camera->bind();
 	_context->dss_collection[(DSBitSet)DepthStencilUsage::depth_equal].bind();
@@ -55,22 +56,24 @@ inline void Render::RenderMeshPass::execute_scene(Render::Scene* scene)
 {
 	auto main_camera_id = scene->get_main_camera()->getEntityId();
 	ECS::ComponentHandle<Camera> hMainCamera;
+	ECS::ComponentHandle<LightViewer> hLightViewer;
 	auto* world = scene->world();
 
-	world->each<Camera>([&](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)
+	world->each<Camera,LightViewer>([&](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera,ECS::ComponentHandle<LightViewer>lview)
 		{
 			if (main_camera_id == entity->getEntityId())
 			{
 				hMainCamera = camera;
+				hLightViewer = lview;
 			}
 			else
 			{
-				render_camera(camera, world);
+				render_camera(camera,lview, world);
 			}
 		});
 	if (hMainCamera.isValid())
 	{
-		render_camera(hMainCamera, world);
+		render_camera(hMainCamera, hLightViewer, world);
 	}
 }
 

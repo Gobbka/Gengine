@@ -43,7 +43,7 @@ inline void Render::RenderMeshPass::render_camera(ECS::ComponentHandle<Camera> c
 	auto* sprite_engine = camera->graphics_context()->get_sprite_engine();
 
 	sprite_engine->begin_sprite_mode(true);
-	
+	sprite_engine->bind_texture(lview->normals_map.get_texture(), 1);
 	world->each<MeshRenderer>([&](ECS::Entity* ent, ECS::ComponentHandle<MeshRenderer> model)
 		{
 			sprite_engine->bind_texture(model->texture,0);
@@ -97,5 +97,6 @@ void Render::RenderMeshPass::execute()
 		execute_scene(scene);
 	}
 
+	_context->get_sprite_engine()->bind_texture(nullptr, 1);
 	execute_scene(_context->main_scene);
 }

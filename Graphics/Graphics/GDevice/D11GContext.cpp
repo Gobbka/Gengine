@@ -99,6 +99,18 @@ void Render::D11GContext::set_render_target(RenderTarget* target)
 	}
 }
 
+void Render::D11GContext::set_shader_resource(Texture* texture,UINT slot)
+{
+	if(texture != nullptr)
+	{
+		texture->bind(slot);
+	}else
+	{
+		ID3D11ShaderResourceView* resource = nullptr;
+		_d11context->PSSetShaderResources(slot, 1, &resource);
+	}
+}
+
 void Render::D11GContext::draw_indexed(UINT count, UINT start_location)
 {
 	_d11context->DrawIndexed(count, start_location, 0);

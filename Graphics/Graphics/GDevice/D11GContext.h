@@ -29,7 +29,9 @@ namespace Render {
 		void set_sampler_state(SamplerState* sampler) override;
 		void set_render_target(RenderTarget* target, MaskEngine* mask) override;
 		void set_render_target(RenderTarget* target) override;
+		void set_shader_resource(Texture* texture,UINT slot) override;
 		void draw_indexed(UINT count, UINT start_location=0) override;
+		
 
 		PixelShader* get_pixel_shader() override;
 	};

@@ -5,6 +5,7 @@ namespace Core {
 }
 
 namespace Render {
+	class IGContext;
 	class Texture;
 	class PixelShader;
 	class VertexShader;
@@ -21,6 +22,7 @@ namespace Render {
 		
 	private:
 		Core::GraphicsContext* _graphicsContext;
+		IGContext* _context;
 		Texture* _binded_texture[16]{};
 	public:
 		SpriteEngine(

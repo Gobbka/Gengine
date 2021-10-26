@@ -46,7 +46,14 @@ namespace Render
 
 		virtual void set_render_target(RenderTarget* target) = 0;
 		virtual void set_render_target(RenderTarget* target, MaskEngine* mask) =0;
+		virtual void set_shader_resource(Texture* texture,UINT slot=0) =0;
+		void set_shader_resource(RenderTarget* rt, UINT slot = 0);
 
 		virtual PixelShader* get_pixel_shader() =0;
 	};
+
+	inline void IGContext::set_shader_resource(RenderTarget* rt,UINT slot)
+	{
+		set_shader_resource(rt->get_texture(),slot);
+	}
 }

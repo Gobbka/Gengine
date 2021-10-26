@@ -3,15 +3,15 @@
 #include "../../IGContext.h"
 
 Render::SpriteEngine::SpriteEngine(Core::GraphicsContext* context)
-{
-	_graphicsContext = context;
-}
+	: _graphicsContext(context)
+	, _context(context->get_context())
+{}
 
 void Render::SpriteEngine::bind_texture(Texture* texture,unsigned slot)
 {
 	if(texture != _binded_texture[slot])
 	{
-		texture->bind(slot);
+		_context->set_shader_resource(texture, slot);
 		_binded_texture[slot] = texture;
 	}
 }

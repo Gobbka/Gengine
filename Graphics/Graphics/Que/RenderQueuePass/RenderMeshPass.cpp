@@ -17,15 +17,15 @@ void Render::ClearPass::execute()
 	}
 }
 
-void Render::RenderMeshPass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshRenderer> model, DirectX::XMMATRIX VPMatrix)
+void Render::RenderMeshPass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshRenderer> model, DirectX::XMMATRIX VPMatrix) const
 {	
 	auto* gcontext = _context->get_context();
-	auto model_matrix = model->transform.get_world_matrix();
+	const auto model_matrix = model->transform.get_world_matrix();
 	gcontext->matrix_buffer.data.MVPMatrix = DirectX::XMMatrixTranspose(model_matrix * VPMatrix);
 	gcontext->matrix_buffer.data.ModelMatrix = DirectX::XMMatrixTranspose(model_matrix);
 	gcontext->matrix_buffer.update();
 	
-	for(auto mesh : model->meshes)
+	for(const auto mesh : model->meshes)
 	{
 		mesh.index_buffer->bind();
 		mesh.buffer->bind();

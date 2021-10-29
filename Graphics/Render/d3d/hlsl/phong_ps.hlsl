@@ -15,7 +15,7 @@ static const float3 lightpos = {-3,3,10};
 static const float pointLightIntensity = 1.f;
 
 static const float3 ambientLightColor = { 1.f,1.f,1.f };
-static const float ambientLightIntensity = 0.0f;
+static const float ambientLightIntensity = 0.1f;
 
 float4 main(PSI input) : SV_TARGET
 {

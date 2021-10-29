@@ -1,7 +1,7 @@
 // PSI (PixelShaderInput)
 struct PSI
 {
-	float4 pos : SV_POSITION;
+	float4 viewPos : SV_POSITION;
 	float3 worldPos : Position;
 	float3 texCoord : COLOR;
 	float3 normal : NORMAL;
@@ -30,7 +30,7 @@ float4 main(PSI input) : SV_TARGET
 	float ntWidth;
 	float ntHeight;
 	normalsTexture.GetDimensions(ntWidth, ntHeight);
-	float3 normal = normalsTexture.Sample(objSamplerState, float2(input.pos.x/ntWidth,input.pos.y/ntHeight));
+	float3 normal = normalsTexture.Sample(objSamplerState, float2(input.viewPos.x/ntWidth,input.viewPos.y/ntHeight));
 	normal = normal * 2 - 1;
 	float3 diffuseLight = max(dot(normalizedVector, normal), 0.f) * pointLightIntensity;
 

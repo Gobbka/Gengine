@@ -1,6 +1,6 @@
 struct PSI
 {
-	float4 pos : SV_POSITION;
+	float4 viewPos : SV_POSITION;
 	float3 worldPos : Position;
 	float3 texCoord : COLOR;
 };

@@ -12,7 +12,7 @@ cbuffer ControlBuffer : register(b1)
 // PSI (PixelShaderInput)
 struct PSI
 {
-	float4 pos : SV_POSITION;
+	float4 viewPos : SV_POSITION;
 	float3 worldPos : Position;
 	float3 texCoord : COLOR;
 	float3 normal : NORMAL;
@@ -24,7 +24,7 @@ PSI VS(float3 pos : POSITION, float3 texcoord : COLOR, float3 normal : NORMAL)
 	PSI psi;
 
 	psi.texCoord = texcoord;
-	psi.pos = mul(float4(pos, 1.f), ModelViewProjectionMatrix);
+	psi.viewPos = mul(float4(pos, 1.f), ModelViewProjectionMatrix);
 	psi.worldPos = mul(float4(pos,1.f),ModelMatrix).xyz;
 	
 	MATRIX model_matrix = ModelMatrix; // model matrix without translation

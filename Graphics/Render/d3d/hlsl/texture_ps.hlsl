@@ -1,7 +1,7 @@
 // PSI (PixelShaderInput)
 struct PSI
 {
-	float4 pos : SV_POSITION;
+	float4 viewPos : SV_POSITION;
 	float3 worldPos : Position;
 	float3 texCoord : COLOR;
 	float3 normal : NORMAL;

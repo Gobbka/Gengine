@@ -37,10 +37,10 @@ ECS::Entity* Render::Scene::create_camera(RenderTarget* target)
 	return ent;
 }
 
-ECS::Entity* Render::Scene::create_model(Texture* texture)
+ECS::Entity* Render::Scene::create_model(Texture* texture, Texture* normals)
 {
 	auto* ent = create_entity();
-	ent->assign<MeshRenderer>(texture);
+	ent->assign<MeshRenderer>(texture,normals);
 
 	return ent;
 }

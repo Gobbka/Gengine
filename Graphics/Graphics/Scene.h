@@ -29,7 +29,7 @@ namespace Render {
 		ECS::Entity* instantiate(Component&component);
 		template<typename Component>
 		ECS::Entity* instantiate();
-		ECS::Entity* create_model(Texture*texture);
+		ECS::Entity* create_model(Texture*texture,Texture*normals=nullptr);
 		ECS::Entity* create_direction_light();
 		
 		__forceinline ECS::World* world() const { return _world; }

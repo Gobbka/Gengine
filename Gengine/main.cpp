@@ -90,10 +90,12 @@ int WINAPI wWinMain(
     	form->get_ui()->window_proc(msg, wp, lp);
     };
 
-    auto stone_material = AssetsLoader::load_png(L"assets\\stone.png");
+    auto stone_material = AssetsLoader::load_png(L"assets\\tileable_concrete_tiles_texture.png");
+    auto stone_material_normals = AssetsLoader::load_png(L"assets\\tileable_concrete_tiles_texture_NORMAL.png");
     Render::Material red_material(Color3XM::from_rgb(255, 50, 50));
 	
     auto* stone_texture = context->get_device()->create_texture(stone_material);
+    auto* stone_texture_normals = context->get_device()->create_texture(stone_material_normals);
     auto* red_texture = context->get_device()->create_texture(red_material);
 
     auto*light = form->editorScene->create_direction_light();
@@ -101,8 +103,8 @@ int WINAPI wWinMain(
     component->set_position(Position3(-4.14113426f, 2.09657478f, -4.79795313f));
     component->set_rotation(Vector3(0.519999862f, 0.880000114f, 0));
 	
-    auto* cube = form->editorScene->create_model(red_texture);
-    auto* platform = form->editorScene->create_model(stone_texture);
+    auto* cube = form->editorScene->create_model(stone_texture,stone_texture_normals);
+    auto* platform = form->editorScene->create_model(red_texture);
     platform->get<Render::MeshRenderer>()->transform.set_position(Position3{ 0,-7,0 });
 
     cube->get<Render::MeshRenderer>()->add_mesh(Render::Cube::make_independent(context, Position3::null(), 5));
@@ -136,8 +138,6 @@ int WINAPI wWinMain(
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - time);
 
         form->main_scene->world()->tick(1.f/(float)duration.count());
-
-        cube->get<Render::MeshRenderer>()->transform.adjust_rotation(Vector3{ 0,0.005f,0 });
 		
         time = now;
 	}

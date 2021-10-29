@@ -11,7 +11,7 @@ Texture2D objTexture : TEXTURE: register(t0);
 Texture2D normalsTexture : TEXTURE: register(t1);
 SamplerState objSamplerState : SAMPLER: register(s0);
 
-static const float3 lightpos = {4,-5,4};
+static const float3 lightpos = {-3,3,10};
 static const float pointLightIntensity = 1.f;
 
 static const float3 ambientLightColor = { 1.f,1.f,1.f };

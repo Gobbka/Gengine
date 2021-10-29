@@ -11,12 +11,13 @@ namespace Render
 	{
 	public:
 		Texture* texture;
+		Texture* normals;
 
 		std::vector<Mesh> meshes;
 		Core::Transform transform;
 
 		MeshRenderer() = delete;
-		explicit MeshRenderer(Texture* texture);
+		MeshRenderer(Texture* texture,Texture*normals=nullptr);
 
 		void add_mesh(Mesh mesh);
 	};

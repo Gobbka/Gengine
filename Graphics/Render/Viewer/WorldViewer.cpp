@@ -122,6 +122,25 @@ DirectX::XMMATRIX Render::WorldViewer::projection_matrix() const
 	return _projectionMatrix;
 }
 
+DirectX::XMMATRIX Render::WorldViewer::rotation_matrix() const
+{
+	auto rotation = _transform.get_rotation();
+
+	auto xm_cam_pos = DirectX::XMVectorSet(0, 0, 0, 0.f);
+	auto camRotMatrix = DirectX::XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
+	auto camTarget = DirectX::XMVector3TransformCoord(Core::Transform::forward(), camRotMatrix);
+
+	camTarget = DirectX::XMVectorAdd(camTarget, xm_cam_pos);
+
+	const auto upDir = DirectX::XMVector3TransformCoord(Core::Transform::up(), camRotMatrix);
+
+	return DirectX::XMMatrixLookAtLH(
+		xm_cam_pos,
+		camTarget,
+		upDir
+	);
+}
+
 void Render::WorldViewer::set_position(Position3 pos)
 {
 	_transform.set_position(pos);

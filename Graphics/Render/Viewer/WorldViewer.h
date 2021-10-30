@@ -53,6 +53,7 @@ namespace Render
 		inline DirectX::XMMATRIX world_to_screen_matrix() const;
 		inline DirectX::XMMATRIX view_matrix() const;
 		inline DirectX::XMMATRIX projection_matrix() const;
+		inline DirectX::XMMATRIX rotation_matrix() const;
 
 		void set_position(Position3 pos);
 		void adjust_position(Position3 pos);

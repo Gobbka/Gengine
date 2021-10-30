@@ -163,6 +163,7 @@
     <ClInclude Include="Graphics\Components\LightViewer.h" />
     <ClInclude Include="Graphics\Components\NormalsRenderTarget.h" />
     <ClInclude Include="Graphics\Components\PointLightComponent.h" />
+    <ClInclude Include="Graphics\Components\SkyboxComponent.h" />
     <ClInclude Include="Graphics\Components\TextComponent.h" />
     <ClInclude Include="Graphics\DepthStencilStatesCollection.h" />
     <ClInclude Include="Graphics\GDevice\D11GContext.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Graphics\Que\CreateLightMapPass\CreateLightMapPass.h" />
     <ClInclude Include="Graphics\Que\CreateNormalsMapPass\CreateNormalsmapPass.h" />
     <ClInclude Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.h" />
+    <ClInclude Include="Graphics\Que\DrawSkyboxPass\DrawSkyboxPass.h" />
     <ClInclude Include="Graphics\Que\IPass\IPass.h" />
     <ClInclude Include="Graphics\Que\IPass\Passer.h" />
     <ClInclude Include="Graphics\Que\RenderQueuePass\RenderMeshPass.h" />
@@ -222,6 +224,7 @@
     <ClCompile Include="Graphics\Que\CreateLightMapPass\CreateLightMapPass.cpp" />
     <ClCompile Include="Graphics\Que\CreateNormalsMapPass\CreateNormalsMapPass.cpp" />
     <ClCompile Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.cpp" />
+    <ClCompile Include="Graphics\Que\DrawSkyboxPass\DrawSkyboxPass.cpp" />
     <ClCompile Include="Graphics\Que\IPass\Passer.cpp" />
     <ClCompile Include="Graphics\Que\RenderQueuePass\RenderMeshPass.cpp" />
     <ClCompile Include="Graphics\Scene.cpp" />

@@ -4,6 +4,7 @@
 //#include "../../../IGContext.h"
 //#include "../../../Render/Engine/Camera.h"
 //#include "../../Components/LightViewer.h"
+//#include "../../Components/PointLightComponent.h"
 
 void Render::CreateLightMapPass::execute()
 {
@@ -18,13 +19,18 @@ void Render::CreateLightMapPass::execute()
 	//	world->each<Camera, LightViewer>([&](ECS::Entity*, ECS::ComponentHandle<Camera>cam, ECS::ComponentHandle<LightViewer>lview)
 	//	{
 	//		lview->light_map.clear();
-	//		gcontext->set_shader_resource(cam->get_mask_engine());
+	//		lview->light_map.bind();
+
+	//		gcontext->set_shader_resource(cam->get_mask_engine(),0);
+	//		gcontext->set_shader_resource(&lview->normals_map,1);
 
 	//		world->each<PointLightComponent>([](ECS::Entity* ent, ECS::ComponentHandle<PointLightComponent> plight)
 	//		{
 
 	//		});
 	//	});
+
+	//	gcontext->set_shader_resource((Texture*)nullptr, 1);
 	//}
 }
 

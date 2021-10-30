@@ -1,6 +1,5 @@
 #pragma once
 #include "../IPass/IPass.h"
-#include "../../Mesh.h"
 
 namespace Core
 {
@@ -9,12 +8,13 @@ namespace Core
 
 namespace Render
 {
-	class CreateLightMapPass : public IPass
+	class DrawSkyboxPass : public IPass
 	{
-		Mesh _point_light_cube;
 		Core::GraphicsContext* _context;
 		void execute() override;
 	public:
-		explicit CreateLightMapPass(Core::GraphicsContext* context);
+		DrawSkyboxPass(Core::GraphicsContext* context)
+			: _context(context)
+		{}
 	};
 }

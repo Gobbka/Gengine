@@ -17,7 +17,6 @@ namespace Render {
 	
 	class __declspec(dllexport) MaskEngine
 	{
-	private:
 		Core::GraphicsContext* _context;
 		Texture _buffer;
 		ID3D11DepthStencilView* _view;

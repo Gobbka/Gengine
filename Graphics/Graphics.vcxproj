@@ -162,6 +162,7 @@
     <ClInclude Include="Graphics\Components\GameEntityComponent.h" />
     <ClInclude Include="Graphics\Components\LightViewer.h" />
     <ClInclude Include="Graphics\Components\NormalsRenderTarget.h" />
+    <ClInclude Include="Graphics\Components\PointLightComponent.h" />
     <ClInclude Include="Graphics\Components\TextComponent.h" />
     <ClInclude Include="Graphics\DepthStencilStatesCollection.h" />
     <ClInclude Include="Graphics\GDevice\D11GContext.h" />

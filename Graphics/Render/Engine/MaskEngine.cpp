@@ -31,14 +31,18 @@ Render::MaskEngine::MaskEngine(RenderTarget* target, MaskEngineUsage usage)
 	texture_2d_desc.MiscFlags = 0;
 	texture_2d_desc.CPUAccessFlags = 0;
 
-	assert(SUCCEEDED(device->CreateTexture2D(&texture_2d_desc,nullptr,&_buffer)));
+	ID3D11Texture2D* texture_2d;
+
+	assert(SUCCEEDED(device->CreateTexture2D(&texture_2d_desc,nullptr,&texture_2d)));
 
 	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV = {};
 	descDSV.Format = MAP_USAGE_TYPED(usage);
 	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	descDSV.Texture2D.MipSlice = 0;
 
-	assert(SUCCEEDED(device->CreateDepthStencilView(_buffer, &descDSV, &_view)));
+	assert(SUCCEEDED(device->CreateDepthStencilView(texture_2d, &descDSV, &_view)));
+
+	_buffer = Texture(_context, texture_2d);
 }
 
 Render::MaskEngine::MaskEngine(Core::GraphicsContext* context, Surface resolution, MaskEngineUsage usage)
@@ -63,17 +67,26 @@ Render::MaskEngine::MaskEngine(Core::GraphicsContext* context, Surface resolutio
 	texture_2d_desc.MiscFlags = 0;
 	texture_2d_desc.CPUAccessFlags = 0;
 
-	assert(SUCCEEDED(device->CreateTexture2D(&texture_2d_desc, nullptr, &_buffer)));
+	ID3D11Texture2D* texture_2d;
+
+	assert(SUCCEEDED(device->CreateTexture2D(&texture_2d_desc, nullptr, &texture_2d)));
 
 	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV = {};
 	descDSV.Format = DXGI_FORMAT_UNKNOWN;
 	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	descDSV.Texture2D.MipSlice = 0;
 
-	assert(SUCCEEDED(device->CreateDepthStencilView(_buffer, &descDSV, &_view)));
+	assert(SUCCEEDED(device->CreateDepthStencilView(texture_2d, &descDSV, &_view)));
+
+	_buffer = Texture(_context, texture_2d);
 }
 
 void Render::MaskEngine::clear_buffer() const
 {
 	_context->context->ClearDepthStencilView(_view, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
+}
+
+Render::Texture* Render::MaskEngine::get_texture()
+{
+	return &_buffer;
 }

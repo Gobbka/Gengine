@@ -32,6 +32,7 @@
 
 #include "Graphics/Components/MeshRenderer.h"
 #include "Graphics/Components/LightViewer.h"
+#include "Graphics/Components/PointLightComponent.h"
 #include "Graphics/Components/TextComponent.h"
 #include "Loaders/AssetsLoader.h"
 #include "Logger/Logger.h"
@@ -102,7 +103,8 @@ int WINAPI wWinMain(
     const auto component = light->get<Render::DirectionLightComponent>();
     component->set_position(Position3(-4.14113426f, 2.09657478f, -4.79795313f));
     component->set_rotation(Vector3(0.519999862f, 0.880000114f, 0));
-	
+
+    form->editorScene->create_point_light({ 1,{1,1,1},{-3,3,10} });
     auto* cube = form->editorScene->create_model(stone_texture,stone_texture_normals);
     auto* platform = form->editorScene->create_model(red_texture);
     platform->get<Render::MeshRenderer>()->transform.set_position(Position3{ 0,-7,0 });

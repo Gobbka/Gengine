@@ -4,6 +4,7 @@
 #include "../Render/Light/DirectionLightComponent.h"
 #include "Components/MeshRenderer.h"
 #include "Components/GameEntityComponent.h"
+#include "Components/PointLightComponent.h"
 
 ECS::Entity* Render::Scene::get_main_camera()
 {
@@ -41,6 +42,14 @@ ECS::Entity* Render::Scene::create_model(Texture* texture, Texture* normals)
 {
 	auto* ent = create_entity();
 	ent->assign<MeshRenderer>(texture,normals);
+
+	return ent;
+}
+
+ECS::Entity* Render::Scene::create_point_light(PointLightComponent light)
+{
+	auto* ent = create_entity();
+	ent->assign<PointLightComponent>(light);
 
 	return ent;
 }

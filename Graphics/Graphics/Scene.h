@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include "Ecs/Ecs.h"
 
+struct PointLightComponent;
+
 namespace Core {
 	class GraphicsContext;
 }
@@ -30,6 +32,7 @@ namespace Render {
 		template<typename Component>
 		ECS::Entity* instantiate();
 		ECS::Entity* create_model(Texture*texture,Texture*normals=nullptr);
+		ECS::Entity* create_point_light(PointLightComponent light);
 		ECS::Entity* create_direction_light();
 		
 		__forceinline ECS::World* world() const { return _world; }

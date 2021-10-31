@@ -111,9 +111,21 @@ void Render::D11GContext::set_shader_resource(Texture* texture,UINT slot)
 	}
 }
 
+void Render::D11GContext::set_rasterizer(Rasterizer& rs)
+{
+	_d11context->RSSetState(rs._rs);
+}
+
 void Render::D11GContext::draw_indexed(UINT count, UINT start_location)
 {
 	_d11context->DrawIndexed(count, start_location, 0);
+}
+
+Render::Rasterizer Render::D11GContext::get_rasterizer()
+{
+	ID3D11RasterizerState* rs=nullptr;
+	_d11context->RSGetState(&rs);
+	return {rs};
 }
 
 Render::PixelShader* Render::D11GContext::get_pixel_shader()

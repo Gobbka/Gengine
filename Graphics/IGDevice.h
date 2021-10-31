@@ -3,6 +3,7 @@
 #include "Graphics/IBuffers/IIndexBuffer.h"
 #include "Graphics/IBuffers/IVertexBuffer.h"
 #include "Render/d3d/Buffer/Texture.h"
+#include "Render/Engine/Rasterizer.h"
 
 namespace Render
 {
@@ -23,6 +24,7 @@ namespace Render
 
 		Texture* create_texture(Material& material);
 		virtual Texture* create_texture(ITexture2DDesc desc) =0;
+		virtual Rasterizer create_rasterizer(RasterizerDesc desc)=0;
 	};
 
 	inline Texture* IGDevice::create_texture(Material& material)

@@ -47,3 +47,12 @@ Render::Texture* Render::D11GDevice::create_texture(ITexture2DDesc desc)
 	return new Texture(_gfx, desc);
 }
 
+Render::Rasterizer Render::D11GDevice::create_rasterizer(RasterizerDesc desc)
+{
+	ID3D11RasterizerState* rs=nullptr;
+	auto rsdesc = CD3D11_RASTERIZER_DESC(CD3D11_DEFAULT());
+	rsdesc.FrontCounterClockwise = desc.cull_mode_front;
+	_device->CreateRasterizerState(&rsdesc, &rs);
+	return { rs };
+}
+

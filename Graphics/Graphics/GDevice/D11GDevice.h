@@ -23,5 +23,6 @@ namespace Render
 		IVertexBuffer* alloc_vertex_buffer(void* data, unsigned size, bool dynamic) override;
 
 		Texture* create_texture(ITexture2DDesc desc) override;
+		Rasterizer create_rasterizer(RasterizerDesc desc) override;
 	};
 }

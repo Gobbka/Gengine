@@ -30,9 +30,10 @@ namespace Render {
 		void set_render_target(RenderTarget* target, MaskEngine* mask) override;
 		void set_render_target(RenderTarget* target) override;
 		void set_shader_resource(Texture* texture,UINT slot) override;
+		void set_rasterizer(Rasterizer& rs) override;
 		void draw_indexed(UINT count, UINT start_location=0) override;
 		
-
+		Rasterizer get_rasterizer() override;
 		PixelShader* get_pixel_shader() override;
 	};
 }

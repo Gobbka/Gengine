@@ -147,9 +147,6 @@
     <ClInclude Include="Graphics\SpriteFont.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\States\RasterizeState.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics\Que\CreateNormalsMapPass\CreateNormalsmapPass.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -187,6 +184,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Que\DrawSkyboxPass\DrawSkyboxPass.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Engine\Rasterizer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
@@ -294,9 +294,6 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Components\TextComponent.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\States\RasterizeState.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Que\CreateNormalsMapPass\CreateNormalsMapPass.cpp">

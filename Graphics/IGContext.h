@@ -51,6 +51,9 @@ namespace Render
 		virtual void set_shader_resource(Texture* texture,UINT slot=0) =0;
 		void set_shader_resource(MaskEngine*mask,UINT slot=0);
 		void set_shader_resource(RenderTarget* rt, UINT slot = 0);
+		virtual void set_rasterizer(Rasterizer& rs) =0;
+
+		virtual Rasterizer get_rasterizer()=0;
 
 		virtual PixelShader* get_pixel_shader() =0;
 	};

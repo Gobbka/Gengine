@@ -1,5 +1,7 @@
 #pragma once
 #include "../IPass/IPass.h"
+#include "../../Mesh.h"
+#include "../../../Render/Engine/Rasterizer.h"
 
 namespace Core
 {
@@ -8,13 +10,14 @@ namespace Core
 
 namespace Render
 {
-	class DrawSkyboxPass : public IPass
+
+	class DrawSkyboxPass final : public IPass
 	{
 		Core::GraphicsContext* _context;
+		Mesh _skybox_cube;
+		Rasterizer _skybox_rasterizer;
 		void execute() override;
 	public:
-		DrawSkyboxPass(Core::GraphicsContext* context)
-			: _context(context)
-		{}
+		explicit DrawSkyboxPass(Core::GraphicsContext* context);
 	};
 }

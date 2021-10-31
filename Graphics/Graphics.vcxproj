@@ -182,7 +182,6 @@
     <ClInclude Include="Graphics\Scene.h" />
     <ClInclude Include="Graphics\ShaderCollection.h" />
     <ClInclude Include="Graphics\SpriteFont.h" />
-    <ClInclude Include="Graphics\States\RasterizeState.h" />
     <ClInclude Include="IGContext.h" />
     <ClInclude Include="IGDevice.h" />
     <ClInclude Include="Render\d3d\Bindable.h" />
@@ -199,6 +198,7 @@
     <ClInclude Include="Render\Engine\Camera.h" />
     <ClInclude Include="Render\Engine\DepthStencil.h" />
     <ClInclude Include="Render\Engine\MaskEngine.h" />
+    <ClInclude Include="Render\Engine\Rasterizer.h" />
     <ClInclude Include="Render\Engine\RenderTarget.h" />
     <ClInclude Include="Render\Engine\SpriteEngine.h" />
     <ClInclude Include="Render\Events\RenderEvent.h" />
@@ -230,7 +230,6 @@
     <ClCompile Include="Graphics\Scene.cpp" />
     <ClCompile Include="Graphics\ShaderCollection.cpp" />
     <ClCompile Include="Graphics\SpriteFont.cpp" />
-    <ClCompile Include="Graphics\States\RasterizeState.cpp" />
     <ClCompile Include="Render\d3d\Bindable.cpp" />
     <ClCompile Include="Render\d3d\Buffer\IndexBuffer.cpp" />
     <ClCompile Include="Render\d3d\Buffer\Texture.cpp" />

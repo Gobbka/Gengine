@@ -10,6 +10,7 @@
 #include "Graphics/Que/CreateLightMapPass/CreateLightMapPass.h"
 #include "Graphics/Que/CreateNormalsMapPass/CreateNormalsmapPass.h"
 #include "Graphics/Que/CreateShadowmapPass/CreateShadowMapPass.h"
+#include "Graphics/Que/DrawSkyboxPass/DrawSkyboxPass.h"
 #include "Types/Types.h"
 
 #include "Render/d3d/Shader/SamplerState.h"
@@ -54,6 +55,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	context->IASetInputLayout(_inputLayout);
 
 	_passer._begin_passes.push_back(new Render::ClearPass(this));
+	_passer._begin_passes.push_back(new Render::DrawSkyboxPass(this));
 	//_passer._probe_passes.push_back(new Render::CreateShadowMapPass());
 	_passer._probe_passes.push_back(new Render::CreateNormalsMapPass(this));
 	_passer._probe_passes.push_back(new Render::CreateLightMapPass(this));

@@ -168,6 +168,8 @@
     <ClInclude Include="Types\Material.h" />
     <ClInclude Include="Types\Transform.h" />
     <ClInclude Include="Types\Types.h" />
+    <ClInclude Include="XML\XMLCommon.h" />
+    <ClInclude Include="XML\XMLEncoder.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BinaryReader.cpp" />
@@ -179,6 +181,8 @@
     <ClCompile Include="Types\Material.cpp" />
     <ClCompile Include="Types\Transform.cpp" />
     <ClCompile Include="Types\Types.cpp" />
+    <ClCompile Include="XML\XMLCommon.cpp" />
+    <ClCompile Include="XML\XMLEncoder.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

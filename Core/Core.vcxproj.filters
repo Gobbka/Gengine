@@ -54,6 +54,12 @@
     <ClInclude Include="GEModule\GEModuleLoader.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="XML\XMLCommon.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="XML\XMLEncoder.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Types\Transform.cpp">
@@ -81,6 +87,12 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="GEModule\GEModuleLoader.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="XML\XMLCommon.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="XML\XMLEncoder.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

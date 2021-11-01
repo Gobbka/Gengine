@@ -40,6 +40,9 @@
 #include "Render/Engine/Camera.h"
 #include "Types/Material.h"
 
+#include <XML/XMLCommon.h>
+#include <XML/XMLEncoder.h>
+
 void debugger_loop()
 {
 	const auto* server = PipeServer::create(L"\\\\.\\pipe\\GENGINE_DBG");
@@ -92,8 +95,17 @@ int WINAPI wWinMain(
     	form->get_ui()->window_proc(msg, wp, lp);
     };
 
-    auto stone_material = AssetsLoader::load_png(L"assets\\tileable_concrete_tiles_texture.png");
-    auto stone_material_normals = AssetsLoader::load_png(L"assets\\tileable_concrete_tiles_texture_NORMAL.png");
+    {
+	    // XML TEST
+        //XML::Document document("Niggers");
+        //document.base_node.append(XML::Node("JOHN"));
+        //document.base_node.append(XML::Node("Joerge"));
+        //XML::XMLEncoder encoder(document);
+        //encoder.print();
+    }
+
+    auto stone_material = AssetsLoader::load_png(L"assets\\Pebbles_027_BaseColor.png");
+    auto stone_material_normals = AssetsLoader::load_png(L"assets\\Pebbles_027_Normal.png");
     auto workbench_material = AssetsLoader::load_png(L"assets\\workspace_background.png");
     Render::Material red_material(Color3XM::from_rgb(255, 50, 50));
 	

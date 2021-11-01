@@ -13,17 +13,21 @@ void Render::IVertexBuffer::count_normals(IIndexBuffer* buffer) const
 	
 	for(size_t i = 0;i < index_size;i+=3)
 	{
-		auto pos1 = data[buffer->operator[](i+0)].pos;
-		auto pos2 = data[buffer->operator[](i+1)].pos;
-		auto pos3 = data[buffer->operator[](i+2)].pos;
+		const auto pos1 = XMLoadFloat3(&data[buffer->operator[](i+0)].pos);
+		const auto pos2 = XMLoadFloat3(&data[buffer->operator[](i+1)].pos);
+		const auto pos3 = XMLoadFloat3(&data[buffer->operator[](i+2)].pos);
 
-		const auto cross = DirectX::XMVector3Cross(XMLoadFloat3(&pos2) , XMLoadFloat3(&pos3));
-		const auto normal = DirectX::XMVectorMultiply(XMLoadFloat3(&pos1), cross);
+		const auto vector1 = DirectX::XMVectorSubtract(pos2,pos1);
+		const auto vector2 = DirectX::XMVectorSubtract(pos2,pos3);
+
+		const auto normal = DirectX::XMVector3Cross(vector1, vector2);
 
 		DirectX::XMStoreFloat3(&data[i].normal, normal);
 		DirectX::XMStoreFloat3(&data[i+1].normal, normal);
 		DirectX::XMStoreFloat3(&data[i+2].normal, normal);
 	}
+
+	return;
 }
 
 Render::Vertex& Render::IVertexBuffer::at(unsigned index) const

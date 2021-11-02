@@ -42,17 +42,13 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 
 	_samplerState = new Render::SamplerState(this);
 	
-	auto* _texture_vs = new Render::VertexShader(this);
-	_texture_vs->read_file(L"d3d11\\texture_vs.cso");
-	_texture_vs->create_input_layout(Render::VertexLayout, ARRAYSIZE(Render::VertexLayout), &_inputLayout);
-	_texture_vs->release_blob();
+	auto* _texture_vs = new Render::VertexShader(this, L"d3d11\\texture_vs.cso",Render::VertexLayout,ARRAYSIZE(Render::VertexLayout));
+
 	shader_collection.insert(L"d3d11\\texture_vs.cso", _texture_vs);
 
 	_spriteEngine = new Render::SpriteEngine(this);
 
 	_gcontext->set_vertex_shader(_texture_vs);
-
-	context->IASetInputLayout(_inputLayout);
 
 	_passer._begin_passes.push_back(new Render::ClearPass(this));
 	_passer._begin_passes.push_back(new Render::DrawSkyboxPass(this));

@@ -1,19 +1,22 @@
 ﻿#pragma once
-#include "Shader.h"
+#include "IShader.h"
+#include <d3d11.h>
 
 namespace Render {
-	class VertexShader : public Shader
+	class VertexShader : public IShader
 	{
-		void construct(ID3DBlob* shader_blob) override;
-		
+		void construct(ID3DBlob* shader_blob);
+		void link(ID3DBlob* blob,const D3D11_INPUT_ELEMENT_DESC* layout,UINT num_elements);
+
 		ID3D11VertexShader* _shader;
+		ID3D11InputLayout* _layout;
 	public:
 
 		ID3D11VertexShader* get_d11_vs();
+		ID3D11InputLayout* get_d11_il();
 		
-		void create_input_layout(const D3D11_INPUT_ELEMENT_DESC*elements,UINT num_elements,ID3D11InputLayout**layout);
-		
-		VertexShader(Core::GraphicsContext* engine);
+		VertexShader(Core::GraphicsContext* engine,const char*data,size_t size,const D3D11_INPUT_ELEMENT_DESC*layout,UINT num_elements);
+		VertexShader(Core::GraphicsContext* ctx, const wchar_t* file_name,const D3D11_INPUT_ELEMENT_DESC* layout, UINT num_elements);
 
 		void bind();
 	};

@@ -30,8 +30,6 @@ namespace Core
 		Render::RenderTarget _targetView;
 
 		Render::SamplerState* _samplerState;
-		
-		ID3D11InputLayout* _inputLayout;
 
 		D3D11_VIEWPORT _viewport;
 		Render::IGDevice* _gdevice;

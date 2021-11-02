@@ -47,6 +47,8 @@ void Render::D11GContext::set_vertex_shader(VertexShader* vs)
 	if (vs == _currect_vs)
 		return;
 	_d11context->VSSetShader(vs->get_d11_vs(), nullptr, 0);
+	_d11context->IASetInputLayout(vs->get_d11_il());
+
 	_currect_vs = vs;
 }
 

@@ -1,5 +1,7 @@
 ﻿#include "PixelShader.h"
 
+#include <d3dcompiler.h>
+
 #include "../../../Graphics.h"
 
 void Render::PixelShader::construct(ID3DBlob* shader_blob)
@@ -12,15 +14,14 @@ void Render::PixelShader::construct(ID3DBlob* shader_blob)
 	);
 }
 
-Render::PixelShader::PixelShader(Core::GraphicsContext* engine)
-	: Shader(engine)
-{
-	_shader = nullptr;
-}
-
 Render::PixelShader::PixelShader(Core::GraphicsContext* engine, const wchar_t* path)
-	: Shader(engine)
+	: IShader(engine)
 {
-	read_file(path);
-	release_blob();
+	ID3DBlob* blob;
+	D3DReadFileToBlob(path, &blob);
+	if(blob)
+	{
+		construct(blob);
+		blob->Release();
+	}
 }

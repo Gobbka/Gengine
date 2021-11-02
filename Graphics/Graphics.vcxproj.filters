@@ -51,7 +51,7 @@
     <ClInclude Include="Render\Engine\MaskEngine.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\d3d\Shader\Shader.h">
+    <ClInclude Include="Render\d3d\Shader\IShader.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Render\d3d\Shader\VertexShader.h">
@@ -224,7 +224,7 @@
     <ClCompile Include="Render\Engine\MaskEngine.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\d3d\Shader\Shader.cpp">
+    <ClCompile Include="Render\d3d\Shader\IShader.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Render\d3d\Shader\VertexShader.cpp">

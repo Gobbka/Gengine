@@ -11,16 +11,27 @@ SamplerState objSamplerState : SAMPLER: register(s0);
 
 float4 main(PSI psi) : SV_TARGET
 {
-	// TODO: convert to tangent space
-	float3 normal = normals.Sample(objSamplerState,psi.texCoord);
-	const float cosine = dot(float3(0,0,1), psi.normal);
-	const float sine = cross(float3(0,0,1),psi.normal);
-	
-	float3x3 rotation_matrix;
+	// TODO: convert from tangent space
+	float3 tangent_space_normal_packed = normals.Sample(objSamplerState,psi.texCoord);
+	float3 tangent_space_normal = tangent_space_normal_packed * 2 - 1.f;
 
-	rotation_matrix[0] = float3(cosine, 0 ,  sine );
-	rotation_matrix[1] = float3(  0   , 1 ,   0   );
-	rotation_matrix[2] = float3(-sine , 0 , cosine);
+	const float3x3 rotation_mtx = {
+		0,1,0,
+		1,0,0,
+		0,0,1,
+	};
 
-	return float4(mul(normal,rotation_matrix),1.f);
+	const float3 tangent = mul(psi.normal,  rotation_mtx);
+	const float3 bitangent = cross(tangent,psi.normal);
+
+	const float3x3 trans_matrix = {
+		tangent.x, bitangent.x, psi.normal.x,
+		tangent.y, bitangent.y, psi.normal.y,
+		tangent.z, bitangent.z, psi.normal.z,
+	};
+
+	float3 worldSpaceNormal = mul(tangent_space_normal, trans_matrix);
+	float3 worldSpaceNormal_packed = mul(worldSpaceNormal, 0.5) + 0.5;
+
+	return float4(worldSpaceNormal_packed,1.f);
 }

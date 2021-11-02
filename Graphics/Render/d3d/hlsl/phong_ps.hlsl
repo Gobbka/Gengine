@@ -11,7 +11,7 @@ Texture2D objTexture : TEXTURE: register(t0);
 Texture2D normalsTexture : TEXTURE: register(t1);
 SamplerState objSamplerState : SAMPLER: register(s0);
 
-static const float3 lightpos = {-3,3,10};
+static const float3 lightpos = {3,3,3};
 static const float pointLightIntensity = 1.f;
 
 static const float3 ambientLightColor = { 1.f,1.f,1.f };
@@ -32,7 +32,8 @@ float4 main(PSI input) : SV_TARGET
 	normalsTexture.GetDimensions(ntWidth, ntHeight);
 	float3 normal = normalsTexture.Sample(objSamplerState, float2(input.viewPos.x/ntWidth,input.viewPos.y/ntHeight));
 	normal = normal * 2 - 1;
-	float3 diffuseLight = max(dot(normalizedVector, normal), 0.f) * pointLightIntensity;
+
+	float3 diffuseLight = max(dot(normalizedVector, normal), 0) * pointLightIntensity;
 
 	appliedLight += diffuseLight;
 	float3 finalColor = texColor * appliedLight;

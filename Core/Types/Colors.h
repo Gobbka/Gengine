@@ -5,11 +5,19 @@
 template<typename T>
 struct __declspec(dllexport) Color3 {
 	T r, g, b;
+
+	Color3(T r=0, T g=0, T b=0)
+		: r(r), g(g), b(b)
+	{}
 };
 
 template<typename T>
 struct __declspec(dllexport) Color4 {
 	T r, g, b, a;
+
+	Color4(T r=0,T g=0,T b=0,T a=0)
+		: r(r),g(g),b(b),a(a)
+	{}
 };
 
 typedef Color3<unsigned char> Color3Byte;

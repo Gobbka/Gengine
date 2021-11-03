@@ -85,35 +85,47 @@ namespace Render {
 		auto* ptr = new Vertex[24];
 
 		// front
-		ptr[0] = Vertex({ x,y,z }, { 0,0,0 }, { 0,0,-1 });
-		ptr[1] = Vertex({ x + width,y,z }, { 1,0,0 }, { 0,0,-1 });
-		ptr[2] = Vertex({ x ,y - height,z }, { 0,1,0 }, { 0,0,-1 });
-		ptr[3] = Vertex({ x + width ,y - height,z }, { 1,1,0 }, { 0,0,-1 });
+		DirectX::XMFLOAT3 fronts_normal{ 0,0,-1 };
+		Color4<char> fronts_tangent{ 127,0,0 };
+		ptr[0] = Vertex({ x,y,z }, { 0,0,0 }, fronts_normal, fronts_tangent);
+		ptr[1] = Vertex({ x + width,y,z }, { 1,0,0 }, fronts_normal, fronts_tangent);
+		ptr[2] = Vertex({ x ,y - height,z }, { 0,1,0 }, fronts_normal, fronts_tangent);
+		ptr[3] = Vertex({ x + width ,y - height,z }, { 1,1,0 }, fronts_normal, fronts_tangent);
 		// right
-		ptr[4] = Vertex({ x + width,y,z }, { 0,0,0 }, { 1,0,0 });
-		ptr[5] = Vertex({ x + width,y,z+length},{1,0,0},{1,0,0});
-		ptr[6] = Vertex({ x + width ,y - height,z }, { 0,1,0 }, { 1,0,0 });
-		ptr[7] = Vertex({ x + width ,y - height,z + length }, { 1,1,0 }, { 1,0,0 });
+		DirectX::XMFLOAT3 rights_normal{ 1,0,0 };
+		Color4<char> rights_tangent{ 0,0,127};
+		ptr[4] = Vertex({ x + width,y,z }, { 0,0,0 }, rights_normal, rights_tangent);
+		ptr[5] = Vertex({ x + width,y,z + length }, { 1,0,0 }, rights_normal, rights_tangent);
+		ptr[6] = Vertex({ x + width ,y - height,z }, { 0,1,0 }, rights_normal, rights_tangent);
+		ptr[7] = Vertex({ x + width ,y - height,z + length }, { 1,1,0 }, rights_normal, rights_tangent);
 		// back
-		ptr[8]  = Vertex({ x + width,y,z + length }, { 0,0,0 }, { 0,0,1 });
-		ptr[9]  = Vertex({ x,y,z + length }, { 1,0,0 }, { 0,0,1});
-		ptr[10] = Vertex({ x + width,y-height,z + length }, { 0,1,0 }, { 0,0,1 });
-		ptr[11] = Vertex({ x,y-height,z + length }, { 1,1,0 }, { 0,0,1 });
+		DirectX::XMFLOAT3 backs_normal{ 0,0,1 };
+		Color4<char> backs_tangent{ -127,0,0 };
+		ptr[8]  = Vertex({ x + width,y,z + length }, { 0,0,0 }, backs_normal, backs_tangent);
+		ptr[9]  = Vertex({ x,y,z + length }, { 1,0,0 }, backs_normal, backs_tangent);
+		ptr[10] = Vertex({ x + width,y-height,z + length }, { 0,1,0 }, backs_normal, backs_tangent);
+		ptr[11] = Vertex({ x,y-height,z + length }, { 1,1,0 }, backs_normal, backs_tangent);
 		//left
-		ptr[12] = Vertex({ x,y,z + length }, { 0,0,0 }, { -1,0,0 });
-		ptr[13] = Vertex({ x,y,z }, { 1,0,0 }, { -1,0,0 });
-		ptr[14] = Vertex({ x,y-height,z+length }, { 0,1,0 }, { -1,0,0 });
-		ptr[15] = Vertex({ x,y-height,z }, { 1,1,0 }, { -1,0,0 });
+		DirectX::XMFLOAT3 lefts_normal{ -1,0,0 };
+		Color4<char> lefts_tangent{ 0,0,-127 };
+		ptr[12] = Vertex({ x,y,z + length }, { 0,0,0 }, lefts_normal, lefts_tangent);
+		ptr[13] = Vertex({ x,y,z }, { 1,0,0 }, lefts_normal, lefts_tangent);
+		ptr[14] = Vertex({ x,y-height,z+length }, { 0,1,0 }, lefts_normal, lefts_tangent);
+		ptr[15] = Vertex({ x,y-height,z }, { 1,1,0 }, lefts_normal, lefts_tangent);
 		// up
-		ptr[16] = Vertex({ x,y,z + length }, { 0,0,0 }, { 0,1,0 });
-		ptr[17] = Vertex({ x+width,y,z + length }, { 1,0,0 }, { 0,1,0 });
-		ptr[18] = Vertex({ x,y,z }, { 0,1,0 }, { 0,1,0 });
-		ptr[19] = Vertex({ x+width,y,z }, { 1,1,0 }, { 0,1,0 });
+		DirectX::XMFLOAT3 ups_normal{ 0,1,0 };
+		Color4<char> ups_tangent{ 127,0,0 };
+		ptr[16] = Vertex({ x,y,z + length }, { 0,0,0 }, ups_normal, ups_tangent);
+		ptr[17] = Vertex({ x+width,y,z + length }, { 1,0,0 }, ups_normal, ups_tangent);
+		ptr[18] = Vertex({ x,y,z }, { 0,1,0 }, ups_normal, ups_tangent);
+		ptr[19] = Vertex({ x+width,y,z }, { 1,1,0 }, ups_normal, ups_tangent);
 		// down
-		ptr[20] = Vertex({ x,y - height,z + length }, { 0,0,0 }, { 0,-1,0 });
-		ptr[21] = Vertex({ x + width,y - height,z + length }, { 1,0,0 }, { 0,-1,0 });
-		ptr[22] = Vertex({ x,y - height,z }, { 0,1,0 }, { 0,-1,0 });
-		ptr[23] = Vertex({ x + width,y - height,z }, { 1,1,0 }, { 0,-1,0 });
+		DirectX::XMFLOAT3 downs_normal{ 0,-1,0 };
+		Color4<char> downs_tangent{ 127,0,0 };
+		ptr[20] = Vertex({ x,y - height,z + length }, { 0,0,0 }, downs_normal, downs_tangent);
+		ptr[21] = Vertex({ x + width,y - height,z + length }, { 1,0,0 }, downs_normal, downs_tangent);
+		ptr[22] = Vertex({ x,y - height,z }, { 0,1,0 }, downs_normal, downs_tangent);
+		ptr[23] = Vertex({ x + width,y - height,z }, { 1,1,0 }, downs_normal, downs_tangent);
 
 		IVertexBufferDesc desc;
 		desc.usage = IVertexBufferDesc::Usage::immutable;

@@ -5,6 +5,7 @@ struct PSI
 	float3 worldPos : Position;
 	float3 texCoord : COLOR;
 	float3 normal : NORMAL;
+	float3 tangent: TANGENT;
 };
 
 Texture2D objTexture : TEXTURE: register(t0);

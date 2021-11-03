@@ -20,6 +20,15 @@ Render::Vertex::Vertex(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 color, DirectX::
 	
 }
 
+Render::Vertex::Vertex(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 color, DirectX::XMFLOAT3 normal, Color4<char> tangent)
+	: pos(pos)
+	, color(color)
+	, normal(normal)
+	, tangent(tangent)
+{
+
+}
+
 Render::Vertex::Vertex(float x, float y, float r, float g, float b)
 {
 	this->pos = DirectX::XMFLOAT3{ x,y,1.f };

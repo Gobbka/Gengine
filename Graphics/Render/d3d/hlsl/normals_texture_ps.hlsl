@@ -4,6 +4,7 @@ struct PSI
 	float3 worldPos : Position;
 	float3 texCoord : COLOR;
 	float3 normal : NORMAL;
+	float3 tangent: TANGENT;
 };
 
 Texture2D normals : register(t0);
@@ -15,13 +16,7 @@ float4 main(PSI psi) : SV_TARGET
 	float3 tangent_space_normal_packed = normals.Sample(objSamplerState,psi.texCoord);
 	float3 tangent_space_normal = tangent_space_normal_packed * 2 - 1.f;
 
-	const float3x3 rotation_mtx = {
-		0,1,0,
-		1,0,0,
-		0,0,1,
-	};
-
-	const float3 tangent = mul(psi.normal,  rotation_mtx);
+	const float3 tangent = psi.tangent;
 	const float3 bitangent = cross(tangent,psi.normal);
 
 	const float3x3 trans_matrix = {

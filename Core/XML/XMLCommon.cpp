@@ -60,10 +60,10 @@ XML::Node* XML::NodeEntry::get() const
 
 XML::Number XML::NodeValue::parse_number() const
 {
-	if (_type != ValueType::string)
+	if (type != ValueType::string)
 		throw std::exception("Value type is not a string");
 
-	const auto* text = (char*)_bytes;
+	const auto* text = (char*)bytes;
 	bool negative = false;
 	Number value =0;
 	const auto length = strlen(text);
@@ -97,8 +97,8 @@ XML::Number XML::NodeValue::parse_number() const
 
 const char* XML::NodeValue::string() const
 {
-	if(_type == ValueType::string)
-		return (const char*)_bytes;
+	if(type == ValueType::string)
+		return (const char*)bytes;
 	throw std::exception("Value type is not a string");
 }
 
@@ -112,24 +112,24 @@ void XML::NodeValue::append(Node node) const
 
 std::vector<XML::Node>& XML::NodeValue::array() const
 {
-	if(_type == ValueType::array)
-		return *(std::vector<Node>*)_bytes;
+	if(type == ValueType::array)
+		return *(std::vector<Node>*)bytes;
 	throw std::exception("Value type is not a node array");
 }
 
 bool XML::NodeValue::is_string() const
 {
-	return _type == ValueType::string;
+	return type == ValueType::string;
 }
 
 bool XML::NodeValue::is_array() const
 {
-	return _type == ValueType::array;
+	return type == ValueType::array;
 }
 
 XML::NodeValue::NodeValue(ValueType type, void* bytes)
-	: _bytes(bytes)
-	, _type(type)
+	: bytes(bytes)
+	, type(type)
 {}
 
 XML::Node::Node(const char* tag, size_t number)
@@ -153,8 +153,8 @@ XML::Node::Node(const char* tag, const char* value)
 	memcpy(this->tag, tag, tag_len + 1);
 
 	const auto value_len = strlen(value);
-	_bytes = new char[value_len+1];
-	memcpy(_bytes, value, value_len+1);
+	bytes = new char[value_len+1];
+	memcpy(bytes, value, value_len+1);
 }
 
 XML::Node::Node(const char* tag, char* value)
@@ -189,22 +189,22 @@ XML::Node::Node(Node&& other) noexcept
 	, tag(other.tag)
 {
 	other.tag = nullptr;
-	other._bytes = nullptr;
+	other.bytes = nullptr;
 }
 
 XML::Node& XML::Node::operator=(Node&& other) noexcept
 {
 	tag = other.tag;
-	_bytes = other._bytes;
-	_type = other._type;
+	bytes = other.bytes;
+	type = other.type;
 
 	other.tag = nullptr;
-	other._bytes = nullptr;
+	other.bytes = nullptr;
 
 	return*this;
 }
 
-XML::Node::~Node()
+XML::Node::~Node() noexcept
 {
 	if(is_array())
 	{

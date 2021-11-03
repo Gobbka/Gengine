@@ -26,10 +26,9 @@ namespace XML
 	};
 
 	class __declspec(dllexport) NodeValue {
-		friend Node;
-
-		void*_bytes;
-		ValueType _type;
+	protected:
+		void*bytes;
+		ValueType type;
 	public:
 		Number parse_number() const;
 		const char* string() const;
@@ -56,7 +55,7 @@ namespace XML
 		explicit Node(const char* tag);
 		explicit Node(char* tag);
 		Node(Node&& other) noexcept;
-		~Node();
+		~Node() noexcept;
 
 		Node& operator=(Node&& other) noexcept;
 

@@ -5,13 +5,13 @@ void XML::XMLEncoder::encode(Node& node)
 {
 	out << "<" << node.tag << ">";
 
-	if(node.value.is_string())
+	if(node.is_string())
 	{
-		out << node.value.string();
+		out << node.string();
 	}
-	if(node.value.is_array())
+	if(node.is_array())
 	{
-		auto* arr = &node.value.array();
+		auto* arr = &node.array();
 
 		for(size_t i =0;i < arr->size();i++)
 		{

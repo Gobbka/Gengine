@@ -42,10 +42,9 @@ namespace XML
 		NodeValue(ValueType type,void*bytes);
 	};
 
-	struct __declspec(dllexport) Node
+	struct __declspec(dllexport) Node : NodeValue
 	{
 		char* tag;
-		NodeValue value;
 
 		Node() = delete;
 

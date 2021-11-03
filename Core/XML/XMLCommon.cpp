@@ -33,7 +33,7 @@ bool strings_equal(const char*ptr1,char*ptr2)
 
 XML::NodeEntry::NodeEntry(Node* node, const char* tag_filter)
 	: _tag_filter(tag_filter)
-	, _nodes(&node->value.array())
+	, _nodes(&node->array())
 	, _current_iteration(0)
 {
 	next();
@@ -133,7 +133,7 @@ XML::NodeValue::NodeValue(ValueType type, void* bytes)
 {}
 
 XML::Node::Node(const char* tag, size_t number)
-	: value(ValueType::string,new size_t)
+	: NodeValue(ValueType::string,new size_t)
 {
 	const auto tag_len = strlen(tag);
 	this->tag = new char[tag_len + 1];
@@ -141,24 +141,24 @@ XML::Node::Node(const char* tag, size_t number)
 }
 
 XML::Node::Node(char* tag, size_t number)
-	: tag(tag)
-	, value(ValueType::string, new size_t)
+	: NodeValue(ValueType::string, new size_t)
+	, tag(tag)
 {}
 
 XML::Node::Node(const char* tag, const char* value)
-	: value(ValueType::string,nullptr)
+	: NodeValue(ValueType::string,nullptr)
 {
 	const auto tag_len = strlen(tag);
 	this->tag = new char[tag_len + 1];
 	memcpy(this->tag, tag, tag_len + 1);
 
 	const auto value_len = strlen(value);
-	this->value._bytes = new char[value_len+1];
-	memcpy(this->value._bytes, value, value_len+1);
+	_bytes = new char[value_len+1];
+	memcpy(_bytes, value, value_len+1);
 }
 
 XML::Node::Node(const char* tag, char* value)
-	: value(ValueType::string,value)
+	: NodeValue(ValueType::string,value)
 {
 	const auto tag_len = strlen(tag);
 	this->tag = new char[tag_len + 1];
@@ -166,13 +166,13 @@ XML::Node::Node(const char* tag, char* value)
 }
 
 XML::Node::Node(char* tag, char* value)
-	: tag(tag)
-	, value(ValueType::string,value)
+	: NodeValue(ValueType::string,value)
+	, tag(tag)
 {}
 
 XML::Node::Node(const char* tag)
-	: tag(nullptr)
-	, value(ValueType::array, new std::vector<Node>)
+	: NodeValue(ValueType::array, new std::vector<Node>)
+	, tag(nullptr)
 {
 	const auto tag_len = strlen(tag);
 	this->tag = new char[tag_len + 1];
@@ -180,34 +180,35 @@ XML::Node::Node(const char* tag)
 }
 
 XML::Node::Node(char* tag)
-	: tag(tag)
-	, value(ValueType::array,new std::vector<Node>)
+	: NodeValue(ValueType::array,new std::vector<Node>)
+	, tag(tag)
 {}
 
 XML::Node::Node(Node&& other) noexcept
-	: tag(other.tag)
-	, value(other.value)
+	: NodeValue(other)
+	, tag(other.tag)
 {
 	other.tag = nullptr;
-	other.value._bytes = nullptr;
+	other._bytes = nullptr;
 }
 
 XML::Node& XML::Node::operator=(Node&& other) noexcept
 {
 	tag = other.tag;
-	value = other.value;
+	_bytes = other._bytes;
+	_type = other._type;
 
 	other.tag = nullptr;
-	other.value._bytes = nullptr;
+	other._bytes = nullptr;
 
 	return*this;
 }
 
 XML::Node::~Node()
 {
-	if(value.is_array())
+	if(is_array())
 	{
-		const auto*vector = &value.array();
+		const auto*vector = &array();
 		delete vector;
 	}
 

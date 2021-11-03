@@ -1,19 +1,29 @@
 ﻿#include "XMLEncoder.h"
 #include <iostream>
 
-void XML::XMLEncoder::encode(Node node)
+void XML::XMLEncoder::encode(Node& node)
 {
-	//for(const auto child : node.children)
-	//{
-	//	out << "<" << child.tag << ">";
-	//	encode(node);
-	//	out << "</" << child.tag << ">";
-	//}
+	out << "<" << node.tag << ">";
+
+	if(node.value.is_string())
+	{
+		out << node.value.string();
+	}
+	if(node.value.is_array())
+	{
+		auto* arr = &node.value.array();
+
+		for(size_t i =0;i < arr->size();i++)
+		{
+			encode(arr->operator[](i));
+		}
+	}
+	out << "</" << node.tag << ">";
 }
 
 XML::XMLEncoder::XMLEncoder(XML::Document& document)
 {
-	out << R"(<?xml version="1.0" encoding="UTF-8" ?>)";
+	out << R"(<?xml version="1.0" encoding="UTF-8" ?>)""\n";
 	encode(document.base_node);
 }
 

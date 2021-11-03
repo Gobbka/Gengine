@@ -8,7 +8,7 @@ namespace XML
 	class __declspec(dllexport) XMLEncoder
 	{
 		std::ostringstream out;
-		void encode(Node node);
+		void encode(Node& node);
 	public:
 		explicit XMLEncoder(XML::Document& document);
 		const char* text();

@@ -31,7 +31,6 @@ bool strings_equal(const char*ptr1,char*ptr2)
 	return false;
 }
 
-
 XML::NodeEntry::NodeEntry(Node* node, const char* tag_filter)
 	: _tag_filter(tag_filter)
 	, _nodes(&node->value.array())
@@ -44,7 +43,8 @@ bool XML::NodeEntry::next()
 {
 	for(; _current_iteration < _nodes->size(); _current_iteration++)
 	{
-		if(strings_equal(_tag_filter,_nodes->operator[](_current_iteration).tag))
+		const auto* node = &_nodes->operator[](_current_iteration);
+		if(strings_equal(_tag_filter, node->tag))
 		{
 			return true;
 		}
@@ -100,6 +100,14 @@ const char* XML::NodeValue::string() const
 	if(_type == ValueType::string)
 		return (const char*)_bytes;
 	throw std::exception("Value type is not a string");
+}
+
+void XML::NodeValue::append(Node node) const
+{
+	if (!is_array())
+		throw std::exception("Value type is not a node array");
+
+	array().push_back(std::move(node));
 }
 
 std::vector<XML::Node>& XML::NodeValue::array() const
@@ -162,9 +170,48 @@ XML::Node::Node(char* tag, char* value)
 	, value(ValueType::string,value)
 {}
 
-void XML::Node::release() const
+XML::Node::Node(const char* tag)
+	: tag(nullptr)
+	, value(ValueType::array, new std::vector<Node>)
 {
-	delete[] tag;
+	const auto tag_len = strlen(tag);
+	this->tag = new char[tag_len + 1];
+	memcpy(this->tag, tag, tag_len + 1);
+}
+
+XML::Node::Node(char* tag)
+	: tag(tag)
+	, value(ValueType::array,new std::vector<Node>)
+{}
+
+XML::Node::Node(Node&& other) noexcept
+	: tag(other.tag)
+	, value(other.value)
+{
+	other.tag = nullptr;
+	other.value._bytes = nullptr;
+}
+
+XML::Node& XML::Node::operator=(Node&& other) noexcept
+{
+	tag = other.tag;
+	value = other.value;
+
+	other.tag = nullptr;
+	other.value._bytes = nullptr;
+
+	return*this;
+}
+
+XML::Node::~Node()
+{
+	if(value.is_array())
+	{
+		const auto*vector = &value.array();
+		delete vector;
+	}
+
+	delete[]tag;
 }
 
 XML::Node* XML::Node::find_by_tag_first(const char* child_tag)
@@ -178,7 +225,7 @@ XML::NodeEntry XML::Node::find_by_tag(const char* child_tag)
 }
 
 XML::Document::Document(Node base_node)
-	: base_node(base_node)
+	: base_node(std::move(base_node))
 {
 
 }

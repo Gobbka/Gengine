@@ -33,6 +33,7 @@ namespace XML
 	public:
 		Number parse_number() const;
 		const char* string() const;
+		void append(Node node) const;
 		std::vector<Node>& array() const;
 
 		bool is_string() const;
@@ -53,11 +54,14 @@ namespace XML
 		Node(const char* tag, const char* value);
 		Node(const char* tag, char* value);
 		Node(char* tag, char* value);
+		explicit Node(const char* tag);
+		explicit Node(char* tag);
+		Node(Node&& other) noexcept;
+		~Node();
 
-		void release() const;
+		Node& operator=(Node&& other) noexcept;
 
 		Node* find_by_tag_first(const char* child_tag);
-
 		NodeEntry find_by_tag(const char* child_tag);
 	};
 

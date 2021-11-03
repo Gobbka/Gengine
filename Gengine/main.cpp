@@ -97,11 +97,13 @@ int WINAPI wWinMain(
 
     {
 	    // XML TEST
-        //XML::Document document("Niggers");
+        XML::Document document(XML::Node("Niggas"));
+        document.base_node.value.append(XML::Node("Nigga", "John"));
+        document.base_node.value.append(XML::Node("Nigga", "Mikle"));
         //document.base_node.append(XML::Node("JOHN"));
         //document.base_node.append(XML::Node("Joerge"));
-        //XML::XMLEncoder encoder(document);
-        //encoder.print();
+        XML::XMLEncoder encoder(document);
+        encoder.print();
     }
 
     auto stone_material = AssetsLoader::load_png(L"assets\\Pebbles_027_BaseColor.png");

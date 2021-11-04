@@ -25,9 +25,7 @@ Render::Vertex::Vertex(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 color, DirectX::
 	, color(color)
 	, normal(normal)
 	, tangent(tangent)
-{
-
-}
+{}
 
 Render::Vertex::Vertex(float x, float y, float r, float g, float b)
 {

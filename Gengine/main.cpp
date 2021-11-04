@@ -98,7 +98,9 @@ int WINAPI wWinMain(
     {
 	    // XML TEST
         XML::Document document(XML::Node("Niggas"));
-        document.base_node.append(XML::Node("Nigga", "John"));
+        XML::Node john("Nigga", "John");
+        john.attributes().add("age", "28");
+        document.base_node.append(std::move(john));
         document.base_node.append(XML::Node("Nigga", "Mikle"));
         //document.base_node.append(XML::Node("JOHN"));
         //document.base_node.append(XML::Node("Joerge"));

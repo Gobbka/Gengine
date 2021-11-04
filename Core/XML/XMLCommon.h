@@ -1,4 +1,6 @@
 #pragma once
+#include <functional>
+#include <map>
 #include <vector>
 
 namespace XML
@@ -25,6 +27,19 @@ namespace XML
 		array
 	};
 
+	class __declspec(dllexport) Attributes {
+		std::map<char*, char*> _attributes;
+	public:
+		Attributes() = default;
+		Attributes(Attributes&& other) noexcept;
+
+		void add(char* key, char* value);
+		void add(const char* key,const char* value);
+		char* get(const char* key);
+
+		void each(std::function<void(const char*key, const char*value)> callback);
+	};
+
 	class __declspec(dllexport) NodeValue {
 	protected:
 		void*bytes;
@@ -32,7 +47,7 @@ namespace XML
 	public:
 		Number parse_number() const;
 		const char* string() const;
-		void append(Node node) const;
+		void append(Node&& node) const;
 		std::vector<Node>& array() const;
 
 		bool is_string() const;
@@ -41,9 +56,14 @@ namespace XML
 		NodeValue(ValueType type,void*bytes);
 	};
 
-	struct __declspec(dllexport) Node : NodeValue
+	class __declspec(dllexport) Node : public NodeValue
 	{
-		char* tag;
+		char* _tag;
+		Attributes _attributes;
+	public:
+
+		const char* tag() const;
+		Attributes& attributes();
 
 		Node() = delete;
 

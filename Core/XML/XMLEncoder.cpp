@@ -3,7 +3,12 @@
 
 void XML::XMLEncoder::encode(Node& node)
 {
-	out << "<" << node.tag << ">";
+	out << "<" << node.tag();
+	node.attributes().each([&](const char* key, const char* value)
+		{
+			out << " " << key << "=\"" << value << "\"";
+		});
+	out << ">";
 
 	if(node.is_string())
 	{
@@ -18,7 +23,7 @@ void XML::XMLEncoder::encode(Node& node)
 			encode(arr->operator[](i));
 		}
 	}
-	out << "</" << node.tag << ">";
+	out << "</" << node.tag() << ">";
 }
 
 XML::XMLEncoder::XMLEncoder(XML::Document& document)

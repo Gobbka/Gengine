@@ -11,7 +11,7 @@ size_t quick_pow10(size_t n)
 	return pow10[n];
 }
 
-bool strings_equal(const char*ptr1,char*ptr2)
+bool strings_equal(const char*ptr1,const char*ptr2)
 {
 	for(int i=0;;i++)
 	{
@@ -44,7 +44,7 @@ bool XML::NodeEntry::next()
 	for(; _current_iteration < _nodes->size(); _current_iteration++)
 	{
 		const auto* node = &_nodes->operator[](_current_iteration);
-		if(strings_equal(_tag_filter, node->tag))
+		if(strings_equal(_tag_filter, node->tag()))
 		{
 			return true;
 		}
@@ -57,6 +57,44 @@ XML::Node* XML::NodeEntry::get() const
 {
 	return &_nodes->operator[](_current_iteration);
 }
+
+XML::Attributes::Attributes(Attributes&& other) noexcept
+{
+	_attributes = std::move(other._attributes);
+}
+
+void XML::Attributes::add(char* key, char* value)
+{
+	_attributes[key] = value;
+}
+
+void XML::Attributes::add(const char* key, const char* value)
+{
+	const auto key_len = strlen(key);
+	const auto value_len = strlen(value);
+
+	auto* new_key = new char[key_len+1];
+	auto* new_value = new char[value_len+1];
+
+	memcpy(new_key, key, key_len + 1);
+	memcpy(new_value, value, value_len + 1);
+
+	_attributes[new_key] = new_value;
+}
+
+char* XML::Attributes::get(const char* key)
+{
+	return _attributes[(char*)key];
+}
+
+void XML::Attributes::each(std::function<void(const char* key, const char* value)> callback)
+{
+	for(const auto pair : _attributes)
+	{
+		callback(pair.first, pair.second);
+	}
+}
+
 
 XML::Number XML::NodeValue::parse_number() const
 {
@@ -102,7 +140,7 @@ const char* XML::NodeValue::string() const
 	throw std::exception("Value type is not a string");
 }
 
-void XML::NodeValue::append(Node node) const
+void XML::NodeValue::append(Node&& node) const
 {
 	if (!is_array())
 		throw std::exception("Value type is not a node array");
@@ -132,25 +170,35 @@ XML::NodeValue::NodeValue(ValueType type, void* bytes)
 	, type(type)
 {}
 
+const char* XML::Node::tag() const
+{
+	return _tag;
+}
+
+XML::Attributes& XML::Node::attributes()
+{
+	return _attributes;
+}
+
 XML::Node::Node(const char* tag, size_t number)
 	: NodeValue(ValueType::string,new size_t)
 {
 	const auto tag_len = strlen(tag);
-	this->tag = new char[tag_len + 1];
-	memcpy(this->tag, tag, tag_len + 1);
+	_tag = new char[tag_len + 1];
+	memcpy(_tag, tag, tag_len + 1);
 }
 
 XML::Node::Node(char* tag, size_t number)
 	: NodeValue(ValueType::string, new size_t)
-	, tag(tag)
+	, _tag(tag)
 {}
 
 XML::Node::Node(const char* tag, const char* value)
 	: NodeValue(ValueType::string,nullptr)
 {
 	const auto tag_len = strlen(tag);
-	this->tag = new char[tag_len + 1];
-	memcpy(this->tag, tag, tag_len + 1);
+	_tag = new char[tag_len + 1];
+	memcpy(_tag, tag, tag_len + 1);
 
 	const auto value_len = strlen(value);
 	bytes = new char[value_len+1];
@@ -161,44 +209,45 @@ XML::Node::Node(const char* tag, char* value)
 	: NodeValue(ValueType::string,value)
 {
 	const auto tag_len = strlen(tag);
-	this->tag = new char[tag_len + 1];
-	memcpy(this->tag, tag, tag_len + 1);
+	_tag = new char[tag_len + 1];
+	memcpy(_tag, tag, tag_len + 1);
 }
 
 XML::Node::Node(char* tag, char* value)
 	: NodeValue(ValueType::string,value)
-	, tag(tag)
+	, _tag(tag)
 {}
 
 XML::Node::Node(const char* tag)
 	: NodeValue(ValueType::array, new std::vector<Node>)
-	, tag(nullptr)
+	, _tag(nullptr)
 {
 	const auto tag_len = strlen(tag);
-	this->tag = new char[tag_len + 1];
-	memcpy(this->tag, tag, tag_len + 1);
+	_tag = new char[tag_len + 1];
+	memcpy(_tag, tag, tag_len + 1);
 }
 
 XML::Node::Node(char* tag)
 	: NodeValue(ValueType::array,new std::vector<Node>)
-	, tag(tag)
+	, _tag(tag)
 {}
 
 XML::Node::Node(Node&& other) noexcept
 	: NodeValue(other)
-	, tag(other.tag)
+	, _tag(other._tag)
+	, _attributes(std::move(other._attributes))
 {
-	other.tag = nullptr;
+	other._tag = nullptr;
 	other.bytes = nullptr;
 }
 
 XML::Node& XML::Node::operator=(Node&& other) noexcept
 {
-	tag = other.tag;
+	_tag = other._tag;
 	bytes = other.bytes;
 	type = other.type;
 
-	other.tag = nullptr;
+	other._tag = nullptr;
 	other.bytes = nullptr;
 
 	return*this;
@@ -212,7 +261,7 @@ XML::Node::~Node() noexcept
 		delete vector;
 	}
 
-	delete[]tag;
+	delete[]_tag;
 }
 
 XML::Node* XML::Node::find_by_tag_first(const char* child_tag)

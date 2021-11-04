@@ -41,7 +41,9 @@
 #include "Types/Material.h"
 
 #include <XML/XMLCommon.h>
-#include <XML/XMLEncoder.h>
+#include <XML/Encoder.h>
+
+#include "XML/XMLDecoder.h"
 
 void debugger_loop()
 {
@@ -102,10 +104,13 @@ int WINAPI wWinMain(
         john.attributes().add("age", "28");
         document.base_node.append(std::move(john));
         document.base_node.append(XML::Node("Nigga", "Mikle"));
+
         //document.base_node.append(XML::Node("JOHN"));
         //document.base_node.append(XML::Node("Joerge"));
-        XML::XMLEncoder encoder(document);
+        XML::Encoder encoder(document);
         encoder.print();
+
+        XML::decode_document(encoder.text().c_str());
     }
 
     auto stone_material = AssetsLoader::load_png(L"assets\\Pebbles_027_BaseColor.png");

@@ -5,13 +5,13 @@
 
 namespace XML
 {
-	class __declspec(dllexport) XMLEncoder
+	class __declspec(dllexport) Encoder
 	{
 		std::ostringstream out;
 		void encode(Node& node);
 	public:
-		explicit XMLEncoder(XML::Document& document);
-		const char* text();
+		explicit Encoder(XML::Document& document);
+		auto text() const { return out.str(); }
 		void print() const;
 	};
 }

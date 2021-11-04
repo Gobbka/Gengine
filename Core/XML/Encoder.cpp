@@ -1,7 +1,7 @@
-﻿#include "XMLEncoder.h"
+﻿#include "Encoder.h"
 #include <iostream>
 
-void XML::XMLEncoder::encode(Node& node)
+void XML::Encoder::encode(Node& node)
 {
 	out << "<" << node.tag();
 	node.attributes().each([&](const char* key, const char* value)
@@ -26,13 +26,13 @@ void XML::XMLEncoder::encode(Node& node)
 	out << "</" << node.tag() << ">";
 }
 
-XML::XMLEncoder::XMLEncoder(XML::Document& document)
+XML::Encoder::Encoder(XML::Document& document)
 {
-	out << R"(<?xml version="1.0" encoding="UTF-8" ?>)""\n";
+	out << R"(<?xml version="1.0" encoding="UTF-8" ?>)";
 	encode(document.base_node);
 }
 
-void XML::XMLEncoder::print() const
+void XML::Encoder::print() const
 {
 	std::cout << out.str().c_str();
 }

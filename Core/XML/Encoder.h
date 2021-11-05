@@ -12,7 +12,7 @@ namespace XML
 	public:
 		explicit Encoder(XML::Document& document);
 		auto text() const { return out.str(); }
-		void print() const;
+		
 	};
 }
 

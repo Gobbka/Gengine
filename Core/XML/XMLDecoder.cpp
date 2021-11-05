@@ -1,8 +1,17 @@
 ﻿#include "XMLDecoder.h"
 
+struct NodeBorder
+{
+	char* node_start;
+	char* node_end;
+	char* value_start;
+	char* value_end;
+};
+
 void copy_pure_xml(const char*src,char*dst)
 {
-	for(size_t j=0;*src;src++)
+	size_t j = 0;
+	for(;*src;src++)
 	{
 		const auto symbol = *src;
 		if(symbol < 0x20)
@@ -11,21 +20,77 @@ void copy_pure_xml(const char*src,char*dst)
 		dst[j] = symbol;
 		j++;
 	}
+	dst[j] = '\0';
 }
 
-XML::Node decode_node(char*text)
+NodeBorder extract_node(char*text)
 {
-	text++;
-	char* start_pos = text;
-	while(*text != ' ' && *text != '>')
-	{
-		text++;
-	}
-	auto* tag = new char[text - start_pos+1];
-	memcpy(tag, start_pos, text - start_pos);
-	tag[text - start_pos] = 0;
+	NodeBorder border{text,nullptr,nullptr,nullptr};
 
- 	return XML::Node(tag);
+	for(;*text!='>';text++){}
+	border.value_start = text+1;
+
+	for (int opened_tags = 0; *text; text++)
+	{
+		const auto symbol = *text;
+		if(symbol=='<')
+		{
+			opened_tags++;
+			continue;
+		}
+
+		if(symbol == '/')
+		{
+			opened_tags -= 2;
+		}
+
+		if(opened_tags < 0)
+		{
+			break;
+		}
+	}
+
+	border.value_end = text-1;
+	for (; *text != '>'; text++){}
+	border.node_end = text;
+
+	return border;
+}
+
+XML::Node decode_node(NodeBorder border)
+{
+	//text++;
+	//char* start_pos = text;
+	//while(*text != ' ' && *text != '>')
+	//{
+	//	text++;
+	//}
+	//auto* tag = new char[text - start_pos+1];
+	//memcpy(tag, start_pos, text - start_pos);
+	//tag[text - start_pos] = 0;
+
+	//int opened_tags=0;
+	//for(size_t i =0;text[i];i++)
+	//{
+	//	auto symbol = text[i];
+	//	if(symbol=='<')
+	//	{
+	//		opened_tags++;
+	//		continue;
+	//	}
+	//	if(symbol=='/')
+	//	{
+	//		opened_tags-=2;
+	//		if(opened_tags == -1)
+	//		{
+	//			
+	//			int i = 228;
+	//		}
+	//	}
+	//}
+
+ //	return XML::Node(tag);
+	throw std::exception("Invalid xml string");
 }
 
 XML::Document XML::decode_document(const char* str)
@@ -38,8 +103,8 @@ XML::Document XML::decode_document(const char* str)
 	{
 		if (pure_xml[i] == '>')
 		{
-			delete[]pure_xml;
-			return Document(decode_node(&((char*)pure_xml)[i+1]));
+			decode_node(extract_node(&pure_xml[i + 1]));
+			throw std::exception("Invalid xml string");
 		}
 	}
 

@@ -108,7 +108,6 @@ int WINAPI wWinMain(
         //document.base_node.append(XML::Node("JOHN"));
         //document.base_node.append(XML::Node("Joerge"));
         XML::Encoder encoder(document);
-        encoder.print();
 
         XML::decode_document(encoder.text().c_str());
     }

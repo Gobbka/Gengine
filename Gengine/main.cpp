@@ -93,12 +93,13 @@ int WINAPI wWinMain(
 
     {
 	    // XML TEST
-        XML::Document document(XML::Node("Niggas", XML::NodeArray()));
-        XML::Node john("Nigga", "John");
+        XML::Document document(XML::Node(XML::Tag("Niggas"), XML::ArrayValue()));
+        XML::Node jill(XML::Tag("Nigga"), XML::StringValue("ff"));
+        XML::Node john(XML::Tag("Nigga"), XML::StringValue("John"));
         john.attributes().add("age", "28");
         document.base_node.append(std::move(john));
-        document.base_node.append(XML::Node("Nigga", "Mikle"));
-        document.base_node.append(XML::Node("Lili", XML::NodeNull()));
+        document.base_node.append(XML::Node("Nigga", XML::StringValue("Mikle")));
+        document.base_node.append(XML::Node("Lili", XML::NullValue()));
 
         //document.base_node.append(XML::Node("JOHN"));
         //document.base_node.append(XML::Node("Joerge"));

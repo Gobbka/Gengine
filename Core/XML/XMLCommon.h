@@ -58,8 +58,38 @@ namespace XML
 		NodeValue(NodeValue&& other) noexcept;
 	};
 
-	struct NodeArray {};
-	struct NodeNull {};
+	struct Tag
+	{
+		char* value;
+
+		Tag(char* name);
+		Tag(const char* name);
+	};
+
+	struct IValue
+	{
+		char* value;
+
+		IValue(char* value);
+	};
+
+	struct ArrayValue : IValue
+	{
+		ArrayValue();
+	};
+	struct NullValue : IValue
+	{
+		NullValue();
+	};
+	struct StringValue : IValue
+	{
+		StringValue(char* value);
+		StringValue(const char* value);
+	};
+	struct NumberValue : IValue
+	{
+		NumberValue(Number num);
+	};
 
 	class __declspec(dllexport) Node : public NodeValue
 	{
@@ -71,17 +101,8 @@ namespace XML
 		Attributes& attributes();
 
 		Node() = delete;
-
-		Node(const char* tag, size_t number);
-		Node(char* tag, size_t number);
-		Node(const char* tag, const char* value);
-		Node(const char* tag, char* value);
-		Node(char* tag, char* value);
-		Node(char* tag, NodeValue&& value);
-		Node(const char* tag, NodeArray arr);
-		Node(char* tag, NodeArray arr);
-		Node(const char* tag, NodeNull arr);
-		Node(char* tag, NodeNull arr);
+		Node(Tag tag, IValue value);
+		Node(Tag tag, ArrayValue value);
 		Node(Node&& other) noexcept;
 		~Node() noexcept;
 

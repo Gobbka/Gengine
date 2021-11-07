@@ -57,6 +57,8 @@ NodeBorder extract_node(char*text)
 	return border;
 }
 
+
+
 XML::Node decode_node(NodeBorder border)
 {
 	//text++;
@@ -103,7 +105,8 @@ XML::Document XML::decode_document(const char* str)
 	{
 		if (pure_xml[i] == '>')
 		{
-			decode_node(extract_node(&pure_xml[i + 1]));
+			extract_node(&pure_xml[i + 1]);
+			
 			throw std::exception("Invalid xml string");
 		}
 	}

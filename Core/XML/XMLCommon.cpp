@@ -1,5 +1,7 @@
 #include "XMLCommon.h"
 
+#define COPY_CONST_STRING(dst,src) { const auto src_len = strlen(src); dst = new char[src_len + 1]; memcpy(dst, src, src_len + 1); }
+
 size_t quick_pow10(size_t n)
 {
 	static size_t pow10[]
@@ -165,10 +167,22 @@ bool XML::NodeValue::is_array() const
 	return type == ValueType::array;
 }
 
+bool XML::NodeValue::null() const
+{
+	return bytes == nullptr;
+}
+
 XML::NodeValue::NodeValue(ValueType type, void* bytes)
 	: bytes(bytes)
 	, type(type)
 {}
+
+XML::NodeValue::NodeValue(NodeValue&& other) noexcept
+	: bytes(other.bytes)
+	, type(other.type)
+{
+	other.bytes = nullptr;
+}
 
 const char* XML::Node::tag() const
 {
@@ -183,9 +197,7 @@ XML::Attributes& XML::Node::attributes()
 XML::Node::Node(const char* tag, size_t number)
 	: NodeValue(ValueType::string,new size_t)
 {
-	const auto tag_len = strlen(tag);
-	_tag = new char[tag_len + 1];
-	memcpy(_tag, tag, tag_len + 1);
+	COPY_CONST_STRING(_tag, tag)
 }
 
 XML::Node::Node(char* tag, size_t number)
@@ -196,21 +208,14 @@ XML::Node::Node(char* tag, size_t number)
 XML::Node::Node(const char* tag, const char* value)
 	: NodeValue(ValueType::string,nullptr)
 {
-	const auto tag_len = strlen(tag);
-	_tag = new char[tag_len + 1];
-	memcpy(_tag, tag, tag_len + 1);
-
-	const auto value_len = strlen(value);
-	bytes = new char[value_len+1];
-	memcpy(bytes, value, value_len+1);
+	COPY_CONST_STRING(_tag, tag)
+	COPY_CONST_STRING(bytes, value)
 }
 
 XML::Node::Node(const char* tag, char* value)
 	: NodeValue(ValueType::string,value)
 {
-	const auto tag_len = strlen(tag);
-	_tag = new char[tag_len + 1];
-	memcpy(_tag, tag, tag_len + 1);
+	COPY_CONST_STRING(_tag, tag)
 }
 
 XML::Node::Node(char* tag, char* value)
@@ -218,22 +223,37 @@ XML::Node::Node(char* tag, char* value)
 	, _tag(tag)
 {}
 
-XML::Node::Node(const char* tag)
+XML::Node::Node(char* tag, NodeValue&& value)
+	: NodeValue(std::move(value))
+	, _tag(tag)
+{}
+
+XML::Node::Node(const char* tag, NodeArray arr)
 	: NodeValue(ValueType::array, new std::vector<Node>)
 	, _tag(nullptr)
 {
-	const auto tag_len = strlen(tag);
-	_tag = new char[tag_len + 1];
-	memcpy(_tag, tag, tag_len + 1);
+	COPY_CONST_STRING(_tag, tag)
 }
 
-XML::Node::Node(char* tag)
+XML::Node::Node(char* tag, NodeArray arr)
 	: NodeValue(ValueType::array,new std::vector<Node>)
 	, _tag(tag)
 {}
 
+XML::Node::Node(const char* tag, NodeNull arr)
+	: NodeValue(ValueType::string,nullptr)
+	, _tag(nullptr)
+{
+	COPY_CONST_STRING(_tag, tag)
+}
+
+XML::Node::Node(char* tag, NodeNull arr)
+	: NodeValue(ValueType::string, nullptr)
+	, _tag(tag)
+{}
+
 XML::Node::Node(Node&& other) noexcept
-	: NodeValue(other)
+	: NodeValue(std::move(other))
 	, _tag(other._tag)
 	, _attributes(std::move(other._attributes))
 {

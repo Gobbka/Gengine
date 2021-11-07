@@ -8,22 +8,29 @@ void XML::Encoder::encode(Node& node)
 		{
 			out << " " << key << "=\"" << value << "\"";
 		});
-	out << ">";
 
-	if(node.is_string())
+	if(node.null())
 	{
-		out << node.string();
-	}
-	if(node.is_array())
+		out << "/>";
+	}else
 	{
-		auto* arr = &node.array();
+		out << ">";
 
-		for(size_t i =0;i < arr->size();i++)
+		if (node.is_string())
 		{
-			encode(arr->operator[](i));
+			out << node.string();
 		}
+		if (node.is_array())
+		{
+			auto* arr = &node.array();
+
+			for (size_t i = 0; i < arr->size(); i++)
+			{
+				encode(arr->operator[](i));
+			}
+		}
+		out << "</" << node.tag() << ">";
 	}
-	out << "</" << node.tag() << ">";
 }
 
 XML::Encoder::Encoder(XML::Document& document)

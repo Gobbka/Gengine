@@ -52,9 +52,14 @@ namespace XML
 
 		bool is_string() const;
 		bool is_array() const;
+		bool null() const;
 
 		NodeValue(ValueType type,void*bytes);
+		NodeValue(NodeValue&& other) noexcept;
 	};
+
+	struct NodeArray {};
+	struct NodeNull {};
 
 	class __declspec(dllexport) Node : public NodeValue
 	{
@@ -72,8 +77,11 @@ namespace XML
 		Node(const char* tag, const char* value);
 		Node(const char* tag, char* value);
 		Node(char* tag, char* value);
-		explicit Node(const char* tag);
-		explicit Node(char* tag);
+		Node(char* tag, NodeValue&& value);
+		Node(const char* tag, NodeArray arr);
+		Node(char* tag, NodeArray arr);
+		Node(const char* tag, NodeNull arr);
+		Node(char* tag, NodeNull arr);
 		Node(Node&& other) noexcept;
 		~Node() noexcept;
 

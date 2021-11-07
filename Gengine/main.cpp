@@ -43,7 +43,7 @@
 #include <XML/XMLCommon.h>
 #include <XML/Encoder.h>
 
-#include "XML/XMLDecoder.h"
+#include <XML/XMLDecoder.h>
 
 void debugger_loop()
 {
@@ -80,12 +80,6 @@ int WINAPI wWinMain(
     AllocLoggerConsole();
     LogW(lpCmdLine);
 
-    BinaryReader reader(L"python\\test.py");
-    auto* script = reader.to_string();
-    pybind11::scoped_interpreter guard{};
-    pybind11::exec(script);
-    delete[] script;
-
     auto*form = new Forms::MainForm(hInstance, 1400, 780);
     form->show();
     form->background = { 17,17,17 };
@@ -99,16 +93,17 @@ int WINAPI wWinMain(
 
     {
 	    // XML TEST
-        XML::Document document(XML::Node("Niggas"));
+        XML::Document document(XML::Node("Niggas", XML::NodeArray()));
         XML::Node john("Nigga", "John");
         john.attributes().add("age", "28");
         document.base_node.append(std::move(john));
         document.base_node.append(XML::Node("Nigga", "Mikle"));
+        document.base_node.append(XML::Node("Lili", XML::NodeNull()));
 
         //document.base_node.append(XML::Node("JOHN"));
         //document.base_node.append(XML::Node("Joerge"));
         XML::Encoder encoder(document);
-
+        std::cout << encoder.text().c_str();
         XML::decode_document(encoder.text().c_str());
     }
 

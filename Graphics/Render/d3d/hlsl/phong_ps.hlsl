@@ -28,15 +28,19 @@ float4 main(PSI input) : SV_TARGET
 
 	float3 vectorToLight = lightpos - input.worldPos;
 	float3 normalizedVector = normalize(vectorToLight);
-	float ntWidth;
-	float ntHeight;
-	normalsTexture.GetDimensions(ntWidth, ntHeight);
-	float3 normal = normalsTexture.Sample(objSamplerState, float2(input.viewPos.x/ntWidth,input.viewPos.y/ntHeight));
-	normal = normal * 2 - 1;
+	if(dot(normalizedVector,input.normal)>0)
+	{
+		float ntWidth;
+		float ntHeight;
+		normalsTexture.GetDimensions(ntWidth, ntHeight);
+		float3 normal = normalsTexture.Sample(objSamplerState, float2(input.viewPos.x / ntWidth, input.viewPos.y / ntHeight));
+		normal = normal * 2 - 1;
 
-	float3 diffuseLight = max(dot(normalizedVector, normal), 0) * pointLightIntensity;
+		float3 diffuseLight = max(dot(normalizedVector, normal), 0) * pointLightIntensity;
+		appliedLight += diffuseLight;
+	}
 
-	appliedLight += diffuseLight;
+
 	float3 finalColor = texColor * appliedLight;
 
 	return float4(finalColor, 1.f);

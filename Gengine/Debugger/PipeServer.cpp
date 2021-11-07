@@ -6,7 +6,6 @@
 
 PipeServer::PipeServer(LPCWSTR address)
 {
-	// CreateNamedPipe - Step 1
 	_hCreateNamedPipe = CreateNamedPipe(
 		address,
 		PIPE_ACCESS_DUPLEX | PIPE_TYPE_BYTE | PIPE_READMODE_BYTE,
@@ -15,7 +14,8 @@ PipeServer::PipeServer(LPCWSTR address)
 		999999,
 		999999,
 		NMPWAIT_USE_DEFAULT_WAIT,
-		NULL);
+		nullptr
+	);
 
 	if (_hCreateNamedPipe == INVALID_HANDLE_VALUE) {
 		std::cout << "NamedPipe creation failed with error number: " << GetLastError() << '\n';

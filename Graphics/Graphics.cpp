@@ -34,11 +34,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_gdevice = new Render::D11GDevice(dev, this);
 	_gcontext = new Render::D11GContext(this, context);
 
-	{
-		DXGI_SWAP_CHAIN_DESC desc;
-		swap->GetDesc(&desc);
-		_screen_resolution = Surface(desc.BufferDesc.Width,desc.BufferDesc.Height);
-	}
+	_screen_resolution = _targetView.get_texture()->resolution();
 
 	_samplerState = new Render::SamplerState(this);
 	

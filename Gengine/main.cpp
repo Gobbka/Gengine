@@ -105,7 +105,7 @@ int WINAPI wWinMain(
         //document.base_node.append(XML::Node("Joerge"));
         XML::Encoder encoder(document);
         std::cout << encoder.text().c_str();
-        XML::decode_document(encoder.text().c_str());
+        //XML::decode_document(encoder.text().c_str());
     }
 
     auto stone_material = AssetsLoader::load_png(L"assets\\Pebbles_027_BaseColor.png");

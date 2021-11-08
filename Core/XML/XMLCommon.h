@@ -58,7 +58,7 @@ namespace XML
 		NodeValue(NodeValue&& other) noexcept;
 	};
 
-	struct Tag
+	struct __declspec(dllexport) Tag
 	{
 		char* value;
 
@@ -66,27 +66,27 @@ namespace XML
 		Tag(const char* name);
 	};
 
-	struct IValue
+	struct __declspec(dllexport) IValue
 	{
 		char* value;
 
 		IValue(char* value);
 	};
 
-	struct ArrayValue : IValue
+	struct __declspec(dllexport) ArrayValue : IValue
 	{
 		ArrayValue();
 	};
-	struct NullValue : IValue
+	struct __declspec(dllexport) NullValue : IValue
 	{
 		NullValue();
 	};
-	struct StringValue : IValue
+	struct __declspec(dllexport) StringValue : IValue
 	{
 		StringValue(char* value);
 		StringValue(const char* value);
 	};
-	struct NumberValue : IValue
+	struct __declspec(dllexport) NumberValue : IValue
 	{
 		NumberValue(Number num);
 	};

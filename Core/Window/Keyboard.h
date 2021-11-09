@@ -186,7 +186,8 @@ enum class VirtualKey : unsigned char {
 
 class __declspec(dllexport) Keyboard
 {
+    bool virtual_keys[0XFE]{};
 public:
-	static bool pressed(VirtualKey key);
-	static void set(VirtualKey key, bool active);
+	bool pressed(VirtualKey key);
+	void set(VirtualKey key, bool active);
 };

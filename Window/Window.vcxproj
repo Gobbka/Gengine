@@ -151,14 +151,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="WindowsManager.h" />
-    <ClInclude Include="WindowsWindow.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="WindowsManager.cpp" />
-    <ClCompile Include="WindowsWindow.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Core\Core.vcxproj">
       <Project>{23ace9d1-999a-4a6b-a355-a81ae87b95e9}</Project>
     </ProjectReference>

@@ -4,7 +4,7 @@
 #include <fstream>
 #include <iostream>
 
-#include <Keyboard.h>
+#include <Window/Keyboard.h>
 #include <FS/FSObject.h>
 #include <FS/FSDirectory.h>
 
@@ -148,50 +148,50 @@ void Forms::MainForm::update()
 	static float scale = 45.f;
 	auto camera = editorScene->get_main_camera()->get<Render::Camera>();
 	
-	if (Keyboard::pressed(VirtualKey::KEY_W)) // W
+	if (keyboard->pressed(VirtualKey::KEY_W)) // W
 	{
 		camera->adjust_position_relative(Position3(0.05f, 0, 0));
 	}
-	if (Keyboard::pressed(VirtualKey::KEY_S))
+	if (keyboard->pressed(VirtualKey::KEY_S))
 	{
 		camera->adjust_position_relative(Position3(-0.05f, 0, 0));
 	}
-	if (Keyboard::pressed(VirtualKey::KEY_D))
+	if (keyboard->pressed(VirtualKey::KEY_D))
 	{
 		camera->adjust_position_relative(Position3(0, 0, 0.05f));
 	}
-	if (Keyboard::pressed(VirtualKey::KEY_A))
+	if (keyboard->pressed(VirtualKey::KEY_A))
 	{
 		camera->adjust_position_relative(Position3(0, 0, -0.05f));
 	}
-	if (Keyboard::pressed(VirtualKey::SPACE))
+	if (keyboard->pressed(VirtualKey::SPACE))
 	{
 		camera->set_fov(scale);
 		scale += 0.1f;
 	}
-	if (Keyboard::pressed(VirtualKey::CONTROL))
+	if (keyboard->pressed(VirtualKey::CONTROL))
 	{
 		camera->set_fov(scale);
 		scale -= 0.1f;
 	}
 
-	if (Keyboard::pressed(VirtualKey::LEFT))
+	if (keyboard->pressed(VirtualKey::LEFT))
 	{
 		camera->adjust_rotation((Vector3(0, -0.04f, 0)));
 	}
-	if (Keyboard::pressed(VirtualKey::RIGHT))
+	if (keyboard->pressed(VirtualKey::RIGHT))
 	{
 		camera->adjust_rotation((Vector3(0, 0.04f, 0)));
 	}
-	if (Keyboard::pressed(VirtualKey::UP))
+	if (keyboard->pressed(VirtualKey::UP))
 	{
 		camera->adjust_rotation((Vector3(-0.04f, 0, 0)));
 	}
-	if (Keyboard::pressed(VirtualKey::DOWN))
+	if (keyboard->pressed(VirtualKey::DOWN))
 	{
 		camera->adjust_rotation((Vector3(0.04f, 0, 0)));
 	}
-	if(Keyboard::pressed(VirtualKey::F1))
+	if(keyboard->pressed(VirtualKey::F1))
 	{
 		auto res = camera->get_view_resolution();
 	}

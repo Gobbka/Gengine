@@ -1,6 +1,6 @@
 #pragma once
-#include "WindowsManager.h"
-#include "WindowsWindow.h"
+#include "Window/WindowsManager.h"
+#include "Window/WindowsWindow.h"
 #include "Graphics/Scene.h"
 #include "Types/Types.h"
 

@@ -4,21 +4,12 @@
 #include <iostream>
 #include <windowsx.h>
 
-#include "../Keyboard.h"
+#include "Window/Keyboard.h"
 
 void UI::Interaction::WinIntEventHandler::window_proc(UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	if (!this->can_handle_event)
 		return;
-
-	if(msg == WM_KEYDOWN)
-	{
-		Keyboard::set((VirtualKey)wParam, true);
-	}
-	if(msg == WM_KEYUP)
-	{
-		Keyboard::set((VirtualKey)wParam, false);
-	}
 	
 	if(msg == WM_MOUSEWHEEL)
 	{

@@ -13,7 +13,16 @@ LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam
 
 	if (window->on_wndproc)
 		window->on_wndproc(msg, wParam, lParam);
-	
+
+	if (msg == WM_KEYDOWN)
+	{
+		window->keyboard->set((VirtualKey)wParam, true);
+	}
+	if (msg == WM_KEYUP)
+	{
+		window->keyboard->set((VirtualKey)wParam, false);
+	}
+
 	if (msg == WM_CLOSE)
 		exit(0);
 
@@ -53,6 +62,7 @@ void Core::WindowsWindow::handle_resize(Surface rect)
 
 Core::WindowsWindow::WindowsWindow(HINSTANCE hint, UINT width, UINT height)
 	: _size(width,height)
+	, keyboard(new Keyboard())
 {
 	_hInst = hint;
 

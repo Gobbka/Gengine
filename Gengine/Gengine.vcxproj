@@ -188,9 +188,6 @@
     <ProjectReference Include="..\UI\UI.vcxproj">
       <Project>{2bebf010-a931-410d-b5b5-e47d441f1948}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Window\Window.vcxproj">
-      <Project>{e60426fb-0403-4d98-859a-0505afcde763}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debugger\PipeServer.h" />

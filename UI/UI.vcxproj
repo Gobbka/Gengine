@@ -165,7 +165,6 @@
     <ClCompile Include="elements\Panel\Panel.cpp" />
     <ClCompile Include="Events\WinIntEventHandler.cpp" />
     <ClCompile Include="InteractiveForm.cpp" />
-    <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="UIContext.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,7 +175,6 @@
     <ClInclude Include="Events\InteractionEventHandler.h" />
     <ClInclude Include="Events\WinIntEventHandler.h" />
     <ClInclude Include="InteractiveForm.h" />
-    <ClInclude Include="Keyboard.h" />
     <ClInclude Include="UIContext.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

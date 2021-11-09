@@ -1,8 +1,10 @@
 ﻿#pragma once
-#include "Types/Types.h"
+#include "../Types/Types.h"
 
 #include <functional>
 #include <Windows.h>
+
+#include "Keyboard.h"
 
 
 namespace Core {
@@ -24,6 +26,7 @@ namespace Core {
 		UINT min_width = 50;
 		UINT min_height = 50;
 	public:
+		Keyboard* keyboard;
 		std::function<void(Surface)> on_resize;
 		std::function<void(UINT msg,WPARAM wParam,LPARAM lParam)> on_wndproc;
 		

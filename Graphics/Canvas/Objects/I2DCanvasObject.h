@@ -9,14 +9,14 @@ namespace Render {
 }
 
 namespace Canvas {
-	class Canvas2DLayer;
+	class CanvasComponent;
 
 	class __declspec(dllexport) IControllableObject
 	{
 	private:
-		Canvas2DLayer* _layer;
+		CanvasComponent* _layer;
 	protected:
-		Canvas2DLayer* layer() const;
+		CanvasComponent* layer() const;
 
 		virtual void on_initialize() = 0;
 
@@ -41,7 +41,7 @@ namespace Canvas {
 
 		virtual void move_by(Position2) = 0;
 
-		void initialize(Canvas2DLayer* layer);
+		void initialize(CanvasComponent* layer);
 
 		IControllableObject();
 	};

@@ -1,7 +1,7 @@
 #include "I2DCanvasObject.h"
-#include "../CanvasLayer.h"
+#include "../CanvasComponent.h"
 
-void Canvas::IControllableObject::initialize(Canvas::Canvas2DLayer* layer)
+void Canvas::IControllableObject::initialize(Canvas::CanvasComponent* layer)
 {
 	_layer = layer;
 	this->on_initialize();
@@ -12,7 +12,7 @@ Canvas::IControllableObject::IControllableObject()
 	_layer = nullptr;
 }
 
-Canvas::Canvas2DLayer* Canvas::IControllableObject::layer() const
+Canvas::CanvasComponent* Canvas::IControllableObject::layer() const
 {
 	return _layer;
 }

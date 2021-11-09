@@ -151,8 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Canvas\CanvasLayer.h" />
-    <ClInclude Include="Canvas\D3D11Canvas.h" />
+    <ClInclude Include="Canvas\CanvasComponent.h" />
+    <ClInclude Include="Canvas\D11VertexAllocator.h" />
     <ClInclude Include="Canvas\Objects\I2DCanvasObject.h" />
     <ClInclude Include="Canvas\Objects\Rectangle\Rectangle.h" />
     <ClInclude Include="Graphics.h" />
@@ -211,8 +211,8 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Canvas\CanvasLayer.cpp" />
-    <ClCompile Include="Canvas\D3D11Canvas.cpp" />
+    <ClCompile Include="Canvas\CanvasComponent.cpp" />
+    <ClCompile Include="Canvas\D11VertexAllocator.cpp" />
     <ClCompile Include="Canvas\Objects\I2DCanvasObject.cpp" />
     <ClCompile Include="Canvas\Objects\Rectangle\Rectangle.cpp" />
     <ClCompile Include="Graphics.cpp" />

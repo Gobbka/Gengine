@@ -21,10 +21,10 @@
     <ClInclude Include="Render\Events\RenderEvent.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Canvas\CanvasLayer.h">
+    <ClInclude Include="Canvas\CanvasComponent.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Canvas\D3D11Canvas.h">
+    <ClInclude Include="Canvas\D11VertexAllocator.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Render\d3d\Bindable.h">
@@ -194,10 +194,10 @@
     <ClCompile Include="Graphics.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Canvas\CanvasLayer.cpp">
+    <ClCompile Include="Canvas\CanvasComponent.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Canvas\D3D11Canvas.cpp">
+    <ClCompile Include="Canvas\D11VertexAllocator.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Render\d3d\Bindable.cpp">

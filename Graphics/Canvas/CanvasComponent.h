@@ -1,12 +1,12 @@
 #pragma once
 #include <vector>
-#include "D3D11Canvas.h"
+#include "D11VertexAllocator.h"
 #include "Objects/I2DCanvasObject.h"
 
 namespace Canvas {
-	class __declspec(dllexport) Canvas2DLayer {
+	class __declspec(dllexport) CanvasComponent {
 	private:
-		Render::D3D11Canvas* _canvas;
+		Render::D11VertexAllocator _canvas;
 		std::vector<I2DCanvasObject*> _objects;
 
 		bool _hidden;
@@ -15,14 +15,11 @@ namespace Canvas {
 	public:
 		Render::Vertex* vertices() const;
 		
-		Canvas2DLayer(Core::GraphicsContext*engine);
-		//Canvas2DLayer(Canvas2DLayer&&other) noexcept;
-		virtual ~Canvas2DLayer();
+		CanvasComponent(Core::GraphicsContext*engine);
+		virtual ~CanvasComponent();
 
-		void update();
+		void update() const;
 		void render(Render::DrawEvent2D* event);
-
-		Render::D3D11Canvas* canvas();
 
 		void add_object(I2DCanvasObject* object);
 

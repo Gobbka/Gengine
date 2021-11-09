@@ -91,7 +91,7 @@ void Render::DrawEvent3D::draw_indexed(UINT count, UINT start_location)
 	_context->context->DrawIndexed(count, start_location, 0);
 }
 
-Render::DrawEvent2D::DrawEvent2D(Camera* camera, Canvas::Canvas2DLayer* layer)
+Render::DrawEvent2D::DrawEvent2D(Camera* camera, Canvas::CanvasComponent* layer)
 	: DrawEvent(camera,camera->graphics_context()->get_sprite_engine())
 {
 	this->layer = layer;

@@ -53,7 +53,6 @@ namespace UI
 		Parent(Position2 position);
 
 		void draw(Render::DrawEvent2D* event) override;
-		void set_color(Color4XM color) override;
 		void move_by(Position2 move) override;
 
 		InteractiveElement* element_at(UINT index);

@@ -27,6 +27,7 @@ namespace Render
 		Material(const BYTE* pSysMem, Surface resolution,bool alpha = true);
 		Material(Material& other);
 		Material(Material&& other) noexcept;
+		Material& operator=(Material&& other) noexcept;
 		Material() = delete;
 		~Material();
 

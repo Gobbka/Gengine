@@ -31,10 +31,7 @@ namespace Canvas {
 		virtual void    set_resolution(Surface surface) = 0;
 		virtual Surface get_resolution() = 0;
 
-		virtual void    set_texture(Render::Texture* texture) PURE;
-
-		virtual void    set_color(Color4XM color) = 0;
-		virtual Color4XM  get_color() = 0;
+		virtual void set_texture(Render::Texture* texture) PURE;
 
 		virtual void scale(float value) =0;
 

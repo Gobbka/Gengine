@@ -30,7 +30,7 @@ namespace UI
 		FS::FSObject _object;
 	public:
 		Directory(FS::FSObject object, Position2 position, Surface resolution, Render::Texture* texture)
-			: Panel(position, resolution, { 1.f,1.f,1.f,1.f }),
+			: Panel(position, resolution, nullptr),
 			_object(object)
 		{
 			Panel::set_texture(texture);
@@ -74,17 +74,29 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 
 	auto* uicanvas_entity = get_ui()->create_layer();
 
-	_topbar_panel = new UI::Panel({ 0,0 }, { (float)width,30 }, { RGB_TO_FLOAT(26,26,26),1.f });
-	_worldspace_panel = new UI::Panel({ 0,-30 }, { 250,(float)height - 30.f }, { RGB_TO_FLOAT(20,20,20),1.f });
+	Render::Texture* dark_gray=nullptr;
+	Render::Texture* dark_gray1=nullptr;
+	Render::Texture* dark_gray2=nullptr;
+	{
+		Render::Material mat({ RGB_TO_FLOAT(26,26,26) });
+		dark_gray = get_graphics_context()->get_device()->create_texture(mat);
+		mat = std::move(Render::Material{{RGB_TO_FLOAT(20,20,20)}});
+		dark_gray1 = get_graphics_context()->get_device()->create_texture(mat);
+		mat = std::move(Render::Material{ {RGB_TO_FLOAT(34,34,34)} });
+		dark_gray2 = get_graphics_context()->get_device()->create_texture(mat);
+	}
 	
-	_assets_panel_wrapper = new UI::Panel({ 250, -1 * (float)(height) + 250.f }, { (float)width-250,250 }, { RGB_TO_FLOAT(26,26,26),1.f });
+	_topbar_panel = new UI::Panel({ 0,0 }, { (float)width,30 }, dark_gray);
+	_worldspace_panel = new UI::Panel({ 0,-30 }, { 250,(float)height - 30.f }, dark_gray1);
+	
+	_assets_panel_wrapper = new UI::Panel({ 250, -1 * (float)(height) + 250.f }, { (float)width-250,250 }, dark_gray);
 	_assets_panel_wrapper->add_element(
-		new UI::Panel({ 0,0 }, { (float)width - 250,30 }, { RGB_TO_FLOAT(34,34,34),1.f })
+		new UI::Panel({ 0,0 }, { (float)width - 250,30 }, dark_gray2)
 	);
 
-	_render_panel = new UI::Panel({ 250, -30 }, { 840,468 }, { RGB_TO_FLOAT(255,0,0),1.f });
+	_render_panel = new UI::Panel({ 250, -30 }, { 840,468 }, nullptr);
 
-	_assets_panel = new UI::Panel({ 0,0}, { (float)width - 250,250-30 }, { RGB_TO_FLOAT(255,26,26),0.f });
+	_assets_panel = new UI::Panel({ 0,0}, { (float)width - 250,250-30 }, nullptr);
 	_assets_panel->styles.display = UI::ElementStyles::DisplayType::flex;
 
 	_assets_panel_wrapper->add_element(_assets_panel);

@@ -32,6 +32,21 @@ Render::Material::Material(Material&& other) noexcept
 	other._resolution = Surface(0, 0);
 }
 
+Render::Material& Render::Material::operator=(Material&& other) noexcept
+{
+	if (_pSysMem != other.pSysMem())
+		delete[]_pSysMem;
+	_pSysMem = other._pSysMem;
+	_resolution = other._resolution;
+	format = other.format;
+
+	other._pSysMem = nullptr;
+	other._resolution = { 0,0 };
+	other.format = DXGI_FORMAT_UNKNOWN;
+
+	return*this;
+}
+
 Render::Material::Material(Color3XM color)
 	: _resolution(1,1)
 {

@@ -9,7 +9,7 @@ namespace Core {
 namespace Canvas
 {
 	class CanvasComponent;
-	class I2DCanvasObject;
+	class IObject;
 }
 
 namespace Render {
@@ -49,7 +49,7 @@ namespace Render {
 		DrawEvent2D(Camera* camera, Canvas::CanvasComponent*layer);
 		
 		void draw_vertex(UINT count, UINT start = 0) const;
-		void draw_object(Canvas::I2DCanvasObject* object);
+		void draw_object(Canvas::IObject* object);
 	};
 
 	struct DrawEvent3D

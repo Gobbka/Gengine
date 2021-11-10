@@ -153,7 +153,7 @@
   <ItemGroup>
     <ClInclude Include="Canvas\CanvasComponent.h" />
     <ClInclude Include="Canvas\D11VertexAllocator.h" />
-    <ClInclude Include="Canvas\Objects\I2DCanvasObject.h" />
+    <ClInclude Include="Canvas\Objects\IObject.h" />
     <ClInclude Include="Canvas\Objects\Rectangle\Rectangle.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="GraphicsBuildSettings.h" />
@@ -213,7 +213,7 @@
   <ItemGroup>
     <ClCompile Include="Canvas\CanvasComponent.cpp" />
     <ClCompile Include="Canvas\D11VertexAllocator.cpp" />
-    <ClCompile Include="Canvas\Objects\I2DCanvasObject.cpp" />
+    <ClCompile Include="Canvas\Objects\IObject.cpp" />
     <ClCompile Include="Canvas\Objects\Rectangle\Rectangle.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Graphics\Components\TextComponent.cpp" />

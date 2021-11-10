@@ -19,7 +19,6 @@ namespace Canvas {
 		CanvasComponent* layer() const;
 
 		virtual void on_initialize() = 0;
-
 	public:
 		virtual ~IControllableObject() = default;
 		bool hidden = false;
@@ -37,7 +36,7 @@ namespace Canvas {
 		virtual void    set_color(Color4XM color) = 0;
 		virtual Color4XM  get_color() = 0;
 
-		virtual void    scale(float value) =0;
+		virtual void scale(float value) =0;
 
 		virtual void move_by(Position2) = 0;
 
@@ -46,7 +45,7 @@ namespace Canvas {
 		IControllableObject();
 	};
 
-	class __declspec(dllexport) I2DCanvasObject : public IControllableObject
+	class __declspec(dllexport) IObject : public IControllableObject
 	{
 	public:
 		Render::Vertex* vertices() const;

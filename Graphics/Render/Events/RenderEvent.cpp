@@ -2,7 +2,7 @@
 
 #include "../../Graphics.h"
 #include "../../IGContext.h"
-#include "../../Canvas/Objects/I2DCanvasObject.h"
+#include "../../Canvas/Objects/IObject.h"
 #include "../Engine/Camera.h"
 #include "../Engine/MaskEngine.h"
 
@@ -70,7 +70,7 @@ void Render::DrawEvent2D::draw_vertex(UINT count, UINT start) const
 	_camera->graphics_context()->context->Draw(count, start + _draw_index);
 }
 
-void Render::DrawEvent2D::draw_object(Canvas::I2DCanvasObject* object)
+void Render::DrawEvent2D::draw_object(Canvas::IObject* object)
 {
 	_draw_index = object->get_index();
 	object->draw(this);

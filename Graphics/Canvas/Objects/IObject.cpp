@@ -1,4 +1,4 @@
-#include "I2DCanvasObject.h"
+#include "IObject.h"
 #include "../CanvasComponent.h"
 
 void Canvas::IControllableObject::initialize(Canvas::CanvasComponent* layer)
@@ -17,12 +17,12 @@ Canvas::CanvasComponent* Canvas::IControllableObject::layer() const
 	return _layer;
 }
 
-Render::Vertex* Canvas::I2DCanvasObject::vertices() const
+Render::Vertex* Canvas::IObject::vertices() const
 {
 	return layer()->vertices() + get_index();
 }
 
-void Canvas::I2DCanvasObject::scale(float value)
+void Canvas::IObject::scale(float value)
 {
 	auto position = get_position();
 	auto resolution = get_resolution();

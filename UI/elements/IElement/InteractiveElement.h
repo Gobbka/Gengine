@@ -2,7 +2,7 @@
 #include <d3d11.h>
 #include <DirectXMath.h>
 #include "functional"
-#include "Canvas/Objects/I2DCanvasObject.h"
+#include "Canvas/Objects/IObject.h"
 #include "Types/Types.h"
 
 

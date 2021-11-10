@@ -1,5 +1,5 @@
 #include "CanvasComponent.h"
-#include "Objects/I2DCanvasObject.h"
+#include "Objects/IObject.h"
 #include "../Render/Events/RenderEvent.h"
 
 void Canvas::CanvasComponent::render_components(Render::DrawEvent2D* event)
@@ -35,7 +35,7 @@ void Canvas::CanvasComponent::render(Render::DrawEvent2D* event)
 	this->render_components(event);
 }
 
-void Canvas::CanvasComponent::add_object(I2DCanvasObject* object)
+void Canvas::CanvasComponent::add_object(IObject* object)
 {
 	object->set_index(_canvas.last_index());
 	_canvas.alloc(object->size());

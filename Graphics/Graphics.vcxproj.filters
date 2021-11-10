@@ -36,7 +36,7 @@
     <ClInclude Include="Render\d3d\Vertex.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Canvas\Objects\I2DCanvasObject.h">
+    <ClInclude Include="Canvas\Objects\IObject.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Canvas\Objects\Rectangle\Rectangle.h">
@@ -212,7 +212,7 @@
     <ClCompile Include="Render\Events\RenderEvent.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Canvas\Objects\I2DCanvasObject.cpp">
+    <ClCompile Include="Canvas\Objects\IObject.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Canvas\Objects\Rectangle\Rectangle.cpp">

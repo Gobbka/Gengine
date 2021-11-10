@@ -4,7 +4,7 @@
 #include "../../../Render/Engine/SpriteEngine.h"
 #include "../../../Render/d3d/Buffer/Texture.h"
 
-Canvas::I2DCanvasObject::INDEX Canvas::Rectangle::size()
+Canvas::IObject::INDEX Canvas::Rectangle::size()
 {
 	return 4;
 }

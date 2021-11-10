@@ -1,5 +1,5 @@
 #pragma once
-#include "../I2DCanvasObject.h"
+#include "../IObject.h"
 
 namespace Render {
 	struct DrawEvent2D;
@@ -7,7 +7,7 @@ namespace Render {
 
 namespace Canvas
 {
-	class __declspec(dllexport) Rectangle final : public Canvas::I2DCanvasObject
+	class __declspec(dllexport) Rectangle final : public Canvas::IObject
 	{
 	public:
 		INDEX size() override;

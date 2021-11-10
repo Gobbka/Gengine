@@ -6,7 +6,7 @@
 //#include "../../Components/LightViewer.h"
 //#include "../../Components/PointLightComponent.h"
 
-void Render::CreateLightMapPass::execute()
+void Render::CreateLightMapPass::execute(Scene*scene)
 {
 	//auto* gcontext = _context->get_context();
 	//

@@ -8,10 +8,12 @@ namespace Render
 		draw,
 		overlay
 	};
-	
+
+	class Scene;
+
 	class __declspec(dllexport) IPass
 	{
 	public:
-		virtual void execute() = 0;
+		virtual void execute(Scene*scene) = 0;
 	};
 }

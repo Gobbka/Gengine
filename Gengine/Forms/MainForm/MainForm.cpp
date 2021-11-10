@@ -174,7 +174,6 @@ void Forms::MainForm::update()
 		camera->set_fov(scale);
 		scale -= 0.1f;
 	}
-
 	if (keyboard->pressed(VirtualKey::LEFT))
 	{
 		camera->adjust_rotation((Vector3(0, -0.04f, 0)));
@@ -190,9 +189,5 @@ void Forms::MainForm::update()
 	if (keyboard->pressed(VirtualKey::DOWN))
 	{
 		camera->adjust_rotation((Vector3(0.04f, 0, 0)));
-	}
-	if(keyboard->pressed(VirtualKey::F1))
-	{
-		auto res = camera->get_view_resolution();
 	}
 }

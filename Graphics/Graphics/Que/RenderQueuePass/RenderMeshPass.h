@@ -21,7 +21,7 @@ namespace Render
 	class ClearPass : public IPass
 	{
 		Core::GraphicsContext* _context;
-		void execute() override;
+		void execute(Scene*scene) override;
 	public:
 		ClearPass(Core::GraphicsContext* context)
 			: _context(context)
@@ -38,6 +38,6 @@ namespace Render
 	public:
 		RenderMeshPass(Core::GraphicsContext* context);
 
-		void execute() override;
+		void execute(Scene*scene) override;
 	};
 }

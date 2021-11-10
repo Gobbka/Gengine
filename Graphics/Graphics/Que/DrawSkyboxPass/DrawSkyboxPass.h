@@ -10,13 +10,14 @@ namespace Core
 
 namespace Render
 {
+	class Scene;
 
 	class DrawSkyboxPass final : public IPass
 	{
 		Core::GraphicsContext* _context;
 		Mesh _skybox_cube;
 		Rasterizer _skybox_rasterizer;
-		void execute() override;
+		void execute(Scene*) override;
 	public:
 		explicit DrawSkyboxPass(Core::GraphicsContext* context);
 	};

@@ -18,7 +18,7 @@ class DrawUIPass : public Render::IPass
 	Core::GraphicsContext* _context;
 
 public:
-	void execute() override
+	void execute(Render::Scene*scene) override
 	{
 		auto* camera = _context->main_scene->get_main_camera()->get<Render::Camera>().get_ptr();
 		camera->bind();
@@ -62,7 +62,7 @@ class DrawTextPass : public Render::IPass
 {
 	Core::GraphicsContext* _context;
 
-	void execute() override
+	void execute(Render::Scene*scene) override
 	{
 		auto* matrix = &_context->get_context()->matrix_buffer;
 

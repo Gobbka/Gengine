@@ -7,14 +7,12 @@
 #include "../../Mesh.h"
 #include "../../Components/LightViewer.h"
 
-void Render::ClearPass::execute()
+void Render::ClearPass::execute(Scene*scene)
 {
-	for (auto* scene : _context->scenes) {
-		scene->world()->each<Camera>([](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)
+	scene->world()->each<Camera>([](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)
 		{
 			camera->clear();
 		});
-	}
 }
 
 void Render::RenderMeshPass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshRenderer> model, DirectX::XMMATRIX VPMatrix) const
@@ -82,21 +80,13 @@ Render::RenderMeshPass::RenderMeshPass(Core::GraphicsContext* context)
 	_context = context;
 }
 
-void Render::RenderMeshPass::execute()
+void Render::RenderMeshPass::execute(Scene*scene)
 {
 	auto* gcontext = _context->get_context();
 	gcontext->set_topology(PrimitiveTopology::TRIANGLELIST);
 	gcontext->matrix_buffer.bind();
 	gcontext->control_buffer.bind();
 
-	for (auto* scene : _context->scenes) {
-
-		if (!scene->active||scene == _context->main_scene)
-			continue;
-
-		execute_scene(scene);
-	}
-
 	_context->get_sprite_engine()->bind_texture(nullptr, 1);
-	execute_scene(_context->main_scene);
+	execute_scene(scene);
 }

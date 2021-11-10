@@ -8,10 +8,12 @@ namespace Core
 
 namespace Render
 {
+	class Scene;
+
 	class CreateShadowMapPass : public IPass
 	{
 		Core::GraphicsContext* _context;
-		void execute() override;
+		void execute(Scene*scene) override;
 	public:
 		CreateShadowMapPass(Core::GraphicsContext*context)
 			: _context(context)

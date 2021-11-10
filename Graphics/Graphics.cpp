@@ -115,38 +115,59 @@ void Core::GraphicsContext::set_resolution(Surface new_resolution)
 
 void Core::GraphicsContext::make_frame()
 {
-	// begin passes
-	if (_viewport.Width == 0.f || _viewport.Height == 0.f)
-		return;
+	for (auto* scene : scenes) {
 
-	context->RSSetViewports(1, &_viewport);
+		if (!scene->active || scene == main_scene)
+			continue;
+
+		if (_viewport.Width == 0.f || _viewport.Height == 0.f)
+			return;
+
+		context->RSSetViewports(1, &_viewport);
+
+		for (Render::IPass* pass : _passer._begin_passes)
+		{
+			pass->execute(scene);
+		}
+		for (Render::IPass* pass : _passer._probe_passes)
+		{
+			pass->execute(scene);
+		}
+		for (Render::IPass* pass : _passer._draw_passes)
+		{
+			pass->execute(scene);
+		}
+		for (Render::IPass* pass : _passer._end_passes)
+		{
+			pass->execute(scene);
+		}
+		for (Render::IPass* pass : _passer._overlay_passes)
+		{
+			pass->execute(scene);
+		}
+	}
 
 	for (Render::IPass* pass : _passer._begin_passes)
 	{
-		pass->execute();
+		pass->execute(main_scene);
 	}
-	
-	// probe,update,collection pass
-	for(Render::IPass*pass :_passer._probe_passes)
+	for (Render::IPass* pass : _passer._probe_passes)
 	{
-		pass->execute();
+		pass->execute(main_scene);
 	}
-
-	// render pass
 	for (Render::IPass* pass : _passer._draw_passes)
 	{
-		pass->execute();
+		pass->execute(main_scene);
 	}
-
 	for (Render::IPass* pass : _passer._end_passes)
 	{
-		pass->execute();
+		pass->execute(main_scene);
 	}
-
 	for (Render::IPass* pass : _passer._overlay_passes)
 	{
-		pass->execute();
+		pass->execute(main_scene);
 	}
+
 }
 
 void Core::GraphicsContext::present_frame() const

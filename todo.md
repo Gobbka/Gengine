@@ -13,3 +13,7 @@ RenderPipeline:
 -> генерация карты теней
 -> генерация освещения на основе карты нормалей
 -> объединить карту теней с картой освещения
+6) Разъеденить Canvas и InteractiveForm:
+-> Разъеденить Canvas::IObject от InteractiveObject
+-> Убрать наследование InteractiveForm от Canvas
+-> Переименовать InteractiveForm в UIComponent

@@ -57,13 +57,13 @@ InteractiveForm* InteractiveForm::add_element(UI::InteractiveElement* element)
 }
 
 InteractiveForm::InteractiveForm(Core::GraphicsContext* pEngine, Position2* cursor_position)
-	: CanvasComponent(pEngine)
+	: Canvas(pEngine)
 {
 	_cursor_position = cursor_position;
 }
 
 //InteractiveForm::InteractiveForm(InteractiveForm&& other) noexcept
-//	: CanvasComponent((CanvasComponent)other)
+//	: Canvas((Canvas)other)
 //{
 //
 //}

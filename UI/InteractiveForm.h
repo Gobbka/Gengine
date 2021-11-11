@@ -2,7 +2,7 @@
 #include <functional>
 #include <vector>
 
-#include "Canvas/CanvasComponent.h"
+#include "Canvas/Canvas.h"
 #include "Types/Types.h"
 #include "Events/InteractionEventHandler.h"
 
@@ -14,7 +14,7 @@ namespace UI {
 	struct InteractiveElementDesc;
 	class InteractiveElement;
 
-	class __declspec(dllexport) InteractiveForm final : public Canvas::CanvasComponent
+	class __declspec(dllexport) InteractiveForm final : public Canvas::Canvas
 	{
 	public:
 		struct DragStruct

@@ -9,18 +9,18 @@ namespace Render {
 }
 
 namespace Canvas {
-	class CanvasComponent;
+	class Canvas;
 
-	class __declspec(dllexport) IControllableObject
+	class __declspec(dllexport) IControllable
 	{
 	private:
-		CanvasComponent* _layer;
+		Canvas* _layer;
 	protected:
-		CanvasComponent* layer() const;
+		Canvas* layer() const;
 
 		virtual void on_initialize() = 0;
 	public:
-		virtual ~IControllableObject() = default;
+		virtual ~IControllable() = default;
 		bool hidden = false;
 
 		virtual void draw(Render::DrawEvent2D* event) = 0;
@@ -37,12 +37,12 @@ namespace Canvas {
 
 		virtual void move_by(Position2) = 0;
 
-		void initialize(CanvasComponent* layer);
+		void initialize(Canvas* layer);
 
-		IControllableObject();
+		IControllable();
 	};
 
-	class __declspec(dllexport) IObject : public IControllableObject
+	class __declspec(dllexport) IObject : public IControllable
 	{
 	public:
 		Render::Vertex* vertices() const;

@@ -8,7 +8,7 @@ namespace Core {
 
 namespace Canvas
 {
-	class CanvasComponent;
+	class Canvas;
 	class IObject;
 }
 
@@ -45,8 +45,8 @@ namespace Render {
 	private:
 		UINT _draw_index = 0u;
 	public:
-		Canvas::CanvasComponent* layer;
-		DrawEvent2D(Camera* camera, Canvas::CanvasComponent*layer);
+		Canvas::Canvas* layer;
+		DrawEvent2D(Camera* camera, Canvas::Canvas*layer);
 		
 		void draw_vertex(UINT count, UINT start = 0) const;
 		void draw_object(Canvas::IObject* object);

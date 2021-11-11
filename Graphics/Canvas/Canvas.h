@@ -4,7 +4,7 @@
 #include "Objects/IObject.h"
 
 namespace Canvas {
-	class __declspec(dllexport) CanvasComponent {
+	class __declspec(dllexport) Canvas {
 	private:
 		Render::D11VertexAllocator _canvas;
 		std::vector<IObject*> _objects;
@@ -15,8 +15,8 @@ namespace Canvas {
 	public:
 		Render::Vertex* vertices() const;
 		
-		CanvasComponent(Core::GraphicsContext*engine);
-		virtual ~CanvasComponent();
+		Canvas(Core::GraphicsContext*engine);
+		virtual ~Canvas();
 
 		void update() const;
 		void render(Render::DrawEvent2D* event);

@@ -1,18 +1,18 @@
 #include "IObject.h"
-#include "../CanvasComponent.h"
+#include "../Canvas.h"
 
-void Canvas::IControllableObject::initialize(Canvas::CanvasComponent* layer)
+void Canvas::IControllable::initialize(Canvas::Canvas* layer)
 {
 	_layer = layer;
 	this->on_initialize();
 }
 
-Canvas::IControllableObject::IControllableObject()
+Canvas::IControllable::IControllable()
 {
 	_layer = nullptr;
 }
 
-Canvas::CanvasComponent* Canvas::IControllableObject::layer() const
+Canvas::Canvas* Canvas::IControllable::layer() const
 {
 	return _layer;
 }

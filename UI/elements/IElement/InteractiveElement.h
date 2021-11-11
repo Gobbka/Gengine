@@ -61,7 +61,7 @@ namespace UI {
 		ElementDescription(bool can_be_parent, const char* string_name, bool has_text = false);
 	};
 
-	class __declspec(dllexport) InteractiveElement : public Canvas::IControllableObject
+	class __declspec(dllexport) InteractiveElement : public Canvas::IControllable
 	{
 	public:
 		typedef std::function<void(UIElementEventArgs)> EventCallback;

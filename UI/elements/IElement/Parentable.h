@@ -42,7 +42,7 @@ namespace UI
 		void handle_mouse_down() override;
 		void handle_mouse_enter() override;
 		void handle_mouse_leave() override;
-		void handle_mouse_move(float mX, float mY) override;
+		void handle_mouse_move(MoveEvent event) override;
 		void handle_mouse_scroll(int delta) override;
 		void handle_db_click() override;
 

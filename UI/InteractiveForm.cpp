@@ -57,32 +57,20 @@ InteractiveForm* InteractiveForm::add_element(UI::InteractiveElement* element)
 }
 
 InteractiveForm::InteractiveForm(Core::GraphicsContext* pEngine, Position2* cursor_position)
-	: _canvas(pEngine)
-{
-	_cursor_position = cursor_position;
-}
+	: _hidden(false)
+	, _canvas(pEngine)
+	, _cursor_position(cursor_position)
+{}
 
-//InteractiveForm::InteractiveForm(InteractiveForm&& other) noexcept
-//	: Canvas((Canvas)other)
-//{
-//
-//}
-
-InteractiveForm::~InteractiveForm()
-{
-	
-}
-
-Interaction::EventStatus InteractiveForm::on_mouse_move(int mx,int my)
+Interaction::EventStatus InteractiveForm::on_mouse_move(MoveEvent move_event)
 {
 	if (hidden())
 		return Interaction::EventStatus::none;
 
-	const Position2 cursor = {(float)mx,(float)my * -1};
-
 	if (this->dragged)
 	{
-		this->dragged->element->set_position(Position2(cursor.x - this->dragged->dragged_offset.x, cursor.y + this->dragged->dragged_offset.y));
+		auto new_pos = dragged->element->get_position() + move_event.delta;
+		this->dragged->element->set_position(new_pos);
 		return Interaction::EventStatus::handled;
 	}
 
@@ -95,14 +83,14 @@ Interaction::EventStatus InteractiveForm::on_mouse_move(int mx,int my)
 		if (
 			element->styles.display != ElementStyles::DisplayType::none &&
 			e_handled == Interaction::EventStatus::none &&
-			element->point_belongs(cursor)
+			element->point_belongs(move_event.absolute)
 			)
 		{
 			if (element->state.hovered == false)
 			{
 				element->handle_mouse_enter();
 			}
-			element->handle_mouse_move(cursor.x, cursor.y);
+			element->handle_mouse_move(move_event);
 			e_handled = Interaction::EventStatus::handled;
 		}
 		else if (element->state.hovered == true)
@@ -155,7 +143,7 @@ void InteractiveForm::hide()
 	_hidden = true;
 }
 
-void InteractiveForm::update()
+void InteractiveForm::update() const
 {
 	if (!hidden())
 		_canvas.update();

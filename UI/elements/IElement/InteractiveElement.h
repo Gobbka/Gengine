@@ -11,6 +11,7 @@ namespace Render {
 }
 
 namespace UI {
+	struct MoveEvent;
 	class InteractiveForm;
 
 	class Parent;
@@ -122,7 +123,7 @@ namespace UI {
 		// u must to call base func if think that event need to be handled
 		//
 
-		virtual void handle_mouse_move(float mX, float mY);
+		virtual void handle_mouse_move(MoveEvent event);
 		virtual void handle_mouse_leave();
 		virtual void handle_mouse_enter();
 		virtual void handle_mouse_up();

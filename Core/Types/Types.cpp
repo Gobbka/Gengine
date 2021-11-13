@@ -53,6 +53,16 @@ Vector2::Vector2(float x, float y)
 	this->y = y;
 }
 
+Vector2 Vector2::operator+(Vector2& first) const
+{
+	return { x + first.x,y + first.y };
+}
+
+Vector2 Vector2::operator-(Vector2& other) const
+{
+	return { x - other.x,y - other.y };
+}
+
 void Vector3::operator+=(Vector3 pos)
 {
 	this->z += pos.z;

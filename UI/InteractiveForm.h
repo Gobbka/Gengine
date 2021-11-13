@@ -14,6 +14,12 @@ namespace UI {
 	struct InteractiveElementDesc;
 	class InteractiveElement;
 
+	struct __declspec(dllexport) MoveEvent
+	{
+		Position2 delta;
+		Position2 absolute;
+	};
+
 	class __declspec(dllexport) InteractiveForm final
 	{
 	public:
@@ -43,11 +49,11 @@ namespace UI {
 	public:
 		InteractiveForm(Core::GraphicsContext* pEngine,Position2*cursor_position);
 		//InteractiveForm(InteractiveForm&& other) noexcept;
-		virtual ~InteractiveForm();
+		~InteractiveForm() = default;
 	public:
 		Interaction::EventStatus on_lbmouse_up();
 		Interaction::EventStatus on_lbmouse_down();
-		Interaction::EventStatus on_mouse_move(int mx, int my);
+		Interaction::EventStatus on_mouse_move(MoveEvent move_event);
 		Interaction::EventStatus on_mouse_scroll(short direction);
 		Interaction::EventStatus on_db_click();
 
@@ -55,7 +61,7 @@ namespace UI {
 		void show();
 		void hide();
 
-		void update();
+		void update() const;
 		void render(Render::DrawEvent2D*event);
 
 		Canvas::Canvas* canvas();

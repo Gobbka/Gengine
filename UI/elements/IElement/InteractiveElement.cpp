@@ -60,9 +60,9 @@ void UI::InteractiveElement::set_parent(Parent* parent)
 
 #pragma region events handler
 
-void UI::InteractiveElement::handle_mouse_move( float mX, float mY)
+void UI::InteractiveElement::handle_mouse_move( MoveEvent event)
 {
-	this->onMouseMove(this, mX, mY);
+	this->onMouseMove(this, event.absolute.x, event.absolute.y);
 }
 
 void UI::InteractiveElement::handle_mouse_leave()

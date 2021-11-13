@@ -1,5 +1,5 @@
 #include "Parentable.h"
-
+#include "../../InteractiveForm.h"
 #include <iostream>
 
 void UI::ReadChildrenCollection::foreach(std::function<void(UI::InteractiveElement* element)> iterator)
@@ -68,7 +68,7 @@ void UI::Parent::handle_mouse_leave()
 	InteractiveElement::handle_mouse_leave();
 }
 
-void UI::Parent::handle_mouse_move(float mX, float mY)
+void UI::Parent::handle_mouse_move(MoveEvent event)
 {
 	bool e_handled = false;
 
@@ -79,14 +79,14 @@ void UI::Parent::handle_mouse_move(float mX, float mY)
 		if (
 			e_handled == false &&
 			element->styles.display != ElementStyles::DisplayType::none &&
-			element->point_belongs({(mX),(mY)})
+			element->point_belongs(event.absolute)
 			)
 		{
 			if (element->state.hovered == false)
 			{
 				element->handle_mouse_enter();
 			}
-			element->handle_mouse_move(mX,mY);
+			element->handle_mouse_move(event);
 			e_handled = true;
 		}
 		else if (element->state.hovered == true)
@@ -95,7 +95,7 @@ void UI::Parent::handle_mouse_move(float mX, float mY)
 		}
 	}
 
-	InteractiveElement::handle_mouse_move(mX, mY);
+	InteractiveElement::handle_mouse_move(event);
 }
 
 void UI::Parent::handle_mouse_scroll(int delta)

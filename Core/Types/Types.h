@@ -13,6 +13,8 @@ struct __declspec(dllexport) Vector2 {
 	Vector2 lerp(Vector2 vector,float t) const;
 
 	Vector2(float x, float y);
+	Vector2 operator+(Vector2& first) const;
+	Vector2 operator-(Vector2& other) const;
 };
 
 struct __declspec(dllexport) Vector3 : public Vector2 {

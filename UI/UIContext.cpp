@@ -13,6 +13,8 @@
 #include "Render/Events/RenderEvent.h"
 #include <Render/d3d/Buffer/ConstantBuffer.h>
 
+#include "Logger/Logger.h"
+
 class DrawUIPass : public Render::IPass
 {
 	Core::GraphicsContext* _context;
@@ -139,11 +141,14 @@ void UI::UIContext::on_mouse_scroll(short direction)
 
 void UI::UIContext::on_mouse_move(int mx, int my)
 {
-	_cursor = Position2(mx, my);
-
+	const Position2 new_pos = { (float)mx,(float)-my };
+	const MoveEvent move_event{new_pos - _cursor,new_pos};
+	
+	_cursor = new_pos;
+	
 	_gfx->main_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
 		{
-			form->on_mouse_move(mx, my);
+			form->on_mouse_move(move_event);
 		});
 }
 

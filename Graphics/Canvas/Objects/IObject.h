@@ -17,6 +17,7 @@ namespace Canvas {
 		virtual void on_initialize() = 0;
 	public:
 		virtual ~IControllable() = default;
+		IControllable() = default;
 		bool hidden = false;
 
 		virtual void draw(Render::DrawEvent2D* event) = 0;
@@ -28,8 +29,6 @@ namespace Canvas {
 		virtual Surface get_resolution() = 0;
 
 		virtual void set_texture(Render::Texture* texture) PURE;
-
-		virtual void scale(float value) =0;
 
 		virtual void move_by(Position2) = 0;
 	};
@@ -50,11 +49,7 @@ namespace Canvas {
 
 		Canvas* canvas();
 
-		// todo: fix scaling
-		void scale(float value) override;
-
 		// must return needed object vertex length
 		virtual INDEX size() = 0;
-
 	};
 }

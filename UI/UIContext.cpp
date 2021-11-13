@@ -43,7 +43,7 @@ public:
 			{
 				if (form->hidden())
 					return;
-				event.layer = form.get_ptr();
+				event.layer = form->canvas();
 				event.set_alpha(1.f);
 
 				form->update();

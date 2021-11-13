@@ -31,7 +31,7 @@ void UI::Panel::draw(Render::DrawEvent2D* event)
 
 void UI::Panel::on_initialize()
 {
-	form->add_object(&rect);
+	form->canvas()->add_object(&rect);
 	Parent::on_initialize();
 }
 

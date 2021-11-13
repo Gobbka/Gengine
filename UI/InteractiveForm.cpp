@@ -57,7 +57,7 @@ InteractiveForm* InteractiveForm::add_element(UI::InteractiveElement* element)
 }
 
 InteractiveForm::InteractiveForm(Core::GraphicsContext* pEngine, Position2* cursor_position)
-	: Canvas(pEngine)
+	: _canvas(pEngine)
 {
 	_cursor_position = cursor_position;
 }
@@ -75,7 +75,7 @@ InteractiveForm::~InteractiveForm()
 
 Interaction::EventStatus InteractiveForm::on_mouse_move(int mx,int my)
 {
-	if (this->hidden())
+	if (_canvas.hidden())
 		return Interaction::EventStatus::none;
 
 	const Position2 cursor = {(float)mx,(float)my * -1};
@@ -116,7 +116,7 @@ Interaction::EventStatus InteractiveForm::on_mouse_move(int mx,int my)
 
 Interaction::EventStatus InteractiveForm::on_mouse_scroll(short direction)
 {
-	if (this->hidden())
+	if (_canvas.hidden())
 		return Interaction::EventStatus::none;
 	
 	this->foreach([direction](UI::InteractiveElement* element)
@@ -129,7 +129,7 @@ Interaction::EventStatus InteractiveForm::on_mouse_scroll(short direction)
 
 Interaction::EventStatus InteractiveForm::on_db_click()
 {
-	if (this->hidden())
+	if (_canvas.hidden())
 		return Interaction::EventStatus::none;
 
 	this->foreach([](UI::InteractiveElement* element)
@@ -140,9 +140,39 @@ Interaction::EventStatus InteractiveForm::on_db_click()
 	return Interaction::EventStatus::none;
 }
 
+bool InteractiveForm::hidden()
+{
+	return _canvas.hidden();
+}
+
+void InteractiveForm::show()
+{
+	_canvas.show();
+}
+
+void InteractiveForm::hide()
+{
+	_canvas.hide();
+}
+
+void InteractiveForm::update()
+{
+	_canvas.update();
+}
+
+void InteractiveForm::render(Render::DrawEvent2D* event)
+{
+	_canvas.render(event);
+}
+
+Canvas::Canvas* InteractiveForm::canvas()
+{
+	return &_canvas;
+}
+
 Interaction::EventStatus InteractiveForm::on_lbmouse_up()
 {
-	if (this->hidden())
+	if (_canvas.hidden())
 		return Interaction::EventStatus::none;
 	
 	this->foreach([](UI::InteractiveElement* element)
@@ -158,7 +188,7 @@ Interaction::EventStatus InteractiveForm::on_lbmouse_up()
 
 Interaction::EventStatus InteractiveForm::on_lbmouse_down()
 {
-	if (this->hidden())
+	if (_canvas.hidden())
 		return Interaction::EventStatus::none;
 	
 	this->foreach([](UI::InteractiveElement* element)

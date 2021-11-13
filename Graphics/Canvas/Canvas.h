@@ -4,14 +4,14 @@
 #include "Objects/IObject.h"
 
 namespace Canvas {
-	class __declspec(dllexport) Canvas {
+	class __declspec(dllexport) Canvas final {
 	private:
 		Render::D11VertexAllocator _canvas;
 		std::vector<IObject*> _objects;
 
 		bool _hidden;
 	protected:
-		virtual void render_components(Render::DrawEvent2D* event);
+		void render_components(Render::DrawEvent2D* event);
 	public:
 		Render::Vertex* vertices() const;
 		

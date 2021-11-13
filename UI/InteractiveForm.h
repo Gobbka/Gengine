@@ -14,7 +14,7 @@ namespace UI {
 	struct InteractiveElementDesc;
 	class InteractiveElement;
 
-	class __declspec(dllexport) InteractiveForm final : public Canvas::Canvas
+	class __declspec(dllexport) InteractiveForm final
 	{
 	public:
 		struct DragStruct
@@ -23,12 +23,15 @@ namespace UI {
 			InteractiveElement* element;
 		};
 	private:
+		Canvas::Canvas _canvas;
+
 		std::vector<UI::InteractiveElement*> _childs;
-		void render_components(Render::DrawEvent2D* event) override;
 
 		Position2* _cursor_position;
 		DragStruct* dragged = nullptr;
 	public:
+		void render_components(Render::DrawEvent2D* event);
+
 		void foreach(std::function<void(UI::InteractiveElement* element)>callback);
 		void drag_move(UI::InteractiveElement* element);
 		void free_drag_move();
@@ -45,5 +48,14 @@ namespace UI {
 		Interaction::EventStatus on_mouse_move(int mx, int my);
 		Interaction::EventStatus on_mouse_scroll(short direction);
 		Interaction::EventStatus on_db_click();
+
+		bool hidden();
+		void show();
+		void hide();
+
+		void update();
+		void render(Render::DrawEvent2D*event);
+
+		Canvas::Canvas* canvas();
 	};
 }

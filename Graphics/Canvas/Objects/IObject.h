@@ -13,11 +13,7 @@ namespace Canvas {
 
 	class __declspec(dllexport) IControllable
 	{
-	private:
-		Canvas* _layer;
 	protected:
-		Canvas* layer() const;
-
 		virtual void on_initialize() = 0;
 	public:
 		virtual ~IControllable() = default;
@@ -36,24 +32,23 @@ namespace Canvas {
 		virtual void scale(float value) =0;
 
 		virtual void move_by(Position2) = 0;
-
-		void initialize(Canvas* layer);
-
-		IControllable();
 	};
+
+	typedef unsigned long INDEX;
 
 	class __declspec(dllexport) IObject : public IControllable
 	{
-	public:
-		Render::Vertex* vertices() const;
-
-	public:
-		typedef unsigned long INDEX;
-	protected:
+		Canvas* _canvas = nullptr;
 		INDEX _index = 0u;
 	public:
+		void initialize(Canvas*canvas);
+
+		Render::Vertex* vertices() const;
+
 		auto get_index() const { return _index; }
 		void set_index(INDEX new_index) { _index = new_index; }
+
+		Canvas* canvas();
 
 		// todo: fix scaling
 		void scale(float value) override;

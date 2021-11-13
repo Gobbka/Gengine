@@ -1,15 +1,3 @@
-#ifdef _MSC_VER
-#include <CodeAnalysis/Warnings.h>
-#pragma  warning(push)
-#pragma warning(disable : ALL_CODE_ANALYSIS_WARNINGS)
-#endif
-#include <python/Python.h>
-#include <pybind11/embed.h>
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
-
-
 #include <iostream>
 #include <Windows.h>
 #include "Graphics.h"
@@ -56,18 +44,6 @@ void debugger_loop()
 
         std::cout << "[DBG]" << buffer << '\n';
 	}
-}
-
-void some_fn(char*str)
-{
-    LogA("[NIGGA]: " << str);
-}
-
-PYBIND11_EMBEDDED_MODULE(nigga,handle)
-{
-    handle.doc() = "This is nigger";
-    
-    handle.def("say", &some_fn);
 }
 
 int WINAPI wWinMain(

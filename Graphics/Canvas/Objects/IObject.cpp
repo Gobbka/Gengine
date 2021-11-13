@@ -1,25 +1,20 @@
 #include "IObject.h"
 #include "../Canvas.h"
 
-void Canvas::IControllable::initialize(Canvas* layer)
+void Canvas::IObject::initialize(Canvas* canvas)
 {
-	_layer = layer;
-	this->on_initialize();
-}
-
-Canvas::IControllable::IControllable()
-{
-	_layer = nullptr;
-}
-
-Canvas::Canvas* Canvas::IControllable::layer() const
-{
-	return _layer;
+	_canvas = canvas;
+	on_initialize();
 }
 
 Render::Vertex* Canvas::IObject::vertices() const
 {
-	return layer()->vertices() + get_index();
+	return _canvas->vertices() + get_index();
+}
+
+Canvas::Canvas* Canvas::IObject::canvas()
+{
+	return _canvas;
 }
 
 void Canvas::IObject::scale(float value)

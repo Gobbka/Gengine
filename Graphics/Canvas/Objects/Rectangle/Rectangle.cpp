@@ -4,14 +4,14 @@
 #include "../../../Render/Engine/SpriteEngine.h"
 #include "../../../Render/d3d/Buffer/Texture.h"
 
-Canvas::IObject::INDEX Canvas::Rectangle::size()
+Canvas::INDEX Canvas::Rectangle::size()
 {
 	return 4;
 }
 
-void Canvas::Rectangle::apply_rectangle() const
+void Canvas::Rectangle::apply_rectangle()
 {
-	if (this->layer() == nullptr)
+	if (canvas() == nullptr)
 		return;
 	
 	auto* ptr = vertices();
@@ -27,9 +27,9 @@ void Canvas::Rectangle::apply_rectangle() const
 	ptr[3].pos = DirectX::XMFLOAT3(x + width, y - height, 1.f);
 }
 
-void Canvas::Rectangle::apply_color() const
+void Canvas::Rectangle::apply_color()
 {
-	if (this->layer() == nullptr)
+	if (canvas() == nullptr)
 		return;
 	
 	auto* ptr = vertices();

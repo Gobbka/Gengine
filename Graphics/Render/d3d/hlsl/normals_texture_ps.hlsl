@@ -12,7 +12,6 @@ SamplerState objSamplerState : SAMPLER: register(s0);
 
 float4 main(PSI psi) : SV_TARGET
 {
-	// TODO: convert from tangent space
 	float3 tangent_space_normal_packed = normals.Sample(objSamplerState,psi.texCoord);
 	float3 tangent_space_normal = tangent_space_normal_packed * 2 - 1.f;
 

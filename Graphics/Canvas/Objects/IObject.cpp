@@ -1,7 +1,7 @@
 #include "IObject.h"
 #include "../Canvas.h"
 
-void Canvas::IControllable::initialize(Canvas::Canvas* layer)
+void Canvas::IControllable::initialize(Canvas* layer)
 {
 	_layer = layer;
 	this->on_initialize();

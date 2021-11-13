@@ -5,7 +5,6 @@
 #include "Canvas/Objects/IObject.h"
 #include "Types/Types.h"
 
-
 namespace Render {
 	struct DrawEvent2D;
 	struct DrawEvent;
@@ -44,7 +43,7 @@ namespace UI {
 
 	struct ElementState
 	{
-		bool         hovered = false;
+		bool hovered = false;
 	};
 
 	struct ElementDescription
@@ -66,8 +65,6 @@ namespace UI {
 	public:
 		typedef std::function<void(UIElementEventArgs)> EventCallback;
 	protected:
-		// protected variables
-
 		InteractiveForm* form = nullptr;
 		Parent* parent = nullptr;
 	protected:
@@ -75,8 +72,6 @@ namespace UI {
 	protected:
 		float alpha = 1.f;
 	public:
-		// public variables
-
 		UINT unique_id = 0;
 
 		ElementStyles styles;
@@ -86,7 +81,6 @@ namespace UI {
 
 		bool have_parent() const;
 
-		// return's screen position
 		Position2 get_position() override PURE;
 
 		virtual ElementDescription get_desc() PURE;
@@ -95,11 +89,8 @@ namespace UI {
 
 		virtual bool point_belongs(Position2 point) PURE;
 
-		// return's parent, if have
 		Parent* get_parent() const;
-		// return's form where this object where registered
 		InteractiveForm* get_form() const;
-
 		Position2 point_to(InteractiveElement* element);
 	public:
 		// public setters
@@ -111,9 +102,6 @@ namespace UI {
 		void set_margin(float x, float y);
 		void set_margin(float x, float y, float z, float w);
 	public:
-		// public voids
-		void draw(Render::DrawEvent2D* event) override PURE;
-
 		void initialize(InteractiveForm* form);
 	protected:
 
@@ -127,8 +115,6 @@ namespace UI {
 		EventCallback onMouseUp = default_event_callback;
 		EventCallback onMouseDown = default_event_callback;
 		EventCallback onDBClick = default_event_callback;
-
-
 	public:
 		//====================
 		// EVENT HANDLER'S

@@ -72,11 +72,6 @@ void UI::Panel::move_by(Position2 pos)
 	UI::Parent::move_by(pos);
 }
 
-void UI::Panel::scale(float value)
-{
-	rect.scale(value);
-}
-
 void UI::Panel::set_texture(Render::Texture* texture)
 {
 	rect.set_texture(texture);

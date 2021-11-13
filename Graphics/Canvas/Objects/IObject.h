@@ -18,6 +18,7 @@ namespace Canvas {
 	public:
 		virtual ~IControllable() = default;
 		IControllable() = default;
+
 		bool hidden = false;
 
 		virtual void draw(Render::DrawEvent2D* event) = 0;
@@ -42,12 +43,11 @@ namespace Canvas {
 	public:
 		void initialize(Canvas*canvas);
 
+		auto get_index() const { return _index; }
+		Canvas* canvas();
 		Render::Vertex* vertices() const;
 
-		auto get_index() const { return _index; }
 		void set_index(INDEX new_index) { _index = new_index; }
-
-		Canvas* canvas();
 
 		// must return needed object vertex length
 		virtual INDEX size() = 0;

@@ -23,6 +23,8 @@ namespace UI {
 			InteractiveElement* element;
 		};
 	private:
+		bool _hidden;
+
 		Canvas::Canvas _canvas;
 
 		std::vector<UI::InteractiveElement*> _childs;
@@ -49,7 +51,7 @@ namespace UI {
 		Interaction::EventStatus on_mouse_scroll(short direction);
 		Interaction::EventStatus on_db_click();
 
-		bool hidden();
+		bool hidden() const;
 		void show();
 		void hide();
 

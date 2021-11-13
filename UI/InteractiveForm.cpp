@@ -75,7 +75,7 @@ InteractiveForm::~InteractiveForm()
 
 Interaction::EventStatus InteractiveForm::on_mouse_move(int mx,int my)
 {
-	if (_canvas.hidden())
+	if (hidden())
 		return Interaction::EventStatus::none;
 
 	const Position2 cursor = {(float)mx,(float)my * -1};
@@ -116,7 +116,7 @@ Interaction::EventStatus InteractiveForm::on_mouse_move(int mx,int my)
 
 Interaction::EventStatus InteractiveForm::on_mouse_scroll(short direction)
 {
-	if (_canvas.hidden())
+	if (hidden())
 		return Interaction::EventStatus::none;
 	
 	this->foreach([direction](UI::InteractiveElement* element)
@@ -129,7 +129,7 @@ Interaction::EventStatus InteractiveForm::on_mouse_scroll(short direction)
 
 Interaction::EventStatus InteractiveForm::on_db_click()
 {
-	if (_canvas.hidden())
+	if (hidden())
 		return Interaction::EventStatus::none;
 
 	this->foreach([](UI::InteractiveElement* element)
@@ -140,29 +140,31 @@ Interaction::EventStatus InteractiveForm::on_db_click()
 	return Interaction::EventStatus::none;
 }
 
-bool InteractiveForm::hidden()
+bool InteractiveForm::hidden() const
 {
-	return _canvas.hidden();
+	return _hidden;
 }
 
 void InteractiveForm::show()
 {
-	_canvas.show();
+	_hidden = false;
 }
 
 void InteractiveForm::hide()
 {
-	_canvas.hide();
+	_hidden = true;
 }
 
 void InteractiveForm::update()
 {
-	_canvas.update();
+	if (!hidden())
+		_canvas.update();
 }
 
 void InteractiveForm::render(Render::DrawEvent2D* event)
 {
-	_canvas.render(event);
+	if(!hidden())
+		_canvas.render(event);
 }
 
 Canvas::Canvas* InteractiveForm::canvas()
@@ -172,7 +174,7 @@ Canvas::Canvas* InteractiveForm::canvas()
 
 Interaction::EventStatus InteractiveForm::on_lbmouse_up()
 {
-	if (_canvas.hidden())
+	if (hidden())
 		return Interaction::EventStatus::none;
 	
 	this->foreach([](UI::InteractiveElement* element)
@@ -188,7 +190,7 @@ Interaction::EventStatus InteractiveForm::on_lbmouse_up()
 
 Interaction::EventStatus InteractiveForm::on_lbmouse_down()
 {
-	if (_canvas.hidden())
+	if (hidden())
 		return Interaction::EventStatus::none;
 	
 	this->foreach([](UI::InteractiveElement* element)

@@ -9,7 +9,6 @@ namespace Canvas {
 		Render::D11VertexAllocator _canvas;
 		std::vector<IObject*> _objects;
 
-		bool _hidden;
 	protected:
 		void render_components(Render::DrawEvent2D* event);
 	public:
@@ -22,9 +21,5 @@ namespace Canvas {
 		void render(Render::DrawEvent2D* event);
 
 		void add_object(IObject* object);
-
-		bool hidden() { return _hidden; }
-		void hide() { _hidden = true; }
-		void show() { _hidden = false; }
 	};
 }

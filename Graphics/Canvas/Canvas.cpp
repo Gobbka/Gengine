@@ -17,7 +17,6 @@ Render::Vertex* Canvas::Canvas::vertices() const
 Canvas::Canvas::Canvas(Core::GraphicsContext* engine)
 	: _canvas(engine)
 {
-	_hidden = false;
 }
 
 Canvas::Canvas::~Canvas()

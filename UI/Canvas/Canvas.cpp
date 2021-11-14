@@ -1,6 +1,6 @@
 #include "Canvas.h"
 #include "Objects/IObject.h"
-#include "../Render/Events/RenderEvent.h"
+#include "../Events/RenderEvent.h"
 
 void Canvas::Canvas::render_components(Render::DrawEvent2D* event)
 {

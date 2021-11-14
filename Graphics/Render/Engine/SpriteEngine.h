@@ -10,7 +10,7 @@ namespace Render {
 	class PixelShader;
 	class VertexShader;
 
-	class SpriteEngine
+	class __declspec(dllexport) SpriteEngine
 	{
 	private:
 		enum class DrawMode

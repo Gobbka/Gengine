@@ -160,19 +160,29 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation\Animator.cpp" />
+    <ClCompile Include="Canvas\Canvas.cpp" />
+    <ClCompile Include="Canvas\D11VertexAllocator.cpp" />
+    <ClCompile Include="Canvas\Objects\IObject.cpp" />
+    <ClCompile Include="Canvas\Objects\Rectangle\Rectangle.cpp" />
     <ClCompile Include="elements\IElement\InteractiveElement.cpp" />
     <ClCompile Include="elements\IElement\Parentable.cpp" />
     <ClCompile Include="elements\Panel\Panel.cpp" />
+    <ClCompile Include="Events\RenderEvent.cpp" />
     <ClCompile Include="Events\WinIntEventHandler.cpp" />
     <ClCompile Include="InteractiveForm.cpp" />
     <ClCompile Include="UIContext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation\Animator.h" />
+    <ClInclude Include="Canvas\Canvas.h" />
+    <ClInclude Include="Canvas\D11VertexAllocator.h" />
+    <ClInclude Include="Canvas\Objects\IObject.h" />
+    <ClInclude Include="Canvas\Objects\Rectangle\Rectangle.h" />
     <ClInclude Include="elements\IElement\InteractiveElement.h" />
     <ClInclude Include="elements\IElement\Parentable.h" />
     <ClInclude Include="elements\Panel\Panel.h" />
     <ClInclude Include="Events\InteractionEventHandler.h" />
+    <ClInclude Include="Events\RenderEvent.h" />
     <ClInclude Include="Events\WinIntEventHandler.h" />
     <ClInclude Include="InteractiveForm.h" />
     <ClInclude Include="UIContext.h" />

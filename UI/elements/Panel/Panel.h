@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../IElement/Parentable.h"
-#include "Canvas/Objects/Rectangle/Rectangle.h"
+#include "../../Canvas/Objects/Rectangle/Rectangle.h"
 
 
 namespace Render {

@@ -1,8 +1,8 @@
 #include "Rectangle.h"
-#include "../../../Render/Events/RenderEvent.h"
-#include "../../../Render/d3d/Vertex.h"
-#include "../../../Render/Engine/SpriteEngine.h"
-#include "../../../Render/d3d/Buffer/Texture.h"
+#include "../../../Events/RenderEvent.h"
+#include <Render/d3d/Vertex.h>
+#include <Render/Engine/SpriteEngine.h>
+#include <Render/d3d/Buffer/Texture.h>
 
 Canvas::INDEX Canvas::Rectangle::size()
 {

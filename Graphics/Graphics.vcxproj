@@ -151,10 +151,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Canvas\Canvas.h" />
-    <ClInclude Include="Canvas\D11VertexAllocator.h" />
-    <ClInclude Include="Canvas\Objects\IObject.h" />
-    <ClInclude Include="Canvas\Objects\Rectangle\Rectangle.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="GraphicsBuildSettings.h" />
     <ClInclude Include="GraphicsCommon.h" />
@@ -201,7 +197,6 @@
     <ClInclude Include="Render\Engine\Rasterizer.h" />
     <ClInclude Include="Render\Engine\RenderTarget.h" />
     <ClInclude Include="Render\Engine\SpriteEngine.h" />
-    <ClInclude Include="Render\Events\RenderEvent.h" />
     <ClInclude Include="Render\I3DObject\Cube\Cube.h" />
     <ClInclude Include="Graphics\Mesh.h" />
     <ClInclude Include="Render\I3DObject\Parallelepiped\Parallelepiped.h" />
@@ -211,10 +206,6 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Canvas\Canvas.cpp" />
-    <ClCompile Include="Canvas\D11VertexAllocator.cpp" />
-    <ClCompile Include="Canvas\Objects\IObject.cpp" />
-    <ClCompile Include="Canvas\Objects\Rectangle\Rectangle.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Graphics\Components\TextComponent.cpp" />
     <ClCompile Include="Graphics\DepthStencilStatesCollection.cpp" />
@@ -245,7 +236,6 @@
     <ClCompile Include="Render\Engine\MaskEngine.cpp" />
     <ClCompile Include="Render\Engine\RenderTarget.cpp" />
     <ClCompile Include="Render\Engine\SpriteEngine.cpp" />
-    <ClCompile Include="Render\Events\RenderEvent.cpp" />
     <ClCompile Include="Render\I3DObject\Cube\Cube.cpp" />
     <ClCompile Include="Graphics\Mesh.cpp" />
     <ClCompile Include="Render\I3DObject\Parallelepiped\Parallelepiped.cpp" />

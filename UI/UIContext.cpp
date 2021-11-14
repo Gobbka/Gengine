@@ -10,7 +10,7 @@
 #include "Graphics/Components/TextComponent.h"
 #include "Graphics/Que/IPass/IPass.h"
 #include "Render/Engine/MaskEngine.h"
-#include "Render/Events/RenderEvent.h"
+#include "Events/RenderEvent.h"
 #include <Render/d3d/Buffer/ConstantBuffer.h>
 
 #include "Logger/Logger.h"
@@ -77,7 +77,6 @@ class DrawTextPass : public Render::IPass
 		_context->main_scene->world()->each<Render::TextComponent>([&](ECS::Entity*, ECS::ComponentHandle<Render::TextComponent>comp)
 			{
 				matrix->data.MVPMatrix = DirectX::XMMatrixTranspose(
-					DirectX::XMMatrixTranslation(0,-0,0) * 
 					worldMatrix
 				);
 				matrix->update();

@@ -1,6 +1,6 @@
 #pragma once
-#include "../Graphics/IBuffers/IVertexBuffer.h"
-#include "../Render/d3d/Vertex.h"
+#include <Graphics/IBuffers/IVertexBuffer.h>
+#include <Render/d3d/Vertex.h>
 
 namespace Core {
 	class GraphicsContext;

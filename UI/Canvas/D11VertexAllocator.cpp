@@ -1,7 +1,7 @@
 #include "D11VertexAllocator.h"
 
-#include "../Graphics.h"
-#include "../Render/d3d/Buffer/VertexBuffer.h"
+#include <Graphics.h>
+#include <Render/d3d/Buffer/VertexBuffer.h>
 
 Render::IVertexBuffer* Render::D11VertexAllocator::alloc_vbuffer(UINT size) const
 {	

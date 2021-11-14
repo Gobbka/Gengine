@@ -1,10 +1,10 @@
 #include "RenderEvent.h"
 
-#include "../../Graphics.h"
-#include "../../IGContext.h"
-#include "../../Canvas/Objects/IObject.h"
-#include "../Engine/Camera.h"
-#include "../Engine/MaskEngine.h"
+#include <Graphics.h>
+#include <IGContext.h>
+#include "../Canvas/Objects/IObject.h"
+#include <Render/Engine/Camera.h>
+#include <Render/Engine/MaskEngine.h>
 
 Render::DrawEvent::DrawEvent(Camera* engine,SpriteEngine*sprite_engine)
 {

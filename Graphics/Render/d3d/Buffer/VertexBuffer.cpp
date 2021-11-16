@@ -3,48 +3,21 @@
 #include "../../../Graphics.h"
 #include "../Vertex.h"
 
-D3D11_USAGE get_d11_usage(Render::IVertexBufferDesc::Usage usage)
-{
-	switch (usage)
-	{
-	case Render::IVertexBufferDesc::Usage::classic:
-		return D3D11_USAGE_DEFAULT;
-		break;
-	case Render::IVertexBufferDesc::Usage::immutable:
-		return D3D11_USAGE_IMMUTABLE;
-	case Render::IVertexBufferDesc::Usage::dynamic:
-		return D3D11_USAGE_DYNAMIC;
-	}
-}
-
 void Render::VertexBuffer::copy_to(void* buffer, UINT size)
 {
 	memcpy(buffer, this->data, size * sizeof(Vertex));
 }
+
+Render::VertexBuffer::VertexBuffer(Core::GraphicsContext* engine, Vertex* data, size_t length, ID3D11Buffer* buffer)
+	: IVertexBuffer(engine,data,length)
+	, _buffer(buffer)
+{}
 
 void Render::VertexBuffer::copy_to(IVertexBuffer* buffer)
 {
 	const auto copy_size = min(this->size, buffer->get_size());
 
 	memcpy(buffer->data, this->data, copy_size * sizeof(Vertex));
-}
-
-Render::VertexBuffer::VertexBuffer(Core::GraphicsContext* engine, Vertex* data, IVertexBufferDesc desc)
-	: IVertexBuffer(engine,desc.size)
-{
-	this->data = data;
-
-	D3D11_BUFFER_DESC vbuffer{
-		sizeof(Vertex) * size,
-		get_d11_usage(desc.usage),
-		D3D11_BIND_VERTEX_BUFFER,
-		(desc.usage == IVertexBufferDesc::Usage::dynamic ? D3D11_CPU_ACCESS_WRITE : 0u),
-		0,
-		sizeof(Vertex)
-	};
-	D3D11_SUBRESOURCE_DATA sd{ data,0,0 };
-	
-	assert(SUCCEEDED(_engine->device->CreateBuffer(&vbuffer, &sd, &_buffer)));
 }
 
 Render::VertexBuffer::~VertexBuffer()

@@ -12,15 +12,13 @@ namespace Render
 	{
 		ID3D11Device* _device;
 		Core::GraphicsContext* _gfx;
+
+		IVertexBuffer* alloc_vertex_buffer_impl(void* data, size_t element_size, IVertexBufferDesc desc) override;
 	public:
 		D11GDevice(ID3D11Device* device,Core::GraphicsContext*context);
 
 		IIndexBuffer* alloc_index_buffer(unsigned size) override;
 		IIndexBuffer* alloc_index_buffer(void* data, unsigned size) override;
-		IVertexBuffer* alloc_vertex_buffer(Vertex* data, IVertexBufferDesc desc) override;
-
-		IVertexBuffer* alloc_vertex_buffer(unsigned size, bool dynamic) override;
-		IVertexBuffer* alloc_vertex_buffer(void* data, unsigned size, bool dynamic) override;
 
 		Texture* create_texture(ITexture2DDesc desc) override;
 		Rasterizer create_rasterizer(RasterizerDesc desc) override;

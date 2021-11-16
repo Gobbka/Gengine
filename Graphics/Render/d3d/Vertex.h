@@ -6,7 +6,7 @@
 
 namespace Render
 {
-	struct Vertex
+	struct __declspec(dllexport) Vertex
 	{
 		DirectX::XMFLOAT3 pos;
 		DirectX::XMFLOAT3 color;

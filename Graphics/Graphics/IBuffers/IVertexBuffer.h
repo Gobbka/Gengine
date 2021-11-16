@@ -13,7 +13,7 @@ namespace Render
 			immutable,
 			dynamic
 		}   usage = Usage::classic;
-		size_t size = 0;
+		size_t length = 0;
 
 	};
 
@@ -22,7 +22,7 @@ namespace Render
 	protected:
 		size_t size;
 
-		IVertexBuffer(Core::GraphicsContext* engine, size_t size) : Bindable(engine), size(size), data(nullptr) {}
+		IVertexBuffer(Core::GraphicsContext* engine,Vertex*data, size_t size) : Bindable(engine), size(size), data(data) {}
 	public:
 		Vertex* data;
 

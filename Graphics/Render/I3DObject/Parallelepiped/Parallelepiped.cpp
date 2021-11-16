@@ -64,7 +64,7 @@ namespace Render {
 
 		IVertexBufferDesc desc;
 		desc.usage = IVertexBufferDesc::Usage::immutable;
-		desc.size = 8;
+		desc.length = 8;
 
 		auto* vbuffer = device->alloc_vertex_buffer(ptr,desc);
 		static auto* index_buffer = device->alloc_index_buffer(PARALLELEPIPED_INDEX_ARRAY, ARRAYSIZE(PARALLELEPIPED_INDEX_ARRAY));
@@ -129,7 +129,7 @@ namespace Render {
 
 		IVertexBufferDesc desc;
 		desc.usage = IVertexBufferDesc::Usage::immutable;
-		desc.size = 24;
+		desc.length = 24;
 
 		auto* vbuffer = device->alloc_vertex_buffer(ptr, desc);
 		static auto* index_buffer = device->alloc_index_buffer(PARALLELEPIPED_INDEPENDENT_INDEX_ARRAY, ARRAYSIZE(PARALLELEPIPED_INDEPENDENT_INDEX_ARRAY));

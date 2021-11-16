@@ -162,6 +162,8 @@
     <ClCompile Include="Animation\Animator.cpp" />
     <ClCompile Include="Canvas\Canvas.cpp" />
     <ClCompile Include="Canvas\D11VertexAllocator.cpp" />
+    <ClCompile Include="Canvas\DrawCmd.cpp" />
+    <ClCompile Include="Canvas\DrawData.cpp" />
     <ClCompile Include="Canvas\Objects\IObject.cpp" />
     <ClCompile Include="Canvas\Objects\Rectangle\Rectangle.cpp" />
     <ClCompile Include="elements\IElement\InteractiveElement.cpp" />
@@ -171,11 +173,14 @@
     <ClCompile Include="Events\WinIntEventHandler.cpp" />
     <ClCompile Include="InteractiveForm.cpp" />
     <ClCompile Include="UIContext.cpp" />
+    <ClCompile Include="Canvas\Vertex2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation\Animator.h" />
     <ClInclude Include="Canvas\Canvas.h" />
     <ClInclude Include="Canvas\D11VertexAllocator.h" />
+    <ClInclude Include="Canvas\DrawCmd.h" />
+    <ClInclude Include="Canvas\DrawData.h" />
     <ClInclude Include="Canvas\Objects\IObject.h" />
     <ClInclude Include="Canvas\Objects\Rectangle\Rectangle.h" />
     <ClInclude Include="elements\IElement\InteractiveElement.h" />
@@ -186,6 +191,25 @@
     <ClInclude Include="Events\WinIntEventHandler.h" />
     <ClInclude Include="InteractiveForm.h" />
     <ClInclude Include="UIContext.h" />
+    <ClInclude Include="Canvas\Vertex2D.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="hlsl\canvas_ps.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)d3d11\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)d3d11\%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="hlsl\canvas_vs.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)d3d11\%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)d3d11\%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

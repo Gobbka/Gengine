@@ -3,7 +3,7 @@
 #include <d3d11.h>
 
 namespace Render {
-	class VertexShader : public IShader
+	class __declspec(dllexport) VertexShader : public IShader
 	{
 		void construct(ID3DBlob* shader_blob);
 		void link(ID3DBlob* blob,const D3D11_INPUT_ELEMENT_DESC* layout,UINT num_elements);

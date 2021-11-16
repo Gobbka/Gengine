@@ -35,5 +35,6 @@ namespace Render {
 		
 		Rasterizer get_rasterizer() override;
 		PixelShader* get_pixel_shader() override;
+		VertexShader* get_vertex_shader() override;
 	};
 }

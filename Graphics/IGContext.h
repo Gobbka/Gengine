@@ -56,6 +56,7 @@ namespace Render
 		virtual Rasterizer get_rasterizer()=0;
 
 		virtual PixelShader* get_pixel_shader() =0;
+		virtual VertexShader* get_vertex_shader() =0;
 	};
 
 	inline void IGContext::set_shader_resource(MaskEngine* mask, UINT slot)

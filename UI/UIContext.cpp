@@ -13,7 +13,8 @@
 #include "Events/RenderEvent.h"
 #include <Render/d3d/Buffer/ConstantBuffer.h>
 
-#include "Logger/Logger.h"
+#include "Canvas/Vertex2D.h"
+#include "Render/d3d/Shader/VertexShader.h"
 
 class DrawUIPass : public Render::IPass
 {
@@ -40,7 +41,13 @@ public:
 		Render::DrawEvent2D event(camera,nullptr);
 
 		_context->dss_collection[(Render::DSBitSet)Render::DepthStencilUsage::stencil_mask].bind(0);
-		
+
+		//auto* old_ps = gcontext->get_pixel_shader();
+		//auto* old_vs = gcontext->get_vertex_shader();
+
+		//gcontext->set_pixel_shader(_context->shader_collection.get<Render::PixelShader>(L"d3d11\\canvas_ps.cso"));
+		//gcontext->set_vertex_shader(_context->shader_collection.get<Render::VertexShader>(L"d3d11\\canvas_vs.cso"));
+
 		_context->main_scene->world()->each<UI::InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<UI::InteractiveForm>form)
 			{
 				if (form->hidden())
@@ -51,6 +58,9 @@ public:
 				form->update();
 				form->render(&event);
 			});
+
+		//gcontext->set_pixel_shader(old_ps);
+		//gcontext->set_vertex_shader(old_vs);
 
 		mask_engine->clear_buffer();
 	}
@@ -105,10 +115,12 @@ ECS::Entity* UI::UIContext::create_layer()
 }
 
 UI::UIContext::UIContext(Core::GraphicsContext* gfx)
-	: WinIntEventHandler(),
-	_cursor(0,0)
+	: WinIntEventHandler()
+	, _gfx(gfx)
+	, _cursor(0,0)
 {
-	_gfx = gfx;
+	//auto* vs = new Render::VertexShader(gfx, L"d3d11\\canvas_vs.cso", vertex2D_layout, ARRAYSIZE(UI::vertex2D_layout));
+	//gfx->shader_collection.insert(L"d3d11\\canvas_vs.cso", vs);
 
 	gfx->get_passer()->add_pass(new DrawUIPass(gfx), Render::PassStep::overlay);
 	gfx->get_passer()->add_pass(new DrawTextPass(gfx), Render::PassStep::overlay);

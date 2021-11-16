@@ -134,3 +134,8 @@ Render::PixelShader* Render::D11GContext::get_pixel_shader()
 {
 	return _current_ps;
 }
+
+Render::VertexShader* Render::D11GContext::get_vertex_shader()
+{
+	return _currect_vs;
+}

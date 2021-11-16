@@ -3,12 +3,12 @@
 #include <Graphics.h>
 #include <Render/d3d/Buffer/VertexBuffer.h>
 
-Render::IVertexBuffer* Render::D11VertexAllocator::alloc_vbuffer(UINT size) const
+Render::IVertexBuffer<Render::Vertex>* Render::D11VertexAllocator::alloc_vbuffer(UINT size) const
 {	
-	return _ctx->get_device()->alloc_vertex_buffer(size, true);
+	return _ctx->get_device()->alloc_vertex_buffer<Vertex>(size, true);
 }
 
-void Render::D11VertexAllocator::set_vbuffer(IVertexBuffer* buffer)
+void Render::D11VertexAllocator::set_vbuffer(IVertexBuffer<Vertex>* buffer)
 {
 	delete _vertex_buffer;
 	_vertex_buffer = buffer;
@@ -62,7 +62,7 @@ void Render::D11VertexAllocator::bind()
 	_vertex_buffer->bind();
 }
 
-Render::D11VertexAllocator::D11VertexAllocator(Core::GraphicsContext* pEngine, IVertexBuffer* buffer)
+Render::D11VertexAllocator::D11VertexAllocator(Core::GraphicsContext* pEngine, IVertexBuffer<Vertex>* buffer)
 	:_allocator(100,100)
 {
 	_ctx = pEngine;

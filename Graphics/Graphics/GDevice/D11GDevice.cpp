@@ -19,7 +19,7 @@ D3D11_USAGE get_d11_usage(Render::IVertexBufferDesc::Usage usage)
 	}
 }
 
-Render::IVertexBuffer* Render::D11GDevice::alloc_vertex_buffer_impl(void* data, size_t element_size,
+Render::IVertexBuffer<char>* Render::D11GDevice::alloc_vertex_buffer_impl(void* data, size_t element_size,
 	IVertexBufferDesc desc)
 {
 	const D3D11_BUFFER_DESC vbuffer{

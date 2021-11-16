@@ -17,14 +17,15 @@ namespace Render
 
 	};
 
+	template<typename T>
 	class __declspec(dllexport) IVertexBuffer : public Bindable
 	{
 	protected:
 		size_t size;
 
-		IVertexBuffer(Core::GraphicsContext* engine,Vertex*data, size_t size) : Bindable(engine), size(size), data(data) {}
+		IVertexBuffer(Core::GraphicsContext* engine,T*data, size_t size) : Bindable(engine), size(size), data(data) {}
 	public:
-		Vertex* data;
+		T* data;
 
 		inline size_t get_size()
 		{
@@ -36,6 +37,9 @@ namespace Render
 
 		virtual void update(unsigned update_size = -1) = 0;
 
-		Vertex& at(unsigned index) const;
+		T& at(unsigned index) const
+		{
+			return data[index];
+		};
 	};
 }

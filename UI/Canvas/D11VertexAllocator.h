@@ -26,10 +26,10 @@ namespace Render
 	private:
 		Core::GraphicsContext* _ctx;
 		GrowPolicy _allocator;
-		IVertexBuffer* _vertex_buffer;
+		IVertexBuffer<Vertex>* _vertex_buffer;
 
-		IVertexBuffer* alloc_vbuffer(UINT size) const;
-		void set_vbuffer(IVertexBuffer* buffer);
+		IVertexBuffer<Vertex>* alloc_vbuffer(UINT size) const;
+		void set_vbuffer(IVertexBuffer<Vertex>* buffer);
 	public:
 		UINT buffer_size() const;
 		UINT last_index() const;
@@ -44,7 +44,7 @@ namespace Render
 
 		void bind();
 
-		D11VertexAllocator(Core::GraphicsContext* pEngine, IVertexBuffer* buffer);
+		D11VertexAllocator(Core::GraphicsContext* pEngine, IVertexBuffer<Vertex>* buffer);
 		explicit D11VertexAllocator(Core::GraphicsContext* pEngine);
 
 		~D11VertexAllocator();

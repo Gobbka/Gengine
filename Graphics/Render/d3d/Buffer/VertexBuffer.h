@@ -6,7 +6,7 @@ namespace Render
 {
 	struct Vertex;
 
-	class VertexBuffer : public IVertexBuffer
+	class VertexBuffer : public IVertexBuffer<char>
 	{
 	private:
 		ID3D11Buffer* _buffer = nullptr;

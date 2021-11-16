@@ -8,7 +8,9 @@ namespace Core
 
 namespace Render
 {
+	struct Vertex;
 	class IIndexBuffer;
+	template<typename T>
 	class IVertexBuffer;
 	class IGDevice;
 
@@ -19,7 +21,7 @@ namespace Render
 		IGDevice* _device;
 	public:
 		SpriteFont* font;
-		IVertexBuffer* vbuffer;
+		IVertexBuffer<Vertex>* vbuffer;
 		IIndexBuffer* ibuffer;
 
 		TextComponent(Core::GraphicsContext* context,SpriteFont* font);

@@ -67,7 +67,7 @@ void Render::TextComponent::set_text(const wchar_t* text)
 	delete vbuffer;
 	delete ibuffer;
 
-	vbuffer = _device->alloc_vertex_buffer(length * GLYPH_VERTEX_SIZE);
+	vbuffer = _device->alloc_vertex_buffer<Vertex>(length * GLYPH_VERTEX_SIZE);
 	ibuffer = _device->alloc_index_buffer(6 * length);
 
 	for(int i  =0 ;i < length;i++)

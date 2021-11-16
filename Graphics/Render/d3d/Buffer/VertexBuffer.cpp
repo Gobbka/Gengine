@@ -9,7 +9,7 @@ void Render::VertexBuffer::copy_to(void* buffer, UINT size)
 }
 
 Render::VertexBuffer::VertexBuffer(Core::GraphicsContext* engine, Vertex* data, size_t length, ID3D11Buffer* buffer)
-	: IVertexBuffer(engine,data,length)
+	: IVertexBuffer(engine,(char*)data,length)
 	, _buffer(buffer)
 {}
 
@@ -29,10 +29,10 @@ Render::VertexBuffer::~VertexBuffer()
 
 void Render::VertexBuffer::bind()
 {
-	UINT stride = sizeof(Vertex);
-	UINT offset = 0;
+	const UINT stride = sizeof(Vertex);
+	const UINT offset = 0;
 
-	_engine->context->IASetVertexBuffers(0, 1, &_buffer, &stride, &offset);
+	_engine->context->IASetVertexBuffers(0, 1, &_buffer, &stride,&offset);
 }
 
 void Render::VertexBuffer::update(UINT update_size)

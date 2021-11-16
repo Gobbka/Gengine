@@ -13,7 +13,7 @@ namespace Render
 		ID3D11Device* _device;
 		Core::GraphicsContext* _gfx;
 
-		IVertexBuffer* alloc_vertex_buffer_impl(void* data, size_t element_size, IVertexBufferDesc desc) override;
+		IVertexBuffer<char>* alloc_vertex_buffer_impl(void* data, size_t element_size, IVertexBufferDesc desc) override;
 	public:
 		D11GDevice(ID3D11Device* device,Core::GraphicsContext*context);
 

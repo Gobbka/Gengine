@@ -149,14 +149,13 @@ void InteractiveForm::update() const
 
 void InteractiveForm::render(Render::DrawEvent2D* event)
 {
-	//for (auto* element : this->_childs)
-	//{
-	//	if (element->styles.display != ElementStyles::DisplayType::none)
-	//		element->draw(event);
-	//}
+	_canvas.bind();
 
-	if(!hidden())
-		_canvas.render(event);
+	for (auto* element : this->_childs)
+	{
+		if (element->styles.display != ElementStyles::DisplayType::none)
+			element->draw(event);
+	}
 }
 
 Canvas::Canvas* InteractiveForm::canvas()

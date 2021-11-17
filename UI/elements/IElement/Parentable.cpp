@@ -182,8 +182,7 @@ UI::Parent* UI::Parent::add_element(InteractiveElement* element)
 			if(
 				relative_point.x + element_res.width + 
 				element->styles.margin.w + element->styles.margin.y +
-				element->get_resolution().width
-				> get_resolution().width
+				element->get_resolution().width > get_resolution().width
 				)
 			{
 				element->move_by({ 0,relative_point.y - element_res.height });

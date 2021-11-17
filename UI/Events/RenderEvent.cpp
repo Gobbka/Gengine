@@ -66,7 +66,7 @@ void Render::DrawEvent::set_alpha(float alpha) const
 
 void Render::DrawEvent2D::draw_vertex(UINT count, UINT start) const
 {
-	_camera->graphics_context()->context->Draw(count, start + _draw_index);
+	_context->context->Draw(count, start + _draw_index);
 }
 
 void Render::DrawEvent2D::draw_object(Canvas::IObject* object)
@@ -78,11 +78,6 @@ void Render::DrawEvent2D::draw_object(Canvas::IObject* object)
 Render::DrawEvent3D::DrawEvent3D(Core::GraphicsContext* context)
 {
 	_context = context;
-}
-
-void Render::DrawEvent3D::draw(UINT count, UINT start_location) const
-{
-	_context->context->Draw(count, start_location);
 }
 
 void Render::DrawEvent3D::draw_indexed(UINT count, UINT start_location) const

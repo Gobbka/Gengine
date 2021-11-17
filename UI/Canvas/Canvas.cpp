@@ -30,7 +30,7 @@ void Canvas::Canvas::update() const
 
 void Canvas::Canvas::render(Render::DrawEvent2D* event)
 {
-	_canvas.bind();
+	bind();
 	this->render_components(event);
 }
 
@@ -41,5 +41,10 @@ void Canvas::Canvas::add_object(IObject* object)
 
 	_objects.push_back(object);
 	object->initialize(this);
+}
+
+void Canvas::Canvas::bind()
+{
+	_canvas.bind();
 }
 

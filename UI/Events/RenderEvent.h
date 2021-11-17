@@ -59,7 +59,6 @@ namespace Render {
 	public:
 		DrawEvent3D(Core::GraphicsContext* context);
 
-		void draw(UINT count,UINT start_location = 0) const;
 		void draw_indexed(UINT count,UINT start_location = 0) const;
 	};
 }

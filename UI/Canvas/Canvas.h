@@ -19,5 +19,7 @@ namespace Canvas {
 		void render(Render::DrawEvent2D* event);
 
 		void add_object(IObject* object);
+
+		void bind();
 	};
 }

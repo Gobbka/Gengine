@@ -2,14 +2,13 @@
 #include "../../../Events/RenderEvent.h"
 #include "../../Vertex2D.h"
 #include <Render/Engine/SpriteEngine.h>
-#include <Render/d3d/Buffer/Texture.h>
 
 Canvas::INDEX Canvas::Rectangle::size()
 {
 	return 4;
 }
 
-void Canvas::Rectangle::apply_rectangle()
+void Canvas::Rectangle::apply_rectangle() const
 {
 	if (canvas() == nullptr)
 		return;
@@ -27,7 +26,7 @@ void Canvas::Rectangle::apply_rectangle()
 	ptr[3].pos = Position2(x + width, y - height);
 }
 
-void Canvas::Rectangle::apply_color()
+void Canvas::Rectangle::apply_color() const
 {
 	if (canvas() == nullptr)
 		return;

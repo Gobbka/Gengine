@@ -1,6 +1,7 @@
 #pragma once
-#include <d3d11.h>
-#include <DirectXMath.h>
+
+typedef unsigned UINT;
+typedef unsigned char BYTE;
 
 namespace Core {
 	class GraphicsContext;
@@ -29,16 +30,16 @@ namespace Render {
 		DrawEvent(Camera* engine,SpriteEngine*sprite_engine);
 
 	public:
-		SpriteEngine* sprite_engine();
+		SpriteEngine* sprite_engine() const;
 
 		void mask_draw_begin() const;
 		void mask_discard_begin(bool increase_layer = true);
 		void mask_discard_end(bool decrease_layer = true);
 		void mask_set_stencil(BYTE new_index);
-		BYTE mask_get_stencil_layer();
-		void mask_clear();
+		BYTE mask_get_stencil_layer() const;
+		void mask_clear() const;
 
-		void set_alpha(float alpha);
+		void set_alpha(float alpha) const;
 	};
 
 	struct __declspec(dllexport) DrawEvent2D : public DrawEvent{
@@ -58,7 +59,7 @@ namespace Render {
 	public:
 		DrawEvent3D(Core::GraphicsContext* context);
 
-		void draw(UINT count,UINT start_location = 0);
-		void draw_indexed(UINT count,UINT start_location = 0);
+		void draw(UINT count,UINT start_location = 0) const;
+		void draw_indexed(UINT count,UINT start_location = 0) const;
 	};
 }

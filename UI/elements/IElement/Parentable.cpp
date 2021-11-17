@@ -6,7 +6,6 @@ void UI::ReadChildrenCollection::foreach(std::function<void(UI::InteractiveEleme
 {
 	for(auto*element: _children)
 		iterator(element);
-	
 }
 
 void UI::ReadWriteChildrenCollection::append(UI::InteractiveElement* child)
@@ -14,7 +13,7 @@ void UI::ReadWriteChildrenCollection::append(UI::InteractiveElement* child)
 	_children.push_back(child);
 }
 
-size_t UI::ReadChildrenCollection::count()
+size_t UI::ReadChildrenCollection::count() const
 {
 	return _children.size();
 }
@@ -123,7 +122,7 @@ void UI::Parent::on_initialize()
 		element->initialize(this->form);
 	});
 
-	this->initialized = true;
+	this->_initialized = true;
 }
 
 UI::ReadChildrenCollection* UI::Parent::children()
@@ -195,7 +194,7 @@ UI::Parent* UI::Parent::add_element(InteractiveElement* element)
 		}
 	}
 	
-	if(this->initialized)
+	if(this->_initialized)
 		element->initialize(this->form);
 	
 	return this;

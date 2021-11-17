@@ -12,7 +12,7 @@ UI::Vertex2D* Canvas::IObject::vertices() const
 	return _canvas->vertices() + get_index();
 }
 
-Canvas::Canvas* Canvas::IObject::canvas()
+Canvas::Canvas* Canvas::IObject::canvas() const
 {
 	return _canvas;
 }

@@ -3,7 +3,6 @@
 #include <vector>
 
 #include "Canvas/Canvas.h"
-#include "Types/Types.h"
 #include "Events/InteractionEventHandler.h"
 
 namespace Render {

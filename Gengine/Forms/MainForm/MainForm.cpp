@@ -19,7 +19,7 @@
 #include <Types/Material.h>
 
 #include "Loaders/AssetsLoader.h"
-#include "Logger/Logger.h"
+#include <Animation/Animator.h>
 #include "Render/Engine/RenderTarget.h"
 
 namespace UI

@@ -1,8 +1,6 @@
 #pragma once
-
 #include "../IElement/Parentable.h"
 #include "../../Canvas/Objects/Rectangle/Rectangle.h"
-
 
 namespace Render {
 	struct DrawEvent2D;

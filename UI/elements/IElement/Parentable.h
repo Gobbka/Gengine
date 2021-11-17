@@ -19,7 +19,7 @@ namespace UI
 	public:
 		void foreach(std::function<void(InteractiveElement* element)> iterator);
 
-		size_t count();
+		size_t count() const;
 
 		UI::InteractiveElement* operator[](UINT index);
 
@@ -33,10 +33,9 @@ namespace UI
 
 	class __declspec(dllexport) Parent : public InteractiveElement
 	{
-	private:
 		Position2 _offset_position;
 		ReadWriteChildrenCollection _children;
-		bool initialized = false;
+		bool _initialized = false;
 	protected:
 		void handle_mouse_up() override;
 		void handle_mouse_down() override;

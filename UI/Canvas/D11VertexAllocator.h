@@ -1,7 +1,5 @@
 #pragma once
 #include <Graphics/IBuffers/IVertexBuffer.h>
-#include <Render/d3d/Vertex.h>
-
 #include "Vertex2D.h"
 
 namespace Core {
@@ -44,7 +42,7 @@ namespace Render
 
 		UI::Vertex2D* get_ptr() const;
 
-		void bind();
+		void bind() const;
 
 		D11VertexAllocator(Core::GraphicsContext* pEngine, IVertexBuffer<UI::Vertex2D>* buffer);
 		explicit D11VertexAllocator(Core::GraphicsContext* pEngine);

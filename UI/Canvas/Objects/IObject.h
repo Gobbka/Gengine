@@ -48,7 +48,7 @@ namespace Canvas {
 		void initialize(Canvas*canvas);
 
 		auto get_index() const { return _index; }
-		Canvas* canvas();
+		Canvas* canvas() const;
 		UI::Vertex2D* vertices() const;
 
 		void set_index(INDEX new_index) { _index = new_index; }

@@ -173,7 +173,6 @@
     <ClCompile Include="Events\WinIntEventHandler.cpp" />
     <ClCompile Include="InteractiveForm.cpp" />
     <ClCompile Include="UIContext.cpp" />
-    <ClCompile Include="Canvas\Vertex2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation\Animator.h" />

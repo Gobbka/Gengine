@@ -1,10 +1,9 @@
 #include "RenderEvent.h"
 
+#include "../Canvas/Objects/IObject.h"
 #include <Graphics.h>
 #include <IGContext.h>
-#include "../Canvas/Objects/IObject.h"
 #include <Render/Engine/Camera.h>
-#include <Render/Engine/MaskEngine.h>
 
 Render::DrawEvent::DrawEvent(Camera* engine,SpriteEngine*sprite_engine)
 {
@@ -13,7 +12,7 @@ Render::DrawEvent::DrawEvent(Camera* engine,SpriteEngine*sprite_engine)
 	_spriteEngine = sprite_engine;
 }
 
-Render::SpriteEngine* Render::DrawEvent::sprite_engine()
+Render::SpriteEngine* Render::DrawEvent::sprite_engine() const
 {
 	return _spriteEngine;
 }
@@ -45,17 +44,17 @@ void Render::DrawEvent::mask_set_stencil(BYTE new_index)
 	_stencil_layer = new_index;
 }
 
-BYTE Render::DrawEvent::mask_get_stencil_layer()
+BYTE Render::DrawEvent::mask_get_stencil_layer() const
 {
 	return _stencil_layer;
 }
 
-void Render::DrawEvent::mask_clear()
+void Render::DrawEvent::mask_clear() const
 {
 	_camera->get_mask_engine()->clear_buffer();
 }
 
-void Render::DrawEvent::set_alpha(float alpha)
+void Render::DrawEvent::set_alpha(float alpha) const
 {
 	auto* context = _context->get_context();
 	if(context->control_buffer.data.opacity != alpha)
@@ -81,12 +80,12 @@ Render::DrawEvent3D::DrawEvent3D(Core::GraphicsContext* context)
 	_context = context;
 }
 
-void Render::DrawEvent3D::draw(UINT count, UINT start_location)
+void Render::DrawEvent3D::draw(UINT count, UINT start_location) const
 {
 	_context->context->Draw(count, start_location);
 }
 
-void Render::DrawEvent3D::draw_indexed(UINT count, UINT start_location)
+void Render::DrawEvent3D::draw_indexed(UINT count, UINT start_location) const
 {
 	_context->context->DrawIndexed(count, start_location, 0);
 }

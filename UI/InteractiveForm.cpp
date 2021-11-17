@@ -1,9 +1,7 @@
 #include "InteractiveForm.h"
 
 #include <iostream>
-
 #include "elements/IElement/InteractiveElement.h"
-#include <windowsx.h>
 
 using namespace UI;
 

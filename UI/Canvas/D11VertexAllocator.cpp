@@ -1,7 +1,6 @@
 #include "D11VertexAllocator.h"
-#include "../Canvas/Canvas.h"
+
 #include <Graphics.h>
-#include <Render/d3d/Buffer/VertexBuffer.h>
 
 Render::IVertexBuffer<UI::Vertex2D>* Render::D11VertexAllocator::alloc_vbuffer(UINT size) const
 {	
@@ -57,25 +56,24 @@ UI::Vertex2D* Render::D11VertexAllocator::get_ptr() const
 	return _vertex_buffer->data;
 }
 
-void Render::D11VertexAllocator::bind()
+void Render::D11VertexAllocator::bind() const
 {
 	_vertex_buffer->bind();
 }
 
 Render::D11VertexAllocator::D11VertexAllocator(Core::GraphicsContext* pEngine, IVertexBuffer<UI::Vertex2D>* buffer)
-	:_allocator(100,100)
+	: _ctx(pEngine)
+	, _allocator(100,100)
+	, _vertex_buffer(buffer)
 {
-	_ctx = pEngine;
-	_vertex_buffer = buffer;
 	_allocator.allocated = (UINT)buffer->get_size();
 }
 
 Render::D11VertexAllocator::D11VertexAllocator(Core::GraphicsContext* pEngine)
-	:_allocator(100, 100)
+	: _ctx(pEngine)
+	, _allocator(100, 100)
+	, _vertex_buffer(nullptr)
 {
-	_vertex_buffer = nullptr;
-	_ctx = pEngine;
-
 	this->set_vbuffer(this->alloc_vbuffer(_allocator.start_size));
 }
 

@@ -8,6 +8,12 @@ namespace UI {
 		Position2 pos;
 		Color3XM  color;
 		Position2  uv;
+
+		Vertex2D()
+			: pos(0,0)
+			, color(0,0,0)
+			, uv(0,0)
+		{}
 	};
 
 	const D3D11_INPUT_ELEMENT_DESC vertex2D_layout[] = {

@@ -29,8 +29,8 @@ Render::VertexBuffer::~VertexBuffer()
 
 void Render::VertexBuffer::bind()
 {
-	const UINT stride = sizeof(Vertex);
 	const UINT offset = 0;
+	const UINT stride = stride_size;
 
 	_engine->context->IASetVertexBuffers(0, 1, &_buffer, &stride,&offset);
 }

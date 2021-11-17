@@ -12,7 +12,7 @@ namespace Canvas {
 	protected:
 		void render_components(Render::DrawEvent2D* event);
 	public:
-		Render::Vertex* vertices() const;
+		UI::Vertex2D* vertices() const;
 		
 		Canvas(Core::GraphicsContext*engine);
 		virtual ~Canvas();

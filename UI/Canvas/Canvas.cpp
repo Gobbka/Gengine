@@ -9,7 +9,7 @@ void Canvas::Canvas::render_components(Render::DrawEvent2D* event)
 			event->draw_object(object);
 }
 
-Render::Vertex* Canvas::Canvas::vertices() const
+UI::Vertex2D* Canvas::Canvas::vertices() const
 {
 	return _canvas.get_ptr();
 }

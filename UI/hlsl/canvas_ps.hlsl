@@ -8,8 +8,13 @@ struct PSI
 	float2 uv : UV;
 };
 
+cbuffer ControlBuffer : register(b1)
+{
+	float c_opacity;
+}
+
 float4 main(PSI psi) : SV_TARGET
 {
-	float3 final_color = psi.color * objTexture.Sample(sample,psi.uv);
+	float3 final_color = psi.color * objTexture.Sample(sample,psi.uv) * c_opacity;
 	return float4(final_color,1);
 }

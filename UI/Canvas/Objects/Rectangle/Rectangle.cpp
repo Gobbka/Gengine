@@ -1,6 +1,6 @@
 #include "Rectangle.h"
 #include "../../../Events/RenderEvent.h"
-#include <Render/d3d/Vertex.h>
+#include "../../Vertex2D.h"
 #include <Render/Engine/SpriteEngine.h>
 #include <Render/d3d/Buffer/Texture.h>
 
@@ -21,10 +21,10 @@ void Canvas::Rectangle::apply_rectangle()
 	auto width = _resolution.width;
 	auto height = _resolution.height;
 	
-	ptr[0].pos = DirectX::XMFLOAT3(x, y, 1.f);
-	ptr[1].pos = DirectX::XMFLOAT3(x + width, y, 1.f);
-	ptr[2].pos = DirectX::XMFLOAT3(x, y - height, 1.f);
-	ptr[3].pos = DirectX::XMFLOAT3(x + width, y - height, 1.f);
+	ptr[0].pos = Position2(x, y);
+	ptr[1].pos = Position2(x + width, y);
+	ptr[2].pos = Position2(x, y - height);
+	ptr[3].pos = Position2(x + width, y - height);
 }
 
 void Canvas::Rectangle::apply_color()
@@ -34,10 +34,15 @@ void Canvas::Rectangle::apply_color()
 	
 	auto* ptr = vertices();
 
-	ptr[0].color = { 0,0,0 };
-	ptr[1].color = { 1,0,0 };
-	ptr[2].color = { 0,1,0 };
-	ptr[3].color = { 1,1,0 };
+	ptr[0].color = Color3XM::white();//{ 1,1,1 };
+	ptr[1].color = Color3XM::white();
+	ptr[2].color = Color3XM::white();
+	ptr[3].color = Color3XM::white();
+
+	ptr[0].uv = { 0,0 };
+	ptr[1].uv = { 1,0 };
+	ptr[2].uv = { 0,1 };
+	ptr[3].uv = { 1,1 };
 }
 
 void Canvas::Rectangle::on_initialize()
@@ -55,12 +60,10 @@ Canvas::Rectangle::Rectangle(Render::Texture* background, Position2 position, Su
 
 void Canvas::Rectangle::draw(Render::DrawEvent2D* draw_event)
 {
-
 	if(_background_texture)
 	{
 		auto* sprite = draw_event->sprite_engine();
 
-		sprite->begin_sprite_mode();
 		sprite->bind_texture(_background_texture, 0);
 		draw_event->draw_vertex(4);
 

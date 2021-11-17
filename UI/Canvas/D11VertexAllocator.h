@@ -2,6 +2,8 @@
 #include <Graphics/IBuffers/IVertexBuffer.h>
 #include <Render/d3d/Vertex.h>
 
+#include "Vertex2D.h"
+
 namespace Core {
 	class GraphicsContext;
 }
@@ -26,10 +28,10 @@ namespace Render
 	private:
 		Core::GraphicsContext* _ctx;
 		GrowPolicy _allocator;
-		IVertexBuffer<Vertex>* _vertex_buffer;
+		IVertexBuffer<UI::Vertex2D>* _vertex_buffer;
 
-		IVertexBuffer<Vertex>* alloc_vbuffer(UINT size) const;
-		void set_vbuffer(IVertexBuffer<Vertex>* buffer);
+		IVertexBuffer<UI::Vertex2D>* alloc_vbuffer(UINT size) const;
+		void set_vbuffer(IVertexBuffer<UI::Vertex2D>* buffer);
 	public:
 		UINT buffer_size() const;
 		UINT last_index() const;
@@ -40,11 +42,11 @@ namespace Render
 
 		void alloc(UINT size);
 
-		Vertex* get_ptr() const;
+		UI::Vertex2D* get_ptr() const;
 
 		void bind();
 
-		D11VertexAllocator(Core::GraphicsContext* pEngine, IVertexBuffer<Vertex>* buffer);
+		D11VertexAllocator(Core::GraphicsContext* pEngine, IVertexBuffer<UI::Vertex2D>* buffer);
 		explicit D11VertexAllocator(Core::GraphicsContext* pEngine);
 
 		~D11VertexAllocator();

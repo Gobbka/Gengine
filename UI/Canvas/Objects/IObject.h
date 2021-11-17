@@ -1,10 +1,14 @@
 #pragma once
 #include "Types/Types.h"
 
+namespace UI
+{
+	struct Vertex2D;
+}
+
 namespace Render {
 	struct DrawEvent2D;
 	class Texture;
-	struct Vertex;
 	struct DrawEvent;
 }
 
@@ -45,7 +49,7 @@ namespace Canvas {
 
 		auto get_index() const { return _index; }
 		Canvas* canvas();
-		Render::Vertex* vertices() const;
+		UI::Vertex2D* vertices() const;
 
 		void set_index(INDEX new_index) { _index = new_index; }
 

@@ -1,14 +1,14 @@
 #include "D11VertexAllocator.h"
-
+#include "../Canvas/Canvas.h"
 #include <Graphics.h>
 #include <Render/d3d/Buffer/VertexBuffer.h>
 
-Render::IVertexBuffer<Render::Vertex>* Render::D11VertexAllocator::alloc_vbuffer(UINT size) const
+Render::IVertexBuffer<UI::Vertex2D>* Render::D11VertexAllocator::alloc_vbuffer(UINT size) const
 {	
-	return _ctx->get_device()->alloc_vertex_buffer<Vertex>(size, true);
+	return _ctx->get_device()->alloc_vertex_buffer<UI::Vertex2D>(size, true);
 }
 
-void Render::D11VertexAllocator::set_vbuffer(IVertexBuffer<Vertex>* buffer)
+void Render::D11VertexAllocator::set_vbuffer(IVertexBuffer<UI::Vertex2D>* buffer)
 {
 	delete _vertex_buffer;
 	_vertex_buffer = buffer;
@@ -52,7 +52,7 @@ void Render::D11VertexAllocator::alloc(UINT size)
 	_allocator.allocated += size;
 }
 
-Render::Vertex* Render::D11VertexAllocator::get_ptr() const
+UI::Vertex2D* Render::D11VertexAllocator::get_ptr() const
 {
 	return _vertex_buffer->data;
 }
@@ -62,7 +62,7 @@ void Render::D11VertexAllocator::bind()
 	_vertex_buffer->bind();
 }
 
-Render::D11VertexAllocator::D11VertexAllocator(Core::GraphicsContext* pEngine, IVertexBuffer<Vertex>* buffer)
+Render::D11VertexAllocator::D11VertexAllocator(Core::GraphicsContext* pEngine, IVertexBuffer<UI::Vertex2D>* buffer)
 	:_allocator(100,100)
 {
 	_ctx = pEngine;

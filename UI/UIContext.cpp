@@ -42,13 +42,13 @@ public:
 
 		_context->dss_collection[(Render::DSBitSet)Render::DepthStencilUsage::stencil_mask].bind(0);
 
-		//auto* old_ps = gcontext->get_pixel_shader();
-		//auto* old_vs = gcontext->get_vertex_shader();
+		auto* old_ps = gcontext->get_pixel_shader();
+		auto* old_vs = gcontext->get_vertex_shader();
 
-		//gcontext->set_pixel_shader(_context->shader_collection.get<Render::PixelShader>(L"d3d11\\canvas_ps.cso"));
-		//gcontext->set_vertex_shader(_context->shader_collection.get<Render::VertexShader>(L"d3d11\\canvas_vs.cso"));
+		gcontext->set_pixel_shader(_context->shader_collection.get<Render::PixelShader>(L"d3d11\\canvas_ps.cso"));
+		gcontext->set_vertex_shader(_context->shader_collection.get_vs(L"d3d11\\canvas_vs.cso"));
 
-		_context->main_scene->world()->each<UI::InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<UI::InteractiveForm>form)
+		scene->world()->each<UI::InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<UI::InteractiveForm>form)
 			{
 				if (form->hidden())
 					return;
@@ -59,8 +59,8 @@ public:
 				form->render(&event);
 			});
 
-		//gcontext->set_pixel_shader(old_ps);
-		//gcontext->set_vertex_shader(old_vs);
+		gcontext->set_pixel_shader(old_ps);
+		gcontext->set_vertex_shader(old_vs);
 
 		mask_engine->clear_buffer();
 	}
@@ -84,7 +84,7 @@ class DrawTextPass : public Render::IPass
 			DirectX::XMMatrixTranslation(-1,1,0) // move count point to top-left corner
 		;
 
-		_context->main_scene->world()->each<Render::TextComponent>([&](ECS::Entity*, ECS::ComponentHandle<Render::TextComponent>comp)
+		scene->world()->each<Render::TextComponent>([&](ECS::Entity*, ECS::ComponentHandle<Render::TextComponent>comp)
 			{
 				matrix->data.MVPMatrix = DirectX::XMMatrixTranspose(
 					worldMatrix
@@ -119,8 +119,8 @@ UI::UIContext::UIContext(Core::GraphicsContext* gfx)
 	, _gfx(gfx)
 	, _cursor(0,0)
 {
-	//auto* vs = new Render::VertexShader(gfx, L"d3d11\\canvas_vs.cso", vertex2D_layout, ARRAYSIZE(UI::vertex2D_layout));
-	//gfx->shader_collection.insert(L"d3d11\\canvas_vs.cso", vs);
+	auto* vs = new Render::VertexShader(gfx, L"d3d11\\canvas_vs.cso", vertex2D_layout, ARRAYSIZE(UI::vertex2D_layout));
+	gfx->shader_collection.insert(L"d3d11\\canvas_vs.cso", vs);
 
 	gfx->get_passer()->add_pass(new DrawUIPass(gfx), Render::PassStep::overlay);
 	gfx->get_passer()->add_pass(new DrawTextPass(gfx), Render::PassStep::overlay);

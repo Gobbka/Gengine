@@ -37,13 +37,18 @@ namespace Render
 		IVertexBufferDesc buffer_desc;
 		buffer_desc.length = size;
 		buffer_desc.usage = dynamic ? IVertexBufferDesc::Usage::dynamic : IVertexBufferDesc::Usage::classic;
-		return (IVertexBuffer<T>*)alloc_vertex_buffer_impl(new T[size], sizeof(T), buffer_desc);
+		auto* buffer = (IVertexBuffer<T>*)alloc_vertex_buffer_impl(new T[size], sizeof(T), buffer_desc);
+		buffer->stride_size = sizeof(T);
+
+		return buffer;
 	}
 
 	template <typename T>
 	IVertexBuffer<T>* IGDevice::alloc_vertex_buffer(T* data, IVertexBufferDesc desc)
 	{
-		return (IVertexBuffer<T>*)alloc_vertex_buffer_impl(data, sizeof(T), desc);
+		auto* buffer = (IVertexBuffer<T>*)alloc_vertex_buffer_impl(data, sizeof(T), desc);
+		buffer->stride_size = sizeof(T);
+		return buffer;
 	}
 
 	inline Texture* IGDevice::create_texture(Material& material)

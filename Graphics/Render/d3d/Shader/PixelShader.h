@@ -4,7 +4,7 @@
 #include "IShader.h"
 
 namespace Render {
-	class PixelShader : public IShader
+	class __declspec(dllexport) PixelShader : public IShader
 	{
 		ID3D11PixelShader* _shader;
 		void construct(ID3DBlob* shader_blob);

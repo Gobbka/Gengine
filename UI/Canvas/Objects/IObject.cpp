@@ -7,7 +7,7 @@ void Canvas::IObject::initialize(Canvas* canvas)
 	on_initialize();
 }
 
-Render::Vertex* Canvas::IObject::vertices() const
+UI::Vertex2D* Canvas::IObject::vertices() const
 {
 	return _canvas->vertices() + get_index();
 }

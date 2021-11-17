@@ -23,23 +23,24 @@ namespace Render
 	protected:
 		size_t size;
 
-		IVertexBuffer(Core::GraphicsContext* engine,T*data, size_t size) : Bindable(engine), size(size), data(data) {}
+		IVertexBuffer(Core::GraphicsContext* engine,T*data, size_t size) : Bindable(engine), size(size), data(data), stride_size(sizeof(T)) {}
 	public:
 		T* data;
-
-		inline size_t get_size()
-		{
-			return size;
-		}
+		char stride_size;
 
 		virtual void copy_to(IVertexBuffer* buffer) =0;
 		virtual void copy_to(void* buffer, unsigned size) =0;
 
 		virtual void update(unsigned update_size = -1) = 0;
 
+		inline size_t get_size()
+		{
+			return size;
+		}
+
 		T& at(unsigned index) const
 		{
 			return data[index];
-		};
+		}
 	};
 }

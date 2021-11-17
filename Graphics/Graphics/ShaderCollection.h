@@ -10,10 +10,11 @@ namespace Core
 
 namespace Render
 {
+	class VertexShader;
 	class IShader;
 }
 
-class ShaderCollection
+class __declspec(dllexport) ShaderCollection
 {
 	std::map<const wchar_t*, Render::IShader*> _collection;
 	Core::GraphicsContext* _context;
@@ -21,6 +22,8 @@ public:
 	explicit ShaderCollection(Core::GraphicsContext* context);
 
 	void insert(const wchar_t* file_name, Render::IShader* shader);
+
+	Render::VertexShader* get_vs(const wchar_t* file_name);
 
 	template<typename T>
 	T* get(const wchar_t* file_name)

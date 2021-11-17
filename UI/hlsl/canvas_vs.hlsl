@@ -13,7 +13,7 @@ struct PSI
 PSI main(float2 pos : POSITION, float3 color : COLOR, float2 uv : UV)
 {
 	PSI psi;
-	psi.sv_pos = mul(pos, mvp);
+	psi.sv_pos = mul(float4(pos,0,1), mvp);
 	psi.color = color;
 	psi.uv = uv;
 	

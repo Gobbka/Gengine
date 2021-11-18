@@ -18,7 +18,7 @@ namespace Render {
 	class SpriteEngine;
 	class Camera;
 
-	struct __declspec(dllexport) DrawEvent {
+	struct __declspec(dllexport) DrawEvent2D {
 	protected:
 		Camera* _camera;
 		Core::GraphicsContext* _context;
@@ -27,7 +27,16 @@ namespace Render {
 		UINT _stencil_layer = 0u;
 		
 	public:
-		DrawEvent(Camera* engine,SpriteEngine*sprite_engine);
+		
+		DrawEvent2D(Camera* camera, Canvas::Canvas* layer);
+
+	private:
+		UINT _draw_index = 0u;
+	public:
+		Canvas::Canvas* layer;
+
+		void draw_vertex(UINT count, UINT start = 0) const;
+		void draw_object(Canvas::IObject* object);
 
 	public:
 		SpriteEngine* sprite_engine() const;
@@ -40,25 +49,5 @@ namespace Render {
 		void mask_clear() const;
 
 		void set_alpha(float alpha) const;
-	};
-
-	struct __declspec(dllexport) DrawEvent2D : DrawEvent{
-	private:
-		UINT _draw_index = 0u;
-	public:
-		Canvas::Canvas* layer;
-		DrawEvent2D(Camera* camera, Canvas::Canvas*layer);
-		
-		void draw_vertex(UINT count, UINT start = 0) const;
-		void draw_object(Canvas::IObject* object);
-	};
-
-	struct DrawEvent3D
-	{
-		Core::GraphicsContext* _context;
-	public:
-		DrawEvent3D(Core::GraphicsContext* context);
-
-		void draw_indexed(UINT count,UINT start_location = 0) const;
 	};
 }

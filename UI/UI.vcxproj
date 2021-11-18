@@ -169,7 +169,7 @@
     <ClCompile Include="elements\IElement\InteractiveElement.cpp" />
     <ClCompile Include="elements\IElement\Parentable.cpp" />
     <ClCompile Include="elements\Panel\Panel.cpp" />
-    <ClCompile Include="Events\RenderEvent.cpp" />
+    <ClCompile Include="Canvas\RenderEvent.cpp" />
     <ClCompile Include="Events\WinIntEventHandler.cpp" />
     <ClCompile Include="InteractiveForm.cpp" />
     <ClCompile Include="UIContext.cpp" />
@@ -186,7 +186,7 @@
     <ClInclude Include="elements\IElement\Parentable.h" />
     <ClInclude Include="elements\Panel\Panel.h" />
     <ClInclude Include="Events\InteractionEventHandler.h" />
-    <ClInclude Include="Events\RenderEvent.h" />
+    <ClInclude Include="Canvas\RenderEvent.h" />
     <ClInclude Include="Events\WinIntEventHandler.h" />
     <ClInclude Include="InteractiveForm.h" />
     <ClInclude Include="UIContext.h" />

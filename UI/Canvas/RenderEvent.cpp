@@ -1,6 +1,6 @@
 #include "RenderEvent.h"
 
-#include "../Canvas/Objects/IObject.h"
+#include "Objects/IObject.h"
 #include <Graphics.h>
 #include <IGContext.h>
 #include <Render/Engine/Camera.h>

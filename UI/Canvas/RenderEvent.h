@@ -42,7 +42,7 @@ namespace Render {
 		void set_alpha(float alpha) const;
 	};
 
-	struct __declspec(dllexport) DrawEvent2D : public DrawEvent{
+	struct __declspec(dllexport) DrawEvent2D : DrawEvent{
 	private:
 		UINT _draw_index = 0u;
 	public:

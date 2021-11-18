@@ -6,7 +6,7 @@
 #include "Render/Engine/Camera.h"
 #include "InteractiveForm.h"
 #include "Graphics/Components/TextComponent.h"
-#include "Events/RenderEvent.h"
+#include "Canvas/RenderEvent.h"
 #include <Render/d3d/Buffer/ConstantBuffer.h>
 #include "Canvas/Vertex2D.h"
 #include "Render/d3d/Shader/VertexShader.h"

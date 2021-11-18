@@ -1,6 +1,6 @@
 #include "Panel.h"
 #include "../../InteractiveForm.h"
-#include "../../Events/RenderEvent.h"
+#include "../../Canvas/RenderEvent.h"
 #include "Types/Types.h"
 
 void UI::Panel::draw(Render::DrawEvent2D* event)

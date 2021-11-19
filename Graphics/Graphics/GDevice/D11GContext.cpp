@@ -123,6 +123,11 @@ void Render::D11GContext::draw_indexed(UINT count, UINT start_location)
 	_d11context->DrawIndexed(count, start_location, 0);
 }
 
+void Render::D11GContext::draw(UINT count, UINT start_location)
+{
+	_d11context->Draw(count, start_location);
+}
+
 Render::Rasterizer Render::D11GContext::get_rasterizer()
 {
 	ID3D11RasterizerState* rs=nullptr;

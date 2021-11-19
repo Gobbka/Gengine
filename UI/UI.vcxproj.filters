@@ -42,7 +42,7 @@
     <ClCompile Include="Canvas\Objects\IObject.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Canvas\Canvas.cpp">
+    <ClCompile Include="Canvas\CanvasImpl.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Canvas\D11VertexAllocator.cpp">
@@ -89,7 +89,7 @@
     <ClInclude Include="Canvas\Objects\IObject.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Canvas\Canvas.h">
+    <ClInclude Include="Canvas\CanvasImpl.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Canvas\D11VertexAllocator.h">
@@ -105,6 +105,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Canvas\Vertex2D.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas\DynamicAllocator.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,7 @@
 #include "IObject.h"
-#include "../Canvas.h"
+#include "../CanvasImpl.h"
 
-void Canvas::IObject::initialize(Canvas* canvas)
+void Canvas::IObject::initialize(CanvasImpl* canvas)
 {
 	_canvas = canvas;
 	on_initialize();
@@ -12,7 +12,7 @@ UI::Vertex2D* Canvas::IObject::vertices() const
 	return _canvas->vertices() + get_index();
 }
 
-Canvas::Canvas* Canvas::IObject::canvas() const
+Canvas::CanvasImpl* Canvas::IObject::canvas() const
 {
 	return _canvas;
 }

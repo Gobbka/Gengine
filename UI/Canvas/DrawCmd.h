@@ -10,5 +10,7 @@ namespace Canvas {
 	{
 		Render::Texture* texture;
 		unsigned idx_offset;
+		unsigned vtx_count;
+		unsigned vtx_offset;
 	};
 }

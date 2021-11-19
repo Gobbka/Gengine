@@ -13,7 +13,7 @@ namespace Render {
 }
 
 namespace Canvas {
-	class Canvas;
+	class CanvasImpl;
 
 	class __declspec(dllexport) IControllable
 	{
@@ -42,13 +42,13 @@ namespace Canvas {
 
 	class __declspec(dllexport) IObject : public IControllable
 	{
-		Canvas* _canvas = nullptr;
+		CanvasImpl* _canvas = nullptr;
 		INDEX _index = 0u;
 	public:
-		void initialize(Canvas*canvas);
+		void initialize(CanvasImpl*canvas);
 
 		auto get_index() const { return _index; }
-		Canvas* canvas() const;
+		CanvasImpl* canvas() const;
 		UI::Vertex2D* vertices() const;
 
 		void set_index(INDEX new_index) { _index = new_index; }

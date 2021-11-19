@@ -2,7 +2,7 @@
 #include <functional>
 #include <vector>
 
-#include "Canvas/Canvas.h"
+#include "Canvas/CanvasImpl.h"
 #include "Events/InteractionEventHandler.h"
 
 namespace Render {
@@ -30,7 +30,7 @@ namespace UI {
 	private:
 		bool _hidden;
 
-		Canvas::Canvas _canvas;
+		Canvas::CanvasImpl _canvas;
 
 		std::vector<UI::InteractiveElement*> _childs;
 
@@ -63,6 +63,6 @@ namespace UI {
 		void update() const;
 		void render(Render::DrawEvent2D*event);
 
-		Canvas::Canvas* canvas();
+		Canvas::CanvasImpl* canvas();
 	};
 }

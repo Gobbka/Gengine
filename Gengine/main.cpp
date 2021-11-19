@@ -31,11 +31,9 @@
 #include <XML/XMLCommon.h>
 #include <XML/Encoder.h>
 
-#include <XML/XMLDecoder.h>
-
 void debugger_loop()
 {
-	const auto* server = PipeServer::create(L"\\\\.\\pipe\\GENGINE_DBG");
+	const auto* server = PipeServer::create(LR"(\\.\pipe\GENGINE_DBG)");
 
 	while(true)
 	{

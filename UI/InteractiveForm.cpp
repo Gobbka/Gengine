@@ -158,7 +158,7 @@ void InteractiveForm::render(Render::DrawEvent2D* event)
 	}
 }
 
-Canvas::Canvas* InteractiveForm::canvas()
+Canvas::CanvasImpl* InteractiveForm::canvas()
 {
 	return &_canvas;
 }

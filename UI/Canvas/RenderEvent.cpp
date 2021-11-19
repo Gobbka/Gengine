@@ -92,7 +92,7 @@ void Render::CanvasDrawEvent::draw_rect(Position2 pos, Surface resolution, Color
 }
 
 
-Render::DrawEvent2D::DrawEvent2D(Camera* camera, Canvas::Canvas* layer)
+Render::DrawEvent2D::DrawEvent2D(Camera* camera, Canvas::CanvasImpl* layer)
 {
 	this->layer = layer;
 	_camera = camera;

@@ -45,11 +45,11 @@ public:
 
 		scene->world()->each<UI::InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<UI::InteractiveForm>form)
 			{
-				//auto* data = form->canvas()->begin();
-				//Render::CanvasDrawEvent de(data);
-				//de.draw_rect({ 0,0 }, { 500,500 }, { 1,1,1 });
-				//de.draw_rect({ 100,-100 }, { 500,500 }, { 1,1,1 });
-				//form->canvas()->present();
+				auto* data = form->canvas()->begin();
+				Render::CanvasDrawEvent de(data);
+				de.draw_rect({ 0,0 }, { 500,500 }, { 1,0,0 });
+				de.draw_rect({ 100,-100 }, { 500,500 }, { 1,1,1 });
+				form->canvas()->present();
 
 				if (form->hidden())
 					return;

@@ -52,7 +52,10 @@ Canvas::CanvasImpl::CanvasImpl(Core::GraphicsContext* engine)
 	: _backupData{nullptr,nullptr}
 	, _buffer(engine->get_device()->alloc_vertex_buffer<UI::Vertex2D>(100u,true))
 	, _canvas(engine)
-{}
+{
+	Render::Material white(Color3XM{ 1,1,1,1 });
+	_drawData.default_texture = new Render::Texture(engine, white);
+}
 
 void Canvas::CanvasImpl::update() const
 {

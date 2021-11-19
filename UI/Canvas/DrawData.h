@@ -12,6 +12,8 @@ namespace Canvas
 		DynamicAllocator<DrawCmd> draw_list;
 		DynamicAllocator<UI::Vertex2D> allocator;
 
+		Render::Texture* default_texture;
+
 		DrawData();
 	};
 }

@@ -26,9 +26,10 @@ namespace Render {
 	public:
 		CanvasDrawEvent(Canvas::DrawData* data);
 
-		UI::Vertex2D* new_draw_cmd(UINT size) const;
+		UI::Vertex2D* new_draw_cmd(UINT size,Texture*texture = nullptr) const;
 
 		void draw_rect(Position2 pos,Surface resolution,Color3XM color) const;
+		void draw_rect(Position2 pos,Surface resolution,Texture* texture) const;
 	};
 
 	struct __declspec(dllexport) DrawEvent2D final {

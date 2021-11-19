@@ -166,6 +166,8 @@
     <ClCompile Include="Canvas\DrawData.cpp" />
     <ClCompile Include="elements\IElement\InteractiveElement.cpp" />
     <ClCompile Include="elements\IElement\Parentable.cpp" />
+    <ClCompile Include="Elements\Panel\FlexColumnPanel.cpp" />
+    <ClCompile Include="Elements\Panel\FlexRowPanel.cpp" />
     <ClCompile Include="elements\Panel\Panel.cpp" />
     <ClCompile Include="Canvas\RenderEvent.cpp" />
     <ClCompile Include="Events\WinIntEventHandler.cpp" />
@@ -181,6 +183,8 @@
     <ClInclude Include="Canvas\DynamicAllocator.h" />
     <ClInclude Include="elements\IElement\InteractiveElement.h" />
     <ClInclude Include="elements\IElement\Parentable.h" />
+    <ClInclude Include="Elements\Panel\FlexColumnPanel.h" />
+    <ClInclude Include="Elements\Panel\FlexRowPanel.h" />
     <ClInclude Include="elements\Panel\Panel.h" />
     <ClInclude Include="Events\InteractionEventHandler.h" />
     <ClInclude Include="Canvas\RenderEvent.h" />

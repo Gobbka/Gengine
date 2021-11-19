@@ -1,6 +1,5 @@
 #pragma once
 #include "../Form/Form.h"
-#include "Ecs/Ecs.h"
 
 namespace Render {
 	class Camera;
@@ -12,6 +11,8 @@ namespace Core {
 }
 
 namespace UI {
+	class FlexColumnPanel;
+	class FlexRowPanel;
 	class Panel;
 }
 
@@ -22,8 +23,8 @@ namespace Forms
 	private:
 		UI::Panel* _topbar_panel;
 		UI::Panel* _worldspace_panel;
-		UI::Panel* _assets_panel_wrapper;
-		UI::Panel* _assets_panel;
+		UI::FlexColumnPanel* _assets_panel_wrapper;
+		UI::FlexRowPanel* _assets_panel;
 		UI::Panel* _render_panel;
 
 		Render::Texture* _folder_texture;

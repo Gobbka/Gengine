@@ -6,32 +6,20 @@ void UI::Panel::draw(Render::DrawEvent2D* event)
 {	
 	if (this->styles.overflow == VisibleState::hidden)
 	{
-		event->mask_draw_begin();
 		event->set_alpha(this->alpha);
 
 		if (_texture)
 			event->draw_rect(_position, _resolution, _texture);
 		else
 			event->draw_rect(_position, _resolution, _color);
-
-		event->set_alpha(1.f);
-		event->mask_discard_begin();
-		Parent::draw(event);
-		event->mask_discard_end();
 	}
 	else
 	{
-		event->mask_discard_begin(false);
-
 		event->set_alpha(this->alpha);
 		if (_texture)
 			event->draw_rect(_position, _resolution, _texture);
 		else
 			event->draw_rect(_position, _resolution, _color);
-		event->set_alpha(1.f);
-		Parent::draw(event);
-
-		event->mask_discard_end(false);
 	}
 }
 
@@ -41,16 +29,14 @@ UI::ElementDescription UI::Panel::get_desc()
 }
 
 UI::Panel::Panel(Vector2 position,Surface resolution, Render::Texture* texture)
-	: Parent(position)
-	, _position(position)
+	: _position(position)
 	, _resolution(resolution)
 	, _texture(texture)
 	, _color(1,1,1)
 {}
 
 UI::Panel::Panel(Vector2 position, Surface resolution, Color3XM color)
-	: Parent(position)
-	, _position(position)
+	: _position(position)
 	, _resolution(resolution)
 	, _texture(nullptr)
 	, _color(color)
@@ -74,8 +60,6 @@ void UI::Panel::set_position(Position2 pos)
 void UI::Panel::move_by(Position2 pos)
 {
 	_position += pos;
-
-	UI::Parent::move_by(pos);
 }
 
 void UI::Panel::set_texture(Render::Texture* texture)

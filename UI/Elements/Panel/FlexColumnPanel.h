@@ -1,14 +1,8 @@
-#pragma once
+﻿#pragma once
 #include "../IElement/Parentable.h"
 
-namespace Render {
-	struct DrawEvent2D;
-	struct DrawEvent;
-}
-
-namespace UI
-{
-	class __declspec(dllexport) Panel : public InteractiveElement
+namespace UI {
+	class __declspec(dllexport) FlexColumnPanel : public Parent
 	{
 		Position2 _position;
 		Surface _resolution;
@@ -22,8 +16,8 @@ namespace UI
 
 		ElementDescription get_desc() override;
 
-		Panel(Vector2 position, Surface resolution, Render::Texture*texture);
-		Panel(Vector2 position, Surface resolution, Color3XM color);
+		FlexColumnPanel(Vector2 position, Surface resolution, Render::Texture* texture);
+		FlexColumnPanel(Vector2 position, Surface resolution, Color3XM color);
 
 		bool point_belongs(Position2 point) override;
 		void set_position(Position2 pos) override;
@@ -35,6 +29,7 @@ namespace UI
 		Position2 get_position() override;
 		Surface get_resolution() override;
 		void set_resolution(Surface surface) override;
+
+		Parent* add_element(InteractiveElement* element) override;
 	};
 }
-

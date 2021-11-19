@@ -20,6 +20,9 @@
 
 #include "Loaders/AssetsLoader.h"
 #include <Animation/Animator.h>
+
+#include "Elements/Panel/FlexColumnPanel.h"
+#include "Elements/Panel/FlexRowPanel.h"
 #include "Render/Engine/RenderTarget.h"
 
 namespace UI
@@ -46,7 +49,6 @@ namespace UI
 				
 				_wsystem(command.c_str());
 			}
-			Parent::handle_db_click();
 		}
 
 		void handle_mouse_enter() override
@@ -77,14 +79,14 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_topbar_panel = new UI::Panel({ 0,0 }, { (float)width,30 }, { RGB_TO_FLOAT(26,26,26) });
 	_worldspace_panel = new UI::Panel({ 0,-30 }, { 250,(float)height - 30.f }, { RGB_TO_FLOAT(20,20,20) });
 	
-	_assets_panel_wrapper = new UI::Panel({ 250, -1 * (float)(height) + 250.f }, { (float)width-250,250 }, { RGB_TO_FLOAT(26,26,26) });
+	_assets_panel_wrapper = new UI::FlexColumnPanel ({ 250, -1 * (float)(height)+250.f }, { (float)width - 250,250 }, { RGB_TO_FLOAT(26,26,26) });
 	_assets_panel_wrapper->add_element(
 		new UI::Panel({ 0,0 }, { (float)width - 250,30 }, { RGB_TO_FLOAT(34,34,34) })
 	);
 
 	_render_panel = new UI::Panel({ 250, -30 }, { 840,468 }, nullptr);
 
-	_assets_panel = new UI::Panel({ 0,0}, { (float)width - 250,250-30 }, { RGB_TO_FLOAT(26,26,26) });
+	_assets_panel = new UI::FlexRowPanel({ 0,0}, { (float)width - 250,250-30 }, { RGB_TO_FLOAT(26,26,26) });
 	_assets_panel->styles.display = UI::ElementStyles::DisplayType::flex;
 
 	_assets_panel_wrapper->add_element(_assets_panel);

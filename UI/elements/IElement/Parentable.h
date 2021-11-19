@@ -51,7 +51,7 @@ namespace UI
 
 		InteractiveElement* element_at(UINT index);
 
-		Parent* add_element(InteractiveElement* element);
+		virtual Parent* add_element(InteractiveElement* element) = 0;
 		Parent* add_element(InteractiveElement* element, bool visible);
 	};
 }

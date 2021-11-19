@@ -145,47 +145,6 @@ void UI::Parent::move_by(Position2 pos)
 	return this->_children[index];
 }
 
-UI::Parent* UI::Parent::add_element(InteractiveElement* element)
-{
-	if (element->have_parent())
-		return this;
-	
-	element->set_parent(this);
-	element->move_by(this->get_position());
-	
-	auto* last_element = _children.last();
-	this->_children.append(element);
-
-	if (last_element != nullptr)
-	{
-		auto relative_point = last_element->point_to(this);
-		auto element_res = last_element->get_resolution();
-
-		if (this->styles.display == ElementStyles::DisplayType::block)
-		{
-			std::cout << relative_point.y << '\n';
-			element->move_by({ 0,relative_point.y - element_res.height });
-		}
-
-		if(this->styles.display == ElementStyles::DisplayType::flex)
-		{
-			if(
-				relative_point.x + element_res.width + 
-				element->styles.margin.w + element->styles.margin.y +
-				element->get_resolution().width > get_resolution().width
-				)
-			{
-				element->move_by({ 0,relative_point.y - element_res.height });
-			}else
-			{
-				element->move_by({ relative_point.x + element_res.width,relative_point.y });
-			}	
-		}
-	}
-	
-	return this;
-}
-
 UI::Parent* UI::Parent::add_element(InteractiveElement* element, bool visible)
 {
 	element->styles.display = visible ? ElementStyles::DisplayType::none : ElementStyles::DisplayType::block;

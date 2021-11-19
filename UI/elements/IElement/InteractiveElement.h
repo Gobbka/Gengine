@@ -47,15 +47,9 @@ namespace UI {
 		VisibleState      overflow = VisibleState::visible;
 		enum class DisplayType
 		{
-			flex,
 			block,
 			none,
 		} display = DisplayType::block;
-		enum class FlexDirectionType
-		{
-			row,
-			column,
-		} flex_direction = FlexDirectionType::row;
 		
 		DirectX::XMFLOAT4 margin = { 0,0,0,0 };
 	};
@@ -84,7 +78,7 @@ namespace UI {
 	public:
 		typedef std::function<void(UIElementEventArgs)> EventCallback;
 	protected:
-		InteractiveForm* form;
+		InteractiveForm* form = nullptr;
 		Parent* parent = nullptr;
 		float alpha = 1.f;
 

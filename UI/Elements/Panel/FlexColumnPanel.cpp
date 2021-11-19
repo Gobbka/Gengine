@@ -113,7 +113,7 @@ UI::Parent* UI::FlexColumnPanel::add_element(InteractiveElement* element)
 
 	if (last_element != nullptr)
 	{
-		auto element_res = last_element->get_resolution();
+		const auto element_res = last_element->get_resolution();
 
 		element->move_by(Position2{ 0,element_res.height * -1 });
 		auto old_resolution = element->get_resolution();

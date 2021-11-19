@@ -87,7 +87,6 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_render_panel = new UI::Panel({ 250, -30 }, { 840,468 }, nullptr);
 
 	_assets_panel = new UI::FlexRowPanel({ 0,0}, { (float)width - 250,250-30 }, { RGB_TO_FLOAT(26,26,26) });
-	_assets_panel->styles.display = UI::ElementStyles::DisplayType::flex;
 
 	_assets_panel_wrapper->add_element(_assets_panel);
 

@@ -9,7 +9,7 @@ using namespace UI;
 
 void InteractiveForm::foreach(std::function<void(UI::InteractiveElement* element)> callback)
 {
-	for(auto*element:this->_childs)
+	for(auto*element:this->_children)
 		callback(element);
 }
 
@@ -33,7 +33,7 @@ void InteractiveForm::free_drag_move()
 
 bool InteractiveForm::has_element(UI::InteractiveElement* element)
 {
-	for (auto* in_element : this->_childs)
+	for (auto* in_element : this->_children)
 		if (element == in_element)
 			return true;
 	return false;
@@ -42,7 +42,7 @@ bool InteractiveForm::has_element(UI::InteractiveElement* element)
 
 InteractiveForm* InteractiveForm::add_element(UI::InteractiveElement* element)
 {
-	this->_childs.push_back(element);
+	this->_children.push_back(element);
 
 	return this;
 }
@@ -67,9 +67,9 @@ Interaction::EventStatus InteractiveForm::on_mouse_move(MoveEvent move_event)
 
 	auto e_handled = Interaction::EventStatus::none;
 
-	for (auto i = this->_childs.size(); i --> 0;)
+	for (auto i = this->_children.size(); i --> 0;)
 	{
-		auto* element = this->_childs[i];
+		auto* element = this->_children[i];
 		
 		if (
 			element->styles.display != ElementStyles::DisplayType::none &&
@@ -139,7 +139,7 @@ void InteractiveForm::render()
 	auto *de = _canvas.begin();
 	Render::DrawEvent2D event(_canvas.gfx(),de);
 
-	for (auto* element : this->_childs)
+	for (auto* element : this->_children)
 	{
 		if (element->styles.display != ElementStyles::DisplayType::none)
 			element->draw(&event);

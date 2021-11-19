@@ -5,12 +5,8 @@
 #include "Canvas/CanvasImpl.h"
 #include "Events/InteractionEventHandler.h"
 
-namespace Render {
-	class Camera;
-}
-
 namespace UI {
-	struct InteractiveElementDesc;
+	
 	class InteractiveElement;
 
 	struct __declspec(dllexport) MoveEvent
@@ -32,19 +28,17 @@ namespace UI {
 
 		Canvas::CanvasImpl _canvas;
 
-		std::vector<UI::InteractiveElement*> _childs;
+		std::vector<InteractiveElement*> _children;
 
 		Position2* _cursor_position;
 		DragStruct* dragged = nullptr;
 	public:
-		
-
 		void foreach(std::function<void(UI::InteractiveElement* element)>callback);
-		void drag_move(UI::InteractiveElement* element);
+		void drag_move(InteractiveElement* element);
 		void free_drag_move();
 
-		bool has_element(UI::InteractiveElement* element);
-		InteractiveForm* add_element(UI::InteractiveElement* element);
+		bool has_element(InteractiveElement* element);
+		InteractiveForm* add_element(InteractiveElement* element);
 	public:
 		InteractiveForm(Core::GraphicsContext* pEngine,Position2*cursor_position);
 		//InteractiveForm(InteractiveForm&& other) noexcept;

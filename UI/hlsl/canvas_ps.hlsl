@@ -16,5 +16,5 @@ cbuffer ControlBuffer : register(b1)
 float4 main(PSI psi) : SV_TARGET
 {
 	float4 final_color = float4(psi.color,1.f) * objTexture.Sample(sample,psi.uv);
-	return final_color;
+	return float4(final_color.xyz,1.f);
 }

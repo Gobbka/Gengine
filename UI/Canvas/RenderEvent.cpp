@@ -79,16 +79,21 @@ Render::CanvasDrawEvent::CanvasDrawEvent(Canvas::DrawData* data)
 	_draw_data = data;
 }
 
-UI::Vertex2D* Render::CanvasDrawEvent::new_draw_cmd(UINT size)
+UI::Vertex2D* Render::CanvasDrawEvent::new_draw_cmd(UINT size) const
 {
-	_draw_data->draw_list.push_back(Canvas::DrawCmd{});
-	return nullptr;
+	auto index = _draw_data->allocator.require(size);
+	_draw_data->draw_list.push(Canvas::DrawCmd{ nullptr,0,size,index });
+	
+	return _draw_data->allocator.at(index);
 }
 
-void Render::CanvasDrawEvent::draw_rect(Position2 pos, Surface resolution, Color3XM color)
+void Render::CanvasDrawEvent::draw_rect(Position2 pos, Surface resolution, Color3XM color) const
 {
 	auto* vertices = new_draw_cmd(4);
-	vertices[0] = UI::Vertex2D{};
+	vertices[0] = UI::Vertex2D(pos,color,{0,0});
+	vertices[1] = UI::Vertex2D({ pos.x + resolution.width,pos.y }, color, { 0,0 });
+	vertices[2] = UI::Vertex2D({ pos.x,pos.y-resolution.height }, color, { 0,0 });
+	vertices[3] = UI::Vertex2D({ pos.x+resolution.width,pos.y-resolution.height }, color, { 0,0 });
 }
 
 

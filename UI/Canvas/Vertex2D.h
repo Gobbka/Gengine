@@ -9,6 +9,12 @@ namespace UI {
 		Color3XM  color;
 		Position2  uv;
 
+		Vertex2D(Position2 pos,Color3XM color,Position2 uv)
+			: pos(pos)
+			, color(color)
+			, uv(uv)
+		{}
+
 		Vertex2D()
 			: pos(0,0)
 			, color(0,0,0)

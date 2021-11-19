@@ -5,7 +5,7 @@
 
 void Render::VertexBuffer::copy_to(void* buffer, UINT size)
 {
-	memcpy(buffer, this->data, size * sizeof(Vertex));
+	memcpy(buffer, this->data, size * stride_size);
 }
 
 Render::VertexBuffer::VertexBuffer(Core::GraphicsContext* engine, Vertex* data, size_t length, ID3D11Buffer* buffer)
@@ -17,7 +17,7 @@ void Render::VertexBuffer::copy_to(IVertexBuffer* buffer)
 {
 	const auto copy_size = min(this->size, buffer->get_size());
 
-	memcpy(buffer->data, this->data, copy_size * sizeof(Vertex));
+	memcpy(buffer->data, this->data, copy_size * stride_size);
 }
 
 Render::VertexBuffer::~VertexBuffer()

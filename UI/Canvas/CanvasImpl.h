@@ -6,6 +6,8 @@
 
 namespace Render
 {
+	template<typename T>
+	class IVertexBuffer;
 	class VertexShader;
 	class PixelShader;
 }
@@ -20,13 +22,15 @@ namespace Canvas {
 	class __declspec(dllexport) CanvasImpl final {
 		CanvasBackupData _backupData;
 		DrawData _drawData;
+		Render::IVertexBuffer<UI::Vertex2D>* _buffer;
+
 		Render::D11VertexAllocator _canvas;
 		std::vector<IObject*> _objects;
 	public:
 		UI::Vertex2D* vertices() const;
 
 		DrawData* begin();
-		void present() const;
+		void present();
 
 		CanvasImpl(Core::GraphicsContext*engine);
 		CanvasImpl() = delete;

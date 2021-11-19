@@ -9,7 +9,7 @@ namespace Canvas
 {
 	struct DrawData
 	{
-		std::vector<DrawCmd> draw_list;
+		DynamicAllocator<DrawCmd> draw_list;
 		DynamicAllocator<UI::Vertex2D> allocator;
 
 		DrawData();

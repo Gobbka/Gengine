@@ -13,6 +13,7 @@ namespace UI
 		Position2 _position;
 		Surface _resolution;
 		Render::Texture* _texture;
+		Color3XM _color;
 
 	public:
 
@@ -22,6 +23,7 @@ namespace UI
 		ElementDescription get_desc() override;
 
 		Panel(Vector2 position, Surface resolution, Render::Texture*texture);
+		Panel(Vector2 position, Surface resolution, Color3XM color);
 
 		bool point_belongs(Position2 point) override;
 		void set_position(Position2 pos) override;

@@ -12,14 +12,8 @@ namespace Render
 }
 
 namespace Canvas {
-	struct CanvasBackupData
-	{
-		Render::PixelShader* old_ps;
-		Render::VertexShader* old_vs;
-	};
 
 	class __declspec(dllexport) CanvasImpl final {
-		CanvasBackupData _backupData;
 		DrawData _drawData;
 		Render::IVertexBuffer<UI::Vertex2D>* _buffer;
 		Core::GraphicsContext* _context;

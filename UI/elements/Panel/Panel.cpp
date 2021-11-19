@@ -1,5 +1,4 @@
 #include "Panel.h"
-#include "../../InteractiveForm.h"
 #include "../../Canvas/RenderEvent.h"
 #include "Types/Types.h"
 
@@ -9,10 +8,13 @@ void UI::Panel::draw(Render::DrawEvent2D* event)
 	{
 		event->mask_draw_begin();
 		event->set_alpha(this->alpha);
-		event->draw_rect(_position, _resolution, _texture);
-		
-		event->set_alpha(1.f);
 
+		if (_texture)
+			event->draw_rect(_position, _resolution, _texture);
+		else
+			event->draw_rect(_position, _resolution, _color);
+
+		event->set_alpha(1.f);
 		event->mask_discard_begin();
 		Parent::draw(event);
 		event->mask_discard_end();
@@ -22,7 +24,10 @@ void UI::Panel::draw(Render::DrawEvent2D* event)
 		event->mask_discard_begin(false);
 
 		event->set_alpha(this->alpha);
-		event->draw_rect(_position, _resolution, _texture);
+		if (_texture)
+			event->draw_rect(_position, _resolution, _texture);
+		else
+			event->draw_rect(_position, _resolution, _color);
 		event->set_alpha(1.f);
 		Parent::draw(event);
 
@@ -40,9 +45,16 @@ UI::Panel::Panel(Vector2 position,Surface resolution, Render::Texture* texture)
 	, _position(position)
 	, _resolution(resolution)
 	, _texture(texture)
-{
-	//this->set_alpha(color.a);
-}
+	, _color(1,1,1)
+{}
+
+UI::Panel::Panel(Vector2 position, Surface resolution, Color3XM color)
+	: Parent(position)
+	, _position(position)
+	, _resolution(resolution)
+	, _texture(nullptr)
+	, _color(color)
+{}
 
 bool UI::Panel::point_belongs(Position2 point)
 {

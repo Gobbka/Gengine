@@ -75,7 +75,7 @@ void Render::CanvasDrawEvent::draw_rect(Position2 pos, Surface resolution, Color
 
 void Render::CanvasDrawEvent::draw_rect(Position2 pos, Surface resolution, Texture* texture) const
 {
-	const auto color = Color3XM{ 1.f,1.f,1.f,1.f };
+	const auto color = Color3XM{ 1.f,1.f,1.f };
 
 	auto* vertices = new_draw_cmd(4,texture);
 	vertices[0] = UI::Vertex2D(pos, color, { 0,0 });

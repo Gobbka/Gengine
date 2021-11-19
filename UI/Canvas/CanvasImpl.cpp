@@ -6,13 +6,6 @@
 
 Canvas::DrawData* Canvas::CanvasImpl::begin()
 {
-	const auto gcontext = _context->get_context();
-
-	_backupData = { gcontext->get_pixel_shader(),gcontext->get_vertex_shader() };
-
-	gcontext->set_pixel_shader(_context->shader_collection.get<Render::PixelShader>(L"d3d11\\canvas_ps.cso"));
-	gcontext->set_vertex_shader(_context->shader_collection.get_vs(L"d3d11\\canvas_vs.cso"));
-
 	_drawData.allocator.clear();
 	_drawData.draw_list.clear();
 
@@ -25,7 +18,6 @@ void Canvas::CanvasImpl::present()
 	{
 		delete _buffer;
 		_buffer = _context->get_device()->alloc_vertex_buffer<UI::Vertex2D>(_drawData.allocator.length()+500, true);
-		
 	}
 	memcpy(&_buffer->at(0), _drawData.allocator.at(0), _drawData.allocator.size());
 	_buffer->update(_drawData.allocator.length());
@@ -42,11 +34,10 @@ void Canvas::CanvasImpl::present()
 }
 
 Canvas::CanvasImpl::CanvasImpl(Core::GraphicsContext* context)
-	: _backupData{nullptr,nullptr}
-	, _buffer(context->get_device()->alloc_vertex_buffer<UI::Vertex2D>(100u,true))
+	: _buffer(context->get_device()->alloc_vertex_buffer<UI::Vertex2D>(100u,true))
 	, _context(context)
 {
-	Render::Material white(Color3XM{ 1,1,1,1 });
+	Render::Material white(Color3XM{ 1,1,1 });
 	_drawData.default_texture = new Render::Texture(context, white);
 }
 

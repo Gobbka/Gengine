@@ -2,28 +2,28 @@
 #include "../../InteractiveForm.h"
 #include <iostream>
 
-void UI::ReadChildrenCollection::foreach(std::function<void(UI::InteractiveElement* element)> iterator)
+void UI::ChildrenCollection::foreach(std::function<void(UI::InteractiveElement* element)> iterator)
 {
 	for(auto*element: _children)
 		iterator(element);
 }
 
-void UI::ReadWriteChildrenCollection::append(UI::InteractiveElement* child)
+void UI::ChildrenCollection::append(UI::InteractiveElement* child)
 {
 	_children.push_back(child);
 }
 
-size_t UI::ReadChildrenCollection::count() const
+size_t UI::ChildrenCollection::count() const
 {
 	return _children.size();
 }
 
-UI::InteractiveElement* UI::ReadChildrenCollection::operator[](UINT index)
+UI::InteractiveElement* UI::ChildrenCollection::operator[](UINT index)
 {
 	return _children[index];
 }
 
-UI::InteractiveElement* UI::ReadChildrenCollection::last()
+UI::InteractiveElement* UI::ChildrenCollection::last()
 {
 	auto _size = count();
 	if (count() == 0)
@@ -116,7 +116,7 @@ void UI::Parent::handle_db_click()
 		});
 }
 
-UI::ReadChildrenCollection* UI::Parent::children()
+UI::ChildrenCollection* UI::Parent::children()
 {
 	return &this->_children;
 }

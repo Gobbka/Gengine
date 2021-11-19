@@ -2,7 +2,7 @@
 #include "../Bindable.h"
 
 namespace Render {
-	class IShader
+	class __declspec(dllexport) IShader
 	{
 	protected:
 		Core::GraphicsContext* context;

@@ -33,7 +33,7 @@ namespace Render {
 		void draw_rect(Position2 pos,Surface resolution,Texture* texture) const;
 	};
 
-	class __declspec(dllexport) DrawEvent2D final : public CanvasDrawEvent{
+	class DrawEvent2D final : public CanvasDrawEvent{
 
 		Core::GraphicsContext* _context;
 		UINT _stencil_layer = 0u;

@@ -12,7 +12,7 @@ namespace Application {
 namespace UI
 {
 
-	class ReadChildrenCollection {
+	class ChildrenCollection {
 	protected:
 		std::vector<UI::InteractiveElement*> _children;
 
@@ -24,17 +24,15 @@ namespace UI
 		UI::InteractiveElement* operator[](UINT index);
 
 		InteractiveElement* last();
-	};
 
-	class ReadWriteChildrenCollection : public ReadChildrenCollection {
-	public:
 		void append(UI::InteractiveElement* child);
+
 	};
 
 	class __declspec(dllexport) Parent : public InteractiveElement
 	{
 		Position2 _offset_position;
-		ReadWriteChildrenCollection _children;
+		ChildrenCollection _children;
 	protected:
 		void handle_mouse_up() override;
 		void handle_mouse_down() override;
@@ -44,7 +42,7 @@ namespace UI
 		void handle_mouse_scroll(int delta) override;
 		void handle_db_click() override;
 	public:
-		ReadChildrenCollection* children();
+		ChildrenCollection* children();
 
 		Parent(Position2 position);
 

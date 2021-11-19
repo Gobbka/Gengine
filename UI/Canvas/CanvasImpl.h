@@ -13,7 +13,7 @@ namespace Render
 
 namespace Canvas {
 
-	class __declspec(dllexport) CanvasImpl final {
+	class CanvasImpl final {
 		DrawData _drawData;
 		Render::IVertexBuffer<UI::Vertex2D>* _buffer;
 		Core::GraphicsContext* _context;

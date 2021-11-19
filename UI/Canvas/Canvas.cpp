@@ -2,13 +2,6 @@
 #include "Objects/IObject.h"
 #include "RenderEvent.h"
 
-void Canvas::Canvas::render_components(Render::DrawEvent2D* event)
-{
-	for (auto* object : _objects)
-		if (!object->hidden)
-			event->draw_object(object);
-}
-
 UI::Vertex2D* Canvas::Canvas::vertices() const
 {
 	return _canvas.get_ptr();
@@ -16,12 +9,7 @@ UI::Vertex2D* Canvas::Canvas::vertices() const
 
 Canvas::Canvas::Canvas(Core::GraphicsContext* engine)
 	: _canvas(engine)
-{
-}
-
-Canvas::Canvas::~Canvas()
-{
-}
+{}
 
 void Canvas::Canvas::update() const
 {
@@ -31,7 +19,9 @@ void Canvas::Canvas::update() const
 void Canvas::Canvas::render(Render::DrawEvent2D* event)
 {
 	bind();
-	this->render_components(event);
+	for (auto* object : _objects)
+		if (!object->hidden)
+			event->draw_object(object);
 }
 
 void Canvas::Canvas::add_object(IObject* object)
@@ -43,7 +33,7 @@ void Canvas::Canvas::add_object(IObject* object)
 	object->initialize(this);
 }
 
-void Canvas::Canvas::bind()
+void Canvas::Canvas::bind() const
 {
 	_canvas.bind();
 }

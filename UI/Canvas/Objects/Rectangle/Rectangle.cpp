@@ -15,10 +15,10 @@ void Canvas::Rectangle::apply_rectangle() const
 	
 	auto* ptr = vertices();
 
-	auto x = _position.x;
-	auto y = _position.y;
-	auto width = _resolution.width;
-	auto height = _resolution.height;
+	const auto x      = _position.x;
+	const auto y      = _position.y;
+	const auto width  = _resolution.width;
+	const auto height = _resolution.height;
 	
 	ptr[0].pos = Position2(x, y);
 	ptr[1].pos = Position2(x + width, y);
@@ -33,10 +33,10 @@ void Canvas::Rectangle::apply_color() const
 	
 	auto* ptr = vertices();
 
-	ptr[0].color = Color3XM::white();//{ 1,1,1 };
-	ptr[1].color = Color3XM::white();
-	ptr[2].color = Color3XM::white();
-	ptr[3].color = Color3XM::white();
+	ptr[0].color = {1,1,1};
+	ptr[1].color = {1,1,1};
+	ptr[2].color = {1,1,1};
+	ptr[3].color = {1,1,1};
 
 	ptr[0].uv = { 0,0 };
 	ptr[1].uv = { 1,0 };

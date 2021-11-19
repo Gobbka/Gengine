@@ -56,6 +56,13 @@ void Render::DrawEvent2D::set_alpha(float alpha) const
 	}
 }
 
+UI::Vertex2D* Render::DrawEvent2D::draw(UINT vertices_count)
+{
+
+
+	return nullptr;
+}
+
 void Render::DrawEvent2D::draw_vertex(UINT count, UINT start) const
 {
 	_context->context->Draw(count, start + _draw_index);
@@ -66,6 +73,24 @@ void Render::DrawEvent2D::draw_object(Canvas::IObject* object)
 	_draw_index = object->get_index();
 	object->draw(this);
 }
+
+Render::CanvasDrawEvent::CanvasDrawEvent(Canvas::DrawData* data)
+{
+	_draw_data = data;
+}
+
+UI::Vertex2D* Render::CanvasDrawEvent::new_draw_cmd(UINT size)
+{
+	_draw_data->draw_list.push_back(Canvas::DrawCmd{});
+	return nullptr;
+}
+
+void Render::CanvasDrawEvent::draw_rect(Position2 pos, Surface resolution, Color3XM color)
+{
+	auto* vertices = new_draw_cmd(4);
+	vertices[0] = UI::Vertex2D{};
+}
+
 
 Render::DrawEvent2D::DrawEvent2D(Camera* camera, Canvas::Canvas* layer)
 {

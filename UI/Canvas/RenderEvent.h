@@ -1,4 +1,6 @@
 #pragma once
+#include "DrawData.h"
+#include "Vertex2D.h"
 
 typedef unsigned UINT;
 typedef unsigned char BYTE;
@@ -18,23 +20,34 @@ namespace Render {
 	class SpriteEngine;
 	class Camera;
 
-	struct __declspec(dllexport) DrawEvent2D {
-	protected:
+	class CanvasDrawEvent
+	{
+		Canvas::DrawData* _draw_data;
+	public:
+		CanvasDrawEvent(Canvas::DrawData* data);
+
+		UI::Vertex2D* new_draw_cmd(UINT size);
+
+		void draw_rect(Position2 pos,Surface resolution,Color3XM color);
+	};
+
+	struct __declspec(dllexport) DrawEvent2D final {
+	
 		Camera* _camera;
 		Core::GraphicsContext* _context;
 		SpriteEngine* _spriteEngine;
-	private:
 		UINT _stencil_layer = 0u;
+		UINT _draw_index = 0u;
 		
 	public:
 		
 		DrawEvent2D(Camera* camera, Canvas::Canvas* layer);
 
 	private:
-		UINT _draw_index = 0u;
 	public:
 		Canvas::Canvas* layer;
 
+		UI::Vertex2D* draw(UINT vertices_count);
 		void draw_vertex(UINT count, UINT start = 0) const;
 		void draw_object(Canvas::IObject* object);
 

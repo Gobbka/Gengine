@@ -35,7 +35,6 @@ namespace UI
 	{
 		Position2 _offset_position;
 		ReadWriteChildrenCollection _children;
-		bool _initialized = false;
 	protected:
 		void handle_mouse_up() override;
 		void handle_mouse_down() override;
@@ -44,8 +43,6 @@ namespace UI
 		void handle_mouse_move(MoveEvent event) override;
 		void handle_mouse_scroll(int delta) override;
 		void handle_db_click() override;
-
-		void on_initialize() override;
 	public:
 		ReadChildrenCollection* children();
 
@@ -56,7 +53,7 @@ namespace UI
 
 		InteractiveElement* element_at(UINT index);
 
-		virtual Parent* add_element(InteractiveElement* element);
+		Parent* add_element(InteractiveElement* element);
 		Parent* add_element(InteractiveElement* element, bool visible);
 	};
 }

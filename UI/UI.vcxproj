@@ -164,8 +164,6 @@
     <ClCompile Include="Canvas\D11VertexAllocator.cpp" />
     <ClCompile Include="Canvas\DrawCmd.cpp" />
     <ClCompile Include="Canvas\DrawData.cpp" />
-    <ClCompile Include="Canvas\Objects\IObject.cpp" />
-    <ClCompile Include="Canvas\Objects\Rectangle\Rectangle.cpp" />
     <ClCompile Include="elements\IElement\InteractiveElement.cpp" />
     <ClCompile Include="elements\IElement\Parentable.cpp" />
     <ClCompile Include="elements\Panel\Panel.cpp" />
@@ -181,8 +179,6 @@
     <ClInclude Include="Canvas\DrawCmd.h" />
     <ClInclude Include="Canvas\DrawData.h" />
     <ClInclude Include="Canvas\DynamicAllocator.h" />
-    <ClInclude Include="Canvas\Objects\IObject.h" />
-    <ClInclude Include="Canvas\Objects\Rectangle\Rectangle.h" />
     <ClInclude Include="elements\IElement\InteractiveElement.h" />
     <ClInclude Include="elements\IElement\Parentable.h" />
     <ClInclude Include="elements\Panel\Panel.h" />

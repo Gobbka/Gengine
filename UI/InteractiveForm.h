@@ -37,7 +37,7 @@ namespace UI {
 		Position2* _cursor_position;
 		DragStruct* dragged = nullptr;
 	public:
-		void render_components(Render::DrawEvent2D* event);
+		
 
 		void foreach(std::function<void(UI::InteractiveElement* element)>callback);
 		void drag_move(UI::InteractiveElement* element);
@@ -60,9 +60,6 @@ namespace UI {
 		void show();
 		void hide();
 
-		void update() const;
-		void render(Render::DrawEvent2D*event);
-
-		Canvas::CanvasImpl* canvas();
+		void render();
 	};
 }

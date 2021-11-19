@@ -1,19 +1,40 @@
 #pragma once
 #include "functional"
-#include "../../Canvas/Objects/IObject.h"
 #include "Types/Types.h"
 
 namespace Render {
-	struct DrawEvent2D;
+	class DrawEvent2D;
+	class Texture;
 }
 
 namespace UI {
+
 	struct MoveEvent;
 	class InteractiveForm;
 
 	class Parent;
 	class InteractiveElement;
 	typedef InteractiveElement* UIElementEventArgs;
+
+	class __declspec(dllexport) IControllable
+	{
+	public:
+		virtual ~IControllable() = default;
+		IControllable() = default;
+
+		bool hidden = false;
+
+		virtual void      set_position(Position2 pos) = 0;
+		virtual Position2 get_position() = 0;
+
+		virtual void    set_resolution(Surface surface) = 0;
+		virtual Surface get_resolution() = 0;
+
+		virtual void set_texture(Render::Texture* texture) PURE;
+
+		virtual void move_by(Position2) = 0;
+	};
+
 
 	enum class VisibleState : bool
 	{
@@ -58,23 +79,24 @@ namespace UI {
 		ElementDescription(bool can_be_parent, const char* string_name, bool has_text = false);
 	};
 
-	class __declspec(dllexport) InteractiveElement : public Canvas::IControllable
+	class __declspec(dllexport) InteractiveElement : public IControllable
 	{
 	public:
 		typedef std::function<void(UIElementEventArgs)> EventCallback;
 	protected:
-		InteractiveForm* form = nullptr;
+		InteractiveForm* form;
 		Parent* parent = nullptr;
-	protected:
-		static void default_event_callback(UIElementEventArgs args) {}
-	protected:
 		float alpha = 1.f;
+
+		static void default_event_callback(UIElementEventArgs args) {}
 	public:
 		UINT unique_id = 0;
 
 		ElementStyles styles;
 		ElementState  state;
 	public:
+		virtual void draw(Render::DrawEvent2D* event) = 0;
+
 		// public getters
 
 		bool have_parent() const;
@@ -92,16 +114,13 @@ namespace UI {
 		Position2 point_to(InteractiveElement* element);
 	public:
 		// public setters
-
+		void set_form(InteractiveForm* form);
 		void set_parent(Parent* parent);
 
 		void set_alpha(float alpha);
 
 		void set_margin(float x, float y);
 		void set_margin(float x, float y, float z, float w);
-	public:
-		void initialize(InteractiveForm* form);
-	protected:
 
 	public:
 		// public callbacks

@@ -27,6 +27,8 @@ namespace Render {
 
 		void clear_buffer() const;
 
+		auto* get_gfx() { return _context; };
+
 		auto get_view() { return _view; }
 		Texture* get_texture();
 	};

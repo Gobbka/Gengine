@@ -9,7 +9,8 @@ void UI::Panel::draw(Render::DrawEvent2D* event)
 	{
 		event->mask_draw_begin();
 		event->set_alpha(this->alpha);
-		event->draw_object(&this->rect);
+		event->draw_rect(_position, _resolution, _texture);
+		
 		event->set_alpha(1.f);
 
 		event->mask_discard_begin();
@@ -21,18 +22,12 @@ void UI::Panel::draw(Render::DrawEvent2D* event)
 		event->mask_discard_begin(false);
 
 		event->set_alpha(this->alpha);
-		event->draw_object(&this->rect);
+		event->draw_rect(_position, _resolution, _texture);
 		event->set_alpha(1.f);
 		Parent::draw(event);
 
 		event->mask_discard_end(false);
 	}
-}
-
-void UI::Panel::on_initialize()
-{
-	form->canvas()->add_object(&rect);
-	Parent::on_initialize();
 }
 
 UI::ElementDescription UI::Panel::get_desc()
@@ -41,17 +36,18 @@ UI::ElementDescription UI::Panel::get_desc()
 }
 
 UI::Panel::Panel(Vector2 position,Surface resolution, Render::Texture* texture)
-	:
-	Parent(position),
-	rect(texture,position,resolution)
+	: Parent(position)
+	, _position(position)
+	, _resolution(resolution)
+	, _texture(texture)
 {
 	//this->set_alpha(color.a);
 }
 
 bool UI::Panel::point_belongs(Position2 point)
 {
-	auto resolution = this->rect.get_resolution();
-	auto position = this->rect.get_position();
+	auto resolution = _resolution;
+	auto position = _position;
 	
 	return
 		(point.x >= position.x && point.x <= position.x + resolution.width) &&
@@ -60,35 +56,33 @@ bool UI::Panel::point_belongs(Position2 point)
 
 void UI::Panel::set_position(Position2 pos)
 {
-	auto local_pos = this->rect.get_position();
-
-	this->move_by(Position2(pos.x - local_pos.x, pos.y - local_pos.y));
+	_position = pos;
 }
 
 void UI::Panel::move_by(Position2 pos)
 {
-	this->rect.move_by(pos);
-	
+	_position += pos;
+
 	UI::Parent::move_by(pos);
 }
 
 void UI::Panel::set_texture(Render::Texture* texture)
 {
-	rect.set_texture(texture);
+	_texture = texture;
 }
 
 Position2 UI::Panel::get_position()
 {
-	return this->rect.get_position();
+	return _position;
 }
 
 
 Surface UI::Panel::get_resolution()
 {
-	return this->rect.get_resolution();
+	return _resolution;
 }
 
 void UI::Panel::set_resolution(Surface surface)
 {
-	this->rect.set_resolution(surface);
+	_resolution = surface;
 }

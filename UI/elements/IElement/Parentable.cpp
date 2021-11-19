@@ -116,26 +116,16 @@ void UI::Parent::handle_db_click()
 		});
 }
 
-void UI::Parent::on_initialize()
-{
-	this->_children.foreach([&](UI::InteractiveElement* element) {
-		element->initialize(this->form);
-	});
-
-	this->_initialized = true;
-}
-
 UI::ReadChildrenCollection* UI::Parent::children()
 {
 	return &this->_children;
 }
 
-UI::Parent::Parent(Position2 position)
+UI::Parent::Parent( Position2 position)
 	: _offset_position(position)
-{
-}
+{}
 
-void UI::Parent::draw(::Render::DrawEvent2D* event)
+void UI::Parent::draw(Render::DrawEvent2D* event)
 {
 	this->_children.foreach([&](UI::InteractiveElement* element) {
 		if (element->styles.display != ElementStyles::DisplayType::none)
@@ -192,9 +182,6 @@ UI::Parent* UI::Parent::add_element(InteractiveElement* element)
 			}	
 		}
 	}
-	
-	if(this->_initialized)
-		element->initialize(this->form);
 	
 	return this;
 }

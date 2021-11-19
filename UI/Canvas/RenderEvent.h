@@ -16,6 +16,7 @@ namespace Canvas
 }
 
 namespace Render {
+	class MaskEngine;
 	class MeshRenderer;
 	class SpriteEngine;
 	class Camera;
@@ -32,35 +33,18 @@ namespace Render {
 		void draw_rect(Position2 pos,Surface resolution,Texture* texture) const;
 	};
 
-	struct __declspec(dllexport) DrawEvent2D final {
-	
-		Camera* _camera;
+	class __declspec(dllexport) DrawEvent2D final : public CanvasDrawEvent{
+
 		Core::GraphicsContext* _context;
-		SpriteEngine* _spriteEngine;
 		UINT _stencil_layer = 0u;
-		UINT _draw_index = 0u;
-		
 	public:
-		
-		DrawEvent2D(Camera* camera, Canvas::CanvasImpl* layer);
-
-	private:
-	public:
-		Canvas::CanvasImpl* layer;
-
-		UI::Vertex2D* draw(UINT vertices_count);
-		void draw_vertex(UINT count, UINT start = 0) const;
-		void draw_object(Canvas::IObject* object);
-
-	public:
-		SpriteEngine* sprite_engine() const;
+		DrawEvent2D(Core::GraphicsContext*ctx,Canvas::DrawData*data);
 
 		void mask_draw_begin() const;
 		void mask_discard_begin(bool increase_layer = true);
 		void mask_discard_end(bool decrease_layer = true);
 		void mask_set_stencil(BYTE new_index);
 		BYTE mask_get_stencil_layer() const;
-		void mask_clear() const;
 
 		void set_alpha(float alpha) const;
 	};

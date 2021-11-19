@@ -2,7 +2,6 @@
 #include <vector>
 #include "D11VertexAllocator.h"
 #include "DrawData.h"
-#include "Objects/IObject.h"
 
 namespace Render
 {
@@ -23,24 +22,16 @@ namespace Canvas {
 		CanvasBackupData _backupData;
 		DrawData _drawData;
 		Render::IVertexBuffer<UI::Vertex2D>* _buffer;
-
-		Render::D11VertexAllocator _canvas;
-		std::vector<IObject*> _objects;
+		Core::GraphicsContext* _context;
 	public:
-		UI::Vertex2D* vertices() const;
 
 		DrawData* begin();
 		void present();
 
-		CanvasImpl(Core::GraphicsContext*engine);
+		CanvasImpl(Core::GraphicsContext*context);
 		CanvasImpl() = delete;
 		~CanvasImpl() = default;
 
-		void update() const;
-		void render(Render::DrawEvent2D* event);
-
-		void add_object(IObject* object);
-
-		void bind() const;
+		Core::GraphicsContext* gfx();
 	};
 }

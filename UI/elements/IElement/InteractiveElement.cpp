@@ -29,12 +29,6 @@ void UI::InteractiveElement::set_margin(float x, float y, float z, float w)
 	this->styles.margin = { x,y,z,w };
 }
 
-void UI::InteractiveElement::initialize(InteractiveForm* form)
-{
-	this->form = form;
-	this->on_initialize();
-}
-
 UI::Parent* UI::InteractiveElement::get_parent() const
 {
 	return this->parent;
@@ -51,6 +45,11 @@ Position2 UI::InteractiveElement::point_to(InteractiveElement* element)
 	auto their_pos = element->get_position();
 
 	return Position2(own_pos.x - their_pos.x, own_pos.y - their_pos.y);
+}
+
+void UI::InteractiveElement::set_form(InteractiveForm* form)
+{
+	this->form = form;
 }
 
 void UI::InteractiveElement::set_parent(Parent* parent)

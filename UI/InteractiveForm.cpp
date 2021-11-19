@@ -1,18 +1,11 @@
 #include "InteractiveForm.h"
 
 #include <iostream>
+
 #include "elements/IElement/InteractiveElement.h"
+#include "Canvas/RenderEvent.h"
 
 using namespace UI;
-
-void InteractiveForm::render_components(Render::DrawEvent2D* event)
-{
-	for(auto*element:this->_childs)
-	{
-		if (element->styles.display != ElementStyles::DisplayType::none)
-			element->draw(event);
-	}
-}
 
 void InteractiveForm::foreach(std::function<void(UI::InteractiveElement* element)> callback)
 {
@@ -50,7 +43,7 @@ bool InteractiveForm::has_element(UI::InteractiveElement* element)
 InteractiveForm* InteractiveForm::add_element(UI::InteractiveElement* element)
 {
 	this->_childs.push_back(element);
-	element->initialize(this);
+
 	return this;
 }
 
@@ -141,26 +134,18 @@ void InteractiveForm::hide()
 	_hidden = true;
 }
 
-void InteractiveForm::update() const
+void InteractiveForm::render()
 {
-	if (!hidden())
-		_canvas.update();
-}
-
-void InteractiveForm::render(Render::DrawEvent2D* event)
-{
-	_canvas.bind();
+	auto *de = _canvas.begin();
+	Render::DrawEvent2D event(_canvas.gfx(),de);
 
 	for (auto* element : this->_childs)
 	{
 		if (element->styles.display != ElementStyles::DisplayType::none)
-			element->draw(event);
+			element->draw(&event);
 	}
-}
 
-Canvas::CanvasImpl* InteractiveForm::canvas()
-{
-	return &_canvas;
+	_canvas.present();
 }
 
 Interaction::EventStatus InteractiveForm::on_lbmouse_up()

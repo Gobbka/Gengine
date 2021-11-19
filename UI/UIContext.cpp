@@ -33,7 +33,6 @@ public:
 		gcontext->control_buffer.update();
 		
 		auto* mask_engine = camera->get_mask_engine();
-		Render::DrawEvent2D event(camera,nullptr);
 
 		_context->dss_collection[(Render::DSBitSet)Render::DepthStencilUsage::stencil_mask].bind(0);
 
@@ -45,19 +44,10 @@ public:
 
 		scene->world()->each<UI::InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<UI::InteractiveForm>form)
 			{
-				auto* data = form->canvas()->begin();
-				Render::CanvasDrawEvent de(data);
-				de.draw_rect({ 0,0 }, { 500,500 }, { 1,0,0 });
-				de.draw_rect({ 100,-100 }, { 500,500 }, { 1,1,1 });
-				form->canvas()->present();
-
 				if (form->hidden())
 					return;
-				event.layer = form->canvas();
-				event.set_alpha(1.f);
 
-				form->update();
-				form->render(&event);
+				form->render();
 			});
 
 		gcontext->set_pixel_shader(old_ps);

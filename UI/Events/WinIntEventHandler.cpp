@@ -1,10 +1,7 @@
 #include "WinIntEventHandler.h"
 
-
 #include <iostream>
 #include <windowsx.h>
-
-#include "Window/Keyboard.h"
 
 void UI::Interaction::WinIntEventHandler::window_proc(UINT msg, WPARAM wParam, LPARAM lParam)
 {

@@ -161,9 +161,6 @@
   <ItemGroup>
     <ClCompile Include="Animation\Animator.cpp" />
     <ClCompile Include="Canvas\CanvasImpl.cpp" />
-    <ClCompile Include="Canvas\D11VertexAllocator.cpp" />
-    <ClCompile Include="Canvas\DrawCmd.cpp" />
-    <ClCompile Include="Canvas\DrawData.cpp" />
     <ClCompile Include="elements\IElement\InteractiveElement.cpp" />
     <ClCompile Include="elements\IElement\Parentable.cpp" />
     <ClCompile Include="Elements\Panel\FlexColumnPanel.cpp" />
@@ -177,7 +174,6 @@
   <ItemGroup>
     <ClInclude Include="Animation\Animator.h" />
     <ClInclude Include="Canvas\CanvasImpl.h" />
-    <ClInclude Include="Canvas\D11VertexAllocator.h" />
     <ClInclude Include="Canvas\DrawCmd.h" />
     <ClInclude Include="Canvas\DrawData.h" />
     <ClInclude Include="Canvas\DynamicAllocator.h" />

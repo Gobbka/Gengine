@@ -1,6 +1,4 @@
 ﻿#pragma once
-#include <vector>
-
 #include "DrawCmd.h"
 #include "DynamicAllocator.h"
 #include "Vertex2D.h"
@@ -14,6 +12,10 @@ namespace Canvas
 
 		Render::Texture* default_texture;
 
-		DrawData();
+		DrawData()
+			: draw_list(100)
+			, allocator(100)
+			, default_texture(nullptr)
+		{}
 	};
 }

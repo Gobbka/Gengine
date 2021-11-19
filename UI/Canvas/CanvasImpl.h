@@ -1,14 +1,15 @@
 #pragma once
-#include <vector>
-#include "D11VertexAllocator.h"
 #include "DrawData.h"
+
+namespace Core
+{
+	class GraphicsContext;
+}
 
 namespace Render
 {
 	template<typename T>
 	class IVertexBuffer;
-	class VertexShader;
-	class PixelShader;
 }
 
 namespace Canvas {
@@ -26,6 +27,6 @@ namespace Canvas {
 		CanvasImpl() = delete;
 		~CanvasImpl() = default;
 
-		Core::GraphicsContext* gfx();
+		Core::GraphicsContext* gfx() const;
 	};
 }

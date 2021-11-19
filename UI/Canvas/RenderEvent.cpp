@@ -2,7 +2,6 @@
 
 #include <Graphics.h>
 #include <IGContext.h>
-#include <Render/Engine/Camera.h>
 
 void Render::DrawEvent2D::mask_draw_begin() const
 {

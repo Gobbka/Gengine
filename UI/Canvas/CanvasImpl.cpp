@@ -2,7 +2,6 @@
 
 #include "Graphics.h"
 #include "IGContext.h"
-#include "RenderEvent.h"
 
 Canvas::DrawData* Canvas::CanvasImpl::begin()
 {
@@ -41,7 +40,7 @@ Canvas::CanvasImpl::CanvasImpl(Core::GraphicsContext* context)
 	_drawData.default_texture = new Render::Texture(context, white);
 }
 
-Core::GraphicsContext* Canvas::CanvasImpl::gfx()
+Core::GraphicsContext* Canvas::CanvasImpl::gfx() const
 {
 	return _context;
 }

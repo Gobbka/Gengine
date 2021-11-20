@@ -145,6 +145,20 @@ void UI::Parent::move_by(Position2 pos)
 	return this->_children[index];
 }
 
+UI::Parent* UI::Parent::add_element(InteractiveElement* element)
+{
+	if (element->have_parent())
+		return this;
+
+	element->set_parent(this);
+	element->move_by(this->get_position());
+	children()->append(element);
+
+	update_items();
+
+	return this;
+}
+
 UI::Parent* UI::Parent::add_element(InteractiveElement* element, bool visible)
 {
 	element->styles.display = visible ? ElementStyles::DisplayType::none : ElementStyles::DisplayType::block;

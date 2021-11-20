@@ -9,6 +9,7 @@ namespace UI {
 		Render::Texture* _texture;
 		Color3XM _color;
 
+		void update_items() override;
 	public:
 
 		void draw(Render::DrawEvent2D* event) override;
@@ -29,7 +30,5 @@ namespace UI {
 		Position2 get_position() override;
 		Surface get_resolution() override;
 		void set_resolution(Surface surface) override;
-
-		Parent* add_element(InteractiveElement* element) override;
 	};
 }

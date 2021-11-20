@@ -3,6 +3,39 @@
 #include "../../Canvas/RenderEvent.h"
 #include "Types/Types.h"
 
+void UI::FlexRowPanel::update_items()
+{
+
+	float content_height = 0.f;
+	auto last_pos = get_position();
+	auto own_resolution = get_resolution();
+	auto own_position = get_position();
+
+	for(auto*element:*children())
+	{
+		auto element_res = element->get_resolution();
+
+		if(last_pos.x + element_res.width > own_position.x + own_resolution.width)
+		{
+			element->set_position({ own_position.x,last_pos.y - element_res.height });
+			last_pos.x = own_position.x;
+			last_pos.y -= element_res.height;
+		}else
+		{
+			element->set_position(last_pos);
+
+			last_pos.x += element_res.width;
+		}
+
+		content_height = last_pos.y - element_res.height;
+	}
+
+	if ((content_height) * -1 > _resolution.height)
+	{
+		_scroll_bar_height = _resolution.height / (content_height * -1);
+	}
+}
+
 void UI::FlexRowPanel::draw(Render::DrawEvent2D* event)
 {
 
@@ -99,47 +132,6 @@ Surface UI::FlexRowPanel::get_resolution()
 void UI::FlexRowPanel::set_resolution(Surface surface)
 {
 	_resolution = surface;
-}
-
-UI::Parent* UI::FlexRowPanel::add_element(InteractiveElement* element)
-{
-	if (element->have_parent())
-		return this;
-
-	element->set_parent(this);
-	element->move_by(this->get_position());
-
-	auto* last_element = children()->last();
-	children()->append(element);
-
-	if (last_element != nullptr)
-	{
-		auto relative_point = last_element->point_to(this);
-		auto element_res = last_element->get_resolution();
-
-		if (
-			relative_point.x + element_res.width +
-			element->styles.margin.w + element->styles.margin.y +
-			element->get_resolution().width > get_resolution().width
-			)
-		{
-			element->move_by({ 0,relative_point.y - element_res.height });
-		}
-		else
-		{
-			element->move_by({ relative_point.x + element_res.width,relative_point.y });
-		}
-	}
-
-	auto element_pos = element->point_to(this);
-	auto element_res = element->get_resolution();
-
-	if((element_pos.y - element_res.height)*-1 > _resolution.height)
-	{
-		_scroll_bar_height = _resolution.height / ((element_pos.y - element_res.height) * -1);
-	}
-
-	return this;
 }
 
 void UI::FlexRowPanel::handle_mouse_scroll(int delta)

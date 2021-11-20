@@ -17,6 +17,10 @@ namespace UI
 		std::vector<UI::InteractiveElement*> _children;
 
 	public:
+
+		auto begin() { return _children.begin(); }
+		auto end() { return _children.end(); }
+
 		void foreach(std::function<void(InteractiveElement* element)> iterator);
 
 		size_t count() const;
@@ -34,6 +38,8 @@ namespace UI
 		Position2 _offset_position;
 		ChildrenCollection _children;
 	protected:
+		virtual void update_items() = 0;
+
 		void handle_mouse_up() override;
 		void handle_mouse_down() override;
 		void handle_mouse_enter() override;
@@ -51,7 +57,7 @@ namespace UI
 
 		InteractiveElement* element_at(UINT index);
 
-		virtual Parent* add_element(InteractiveElement* element) = 0;
+		Parent* add_element(InteractiveElement* element);
 		Parent* add_element(InteractiveElement* element, bool visible);
 	};
 }

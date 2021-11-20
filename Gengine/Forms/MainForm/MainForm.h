@@ -23,6 +23,7 @@ namespace Forms
 	{
 		void print_element(UI::InteractiveElement* element,UINT deep);
 		void print_gpu_info();
+		void print_entity();
 	private:
 		UI::Panel* _topbar_panel;
 		UI::FlexColumnPanel* _worldspace_panel;

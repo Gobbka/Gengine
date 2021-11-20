@@ -72,19 +72,19 @@ namespace UI
 
 Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	: Form(hinst, width, height)
+	, _topbar_panel(new UI::Panel({0, 0}, {(float)width, 30}, {RGB_TO_FLOAT(26, 26, 26)}))
+	, _worldspace_panel(new UI::FlexColumnPanel({0, -30}, {250, (float)height - 30.f}, {RGB_TO_FLOAT(20, 20, 20)}))
+	, _assets_panel_wrapper(new UI::FlexColumnPanel({250, -1 * (float)(height) + 250.f}, {(float)width - 250, 250},{RGB_TO_FLOAT(26, 26, 26)}))
 {
 	main_scene->register_system(new UI::HandleAnimationSystem());
 	auto main_cam = main_scene->get_main_camera()->get<Render::Camera>();
 	main_cam->get_target_view()->clear_color = Color3XM(.1f, .1f, .1f);
 
 	auto* uicanvas_entity = get_ui()->create_layer();
-	
-	_topbar_panel = new UI::Panel({ 0,0 }, { (float)width,30 }, { RGB_TO_FLOAT(26,26,26) });
-	_worldspace_panel = new UI::FlexColumnPanel({ 0,-30 }, { 250,(float)height - 30.f }, { RGB_TO_FLOAT(20,20,20) });
+
 	_worldspace_panel->add_element(new UI::Button({ 0,0 }, { 0,50 }, { RGB_TO_FLOAT(48,48,48)}, nullptr));
 	_worldspace_panel->add_element(new UI::Checkbox({ 0,0 }, { 0,50 }));
 
-	_assets_panel_wrapper = new UI::FlexColumnPanel ({ 250, -1 * (float)(height)+250.f }, { (float)width - 250,250 }, { RGB_TO_FLOAT(26,26,26) });
 	_assets_panel_wrapper->add_element(
 		new UI::Panel({ 0,0 }, { (float)width - 250,30 }, { RGB_TO_FLOAT(34,34,34) })
 	);
@@ -116,7 +116,6 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 		->add_element(_topbar_panel)
 		->add_element(_worldspace_panel)
 		->add_element(_render_panel)
-	
 		->add_element(_assets_panel_wrapper)
 	;
 	
@@ -216,6 +215,10 @@ void Forms::MainForm::update()
 		{
 			print_gpu_info();
 		}
+		if(strcmp(command,"entity")==0)
+		{
+			print_entity();
+		}
 	}
 }
 
@@ -260,4 +263,26 @@ void Forms::MainForm::print_gpu_info()
 		adapter->Release();
 	if (dev)
 		dev->Release();
+}
+
+void Forms::MainForm::print_entity()
+{
+	std::cout << "Entity list: \n";
+	editorScene->world()->all([&](ECS::Entity* ent)
+		{
+			std::cout << '[' << ent->getEntityId() << "] ";
+		});
+	std::cout << "\nChoose entity? (enter entity id or 0 to close)\n>>";
+	int id=0;
+	scanf("%d", &id);
+	if(id != ECS::Entity::InvalidEntityId)
+	{
+		char command[20];
+		std::cout << "Available commands:\ndel (delete entity)\nEnter command\n>>";
+		scanf("%20s", command);
+		if(strcmp(command,"del")==0)
+		{
+			editorScene->world()->destroy( editorScene->world()->getById(id));
+		}
+	}
 }

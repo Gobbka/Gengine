@@ -30,7 +30,9 @@ void UI::FlexRowPanel::update_items()
 		content_height = last_pos.y - element_res.height;
 	}
 
-	if ((content_height) * -1 > _resolution.height)
+	content_height -= own_position.y;
+
+	if (content_height * -1 > _resolution.height)
 	{
 		_scroll_bar_height = _resolution.height / (content_height * -1);
 	}
@@ -61,7 +63,7 @@ void UI::FlexRowPanel::draw(Render::DrawEvent2D* event)
 		const auto scroll_bar_height_px = resolution.height * _scroll_bar_height;
 
 		event->draw_rect(
-			{ position.x+resolution.width - scroll_bar_width - 5,position.y -5 }, 
+			{ position.x + resolution.width - scroll_bar_width - 5,position.y - 5 - _scroll_offset.y * _scroll_bar_height }, 
 			{ scroll_bar_width,scroll_bar_height_px-10 },
 			Color3XM::from_rgb(62, 62, 62)
 		);
@@ -80,6 +82,7 @@ UI::FlexRowPanel::FlexRowPanel(Vector2 position, Surface resolution, Render::Tex
 	, _texture(texture)
 	, _color(1, 1, 1)
 	, _scroll_bar_height(1)
+	, _scroll_offset(0, 0)
 {}
 
 UI::FlexRowPanel::FlexRowPanel(Vector2 position, Surface resolution, Color3XM color)
@@ -89,6 +92,7 @@ UI::FlexRowPanel::FlexRowPanel(Vector2 position, Surface resolution, Color3XM co
 	, _texture(nullptr)
 	, _color(color)
 	, _scroll_bar_height(1)
+	, _scroll_offset(0,0)
 {}
 
 bool UI::FlexRowPanel::point_belongs(Position2 point)
@@ -136,10 +140,21 @@ void UI::FlexRowPanel::set_resolution(Surface surface)
 
 void UI::FlexRowPanel::handle_mouse_scroll(int delta)
 {
-	children()->foreach([&](InteractiveElement* element)
+	auto fdelta = (float)delta;
+	auto content_height = _resolution.height / _scroll_bar_height;
+
+	if(
+		_scroll_offset.y - fdelta < content_height &&
+		_scroll_offset.y - fdelta >= 0
+		)
+	{
+		_scroll_offset.y -= fdelta;
+
+		for (auto* element : *children())
 		{
-			element->move_by({ 0,(float)delta * -1 });
-		});
+			element->move_by({ 0,fdelta * -1 });
+		}
+	}
 
 	Parent::handle_mouse_scroll(delta);
 }

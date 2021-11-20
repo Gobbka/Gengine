@@ -9,6 +9,7 @@ namespace UI
 		Render::Texture* _texture;
 		Color3XM _color;
 		float _scroll_bar_height;
+		Vector2 _scroll_offset;
 
 		void update_items() override;
 	public:

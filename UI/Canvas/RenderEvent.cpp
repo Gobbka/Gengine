@@ -3,25 +3,26 @@
 #include <Graphics.h>
 #include <IGContext.h>
 
-void Render::DrawEvent2D::mask_draw_begin() const
+void Render::DrawEvent2D::mask_draw_begin()
 {
-	_context->dss_collection[(DSBitSet)DepthStencilUsage::stencil_write].bind(_stencil_layer);
+	//_stencil_layer++;
+	//_context->dss_collection[(DSBitSet)DepthStencilUsage::stencil_write].bind(_stencil_layer);
 }
 
 void Render::DrawEvent2D::mask_discard_begin(bool increase_layer)
 {
-	if (increase_layer)
-		_stencil_layer++;
-	
-	_context->dss_collection[(DSBitSet)DepthStencilUsage::stencil_mask].bind(_stencil_layer);
+	//if (increase_layer)
+	//	_stencil_layer++;
+	//
+	//_context->dss_collection[(DSBitSet)DepthStencilUsage::stencil_mask].bind(_stencil_layer);
 }
 
 void Render::DrawEvent2D::mask_discard_end(bool decrease_layer)
 {
-	if (decrease_layer)
-		_stencil_layer--;
+	//if (decrease_layer)
+	//	_stencil_layer--;
 
-	_context->dss_collection[(DSBitSet)DepthStencilUsage::stencil_mask].bind(_stencil_layer);
+	//_context->dss_collection[(DSBitSet)DepthStencilUsage::stencil_mask].bind(_stencil_layer);
 }
 
 void Render::DrawEvent2D::mask_set_stencil(BYTE new_index)

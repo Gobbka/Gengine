@@ -8,7 +8,7 @@ namespace UI
 		Surface _resolution;
 		Render::Texture* _texture;
 		Color3XM _color;
-
+		float _scroll_bar_height;
 	public:
 
 		void draw(Render::DrawEvent2D* event) override;
@@ -31,5 +31,7 @@ namespace UI
 		void set_resolution(Surface surface) override;
 
 		Parent* add_element(InteractiveElement* element) override;
+
+		void handle_mouse_scroll(int delta) override;
 	};
 }

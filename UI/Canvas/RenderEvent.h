@@ -40,7 +40,7 @@ namespace Render {
 	public:
 		DrawEvent2D(Core::GraphicsContext*ctx,Canvas::DrawData*data);
 
-		void mask_draw_begin() const;
+		void mask_draw_begin();
 		void mask_discard_begin(bool increase_layer = true);
 		void mask_discard_end(bool decrease_layer = true);
 		void mask_set_stencil(BYTE new_index);

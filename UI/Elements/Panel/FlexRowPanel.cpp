@@ -5,34 +5,33 @@
 
 void UI::FlexRowPanel::draw(Render::DrawEvent2D* event)
 {
-	if (this->styles.overflow == VisibleState::hidden)
-	{
-		event->mask_draw_begin();
-		event->set_alpha(this->alpha);
 
-		if (_texture)
-			event->draw_rect(_position, _resolution, _texture);
-		else
-			event->draw_rect(_position, _resolution, _color);
+	event->mask_draw_begin();
+	event->set_alpha(this->alpha);
 
-		event->set_alpha(1.f);
-		event->mask_discard_begin();
-		Parent::draw(event);
-		event->mask_discard_end();
-	}
+	if (_texture)
+		event->draw_rect(_position, _resolution, _texture);
 	else
+		event->draw_rect(_position, _resolution, _color);
+
+	event->set_alpha(1.f);
+	event->mask_discard_begin(false);
+	Parent::draw(event);
+	event->mask_discard_end(true);
+
+	if (_scroll_bar_height > 0)
 	{
-		event->mask_discard_begin(false);
+		auto resolution = get_resolution();
+		auto position = get_position();
 
-		event->set_alpha(this->alpha);
-		if (_texture)
-			event->draw_rect(_position, _resolution, _texture);
-		else
-			event->draw_rect(_position, _resolution, _color);
-		event->set_alpha(1.f);
-		Parent::draw(event);
+		const auto scroll_bar_width = 20;
+		const auto scroll_bar_height_px = resolution.height * _scroll_bar_height;
 
-		event->mask_discard_end(false);
+		event->draw_rect(
+			{ position.x+resolution.width - scroll_bar_width - 5,position.y -5 }, 
+			{ scroll_bar_width,scroll_bar_height_px-10 },
+			Color3XM::from_rgb(62, 62, 62)
+		);
 	}
 }
 
@@ -47,6 +46,7 @@ UI::FlexRowPanel::FlexRowPanel(Vector2 position, Surface resolution, Render::Tex
 	, _resolution(resolution)
 	, _texture(texture)
 	, _color(1, 1, 1)
+	, _scroll_bar_height(1)
 {}
 
 UI::FlexRowPanel::FlexRowPanel(Vector2 position, Surface resolution, Color3XM color)
@@ -55,6 +55,7 @@ UI::FlexRowPanel::FlexRowPanel(Vector2 position, Surface resolution, Color3XM co
 	, _resolution(resolution)
 	, _texture(nullptr)
 	, _color(color)
+	, _scroll_bar_height(1)
 {}
 
 bool UI::FlexRowPanel::point_belongs(Position2 point)
@@ -130,5 +131,23 @@ UI::Parent* UI::FlexRowPanel::add_element(InteractiveElement* element)
 		}
 	}
 
+	auto element_pos = element->point_to(this);
+	auto element_res = element->get_resolution();
+
+	if((element_pos.y - element_res.height)*-1 > _resolution.height)
+	{
+		_scroll_bar_height = _resolution.height / ((element_pos.y - element_res.height) * -1);
+	}
+
 	return this;
+}
+
+void UI::FlexRowPanel::handle_mouse_scroll(int delta)
+{
+	children()->foreach([&](InteractiveElement* element)
+		{
+			element->move_by({ 0,(float)delta * -1 });
+		});
+
+	Parent::handle_mouse_scroll(delta);
 }

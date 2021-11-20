@@ -28,9 +28,6 @@
 #include "Render/Engine/Camera.h"
 #include "Types/Material.h"
 
-#include <XML/XMLCommon.h>
-#include <XML/Encoder.h>
-
 void debugger_loop()
 {
 	const auto* server = PipeServer::create(LR"(\\.\pipe\GENGINE_DBG)");

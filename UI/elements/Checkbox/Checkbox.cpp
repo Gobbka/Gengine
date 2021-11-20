@@ -1,84 +1,81 @@
 #include "Checkbox.h"
-#include "../../../../Render/Engine/Engine.h"
 #include "../../InteractiveForm.h"
+#include "../../Canvas/RenderEvent.h"
 
-void Application::UI::Checkbox::draw(Render::DrawEvent* event)
+void UI::Checkbox::draw(Render::DrawEvent2D* event)
 {
-	event->draw_element(&this->rectangle);
+	if (_checked)
+		event->draw_rect(_position, _resolution, active_color);
+	else
+		event->draw_rect(_position, _resolution, non_active_color);
 }
 
-bool Application::UI::Checkbox::is_checked()
+bool UI::Checkbox::is_checked() const
 {
-	return this->checked;
+	return _checked;
 }
 
-Application::UI::ElementDescription Application::UI::Checkbox::get_desc()
+UI::ElementDescription UI::Checkbox::get_desc()
 {
 	return ElementDescription(false,"CHECKBOX" );
 }
 
-void Application::UI::Checkbox::on_initialize()
+UI::Checkbox::Checkbox(Position2 position, Surface resolution, Color3XM color)
+	: _position(position)
+	, _resolution(resolution)
+	, active_color(color)
+{}
+
+UI::Checkbox::Checkbox(const Position2 position, const Surface resolution)
+	: _position(position)
+	, _resolution(resolution)
 {
-	this->form->add_canvas_element(&this->rectangle);
 }
 
-
-Application::UI::Checkbox::Checkbox(Render::Position position, Render::Resolution resolution, Render::Color4 color)
-	:rectangle(position,resolution, { 0.305f,0.305f,0.305f })
+void UI::Checkbox::set_position(const Position2 position)
 {
-	this->active_color = color;
+	_position = position;
 }
 
-void Application::UI::Checkbox::set_pos(float x, float y)
+Position2 UI::Checkbox::get_position()
 {
-	this->rectangle.set_pos(x, y);
+	return _position;
 }
 
-void Application::UI::Checkbox::set_color(Render::Color4 color)
+Surface UI::Checkbox::get_resolution()
 {
-	this->rectangle.set_color(color);
+	return _resolution;
 }
 
-Application::Render::Position Application::UI::Checkbox::get_position()
+void UI::Checkbox::set_resolution(const Surface resolution)
 {
-	return this->rectangle.get_position();
+	_resolution = resolution;
 }
 
-Application::Render::Resolution Application::UI::Checkbox::get_resolution()
+bool UI::Checkbox::point_belongs(const Position2 point)
 {
-	return this->rectangle.get_resolution();
-}
-
-Application::UI::InteractiveElement* Application::UI::Checkbox::set_resolution(float width, float height)
-{
-	this->rectangle.set_resolution(width, height);
-	return this;
-}
-
-bool Application::UI::Checkbox::point_belongs(Render::Position point)
-{
-	auto position = this->rectangle.get_position();
-	auto resolution = this->rectangle.get_resolution();
+	const auto position = get_position();
+	const auto resolution = get_resolution();
 	
 	return
 		(point.x >= position.x && point.x <= position.x + resolution.width) &&
 		(point.y <= position.y && point.y >= (position.y - resolution.height));
 }
 
-void Application::UI::Checkbox::move_by(float x, float y)
+void UI::Checkbox::move_by(const Position2 offset)
 {
-	this->rectangle.move_by(x, y);
+	_position += offset;
 }
 
-void Application::UI::Checkbox::handle_mouse_up()
+void UI::Checkbox::handle_mouse_up()
 {
-	this->checked = !this->checked;
-	
-	if (this->checked == true)
-		this->set_color(active_color);
-	else
-		this->set_color(non_active_color);
+	_checked = !_checked;
 
 	onChange(this);
 	InteractiveElement::handle_mouse_up();
+}
+
+void UI::Checkbox::set_texture(Render::Texture* texture)
+{
+
 }

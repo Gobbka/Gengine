@@ -51,6 +51,9 @@
     <ClCompile Include="Elements\Button\Button.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Elements\Checkbox\Checkbox.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InteractiveForm.h">
@@ -102,6 +105,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Elements\Button\Button.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Elements\Checkbox\Checkbox.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

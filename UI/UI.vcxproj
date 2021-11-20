@@ -162,6 +162,7 @@
     <ClCompile Include="Animation\Animator.cpp" />
     <ClCompile Include="Canvas\CanvasImpl.cpp" />
     <ClCompile Include="Elements\Button\Button.cpp" />
+    <ClCompile Include="Elements\Checkbox\Checkbox.cpp" />
     <ClCompile Include="elements\IElement\InteractiveElement.cpp" />
     <ClCompile Include="elements\IElement\Parentable.cpp" />
     <ClCompile Include="Elements\Panel\FlexColumnPanel.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="Canvas\DrawData.h" />
     <ClInclude Include="Canvas\DynamicAllocator.h" />
     <ClInclude Include="Elements\Button\Button.h" />
+    <ClInclude Include="Elements\Checkbox\Checkbox.h" />
     <ClInclude Include="elements\IElement\InteractiveElement.h" />
     <ClInclude Include="elements\IElement\Parentable.h" />
     <ClInclude Include="Elements\Panel\FlexColumnPanel.h" />

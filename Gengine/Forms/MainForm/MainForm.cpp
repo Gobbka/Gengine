@@ -21,6 +21,7 @@
 #include "Loaders/AssetsLoader.h"
 #include <Animation/Animator.h>
 
+#include "Elements/Button/Button.h"
 #include "Elements/Panel/FlexColumnPanel.h"
 #include "Elements/Panel/FlexRowPanel.h"
 #include "Logger/Logger.h"
@@ -78,8 +79,9 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	auto* uicanvas_entity = get_ui()->create_layer();
 	
 	_topbar_panel = new UI::Panel({ 0,0 }, { (float)width,30 }, { RGB_TO_FLOAT(26,26,26) });
-	_worldspace_panel = new UI::Panel({ 0,-30 }, { 250,(float)height - 30.f }, { RGB_TO_FLOAT(20,20,20) });
-	
+	_worldspace_panel = new UI::FlexColumnPanel({ 0,-30 }, { 250,(float)height - 30.f }, { RGB_TO_FLOAT(20,20,20) });
+	_worldspace_panel->add_element(new UI::Button({ 0,0 }, { 0,50 }, { RGB_TO_FLOAT(48,48,48)}, nullptr));
+
 	_assets_panel_wrapper = new UI::FlexColumnPanel ({ 250, -1 * (float)(height)+250.f }, { (float)width - 250,250 }, { RGB_TO_FLOAT(26,26,26) });
 	_assets_panel_wrapper->add_element(
 		new UI::Panel({ 0,0 }, { (float)width - 250,30 }, { RGB_TO_FLOAT(34,34,34) })

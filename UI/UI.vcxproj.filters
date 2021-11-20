@@ -48,6 +48,9 @@
     <ClCompile Include="Elements\Panel\FlexColumnPanel.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Elements\Button\Button.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InteractiveForm.h">
@@ -96,6 +99,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Elements\Panel\FlexColumnPanel.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Elements\Button\Button.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

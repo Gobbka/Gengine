@@ -1,62 +1,40 @@
 #pragma once
-#include "../../../../Render/Render.h"
-#include "../../../Canvas/elements/rectangle/rectangle.h"
-
 #include "../IElement/InteractiveElement.h"
-#include "../Label/Label.h"
 
-
-namespace DirectX {
-	class SpriteFont;
-}
-
-namespace Application {
-	namespace Render {
-		class Engine;
-	}
-
-	class InteractiveForm;
-}
-
-namespace Application
+namespace UI
 {
-	namespace UI
+	class __declspec(dllexport) Button final : public InteractiveElement
 	{
+	private:
+		Position2 _position;
+		Surface _resolution;
+		Color3XM _color;
+		Color3XM _visible_color;
 
-		class Button final : public Label
-		{
-		private:
-			void draw(Render::DrawEvent* event) override;
-			void set_temp_color(Render::Color4 color);
+		void draw(Render::DrawEvent2D* event) override;
+	public:
 
-		private:
-			Canvas::Rectangle back_rect;
-		public:
+		ElementDescription get_desc() override;
 
-			Render::Color4 non_active_color;
+		Button(Position2 position, Surface resolution, Color3XM color, const char* text);
 
-			ElementDescription get_desc() override;
+		bool point_belongs(Position2 point) override;
 
-			Button(Render::Position position, Render::Resolution resolution, Render::Color4 color,DirectX::SpriteFont*font,const char*text);
+		void set_position(Position2 position) override;
+		void set_color(Color3XM color);
+		void move_by(Position2 offset) override;
+		void set_resolution(Surface resolution) override;
 
-			bool point_belongs(Render::Position point) override;
+		Surface get_resolution() override;
+		Position2 get_position() override;
 
-			void set_pos(float x, float y) override;
-			void set_color(Render::Color4 color) override;
-			void move_by(float x, float y) override;
-			UI::InteractiveElement* set_resolution(float width, float height) override;
+		EventCallback onClick = default_event_callback;
 
-			Render::Resolution get_resolution() override;
-			Render::Position get_position() override;
-			void on_initialize() override;
-
-			EventCallback onClick = default_event_callback;
-
-			void handle_mouse_up() override;
-			void handle_mouse_down() override;
-			void handle_mouse_enter() override;
-			void handle_mouse_leave() override;
-		};
-	}
-
+		void handle_mouse_up() override;
+		void handle_mouse_down() override;
+		void handle_mouse_enter() override;
+		void handle_mouse_leave() override;
+		void set_texture(Render::Texture* texture) override;
+	};
 }
+

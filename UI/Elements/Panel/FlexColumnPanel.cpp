@@ -52,7 +52,7 @@ void UI::FlexColumnPanel::draw(Render::DrawEvent2D* event)
 
 UI::ElementDescription UI::FlexColumnPanel::get_desc()
 {
-	return ElementDescription(true, "FLEXROWPANEL");
+	return ElementDescription(true, "FLEXCOLUMNPANEL");
 }
 
 UI::FlexColumnPanel::FlexColumnPanel(Vector2 position, Surface resolution, Render::Texture* texture)

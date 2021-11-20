@@ -14,7 +14,7 @@ void UI::Panel::draw(Render::DrawEvent2D* event)
 
 UI::ElementDescription UI::Panel::get_desc()
 {
-	return ElementDescription(true, "PANEL");
+	return ElementDescription(false, "PANEL");
 }
 
 UI::Panel::Panel(Vector2 position,Surface resolution, Render::Texture* texture)

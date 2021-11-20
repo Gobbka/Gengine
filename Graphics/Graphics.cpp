@@ -31,7 +31,6 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	dss_collection(this),
 	main_scene(nullptr)
 {
-
 	_gdevice = new Render::D11GDevice(dev, this);
 	_gcontext = new Render::D11GContext(this, context);
 

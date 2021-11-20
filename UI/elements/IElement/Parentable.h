@@ -12,7 +12,7 @@ namespace Application {
 namespace UI
 {
 
-	class ChildrenCollection {
+	class __declspec(dllexport) ChildrenCollection {
 	protected:
 		std::vector<UI::InteractiveElement*> _children;
 

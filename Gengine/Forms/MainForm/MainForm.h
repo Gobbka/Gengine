@@ -11,6 +11,7 @@ namespace Core {
 }
 
 namespace UI {
+	class InteractiveElement;
 	class FlexColumnPanel;
 	class FlexRowPanel;
 	class Panel;
@@ -20,6 +21,8 @@ namespace Forms
 {
 	class MainForm : public Core::Form
 	{
+		void print_element(UI::InteractiveElement* element,UINT deep);
+		void print_gpu_info();
 	private:
 		UI::Panel* _topbar_panel;
 		UI::Panel* _worldspace_panel;
@@ -31,7 +34,6 @@ namespace Forms
 		Render::Texture* _file_texture;
 	public:
 		Render::Scene* editorScene;
-
 
 		MainForm(HINSTANCE hinst, UINT width, UINT height);
 

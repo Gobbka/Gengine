@@ -23,6 +23,7 @@
 
 #include "Elements/Panel/FlexColumnPanel.h"
 #include "Elements/Panel/FlexRowPanel.h"
+#include "Logger/Logger.h"
 #include "Render/Engine/RenderTarget.h"
 
 namespace UI
@@ -191,4 +192,69 @@ void Forms::MainForm::update()
 	{
 		camera->adjust_rotation((Vector3(0.04f, 0, 0)));
 	}
+	if(keyboard->pressed(VirtualKey::F1))
+	{
+		char command[12];
+		std::cout << "Send command to MainForm: \n>> ";
+		scanf("%12s", command);
+		if(strcmp(command,"dom")==0)
+		{
+			main_scene->world()->each<UI::InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<UI::InteractiveForm>form)
+				{
+					std::cout << "=== Interactive From ===\n";
+					form->foreach([&](UI::InteractiveElement* element)
+						{
+							print_element(element,0);
+						});
+				});
+		}
+		if(strcmp(command,"gpu")==0)
+		{
+			print_gpu_info();
+		}
+	}
+}
+
+void Forms::MainForm::print_element(UI::InteractiveElement* element,UINT deep)
+{
+	for(int i = 0;i<=deep;i++)
+	{
+		std::cout << '-';
+	}
+	auto desc = element->get_desc();
+	auto pos = element->get_position();
+	auto res = element->get_resolution();
+	std::cout
+		<< " " << green << desc.string_name << white
+		<< " (x:"<<yellow<<pos.x<<white
+		<< " y:" <<yellow<<pos.y<<white
+		<< ")" << " (w:" << yellow << res.width << white
+		<< " h:"<<yellow<<res.height<<white<<")\n";
+	if(desc.can_be_parent)
+	{
+		for(auto*child:*((UI::Parent*)element)->children())
+		{
+			print_element(child, deep + 1);
+		}
+	}
+}
+
+void Forms::MainForm::print_gpu_info()
+{
+	IDXGIDevice* dev;
+	IDXGIAdapter* adapter;
+	DXGI_ADAPTER_DESC desc;
+
+	get_graphics_context()->device->QueryInterface(__uuidof(IDXGIDevice), (void**) & dev);
+	dev->GetAdapter(&adapter);
+	adapter->GetDesc(&desc);
+	std::cout << "=== GPU ===\n";
+	std::wcout << L"Name: " << desc.Description << '\n';
+	std::cout << "Memory: " << desc.DedicatedVideoMemory / 1048576u << "MB\n";
+	adapter->GetDesc(&desc);
+	if (adapter)
+		adapter->Release();
+	if (dev)
+		dev->Release();
+	
 }

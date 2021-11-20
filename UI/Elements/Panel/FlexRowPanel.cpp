@@ -63,7 +63,7 @@ void UI::FlexRowPanel::draw(Render::DrawEvent2D* event)
 		const auto scroll_bar_height_px = resolution.height * _scroll_bar_height;
 
 		event->draw_rect(
-			{ position.x + resolution.width - scroll_bar_width - 5,position.y - 5 - _scroll_offset.y * _scroll_bar_height }, 
+			{ position.x + resolution.width - scroll_bar_width - 5,position.y - 5 - _scroll_offset.y * (1 - _scroll_bar_height)},
 			{ scroll_bar_width,scroll_bar_height_px-10 },
 			Color3XM::from_rgb(62, 62, 62)
 		);

@@ -4,7 +4,7 @@
 
 void UI::Checkbox::draw(Render::DrawEvent2D* event)
 {
-	if (_checked)
+	if (*_lp_value)
 		event->draw_rect(_position, _resolution, active_color);
 	else
 		event->draw_rect(_position, _resolution, non_active_color);
@@ -12,7 +12,7 @@ void UI::Checkbox::draw(Render::DrawEvent2D* event)
 
 bool UI::Checkbox::is_checked() const
 {
-	return _checked;
+	return *_lp_value;
 }
 
 UI::ElementDescription UI::Checkbox::get_desc()
@@ -20,17 +20,18 @@ UI::ElementDescription UI::Checkbox::get_desc()
 	return ElementDescription(false,"CHECKBOX" );
 }
 
-UI::Checkbox::Checkbox(Position2 position, Surface resolution, Color3XM color)
-	: _position(position)
+UI::Checkbox::Checkbox(Position2 position, Surface resolution, Color3XM color, bool* value)
+	: _lp_value(value)
+	, _position(position)
 	, _resolution(resolution)
 	, active_color(color)
 {}
 
-UI::Checkbox::Checkbox(const Position2 position, const Surface resolution)
-	: _position(position)
+UI::Checkbox::Checkbox(const Position2 position, const Surface resolution,bool*value)
+	: _lp_value(value)
+	, _position(position)
 	, _resolution(resolution)
-{
-}
+{}
 
 void UI::Checkbox::set_position(const Position2 position)
 {
@@ -69,9 +70,8 @@ void UI::Checkbox::move_by(const Position2 offset)
 
 void UI::Checkbox::handle_mouse_up()
 {
-	_checked = !_checked;
+	*_lp_value = !*_lp_value;
 
-	onChange(this);
 	InteractiveElement::handle_mouse_up();
 }
 

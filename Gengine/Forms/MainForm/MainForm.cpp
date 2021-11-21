@@ -83,7 +83,6 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	auto* uicanvas_entity = get_ui()->create_layer();
 
 	_worldspace_panel->add_element(new UI::Button({ 0,0 }, { 0,50 }, { RGB_TO_FLOAT(48,48,48)}, nullptr));
-	_worldspace_panel->add_element(new UI::Checkbox({ 0,0 }, { 0,50 }));
 
 	_assets_panel_wrapper->add_element(
 		new UI::Panel({ 0,0 }, { (float)width - 250,30 }, { RGB_TO_FLOAT(34,34,34) })

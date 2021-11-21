@@ -9,7 +9,7 @@ namespace UI
 	private:
 		void draw(Render::DrawEvent2D* event) override;
 
-		bool _checked = false;
+		bool* _lp_value;
 
 		Position2 _position;
 		Surface _resolution;
@@ -20,10 +20,8 @@ namespace UI
 		bool is_checked() const;
 		ElementDescription get_desc() override;
 
-		EventCallback onChange = default_event_callback;
-
-		Checkbox(Position2 position, Surface resolution, Color3XM color);
-		Checkbox(Position2 position, Surface resolution);
+		Checkbox(Position2 position, Surface resolution, Color3XM color,bool*value);
+		Checkbox(Position2 position, Surface resolution,bool*value);
 
 		void set_position(Position2 position) override;
 

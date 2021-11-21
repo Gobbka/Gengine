@@ -22,27 +22,24 @@
 #include "Render/Engine/SpriteEngine.h"
 
 Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11DeviceContext* context)
-	: context(context),
-	device(dev),
-	_screen_resolution(0,0),
-	_swap(swap),
-	_targetView(this,swap),
-	shader_collection(this),
-	dss_collection(this),
-	main_scene(nullptr)
+	: context(context)
+	, device(dev)
+	, _screen_resolution(0,0)
+	, _swap(swap)
+	, _targetView(this,swap)
+	, _samplerState(new Render::SamplerState(this))
+	, _gdevice(new Render::D11GDevice(dev,this))
+	, _gcontext(new Render::D11GContext(context,this))
+	, _spriteEngine(new Render::SpriteEngine(this))
+	, shader_collection(this)
+	, dss_collection(this)
+	, main_scene(nullptr)
 {
-	_gdevice = new Render::D11GDevice(dev, this);
-	_gcontext = new Render::D11GContext(this, context);
-
 	_screen_resolution = _targetView.get_texture()->resolution();
-
-	_samplerState = new Render::SamplerState(this);
 	
 	auto* _texture_vs = new Render::VertexShader(this, L"d3d11\\texture_vs.cso",Render::VertexLayout,ARRAYSIZE(Render::VertexLayout));
 
 	shader_collection.insert(L"d3d11\\texture_vs.cso", _texture_vs);
-
-	_spriteEngine = new Render::SpriteEngine(this);
 
 	_gcontext->set_vertex_shader(_texture_vs);
 
@@ -75,7 +72,7 @@ Render::Scene* Core::GraphicsContext::create_scene()
 	return scene;
 }
 
-Render::SpriteEngine* Core::GraphicsContext::get_sprite_engine()
+Render::SpriteEngine* Core::GraphicsContext::get_sprite_engine() const
 {
 	return _spriteEngine;
 }
@@ -95,12 +92,12 @@ inline Render::Passer* Core::GraphicsContext::get_passer()
 	return &_passer;
 }
 
-inline Render::IGDevice* Core::GraphicsContext::get_device()
+inline auto Core::GraphicsContext::get_device() const -> Render::IGDevice*
 {
 	return _gdevice;
 }
 
-inline Render::IGContext* Core::GraphicsContext::get_context()
+inline Render::IGContext* Core::GraphicsContext::get_context() const
 {
 	return _gcontext;
 }
@@ -113,7 +110,7 @@ void Core::GraphicsContext::set_resolution(Surface new_resolution)
 	_viewport.Height = _screen_resolution.height;
 }
 
-void Core::GraphicsContext::make_frame()
+void Core::GraphicsContext::make_frame() const
 {
 	for (auto* scene : scenes) {
 

@@ -20,7 +20,7 @@ namespace Render {
 		VertexShader* _currect_vs;
 		SamplerState* _current_sampler;
 	public:
-		D11GContext(Core::GraphicsContext* context,ID3D11DeviceContext*d11context);
+		D11GContext(ID3D11DeviceContext*d11context, Core::GraphicsContext* context);
 
 		void set_topology(PrimitiveTopology topology) override;
 		void set_pixel_shader(PixelShader* ps) override;

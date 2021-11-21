@@ -3,7 +3,6 @@
 #include "Graphics.h"
 #include "UIContext.h"
 #include "Window/WindowsManager.h"
-#include "Render/Engine/Camera.h"
 #include "../../resource.h"
 
 void Core::Form::handle_resize(Surface rect)
@@ -12,16 +11,12 @@ void Core::Form::handle_resize(Surface rect)
     WindowsWindow::handle_resize(rect);
 }
 
-void Core::Form::draw_frame()
-{
-}
-
 Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
-	: WindowsWindow(hinst,width,height,LoadIcon(hinst,MAKEINTRESOURCE(IDI_ICON1))),
-	_graphics(GraphicsContext::new_context(WindowsWindow::hwnd(), WindowsWindow::size())),
-	main_scene(_graphics->create_scene())
+	: WindowsWindow(hinst,width,height,LoadIcon(hinst,MAKEINTRESOURCE(IDI_ICON1)))
+	, _graphics(GraphicsContext::new_context(WindowsWindow::hwnd(), WindowsWindow::size()))
+	, _ui_context(new UI::UIContext(_graphics))
+	, main_scene(_graphics->create_scene())
 {
-    _uicontext = new UI::UIContext(_graphics);
     main_scene->set_main_camera(main_scene->create_camera(_graphics->get_render_target_view()));
 }
 
@@ -32,7 +27,7 @@ Core::Form::~Form()
 
 UI::UIContext* Core::Form::get_ui()
 {
-    return _uicontext;
+    return _ui_context;
 }
 
 Core::GraphicsContext* Core::Form::get_graphics_context() const
@@ -55,8 +50,5 @@ void Core::Form::force_draw()
     }
 
     _graphics->make_frame();
-	
-    draw_frame();
-	
     _graphics->present_frame();
 }

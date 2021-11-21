@@ -5,10 +5,10 @@
 #include "../../Render/d3d/Shader/VertexShader.h"
 #include "../../Render/Engine/MaskEngine.h"
 
-Render::D11GContext::D11GContext(Core::GraphicsContext* context, ID3D11DeviceContext* d11context)
+Render::D11GContext::D11GContext(ID3D11DeviceContext* d11context, Core::GraphicsContext* context )
 	: IGContext(context),
-	_current_topology(PrimitiveTopology::NONE),
 	_d11context(d11context),
+	_current_topology(PrimitiveTopology::NONE),
 	_current_ps(nullptr),
 	_currect_vs(nullptr),
 	_current_sampler(nullptr)

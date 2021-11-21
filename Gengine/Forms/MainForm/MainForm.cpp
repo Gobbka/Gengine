@@ -1,34 +1,25 @@
 #include "MainForm.h"
 
 #include <FreeImage.h>
-#include <fstream>
-#include <iostream>
-
 #include <Window/Keyboard.h>
 #include <FS/FSObject.h>
 #include <FS/FSDirectory.h>
 
 #include <Graphics.h>
-#include <Render/d3d/Buffer/Texture.h>
 #include <Render/Engine/Camera.h>
-#include <UI/Panel.h>
 #include <InteractiveForm.h>
+#include <Loaders/AssetsLoader.h>
+
 #include <UIContext.h>
-
-#include "Render/Light/DirectionLightComponent.h"
-#include <Types/Material.h>
-
-#include "Loaders/AssetsLoader.h"
-#include <Animation/Animator.h>
-
 #include <UI/Button.h>
+#include <UI/Panel.h>
 #include <UI/FlexColumnPanel.h>
 #include <UI/FlexRowPanel.h>
+#include <UI/Text.h>
 
+#include "Animation/Animator.h"
 #include "Graphics/SpriteFont.h"
 #include "Logger/Logger.h"
-#include "Render/Engine/RenderTarget.h"
-#include "UI/Text.h"
 
 namespace UI
 {
@@ -77,11 +68,12 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	, _topbar_panel(new UI::FlexColumnPanel({0, 0}, {(float)width, 30}, {RGB_TO_FLOAT(26, 26, 26)}))
 	, _worldspace_panel(new UI::FlexColumnPanel({0, -30}, {250, (float)height - 30.f}, {RGB_TO_FLOAT(20, 20, 20)}))
 	, _assets_panel_wrapper(new UI::FlexColumnPanel({250, -1 * (float)(height) + 250.f}, {(float)width - 250, 250},{RGB_TO_FLOAT(26, 26, 26)}))
+	, editorScene(get_graphics_context()->create_scene())
 {
-	Render::SpriteFont* font = new Render::SpriteFont(get_graphics_context()->get_device(), L"visby.spritefont");
+	auto* font = new Render::SpriteFont(get_graphics_context()->get_device(), L"visby.spritefont");
 
 	main_scene->register_system(new UI::HandleAnimationSystem());
-	auto main_cam = main_scene->get_main_camera()->get<Render::Camera>();
+	const auto main_cam = main_scene->get_main_camera()->get<Render::Camera>();
 	main_cam->get_target_view()->clear_color = Color3XM(.1f, .1f, .1f);
 
 	auto* uicanvas_entity = get_ui()->create_layer();
@@ -105,7 +97,6 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_folder_texture = get_graphics_context()->get_device()->create_texture(folder_material);
 	_file_texture = get_graphics_context()->get_device()->create_texture(file_material);
 
-	editorScene = get_graphics_context()->create_scene();
 	auto worldTexture = new Render::RenderTarget(get_graphics_context(),{1400,780});
 	auto* editorCam = editorScene->create_camera(worldTexture);
 	editorScene->set_main_camera(editorCam);

@@ -48,18 +48,18 @@ namespace Core
 		std::vector<Render::Scene*> scenes;
 		Render::Scene* main_scene;
 		
-		Render::SpriteEngine* get_sprite_engine();
+		Render::SpriteEngine* get_sprite_engine() const;
 		
 		Surface get_screen_resolution() const;
 		inline Render::RenderTarget* get_render_target_view();
 
 		inline Render::Passer* get_passer();
-		inline Render::IGDevice* get_device();
-		inline Render::IGContext* get_context();
+		inline Render::IGDevice* get_device() const;
+		inline Render::IGContext* get_context() const;
 	public:
 		void set_resolution(Surface new_resolution);
 
-		void make_frame();
+		void make_frame() const;
 		void present_frame() const;
 	public:
 		

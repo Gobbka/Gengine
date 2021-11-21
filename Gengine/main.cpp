@@ -1,21 +1,14 @@
-#include <iostream>
-#include <Windows.h>
 #include "Graphics.h"
 
-#include "FreeImage.h"
 #include "PhysicsModule.h"
 #include "UIContext.h"
 #include "Forms/MainForm/MainForm.h"
 #include "Render/I3DObject/Cube/Cube.h"
+#include <Render/I3DObject/Parallelepiped/Parallelepiped.h>
 #include "Debugger/PipeServer.h"
-#include "Render/d3d/Buffer/IndexBuffer.h"
-
 #include <Ecs/Ecs.h>
 #include <chrono>
 
-#include <BinaryReader.h>
-#include <Graphics/SpriteFont.h>
-#include <Render/I3DObject/Parallelepiped/Parallelepiped.h>
 #include <Render/Light/DirectionLightComponent.h>
 
 #include "Graphics/Components/MeshRenderer.h"

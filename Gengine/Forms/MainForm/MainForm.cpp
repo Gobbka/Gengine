@@ -111,8 +111,8 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 
 	_render_panel->set_texture(worldTexture->get_texture());
 
-	Render::SpriteFont font(get_graphics_context()->get_device(), L"visby.spritefont");
-	//_topbar_panel->add_element(new UI::Text(&font, L"GEngine"));
+	Render::SpriteFont* font = new Render::SpriteFont(get_graphics_context()->get_device(), L"visby.spritefont");
+	_topbar_panel->add_element(new UI::Text(font, L"GEngine"));
 
 	auto uicanvas = uicanvas_entity->get<UI::InteractiveForm>();
 	

@@ -162,8 +162,8 @@ void UI::Text::draw(Render::DrawEvent2D* event)
 {
 	const auto draw_cmd = event->new_draw_cmd(_length * GLYPH_VERTEX_SIZE,_length*6,font->font_texture);
 
-	memcpy(draw_cmd.vertices, _vbuffer, _length * GLYPH_VERTEX_SIZE);
-	memcpy(draw_cmd.indices, _ibuffer, _length * 6);
+	memcpy(draw_cmd.vertices, _vbuffer, _length * GLYPH_VERTEX_SIZE * sizeof(Vertex2D));
+	memcpy(draw_cmd.indices, _ibuffer, _length * 6 * sizeof(UINT));
 
 }
 

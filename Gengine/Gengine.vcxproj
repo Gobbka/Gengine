@@ -193,6 +193,16 @@
     <ClInclude Include="Debugger\PipeServer.h" />
     <ClInclude Include="Forms\Form\Form.h" />
     <ClInclude Include="Forms\MainForm\MainForm.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GengineEditor.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resource\Media\icon.ico" />
+    <Image Include="..\Resource\Media\icon.png" />
+    <Image Include="..\Resource\Media\icon128.ico" />
+    <Image Include="..\Resource\Media\icon128.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

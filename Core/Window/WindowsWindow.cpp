@@ -60,12 +60,12 @@ void Core::WindowsWindow::handle_resize(Surface rect)
 		this->on_resize(rect);
 }
 
-Core::WindowsWindow::WindowsWindow(HINSTANCE hint, UINT width, UINT height)
+Core::WindowsWindow::WindowsWindow(HINSTANCE hint, UINT width, UINT height,HICON icon)
 	: _size(width,height)
 	, keyboard(new Keyboard())
 {
 	_hInst = hint;
-
+	
 	const auto* class_name = L"GENGINE";
 	WNDCLASSEXW wndClass
 	{
@@ -76,7 +76,7 @@ Core::WindowsWindow::WindowsWindow(HINSTANCE hint, UINT width, UINT height)
 		_hInst,nullptr,LoadCursor(nullptr,IDC_ARROW),nullptr,
 		nullptr,
 		class_name,
-		nullptr
+		icon
 	};
 	auto result = RegisterClassExW(&wndClass);
 	assert(result != 0);

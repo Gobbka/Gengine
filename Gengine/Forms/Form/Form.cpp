@@ -4,6 +4,7 @@
 #include "UIContext.h"
 #include "Window/WindowsManager.h"
 #include "Render/Engine/Camera.h"
+#include "../../resource.h"
 
 void Core::Form::handle_resize(Surface rect)
 {
@@ -16,7 +17,7 @@ void Core::Form::draw_frame()
 }
 
 Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
-	: WindowsWindow(hinst,width,height),
+	: WindowsWindow(hinst,width,height,LoadIcon(hinst,MAKEINTRESOURCE(IDI_ICON1))),
 	_graphics(GraphicsContext::new_context(WindowsWindow::hwnd(), WindowsWindow::size())),
 	main_scene(_graphics->create_scene())
 {

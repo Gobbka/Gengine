@@ -30,7 +30,7 @@ namespace Core {
 		std::function<void(Surface)> on_resize;
 		std::function<void(UINT msg,WPARAM wParam,LPARAM lParam)> on_wndproc;
 		
-		WindowsWindow(HINSTANCE hinst,UINT width=800u,UINT height=600u);
+		WindowsWindow(HINSTANCE hinst,UINT width=800u,UINT height=600u,HICON icon = nullptr);
 
 		void show();
 		void hide();

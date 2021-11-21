@@ -54,7 +54,7 @@ void UI::FlexRowPanel::draw(Render::DrawEvent2D* event)
 	Parent::draw(event);
 	event->mask_discard_end(true);
 
-	if (_scroll_bar_height > 0 && _scroll_bar_height < 1)
+	if (_scroll_bar_height < 1)
 	{
 		auto resolution = get_resolution();
 		auto position = get_position();

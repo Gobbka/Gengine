@@ -11,9 +11,7 @@ namespace UI {
 
 		void update_items() override;
 	public:
-
 		void draw(Render::DrawEvent2D* event) override;
-
 
 		ElementDescription get_desc() override;
 

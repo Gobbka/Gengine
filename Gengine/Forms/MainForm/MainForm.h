@@ -25,7 +25,7 @@ namespace Forms
 		void print_gpu_info();
 		void print_entity();
 	private:
-		UI::Panel* _topbar_panel;
+		UI::FlexColumnPanel* _topbar_panel;
 		UI::FlexColumnPanel* _worldspace_panel;
 		UI::FlexColumnPanel* _assets_panel_wrapper;
 		UI::FlexRowPanel* _assets_panel;

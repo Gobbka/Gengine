@@ -5,7 +5,6 @@
 #include "IGContext.h"
 #include "Render/Engine/Camera.h"
 #include "InteractiveForm.h"
-#include "Graphics/Components/TextComponent.h"
 #include "Canvas/RenderEvent.h"
 #include <Render/d3d/Buffer/ConstantBuffer.h>
 #include "Canvas/Vertex2D.h"
@@ -23,7 +22,7 @@ public:
 
 		auto resolution = camera->get_view_resolution();
 		auto* gcontext = _context->get_context();
-		gcontext->set_topology(PrimitiveTopology::TRIANGLESTRIP);
+		gcontext->set_topology(PrimitiveTopology::TRIANGLELIST);
 		gcontext->matrix_buffer.data.MVPMatrix = DirectX::XMMatrixTranspose(
 			DirectX::XMMatrixOrthographicLH(resolution.width,resolution.height,0.0,1.f) * DirectX::XMMatrixTranslation(-1,1,0)
 		);
@@ -67,28 +66,28 @@ class DrawTextPass : public Render::IPass
 
 	void execute(Render::Scene*scene) override
 	{
-		auto* matrix = &_context->get_context()->matrix_buffer;
+		//auto* matrix = &_context->get_context()->matrix_buffer;
 
-		auto resolution = _context->get_screen_resolution();
-		auto worldMatrix = 
-			DirectX::XMMatrixOrthographicLH(resolution.width, resolution.height, 0.0, 1.f) * 
-			DirectX::XMMatrixTranslation(-1,1,0) // move count point to top-left corner
-		;
+		//auto resolution = _context->get_screen_resolution();
+		//auto worldMatrix = 
+		//	DirectX::XMMatrixOrthographicLH(resolution.width, resolution.height, 0.0, 1.f) * 
+		//	DirectX::XMMatrixTranslation(-1,1,0) // move count point to top-left corner
+		//;
 
-		scene->world()->each<Render::TextComponent>([&](ECS::Entity*, ECS::ComponentHandle<Render::TextComponent>comp)
-			{
-				matrix->data.MVPMatrix = DirectX::XMMatrixTranspose(
-					worldMatrix
-				);
-				matrix->update();
+		//scene->world()->each<Render::TextComponent>([&](ECS::Entity*, ECS::ComponentHandle<Render::TextComponent>comp)
+		//	{
+		//		matrix->data.MVPMatrix = DirectX::XMMatrixTranspose(
+		//			worldMatrix
+		//		);
+		//		matrix->update();
 
-				_context->get_context()->set_topology(PrimitiveTopology::TRIANGLELIST);
-				comp->vbuffer->bind();
-				comp->ibuffer->bind();
-				comp->font->font_texture->bind();
+		//		_context->get_context()->set_topology(PrimitiveTopology::TRIANGLELIST);
+		//		comp->vbuffer->bind();
+		//		comp->ibuffer->bind();
+		//		comp->font->font_texture->bind();
 
-				_context->get_context()->draw_indexed(comp->ibuffer->get_size());
-			});
+		//		_context->get_context()->draw_indexed(comp->ibuffer->get_size());
+		//	});
 	}
 
 public:

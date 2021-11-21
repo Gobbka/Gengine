@@ -24,8 +24,11 @@
 #include <UI/Button.h>
 #include <UI/FlexColumnPanel.h>
 #include <UI/FlexRowPanel.h>
+
+#include "Graphics/SpriteFont.h"
 #include "Logger/Logger.h"
 #include "Render/Engine/RenderTarget.h"
+#include "UI/Text.h"
 
 namespace UI
 {
@@ -71,7 +74,7 @@ namespace UI
 
 Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	: Form(hinst, width, height)
-	, _topbar_panel(new UI::Panel({0, 0}, {(float)width, 30}, {RGB_TO_FLOAT(26, 26, 26)}))
+	, _topbar_panel(new UI::FlexColumnPanel({0, 0}, {(float)width, 30}, {RGB_TO_FLOAT(26, 26, 26)}))
 	, _worldspace_panel(new UI::FlexColumnPanel({0, -30}, {250, (float)height - 30.f}, {RGB_TO_FLOAT(20, 20, 20)}))
 	, _assets_panel_wrapper(new UI::FlexColumnPanel({250, -1 * (float)(height) + 250.f}, {(float)width - 250, 250},{RGB_TO_FLOAT(26, 26, 26)}))
 {
@@ -107,6 +110,9 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	cam->get_target_view()->clear_color.a = 0.f;
 
 	_render_panel->set_texture(worldTexture->get_texture());
+
+	Render::SpriteFont font(get_graphics_context()->get_device(), L"visby.spritefont");
+	//_topbar_panel->add_element(new UI::Text(&font, L"GEngine"));
 
 	auto uicanvas = uicanvas_entity->get<UI::InteractiveForm>();
 	

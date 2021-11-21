@@ -21,13 +21,19 @@ namespace Render {
 	class SpriteEngine;
 	class Camera;
 
+	struct EventDrawCmd
+	{
+		UI::Vertex2D* vertices;
+		unsigned* indices;
+	};
+
 	class CanvasDrawEvent
 	{
 		Canvas::DrawData* _draw_data;
 	public:
 		CanvasDrawEvent(Canvas::DrawData* data);
 
-		UI::Vertex2D* new_draw_cmd(UINT size,Texture*texture = nullptr) const;
+		EventDrawCmd new_draw_cmd(UINT vertices,UINT indices,Texture*texture = nullptr) const;
 
 		void draw_rect(Position2 pos,Surface resolution,Color3XM color) const;
 		void draw_rect(Position2 pos,Surface resolution,Texture* texture) const;

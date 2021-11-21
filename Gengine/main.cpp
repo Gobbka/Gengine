@@ -22,7 +22,6 @@
 #include "Graphics/Components/LightViewer.h"
 #include "Graphics/Components/PointLightComponent.h"
 #include "Graphics/Components/SkyboxComponent.h"
-#include "Graphics/Components/TextComponent.h"
 #include "Loaders/AssetsLoader.h"
 #include "Logger/Logger.h"
 #include "Render/Engine/Camera.h"
@@ -86,17 +85,11 @@ int WINAPI wWinMain(
     cube->get<Render::MeshRenderer>()->add_mesh(Render::Cube::make_independent(context, Position3::null(), 5));
     platform->get<Render::MeshRenderer>()->add_mesh(Render::Parallelepiped::make_independent(context, Position3::null(), Vector3{ 27,3,27 }));
 
-    Render::SpriteFont font(context->get_device(), L"visby.spritefont");
-
     form->editorScene->get_main_camera()
 		->assign<Render::LightViewer>(
             context,
             form->main_scene->get_main_camera()->get<Render::Camera>()->get_view_resolution()
 	);
-    
-    auto* text = form->main_scene->create_entity();
-    auto text_comp = text->assign<Render::TextComponent>(context,&font);
-    text_comp->set_text(L"GEngine is the best engine");
 
     CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);
 

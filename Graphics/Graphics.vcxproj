@@ -160,7 +160,6 @@
     <ClInclude Include="Graphics\Components\NormalsRenderTarget.h" />
     <ClInclude Include="Graphics\Components\PointLightComponent.h" />
     <ClInclude Include="Graphics\Components\SkyboxComponent.h" />
-    <ClInclude Include="Graphics\Components\TextComponent.h" />
     <ClInclude Include="Graphics\DepthStencilStatesCollection.h" />
     <ClInclude Include="Graphics\GDevice\D11GContext.h" />
     <ClInclude Include="Graphics\GDevice\D11GDevice.h" />
@@ -207,7 +206,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp" />
-    <ClCompile Include="Graphics\Components\TextComponent.cpp" />
     <ClCompile Include="Graphics\DepthStencilStatesCollection.cpp" />
     <ClCompile Include="Graphics\GDevice\D11GContext.cpp" />
     <ClCompile Include="Graphics\GDevice\D11GDevice.cpp" />

@@ -44,7 +44,7 @@ namespace Render
 		virtual void set_vertex_shader(VertexShader* vs) = 0;
 		virtual void set_mask_engine(MaskEngine* mask) =0;
 		virtual void set_sampler_state(SamplerState* sampler) =0;
-		virtual void draw_indexed(UINT count, UINT start_location=0) = 0;
+		virtual void draw_indexed(UINT count, UINT start_location=0,UINT base_vertex_location=0) = 0;
 		virtual void draw(UINT count, UINT start_location) = 0;
 
 		virtual void set_render_target(RenderTarget* target) = 0;

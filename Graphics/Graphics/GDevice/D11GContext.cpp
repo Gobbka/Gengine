@@ -118,9 +118,9 @@ void Render::D11GContext::set_rasterizer(Rasterizer& rs)
 	_d11context->RSSetState(rs._rs);
 }
 
-void Render::D11GContext::draw_indexed(UINT count, UINT start_location)
+void Render::D11GContext::draw_indexed(UINT count, UINT start_location,UINT base_vertex_location)
 {
-	_d11context->DrawIndexed(count, start_location, 0);
+	_d11context->DrawIndexed(count, start_location, base_vertex_location);
 }
 
 void Render::D11GContext::draw(UINT count, UINT start_location)

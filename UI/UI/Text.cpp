@@ -13,11 +13,12 @@ UINT text_indices[]
 	0,1,2,1,3,2
 };
 
-UI::Text::Text(Render::SpriteFont* font, const wchar_t* text)
+UI::Text::Text(Render::SpriteFont* font, const wchar_t* text,Position2 position)
 	: _length(0)
 	, _text(nullptr)
 	, _vbuffer(nullptr)
 	, _ibuffer(nullptr)
+	, _position(position)
 	, font(font)
 {
 	set_text(text);
@@ -28,6 +29,7 @@ UI::Text::Text(Text&& other) noexcept
 	, _text(other._text)
 	, _vbuffer(other._vbuffer)
 	, _ibuffer(other._ibuffer)
+	, _position(other._position)
 	, font(other.font)
 {
 	other.font = nullptr;
@@ -86,13 +88,13 @@ void UI::Text::set_text(const wchar_t* text)
 	const auto texture_width = (float)font->font_texture->width();
 	const auto texture_height = (float)font->font_texture->height();
 
-	Vector2 write_pos(0, 0);
+	Vector2 write_pos = _position;
 
 	for(auto i=0u;i< _length;i++)
 	{
-		auto glyph = font->find_glyph(text[i]);
+		const auto glyph = font->find_glyph(text[i]);
 
-		Vector2 glyphResolution(glyph.Subrect.z - glyph.Subrect.x , glyph.Subrect.w - glyph.Subrect.y);
+		const Vector2 glyphResolution(glyph.Subrect.z - glyph.Subrect.x , glyph.Subrect.w - glyph.Subrect.y);
 
 		_vbuffer[i * 4] = Vertex2D(
 			Position2(write_pos.x + glyph.XOffset, write_pos.y - glyph.YOffset),
@@ -130,7 +132,7 @@ void UI::Text::set_text(const wchar_t* text)
 		write_pos.x += glyphResolution.x;
 		if (text[i] == L'\n')
 		{
-			write_pos.x = 0;
+			write_pos.x = _position.x;
 			write_pos.y -= font->line_spacings;
 		}
 		if(text[i]==L' ')
@@ -142,7 +144,8 @@ void UI::Text::set_text(const wchar_t* text)
 
 void UI::Text::set_position(Position2 pos)
 {
-
+	const auto diff = pos - _position;
+	move_by(diff);
 }
 
 void UI::Text::set_resolution(Surface surface)
@@ -154,8 +157,14 @@ void UI::Text::set_texture(Render::Texture* texture)
 {
 }
 
-void UI::Text::move_by(Position2)
+void UI::Text::move_by(Position2 position)
 {
+	_position += position;
+
+	for(int i =0;i < _length * GLYPH_VERTEX_SIZE;i++)
+	{
+		_vbuffer[i].pos += position;
+	}
 }
 
 void UI::Text::draw(Render::DrawEvent2D* event)

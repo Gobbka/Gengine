@@ -22,10 +22,12 @@ namespace UI
 		const wchar_t* _text;
 		Vertex2D* _vbuffer;
 		unsigned* _ibuffer;
+
+		Position2 _position;
 	public:
 		Render::SpriteFont* font;
 
-		Text(Render::SpriteFont* font,const wchar_t*text);
+		Text(Render::SpriteFont* font,const wchar_t*text,Position2 pos);
 		Text(Text&& other) noexcept;
 		Text& operator=(Text&& other) noexcept;
 		~Text() override;

@@ -1,6 +1,5 @@
 #include "Checkbox.h"
-#include "../../InteractiveForm.h"
-#include "../../Canvas/RenderEvent.h"
+#include "../Canvas/RenderEvent.h"
 
 void UI::Checkbox::draw(Render::DrawEvent2D* event)
 {

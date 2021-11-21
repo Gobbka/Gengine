@@ -1,6 +1,6 @@
 #include "Button.h"
-#include "../../InteractiveForm.h"
-#include "../../Canvas/RenderEvent.h"
+#include "../InteractiveForm.h"
+#include "../Canvas/RenderEvent.h"
 
 bool UI::Button::point_belongs(Position2 point)
 {

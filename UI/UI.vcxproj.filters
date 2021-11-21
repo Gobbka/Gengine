@@ -21,13 +21,13 @@
     <ClCompile Include="Events\WinIntEventHandler.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="elements\Panel\Panel.cpp">
+    <ClCompile Include="UI\Panel.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="elements\IElement\Parentable.cpp">
+    <ClCompile Include="IElement\Parentable.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="elements\IElement\InteractiveElement.cpp">
+    <ClCompile Include="IElement\InteractiveElement.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="UIContext.cpp">
@@ -42,16 +42,16 @@
     <ClCompile Include="Canvas\RenderEvent.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Elements\Panel\FlexRowPanel.cpp">
+    <ClCompile Include="UI\FlexRowPanel.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Elements\Panel\FlexColumnPanel.cpp">
+    <ClCompile Include="UI\FlexColumnPanel.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Elements\Button\Button.cpp">
+    <ClCompile Include="UI\Button.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Elements\Checkbox\Checkbox.cpp">
+    <ClCompile Include="UI\Checkbox.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,13 +65,13 @@
     <ClInclude Include="Events\WinIntEventHandler.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="elements\Panel\Panel.h">
+    <ClInclude Include="UI\Panel.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="elements\IElement\Parentable.h">
+    <ClInclude Include="IElement\Parentable.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="elements\IElement\InteractiveElement.h">
+    <ClInclude Include="IElement\InteractiveElement.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="UIContext.h">
@@ -98,16 +98,16 @@
     <ClInclude Include="Canvas\DynamicAllocator.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Elements\Panel\FlexRowPanel.h">
+    <ClInclude Include="UI\FlexRowPanel.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Elements\Panel\FlexColumnPanel.h">
+    <ClInclude Include="UI\FlexColumnPanel.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Elements\Button\Button.h">
+    <ClInclude Include="UI\Button.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Elements\Checkbox\Checkbox.h">
+    <ClInclude Include="UI\Checkbox.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

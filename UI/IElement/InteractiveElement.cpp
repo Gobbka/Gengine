@@ -1,5 +1,5 @@
 #include "InteractiveElement.h"
-#include "../../InteractiveForm.h"
+#include "../InteractiveForm.h"
 
 UI::ElementDescription::ElementDescription(bool can_be_parent, const char* string_name,bool has_text)
 {

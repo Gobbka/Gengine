@@ -11,7 +11,7 @@
 #include <Graphics.h>
 #include <Render/d3d/Buffer/Texture.h>
 #include <Render/Engine/Camera.h>
-#include <elements/Panel/Panel.h>
+#include <UI/Panel.h>
 #include <InteractiveForm.h>
 #include <UIContext.h>
 
@@ -21,10 +21,9 @@
 #include "Loaders/AssetsLoader.h"
 #include <Animation/Animator.h>
 
-#include "Elements/Button/Button.h"
-#include "Elements/Checkbox/Checkbox.h"
-#include "Elements/Panel/FlexColumnPanel.h"
-#include "Elements/Panel/FlexRowPanel.h"
+#include <UI/Button.h>
+#include <UI/FlexColumnPanel.h>
+#include <UI/FlexRowPanel.h>
 #include "Logger/Logger.h"
 #include "Render/Engine/RenderTarget.h"
 

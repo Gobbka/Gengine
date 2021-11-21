@@ -1,7 +1,6 @@
 #pragma once
 #include "../IElement/InteractiveElement.h"
 
-
 namespace UI
 {
 	class __declspec(dllexport) Checkbox final : public ::UI::InteractiveElement

@@ -1,6 +1,5 @@
 #include "Parentable.h"
-#include "../../InteractiveForm.h"
-#include <iostream>
+#include "../InteractiveForm.h"
 
 void UI::ChildrenCollection::foreach(std::function<void(UI::InteractiveElement* element)> iterator)
 {

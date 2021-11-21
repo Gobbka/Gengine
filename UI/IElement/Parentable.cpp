@@ -1,7 +1,7 @@
 #include "Parentable.h"
 #include "../InteractiveForm.h"
 
-void UI::ChildrenCollection::foreach(std::function<void(UI::InteractiveElement* element)> iterator)
+void UI::ChildrenCollection::foreach(std::function<void(UI::InteractiveElement* element)> iterator) const
 {
 	for(auto*element: _children)
 		iterator(element);
@@ -24,7 +24,7 @@ UI::InteractiveElement* UI::ChildrenCollection::operator[](UINT index)
 
 UI::InteractiveElement* UI::ChildrenCollection::last()
 {
-	auto _size = count();
+	const auto _size = count();
 	if (count() == 0)
 		return nullptr;
 	
@@ -34,20 +34,22 @@ UI::InteractiveElement* UI::ChildrenCollection::last()
 
 void UI::Parent::handle_mouse_up()
 {
-	_children.foreach([&](UI::InteractiveElement* element) {
+	for(auto*element:_children)
+	{
 		if (element->state.hovered)
 			element->handle_mouse_up();
-	});
+	}
 	
 	InteractiveElement::handle_mouse_up();
 }
 
 void UI::Parent::handle_mouse_down()
 {
-	_children.foreach([&](UI::InteractiveElement* element) {
+	for (auto* element : _children)
+	{
 		if (element->state.hovered)
 			element->handle_mouse_down();
-	});
+	}
 	
 	InteractiveElement::handle_mouse_down();
 }
@@ -59,9 +61,10 @@ void UI::Parent::handle_mouse_enter()
 
 void UI::Parent::handle_mouse_leave()
 {
-	_children.foreach([&](UI::InteractiveElement* element) {
+	for (auto* element : _children)
+	{
 		element->handle_mouse_leave();
-	});
+	}
 	
 	InteractiveElement::handle_mouse_leave();
 }
@@ -98,21 +101,23 @@ void UI::Parent::handle_mouse_move(MoveEvent event)
 
 void UI::Parent::handle_mouse_scroll(int delta)
 {
-	this->_children.foreach([&](UI::InteractiveElement* element) {
+
+	for (auto* element : _children)
+	{
 		if (element->state.hovered)
 			element->handle_mouse_scroll(delta);
-	});
-	
+	}
+
 	InteractiveElement::handle_mouse_scroll(delta);
 }
 
 void UI::Parent::handle_db_click()
 {
-	this->_children.foreach([](UI::InteractiveElement* element)
-		{
-			if (element->state.hovered == true)
-				element->handle_db_click();
-		});
+	for (auto* element : _children)
+	{
+		if (element->state.hovered == true)
+			element->handle_db_click();
+	}
 }
 
 UI::ChildrenCollection* UI::Parent::children()
@@ -126,17 +131,19 @@ UI::Parent::Parent( Position2 position)
 
 void UI::Parent::draw(Render::DrawEvent2D* event)
 {
-	this->_children.foreach([&](UI::InteractiveElement* element) {
+	for (auto* element : _children)
+	{
 		if (element->styles.display != ElementStyles::DisplayType::none)
 			element->draw(event);
-	});
+	}
 }
 
 void UI::Parent::move_by(Position2 pos)
 {
-	this->_children.foreach([&](UI::InteractiveElement* element) {
+	for (auto* element : _children)
+	{
 		element->move_by(pos);
-	});
+	}
 }
 
  UI::InteractiveElement* UI::Parent::element_at(UINT index)

@@ -74,7 +74,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 
 	main_scene->register_system(new UI::HandleAnimationSystem());
 	const auto main_cam = main_scene->get_main_camera()->get<Render::Camera>();
-	main_cam->get_target_view()->clear_color = Color3XM(.1f, .1f, .1f);
+	main_cam->get_target_view()->clear_color = Color3XM(.05f, .05f, .05f);
 
 	auto* uicanvas_entity = get_ui()->create_layer();
 
@@ -85,7 +85,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 		->add_element(new UI::Text(font,L"Assets",{0,0}))
 	);
 
-	_render_panel = new UI::Panel({ 250, -30 }, { 840,468 }, nullptr);
+	_render_panel = new UI::Panel({ 250, -30 }, { 897,500 }, nullptr);
 
 	_assets_panel = new UI::FlexRowPanel({ 0,0}, { (float)width - 250,250-30 }, { RGB_TO_FLOAT(26,26,26) });
 

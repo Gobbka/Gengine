@@ -21,7 +21,7 @@ namespace UI
 		auto begin() { return _children.begin(); }
 		auto end() { return _children.end(); }
 
-		void foreach(std::function<void(InteractiveElement* element)> iterator);
+		void foreach(std::function<void(InteractiveElement* element)> iterator) const;
 
 		size_t count() const;
 

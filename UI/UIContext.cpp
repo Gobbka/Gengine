@@ -1,11 +1,9 @@
 ﻿#include "UIContext.h"
 
-#include <iostream>
 #include "Graphics.h"
 #include "IGContext.h"
 #include "Render/Engine/Camera.h"
 #include "InteractiveForm.h"
-#include "Canvas/RenderEvent.h"
 #include <Render/d3d/Buffer/ConstantBuffer.h>
 #include "Canvas/Vertex2D.h"
 #include "Render/d3d/Shader/VertexShader.h"
@@ -60,42 +58,6 @@ public:
 	{}
 };
 
-class DrawTextPass : public Render::IPass
-{
-	Core::GraphicsContext* _context;
-
-	void execute(Render::Scene*scene) override
-	{
-		//auto* matrix = &_context->get_context()->matrix_buffer;
-
-		//auto resolution = _context->get_screen_resolution();
-		//auto worldMatrix = 
-		//	DirectX::XMMatrixOrthographicLH(resolution.width, resolution.height, 0.0, 1.f) * 
-		//	DirectX::XMMatrixTranslation(-1,1,0) // move count point to top-left corner
-		//;
-
-		//scene->world()->each<Render::TextComponent>([&](ECS::Entity*, ECS::ComponentHandle<Render::TextComponent>comp)
-		//	{
-		//		matrix->data.MVPMatrix = DirectX::XMMatrixTranspose(
-		//			worldMatrix
-		//		);
-		//		matrix->update();
-
-		//		_context->get_context()->set_topology(PrimitiveTopology::TRIANGLELIST);
-		//		comp->vbuffer->bind();
-		//		comp->ibuffer->bind();
-		//		comp->font->font_texture->bind();
-
-		//		_context->get_context()->draw_indexed(comp->ibuffer->get_size());
-		//	});
-	}
-
-public:
-	DrawTextPass(Core::GraphicsContext*context)
-		: _context(context)
-	{}
-};
-
 ECS::Entity* UI::UIContext::create_layer()
 {
 	auto* ent = _gfx->main_scene->world()->create();
@@ -113,7 +75,6 @@ UI::UIContext::UIContext(Core::GraphicsContext* gfx)
 	gfx->shader_collection.insert(L"d3d11\\canvas_vs.cso", vs);
 
 	gfx->get_passer()->add_pass(new DrawUIPass(gfx), Render::PassStep::overlay);
-	gfx->get_passer()->add_pass(new DrawTextPass(gfx), Render::PassStep::overlay);
 }
 
 void UI::UIContext::on_lbmouse_down()

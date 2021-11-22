@@ -1,22 +1,24 @@
 #pragma once
+#include "Text.h"
 #include "../IElement/InteractiveElement.h"
 
 namespace UI
 {
 	class __declspec(dllexport) Button final : public InteractiveElement
 	{
-	private:
+	
 		Position2 _position;
 		Surface _resolution;
 		Color3XM _color;
 		Color3XM _visible_color;
+		Text _text;
 
 		void draw(Render::DrawEvent2D* event) override;
 	public:
 
 		ElementDescription get_desc() override;
 
-		Button(Position2 position, Surface resolution, Color3XM color, const char* text);
+		Button(Position2 position, Surface resolution, Color3XM color,Render::SpriteFont*font, const wchar_t* text);
 
 		bool point_belongs(Position2 point) override;
 

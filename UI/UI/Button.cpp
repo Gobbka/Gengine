@@ -15,11 +15,13 @@ bool UI::Button::point_belongs(Position2 point)
 void UI::Button::set_position(Position2 position)
 {
 	_position = position;
+	_text.set_position(position);
 }
 
 void UI::Button::draw(Render::DrawEvent2D* event)
 {
 	event->draw_rect(_position, _resolution, _visible_color);
+	_text.draw(event);
 }
 
 UI::ElementDescription UI::Button::get_desc()
@@ -27,11 +29,12 @@ UI::ElementDescription UI::Button::get_desc()
 	return ElementDescription(false,"BUTTON",true );
 }
 
-UI::Button::Button(Position2 position, Surface resolution, Color3XM color, const char* text)
+UI::Button::Button(Position2 position, Surface resolution, Color3XM color,Render::SpriteFont*font, const wchar_t* text)
 	: _position(position)
 	, _resolution(resolution)
 	, _color(color)
 	, _visible_color(color)
+	, _text(font,text,position)
 {
 
 }
@@ -44,6 +47,7 @@ void UI::Button::set_color(Color3XM color)
 void UI::Button::move_by(Position2 offset)
 {
 	_position += offset;
+	_text.move_by(offset);
 }
 
 void UI::Button::set_resolution(Surface resolution)

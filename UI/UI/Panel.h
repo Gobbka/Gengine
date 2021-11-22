@@ -2,8 +2,7 @@
 #include "../IElement/Parentable.h"
 
 namespace Render {
-	struct DrawEvent2D;
-	struct DrawEvent;
+	class DrawEvent2D;
 }
 
 namespace UI

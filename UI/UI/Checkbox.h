@@ -5,7 +5,6 @@ namespace UI
 {
 	class __declspec(dllexport) Checkbox final : public ::UI::InteractiveElement
 	{
-	private:
 		void draw(Render::DrawEvent2D* event) override;
 
 		bool* _lp_value;

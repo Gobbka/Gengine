@@ -4,8 +4,8 @@
 
 bool UI::Button::point_belongs(Position2 point)
 {
-	auto position = _position;
-	auto resolution = _resolution;
+	const auto position = _position;
+	const auto resolution = _resolution;
 	
 	return
 		(point.x >= position.x && point.x <= position.x + resolution.width) &&
@@ -26,7 +26,7 @@ void UI::Button::draw(Render::DrawEvent2D* event)
 
 UI::ElementDescription UI::Button::get_desc()
 {
-	return ElementDescription(false,"BUTTON",true );
+	return {false,"BUTTON",true};
 }
 
 UI::Button::Button(Position2 position, Surface resolution, Color3XM color,Render::SpriteFont*font, const wchar_t* text)

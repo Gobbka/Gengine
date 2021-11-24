@@ -21,8 +21,6 @@
 #include "Graphics/SpriteFont.h"
 #include "Logger/Logger.h"
 
-#include "../../resource.h"
-
 namespace UI
 {
 	class Directory : public Panel

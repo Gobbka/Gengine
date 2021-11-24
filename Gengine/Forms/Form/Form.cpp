@@ -13,7 +13,7 @@ void Core::Form::handle_resize(Surface rect)
 
 Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
 	: WindowsWindow(hinst,width,height,LoadIcon(hinst,MAKEINTRESOURCE(IDI_ICON1)))
-	, _graphics(GraphicsContext::new_context(WindowsWindow::hwnd(), WindowsWindow::size()))
+	, _graphics(Graphics_CreateContext(hwnd()))
 	, _ui_context(new UI::UIContext(_graphics))
 	, main_scene(_graphics->create_scene())
 {

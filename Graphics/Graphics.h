@@ -32,12 +32,12 @@ namespace Core
 		Render::IGDevice* _gdevice;
 		Render::IGContext* _gcontext;
 	private:
-		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 		
 		Render::SpriteEngine* _spriteEngine;
 		Render::Passer _passer;
 		
 	public:
+		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 		ShaderCollection shader_collection;
 		Render::DepthStencilStatesCollection dss_collection;
 
@@ -58,8 +58,7 @@ namespace Core
 
 		void make_frame() const;
 		void present_frame() const;
-	public:
-		
-		static GraphicsContext* new_context(HWND hwnd,Surface size);
 	};
 }
+
+__declspec(dllexport) Core::GraphicsContext* Graphics_CreateContext(HWND hwnd);

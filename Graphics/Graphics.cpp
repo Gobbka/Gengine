@@ -9,7 +9,6 @@
 #include "Graphics/GDevice/D11GDevice.h"
 #include "Graphics/Que/CreateLightMapPass/CreateLightMapPass.h"
 #include "Graphics/Que/CreateNormalsMapPass/CreateNormalsmapPass.h"
-#include "Graphics/Que/CreateShadowmapPass/CreateShadowMapPass.h"
 #include "Graphics/Que/DrawSkyboxPass/DrawSkyboxPass.h"
 #include "Types/Types.h"
 
@@ -20,6 +19,8 @@
 #include "Render/d3d/Vertex.h"
 #include "Render/Engine/RenderTarget.h"
 #include "Render/Engine/SpriteEngine.h"
+
+#include "GraphicsBuildSettings.h"
 
 Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11DeviceContext* context)
 	: context(context)
@@ -172,15 +173,19 @@ void Core::GraphicsContext::present_frame() const
 	_swap->Present(1u, 0u);
 }
 
-Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd,Surface size)
+Core::GraphicsContext* Graphics_CreateContext(HWND hwnd)
 {
-	IDXGISwapChain* pswap=nullptr;
-	ID3D11Device* device=nullptr;
-	ID3D11DeviceContext* context=nullptr;
+#ifdef DRAW_LIBRARY_DX11
+	IDXGISwapChain* pswap = nullptr;
+	ID3D11Device* device = nullptr;
+	ID3D11DeviceContext* context = nullptr;
+	RECT screen_resolution;
+
+	GetClientRect(hwnd, &screen_resolution);
 
 	DXGI_SWAP_CHAIN_DESC sd;
 	sd.BufferDesc = DXGI_MODE_DESC{
-		(UINT)size.width,(UINT)size.height,
+		(UINT)screen_resolution.left,(UINT)screen_resolution.bottom,
 		{60,1},
 		DXGI_FORMAT_B8G8R8A8_UNORM,
 		DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED,
@@ -193,15 +198,15 @@ Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd,Surface size
 	sd.Windowed = true;
 	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	sd.Flags = 0;
-	
+
 	auto hr = D3D11CreateDeviceAndSwapChain(
 		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
 		nullptr,
 #ifdef _DEBUG 
-		D3D11_CREATE_DEVICE_DEBUG 
+		D3D11_CREATE_DEVICE_DEBUG
 #else 
-		0 
+		0
 #endif
 		,
 		nullptr,
@@ -215,5 +220,6 @@ Core::GraphicsContext* Core::GraphicsContext::new_context(HWND hwnd,Surface size
 	);
 	assert(SUCCEEDED(hr));
 
-	return new GraphicsContext(device, pswap, context);
+	return new Core::GraphicsContext(device, pswap, context);
+#endif
 }

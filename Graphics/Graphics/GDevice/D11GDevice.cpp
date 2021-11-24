@@ -16,6 +16,7 @@ D3D11_USAGE get_d11_usage(Render::IVertexBufferDesc::Usage usage)
 	case Render::IVertexBufferDesc::Usage::dynamic:
 		return D3D11_USAGE_DYNAMIC;
 	}
+	throw std::exception("Unknown usage");
 }
 
 Render::IVertexBuffer<char>* Render::D11GDevice::alloc_vertex_buffer_impl(void* data, UINT element_size,

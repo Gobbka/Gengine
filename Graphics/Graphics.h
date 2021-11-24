@@ -10,10 +10,7 @@
 #include "Graphics/Que/IPass/Passer.h"
 
 namespace Render {
-	class IGContext;
-	class RenderTarget;
 	class SamplerState;
-	class Camera;
 }
 
 namespace Core

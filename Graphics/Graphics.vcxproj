@@ -202,7 +202,6 @@
     <ClInclude Include="Render\Light\DirectionLightComponent.h" />
     <ClInclude Include="Graphics\Components\MeshRenderer.h" />
     <ClInclude Include="Render\Viewer\WorldViewer.h" />
-    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp" />
@@ -325,9 +324,6 @@
     <ProjectReference Include="..\Core\Core.vcxproj">
       <Project>{23ace9d1-999a-4a6b-a355-a81ae87b95e9}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Graphics.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

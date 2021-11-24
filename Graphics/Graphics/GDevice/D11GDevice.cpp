@@ -11,7 +11,6 @@ D3D11_USAGE get_d11_usage(Render::IVertexBufferDesc::Usage usage)
 	{
 	case Render::IVertexBufferDesc::Usage::classic:
 		return D3D11_USAGE_DEFAULT;
-		break;
 	case Render::IVertexBufferDesc::Usage::immutable:
 		return D3D11_USAGE_IMMUTABLE;
 	case Render::IVertexBufferDesc::Usage::dynamic:
@@ -19,16 +18,16 @@ D3D11_USAGE get_d11_usage(Render::IVertexBufferDesc::Usage usage)
 	}
 }
 
-Render::IVertexBuffer<char>* Render::D11GDevice::alloc_vertex_buffer_impl(void* data, size_t element_size,
+Render::IVertexBuffer<char>* Render::D11GDevice::alloc_vertex_buffer_impl(void* data, UINT element_size,
 	IVertexBufferDesc desc)
 {
-	const D3D11_BUFFER_DESC vbuffer{
-		element_size * desc.length,
+	D3D11_BUFFER_DESC vbuffer{
+		(UINT)(element_size * desc.length),
 		get_d11_usage(desc.usage),
 		D3D11_BIND_VERTEX_BUFFER,
 		(desc.usage == IVertexBufferDesc::Usage::dynamic ? D3D11_CPU_ACCESS_WRITE : 0u),
 		0,
-		sizeof(Vertex)
+		element_size
 	};
 	D3D11_SUBRESOURCE_DATA sd{ data,0,0 };
 

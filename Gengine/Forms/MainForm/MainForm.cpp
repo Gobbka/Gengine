@@ -70,7 +70,8 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	, _topbar_panel(new UI::FlexColumnPanel({0, 0}, {(float)width, 30}, {RGB_TO_FLOAT(26, 26, 26)}))
 	, _worldspace_panel(new UI::FlexColumnPanel({0, -30}, {250, (float)height - 30.f}, {RGB_TO_FLOAT(20, 20, 20)}))
 	, _assets_panel_wrapper(new UI::FlexColumnPanel({250, -1 * (float)height + 250.f}, {(float)width - 250, 250},{RGB_TO_FLOAT(26, 26, 26)}))
-	, _render_panel(new UI::Panel({250, -30}, {897, 500}, nullptr)), editorScene(get_graphics_context()->create_scene())
+	, _assets_panel(new UI::FlexRowPanel({0, 0}, {(float)width - 250, 250 - 30}, {RGB_TO_FLOAT(26, 26, 26)})),
+	_render_panel(new UI::Panel({250, -30}, {897, 500}, nullptr)), editorScene(get_graphics_context()->create_scene())
 {
 	auto* font = new Render::SpriteFont(get_graphics_context()->get_device(), L"visby.spritefont");
 
@@ -86,8 +87,6 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 		(new UI::FlexRowPanel({ 0,0 }, { (float)width - 450,30 }, { RGB_TO_FLOAT(34,34,34) }))
 		->add_element(new UI::Text(font,L"Assets",{0,0}))
 	);
-
-	_assets_panel = new UI::FlexRowPanel({ 0,0}, { (float)width - 250,250-30 }, { RGB_TO_FLOAT(26,26,26) });
 
 	_assets_panel_wrapper->add_element(_assets_panel);
 
@@ -106,7 +105,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_render_panel->set_texture(worldTexture->get_texture());
 
 	_topbar_panel->add_element(new UI::Text(font, L"GEngine",{0,0}));
-
+	
 	auto uicanvas = uicanvas_entity->get<UI::InteractiveForm>();
 	
 	uicanvas

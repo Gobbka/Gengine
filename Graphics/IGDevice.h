@@ -14,7 +14,7 @@ namespace Render
 	class __declspec(dllexport) IGDevice
 	{
 	protected:
-		virtual IVertexBuffer<char>* alloc_vertex_buffer_impl(void*data,size_t element_size, IVertexBufferDesc desc) = 0;
+		virtual IVertexBuffer<char>* alloc_vertex_buffer_impl(void*data,UINT element_size, IVertexBufferDesc desc) = 0;
 	public:
 		virtual ~IGDevice() = default;
 

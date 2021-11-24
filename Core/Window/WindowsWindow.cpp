@@ -4,9 +4,9 @@
 #include <iostream>
 #include "WindowsManager.h"
 
-LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+LRESULT GE::Window::window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {	
-	auto* window = (WindowsWindow*)WindowsManager::instance()->get_by_hwnd(hwnd);
+	auto* window = (Window*)WindowsManager::instance()->get_by_hwnd(hwnd);
 
 	if(!window)
 		return DefWindowProc(hwnd, msg, wParam, lParam);
@@ -52,7 +52,7 @@ LRESULT Core::WindowsWindow::window_procedure(HWND hwnd, UINT msg, WPARAM wParam
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }
 
-void Core::WindowsWindow::handle_resize(Surface rect)
+void GE::Window::handle_resize(Surface rect)
 {
 	_size = rect;
 
@@ -60,7 +60,7 @@ void Core::WindowsWindow::handle_resize(Surface rect)
 		this->on_resize(rect);
 }
 
-Core::WindowsWindow::WindowsWindow(HINSTANCE hint, UINT width, UINT height,HICON icon)
+GE::Window::Window(HINSTANCE hint, UINT width, UINT height,HICON icon)
 	: _size(width,height)
 	, keyboard(new Keyboard())
 {
@@ -112,17 +112,17 @@ Core::WindowsWindow::WindowsWindow(HINSTANCE hint, UINT width, UINT height,HICON
 	WindowsManager::instance()->register_window(this);
 }
 
-void Core::WindowsWindow::show()
+void GE::Window::show()
 {
 	ShowWindow(_hwnd, SW_SHOW);
 }
 
-void Core::WindowsWindow::hide()
+void GE::Window::hide()
 {
 	ShowWindow(_hwnd, SW_HIDE);
 }
 
-void Core::WindowsWindow::peek()
+void GE::Window::peek()
 {
 	MSG msg;
 
@@ -133,12 +133,12 @@ void Core::WindowsWindow::peek()
 	}
 }
 
-HWND Core::WindowsWindow::hwnd()
+HWND GE::Window::hwnd()
 {
 	return _hwnd;
 }
 
-Surface Core::WindowsWindow::size()
+Surface GE::Window::size()
 {
 	return _size;
 }

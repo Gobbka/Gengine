@@ -1,6 +1,6 @@
 ﻿#include "WindowsManager.h"
 
-Core::WindowsWindow* Core::WindowsManager::get_by_hwnd(HWND hwnd)
+GE::Window* GE::WindowsManager::get_by_hwnd(HWND hwnd)
 {
 	for(auto*wnd : _windows)
 	{
@@ -11,26 +11,26 @@ Core::WindowsWindow* Core::WindowsManager::get_by_hwnd(HWND hwnd)
 	return nullptr;
 }
 
-Core::WindowsWindow* Core::WindowsManager::create_window(HINSTANCE hinst, UINT width, UINT height)
+GE::Window* GE::WindowsManager::create_window(HINSTANCE hinst, UINT width, UINT height)
 {
-	auto* new_window = new Core::WindowsWindow(hinst,width,height);
+	auto* new_window = new Window(hinst,width,height);
 
 	register_window(new_window);
 
 	return new_window;
 }
 
-void Core::WindowsManager::register_window(WindowsWindow* wnd)
+void GE::WindowsManager::register_window(Window* wnd)
 {
 	_windows.push_back(wnd);
 }
 
-void Core::WindowsManager::remove_window(WindowsWindow* wnd)
+void GE::WindowsManager::remove_window(Window* wnd)
 {
 	// TODO: complete
 }
 
-Core::WindowsManager* Core::WindowsManager::instance()
+GE::WindowsManager* GE::WindowsManager::instance()
 {
 	static auto* instance = new WindowsManager();
 	return instance;

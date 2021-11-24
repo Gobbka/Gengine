@@ -7,8 +7,8 @@
 #include "Keyboard.h"
 
 
-namespace Core {
-	class __declspec(dllexport) WindowsWindow
+namespace GE {
+	class __declspec(dllexport) Window
 	{
 	private:
 		static LRESULT CALLBACK window_procedure(HWND, UINT, WPARAM, LPARAM);
@@ -30,7 +30,7 @@ namespace Core {
 		std::function<void(Surface)> on_resize;
 		std::function<void(UINT msg,WPARAM wParam,LPARAM lParam)> on_wndproc;
 		
-		WindowsWindow(HINSTANCE hinst,UINT width=800u,UINT height=600u,HICON icon = nullptr);
+		Window(HINSTANCE hinst,UINT width=800u,UINT height=600u,HICON icon = nullptr);
 
 		void show();
 		void hide();

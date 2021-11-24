@@ -19,7 +19,7 @@ namespace UI {
 
 namespace Forms
 {
-	class MainForm : public Core::Form
+	class MainForm : public GE::Form
 	{
 		void print_element(UI::InteractiveElement* element,UINT deep);
 		void print_gpu_info();

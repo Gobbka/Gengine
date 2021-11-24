@@ -5,14 +5,14 @@
 #include "Window/WindowsManager.h"
 #include "../../resource.h"
 
-void Core::Form::handle_resize(Surface rect)
+void GE::Form::handle_resize(Surface rect)
 {
     _graphics->set_resolution(rect);
-    WindowsWindow::handle_resize(rect);
+    Window::handle_resize(rect);
 }
 
-Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
-	: WindowsWindow(hinst,width,height,LoadIcon(hinst,MAKEINTRESOURCE(IDI_ICON1)))
+GE::Form::Form(HINSTANCE hinst, UINT width, UINT height)
+	: Window(hinst,width,height,LoadIcon(hinst,MAKEINTRESOURCE(IDI_ICON1)))
 	, _graphics(Graphics_CreateContext(hwnd()))
 	, _ui_context(new UI::UIContext(_graphics))
 	, main_scene(_graphics->create_scene())
@@ -20,30 +20,30 @@ Core::Form::Form(HINSTANCE hinst, UINT width, UINT height)
     main_scene->set_main_camera(main_scene->create_camera(_graphics->get_render_target_view()));
 }
 
-Core::Form::~Form()
+GE::Form::~Form()
 {
 	WindowsManager::instance()->remove_window(this);
 }
 
-UI::UIContext* Core::Form::get_ui()
+UI::UIContext* GE::Form::get_ui()
 {
     return _ui_context;
 }
 
-Core::GraphicsContext* Core::Form::get_graphics_context() const
+Core::GraphicsContext* GE::Form::get_graphics_context() const
 {
     return _graphics;
 }
 
-void Core::Form::drag_move()
+void GE::Form::drag_move()
 {
     ReleaseCapture();
     SendMessage(hwnd(), WM_NCLBUTTONDOWN, HTCAPTION, 0);
 }
 
-void Core::Form::force_draw()
+void GE::Form::force_draw()
 {
-    if (WindowsWindow::size().width == 0.f)
+    if (size().width == 0.f)
     {
         Sleep(17);
         return;

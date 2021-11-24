@@ -2,17 +2,17 @@
 #include <vector>
 #include "WindowsWindow.h"
 
-namespace Core {
+namespace GE {
 	class __declspec(dllexport) WindowsManager
 	{
 	private:
-		std::vector<Core::WindowsWindow*> _windows;
+		std::vector<Window*> _windows;
 	public:
-		Core::WindowsWindow* get_by_hwnd(HWND hwnd);
+		Window* get_by_hwnd(HWND hwnd);
 
-		Core::WindowsWindow* create_window(HINSTANCE hinst, UINT width = 800u, UINT height = 600u);
-		void register_window(WindowsWindow* wnd);
-		void remove_window(WindowsWindow* wnd);
+		Window* create_window(HINSTANCE hinst, UINT width = 800u, UINT height = 600u);
+		void register_window(Window* wnd);
+		void remove_window(Window* wnd);
 
 		static WindowsManager* instance();
 	};

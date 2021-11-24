@@ -10,11 +10,14 @@ namespace UI {
 namespace Core
 {
 	class GraphicsContext;
+}
 
-	class Form : public WindowsWindow
+namespace GE
+{
+
+	class Form : public Window
 	{
-
-		GraphicsContext* _graphics;
+		Core::GraphicsContext* _graphics;
 		UI::UIContext* _ui_context;
 		
 	protected:
@@ -27,7 +30,7 @@ namespace Core
 		Color3XM background{ 0,0,0 };
 
 		UI::UIContext* get_ui();
-		GraphicsContext* get_graphics_context() const;
+		Core::GraphicsContext* get_graphics_context() const;
 
 		void drag_move();
 		void force_draw();

@@ -188,6 +188,6 @@ class __declspec(dllexport) Keyboard
 {
     bool virtual_keys[0XFE]{};
 public:
-	bool pressed(VirtualKey key);
+	bool pressed(VirtualKey key) const;
 	void set(VirtualKey key, bool active);
 };

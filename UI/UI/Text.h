@@ -39,6 +39,7 @@ namespace UI
 		void set_texture(Render::Texture* texture) override;
 		void move_by(Position2) override;
 		void draw(Render::DrawEvent2D* event) override;
+		void set_color(Color3XM color);
 		Position2 get_position() override;
 		ElementDescription get_desc() override;
 		Surface get_resolution() override;

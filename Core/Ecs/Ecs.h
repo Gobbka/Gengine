@@ -458,7 +458,12 @@ namespace ECS
 		template<typename T>
 		bool remove()
 		{
-			auto found = components.find(getTypeIndex<T>());
+			return remove(getTypeIndex<T>());
+		}
+
+		bool remove(TypeIndex index)
+		{
+			auto found = components.find(index);
 			if (found != components.end())
 			{
 				found->second->removed(this);

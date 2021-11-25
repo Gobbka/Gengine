@@ -1,8 +1,6 @@
 ﻿#include "Keyboard.h"
 
-bool virtual_keys[0XFE]{};
-
-bool Keyboard::pressed(VirtualKey key)
+bool Keyboard::pressed(VirtualKey key) const
 {
 	return virtual_keys[(__int8)key];
 }

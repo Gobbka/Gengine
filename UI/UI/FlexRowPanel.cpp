@@ -143,6 +143,11 @@ void UI::FlexRowPanel::set_resolution(Surface surface)
 
 void UI::FlexRowPanel::handle_mouse_scroll(int delta)
 {
+	if(_scroll_bar_height >= 1)
+	{
+		return;
+	}
+
 	auto fdelta = (float)delta;
 	auto content_height = _resolution.height / _scroll_bar_height;
 

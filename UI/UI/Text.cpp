@@ -176,6 +176,14 @@ void UI::Text::draw(Render::DrawEvent2D* event)
 
 }
 
+void UI::Text::set_color(Color3XM color)
+{
+	for (int i = 0; i < _length * GLYPH_VERTEX_SIZE; i++)
+	{
+		_vbuffer[i].color = color;
+	}
+}
+
 Position2 UI::Text::get_position()
 {
 	return { 0,0 };

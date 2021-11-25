@@ -24,6 +24,7 @@ namespace UI
 
 		void set_position(Position2 position) override;
 		void set_color(Color3XM color);
+		void set_text_color(Color3XM color);
 		void move_by(Position2 offset) override;
 		void set_resolution(Surface resolution) override;
 

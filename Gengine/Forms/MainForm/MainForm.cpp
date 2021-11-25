@@ -83,9 +83,10 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 
 	_assets_panel_wrapper->add_element(
 		(new UI::FlexRowPanel({ 0,0 }, { (float)width - 450,30 }, { RGB_TO_FLOAT(34,34,34) }))
-		->add_element(new UI::Text(font,L"Assets",{0,0}))
+		->add_element(new UI::Button({ 0,0 }, { 70,30 }, { RGB_TO_FLOAT(34,34,34) },font, L"Assets"))
+		->add_element(new UI::Button({ 0,0 }, { 80,30 }, { RGB_TO_FLOAT(34,34,34) },font, L"Console"))
 	);
-
+	
 	_assets_panel_wrapper->add_element(_assets_panel);
 
 	auto folder_material = AssetsLoader::load_png(L"assets\\folder.png");

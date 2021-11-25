@@ -44,6 +44,11 @@ void UI::Button::set_color(Color3XM color)
 	_color = color;
 }
 
+void UI::Button::set_text_color(Color3XM color)
+{
+	_text.set_color(color);
+}
+
 void UI::Button::move_by(Position2 offset)
 {
 	_position += offset;
@@ -86,6 +91,7 @@ void UI::Button::handle_mouse_enter()
 void UI::Button::handle_mouse_leave()
 {
 	_visible_color = _color;
+
 	InteractiveElement::handle_mouse_leave();
 }
 

@@ -27,6 +27,7 @@ namespace Render
 		virtual IIndexBuffer* alloc_index_buffer(void* data, unsigned size) = 0;
 
 		Texture* create_texture(Material& material);
+		Texture* create_texture(Material material);
 		virtual Texture* create_texture(ITexture2DDesc desc) =0;
 		virtual Rasterizer create_rasterizer(RasterizerDesc desc)=0;
 	};
@@ -58,6 +59,18 @@ namespace Render
 		desc.height = (UINT)material.height();
 		desc.width  = (UINT)material.width();
 		desc.rows   = 0;
+		desc.stride = 0;
+		desc.pSysMem = material.pSysMem();
+		return this->create_texture(desc);
+	}
+
+	inline Texture* IGDevice::create_texture(Material material)
+	{
+		ITexture2DDesc desc;
+		desc.format = material.format;
+		desc.height = (UINT)material.height();
+		desc.width = (UINT)material.width();
+		desc.rows = 0;
 		desc.stride = 0;
 		desc.pSysMem = material.pSysMem();
 		return this->create_texture(desc);

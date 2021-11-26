@@ -53,16 +53,11 @@ int WINAPI wWinMain(
     {
     	form->get_ui()->window_proc(msg, wp, lp);
     };
-
-    auto stone_material = AssetsLoader::load_png(L"assets\\Pebbles_027_BaseColor.png");
-    auto stone_material_normals = AssetsLoader::load_png(L"assets\\Pebbles_027_Normal.png");
-    auto workbench_material = AssetsLoader::load_png(L"assets\\workspace_background.png");
-    Render::Material red_material(Color3XM::from_rgb(255, 50, 50));
 	
-    auto* stone_texture = context->get_device()->create_texture(stone_material);
-    auto* stone_texture_normals = context->get_device()->create_texture(stone_material_normals);
-    auto* workbench_texture = context->get_device()->create_texture(workbench_material);
-    auto* red_texture = context->get_device()->create_texture(red_material);
+    auto* stone_texture = context->get_device()->create_texture(AssetsLoader::load_png(L"assets\\Pebbles_027_BaseColor.png"));
+    auto* stone_texture_normals = context->get_device()->create_texture(AssetsLoader::load_png(L"assets\\Pebbles_027_Normal.png"));
+    auto* workbench_texture = context->get_device()->create_texture(AssetsLoader::load_png(L"assets\\workspace_background.png"));
+    auto* red_texture = context->get_device()->create_texture(Render::Material(Color3XM::from_rgb(255,50,50)));
 
     auto*light = form->editorScene->create_direction_light();
     const auto component = light->get<Render::DirectionLightComponent>();

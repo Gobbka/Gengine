@@ -65,11 +65,11 @@ namespace UI
 
 Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	: Form(TEXT("GEngine"), hinst, width, height)
-	, _topbar_panel(new UI::FlexColumnPanel({0, 0}, {(float)width, 30}, {RGB_TO_FLOAT(26, 26, 26)}))
-	, _worldspace_panel(new UI::FlexColumnPanel({0, -30}, {250, (float)height - 30.f}, {RGB_TO_FLOAT(20, 20, 20)}))
-	, _assets_panel_wrapper(new UI::FlexColumnPanel({250, -1 * (float)height + 250.f}, {(float)width - 250, 250},{RGB_TO_FLOAT(26, 26, 26)}))
-	, _assets_panel(new UI::FlexRowPanel({0, 0}, {(float)width - 250, 250 - 30}, {RGB_TO_FLOAT(26, 26, 26)})),
-	_render_panel(new UI::Panel({250, -30}, {897, 500}, nullptr)), editorScene(get_graphics_context()->create_scene())
+	, _topbar_panel(new UI::FlexRowPanel({ 0, 0 }, { (float)width, 30 }, { RGB_TO_FLOAT(26, 26, 26) }))
+	, _worldspace_panel(new UI::FlexColumnPanel({ 0, -30 }, { 250, (float)height - 30.f }, { RGB_TO_FLOAT(20, 20, 20) }))
+	, _assets_panel_wrapper(new UI::FlexColumnPanel({ 250, -1 * (float)height + 250.f }, { (float)width - 250, 250 }, { RGB_TO_FLOAT(26, 26, 26) }))
+	, _assets_panel(new UI::FlexRowPanel({ 0, 0 }, { (float)width - 250, 250 - 30 }, { RGB_TO_FLOAT(26, 26, 26) })),
+	_render_panel(new UI::Panel({ 250, -30 }, { 897, 500 }, nullptr)), editorScene(get_graphics_context()->create_scene())
 {
 	auto* font = new Render::SpriteFont(get_graphics_context()->get_device(), L"visby.spritefont");
 
@@ -77,25 +77,22 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	const auto main_cam = main_scene->get_main_camera()->get<Render::Camera>();
 	main_cam->get_target_view()->clear_color = Color3XM(.05f, .05f, .05f);
 
-	auto* uicanvas_entity = get_ui()->create_layer();
+	auto uicanvas = get_ui()->create_layer()->get<UI::InteractiveForm>();
 
-	_worldspace_panel->add_element(new UI::Button({ 0,0 }, { 0,50 }, { RGB_TO_FLOAT(48,48,48)}, font,L"Create nigger"));
+	_worldspace_panel->add_element(new UI::Button({ 0,0 }, { 0,50 }, { RGB_TO_FLOAT(48,48,48) }, font, L"Create nigger"));
 
 	_assets_panel_wrapper->add_element(
 		(new UI::FlexRowPanel({ 0,0 }, { (float)width - 450,30 }, { RGB_TO_FLOAT(34,34,34) }))
-		->add_element(new UI::Button({ 0,0 }, { 70,30 }, { RGB_TO_FLOAT(34,34,34) },font, L"Assets"))
-		->add_element(new UI::Button({ 0,0 }, { 80,30 }, { RGB_TO_FLOAT(34,34,34) },font, L"Console"))
+		->add_element(new UI::Button({ 0,0 }, { 70,30 }, { RGB_TO_FLOAT(34,34,34) }, font, L"Assets"))
+		->add_element(new UI::Button({ 0,0 }, { 80,30 }, { RGB_TO_FLOAT(34,34,34) }, font, L"Console"))
 	);
-	
+
 	_assets_panel_wrapper->add_element(_assets_panel);
 
-	auto folder_material = AssetsLoader::load_png(L"assets\\folder.png");
-	auto file_material = AssetsLoader::load_png(L"assets\\file.png");
+	_folder_texture = get_graphics_context()->get_device()->create_texture(AssetsLoader::load_png(L"assets\\folder.png"));
+	_file_texture = get_graphics_context()->get_device()->create_texture(AssetsLoader::load_png(L"assets\\file.png"));
 
-	_folder_texture = get_graphics_context()->get_device()->create_texture(folder_material);
-	_file_texture = get_graphics_context()->get_device()->create_texture(file_material);
-
-	auto worldTexture = new Render::RenderTarget(get_graphics_context(),{1400,780});
+	auto worldTexture = new Render::RenderTarget(get_graphics_context(), { 1400,780 });
 	auto* editorCam = editorScene->create_camera(worldTexture);
 	editorScene->set_main_camera(editorCam);
 	auto cam = editorCam->get<Render::Camera>();
@@ -103,9 +100,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 
 	_render_panel->set_texture(worldTexture->get_texture());
 
-	_topbar_panel->add_element(new UI::Text(font, L"GEngine",{0,0}));
-	
-	auto uicanvas = uicanvas_entity->get<UI::InteractiveForm>();
+	_topbar_panel->add_element(new UI::Button({ 0,0 }, { 50,30 }, { RGB_TO_FLOAT(34,34,34) }, font, L"Build"));
 	
 	uicanvas
 		->add_element(_topbar_panel)

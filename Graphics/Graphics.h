@@ -28,7 +28,6 @@ namespace Core
 
 		Render::SamplerState* _samplerState;
 
-		D3D11_VIEWPORT _viewport;
 		Render::IGDevice* _gdevice;
 		Render::IGContext* _gcontext;
 	private:
@@ -56,7 +55,7 @@ namespace Core
 	public:
 		void set_resolution(Surface new_resolution);
 
-		void make_frame() const;
+		void make_frame();
 		void present_frame() const;
 	};
 }

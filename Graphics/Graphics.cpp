@@ -36,30 +36,22 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	, dss_collection(this)
 	, main_scene(nullptr)
 {
-	_screen_resolution = _targetView.get_texture()->resolution();
+	set_resolution(_targetView.get_texture()->resolution());
 	
-	auto* _texture_vs = new Render::VertexShader(this, L"d3d11\\texture_vs.cso",Render::VertexLayout,ARRAYSIZE(Render::VertexLayout));
+	auto* texture_vs = new Render::VertexShader(this, L"d3d11\\texture_vs.cso",Render::VertexLayout,ARRAYSIZE(Render::VertexLayout));
 
-	shader_collection.insert(L"d3d11\\texture_vs.cso", _texture_vs);
+	shader_collection.insert(L"d3d11\\texture_vs.cso", texture_vs);
 
-	_gcontext->set_vertex_shader(_texture_vs);
+	_gcontext->set_vertex_shader(texture_vs);
 
-	_passer._begin_passes.push_back(new Render::ClearPass(this));
-	_passer._begin_passes.push_back(new Render::DrawSkyboxPass(this));
+	_passer.add_pass(new Render::ClearPass(this), Render::PassStep::begin);
+	_passer.add_pass(new Render::DrawSkyboxPass(this), Render::PassStep::begin);
 	//_passer._probe_passes.push_back(new Render::CreateShadowMapPass());
-	_passer._probe_passes.push_back(new Render::CreateNormalsMapPass(this));
-	_passer._probe_passes.push_back(new Render::CreateLightMapPass(this));
-	_passer._end_passes.push_back(new Render::RenderMeshPass(this));
+	_passer.add_pass(new Render::CreateNormalsMapPass(this), Render::PassStep::probe);
+	//_passer._probe_passes.push_back(new Render::CreateLightMapPass(this));
+	_passer.add_pass(new Render::RenderMeshPass(this), Render::PassStep::draw);
 
 	_gcontext->set_topology(PrimitiveTopology::TRIANGLESTRIP);
-	
-	_viewport.Width  = _screen_resolution.width;
-	_viewport.Height = _screen_resolution.height;
-	_viewport.MaxDepth = 1;
-	_viewport.MinDepth = 0;
-	_viewport.TopLeftX = 0;
-	_viewport.TopLeftY = 0;
-	context->RSSetViewports(1, &_viewport);
 
 	_samplerState->bind();
 }
@@ -107,65 +99,24 @@ void Core::GraphicsContext::set_resolution(Surface new_resolution)
 {
 	_screen_resolution = new_resolution;
 
-	_viewport.Width = _screen_resolution.width;
-	_viewport.Height = _screen_resolution.height;
+	const CD3D11_VIEWPORT viewport{ 0.f,0.f,_screen_resolution.width,_screen_resolution.height };
+	context->RSSetViewports(1, &viewport);
 }
 
-void Core::GraphicsContext::make_frame() const
+void Core::GraphicsContext::make_frame()
 {
+	if (_screen_resolution.width == 0.f || _screen_resolution.height == 0.f)
+		return;
+
 	for (auto* scene : scenes) {
 
 		if (!scene->active || scene == main_scene)
 			continue;
 
-		if (_viewport.Width == 0.f || _viewport.Height == 0.f)
-			return;
-
-		context->RSSetViewports(1, &_viewport);
-
-		for (Render::IPass* pass : _passer._begin_passes)
-		{
-			pass->execute(scene);
-		}
-		for (Render::IPass* pass : _passer._probe_passes)
-		{
-			pass->execute(scene);
-		}
-		for (Render::IPass* pass : _passer._draw_passes)
-		{
-			pass->execute(scene);
-		}
-		for (Render::IPass* pass : _passer._end_passes)
-		{
-			pass->execute(scene);
-		}
-		for (Render::IPass* pass : _passer._overlay_passes)
-		{
-			pass->execute(scene);
-		}
+		_passer.execute(scene);
 	}
 
-	for (Render::IPass* pass : _passer._begin_passes)
-	{
-		pass->execute(main_scene);
-	}
-	for (Render::IPass* pass : _passer._probe_passes)
-	{
-		pass->execute(main_scene);
-	}
-	for (Render::IPass* pass : _passer._draw_passes)
-	{
-		pass->execute(main_scene);
-	}
-	for (Render::IPass* pass : _passer._end_passes)
-	{
-		pass->execute(main_scene);
-	}
-	for (Render::IPass* pass : _passer._overlay_passes)
-	{
-		pass->execute(main_scene);
-	}
-
+	_passer.execute(main_scene);
 }
 
 void Core::GraphicsContext::present_frame() const

@@ -2,12 +2,7 @@
 
 namespace Render
 {
-	enum class PassStep
-	{
-		probe,
-		draw,
-		overlay
-	};
+
 
 	class Scene;
 

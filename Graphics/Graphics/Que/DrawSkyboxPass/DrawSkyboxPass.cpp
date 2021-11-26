@@ -13,6 +13,7 @@ void Render::DrawSkyboxPass::execute(Scene*scene)
 	gcontext->set_rasterizer(_skybox_rasterizer);
 	gcontext->set_topology(_skybox_cube.topology);
 	gcontext->set_pixel_shader(_context->shader_collection.get<PixelShader>(L"d3d11\\texture_ps.cso"));
+
 	_skybox_cube.buffer->bind();
 	_skybox_cube.index_buffer->bind();
 

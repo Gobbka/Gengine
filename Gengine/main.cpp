@@ -3,6 +3,7 @@
 #include "PhysicsModule.h"
 #include "UIContext.h"
 #include "Forms/MainForm/MainForm.h"
+#include "Forms/WelcomeForm/WelcomeForm.h"
 #include "Render/I3DObject/Cube/Cube.h"
 #include <Render/I3DObject/Parallelepiped/Parallelepiped.h>
 #include "Debugger/PipeServer.h"
@@ -45,7 +46,9 @@ int WINAPI wWinMain(
 
     auto*form = new Forms::MainForm(hInstance, 1400, 780);
     form->show();
-    form->background = { 17,17,17 };
+
+    auto* welcome_form = new Forms::WelcomeForm(hInstance);
+	welcome_form->show();
 
     auto* context = form->get_graphics_context();
 
@@ -95,6 +98,10 @@ int WINAPI wWinMain(
         form->peek();
         form->update();
         form->force_draw();
+
+        welcome_form->peek();
+        welcome_form->update();
+        welcome_form->force_draw();
 
         auto now = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - time);

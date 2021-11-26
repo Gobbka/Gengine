@@ -23,11 +23,10 @@ namespace GE
 	protected:
 		void handle_resize(Surface rect) override;
 
-		Form(HINSTANCE hinst, UINT width, UINT height);
+		Form(const wchar_t*name, HINSTANCE hinst, UINT width, UINT height);
 		virtual ~Form();
 	public:
 		Render::Scene* main_scene;
-		Color3XM background{ 0,0,0 };
 
 		UI::UIContext* get_ui();
 		Core::GraphicsContext* get_graphics_context() const;

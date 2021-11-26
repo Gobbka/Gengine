@@ -173,6 +173,7 @@
     <ClCompile Include="Debugger\PipeServer.cpp" />
     <ClCompile Include="Forms\Form\Form.cpp" />
     <ClCompile Include="Forms\MainForm\MainForm.cpp" />
+    <ClCompile Include="Forms\WelcomeForm\WelcomeForm.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +194,7 @@
     <ClInclude Include="Debugger\PipeServer.h" />
     <ClInclude Include="Forms\Form\Form.h" />
     <ClInclude Include="Forms\MainForm\MainForm.h" />
+    <ClInclude Include="Forms\WelcomeForm\WelcomeForm.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

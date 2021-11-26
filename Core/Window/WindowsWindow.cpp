@@ -6,49 +6,49 @@
 
 LRESULT GE::Window::window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {	
-	auto* window = (Window*)WindowsManager::instance()->get_by_hwnd(hwnd);
+	auto* window = WindowsManager::instance()->find(hwnd);
 
-	if(!window)
-		return DefWindowProc(hwnd, msg, wParam, lParam);
+	if (window) {
 
-	if (window->on_wndproc)
-		window->on_wndproc(msg, wParam, lParam);
+		if (msg == WM_KEYDOWN)
+		{
+			window->keyboard->set((VirtualKey)wParam, true);
+		}
+		if (msg == WM_KEYUP)
+		{
+			window->keyboard->set((VirtualKey)wParam, false);
+		}
 
-	if (msg == WM_KEYDOWN)
-	{
-		window->keyboard->set((VirtualKey)wParam, true);
+		if (msg == WM_CLOSE)
+			WindowsManager::instance()->remove_window(window);
+
+		if (msg == WM_SIZE)
+		{
+			const auto window_width = LOWORD(lParam);
+			const auto window_height = HIWORD(lParam);
+
+			std::cout << window_width << " " << window_height << '\n';
+			window->handle_resize(Surface(window_width, window_height));
+		}
+
+		if (msg == WM_SIZING)
+		{
+			const auto r = *(RECT*)lParam;
+
+			const auto window_width = (UINT)(r.right - r.left);
+			const auto window_height = (UINT)(r.bottom - r.top);
+
+			if (window_width > window->max_width)
+				((RECT*)lParam)->right = r.left + window->max_width;
+
+			if (window_height > window->max_height)
+				((RECT*)lParam)->bottom = r.top + window->max_height;
+		}
+
+		if (window->on_wndproc)
+			window->on_wndproc(msg, wParam, lParam);
 	}
-	if (msg == WM_KEYUP)
-	{
-		window->keyboard->set((VirtualKey)wParam, false);
-	}
 
-	if (msg == WM_CLOSE)
-		exit(0);
-
-	if(msg == WM_SIZE)
-	{
-		const auto window_width  = LOWORD(lParam);
-		const auto window_height = HIWORD(lParam);
-
-		std::cout << window_width << " " << window_height << '\n';
-		window->handle_resize(Surface(window_width,window_height));
-	}
-	
-	if (msg == WM_SIZING)
-	{
-		RECT r = *(RECT*)lParam;
-		
-		const auto window_width  = (UINT)( r.right - r.left );
-		const auto window_height = (UINT)( r.bottom - r.top );
-		
-		if (window_width > window->max_width)
-			((RECT*)lParam)->right = r.left + window->max_width;
-
-		if (window_height > window->max_height)
-			((RECT*)lParam)->bottom = r.top + window->max_height;
-	}
-	
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }
 
@@ -60,29 +60,35 @@ void GE::Window::handle_resize(Surface rect)
 		this->on_resize(rect);
 }
 
-GE::Window::Window(HINSTANCE hint, UINT width, UINT height,HICON icon)
-	: _size(width,height)
+GE::Window::Window(const wchar_t*name,HINSTANCE hint, UINT width, UINT height,HICON icon)
+	: _hInst(hint)
+	, _size(width,height)
 	, keyboard(new Keyboard())
 {
-	_hInst = hint;
-	
-	const auto* class_name = L"GENGINE";
-	WNDCLASSEXW wndClass
+	const auto* class_name = TEXT("GEWindow");
+	static bool class_registered = false;
+	if(!class_registered)
 	{
-		sizeof(WNDCLASSEXW),
-		CS_OWNDC | CS_DBLCLKS,
-		window_procedure,
-		0,0,
-		_hInst,nullptr,LoadCursor(nullptr,IDC_ARROW),nullptr,
-		nullptr,
-		class_name,
-		icon
-	};
-	auto result = RegisterClassExW(&wndClass);
-	assert(result != 0);
+		const WNDCLASSEX wndClass
+		{
+			sizeof(WNDCLASSEX),
+			CS_OWNDC | CS_DBLCLKS,
+			window_procedure,
+			0,0,
+			_hInst,nullptr,LoadCursor(nullptr,IDC_ARROW),nullptr,
+			nullptr,
+			class_name,
+			icon
+		};
+		const auto result = RegisterClassEx(&wndClass);
+		assert(result != 0);
 
-	int centerScreenX = GetSystemMetrics(SM_CXSCREEN) / 2 - width / 2;
-	int centerScreenY = GetSystemMetrics(SM_CYSCREEN) / 2 - height / 2;
+		class_registered = true;
+	}
+
+
+	const int centerScreenX = GetSystemMetrics(SM_CXSCREEN) / 2 - width / 2;
+	const int centerScreenY = GetSystemMetrics(SM_CYSCREEN) / 2 - height / 2;
 
 	RECT wr; //Widow Rectangle
 	wr.left = centerScreenX;
@@ -94,21 +100,20 @@ GE::Window::Window(HINSTANCE hint, UINT width, UINT height,HICON icon)
 	_hwnd = CreateWindowExW(
 		0,
 		class_name,
-		L"GENIGNE MAIN",
+		name,
 		WS_CAPTION | WS_MINIMIZEBOX | WS_SIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU,
 		wr.left, //Window X Position
 		wr.top, //Window Y Position
 		wr.right - wr.left, //Window Width
 		wr.bottom - wr.top, //Window Height
-		0,
-		0,
+		nullptr,
+		nullptr,
 		_hInst,
-		0
+		nullptr
 	);
 
 	assert(_hwnd != nullptr);
 
-	_size = Surface(width, height);
 	WindowsManager::instance()->register_window(this);
 }
 
@@ -126,7 +131,7 @@ void GE::Window::peek()
 {
 	MSG msg;
 
-	if (PeekMessage(&msg, _hwnd, 0, 0, PM_REMOVE))
+	while(PeekMessage(&msg, _hwnd, 0, 0, PM_REMOVE))
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);

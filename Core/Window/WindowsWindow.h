@@ -30,7 +30,7 @@ namespace GE {
 		std::function<void(Surface)> on_resize;
 		std::function<void(UINT msg,WPARAM wParam,LPARAM lParam)> on_wndproc;
 		
-		Window(HINSTANCE hinst,UINT width=800u,UINT height=600u,HICON icon = nullptr);
+		Window(const wchar_t*name,HINSTANCE hinst,UINT width=800u,UINT height=600u,HICON icon = nullptr);
 
 		void show();
 		void hide();

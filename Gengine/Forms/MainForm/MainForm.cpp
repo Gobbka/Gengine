@@ -64,7 +64,7 @@ namespace UI
 }
 
 Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
-	: Form(hinst, width, height)
+	: Form(TEXT("GEngine"), hinst, width, height)
 	, _topbar_panel(new UI::FlexColumnPanel({0, 0}, {(float)width, 30}, {RGB_TO_FLOAT(26, 26, 26)}))
 	, _worldspace_panel(new UI::FlexColumnPanel({0, -30}, {250, (float)height - 30.f}, {RGB_TO_FLOAT(20, 20, 20)}))
 	, _assets_panel_wrapper(new UI::FlexColumnPanel({250, -1 * (float)height + 250.f}, {(float)width - 250, 250},{RGB_TO_FLOAT(26, 26, 26)}))

@@ -11,8 +11,8 @@ void GE::Form::handle_resize(Surface rect)
     Window::handle_resize(rect);
 }
 
-GE::Form::Form(HINSTANCE hinst, UINT width, UINT height)
-	: Window(hinst,width,height,LoadIcon(hinst,MAKEINTRESOURCE(IDI_ICON1)))
+GE::Form::Form(const wchar_t*name,HINSTANCE hinst, UINT width, UINT height)
+	: Window(name, hinst,width,height,LoadIcon(hinst,MAKEINTRESOURCE(IDI_ICON1)))
 	, _graphics(Graphics_CreateContext(hwnd()))
 	, _ui_context(new UI::UIContext(_graphics))
 	, main_scene(_graphics->create_scene())

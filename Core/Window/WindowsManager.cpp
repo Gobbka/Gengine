@@ -1,6 +1,6 @@
 ﻿#include "WindowsManager.h"
 
-GE::Window* GE::WindowsManager::get_by_hwnd(HWND hwnd)
+GE::Window* GE::WindowsManager::find(HWND hwnd)
 {
 	for(auto*wnd : _windows)
 	{
@@ -11,15 +11,6 @@ GE::Window* GE::WindowsManager::get_by_hwnd(HWND hwnd)
 	return nullptr;
 }
 
-GE::Window* GE::WindowsManager::create_window(HINSTANCE hinst, UINT width, UINT height)
-{
-	auto* new_window = new Window(hinst,width,height);
-
-	register_window(new_window);
-
-	return new_window;
-}
-
 void GE::WindowsManager::register_window(Window* wnd)
 {
 	_windows.push_back(wnd);
@@ -28,6 +19,16 @@ void GE::WindowsManager::register_window(Window* wnd)
 void GE::WindowsManager::remove_window(Window* wnd)
 {
 	// TODO: complete
+	for(UINT i = 0;i < _windows.size();i++)
+	{
+		if (_windows[i] == wnd)
+			_windows.erase(_windows.begin()+i);
+	}
+
+	if(_windows.size() == 0)
+	{
+		exit(0);
+	}
 }
 
 GE::WindowsManager* GE::WindowsManager::instance()

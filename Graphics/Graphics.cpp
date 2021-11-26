@@ -1,10 +1,5 @@
 #include "Graphics.h"
 
-#include <d3dcompiler.h>
-
-#pragma comment(lib,"d3d11.lib")
-#pragma comment(lib,"D3DCompiler.lib")
-
 #include "Graphics/GDevice/D11GContext.h"
 #include "Graphics/GDevice/D11GDevice.h"
 #include "Graphics/Que/CreateLightMapPass/CreateLightMapPass.h"

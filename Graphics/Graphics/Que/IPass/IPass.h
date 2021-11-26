@@ -2,8 +2,6 @@
 
 namespace Render
 {
-
-
 	class Scene;
 
 	class __declspec(dllexport) IPass

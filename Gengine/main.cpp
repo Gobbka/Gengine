@@ -47,9 +47,6 @@ int WINAPI wWinMain(
     auto*form = new Forms::MainForm(hInstance, 1400, 780);
     form->show();
 
-    auto* welcome_form = new Forms::WelcomeForm(hInstance);
-	welcome_form->show();
-
     auto* context = form->get_graphics_context();
 
     form->on_wndproc = [&](UINT msg, WPARAM wp, LPARAM lp)
@@ -98,10 +95,6 @@ int WINAPI wWinMain(
         form->peek();
         form->update();
         form->force_draw();
-
-        welcome_form->peek();
-        welcome_form->update();
-        welcome_form->force_draw();
 
         auto now = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - time);

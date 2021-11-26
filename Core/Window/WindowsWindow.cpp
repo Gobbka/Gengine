@@ -20,7 +20,7 @@ LRESULT GE::Window::window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
 		}
 
 		if (msg == WM_CLOSE)
-			WindowsManager::instance()->remove_window(window);
+			delete window;
 
 		if (msg == WM_SIZE)
 		{

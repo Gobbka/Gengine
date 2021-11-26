@@ -22,6 +22,8 @@ GE::Form::Form(const wchar_t*name,HINSTANCE hinst, UINT width, UINT height)
 
 GE::Form::~Form()
 {
+    delete _ui_context;
+    delete _graphics;
 	WindowsManager::instance()->remove_window(this);
 }
 

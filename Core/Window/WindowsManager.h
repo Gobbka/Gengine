@@ -13,6 +13,9 @@ namespace GE {
 		void register_window(Window* wnd);
 		void remove_window(Window* wnd);
 
+		auto begin() { return _windows.begin(); }
+		auto end() { return _windows.end(); }
+
 		static WindowsManager* instance();
 	};
 }

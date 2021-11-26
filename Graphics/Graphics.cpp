@@ -51,6 +51,25 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_samplerState->bind();
 }
 
+Core::GraphicsContext::~GraphicsContext()
+{
+	if (device)
+		device->Release();
+	if (context)
+		context->Release();
+	if (_swap)
+		_swap->Release();
+	delete _samplerState;
+	delete _gdevice;
+	delete _gcontext;
+	delete _spriteEngine;
+
+	for(const auto*scene:scenes)
+	{
+		scene->world()->destroyWorld();
+	}
+}
+
 Render::Scene* Core::GraphicsContext::create_scene()
 {
 	auto* scene = new Render::Scene(this);

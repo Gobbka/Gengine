@@ -15,7 +15,7 @@ namespace Render {
 
 namespace Core
 {
-	class __declspec(dllexport) GraphicsContext
+	class __declspec(dllexport) GraphicsContext final
 	{
 	public:
 		ID3D11DeviceContext* context;
@@ -37,6 +37,8 @@ namespace Core
 		
 	public:
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
+		~GraphicsContext();
+
 		ShaderCollection shader_collection;
 		Render::DepthStencilStatesCollection dss_collection;
 

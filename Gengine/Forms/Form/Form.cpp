@@ -22,6 +22,7 @@ GE::Form::Form(const wchar_t*name,HINSTANCE hinst, UINT width, UINT height)
     auto&pipeline = main_scene->render_pipeline();
     //pipeline.clear(Render::PassStep::draw);
 	pipeline.clear(Render::PassStep::probe);
+	pipeline.clear(Render::PassStep::begin);
 }
 
 GE::Form::~Form()

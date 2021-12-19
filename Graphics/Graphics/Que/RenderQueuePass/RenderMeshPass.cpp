@@ -9,12 +9,12 @@
 
 void Render::ClearPass::execute(Scene*scene)
 {
+	_context->get_context()->debug_message("ClearPass executed");
+
 	scene->world()->each<Camera>([](ECS::Entity* entity, ECS::ComponentHandle<Camera>camera)
 		{
 			camera->clear();
 		});
-
-	_context->get_context()->debug_message("RT cleaned");
 }
 
 void Render::RenderMeshPass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshRenderer> model, DirectX::XMMATRIX VPMatrix) const
@@ -86,7 +86,7 @@ void Render::RenderMeshPass::execute(Scene*scene)
 {
 	auto* gcontext = _context->get_context();
 	gcontext->debug_message("RenderMeshPass");
-	gcontext->set_topology(PrimitiveTopology::TRIANGLELIST);
+
 	gcontext->matrix_buffer.bind();
 	gcontext->control_buffer.bind();
 

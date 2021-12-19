@@ -78,8 +78,8 @@ inline void Render::RenderMeshPass::execute_scene(Render::Scene* scene)
 }
 
 Render::RenderMeshPass::RenderMeshPass(Core::GraphicsContext* context)
+	: _context(context)
 {
-	_context = context;
 }
 
 void Render::RenderMeshPass::execute(Scene*scene)

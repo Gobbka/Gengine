@@ -11,6 +11,7 @@
 void Render::CreateLightMapPass::execute(Scene*scene)
 {
 	auto* world = scene->world();
+
 	auto* gcontext = _context->get_context();
 	gcontext->debug_message("CreateLightMapPass executed");
 	_light_struct.bind();

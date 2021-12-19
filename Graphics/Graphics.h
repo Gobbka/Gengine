@@ -39,10 +39,13 @@ namespace Core
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 		~GraphicsContext();
 
+		Render::Passer& draw_pipeline();
+
 		ShaderCollection shader_collection;
 		Render::DepthStencilStatesCollection dss_collection;
 
-		Render::Scene* create_scene();
+		Render::Scene* create_empty_scene();
+		Render::Scene* create_scene_3d();
 		std::vector<Render::Scene*> scenes;
 		Render::Scene* main_scene;
 		
@@ -51,7 +54,6 @@ namespace Core
 		Surface get_screen_resolution() const;
 		inline Render::RenderTarget* get_render_target_view();
 
-		inline Render::Passer* get_passer();
 		inline Render::IGDevice* get_device() const;
 		inline Render::IGContext* get_context() const;
 	public:

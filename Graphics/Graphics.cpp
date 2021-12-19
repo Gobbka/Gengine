@@ -70,12 +70,22 @@ Core::GraphicsContext::~GraphicsContext()
 	}
 }
 
-Render::Scene* Core::GraphicsContext::create_scene()
+Render::Passer& Core::GraphicsContext::draw_pipeline()
+{
+	return _passer;
+}
+
+Render::Scene* Core::GraphicsContext::create_empty_scene()
 {
 	auto* scene = new Render::Scene(this);
 	this->scenes.push_back(scene);
 	if (main_scene == nullptr)
 		main_scene = scene;
+}
+
+Render::Scene* Core::GraphicsContext::create_scene_3d()
+{
+	auto* scene = create_empty_scene();
 	return scene;
 }
 
@@ -92,11 +102,6 @@ Surface Core::GraphicsContext::get_screen_resolution() const
 inline Render::RenderTarget* Core::GraphicsContext::get_render_target_view()
 {
 	return &_targetView;
-}
-
-inline Render::Passer* Core::GraphicsContext::get_passer()
-{
-	return &_passer;
 }
 
 inline auto Core::GraphicsContext::get_device() const -> Render::IGDevice*

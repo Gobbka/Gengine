@@ -74,7 +74,7 @@ UI::UIContext::UIContext(Core::GraphicsContext* gfx)
 	auto* vs = new Render::VertexShader(gfx, L"d3d11\\canvas_vs.cso", vertex2D_layout, ARRAYSIZE(UI::vertex2D_layout));
 	gfx->shader_collection.insert(L"d3d11\\canvas_vs.cso", vs);
 
-	gfx->get_passer()->add_pass(new DrawUIPass(gfx), Render::PassStep::overlay);
+	gfx->draw_pipeline().add_pass(new DrawUIPass(gfx), Render::PassStep::overlay);
 }
 
 void UI::UIContext::on_lbmouse_down()

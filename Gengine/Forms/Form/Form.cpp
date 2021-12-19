@@ -15,7 +15,7 @@ GE::Form::Form(const wchar_t*name,HINSTANCE hinst, UINT width, UINT height)
 	: Window(name, hinst,width,height,LoadIcon(hinst,MAKEINTRESOURCE(IDI_ICON1)))
 	, _graphics(Graphics_CreateContext(hwnd()))
 	, _ui_context(new UI::UIContext(_graphics))
-	, main_scene(_graphics->create_scene())
+	, main_scene(_graphics->create_scene_3d())
 {
     main_scene->set_main_camera(main_scene->create_camera(_graphics->get_render_target_view()));
 }

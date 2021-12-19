@@ -20,6 +20,9 @@ namespace Render {
 		std::vector<IPass*> _overlay_passes;
 	public:
 
+		void clear(PassStep step);
+		void clear_all();
+
 		void execute(Scene*scene);
 		void add_pass(IPass*,PassStep step);
 	};

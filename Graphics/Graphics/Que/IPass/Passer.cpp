@@ -1,5 +1,24 @@
 ﻿#include "Passer.h"
 
+void Render::Passer::clear(PassStep step)
+{
+	switch (step)
+	{
+	case PassStep::begin:
+		_begin_passes.clear();
+	break;
+	case PassStep::draw:
+		_draw_passes.clear();
+	break;
+	case PassStep::probe:
+		_probe_passes.clear();
+	break;
+	case PassStep::overlay:
+		_overlay_passes.clear();
+	break;
+	}
+}
+
 void Render::Passer::execute(Scene* scene)
 {
 	for (IPass* pass : _begin_passes)

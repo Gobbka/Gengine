@@ -43,7 +43,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_passer.add_pass(new Render::DrawSkyboxPass(this), Render::PassStep::begin);
 	//_passer._probe_passes.push_back(new Render::CreateShadowMapPass());
 	_passer.add_pass(new Render::CreateNormalsMapPass(this), Render::PassStep::probe);
-	_passer.add_pass(new Render::CreateLightMapPass(this),Render::PassStep::probe);
+	//_passer.add_pass(new Render::CreateLightMapPass(this),Render::PassStep::probe);
 	_passer.add_pass(new Render::RenderMeshPass(this), Render::PassStep::draw);
 
 	_gcontext->set_topology(PrimitiveTopology::TRIANGLESTRIP);

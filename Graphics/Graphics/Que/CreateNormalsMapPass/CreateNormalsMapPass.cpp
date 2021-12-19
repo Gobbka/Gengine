@@ -11,6 +11,7 @@
 void Render::CreateNormalsMapPass::execute(Scene* scene)
 {
 	auto* gcontext = _context->get_context();
+	gcontext->debug_message("CreateNormalMapPass executed");
 	_context->dss_collection[(DSBitSet)DepthStencilUsage::depth].bind();
 
 	auto* world = scene->world();

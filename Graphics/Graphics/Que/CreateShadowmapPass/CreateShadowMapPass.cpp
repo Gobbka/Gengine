@@ -11,6 +11,7 @@
 void Render::CreateShadowMapPass::execute(Scene*scene)
 {
 	auto* gcontext = _context->get_context();
+	gcontext->debug_message("CreateShadowMapPass");
 	auto* old_ps = gcontext->get_pixel_shader();
 
 	gcontext->set_pixel_shader(nullptr);

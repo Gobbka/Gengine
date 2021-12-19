@@ -8,6 +8,7 @@
 void Render::DrawSkyboxPass::execute(Scene*scene)
 {
 	auto* gcontext = _context->get_context();
+	gcontext->debug_message("DrawSkyboxPass executed");
 	auto old_rasterizer = gcontext->get_rasterizer();
 
 	gcontext->set_rasterizer(_skybox_rasterizer);

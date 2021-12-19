@@ -10,17 +10,16 @@
 
 void Render::CreateLightMapPass::execute(Scene*scene)
 {
-	_light_struct.bind();
-	
-
 	auto* world = scene->world();
 	auto* gcontext = _context->get_context();
+	gcontext->debug_message("CreateLightMapPass executed");
+	_light_struct.bind();
 	auto* old_ps = gcontext->get_pixel_shader();
 
 	gcontext->set_pixel_shader(
 		_context->shader_collection.get<PixelShader>(L"d3d11\\point_light_ps.cso")
 	);
-
+	
 	world->each<Camera, LightViewer>([&](ECS::Entity*, ECS::ComponentHandle<Camera>cam, ECS::ComponentHandle<LightViewer>lview)
 	{
 		lview->light_map.clear();

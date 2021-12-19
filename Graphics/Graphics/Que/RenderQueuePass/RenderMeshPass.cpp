@@ -13,10 +13,12 @@ void Render::ClearPass::execute(Scene*scene)
 		{
 			camera->clear();
 		});
+
+	_context->get_context()->debug_message("RT cleaned");
 }
 
 void Render::RenderMeshPass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshRenderer> model, DirectX::XMMATRIX VPMatrix) const
-{	
+{
 	auto* gcontext = _context->get_context();
 	const auto model_matrix = model->transform.get_world_matrix();
 	gcontext->matrix_buffer.data.MVPMatrix = DirectX::XMMatrixTranspose(model_matrix * VPMatrix);
@@ -83,6 +85,7 @@ Render::RenderMeshPass::RenderMeshPass(Core::GraphicsContext* context)
 void Render::RenderMeshPass::execute(Scene*scene)
 {
 	auto* gcontext = _context->get_context();
+	gcontext->debug_message("RenderMeshPass");
 	gcontext->set_topology(PrimitiveTopology::TRIANGLELIST);
 	gcontext->matrix_buffer.bind();
 	gcontext->control_buffer.bind();

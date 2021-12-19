@@ -39,6 +39,8 @@ namespace Render
 		ConstantBuffer<MatrixBufferStruct> matrix_buffer;
 		ConstantBuffer<ControlBufferStruct> control_buffer;
 
+		virtual void debug_message(const char* message) =0;
+
 		virtual void set_topology(PrimitiveTopology topology) =0;
 		virtual void set_pixel_shader(PixelShader* ps) =0;
 		virtual void set_vertex_shader(VertexShader* vs) = 0;

@@ -12,7 +12,11 @@ Render::D11GContext::D11GContext(ID3D11DeviceContext* d11context, Core::Graphics
 	_current_ps(nullptr),
 	_currect_vs(nullptr),
 	_current_sampler(nullptr)
-{}
+{
+	ID3D11Device* device;
+	_d11context->GetDevice(&device);
+	device->QueryInterface(__uuidof(ID3D11InfoQueue), (void**)&_info_queue);
+}
 
 void Render::D11GContext::set_topology(PrimitiveTopology topology)
 {
@@ -126,6 +130,11 @@ void Render::D11GContext::draw_indexed(UINT count, UINT start_location,UINT base
 void Render::D11GContext::draw(UINT count, UINT start_location)
 {
 	_d11context->Draw(count, start_location);
+}
+
+void Render::D11GContext::debug_message(const char* message)
+{
+	_info_queue->AddApplicationMessage(D3D11_MESSAGE_SEVERITY_INFO, message);
 }
 
 Render::Rasterizer Render::D11GContext::get_rasterizer()

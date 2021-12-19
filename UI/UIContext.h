@@ -9,6 +9,7 @@ namespace Core {
 }
 
 namespace Render {
+	class Scene;
 	class Camera;
 }
 
@@ -22,7 +23,7 @@ namespace UI {
 		Core::GraphicsContext* _gfx;
 		Vector2 _cursor;
 	public:
-		explicit UIContext(Core::GraphicsContext*gfx);
+		UIContext(Core::GraphicsContext*gfx,Render::Scene*scene);
 		
 		ECS::Entity* create_layer();
 	protected:

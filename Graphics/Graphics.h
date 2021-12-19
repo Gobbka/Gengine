@@ -33,13 +33,10 @@ namespace Core
 	private:
 		
 		Render::SpriteEngine* _spriteEngine;
-		Render::Passer _passer;
 		
 	public:
 		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 		~GraphicsContext();
-
-		Render::Passer& draw_pipeline();
 
 		ShaderCollection shader_collection;
 		Render::DepthStencilStatesCollection dss_collection;

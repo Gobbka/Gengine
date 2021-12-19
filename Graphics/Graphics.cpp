@@ -39,13 +39,6 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 
 	_gcontext->set_vertex_shader(texture_vs);
 
-	_passer.add_pass(new Render::ClearPass(this), Render::PassStep::begin);
-	_passer.add_pass(new Render::DrawSkyboxPass(this), Render::PassStep::begin);
-	//_passer._probe_passes.push_back(new Render::CreateShadowMapPass());
-	_passer.add_pass(new Render::CreateNormalsMapPass(this), Render::PassStep::probe);
-	//_passer.add_pass(new Render::CreateLightMapPass(this),Render::PassStep::probe);
-	_passer.add_pass(new Render::RenderMeshPass(this), Render::PassStep::draw);
-
 	_gcontext->set_topology(PrimitiveTopology::TRIANGLESTRIP);
 
 	_samplerState->bind();
@@ -70,22 +63,27 @@ Core::GraphicsContext::~GraphicsContext()
 	}
 }
 
-Render::Passer& Core::GraphicsContext::draw_pipeline()
-{
-	return _passer;
-}
-
 Render::Scene* Core::GraphicsContext::create_empty_scene()
 {
 	auto* scene = new Render::Scene(this);
 	this->scenes.push_back(scene);
 	if (main_scene == nullptr)
 		main_scene = scene;
+	return scene;
 }
 
 Render::Scene* Core::GraphicsContext::create_scene_3d()
 {
 	auto* scene = create_empty_scene();
+	auto &pipeline = scene->render_pipeline();
+
+	pipeline.add_pass(new Render::ClearPass(this), Render::PassStep::begin);
+	pipeline.add_pass(new Render::DrawSkyboxPass(this), Render::PassStep::begin);
+	//_passer._probe_passes.push_back(new Render::CreateShadowMapPass());
+	pipeline.add_pass(new Render::CreateNormalsMapPass(this), Render::PassStep::probe);
+	//_passer.add_pass(new Render::CreateLightMapPass(this),Render::PassStep::probe);
+	pipeline.add_pass(new Render::RenderMeshPass(this), Render::PassStep::draw);
+
 	return scene;
 }
 
@@ -132,10 +130,10 @@ void Core::GraphicsContext::make_frame()
 		if (!scene->active || scene == main_scene)
 			continue;
 
-		_passer.execute(scene);
+		scene->render_pipeline().execute(scene);
 	}
 
-	_passer.execute(main_scene);
+	main_scene->render_pipeline().execute(main_scene);
 }
 
 void Core::GraphicsContext::present_frame() const

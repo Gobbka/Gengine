@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Ecs/Ecs.h"
+#include "Que/IPass/Passer.h"
 
 struct PointLightComponent;
 
@@ -17,8 +18,11 @@ namespace Render {
 		ECS::World* _world;
 		Core::GraphicsContext* _context;
 		ECS::Entity* _main_camera;
+		Passer _render_pipeline;
 	public:
 		bool active = true;
+
+		Passer& render_pipeline();
 
 		ECS::Entity* get_main_camera();
 		void set_main_camera(ECS::Entity*);

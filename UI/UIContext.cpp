@@ -66,7 +66,7 @@ ECS::Entity* UI::UIContext::create_layer()
 	return ent;
 }
 
-UI::UIContext::UIContext(Core::GraphicsContext* gfx)
+UI::UIContext::UIContext(Core::GraphicsContext* gfx,Render::Scene* scene)
 	: WinIntEventHandler()
 	, _gfx(gfx)
 	, _cursor(0,0)
@@ -74,7 +74,7 @@ UI::UIContext::UIContext(Core::GraphicsContext* gfx)
 	auto* vs = new Render::VertexShader(gfx, L"d3d11\\canvas_vs.cso", vertex2D_layout, ARRAYSIZE(UI::vertex2D_layout));
 	gfx->shader_collection.insert(L"d3d11\\canvas_vs.cso", vs);
 
-	gfx->draw_pipeline().add_pass(new DrawUIPass(gfx), Render::PassStep::overlay);
+	scene->render_pipeline().add_pass(new DrawUIPass(gfx), Render::PassStep::overlay);
 }
 
 void UI::UIContext::on_lbmouse_down()

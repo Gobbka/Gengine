@@ -6,6 +6,11 @@
 #include "Components/GameEntityComponent.h"
 #include "Components/PointLightComponent.h"
 
+Render::Passer& Render::Scene::render_pipeline()
+{
+	return _render_pipeline;
+}
+
 ECS::Entity* Render::Scene::get_main_camera()
 {
 	return _main_camera;

@@ -283,5 +283,6 @@
     <FxCompile Include="Render\d3d\hlsl\texture_ps.hlsl" />
     <FxCompile Include="Render\d3d\hlsl\normals_ps.hlsl" />
     <FxCompile Include="Render\d3d\hlsl\normals_texture_ps.hlsl" />
+    <FxCompile Include="Render\d3d\hlsl\point_light_ps.hlsl" />
   </ItemGroup>
 </Project>

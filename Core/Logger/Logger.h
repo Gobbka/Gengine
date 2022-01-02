@@ -4,6 +4,9 @@
 #define LogA(text) std::cout << text << '\n'
 #define LogW(text) std::wcout << text << L'\n'
 
+#define DebugAssert(exp) assert(exp)
+#define GEAssert(exp,mess) MessageBox(nullptr,mess,TEXT("Assertation failed"),MB_OK)
+
 #define AllocLoggerConsole() AllocConsole(); \
 freopen("CONIN$", "r", stdin); \
 freopen("CONOUT$", "w", stdout); \

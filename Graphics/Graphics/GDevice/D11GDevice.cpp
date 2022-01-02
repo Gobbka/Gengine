@@ -4,6 +4,7 @@
 #include "../../Render/d3d/Vertex.h"
 #include "../../Render/d3d/Buffer/IndexBuffer.h"
 #include "../../Render/d3d/Buffer/VertexBuffer.h"
+#include "Logger/Logger.h"
 
 D3D11_USAGE get_d11_usage(Render::IVertexBufferDesc::Usage usage)
 {
@@ -40,8 +41,8 @@ Render::IVertexBuffer<char>* Render::D11GDevice::alloc_vertex_buffer_impl(void* 
 }
 
 Render::D11GDevice::D11GDevice(ID3D11Device* device,Core::GraphicsContext* gfx)
-	: _device(device),
-	_gfx(gfx)
+	: _device(device)
+	, _gfx(gfx)
 {}
 
 Render::IIndexBuffer* Render::D11GDevice::alloc_index_buffer(unsigned size)

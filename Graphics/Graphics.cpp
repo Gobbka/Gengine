@@ -16,6 +16,7 @@
 #include "Render/Engine/SpriteEngine.h"
 
 #include "GraphicsBuildSettings.h"
+#include "Logger/Logger.h"
 
 Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11DeviceContext* context)
 	: context(context)
@@ -52,6 +53,7 @@ Core::GraphicsContext::~GraphicsContext()
 		context->Release();
 	if (_swap)
 		_swap->Release();
+
 	delete _samplerState;
 	delete _gdevice;
 	delete _gcontext;
@@ -102,7 +104,7 @@ inline Render::RenderTarget* Core::GraphicsContext::get_render_target_view()
 	return &_targetView;
 }
 
-inline auto Core::GraphicsContext::get_device() const -> Render::IGDevice*
+inline Render::IGDevice* Core::GraphicsContext::get_device() const
 {
 	return _gdevice;
 }
@@ -167,7 +169,7 @@ Core::GraphicsContext* Graphics_CreateContext(HWND hwnd)
 	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	sd.Flags = 0;
 
-	auto hr = D3D11CreateDeviceAndSwapChain(
+	const auto hr = D3D11CreateDeviceAndSwapChain(
 		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
 		nullptr,
@@ -186,7 +188,8 @@ Core::GraphicsContext* Graphics_CreateContext(HWND hwnd)
 		nullptr,
 		&context
 	);
-	assert(SUCCEEDED(hr));
+
+	GEAssert(hr).abort(TEXT("Graphics.cpp: cannot create dx11 device and swap chain"));
 
 	return new Core::GraphicsContext(device, pswap, context);
 #endif

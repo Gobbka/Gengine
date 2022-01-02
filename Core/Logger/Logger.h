@@ -5,7 +5,52 @@
 #define LogW(text) std::wcout << text << L'\n'
 
 #define DebugAssert(exp) assert(exp)
-#define GEAssert(exp,mess) MessageBox(nullptr,mess,TEXT("Assertation failed"),MB_OK)
+//#define GEAssert(exp,mess) if(!exp) MessageBox(nullptr,mess,TEXT("Assertation failed"),MB_OK)
+
+struct GEAssert {
+    bool succeeded;
+#ifdef UNICODE
+    void log(LPCWSTR message) const
+    {
+        if(!succeeded)
+			LogW(message);
+	}
+#else
+    void log(LPCSTR message)
+    {
+        if (!succeeded)
+            LogA(message);
+    }
+#endif
+
+#ifdef UNICODE
+    void abort(LPCWSTR message) const
+    {
+        if (!succeeded)
+        {
+            MessageBoxW(nullptr, message, TEXT("Assertation failed"), MB_ICONERROR);
+            exit(-1);
+        }
+    }
+#else
+    void abort(LPCSTR message)
+    {
+        if (!succeeded)
+        {
+            MessageBoxA(nullptr, message, "Assertation failed", MB_OK);
+            exit(-1);
+        }
+    }
+#endif
+
+    GEAssert(bool status)
+	    : succeeded(status)
+    {}
+
+    GEAssert(HRESULT hr)
+	    : succeeded(SUCCEEDED(hr))
+    {}
+};
 
 #define AllocLoggerConsole() AllocConsole(); \
 freopen("CONIN$", "r", stdin); \

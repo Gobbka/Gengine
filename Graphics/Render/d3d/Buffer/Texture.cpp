@@ -1,5 +1,6 @@
 ﻿#include "Texture.h"
 #include "../../../Graphics.h"
+#include "Logger/Logger.h"
 
 D3D11_TEXTURE2D_DESC Render::Texture::get_desc() const
 {
@@ -14,10 +15,9 @@ ID3D11Texture2D* Render::Texture::texture() const
 }
 
 Render::Texture::Texture(Core::GraphicsContext* context, Surface resolution, UINT bind_flags, DXGI_FORMAT format)
-	:
-	_context(context),
-	_texture(nullptr),
-	_resource(nullptr)
+	: _context(context)
+	, _texture(nullptr)
+	, _resource(nullptr)
 {
 	D3D11_TEXTURE2D_DESC texture_desc;
 	texture_desc.BindFlags = bind_flags;
@@ -37,22 +37,17 @@ Render::Texture::Texture(Core::GraphicsContext* context, Surface resolution, UIN
 	rvDesc.Texture2D.MostDetailedMip = texture_desc.MipLevels - 1;
 	rvDesc.ViewDimension = D3D_SRV_DIMENSION_TEXTURE2D;
 
-	assert(SUCCEEDED(_context->device->CreateTexture2D(&texture_desc, nullptr, &_texture)));
+	GEAssert(_context->device->CreateTexture2D(&texture_desc, nullptr, &_texture))
+		.abort(TEXT("Texture.cpp: cannot create texture"));
 
-	_context->context->UpdateSubresource(
-		_texture, 0, nullptr, 
-		new char[(UINT)resolution.width * (UINT)resolution.height * 4], 
-		(UINT)resolution.width * 4, 0
-	);
-	
-	assert(SUCCEEDED(_context->device->CreateShaderResourceView(_texture, &rvDesc, &_resource)));
+	GEAssert(_context->device->CreateShaderResourceView(_texture, &rvDesc, &_resource))
+		.abort(TEXT("Texture.cpp: cannot create shader resource view"));
 }
 
 Render::Texture::Texture(Core::GraphicsContext* engine,Material& material)
-	:
-	_context(engine),
-	_texture(nullptr),
-	_resource(nullptr)
+	: _context(engine)
+	, _texture(nullptr)
+	, _resource(nullptr)
 {
 	D3D11_TEXTURE2D_DESC texture_desc;
 	texture_desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
@@ -72,29 +67,30 @@ Render::Texture::Texture(Core::GraphicsContext* engine,Material& material)
 	rvDesc.Texture2D.MostDetailedMip = texture_desc.MipLevels - 1;
 	rvDesc.ViewDimension = D3D_SRV_DIMENSION_TEXTURE2D;
 
-	assert(SUCCEEDED(engine->device->CreateTexture2D(&texture_desc, nullptr, &_texture)));
+	GEAssert(engine->device->CreateTexture2D(&texture_desc, nullptr, &_texture))
+		.abort(TEXT("Texture.cpp: cannot create texture2d from material"));
 
 	engine->context->UpdateSubresource(_texture, 0, nullptr, material.pSysMem(), (UINT)material.width() * 4,0);
 
-	assert(SUCCEEDED(engine->device->CreateShaderResourceView(_texture, &rvDesc, &_resource)));
+	GEAssert(engine->device->CreateShaderResourceView(_texture, &rvDesc, &_resource))
+		.abort(TEXT("Texture.cpp: cannot create shader resource view from material texture"));
 }
 
 Render::Texture::Texture(Core::GraphicsContext* context, ID3D11Texture2D* texture)
 	: _context(context)
+	, _texture(texture)
+	, _resource(nullptr)
 {
-	_texture = texture;
 	D3D11_TEXTURE2D_DESC desc;
 	_texture->GetDesc(&desc);
 	_width = desc.Width;
 	_height = desc.Height;
-	_resource = nullptr;
 }
 
 Render::Texture::Texture(Core::GraphicsContext* context, ITexture2DDesc texture)
-	:
-	_context(context),
-	_texture(nullptr),
-	_resource(nullptr)
+	: _context(context)
+	, _texture(nullptr)
+	, _resource(nullptr)
 {
 	D3D11_TEXTURE2D_DESC texture_desc;
 	texture_desc.BindFlags = texture.bind_flag;
@@ -114,7 +110,8 @@ Render::Texture::Texture(Core::GraphicsContext* context, ITexture2DDesc texture)
 	rvDesc.Texture2D.MostDetailedMip = texture_desc.MipLevels - 1;
 	rvDesc.ViewDimension = D3D_SRV_DIMENSION_TEXTURE2D;
 
-	assert(SUCCEEDED(context->device->CreateTexture2D(&texture_desc, nullptr, &_texture)));
+	GEAssert(context->device->CreateTexture2D(&texture_desc, nullptr, &_texture))
+		.abort(TEXT("Texture.cpp: Cannot create texture2d from ITexture2DDesc"));
 
 	auto slice = texture.stride;
 	if (slice == 0)
@@ -123,26 +120,25 @@ Render::Texture::Texture(Core::GraphicsContext* context, ITexture2DDesc texture)
 	if(texture.pSysMem)
 		context->context->UpdateSubresource(_texture, 0, nullptr, texture.pSysMem, slice, 0);
 
-	assert(SUCCEEDED(context->device->CreateShaderResourceView(_texture, &rvDesc, &_resource)));
+	GEAssert(context->device->CreateShaderResourceView(_texture, &rvDesc, &_resource))
+		.abort(TEXT("Texture.cpp: cannot create shader resurce view from texture from ITexture2DDesc"));
 }
 
 Render::Texture::Texture(Core::GraphicsContext* context)
 	: _context(context)
-{
-	_width = 0;
-	_height = 0;
-	_resource = nullptr;
-	_texture = nullptr;
-}
+	, _texture(nullptr)
+	, _resource(nullptr)
+	, _width(0)
+	, _height(0)
+{}
 
 Render::Texture::Texture(Texture&& move) noexcept
+	: _context(move._context)
+	, _texture(move._texture)
+	, _resource(move._resource)
+	, _width(move._width)
+	, _height(move._height)
 {
-	_width = move._width;
-	_height = move._height;
-	_resource = move._resource;
-	_texture = move._texture;
-	_context = move._context;
-
 	move._resource = nullptr;
 	move._texture = nullptr;
 }
@@ -154,7 +150,7 @@ Render::Texture::Texture(Texture& other)
 	, _width(other.width())
 	, _height(other._height)
 {
-	auto d3ddesc = other.get_desc();
+	const auto d3ddesc = other.get_desc();
 	_context->device->CreateTexture2D(&d3ddesc, nullptr, &_texture);
 	other.copy_to(this);
 

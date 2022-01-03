@@ -1,6 +1,7 @@
 ﻿#include "SamplerState.h"
 
 #include "../../../Graphics.h"
+#include "Logger/Logger.h"
 
 D3D11_FILTER SamplerFilterToD3D11Filter(Render::SamplerFilter filter)
 {
@@ -17,8 +18,8 @@ D3D11_FILTER SamplerFilterToD3D11Filter(Render::SamplerFilter filter)
 
 Render::SamplerState::SamplerState(Core::GraphicsContext* engine, SamplerFilter filter)
 	: Bindable(engine)
+	, _state(nullptr)
 {
-	_state = nullptr;
 
 	D3D11_SAMPLER_DESC desc{};
 	desc.Filter = SamplerFilterToD3D11Filter(filter);
@@ -28,8 +29,9 @@ Render::SamplerState::SamplerState(Core::GraphicsContext* engine, SamplerFilter 
 	desc.ComparisonFunc = D3D11_COMPARISON_NEVER;
 	desc.MaxLOD = D3D11_FLOAT32_MAX;
 	desc.MinLOD = 0;
-	
-	assert(SUCCEEDED(_engine->device->CreateSamplerState(&desc, &_state)));
+
+	GEAssert(_engine->device->CreateSamplerState(&desc, &_state))
+		.abort(TEXT("SamplerState.cpp: Cannot create sampler state"));
 }
 
 void Render::SamplerState::bind()

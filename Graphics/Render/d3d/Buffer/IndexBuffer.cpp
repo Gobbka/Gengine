@@ -4,10 +4,9 @@
 Render::IndexBuffer::IndexBuffer(Core::GraphicsContext* graphics_context, UINT* index, size_t size)
 	: IIndexBuffer(graphics_context,size,index)
 {
-	
 	D3D11_BUFFER_DESC desc;
 	desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	desc.CPUAccessFlags = 0;// D3D11_CPU_ACCESS_WRITE;
+	desc.CPUAccessFlags = 0;
 	desc.Usage = D3D11_USAGE_DEFAULT;
 	desc.ByteWidth = sizeof(UINT) * size;
 	desc.StructureByteStride = 0;

@@ -1,7 +1,8 @@
 ﻿#pragma once
 #include "../../../Graphics.h"
-#include <cassert>
 #include <d3d11.h>
+
+#include "Logger/Logger.h"
 
 namespace Render {
 
@@ -29,17 +30,16 @@ namespace Render {
 
 	template <typename T>
 	ConstantBuffer<T>::ConstantBuffer(Core::GraphicsContext* engine, UINT slot, BYTE binds)
+		: _context(engine)
+		, _d3d_buffer(nullptr)
+		, _slot(slot)
+		, _binds(binds)
 	{
-		_binds = binds;
-		_slot = slot;
-		_d3d_buffer = nullptr;
-		_context = engine;
-
 		D3D11_BUFFER_DESC desc{ sizeof(T),D3D11_USAGE_DEFAULT,D3D11_BIND_CONSTANT_BUFFER,0,0,0 };
 		D3D11_SUBRESOURCE_DATA sd{ &data,0,0 };
 
-		auto hr = _context->device->CreateBuffer(&desc, &sd, &_d3d_buffer);
-		assert(SUCCEEDED(hr));
+		GEAssert(_context->device->CreateBuffer(&desc, &sd, &_d3d_buffer))
+			.abort(TEXT("ConstantBuffer.cpp: cannot create constant buffer"));
 	}
 
 	template <typename T>

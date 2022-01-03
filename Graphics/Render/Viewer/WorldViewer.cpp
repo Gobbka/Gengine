@@ -61,12 +61,11 @@ Render::WorldViewer::WorldViewer(Surface resolution)
 }
 
 Render::WorldViewer::WorldViewer(WorldViewer& other)
-	:
-	_transform(other._transform),
-	projection(other.projection),
-	_resolution(other._resolution),
-	_projectionMatrix(other._projectionMatrix),
-	_viewMatrix(other._viewMatrix)
+	: _transform(other._transform)
+	, projection(other.projection)
+	, _resolution(other._resolution)
+	, _projectionMatrix(other._projectionMatrix)
+	, _viewMatrix(other._viewMatrix)
 {
 }
 

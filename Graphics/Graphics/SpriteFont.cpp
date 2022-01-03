@@ -54,10 +54,9 @@ Render::SpriteFont::SpriteFont(IGDevice* device,BinaryReader& reader)
 }
 
 Render::SpriteFont::SpriteFont(IGDevice* device, const wchar_t* file_name)
-	:
-	line_spacings(0),
-	default_character(0),
-	font_texture(nullptr)
+	: line_spacings(0)
+	, default_character(0)
+	, font_texture(nullptr)
 {
     BinaryReader reader(file_name);
     if (!reader.valid())
@@ -67,12 +66,11 @@ Render::SpriteFont::SpriteFont(IGDevice* device, const wchar_t* file_name)
 }
 
 Render::SpriteFont::SpriteFont(SpriteFont&& other) noexcept
+    : glyphs(std::move(other.glyphs))
+	, line_spacings(other.line_spacings)
+	, default_character(other.default_character)
+    , font_texture(other.font_texture)
 {
-    this->font_texture = other.font_texture;
-    this->default_character = other.default_character;
-    this->glyphs = other.glyphs;
-    this->line_spacings = other.line_spacings;
-
     other.glyphs.clear();
     other.font_texture = nullptr;
 }
@@ -82,10 +80,10 @@ Render::SpriteFont& Render::SpriteFont::operator=(SpriteFont&& other) noexcept
     if(font_texture != other.font_texture)
 		delete font_texture;
 
-    this->font_texture = other.font_texture;
-    this->default_character = other.default_character;
-    this->glyphs = other.glyphs;
-    this->line_spacings = other.line_spacings;
+    font_texture = other.font_texture;
+    default_character = other.default_character;
+    glyphs = other.glyphs;
+    line_spacings = other.line_spacings;
 
     other.glyphs.clear();
     other.font_texture = nullptr;

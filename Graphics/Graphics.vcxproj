@@ -154,7 +154,6 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="GraphicsBuildSettings.h" />
     <ClInclude Include="GraphicsCommon.h" />
-    <ClInclude Include="Graphics\Channels.h" />
     <ClInclude Include="Graphics\Components\GameEntityComponent.h" />
     <ClInclude Include="Graphics\Components\LightViewer.h" />
     <ClInclude Include="Graphics\Components\NormalsRenderTarget.h" />

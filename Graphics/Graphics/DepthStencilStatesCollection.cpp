@@ -11,8 +11,8 @@ Render::DepthFunc get_depth_func(Render::DSBitSet bitset)
 }
 
 Render::DepthStencilStatesCollection::DepthStencilStatesCollection(Core::GraphicsContext* context)
+	: _context(context)
 {
-	_context = context;
 }
 
 Render::DepthStencil Render::DepthStencilStatesCollection::operator[](DSBitSet index)

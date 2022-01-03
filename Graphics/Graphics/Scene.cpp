@@ -67,10 +67,10 @@ ECS::Entity* Render::Scene::create_direction_light()
 }
 
 Render::Scene::Scene(Core::GraphicsContext* context)
+	: _world(ECS::World::createWorld())
+	, _context(context)
+	, _main_camera(nullptr)
 {
-	_world = ECS::World::createWorld();
-	_main_camera = nullptr;
-	_context = context;
 }
 
 void Render::Scene::destroy() const

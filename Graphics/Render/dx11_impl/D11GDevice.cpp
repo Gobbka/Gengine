@@ -1,5 +1,6 @@
 #include "D11GDevice.h"
 
+#include "BlendEngine.h"
 #include "../../Graphics.h"
 #include "../../Render/d3d/Vertex.h"
 #include "../../Render/d3d/Buffer/IndexBuffer.h"
@@ -67,5 +68,10 @@ Render::Rasterizer Render::D11GDevice::create_rasterizer(RasterizerDesc desc)
 	rsdesc.FrontCounterClockwise = desc.cull_mode_front;
 	_device->CreateRasterizerState(&rsdesc, &rs);
 	return { rs };
+}
+
+Render::IBlendEngine* Render::D11GDevice::create_blend_engine()
+{
+	return new BlendEngine(_gfx);
 }
 

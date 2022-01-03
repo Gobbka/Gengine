@@ -4,8 +4,8 @@
 #include "Logger/Logger.h"
 
 Render::BlendEngine::BlendEngine(Core::GraphicsContext* engine)
-	: Bindable(engine),
-	_blend(nullptr)
+	: IBlendEngine(engine)
+	, _blend(nullptr)
 {
 	D3D11_RENDER_TARGET_BLEND_DESC rtbd{};
 

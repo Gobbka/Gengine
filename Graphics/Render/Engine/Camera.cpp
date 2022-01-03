@@ -1,7 +1,7 @@
 #include "Camera.h"
 
 #include <algorithm>
-#include "BlendEngine.h"
+#include "../Common/IBlendEngine.h"
 #include "MaskEngine.h"
 #include "RenderTarget.h"
 #include "Types/Types.h"
@@ -41,11 +41,6 @@ Render::MaskEngine* Render::Camera::get_mask_engine() const
 	return _mask_engine;
 }
 
-Render::BlendEngine* Render::Camera::blend_engine() const
-{
-	return _blendEngine;
-}
-
 Render::Camera& Render::Camera::operator=(Camera&& other) noexcept
 {
 	if (_blendEngine != other._blendEngine)
@@ -80,8 +75,8 @@ Render::Camera::Camera(Camera&& other) noexcept
 
 
 Render::Camera::Camera(Core::GraphicsContext* context, RenderTarget* target)
-	: WorldViewer(Surface(target->get_texture()->width(), target->get_texture()->height()))
-	, _blendEngine(new BlendEngine(context))
+	: WorldViewer(target->get_texture()->resolution())
+	, _blendEngine(context->get_device()->create_blend_engine())
 	, _render_target(target)
 	, _mask_engine(new MaskEngine(_render_target))
 	, _context(context)

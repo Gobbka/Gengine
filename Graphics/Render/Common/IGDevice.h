@@ -9,6 +9,7 @@
 
 namespace Render
 {
+	class IBlendEngine;
 	struct ITexture2DDesc;
 	class Material;
 	class RenderTarget;
@@ -32,6 +33,7 @@ namespace Render
 		Texture* create_texture(Material material);
 		virtual Texture* create_texture(ITexture2DDesc desc) =0;
 		virtual Rasterizer create_rasterizer(RasterizerDesc desc)=0;
+		virtual IBlendEngine* create_blend_engine() = 0;
 	};
 
 	template <typename T>

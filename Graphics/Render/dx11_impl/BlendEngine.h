@@ -1,10 +1,10 @@
 ﻿#pragma once
 #include <d3d11.h>
-#include "../Common/Bindable.h"
+#include "../Common/IBlendEngine.h"
 
 namespace Render
 {
-	class BlendEngine final : Bindable
+	class BlendEngine final : public IBlendEngine
 	{
 		ID3D11BlendState* _blend;
 	public:

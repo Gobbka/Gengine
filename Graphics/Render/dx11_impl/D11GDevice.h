@@ -22,5 +22,6 @@ namespace Render
 
 		Texture* create_texture(ITexture2DDesc desc) override;
 		Rasterizer create_rasterizer(RasterizerDesc desc) override;
+		IBlendEngine* create_blend_engine() override;
 	};
 }

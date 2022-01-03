@@ -160,6 +160,7 @@
     <ClInclude Include="Graphics\Components\PointLightComponent.h" />
     <ClInclude Include="Graphics\Components\SkyboxComponent.h" />
     <ClInclude Include="Graphics\DepthStencilStatesCollection.h" />
+    <ClInclude Include="Render\Common\IBlendEngine.h" />
     <ClInclude Include="Render\dx11_impl\D11GContext.h" />
     <ClInclude Include="Render\dx11_impl\D11GDevice.h" />
     <ClInclude Include="Render\Common\IIndexBuffer.h" />
@@ -188,7 +189,7 @@
     <ClInclude Include="Render\d3d\Shader\IShader.h" />
     <ClInclude Include="Render\d3d\Shader\VertexShader.h" />
     <ClInclude Include="Render\d3d\Vertex.h" />
-    <ClInclude Include="Render\Engine\BlendEngine.h" />
+    <ClInclude Include="Render\dx11_impl\BlendEngine.h" />
     <ClInclude Include="Render\Engine\Camera.h" />
     <ClInclude Include="Render\Engine\DepthStencil.h" />
     <ClInclude Include="Render\Engine\MaskEngine.h" />
@@ -223,7 +224,7 @@
     <ClCompile Include="Render\d3d\Shader\SamplerState.cpp" />
     <ClCompile Include="Render\d3d\Shader\VertexShader.cpp" />
     <ClCompile Include="Render\d3d\Vertex.cpp" />
-    <ClCompile Include="Render\Engine\BlendEngine.cpp" />
+    <ClCompile Include="Render\dx11_impl\BlendEngine.cpp" />
     <ClCompile Include="Render\Engine\Camera.cpp" />
     <ClCompile Include="Render\Engine\DepthStencil.cpp" />
     <ClCompile Include="Render\Engine\MaskEngine.cpp" />

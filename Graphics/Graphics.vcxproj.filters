@@ -30,7 +30,7 @@
     <ClInclude Include="Render\d3d\Buffer\ConstantBuffer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Engine\BlendEngine.h">
+    <ClInclude Include="Render\dx11_impl\BlendEngine.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Render\Engine\MaskEngine.h">
@@ -165,6 +165,9 @@
     <ClInclude Include="Render\Engine\Rasterizer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Render\Common\IBlendEngine.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp">
@@ -176,7 +179,7 @@
     <ClCompile Include="Render\d3d\Vertex.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Engine\BlendEngine.cpp">
+    <ClCompile Include="Render\dx11_impl\BlendEngine.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Render\Engine\MaskEngine.cpp">

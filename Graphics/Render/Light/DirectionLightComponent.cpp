@@ -23,7 +23,7 @@ Render::DirectionLightComponent::DirectionLightComponent(DirectionLightComponent
 Render::DirectionLightComponent& Render::DirectionLightComponent::operator=(DirectionLightComponent&& other) noexcept
 {
 	*(WorldViewer*)this = std::move((WorldViewer&)other);
-	this->mask_engine = other.mask_engine;
+	mask_engine = other.mask_engine;
 
 	other.mask_engine = nullptr;
 

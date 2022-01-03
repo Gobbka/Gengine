@@ -82,7 +82,7 @@ Render::SpriteFont& Render::SpriteFont::operator=(SpriteFont&& other) noexcept
 
     font_texture = other.font_texture;
     default_character = other.default_character;
-    glyphs = other.glyphs;
+    glyphs = std::move(other.glyphs);
     line_spacings = other.line_spacings;
 
     other.glyphs.clear();

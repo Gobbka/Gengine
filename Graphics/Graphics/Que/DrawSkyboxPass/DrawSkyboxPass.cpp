@@ -3,7 +3,7 @@
 #include "../../Components/SkyboxComponent.h"
 #include "../../../IGContext.h"
 #include "../../../Render/Engine/Camera.h"
-#include "../../../Render/I3DObject/Cube/Cube.h"
+#include "../../I3DObject/Cube/Cube.h"
 
 void Render::DrawSkyboxPass::execute(Scene*scene)
 {

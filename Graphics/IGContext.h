@@ -1,6 +1,6 @@
 #pragma once
 #include "Render/d3d/Buffer/ConstantBuffer.h"
-#include "Graphics/PrimitiveTopology.h"
+#include "Render/Engine/PrimitiveTopology.h"
 #include <DirectXMath.h>
 
 #include "Render/Engine/MaskEngine.h"

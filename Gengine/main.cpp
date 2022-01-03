@@ -4,8 +4,8 @@
 #include "UIContext.h"
 #include "Forms/MainForm/MainForm.h"
 #include "Forms/WelcomeForm/WelcomeForm.h"
-#include "Render/I3DObject/Cube/Cube.h"
-#include <Render/I3DObject/Parallelepiped/Parallelepiped.h>
+#include <Graphics/I3DObject/Cube/Cube.h>
+#include <Graphics/I3DObject/Parallelepiped/Parallelepiped.h>
 #include "Debugger/PipeServer.h"
 #include <Ecs/Ecs.h>
 #include <chrono>

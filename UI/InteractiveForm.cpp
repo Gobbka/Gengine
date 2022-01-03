@@ -20,15 +20,15 @@ void InteractiveForm::drag_move(InteractiveElement* element)
 
 	pos.y *= -1;
 	cursor -= pos;
-	this->dragged = new DragStruct{ cursor ,element};
+	dragged = new DragStruct{ cursor ,element};
 }
 
 void InteractiveForm::free_drag_move()
 {
-	if (this->dragged == nullptr) return;
+	if (dragged == nullptr) return;
 
-	delete this->dragged;
-	this->dragged = nullptr;
+	delete dragged;
+	dragged = nullptr;
 }
 
 bool InteractiveForm::has_element(UI::InteractiveElement* element)
@@ -42,7 +42,7 @@ bool InteractiveForm::has_element(UI::InteractiveElement* element)
 
 InteractiveForm* InteractiveForm::add_element(UI::InteractiveElement* element)
 {
-	this->_children.push_back(element);
+	_children.push_back(element);
 
 	return this;
 }
@@ -98,7 +98,7 @@ Interaction::EventStatus InteractiveForm::on_mouse_scroll(short direction)
 	if (hidden())
 		return Interaction::EventStatus::none;
 	
-	this->foreach([direction](UI::InteractiveElement* element)
+	foreach([direction](UI::InteractiveElement* element)
 		{
 			if (element->state.hovered == true)
 				element->handle_mouse_scroll(direction);
@@ -111,7 +111,7 @@ Interaction::EventStatus InteractiveForm::on_db_click()
 	if (hidden())
 		return Interaction::EventStatus::none;
 
-	this->foreach([](UI::InteractiveElement* element)
+	foreach([](UI::InteractiveElement* element)
 		{
 			if (element->state.hovered == true)
 				element->handle_db_click();
@@ -136,7 +136,7 @@ void InteractiveForm::hide()
 
 void InteractiveForm::render()
 {
-	auto *de = _canvas.begin();
+	auto* de = _canvas.begin();
 	Render::DrawEvent2D event(_canvas.gfx(),de);
 
 	for (auto* element : this->_children)

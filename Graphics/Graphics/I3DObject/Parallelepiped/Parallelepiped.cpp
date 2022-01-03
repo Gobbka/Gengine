@@ -1,6 +1,6 @@
 #include "Parallelepiped.h"
 #include "../../../Graphics.h"
-#include "../../d3d/Vertex.h"
+#include "../../../Render/d3d/Vertex.h"
 
 UINT PARALLELEPIPED_INDEX_ARRAY[]{
 	0,1,2,1,3,2, // front

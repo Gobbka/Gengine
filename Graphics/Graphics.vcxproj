@@ -165,7 +165,7 @@
     <ClInclude Include="Graphics\IBuffers\IIndexBuffer.h" />
     <ClInclude Include="Graphics\IBuffers\ITexture2D.h" />
     <ClInclude Include="Graphics\IBuffers\IVertexBuffer.h" />
-    <ClInclude Include="Graphics\PrimitiveTopology.h" />
+    <ClInclude Include="Render\Engine\PrimitiveTopology.h" />
     <ClInclude Include="Graphics\Que\CreateLightMapPass\CreateLightMapPass.h" />
     <ClInclude Include="Graphics\Que\CreateNormalsMapPass\CreateNormalsmapPass.h" />
     <ClInclude Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.h" />
@@ -195,9 +195,9 @@
     <ClInclude Include="Render\Engine\Rasterizer.h" />
     <ClInclude Include="Render\Engine\RenderTarget.h" />
     <ClInclude Include="Render\Engine\SpriteEngine.h" />
-    <ClInclude Include="Render\I3DObject\Cube\Cube.h" />
+    <ClInclude Include="Graphics\I3DObject\Cube\Cube.h" />
     <ClInclude Include="Graphics\Mesh.h" />
-    <ClInclude Include="Render\I3DObject\Parallelepiped\Parallelepiped.h" />
+    <ClInclude Include="Graphics\I3DObject\Parallelepiped\Parallelepiped.h" />
     <ClInclude Include="Render\Light\DirectionLightComponent.h" />
     <ClInclude Include="Graphics\Components\MeshRenderer.h" />
     <ClInclude Include="Render\Viewer\WorldViewer.h" />
@@ -231,9 +231,9 @@
     <ClCompile Include="Render\Engine\MaskEngine.cpp" />
     <ClCompile Include="Render\Engine\RenderTarget.cpp" />
     <ClCompile Include="Render\Engine\SpriteEngine.cpp" />
-    <ClCompile Include="Render\I3DObject\Cube\Cube.cpp" />
+    <ClCompile Include="Graphics\I3DObject\Cube\Cube.cpp" />
     <ClCompile Include="Graphics\Mesh.cpp" />
-    <ClCompile Include="Render\I3DObject\Parallelepiped\Parallelepiped.cpp" />
+    <ClCompile Include="Graphics\I3DObject\Parallelepiped\Parallelepiped.cpp" />
     <ClCompile Include="Render\Light\DirectionLightComponent.cpp" />
     <ClCompile Include="Graphics\Components\MeshRenderer.cpp" />
     <ClCompile Include="Render\Viewer\WorldViewer.cpp" />

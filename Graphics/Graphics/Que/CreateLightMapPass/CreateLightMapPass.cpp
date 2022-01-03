@@ -1,5 +1,5 @@
 #include "CreateLightMapPass.h"
-#include "../../../Render/I3DObject/Cube/Cube.h"
+#include "../../I3DObject/Cube/Cube.h"
 #include "../../../Graphics.h"
 #include "../../../IGContext.h"
 #include "../../../Render/Engine/Camera.h"

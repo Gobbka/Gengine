@@ -53,12 +53,11 @@ DirectX::XMMATRIX Render::WorldViewer::create_projection_matrix() const
 }
 
 Render::WorldViewer::WorldViewer(Surface resolution)
-	:
-	_transform({0,0,0}),
-	_resolution(resolution)
+	: _transform({0,0,0})
+	, _resolution(resolution)
+	, _projectionMatrix(create_projection_matrix())
+	, _viewMatrix(create_view_matrix())
 {
-	_viewMatrix = create_view_matrix();
-	_projectionMatrix = create_projection_matrix();
 }
 
 Render::WorldViewer::WorldViewer(WorldViewer& other)
@@ -69,7 +68,6 @@ Render::WorldViewer::WorldViewer(WorldViewer& other)
 	_projectionMatrix(other._projectionMatrix),
 	_viewMatrix(other._viewMatrix)
 {
-	
 }
 
 void Render::WorldViewer::set_projection_type(WVProjectionType type)
@@ -78,19 +76,19 @@ void Render::WorldViewer::set_projection_type(WVProjectionType type)
 	_projectionMatrix = create_projection_matrix();
 }
 
-void Render::WorldViewer::set_scale(float scale)
+void Render::WorldViewer::set_scale(const float scale)
 {
 	_scale = scale;
 	_projectionMatrix = create_projection_matrix();
 }
 
-void Render::WorldViewer::set_fov(float fov)
+void Render::WorldViewer::set_fov(const float fov)
 {
 	_fov = fov;
 	_projectionMatrix = create_projection_matrix();
 }
 
-void Render::WorldViewer::set_farz(float farz)
+void Render::WorldViewer::set_farz(const float farz)
 {
 	_far_z = farz;
 	_projectionMatrix = create_projection_matrix();
@@ -124,10 +122,10 @@ DirectX::XMMATRIX Render::WorldViewer::projection_matrix() const
 
 DirectX::XMMATRIX Render::WorldViewer::rotation_matrix() const
 {
-	auto rotation = _transform.get_rotation();
+	const auto rotation = _transform.get_rotation();
 
-	auto xm_cam_pos = DirectX::XMVectorSet(0, 0, 0, 0.f);
-	auto camRotMatrix = DirectX::XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
+	const auto xm_cam_pos = DirectX::XMVectorSet(0, 0, 0, 0.f);
+	const auto camRotMatrix = DirectX::XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
 	auto camTarget = DirectX::XMVector3TransformCoord(Core::Transform::forward(), camRotMatrix);
 
 	camTarget = DirectX::XMVectorAdd(camTarget, xm_cam_pos);
@@ -141,31 +139,31 @@ DirectX::XMMATRIX Render::WorldViewer::rotation_matrix() const
 	);
 }
 
-void Render::WorldViewer::set_position(Position3 pos)
+void Render::WorldViewer::set_position(const Position3 pos)
 {
 	_transform.set_position(pos);
 	_viewMatrix = create_view_matrix();
 }
 
-void Render::WorldViewer::adjust_position(Position3 pos)
+void Render::WorldViewer::adjust_position(const Position3 pos)
 {
 	_transform.adjust_position(pos);
 	_viewMatrix = create_view_matrix();
 }
 
-void Render::WorldViewer::adjust_position_relative(Position3 pos)
+void Render::WorldViewer::adjust_position_relative(const Position3 pos)
 {
 	_transform.adjust_position(pos);
 	_viewMatrix = create_view_matrix();
 }
 
-void Render::WorldViewer::set_rotation(Vector3 quat)
+void Render::WorldViewer::set_rotation(const Vector3 rot)
 {
-	_transform.set_rotation(quat);
+	_transform.set_rotation(rot);
 	_viewMatrix = create_view_matrix();
 }
 
-void Render::WorldViewer::adjust_rotation(Vector3 rot)
+void Render::WorldViewer::adjust_rotation(const Vector3 rot)
 {
 	_transform.adjust_rotation(rot);
 	_viewMatrix = create_view_matrix();

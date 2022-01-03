@@ -1,5 +1,6 @@
 ﻿#include "DepthStencil.h"
 #include "../../Graphics.h"
+#include "Logger/Logger.h"
 
 D3D11_COMPARISON_FUNC get_d3d11_comparison_func(Render::DepthFunc func)
 {
@@ -12,6 +13,8 @@ D3D11_COMPARISON_FUNC get_d3d11_comparison_func(Render::DepthFunc func)
 	case Render::DepthFunc::depth_equal:
 		return D3D11_COMPARISON_EQUAL;
 	}
+
+	return D3D11_COMPARISON_ALWAYS;
 }
 
 D3D11_DEPTH_STENCILOP_DESC create_depth_stencilop_desc(D3D11_COMPARISON_FUNC stencil_func, D3D11_STENCIL_OP success_func)
@@ -20,15 +23,13 @@ D3D11_DEPTH_STENCILOP_DESC create_depth_stencilop_desc(D3D11_COMPARISON_FUNC ste
 }
 
 Render::DepthStencil::DepthStencil()
-{
-	_context = nullptr;
-	_state = nullptr;
-}
+	: _context(nullptr)
+	, _state(nullptr)
+{}
 
 Render::DepthStencil::DepthStencil(Core::GraphicsContext* context, DepthStencilDesc desc)
-	:
-	_context(context->context),
-	_state(nullptr)
+	: _context(context->context)
+	, _state(nullptr)
 {
 	D3D11_DEPTH_STENCIL_DESC depthstencildesc = {};
 
@@ -58,7 +59,8 @@ Render::DepthStencil::DepthStencil(Core::GraphicsContext* context, DepthStencilD
 	default: ;
 	}
 
-	context->device->CreateDepthStencilState(&depthstencildesc, &_state);
+	GEAssert(context->device->CreateDepthStencilState(&depthstencildesc, &_state))
+		.abort(TEXT("DepthStencil.cpp: cannot create DepthStencil from DepthStencilDesc"));
 }
 
 void Render::DepthStencil::bind(unsigned reference) const

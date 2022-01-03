@@ -6,7 +6,6 @@ namespace Render
 {
 	class BlendEngine final : Bindable
 	{
-	private:
 		ID3D11BlendState* _blend;
 	public:
 		BlendEngine(Core::GraphicsContext* engine);

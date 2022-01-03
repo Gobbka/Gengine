@@ -67,28 +67,25 @@ Render::Camera& Render::Camera::operator=(Camera&& other) noexcept
 
 
 Render::Camera::Camera(Camera&& other) noexcept
-	:
-	WorldViewer(other)
+	: WorldViewer(other)
+	, _blendEngine(other._blendEngine)
+	, _render_target(other._render_target)
+	, _mask_engine(other._mask_engine)
+	, _context(other._context)
 {
-	_blendEngine = other._blendEngine;
-	_mask_engine = other._mask_engine;
-	_render_target = other._render_target;
-	_context = other._context;
-
 	other._blendEngine = nullptr;
 	other._mask_engine = nullptr;
 	other._render_target = nullptr;
 }
 
 
-Render::Camera::Camera(Core::GraphicsContext* context,RenderTarget*target)
+Render::Camera::Camera(Core::GraphicsContext* context, RenderTarget* target)
 	: WorldViewer(Surface(target->get_texture()->width(), target->get_texture()->height()))
-{
-	_render_target = target;
-	_blendEngine = new BlendEngine(context);
-	_mask_engine = new MaskEngine(_render_target);
-	_context = context;
-}
+	, _blendEngine(new BlendEngine(context))
+	, _render_target(target)
+	, _mask_engine(new MaskEngine(_render_target))
+	, _context(context)
+{}
 
 void Render::Camera::bind() const
 {

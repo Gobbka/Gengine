@@ -224,7 +224,6 @@
     <ClCompile Include="Render\d3d\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Render\d3d\Shader\PixelShader.cpp" />
     <ClCompile Include="Render\d3d\Shader\SamplerState.cpp" />
-    <ClCompile Include="Render\d3d\Shader\IShader.cpp" />
     <ClCompile Include="Render\d3d\Shader\VertexShader.cpp" />
     <ClCompile Include="Render\d3d\Vertex.cpp" />
     <ClCompile Include="Render\Engine\BlendEngine.cpp" />

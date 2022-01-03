@@ -188,9 +188,6 @@
     <ClCompile Include="Render\Engine\MaskEngine.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\d3d\Shader\IShader.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Render\d3d\Shader\VertexShader.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>

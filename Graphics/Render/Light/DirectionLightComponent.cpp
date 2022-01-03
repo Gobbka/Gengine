@@ -6,26 +6,26 @@
 
 Render::DirectionLightComponent::DirectionLightComponent(Core::GraphicsContext* gcontext)
 	: WorldViewer(gcontext->get_screen_resolution())
+	, context(gcontext)
+	, mask_engine(new MaskEngine(context,context->get_screen_resolution(),MaskEngineUsage::Depth))
 {
-	context = gcontext;
-	auto scr_res = context->get_screen_resolution();
-	mask_engine = new MaskEngine(context, scr_res,MaskEngineUsage::Depth);
-
 	WorldViewer::adjust_position(Position3(-2, -2, -2));
 }
 
 Render::DirectionLightComponent::DirectionLightComponent(DirectionLightComponent&&other) noexcept
 	: WorldViewer(other)
+	, context(other.context)
+	, mask_engine(other.mask_engine)
 {
-	context = other.context;
-	mask_engine = other.mask_engine;
-
 	other.mask_engine = nullptr;
 }
 
 Render::DirectionLightComponent& Render::DirectionLightComponent::operator=(DirectionLightComponent&& other) noexcept
 {
 	*(WorldViewer*)this = std::move((WorldViewer&)other);
+	this->mask_engine = other.mask_engine;
+
+	other.mask_engine = nullptr;
 
 	return*this;
 }

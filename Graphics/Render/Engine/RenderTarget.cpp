@@ -27,9 +27,9 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, IDXGISwapChai
 }
 
 Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Texture texture)
-	: _targetView(nullptr),
-	_context(context),
-	_texture(std::move(texture))
+	: _targetView(nullptr)
+	, _context(context)
+	, _texture(std::move(texture))
 {
 	GEAssert(_texture.is_render_target())
 		.abort(TEXT("RenderTarget.cpp: texture passed in arguments is not a render target."));
@@ -38,27 +38,27 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Texture textu
 }
 
 Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Surface texture_resolution)
-	: _targetView(nullptr),
-	_context(context),
-	_texture(context, texture_resolution, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET)
+	: _targetView(nullptr)
+	, _context(context)
+	, _texture(context, texture_resolution, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET)
 {
 	GEAssert(context->device->CreateRenderTargetView(_texture.texture(), nullptr, &_targetView))
 		.abort(TEXT("RenderTarget.cpp: cannot create render target"));
 }
 
 Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, ITexture2DDesc texture_desc)
-	: _targetView(nullptr),
-	_context(context),
-	_texture(context,texture_desc)
+	: _targetView(nullptr)
+	, _context(context)
+	, _texture(context,texture_desc)
 {
 	GEAssert(context->device->CreateRenderTargetView(_texture.texture(), nullptr, &_targetView))
 		.abort(TEXT("RenderTarget.cpp: cannot create render target"));
 }
 
 Render::RenderTarget::RenderTarget(Core::GraphicsContext* context)
-	: _targetView(nullptr),
-	_context(context),
-	_texture(context)
+	: _targetView(nullptr)
+	, _context(context)
+	, _texture(context)
 {}
 
 Render::RenderTarget::RenderTarget(RenderTarget&& other) noexcept

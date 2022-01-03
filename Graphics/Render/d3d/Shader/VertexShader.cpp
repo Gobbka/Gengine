@@ -16,15 +16,13 @@ void Render::VertexShader::construct(ID3DBlob* shader_blob)
 
 void Render::VertexShader::link(ID3DBlob* blob,const D3D11_INPUT_ELEMENT_DESC* layout,UINT num_elements)
 {
-	const auto hresult = context->device->CreateInputLayout(
+	GEAssert(context->device->CreateInputLayout(
 		layout,
 		num_elements,
 		blob->GetBufferPointer(),
 		blob->GetBufferSize(),
 		&_layout
-	);
-
-	assert(SUCCEEDED(hresult));
+	)).abort(TEXT("VertexShader.cpp: cannot link  input layout with elements description"));
 }
 
 ID3D11VertexShader* Render::VertexShader::get_d11_vs()

@@ -2,18 +2,25 @@
 
 #include "../../Graphics.h"
 #include "../d3d/Buffer/Texture.h"
+#include "Logger/Logger.h"
 
 Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, IDXGISwapChain* swap)
-	:  _context(context),
-	_texture(context)
+	:  _targetView(nullptr)
+	, _context(context)
+	, _texture(context)
 {
-	ID3D11Resource* back_buffer;
+	ID3D11Resource* back_buffer = nullptr;
 	swap->GetBuffer(0, __uuidof(ID3D11Resource), (void**)&back_buffer);
 
 	D3D11_TEXTURE2D_DESC desc;
 	((ID3D11Texture2D*)back_buffer)->GetDesc(&desc);
+
+	GEAssert(back_buffer != nullptr)
+		.abort(TEXT("RenderTarget.cpp: cannot get back buffer from IDXGISwapChain"));
+
+	GEAssert(context->device->CreateRenderTargetView(back_buffer, nullptr, &_targetView))
+		.abort(TEXT("RenderTarget.cpp: cannot create render target from IDXGISwapChain"));
 	
-	assert(SUCCEEDED(context->device->CreateRenderTargetView(back_buffer, nullptr, &_targetView)));
 	_texture = Texture(context, (ID3D11Texture2D*)back_buffer);
 	
 	back_buffer->Release();
@@ -24,8 +31,10 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Texture textu
 	_context(context),
 	_texture(std::move(texture))
 {
-	assert(texture.is_render_target());	
-	assert(SUCCEEDED(context->device->CreateRenderTargetView(texture.texture(), nullptr, &_targetView)));
+	GEAssert(_texture.is_render_target())
+		.abort(TEXT("RenderTarget.cpp: texture passed in arguments is not a render target."));
+	GEAssert(context->device->CreateRenderTargetView(_texture.texture(), nullptr, &_targetView))
+		.abort(TEXT("RenderTarget.cpp: cannot create render target from texture"));
 }
 
 Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Surface texture_resolution)
@@ -33,7 +42,8 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Surface textu
 	_context(context),
 	_texture(context, texture_resolution, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET)
 {
-	assert(SUCCEEDED(context->device->CreateRenderTargetView(_texture.texture(), nullptr, &_targetView)));
+	GEAssert(context->device->CreateRenderTargetView(_texture.texture(), nullptr, &_targetView))
+		.abort(TEXT("RenderTarget.cpp: cannot create render target"));
 }
 
 Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, ITexture2DDesc texture_desc)
@@ -41,24 +51,22 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, ITexture2DDes
 	_context(context),
 	_texture(context,texture_desc)
 {
-	assert(SUCCEEDED(context->device->CreateRenderTargetView(_texture.texture(), nullptr, &_targetView)));
+	GEAssert(context->device->CreateRenderTargetView(_texture.texture(), nullptr, &_targetView))
+		.abort(TEXT("RenderTarget.cpp: cannot create render target"));
 }
 
 Render::RenderTarget::RenderTarget(Core::GraphicsContext* context)
 	: _targetView(nullptr),
 	_context(context),
 	_texture(context)
-{
-}
+{}
 
 Render::RenderTarget::RenderTarget(RenderTarget&& other) noexcept
-	:
-	_texture(std::move(other._texture))
+	: _targetView(other._targetView)
+	, _context(other._context)
+	, _texture(std::move(other._texture))
+	, clear_color(other.clear_color)
 {
-	_context = other._context;
-	_targetView = other._targetView;
-	clear_color = other.clear_color;
-
 	other._targetView = nullptr;
 	other._context = nullptr;
 	other._texture = Texture(_context);

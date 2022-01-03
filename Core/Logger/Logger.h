@@ -5,7 +5,6 @@
 #define LogW(text) std::wcout << text << L'\n'
 
 #define DebugAssert(exp) assert(exp)
-//#define GEAssert(exp,mess) if(!exp) MessageBox(nullptr,mess,TEXT("Assertation failed"),MB_OK)
 
 struct GEAssert {
     bool succeeded;
@@ -28,8 +27,10 @@ struct GEAssert {
     {
         if (!succeeded)
         {
+#ifdef WIN32
             MessageBoxW(nullptr, message, TEXT("Assertation failed"), MB_ICONERROR);
             exit(-1);
+#endif
         }
     }
 #else
@@ -37,8 +38,10 @@ struct GEAssert {
     {
         if (!succeeded)
         {
+#ifdef WIN32
             MessageBoxA(nullptr, message, "Assertation failed", MB_OK);
             exit(-1);
+#endif
         }
     }
 #endif

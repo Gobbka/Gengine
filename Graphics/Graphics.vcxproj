@@ -194,7 +194,7 @@
     <ClInclude Include="Render\dx11_impl\MaskEngine.h" />
     <ClInclude Include="Render\Engine\Rasterizer.h" />
     <ClInclude Include="Render\Engine\RenderTarget.h" />
-    <ClInclude Include="Render\Engine\SpriteEngine.h" />
+    <ClInclude Include="Render\Common\SpriteEngine.h" />
     <ClInclude Include="Graphics\I3DObject\Cube\Cube.h" />
     <ClInclude Include="Graphics\Mesh.h" />
     <ClInclude Include="Graphics\I3DObject\Parallelepiped\Parallelepiped.h" />
@@ -228,7 +228,7 @@
     <ClCompile Include="Render\Engine\DepthStencil.cpp" />
     <ClCompile Include="Render\dx11_impl\MaskEngine.cpp" />
     <ClCompile Include="Render\Engine\RenderTarget.cpp" />
-    <ClCompile Include="Render\Engine\SpriteEngine.cpp" />
+    <ClCompile Include="Render\Common\SpriteEngine.cpp" />
     <ClCompile Include="Graphics\I3DObject\Cube\Cube.cpp" />
     <ClCompile Include="Graphics\Mesh.cpp" />
     <ClCompile Include="Graphics\I3DObject\Parallelepiped\Parallelepiped.cpp" />

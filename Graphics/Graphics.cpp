@@ -13,7 +13,7 @@
 #include "Graphics/Que/RenderQueuePass/RenderMeshPass.h"
 #include "Render/d3d/Vertex.h"
 #include "Render/Engine/RenderTarget.h"
-#include "Render/Engine/SpriteEngine.h"
+#include "Render/Common/SpriteEngine.h"
 
 #include "GraphicsBuildSettings.h"
 #include "Logger/Logger.h"

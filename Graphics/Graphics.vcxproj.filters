@@ -54,7 +54,7 @@
     <ClInclude Include="Render\Engine\Camera.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Engine\SpriteEngine.h">
+    <ClInclude Include="Render\Common\SpriteEngine.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\I3DObject\Cube\Cube.h">
@@ -197,7 +197,7 @@
     <ClCompile Include="Render\Engine\Camera.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Engine\SpriteEngine.cpp">
+    <ClCompile Include="Render\Common\SpriteEngine.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\I3DObject\Cube\Cube.cpp">

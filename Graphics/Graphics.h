@@ -6,7 +6,7 @@
 #include "Graphics/Scene.h"
 #include "Graphics/ShaderCollection.h"
 #include "Render/Engine/RenderTarget.h"
-#include "Render/Engine/SpriteEngine.h"
+#include "Render/Common/SpriteEngine.h"
 
 namespace Render {
 	class SamplerState;

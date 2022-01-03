@@ -147,9 +147,6 @@
     <ClInclude Include="Graphics\Components\LightViewer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsCommon.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="GraphicsBuildSettings.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -165,7 +162,7 @@
     <ClInclude Include="Render\Engine\Rasterizer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Common\IBlendEngine.h">
+    <ClInclude Include="Render\Common\GraphicsCommon.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

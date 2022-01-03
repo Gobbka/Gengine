@@ -1,14 +1,14 @@
 ﻿#pragma once
 #include <d3d11.h>
-#include "../Common/IBlendEngine.h"
+#include "../Common/Bindable.h"
 
 namespace Render
 {
-	class BlendEngine final : public IBlendEngine
+	class DX11BlendEngine final : public Bindable
 	{
 		ID3D11BlendState* _blend;
 	public:
-		BlendEngine(Core::GraphicsContext* engine);
+		DX11BlendEngine(Core::GraphicsContext* engine);
 		
 		void bind() override;
 	};

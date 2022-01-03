@@ -3,8 +3,8 @@
 #include "../../Graphics.h"
 #include "Logger/Logger.h"
 
-Render::BlendEngine::BlendEngine(Core::GraphicsContext* engine)
-	: IBlendEngine(engine)
+Render::DX11BlendEngine::DX11BlendEngine(Core::GraphicsContext* engine)
+	: Bindable(engine)
 	, _blend(nullptr)
 {
 	D3D11_RENDER_TARGET_BLEND_DESC rtbd{};
@@ -25,7 +25,7 @@ Render::BlendEngine::BlendEngine(Core::GraphicsContext* engine)
 		.abort(TEXT("BlendEngine.cpp: cannot create blend state"));
 }
 
-void Render::BlendEngine::bind()
+void Render::DX11BlendEngine::bind()
 {
 	_engine->context->OMSetBlendState(_blend, 0, 0xFFFFFFFF);
 }

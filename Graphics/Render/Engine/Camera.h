@@ -1,16 +1,16 @@
 #pragma once
+#include "../Common/GraphicsCommon.h"
 #include "../Viewer/WorldViewer.h"
 
 struct Surface;
 
 namespace Render
 {
-	class IBlendEngine;
 
 	class __declspec(dllexport) Camera : public WorldViewer
 	{
 	private:
-		IBlendEngine* _blendEngine;
+		GEBlendEngine* _blendEngine;
 		RenderTarget* _render_target;
 		MaskEngine* _mask_engine;
 		Core::GraphicsContext* _context;

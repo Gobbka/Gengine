@@ -1,10 +1,6 @@
 #pragma once
 
 #define DRAW_LIBRARY_DX11
-// #define DRAW_LIBRARY_OPENGL
-
-//================
-//
 
 #ifdef DRAW_LIBRARY_DX11
 #pragma comment(lib,"d3d11.lib")

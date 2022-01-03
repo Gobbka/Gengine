@@ -153,14 +153,13 @@
   <ItemGroup>
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="GraphicsBuildSettings.h" />
-    <ClInclude Include="GraphicsCommon.h" />
     <ClInclude Include="Graphics\Components\GameEntityComponent.h" />
     <ClInclude Include="Graphics\Components\LightViewer.h" />
     <ClInclude Include="Graphics\Components\NormalsRenderTarget.h" />
     <ClInclude Include="Graphics\Components\PointLightComponent.h" />
     <ClInclude Include="Graphics\Components\SkyboxComponent.h" />
     <ClInclude Include="Graphics\DepthStencilStatesCollection.h" />
-    <ClInclude Include="Render\Common\IBlendEngine.h" />
+    <ClInclude Include="Render\Common\GraphicsCommon.h" />
     <ClInclude Include="Render\dx11_impl\D11GContext.h" />
     <ClInclude Include="Render\dx11_impl\D11GDevice.h" />
     <ClInclude Include="Render\Common\IIndexBuffer.h" />

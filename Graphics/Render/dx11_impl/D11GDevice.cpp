@@ -69,9 +69,3 @@ Render::Rasterizer Render::D11GDevice::create_rasterizer(RasterizerDesc desc)
 	_device->CreateRasterizerState(&rsdesc, &rs);
 	return { rs };
 }
-
-Render::IBlendEngine* Render::D11GDevice::create_blend_engine()
-{
-	return new BlendEngine(_gfx);
-}
-

@@ -1,7 +1,6 @@
 #include "Camera.h"
 
 #include <algorithm>
-#include "../Common/IBlendEngine.h"
 #include "MaskEngine.h"
 #include "RenderTarget.h"
 #include "Types/Types.h"
@@ -76,7 +75,7 @@ Render::Camera::Camera(Camera&& other) noexcept
 
 Render::Camera::Camera(Core::GraphicsContext* context, RenderTarget* target)
 	: WorldViewer(target->get_texture()->resolution())
-	, _blendEngine(context->get_device()->create_blend_engine())
+	, _blendEngine(new GEBlendEngine(context))
 	, _render_target(target)
 	, _mask_engine(new MaskEngine(_render_target))
 	, _context(context)

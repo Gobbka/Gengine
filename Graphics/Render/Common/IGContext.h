@@ -1,12 +1,13 @@
 #pragma once
-#include "Render/d3d/Buffer/ConstantBuffer.h"
-#include "Render/Engine/PrimitiveTopology.h"
+#include "../d3d/Buffer/ConstantBuffer.h"
+#include "../Engine/PrimitiveTopology.h"
 #include <DirectXMath.h>
 
-#include "Render/Engine/MaskEngine.h"
+#include "../Engine/MaskEngine.h"
 
 namespace Render
 {
+	class Rasterizer;
 	class MaskEngine;
 	class PixelShader;
 	class VertexShader;

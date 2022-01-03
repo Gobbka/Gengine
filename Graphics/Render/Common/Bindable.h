@@ -13,8 +13,11 @@ namespace Render
 	protected:
 		Core::GraphicsContext* _engine;
 	public:
-		Bindable(Core::GraphicsContext*engine);
-		virtual ~Bindable();
+		Bindable(Core::GraphicsContext*engine)
+			: _engine(engine)
+		{}
+
+		virtual ~Bindable() = default;
 
 		virtual void bind() = 0;
 	};

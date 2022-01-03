@@ -3,7 +3,7 @@
 #include "../../Components/MeshRenderer.h"
 #include "../../../Render/Engine/Camera.h"
 #include "../../../Graphics.h"
-#include "../../../IGContext.h"
+#include "../../../Render/Common/IGContext.h"
 #include "../../Mesh.h"
 #include "../../Components/LightViewer.h"
 

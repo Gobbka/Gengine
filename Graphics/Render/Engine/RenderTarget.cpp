@@ -2,6 +2,7 @@
 
 #include "../../Graphics.h"
 #include "../d3d/Buffer/Texture.h"
+#include "../Common/ITexture2D.h"
 #include "Logger/Logger.h"
 
 Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, IDXGISwapChain* swap)

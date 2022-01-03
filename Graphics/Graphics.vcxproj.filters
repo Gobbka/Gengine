@@ -18,7 +18,7 @@
     <ClInclude Include="Graphics.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\d3d\Bindable.h">
+    <ClInclude Include="Render\Common\Bindable.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Render\d3d\Buffer\VertexBuffer.h">
@@ -69,16 +69,16 @@
     <ClInclude Include="Graphics\Components\MeshRenderer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\IBuffers\IVertexBuffer.h">
+    <ClInclude Include="Render\Common\IVertexBuffer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\IBuffers\IIndexBuffer.h">
+    <ClInclude Include="Render\Common\IIndexBuffer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Render\Engine\RenderTarget.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\IBuffers\ITexture2D.h">
+    <ClInclude Include="Render\Common\ITexture2D.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Render\Light\DirectionLightComponent.h">
@@ -99,16 +99,16 @@
     <ClInclude Include="Graphics\Que\IPass\Passer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="IGDevice.h">
+    <ClInclude Include="Render\Common\IGDevice.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\GDevice\D11GDevice.h">
+    <ClInclude Include="Render\dx11_impl\D11GDevice.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="IGContext.h">
+    <ClInclude Include="Render\Common\IGContext.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\GDevice\D11GContext.h">
+    <ClInclude Include="Render\dx11_impl\D11GContext.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Scene.h">
@@ -168,9 +168,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\d3d\Bindable.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Render\d3d\Buffer\VertexBuffer.cpp">
@@ -233,16 +230,13 @@
     <ClCompile Include="Graphics\Que\IPass\Passer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\GDevice\D11GDevice.cpp">
+    <ClCompile Include="Render\dx11_impl\D11GDevice.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\GDevice\D11GContext.cpp">
+    <ClCompile Include="Render\dx11_impl\D11GContext.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Scene.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\IBuffers\IVertexBuffer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.cpp">

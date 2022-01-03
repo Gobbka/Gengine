@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <d3d11.h>
-#include "../Bindable.h"
+#include "../../Common/Bindable.h"
 
 namespace Render {
 	enum class SamplerFilter

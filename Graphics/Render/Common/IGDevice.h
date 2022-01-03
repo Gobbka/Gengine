@@ -1,13 +1,15 @@
 ﻿#pragma once
 #include <Types/Material.h>
-#include "Graphics/IBuffers/IIndexBuffer.h"
-#include "Graphics/IBuffers/IVertexBuffer.h"
-#include "Render/d3d/Vertex.h"
-#include "Render/d3d/Buffer/Texture.h"
-#include "Render/Engine/Rasterizer.h"
+#include "IIndexBuffer.h"
+#include "IVertexBuffer.h"
+#include "../d3d/Vertex.h"
+#include "../d3d/Buffer/Texture.h"
+#include "../Engine/Rasterizer.h"
+#include "ITexture2D.h"
 
 namespace Render
 {
+	struct ITexture2DDesc;
 	class Material;
 	class RenderTarget;
 

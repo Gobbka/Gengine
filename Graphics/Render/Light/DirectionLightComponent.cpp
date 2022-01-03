@@ -1,7 +1,7 @@
 #include "DirectionLightComponent.h"
 
 #include "../../Graphics.h"
-#include "../../IGContext.h"
+#include "../Common/IGContext.h"
 #include "../Engine/MaskEngine.h"
 
 Render::DirectionLightComponent::DirectionLightComponent(Core::GraphicsContext* gcontext)

@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <d3d11.h>
-#include "../../IGContext.h"
+#include "../Common/IGContext.h"
 
 namespace Core
 {

@@ -1,6 +1,6 @@
 ﻿#include "SpriteEngine.h"
 #include "../../Graphics.h"
-#include "../../IGContext.h"
+#include "../Common/IGContext.h"
 
 Render::SpriteEngine::SpriteEngine(Core::GraphicsContext* context)
 	: _graphicsContext(context)

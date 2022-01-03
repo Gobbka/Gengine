@@ -160,11 +160,11 @@
     <ClInclude Include="Graphics\Components\PointLightComponent.h" />
     <ClInclude Include="Graphics\Components\SkyboxComponent.h" />
     <ClInclude Include="Graphics\DepthStencilStatesCollection.h" />
-    <ClInclude Include="Graphics\GDevice\D11GContext.h" />
-    <ClInclude Include="Graphics\GDevice\D11GDevice.h" />
-    <ClInclude Include="Graphics\IBuffers\IIndexBuffer.h" />
-    <ClInclude Include="Graphics\IBuffers\ITexture2D.h" />
-    <ClInclude Include="Graphics\IBuffers\IVertexBuffer.h" />
+    <ClInclude Include="Render\dx11_impl\D11GContext.h" />
+    <ClInclude Include="Render\dx11_impl\D11GDevice.h" />
+    <ClInclude Include="Render\Common\IIndexBuffer.h" />
+    <ClInclude Include="Render\Common\ITexture2D.h" />
+    <ClInclude Include="Render\Common\IVertexBuffer.h" />
     <ClInclude Include="Render\Engine\PrimitiveTopology.h" />
     <ClInclude Include="Graphics\Que\CreateLightMapPass\CreateLightMapPass.h" />
     <ClInclude Include="Graphics\Que\CreateNormalsMapPass\CreateNormalsmapPass.h" />
@@ -176,9 +176,9 @@
     <ClInclude Include="Graphics\Scene.h" />
     <ClInclude Include="Graphics\ShaderCollection.h" />
     <ClInclude Include="Graphics\SpriteFont.h" />
-    <ClInclude Include="IGContext.h" />
-    <ClInclude Include="IGDevice.h" />
-    <ClInclude Include="Render\d3d\Bindable.h" />
+    <ClInclude Include="Render\Common\IGContext.h" />
+    <ClInclude Include="Render\Common\IGDevice.h" />
+    <ClInclude Include="Render\Common\Bindable.h" />
     <ClInclude Include="Render\d3d\Buffer\ConstantBuffer.h" />
     <ClInclude Include="Render\d3d\Buffer\IndexBuffer.h" />
     <ClInclude Include="Render\d3d\Buffer\Texture.h" />
@@ -205,9 +205,8 @@
   <ItemGroup>
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Graphics\DepthStencilStatesCollection.cpp" />
-    <ClCompile Include="Graphics\GDevice\D11GContext.cpp" />
-    <ClCompile Include="Graphics\GDevice\D11GDevice.cpp" />
-    <ClCompile Include="Graphics\IBuffers\IVertexBuffer.cpp" />
+    <ClCompile Include="Render\dx11_impl\D11GContext.cpp" />
+    <ClCompile Include="Render\dx11_impl\D11GDevice.cpp" />
     <ClCompile Include="Graphics\Que\CreateLightMapPass\CreateLightMapPass.cpp" />
     <ClCompile Include="Graphics\Que\CreateNormalsMapPass\CreateNormalsMapPass.cpp" />
     <ClCompile Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.cpp" />
@@ -217,7 +216,6 @@
     <ClCompile Include="Graphics\Scene.cpp" />
     <ClCompile Include="Graphics\ShaderCollection.cpp" />
     <ClCompile Include="Graphics\SpriteFont.cpp" />
-    <ClCompile Include="Render\d3d\Bindable.cpp" />
     <ClCompile Include="Render\d3d\Buffer\IndexBuffer.cpp" />
     <ClCompile Include="Render\d3d\Buffer\Texture.cpp" />
     <ClCompile Include="Render\d3d\Buffer\VertexBuffer.cpp" />

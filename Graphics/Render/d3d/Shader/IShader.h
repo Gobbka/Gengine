@@ -1,5 +1,9 @@
 ﻿#pragma once
-#include "../Bindable.h"
+
+namespace Core
+{
+	class GraphicsContext;
+};
 
 namespace Render {
 	class __declspec(dllexport) IShader

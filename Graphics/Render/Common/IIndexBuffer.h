@@ -1,5 +1,5 @@
 #pragma once
-#include "../../Render/d3d/Bindable.h"
+#include "Bindable.h"
 
 namespace Render
 {

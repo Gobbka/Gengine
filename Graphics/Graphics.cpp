@@ -1,7 +1,7 @@
 #include "Graphics.h"
 
-#include "Graphics/GDevice/D11GContext.h"
-#include "Graphics/GDevice/D11GDevice.h"
+#include "Render/dx11_impl/D11GContext.h"
+#include "Render/dx11_impl/D11GDevice.h"
 #include "Graphics/Que/CreateLightMapPass/CreateLightMapPass.h"
 #include "Graphics/Que/CreateNormalsMapPass/CreateNormalsmapPass.h"
 #include "Graphics/Que/DrawSkyboxPass/DrawSkyboxPass.h"

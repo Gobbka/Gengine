@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <d3d11.h>
-#include "../../../Graphics/IBuffers/IIndexBuffer.h"
+#include "../../Common/IIndexBuffer.h"
 
 namespace Render {
 	class IndexBuffer : public IIndexBuffer

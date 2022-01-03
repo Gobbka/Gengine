@@ -2,7 +2,7 @@
 #include "../../../Graphics.h"
 #include "../../../Render/Engine/Camera.h"
 #include "../../Components/MeshRenderer.h"
-#include "../../../IGContext.h"
+#include "../../../Render/Common/IGContext.h"
 #include "../../../Render/d3d/Buffer/ConstantBuffer.h"
 #include "../../Components/LightViewer.h"
 #include "../../../Render/Engine/MaskEngine.h"

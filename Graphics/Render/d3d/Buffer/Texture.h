@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <d3d11.h>
-#include "../../../Graphics/IBuffers/ITexture2D.h"
+#include "../../Common/ITexture2D.h"
 
 namespace Core
 {

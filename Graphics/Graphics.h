@@ -1,13 +1,12 @@
 #pragma once
 #include <d3d11.h>
 
-#include "IGDevice.h"
+#include "Render/Common/IGDevice.h"
 #include "Graphics/DepthStencilStatesCollection.h"
 #include "Graphics/Scene.h"
 #include "Graphics/ShaderCollection.h"
 #include "Render/Engine/RenderTarget.h"
 #include "Render/Engine/SpriteEngine.h"
-#include "Graphics/Que/IPass/Passer.h"
 
 namespace Render {
 	class SamplerState;

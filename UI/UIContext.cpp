@@ -1,7 +1,7 @@
 ﻿#include "UIContext.h"
 
 #include "Graphics.h"
-#include "IGContext.h"
+#include <Render/Common/IGContext.h>
 #include "Render/Engine/Camera.h"
 #include "InteractiveForm.h"
 #include <Render/d3d/Buffer/ConstantBuffer.h>

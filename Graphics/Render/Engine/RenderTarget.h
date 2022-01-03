@@ -10,6 +10,7 @@ namespace Core {
 }
 
 namespace Render {
+	struct ITexture2DDesc;
 	class Texture;
 
 	class __declspec(dllexport) RenderTarget

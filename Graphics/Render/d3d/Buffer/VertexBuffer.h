@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <d3d11.h>
-#include "../../../Graphics/IBuffers/IVertexBuffer.h"
+#include "../../Common/IVertexBuffer.h"
 
 namespace Render
 {

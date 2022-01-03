@@ -1,7 +1,7 @@
 #include "CanvasImpl.h"
 
 #include "Graphics.h"
-#include "IGContext.h"
+#include <Render/Common/IGContext.h>
 
 Canvas::DrawData* Canvas::CanvasImpl::begin()
 {

@@ -3,7 +3,6 @@
 #include "../../Render/d3d/Shader/PixelShader.h"
 #include "../../Render/d3d/Shader/SamplerState.h"
 #include "../../Render/d3d/Shader/VertexShader.h"
-#include "../../Render/Engine/MaskEngine.h"
 
 Render::D11GContext::D11GContext(ID3D11DeviceContext* d11context, Core::GraphicsContext* context )
 	: IGContext(context),
@@ -56,7 +55,7 @@ void Render::D11GContext::set_vertex_shader(VertexShader* vs)
 	_currect_vs = vs;
 }
 
-void Render::D11GContext::set_mask_engine(MaskEngine* mask)
+void Render::D11GContext::set_mask_engine(GEMaskEngine* mask)
 {
 	ID3D11RenderTargetView* target_view;
 	_d11context->OMGetRenderTargets(1, &target_view, nullptr);
@@ -77,7 +76,7 @@ void Render::D11GContext::set_sampler_state(SamplerState* sampler)
 	_current_sampler = sampler;
 }
 
-void Render::D11GContext::set_render_target(RenderTarget* target, MaskEngine* mask)
+void Render::D11GContext::set_render_target(RenderTarget* target, GEMaskEngine* mask)
 {
 	auto* mask_view = mask == nullptr ? nullptr : mask->get_view();
 	if(target == nullptr)

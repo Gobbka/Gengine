@@ -26,9 +26,9 @@ namespace Render {
 		void set_topology(PrimitiveTopology topology) override;
 		void set_pixel_shader(PixelShader* ps) override;
 		void set_vertex_shader(VertexShader* vs) override;
-		void set_mask_engine(MaskEngine* mask) override;
+		void set_mask_engine(GEMaskEngine* mask) override;
 		void set_sampler_state(SamplerState* sampler) override;
-		void set_render_target(RenderTarget* target, MaskEngine* mask) override;
+		void set_render_target(RenderTarget* target, GEMaskEngine* mask) override;
 		void set_render_target(RenderTarget* target) override;
 		void set_shader_resource(Texture* texture,UINT slot) override;
 		void set_rasterizer(Rasterizer& rs) override;

@@ -2,12 +2,12 @@
 
 #include "../../Graphics.h"
 #include "../Common/IGContext.h"
-#include "../Engine/MaskEngine.h"
+
 
 Render::DirectionLightComponent::DirectionLightComponent(Core::GraphicsContext* gcontext)
 	: WorldViewer(gcontext->get_screen_resolution())
 	, context(gcontext)
-	, mask_engine(new MaskEngine(context,context->get_screen_resolution(),MaskEngineUsage::Depth))
+	, mask_engine(new GEMaskEngine(context,context->get_screen_resolution(),MaskEngineUsage::Depth))
 {
 	WorldViewer::adjust_position(Position3(-2, -2, -2));
 }

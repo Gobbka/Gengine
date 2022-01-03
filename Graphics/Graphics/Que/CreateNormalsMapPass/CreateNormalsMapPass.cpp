@@ -5,8 +5,6 @@
 #include "../../../Render/Common/IGContext.h"
 #include "../../../Render/d3d/Buffer/ConstantBuffer.h"
 #include "../../Components/LightViewer.h"
-#include "../../../Render/Engine/MaskEngine.h"
-
 
 void Render::CreateNormalsMapPass::execute(Scene* scene)
 {

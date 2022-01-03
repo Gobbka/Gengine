@@ -10,7 +10,6 @@ namespace Core {
 
 namespace Render
 {
-	class MaskEngine;
 	class MeshRenderer;
 	class RenderTarget;
 

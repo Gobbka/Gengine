@@ -1,7 +1,7 @@
 #include "Camera.h"
 
 #include <algorithm>
-#include "MaskEngine.h"
+
 #include "RenderTarget.h"
 #include "Types/Types.h"
 #include "../../Graphics.h"
@@ -35,7 +35,7 @@ Render::RenderTarget* Render::Camera::get_target_view()
 	return _render_target;
 }
 
-Render::MaskEngine* Render::Camera::get_mask_engine() const
+Render::GEMaskEngine* Render::Camera::get_mask_engine() const
 {
 	return _mask_engine;
 }
@@ -77,7 +77,7 @@ Render::Camera::Camera(Core::GraphicsContext* context, RenderTarget* target)
 	: WorldViewer(target->get_texture()->resolution())
 	, _blendEngine(new GEBlendEngine(context))
 	, _render_target(target)
-	, _mask_engine(new MaskEngine(_render_target))
+	, _mask_engine(new GEMaskEngine(_render_target))
 	, _context(context)
 {}
 

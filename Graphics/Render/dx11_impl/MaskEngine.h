@@ -15,15 +15,15 @@ namespace Render {
 		DepthStencil,
 	};
 	
-	class __declspec(dllexport) MaskEngine
+	class __declspec(dllexport) DX11MaskEngine
 	{
 		Core::GraphicsContext* _context;
 		Texture _buffer;
 		ID3D11DepthStencilView* _view;
 		RenderTarget* _target;
 	public:
-		MaskEngine(RenderTarget* target, MaskEngineUsage usage = MaskEngineUsage::DepthStencil);
-		explicit MaskEngine(Core::GraphicsContext* context,Surface resolution, MaskEngineUsage usage = MaskEngineUsage::DepthStencil);
+		DX11MaskEngine(RenderTarget* target, MaskEngineUsage usage = MaskEngineUsage::DepthStencil);
+		explicit DX11MaskEngine(Core::GraphicsContext* context,Surface resolution, MaskEngineUsage usage = MaskEngineUsage::DepthStencil);
 
 		void clear_buffer() const;
 

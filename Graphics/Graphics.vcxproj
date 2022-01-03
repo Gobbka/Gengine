@@ -191,7 +191,7 @@
     <ClInclude Include="Render\dx11_impl\BlendEngine.h" />
     <ClInclude Include="Render\Engine\Camera.h" />
     <ClInclude Include="Render\Engine\DepthStencil.h" />
-    <ClInclude Include="Render\Engine\MaskEngine.h" />
+    <ClInclude Include="Render\dx11_impl\MaskEngine.h" />
     <ClInclude Include="Render\Engine\Rasterizer.h" />
     <ClInclude Include="Render\Engine\RenderTarget.h" />
     <ClInclude Include="Render\Engine\SpriteEngine.h" />
@@ -226,7 +226,7 @@
     <ClCompile Include="Render\dx11_impl\BlendEngine.cpp" />
     <ClCompile Include="Render\Engine\Camera.cpp" />
     <ClCompile Include="Render\Engine\DepthStencil.cpp" />
-    <ClCompile Include="Render\Engine\MaskEngine.cpp" />
+    <ClCompile Include="Render\dx11_impl\MaskEngine.cpp" />
     <ClCompile Include="Render\Engine\RenderTarget.cpp" />
     <ClCompile Include="Render\Engine\SpriteEngine.cpp" />
     <ClCompile Include="Graphics\I3DObject\Cube\Cube.cpp" />

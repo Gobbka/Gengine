@@ -1,15 +1,15 @@
 ﻿#include "MaskEngine.h"
 
 #include "../../Graphics.h"
-#include "Camera.h"
+#include "../Engine/Camera.h"
 #include "Types/Types.h"
-#include "RenderTarget.h"
+#include "../Engine/RenderTarget.h"
 #include "Logger/Logger.h"
 
 #define MAP_USAGE_TYPELESS(usage) usage == MaskEngineUsage::DepthStencil ? DXGI_FORMAT_R24G8_TYPELESS : DXGI_FORMAT_R32_TYPELESS
 #define MAP_USAGE_TYPED(usage) usage == MaskEngineUsage::DepthStencil ? DXGI_FORMAT_D24_UNORM_S8_UINT : DXGI_FORMAT_D32_FLOAT
 
-Render::MaskEngine::MaskEngine(RenderTarget* target, MaskEngineUsage usage)
+Render::DX11MaskEngine::DX11MaskEngine(RenderTarget* target, MaskEngineUsage usage)
 	: _context(target->get_context())
 	, _buffer(nullptr)
 	, _view(nullptr)
@@ -47,7 +47,7 @@ Render::MaskEngine::MaskEngine(RenderTarget* target, MaskEngineUsage usage)
 	_buffer = Texture(_context, texture_2d);
 }
 
-Render::MaskEngine::MaskEngine(Core::GraphicsContext* context, Surface resolution, MaskEngineUsage usage)
+Render::DX11MaskEngine::DX11MaskEngine(Core::GraphicsContext* context, Surface resolution, MaskEngineUsage usage)
 	: _context(context)
 	, _buffer(nullptr)
 	, _view(nullptr)
@@ -84,12 +84,12 @@ Render::MaskEngine::MaskEngine(Core::GraphicsContext* context, Surface resolutio
 	_buffer = Texture(_context, texture_2d);
 }
 
-void Render::MaskEngine::clear_buffer() const
+void Render::DX11MaskEngine::clear_buffer() const
 {
 	_context->context->ClearDepthStencilView(_view, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 }
 
-Render::Texture* Render::MaskEngine::get_texture()
+Render::Texture* Render::DX11MaskEngine::get_texture()
 {
 	return &_buffer;
 }

@@ -3,12 +3,11 @@
 #include "../Engine/PrimitiveTopology.h"
 #include <DirectXMath.h>
 
-#include "../Engine/MaskEngine.h"
+#include "GraphicsCommon.h"
 
 namespace Render
 {
 	class Rasterizer;
-	class MaskEngine;
 	class PixelShader;
 	class VertexShader;
 	class SamplerState;
@@ -45,15 +44,15 @@ namespace Render
 		virtual void set_topology(PrimitiveTopology topology) =0;
 		virtual void set_pixel_shader(PixelShader* ps) =0;
 		virtual void set_vertex_shader(VertexShader* vs) = 0;
-		virtual void set_mask_engine(MaskEngine* mask) =0;
+		virtual void set_mask_engine(GEMaskEngine* mask) =0;
 		virtual void set_sampler_state(SamplerState* sampler) =0;
 		virtual void draw_indexed(UINT count, UINT start_location=0,UINT base_vertex_location=0) = 0;
 		virtual void draw(UINT count, UINT start_location) = 0;
 
 		virtual void set_render_target(RenderTarget* target) = 0;
-		virtual void set_render_target(RenderTarget* target, MaskEngine* mask) =0;
+		virtual void set_render_target(RenderTarget* target, GEMaskEngine* mask) =0;
 		virtual void set_shader_resource(Texture* texture,UINT slot=0) =0;
-		void set_shader_resource(MaskEngine*mask,UINT slot=0);
+		void set_shader_resource(GEMaskEngine*mask,UINT slot=0);
 		void set_shader_resource(RenderTarget* rt, UINT slot = 0);
 		virtual void set_rasterizer(Rasterizer& rs) =0;
 
@@ -63,7 +62,7 @@ namespace Render
 		virtual VertexShader* get_vertex_shader() =0;
 	};
 
-	inline void IGContext::set_shader_resource(MaskEngine* mask, UINT slot)
+	inline void IGContext::set_shader_resource(GEMaskEngine* mask, UINT slot)
 	{
 		set_shader_resource(mask->get_texture(), slot);
 	}

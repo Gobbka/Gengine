@@ -16,7 +16,6 @@ namespace Canvas
 }
 
 namespace Render {
-	class MaskEngine;
 	class MeshRenderer;
 	class SpriteEngine;
 	class Camera;

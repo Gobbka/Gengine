@@ -33,7 +33,7 @@
     <ClInclude Include="Render\dx11_impl\BlendEngine.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Engine\MaskEngine.h">
+    <ClInclude Include="Render\dx11_impl\MaskEngine.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Render\d3d\Shader\IShader.h">
@@ -179,7 +179,7 @@
     <ClCompile Include="Render\dx11_impl\BlendEngine.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Engine\MaskEngine.cpp">
+    <ClCompile Include="Render\dx11_impl\MaskEngine.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Render\d3d\Shader\VertexShader.cpp">

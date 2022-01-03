@@ -15,7 +15,6 @@ namespace Render
 	class Camera;
 	class VertexShader;
 	class PixelShader;
-	class MaskEngine;
 	class RenderTarget;
 
 	class ClearPass : public IPass

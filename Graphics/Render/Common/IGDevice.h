@@ -1,10 +1,11 @@
 ﻿#pragma once
 #include <Types/Material.h>
+
+#include "GraphicsCommon.h"
 #include "IIndexBuffer.h"
 #include "IVertexBuffer.h"
 #include "../d3d/Vertex.h"
 #include "../d3d/Buffer/Texture.h"
-#include "../Engine/Rasterizer.h"
 #include "ITexture2D.h"
 
 namespace Render
@@ -32,7 +33,7 @@ namespace Render
 		Texture* create_texture(Material& material);
 		Texture* create_texture(Material material);
 		virtual Texture* create_texture(ITexture2DDesc desc) =0;
-		virtual Rasterizer create_rasterizer(RasterizerDesc desc)=0;
+		virtual GERasterizer create_rasterizer(RasterizerDesc desc)=0;
 	};
 
 	template <typename T>

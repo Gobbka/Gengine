@@ -61,7 +61,7 @@ Render::Texture* Render::D11GDevice::create_texture(ITexture2DDesc desc)
 	return new Texture(_gfx, desc);
 }
 
-Render::Rasterizer Render::D11GDevice::create_rasterizer(RasterizerDesc desc)
+Render::GERasterizer Render::D11GDevice::create_rasterizer(RasterizerDesc desc)
 {
 	ID3D11RasterizerState* rs=nullptr;
 	auto rsdesc = CD3D11_RASTERIZER_DESC(CD3D11_DEFAULT());

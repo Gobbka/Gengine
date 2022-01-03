@@ -116,7 +116,7 @@ void Render::D11GContext::set_shader_resource(Texture* texture,UINT slot)
 	}
 }
 
-void Render::D11GContext::set_rasterizer(Rasterizer& rs)
+void Render::D11GContext::set_rasterizer(GERasterizer& rs)
 {
 	_d11context->RSSetState(rs._rs);
 }
@@ -136,7 +136,7 @@ void Render::D11GContext::debug_message(const char* message)
 	_info_queue->AddApplicationMessage(D3D11_MESSAGE_SEVERITY_INFO, message);
 }
 
-Render::Rasterizer Render::D11GContext::get_rasterizer()
+Render::GERasterizer Render::D11GContext::get_rasterizer()
 {
 	ID3D11RasterizerState* rs=nullptr;
 	_d11context->RSGetState(&rs);

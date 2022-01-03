@@ -7,7 +7,6 @@
 
 namespace Render
 {
-	class Rasterizer;
 	class PixelShader;
 	class VertexShader;
 	class SamplerState;
@@ -54,9 +53,9 @@ namespace Render
 		virtual void set_shader_resource(Texture* texture,UINT slot=0) =0;
 		void set_shader_resource(GEMaskEngine*mask,UINT slot=0);
 		void set_shader_resource(RenderTarget* rt, UINT slot = 0);
-		virtual void set_rasterizer(Rasterizer& rs) =0;
+		virtual void set_rasterizer(GERasterizer& rs) =0;
 
-		virtual Rasterizer get_rasterizer()=0;
+		virtual GERasterizer get_rasterizer()=0;
 
 		virtual PixelShader* get_pixel_shader() =0;
 		virtual VertexShader* get_vertex_shader() =0;

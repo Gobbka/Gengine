@@ -1,7 +1,7 @@
 #pragma once
 #include "../IPass/IPass.h"
 #include "../../Mesh.h"
-#include "../../../Render/Engine/Rasterizer.h"
+#include "../../../Render/Common/GraphicsCommon.h"
 
 namespace Core
 {
@@ -16,7 +16,7 @@ namespace Render
 	{
 		Core::GraphicsContext* _context;
 		Mesh _skybox_cube;
-		Rasterizer _skybox_rasterizer;
+		GERasterizer _skybox_rasterizer;
 		void execute(Scene*) override;
 	public:
 		explicit DrawSkyboxPass(Core::GraphicsContext* context);

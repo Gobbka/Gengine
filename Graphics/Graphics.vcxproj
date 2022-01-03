@@ -192,7 +192,7 @@
     <ClInclude Include="Render\Engine\Camera.h" />
     <ClInclude Include="Render\Engine\DepthStencil.h" />
     <ClInclude Include="Render\dx11_impl\MaskEngine.h" />
-    <ClInclude Include="Render\Engine\Rasterizer.h" />
+    <ClInclude Include="Render\dx11_impl\Rasterizer.h" />
     <ClInclude Include="Render\Engine\RenderTarget.h" />
     <ClInclude Include="Render\Common\SpriteEngine.h" />
     <ClInclude Include="Graphics\I3DObject\Cube\Cube.h" />

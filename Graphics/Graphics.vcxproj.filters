@@ -159,7 +159,7 @@
     <ClInclude Include="Graphics\Que\DrawSkyboxPass\DrawSkyboxPass.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Engine\Rasterizer.h">
+    <ClInclude Include="Render\dx11_impl\Rasterizer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Render\Common\GraphicsCommon.h">

@@ -20,14 +20,14 @@ namespace Render
 		{}
 	};
 
-	class Rasterizer
+	class DX11Rasterizer
 	{
 		friend D11GContext;
 		friend D11GDevice;
 
 		ID3D11RasterizerState* _rs;
 	
-		Rasterizer(ID3D11RasterizerState*rs)
+		DX11Rasterizer(ID3D11RasterizerState*rs)
 			: _rs(rs)
 		{}
 	};

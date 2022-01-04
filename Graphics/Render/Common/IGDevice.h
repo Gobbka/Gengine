@@ -11,7 +11,6 @@
 namespace Render
 {
 	class IBlendEngine;
-	struct ITexture2DDesc;
 	class Material;
 	class RenderTarget;
 

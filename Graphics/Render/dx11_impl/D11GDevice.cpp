@@ -3,7 +3,7 @@
 #include "BlendEngine.h"
 #include "../../Graphics.h"
 #include "../../Render/d3d/Vertex.h"
-#include "../../Render/d3d/Buffer/IndexBuffer.h"
+#include "../../Render/Common/IndexBuffer.h"
 #include "../../Render/d3d/Buffer/VertexBuffer.h"
 #include "Logger/Logger.h"
 
@@ -46,14 +46,14 @@ Render::D11GDevice::D11GDevice(ID3D11Device* device,Core::GraphicsContext* gfx)
 	, _gfx(gfx)
 {}
 
-Render::IIndexBuffer* Render::D11GDevice::alloc_index_buffer(unsigned size)
+Render::GEIndexBuffer* Render::D11GDevice::alloc_index_buffer(unsigned size)
 {
-	return new IndexBuffer(_gfx, new UINT[size], size);
+	return new GEIndexBuffer(_gfx, new UINT[size], size);
 }
 
-Render::IIndexBuffer* Render::D11GDevice::alloc_index_buffer(void* data, unsigned size)
+Render::GEIndexBuffer* Render::D11GDevice::alloc_index_buffer(void* data, unsigned size)
 {
-	return new IndexBuffer(_gfx, (UINT*)data, size);
+	return new GEIndexBuffer(_gfx, (UINT*)data, size);
 }
 
 Render::GETexture* Render::D11GDevice::create_texture(ITexture2DDesc desc)

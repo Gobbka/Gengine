@@ -60,7 +60,7 @@
     <ClInclude Include="Graphics\I3DObject\Cube\Cube.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\d3d\Buffer\IndexBuffer.h">
+    <ClInclude Include="Render\dx11_impl\IndexBuffer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\I3DObject\Parallelepiped\Parallelepiped.h">
@@ -72,7 +72,7 @@
     <ClInclude Include="Render\Common\IVertexBuffer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Common\IIndexBuffer.h">
+    <ClInclude Include="Render\Common\IndexBuffer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Render\Engine\RenderTarget.h">
@@ -212,7 +212,7 @@
     <ClCompile Include="Graphics\I3DObject\Cube\Cube.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\d3d\Buffer\IndexBuffer.cpp">
+    <ClCompile Include="Render\dx11_impl\IndexBuffer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\I3DObject\Parallelepiped\Parallelepiped.cpp">

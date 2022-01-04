@@ -3,6 +3,7 @@
 #include "../../../Render/Engine/Camera.h"
 #include "../../Components/MeshRenderer.h"
 #include "../../../Render/Common/IGContext.h"
+#include "../../../Render/Common/IndexBuffer.h"
 #include "../../../Render/d3d/Buffer/ConstantBuffer.h"
 #include "../../Components/LightViewer.h"
 

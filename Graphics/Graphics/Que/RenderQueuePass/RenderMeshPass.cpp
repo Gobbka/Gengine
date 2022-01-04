@@ -4,6 +4,7 @@
 #include "../../../Render/Engine/Camera.h"
 #include "../../../Graphics.h"
 #include "../../../Render/Common/IGContext.h"
+#include "../../../Render/Common/IndexBuffer.h"
 #include "../../../Render/Common/Texture.h"
 #include "../../Mesh.h"
 #include "../../Components/LightViewer.h"

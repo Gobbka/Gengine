@@ -1,19 +1,19 @@
 #pragma once
 #include "../Render/Engine/PrimitiveTopology.h"
+#include "../Render/Common/GraphicsCommon.h"
 
 namespace Render
 {
 	struct Vertex;
-	class IIndexBuffer;
 	template<typename T>
 	class IVertexBuffer;
 
 	struct __declspec(dllexport) Mesh final
 	{
 		IVertexBuffer<Vertex>* buffer;
-		IIndexBuffer* index_buffer;
+		GEIndexBuffer* index_buffer;
 		PrimitiveTopology topology;
 		
-		Mesh(IVertexBuffer<Vertex>* buffer, IIndexBuffer* index_buffer);
+		Mesh(IVertexBuffer<Vertex>* buffer, GEIndexBuffer* index_buffer);
 	};
 }

@@ -17,8 +17,8 @@ namespace Render
 	public:
 		D11GDevice(ID3D11Device* device,Core::GraphicsContext*context);
 
-		IIndexBuffer* alloc_index_buffer(unsigned size) override;
-		IIndexBuffer* alloc_index_buffer(void* data, unsigned size) override;
+		GEIndexBuffer* alloc_index_buffer(unsigned size) override;
+		GEIndexBuffer* alloc_index_buffer(void* data, unsigned size) override;
 
 		GETexture* create_texture(ITexture2DDesc desc) override;
 		GERasterizer create_rasterizer(RasterizerDesc desc) override;

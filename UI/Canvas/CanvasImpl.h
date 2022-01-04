@@ -10,7 +10,6 @@ namespace Render
 {
 	template<typename T>
 	class IVertexBuffer;
-	class IIndexBuffer;
 }
 
 namespace Canvas {
@@ -18,7 +17,7 @@ namespace Canvas {
 	class CanvasImpl final {
 		DrawData _drawData;
 		Render::IVertexBuffer<UI::Vertex2D>* _buffer;
-		Render::IIndexBuffer* _ibuffer;
+		Render::GEIndexBuffer* _ibuffer;
 		Core::GraphicsContext* _context;
 	public:
 

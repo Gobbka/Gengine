@@ -2,7 +2,6 @@
 #include <Types/Material.h>
 
 #include "GraphicsCommon.h"
-#include "IIndexBuffer.h"
 #include "IVertexBuffer.h"
 #include "../d3d/Vertex.h"
 #include "Rasterizer.h"
@@ -10,10 +9,6 @@
 
 namespace Render
 {
-	class IBlendEngine;
-	class Material;
-	class RenderTarget;
-
 	class __declspec(dllexport) IGDevice
 	{
 	protected:
@@ -26,8 +21,8 @@ namespace Render
 		template<typename T>
 		IVertexBuffer<T>* alloc_vertex_buffer(T* data, IVertexBufferDesc desc);
 
-		virtual IIndexBuffer* alloc_index_buffer(unsigned size) = 0;
-		virtual IIndexBuffer* alloc_index_buffer(void* data, unsigned size) = 0;
+		virtual GEIndexBuffer* alloc_index_buffer(unsigned size) = 0;
+		virtual GEIndexBuffer* alloc_index_buffer(void* data, unsigned size) = 0;
 
 		GETexture* create_texture(Material& material);
 		GETexture* create_texture(Material material);

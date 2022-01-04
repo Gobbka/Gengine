@@ -2,6 +2,7 @@
 
 #include "Graphics.h"
 #include <Render/Common/IGContext.h>
+#include <Render/Common/IndexBuffer.h>
 
 Canvas::DrawData* Canvas::CanvasImpl::begin()
 {

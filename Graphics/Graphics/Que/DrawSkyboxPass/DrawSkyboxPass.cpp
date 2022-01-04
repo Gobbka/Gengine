@@ -4,6 +4,7 @@
 #include "../../../Render/Common/IGContext.h"
 #include "../../../Render/Engine/Camera.h"
 #include "../../I3DObject/Cube/Cube.h"
+#include "../../../Render/Common/IndexBuffer.h"
 
 void Render::DrawSkyboxPass::execute(Scene*scene)
 {

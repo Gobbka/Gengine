@@ -1,5 +1,5 @@
 ﻿#include "DepthStencilStatesCollection.h"
-#include "../Render/Engine/DepthStencil.h"
+#include "../Render/Common/DepthStencil.h"
 
 Render::DepthFunc get_depth_func(Render::DSBitSet bitset)
 {
@@ -15,7 +15,7 @@ Render::DepthStencilStatesCollection::DepthStencilStatesCollection(Core::Graphic
 {
 }
 
-Render::DepthStencil Render::DepthStencilStatesCollection::operator[](DSBitSet index)
+Render::GEDepthStencil Render::DepthStencilStatesCollection::operator[](DSBitSet index)
 {
 	auto element = _map[index];
 	if(!element.valid())
@@ -24,7 +24,7 @@ Render::DepthStencil Render::DepthStencilStatesCollection::operator[](DSBitSet i
 		ds_desc.depth = get_depth_func(index);
 		ds_desc.stencil_usage = (StencilUsage)(index >> 2);
 
-		element = DepthStencil(_context, ds_desc);
+		element = GEDepthStencil(_context, ds_desc);
 		_map[index] = element;
 	}
 	return element;

@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "../Render/Engine/DepthStencil.h"
+#include "../Render/Common/DepthStencil.h"
 #include <map>
 
 namespace Core
@@ -22,10 +22,10 @@ namespace Render {
 	class __declspec(dllexport) DepthStencilStatesCollection
 	{
 		Core::GraphicsContext* _context;
-		std::map<DSBitSet, DepthStencil> _map;
+		std::map<DSBitSet, GEDepthStencil> _map;
 	public:
 		DepthStencilStatesCollection(Core::GraphicsContext*context);
 
-		DepthStencil operator[](DSBitSet index);
+		GEDepthStencil operator[](DSBitSet index);
 	};
 }

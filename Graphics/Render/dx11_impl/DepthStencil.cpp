@@ -22,12 +22,12 @@ D3D11_DEPTH_STENCILOP_DESC create_depth_stencilop_desc(D3D11_COMPARISON_FUNC ste
 	return D3D11_DEPTH_STENCILOP_DESC{ D3D11_STENCIL_OP_KEEP,D3D11_STENCIL_OP_KEEP,success_func,stencil_func };
 }
 
-Render::DepthStencil::DepthStencil()
+Render::DX11DepthStencil::DX11DepthStencil()
 	: _context(nullptr)
 	, _state(nullptr)
 {}
 
-Render::DepthStencil::DepthStencil(Core::GraphicsContext* context, DepthStencilDesc desc)
+Render::DX11DepthStencil::DX11DepthStencil(Core::GraphicsContext* context, DepthStencilDesc desc)
 	: _context(context->context)
 	, _state(nullptr)
 {
@@ -63,12 +63,12 @@ Render::DepthStencil::DepthStencil(Core::GraphicsContext* context, DepthStencilD
 		.abort(TEXT("DepthStencil.cpp: cannot create DepthStencil from DepthStencilDesc"));
 }
 
-void Render::DepthStencil::bind(unsigned reference) const
+void Render::DX11DepthStencil::bind(unsigned reference) const
 {
 	_context->OMSetDepthStencilState(_state, reference);
 }
 
-bool Render::DepthStencil::valid() const
+bool Render::DX11DepthStencil::valid() const
 {
 	return !!_state;
 }

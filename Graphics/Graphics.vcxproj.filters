@@ -135,7 +135,7 @@
     <ClInclude Include="Graphics\DepthStencilStatesCollection.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Engine\DepthStencil.h">
+    <ClInclude Include="Render\dx11_impl\DepthStencil.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Que\CreateLightMapPass\CreateLightMapPass.h">
@@ -178,6 +178,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Render\Common\SamplerState.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\Common\DepthStencil.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
@@ -269,7 +272,7 @@
     <ClCompile Include="Graphics\DepthStencilStatesCollection.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Engine\DepthStencil.cpp">
+    <ClCompile Include="Render\dx11_impl\DepthStencil.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Que\CreateLightMapPass\CreateLightMapPass.cpp">

@@ -35,13 +35,13 @@ namespace Render {
 		{}
 	};
 
-	class __declspec(dllexport) DepthStencil final
+	class __declspec(dllexport) DX11DepthStencil final
 	{
 		ID3D11DeviceContext* _context;
 		ID3D11DepthStencilState* _state;
 	public:
-		DepthStencil();
-		DepthStencil(Core::GraphicsContext* context,DepthStencilDesc desc);
+		DX11DepthStencil();
+		DX11DepthStencil(Core::GraphicsContext* context,DepthStencilDesc desc);
 
 		void bind(unsigned reference = 0) const;
 		bool valid() const;

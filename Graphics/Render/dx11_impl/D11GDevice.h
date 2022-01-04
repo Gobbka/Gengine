@@ -2,10 +2,6 @@
 #include <d3d11.h>
 #include "../Common/IGDevice.h"
 
-namespace Core {
-	class GraphicsContext;
-}
-
 namespace Render
 {
 	class __declspec(dllexport) D11GDevice final : public IGDevice

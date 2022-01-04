@@ -2,15 +2,8 @@
 #include <d3d11.h>
 #include "../Common/IGContext.h"
 
-namespace Core
+namespace Render
 {
-	class GraphicsContext;
-}
-
-namespace Render {
-	class VertexShader;
-	class PixelShader;
-
 	class D11GContext final : public IGContext
 	{
 		ID3D11InfoQueue* _info_queue;

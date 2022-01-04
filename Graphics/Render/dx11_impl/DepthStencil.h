@@ -6,7 +6,8 @@ namespace Core
 	class GraphicsContext;
 }
 
-namespace Render {
+namespace Render
+{
 	enum class StencilUsage : __int8
 	{
 		none = 0,

@@ -1,20 +1,19 @@
 ﻿#pragma once
 #include <d3d11.h>
+#include "Types/Types.h"
 
 namespace Core
 {
 	class GraphicsContext;
 }
 
-struct Surface;
-
-namespace Render {
+namespace Render
+{
 	struct ITexture2DDesc;
 	class Material;
 
 	class __declspec(dllexport) DX11Texture
 	{
-	private:
 		Core::GraphicsContext* _context;
 		
 		D3D11_TEXTURE2D_DESC get_desc() const;

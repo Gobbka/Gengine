@@ -1,11 +1,10 @@
 ﻿#pragma once
-#include "../../../Graphics.h"
 #include <d3d11.h>
-
+#include "../../../Graphics.h"
 #include "Logger/Logger.h"
 
-namespace Render {
-
+namespace Render
+{
 	enum CBBindFlag : BYTE
 	{
 		CBBindFlag_vs = 0x1,

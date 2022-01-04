@@ -2,7 +2,8 @@
 #include <d3d11.h>
 #include "../Common/Bindable.h"
 
-namespace Render {
+namespace Render
+{
 	enum class SamplerFilter
 	{
 		MinMagMip,

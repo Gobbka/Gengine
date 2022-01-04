@@ -6,7 +6,8 @@ namespace Core
 	class GraphicsContext;
 }
 
-namespace Render {
+namespace Render
+{
 	class __declspec(dllexport) DX11IndexBuffer
 	{
 		Core::GraphicsContext* _context;

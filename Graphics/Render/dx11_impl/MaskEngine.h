@@ -3,11 +3,8 @@
 #include "../Common/Bindable.h"
 #include "../Common/Texture.h"
 
-struct Surface;
-
-namespace Render {
-	class WorldViewer;
-
+namespace Render
+{
 	enum class MaskEngineUsage
 	{
 		Depth,

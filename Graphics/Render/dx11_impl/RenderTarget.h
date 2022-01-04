@@ -3,14 +3,13 @@
 #include "../Common/Texture.h"
 #include "Types/Types.h"
 
-struct Color3XM;
-
-namespace Core {
+namespace Core
+{
 	class GraphicsContext;
 }
 
-namespace Render {
-
+namespace Render
+{
 	class __declspec(dllexport) DX11RenderTarget
 	{
 		ID3D11RenderTargetView* _targetView;

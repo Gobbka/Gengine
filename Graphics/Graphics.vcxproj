@@ -203,7 +203,7 @@
     <ClInclude Include="Graphics\I3DObject\Cube\Cube.h" />
     <ClInclude Include="Graphics\Mesh.h" />
     <ClInclude Include="Graphics\I3DObject\Parallelepiped\Parallelepiped.h" />
-    <ClInclude Include="Render\Light\DirectionLightComponent.h" />
+    <ClInclude Include="Graphics\Components\DirectionLightComponent.h" />
     <ClInclude Include="Graphics\Components\MeshRenderer.h" />
     <ClInclude Include="Render\Viewer\WorldViewer.h" />
   </ItemGroup>
@@ -237,7 +237,7 @@
     <ClCompile Include="Graphics\I3DObject\Cube\Cube.cpp" />
     <ClCompile Include="Graphics\Mesh.cpp" />
     <ClCompile Include="Graphics\I3DObject\Parallelepiped\Parallelepiped.cpp" />
-    <ClCompile Include="Render\Light\DirectionLightComponent.cpp" />
+    <ClCompile Include="Graphics\Components\DirectionLightComponent.cpp" />
     <ClCompile Include="Graphics\Components\MeshRenderer.cpp" />
     <ClCompile Include="Render\Viewer\WorldViewer.cpp" />
   </ItemGroup>

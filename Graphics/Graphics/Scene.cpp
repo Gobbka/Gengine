@@ -1,7 +1,7 @@
 ﻿#include "Scene.h"
 
 #include "../Render/Engine/Camera.h"
-#include "../Render/Light/DirectionLightComponent.h"
+#include "../Graphics/Components/DirectionLightComponent.h"
 #include "Components/MeshRenderer.h"
 #include "Components/GameEntityComponent.h"
 #include "Components/PointLightComponent.h"

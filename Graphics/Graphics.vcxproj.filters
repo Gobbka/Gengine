@@ -78,7 +78,7 @@
     <ClInclude Include="Render\dx11_impl\RenderTarget.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Light\DirectionLightComponent.h">
+    <ClInclude Include="Graphics\Components\DirectionLightComponent.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Render\Viewer\WorldViewer.h">
@@ -230,7 +230,7 @@
     <ClCompile Include="Render\dx11_impl\RenderTarget.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Light\DirectionLightComponent.cpp">
+    <ClCompile Include="Graphics\Components\DirectionLightComponent.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Render\Viewer\WorldViewer.cpp">

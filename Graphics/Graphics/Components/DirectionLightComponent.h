@@ -1,6 +1,6 @@
 #pragma once
-#include "../Viewer/WorldViewer.h"
-#include "../Common/GraphicsCommon.h"
+#include "../../Render/Viewer/WorldViewer.h"
+#include "../../Render/Common/GraphicsCommon.h"
 
 namespace Core {
 	class GraphicsContext;
@@ -8,7 +8,7 @@ namespace Core {
 
 namespace Render
 {
-	struct __declspec(dllexport) DirectionLightComponent : public WorldViewer
+	struct __declspec(dllexport) DirectionLightComponent : WorldViewer
 	{
 		Core::GraphicsContext* context;
 		GEMaskEngine* mask_engine;

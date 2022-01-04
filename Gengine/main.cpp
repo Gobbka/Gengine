@@ -10,7 +10,7 @@
 #include <Ecs/Ecs.h>
 #include <chrono>
 
-#include <Render/Light/DirectionLightComponent.h>
+#include <Graphics/Components/DirectionLightComponent.h>
 
 #include "Graphics/Components/MeshRenderer.h"
 #include "Graphics/Components/LightViewer.h"

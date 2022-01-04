@@ -1,8 +1,7 @@
 #include "DirectionLightComponent.h"
 
 #include "../../Graphics.h"
-#include "../Common/IGContext.h"
-
+#include "../../Render/Common/IGContext.h"
 
 Render::DirectionLightComponent::DirectionLightComponent(Core::GraphicsContext* gcontext)
 	: WorldViewer(gcontext->get_screen_resolution())

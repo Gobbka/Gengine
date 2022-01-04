@@ -3,7 +3,6 @@
 
 namespace Render
 {
-
 	struct __declspec(dllexport) LightViewer final
 	{
 		GERenderTarget normals_map;

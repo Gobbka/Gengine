@@ -2,14 +2,10 @@
 #include "../Render/Common/GraphicsCommon.h"
 #include "../Render/Viewer/WorldViewer.h"
 
-struct Surface;
-
 namespace Render
 {
-
 	class __declspec(dllexport) Camera : public WorldViewer
 	{
-	private:
 		GEBlendEngine* _blendEngine;
 		DX11RenderTarget* _render_target;
 		GEMaskEngine* _mask_engine;
@@ -19,11 +15,11 @@ namespace Render
 		void clear();
 		
 		void set_resolution(Surface new_resolution);
-	public:
+
 		Core::GraphicsContext* graphics_context();
 		DX11RenderTarget* get_target_view();
 		GEMaskEngine* get_mask_engine() const;
-	public:
+
 		Camera& operator=(Camera&& other) noexcept;
 		Camera(Camera&& other) noexcept;
 		Camera(Core::GraphicsContext* context, DX11RenderTarget*target);

@@ -3,9 +3,6 @@
 
 namespace Render
 {
-	class IIndexBuffer;
-	struct Vertex;
-
 	struct __declspec(dllexport) IVertexBufferDesc {
 		enum class Usage
 		{

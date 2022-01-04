@@ -2,10 +2,6 @@
 #include "../../Render/Viewer/WorldViewer.h"
 #include "../../Render/Common/GraphicsCommon.h"
 
-namespace Core {
-	class GraphicsContext;
-}
-
 namespace Render
 {
 	struct __declspec(dllexport) DirectionLightComponent : WorldViewer

@@ -1,12 +1,14 @@
 #pragma once
+#include "../../Render/Common/GraphicsCommon.h"
 
-#include "../../Render/Common/Texture.h"
-
-struct SkyboxComponent
+namespace Render
 {
-	Render::GETexture* sky_texture;
+	struct SkyboxComponent
+	{
+		GETexture* sky_texture;
 
-	SkyboxComponent(Render::GETexture* sky_texture)
-		: sky_texture(sky_texture)
-	{}
-};
+		SkyboxComponent(GETexture* sky_texture)
+			: sky_texture(sky_texture)
+		{}
+	};
+}

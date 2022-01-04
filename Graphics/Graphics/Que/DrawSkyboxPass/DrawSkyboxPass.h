@@ -3,15 +3,8 @@
 #include "../../Mesh.h"
 #include "../../../Render/Common/Rasterizer.h"
 
-namespace Core
-{
-	class GraphicsContext;
-}
-
 namespace Render
 {
-	class Scene;
-
 	class DrawSkyboxPass final : public IPass
 	{
 		Core::GraphicsContext* _context;

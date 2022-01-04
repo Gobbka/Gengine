@@ -1,13 +1,13 @@
 #pragma once
-#include "../../Render/Engine/RenderTarget.h"
+#include "../../Render/Common/RenderTarget.h"
 
 namespace Render
 {
 
 	struct __declspec(dllexport) LightViewer final
 	{
-		RenderTarget normals_map;
-		RenderTarget light_map;
+		GERenderTarget normals_map;
+		GERenderTarget light_map;
 
 		LightViewer(Core::GraphicsContext*context,Surface resolution)
 			: normals_map(context,resolution)

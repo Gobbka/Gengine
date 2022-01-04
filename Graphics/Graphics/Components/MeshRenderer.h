@@ -6,7 +6,6 @@
 
 namespace Render
 {
-	
 	class __declspec(dllexport) MeshRenderer
 	{
 	public:

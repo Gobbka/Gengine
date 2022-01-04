@@ -64,7 +64,7 @@ int WINAPI wWinMain(
     component->set_rotation(Vector3(0.519999862f, 0.880000114f, 0));
 
     form->editorScene->create_point_light({ 1,{1,1,1},{-3,3,10} });
-    form->editorScene->get_main_camera()->assign<SkyboxComponent>(workbench_texture);
+    form->editorScene->get_main_camera()->assign<Render::SkyboxComponent>(workbench_texture);
     auto* cube = form->editorScene->create_model(stone_texture,stone_texture_normals);
     auto* platform = form->editorScene->create_model(red_texture);
     platform->get<Render::MeshRenderer>()->transform.set_position(Position3{ 0,-7,0 });

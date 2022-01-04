@@ -1,20 +1,13 @@
 #pragma once
 #include <DirectXMath.h>
-
 #include "../IPass/IPass.h"
 #include "../../Scene.h"
-
-namespace Core {
-	class GraphicsContext;
-}
 
 namespace Render
 {
 	struct LightViewer;
 	class MeshRenderer;
 	class Camera;
-	class VertexShader;
-	class PixelShader;
 
 	class ClearPass : public IPass
 	{

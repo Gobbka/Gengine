@@ -2,8 +2,8 @@
 #include <vector>
 #include "IPass.h"
 
-namespace Render {
-
+namespace Render
+{
 	enum class PassStep
 	{
 		begin,

@@ -4,15 +4,8 @@
 #include "Types/Types.h"
 #include "../../../Render/d3d/Buffer/ConstantBuffer.h"
 
-namespace Core
-{
-	class GraphicsContext;
-}
-
 namespace Render
 {
-	class Scene;
-
 	struct PointLightCBStruct
 	{
 		Position3 pos = Position3::null();

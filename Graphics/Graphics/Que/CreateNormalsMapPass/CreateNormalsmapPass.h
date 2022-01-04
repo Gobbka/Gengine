@@ -8,8 +8,6 @@ namespace Core
 
 namespace Render
 {
-	class Scene;
-
 	class CreateNormalsMapPass : public IPass
 	{
 		Core::GraphicsContext* _context;

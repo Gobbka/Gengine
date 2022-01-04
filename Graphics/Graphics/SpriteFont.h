@@ -1,13 +1,7 @@
 ﻿#pragma once
 #include <vector>
-
 #include "Types/Types.h"
 #include "../Render/Common/Texture.h"
-
-namespace Core
-{
-	class GraphicsContext;
-}
 
 class BinaryReader;
 

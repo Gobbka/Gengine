@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <map>
-#include "../Render/d3d/Shader/PixelShader.h"
 #include "../Render/d3d/Shader/IShader.h"
+#include "../Render/d3d/Shader/PixelShader.h"
 
 namespace Core
 {

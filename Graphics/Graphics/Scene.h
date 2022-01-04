@@ -2,14 +2,11 @@
 #include "Ecs/Ecs.h"
 #include "Que/IPass/Passer.h"
 #include "../Render/Common/Texture.h"
-struct PointLightComponent;
 
-namespace Core {
-	class GraphicsContext;
-}
 
-namespace Render {
-	class Camera;
+namespace Render
+{
+	struct PointLightComponent;
 
 	class __declspec(dllexport) Scene
 	{

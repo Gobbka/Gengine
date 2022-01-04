@@ -11,7 +11,6 @@
 #include <chrono>
 
 #include <Graphics/Components/DirectionLightComponent.h>
-
 #include <Graphics/Components/MeshRenderer.h>
 #include <Graphics/Components/LightViewer.h>
 #include <Graphics/Components/PointLightComponent.h>

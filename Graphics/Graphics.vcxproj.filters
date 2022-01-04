@@ -114,7 +114,7 @@
     <ClInclude Include="Graphics\Que\CreateShadowmapPass\CreateShadowMapPass.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Engine\PrimitiveTopology.h">
+    <ClInclude Include="Graphics\PrimitiveTopology.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Components\GameEntityComponent.h">
@@ -280,12 +280,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Render\d3d\hlsl\pixel_shader.hlsl" />
-    <FxCompile Include="Render\d3d\hlsl\phong_ps.hlsl" />
-    <FxCompile Include="Render\d3d\hlsl\texture_vs.hlsl" />
-    <FxCompile Include="Render\d3d\hlsl\texture_ps.hlsl" />
-    <FxCompile Include="Render\d3d\hlsl\normals_ps.hlsl" />
-    <FxCompile Include="Render\d3d\hlsl\normals_texture_ps.hlsl" />
-    <FxCompile Include="Render\d3d\hlsl\point_light_ps.hlsl" />
+    <FxCompile Include="Render\dx11_impl\hlsl\pixel_shader.hlsl" />
+    <FxCompile Include="Render\dx11_impl\hlsl\phong_ps.hlsl" />
+    <FxCompile Include="Render\dx11_impl\hlsl\texture_vs.hlsl" />
+    <FxCompile Include="Render\dx11_impl\hlsl\texture_ps.hlsl" />
+    <FxCompile Include="Render\dx11_impl\hlsl\normals_ps.hlsl" />
+    <FxCompile Include="Render\dx11_impl\hlsl\normals_texture_ps.hlsl" />
+    <FxCompile Include="Render\dx11_impl\hlsl\point_light_ps.hlsl" />
   </ItemGroup>
 </Project>

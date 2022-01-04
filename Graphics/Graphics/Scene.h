@@ -9,7 +9,6 @@ namespace Core {
 }
 
 namespace Render {
-	class RenderTarget;
 	class Camera;
 
 	class __declspec(dllexport) Scene
@@ -29,7 +28,7 @@ namespace Render {
 		void register_system(ECS::EntitySystem*system);
 
 		ECS::Entity* create_entity(ECS::Entity*parent=nullptr);
-		ECS::Entity* create_camera(RenderTarget* target);
+		ECS::Entity* create_camera(GERenderTarget* target);
 		template<typename Component>
 		ECS::Entity* instantiate(Component&component);
 		template<typename Component>

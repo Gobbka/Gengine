@@ -163,6 +163,7 @@
     <ClInclude Include="Render\Common\GraphicsCommon.h" />
     <ClInclude Include="Render\Common\MaskEngine.h" />
     <ClInclude Include="Render\Common\Rasterizer.h" />
+    <ClInclude Include="Render\Common\RenderTarget.h" />
     <ClInclude Include="Render\Common\Texture.h" />
     <ClInclude Include="Render\dx11_impl\D11GContext.h" />
     <ClInclude Include="Render\dx11_impl\D11GDevice.h" />
@@ -196,7 +197,7 @@
     <ClInclude Include="Render\Engine\DepthStencil.h" />
     <ClInclude Include="Render\dx11_impl\MaskEngine.h" />
     <ClInclude Include="Render\dx11_impl\Rasterizer.h" />
-    <ClInclude Include="Render\Engine\RenderTarget.h" />
+    <ClInclude Include="Render\dx11_impl\RenderTarget.h" />
     <ClInclude Include="Render\Common\SpriteEngine.h" />
     <ClInclude Include="Graphics\I3DObject\Cube\Cube.h" />
     <ClInclude Include="Graphics\Mesh.h" />
@@ -230,7 +231,7 @@
     <ClCompile Include="Render\Engine\Camera.cpp" />
     <ClCompile Include="Render\Engine\DepthStencil.cpp" />
     <ClCompile Include="Render\dx11_impl\MaskEngine.cpp" />
-    <ClCompile Include="Render\Engine\RenderTarget.cpp" />
+    <ClCompile Include="Render\dx11_impl\RenderTarget.cpp" />
     <ClCompile Include="Render\Common\SpriteEngine.cpp" />
     <ClCompile Include="Graphics\I3DObject\Cube\Cube.cpp" />
     <ClCompile Include="Graphics\Mesh.cpp" />

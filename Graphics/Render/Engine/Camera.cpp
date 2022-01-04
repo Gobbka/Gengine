@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-#include "RenderTarget.h"
+#include "../Common/RenderTarget.h"
 #include "Types/Types.h"
 #include "../../Graphics.h"
 #include "../Common/IGContext.h"
@@ -30,7 +30,7 @@ Core::GraphicsContext* Render::Camera::graphics_context()
 	return _context;
 }
 
-Render::RenderTarget* Render::Camera::get_target_view()
+Render::DX11RenderTarget* Render::Camera::get_target_view()
 {
 	return _render_target;
 }
@@ -73,7 +73,7 @@ Render::Camera::Camera(Camera&& other) noexcept
 }
 
 
-Render::Camera::Camera(Core::GraphicsContext* context, RenderTarget* target)
+Render::Camera::Camera(Core::GraphicsContext* context, DX11RenderTarget* target)
 	: WorldViewer(target->get_texture()->resolution())
 	, _blendEngine(new GEBlendEngine(context))
 	, _render_target(target)

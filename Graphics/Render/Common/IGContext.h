@@ -49,11 +49,11 @@ namespace Render
 		virtual void draw_indexed(UINT count, UINT start_location=0,UINT base_vertex_location=0) = 0;
 		virtual void draw(UINT count, UINT start_location) = 0;
 
-		virtual void set_render_target(RenderTarget* target) = 0;
-		virtual void set_render_target(RenderTarget* target, GEMaskEngine* mask) =0;
+		virtual void set_render_target(GERenderTarget* target) = 0;
+		virtual void set_render_target(GERenderTarget* target, GEMaskEngine* mask) =0;
 		virtual void set_shader_resource(GETexture* texture,UINT slot=0) =0;
 		void set_shader_resource(GEMaskEngine*mask,UINT slot=0);
-		void set_shader_resource(RenderTarget* rt, UINT slot = 0);
+		void set_shader_resource(GERenderTarget* rt, UINT slot = 0);
 		virtual void set_rasterizer(GERasterizer& rs) =0;
 
 		virtual GERasterizer get_rasterizer()=0;
@@ -67,7 +67,7 @@ namespace Render
 		set_shader_resource(mask->get_texture(), slot);
 	}
 
-	inline void IGContext::set_shader_resource(RenderTarget* rt,UINT slot)
+	inline void IGContext::set_shader_resource(GERenderTarget* rt,UINT slot)
 	{
 		set_shader_resource(rt->get_texture(),slot);
 	}

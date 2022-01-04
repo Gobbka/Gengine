@@ -34,7 +34,7 @@ ECS::Entity* Render::Scene::create_entity(ECS::Entity* parent)
 	return ent;
 }
 
-ECS::Entity* Render::Scene::create_camera(RenderTarget* target)
+ECS::Entity* Render::Scene::create_camera(GERenderTarget* target)
 {
 	auto* ent = create_entity();
 	

@@ -3,13 +3,13 @@
 #include "../../Graphics.h"
 #include "../Engine/Camera.h"
 #include "Types/Types.h"
-#include "../Engine/RenderTarget.h"
+#include "../Common/RenderTarget.h"
 #include "Logger/Logger.h"
 
 #define MAP_USAGE_TYPELESS(usage) usage == MaskEngineUsage::DepthStencil ? DXGI_FORMAT_R24G8_TYPELESS : DXGI_FORMAT_R32_TYPELESS
 #define MAP_USAGE_TYPED(usage) usage == MaskEngineUsage::DepthStencil ? DXGI_FORMAT_D24_UNORM_S8_UINT : DXGI_FORMAT_D32_FLOAT
 
-Render::DX11MaskEngine::DX11MaskEngine(RenderTarget* target, MaskEngineUsage usage)
+Render::DX11MaskEngine::DX11MaskEngine(DX11RenderTarget* target, MaskEngineUsage usage)
 	: _context(target->get_context())
 	, _buffer(nullptr)
 	, _view(nullptr)

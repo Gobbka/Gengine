@@ -12,7 +12,7 @@
 
 #include "Graphics/Que/RenderQueuePass/RenderMeshPass.h"
 #include "Render/d3d/Vertex.h"
-#include "Render/Engine/RenderTarget.h"
+#include "Render/Common/RenderTarget.h"
 #include "Render/Common/SpriteEngine.h"
 
 #include "GraphicsBuildSettings.h"
@@ -99,7 +99,7 @@ Surface Core::GraphicsContext::get_screen_resolution() const
 	return _screen_resolution;
 }
 
-inline Render::RenderTarget* Core::GraphicsContext::get_render_target_view()
+inline Render::GERenderTarget* Core::GraphicsContext::get_render_target_view()
 {
 	return &_targetView;
 }

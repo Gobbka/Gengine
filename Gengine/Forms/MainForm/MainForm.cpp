@@ -93,7 +93,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_folder_texture = get_graphics_context()->get_device()->create_texture(AssetsLoader::load_png(L"assets\\folder.png"));
 	_file_texture = get_graphics_context()->get_device()->create_texture(AssetsLoader::load_png(L"assets\\file.png"));
 
-	auto worldTexture = new Render::RenderTarget(get_graphics_context(), { 1400,780 });
+	auto worldTexture = new Render::GERenderTarget(get_graphics_context(), { 1400,780 });
 	auto* editorCam = editorScene->create_camera(worldTexture);
 	editorScene->set_main_camera(editorCam);
 	auto cam = editorCam->get<Render::Camera>();

@@ -5,7 +5,7 @@
 #include "UIContext.h"
 #include "Graphics/SpriteFont.h"
 #include "Render/Engine/Camera.h"
-#include "Render/Engine/RenderTarget.h"
+#include "Render/Common/RenderTarget.h"
 #include "UI/Text.h"
 
 Forms::WelcomeForm::WelcomeForm(HINSTANCE hinst)

@@ -11,7 +11,6 @@ namespace Core {
 namespace Render
 {
 	class MeshRenderer;
-	class RenderTarget;
 
 	enum class WVProjectionType
 	{

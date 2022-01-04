@@ -6,7 +6,6 @@
 struct Surface;
 
 namespace Render {
-	class RenderTarget;
 	class WorldViewer;
 
 	enum class MaskEngineUsage
@@ -20,9 +19,9 @@ namespace Render {
 		Core::GraphicsContext* _context;
 		GETexture _buffer;
 		ID3D11DepthStencilView* _view;
-		RenderTarget* _target;
+		DX11RenderTarget* _target;
 	public:
-		DX11MaskEngine(RenderTarget* target, MaskEngineUsage usage = MaskEngineUsage::DepthStencil);
+		DX11MaskEngine(DX11RenderTarget* target, MaskEngineUsage usage = MaskEngineUsage::DepthStencil);
 		explicit DX11MaskEngine(Core::GraphicsContext* context,Surface resolution, MaskEngineUsage usage = MaskEngineUsage::DepthStencil);
 
 		void clear_buffer() const;

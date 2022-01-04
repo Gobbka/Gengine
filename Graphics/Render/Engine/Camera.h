@@ -11,7 +11,7 @@ namespace Render
 	{
 	private:
 		GEBlendEngine* _blendEngine;
-		RenderTarget* _render_target;
+		DX11RenderTarget* _render_target;
 		GEMaskEngine* _mask_engine;
 		Core::GraphicsContext* _context;
 	public:
@@ -21,12 +21,12 @@ namespace Render
 		void set_resolution(Surface new_resolution);
 	public:
 		Core::GraphicsContext* graphics_context();
-		RenderTarget* get_target_view();
+		DX11RenderTarget* get_target_view();
 		GEMaskEngine* get_mask_engine() const;
 	public:
 		Camera& operator=(Camera&& other) noexcept;
 		Camera(Camera&& other) noexcept;
-		Camera(Core::GraphicsContext* context,RenderTarget*target);
+		Camera(Core::GraphicsContext* context, DX11RenderTarget*target);
 
 		void bind() const;
 	};

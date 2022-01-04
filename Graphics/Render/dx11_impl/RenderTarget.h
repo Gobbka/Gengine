@@ -10,9 +10,8 @@ namespace Core {
 }
 
 namespace Render {
-	struct ITexture2DDesc;
 
-	class __declspec(dllexport) RenderTarget
+	class __declspec(dllexport) DX11RenderTarget
 	{
 		ID3D11RenderTargetView* _targetView;
 		Core::GraphicsContext* _context;
@@ -21,19 +20,19 @@ namespace Render {
 		Color4XM clear_color = Color4XM(0, 0, 0,1.f);
 		
 		// create render target from IDXGISwapChain
-		RenderTarget(Core::GraphicsContext* context, IDXGISwapChain* swap);
+		DX11RenderTarget(Core::GraphicsContext* context, IDXGISwapChain* swap);
 		// create render target from texture. Texture must have RenderTarget bind flag
-		RenderTarget(Core::GraphicsContext* context, GETexture texture);
+		DX11RenderTarget(Core::GraphicsContext* context, GETexture texture);
 		// create render target from empty texture
-		RenderTarget(Core::GraphicsContext* context, Surface texture_resolution);
-		RenderTarget(Core::GraphicsContext* context, ITexture2DDesc texture_desc);
+		DX11RenderTarget(Core::GraphicsContext* context, Surface texture_resolution);
+		DX11RenderTarget(Core::GraphicsContext* context, ITexture2DDesc texture_desc);
 
-		RenderTarget(Core::GraphicsContext* context);
+		DX11RenderTarget(Core::GraphicsContext* context);
 
-		RenderTarget(RenderTarget&& other) noexcept;
-		~RenderTarget();
+		DX11RenderTarget(DX11RenderTarget&& other) noexcept;
+		~DX11RenderTarget();
 
-		RenderTarget& operator=(RenderTarget&& other) noexcept;
+		DX11RenderTarget& operator=(DX11RenderTarget&& other) noexcept;
 
 		Core::GraphicsContext* get_context();
 		ID3D11RenderTargetView* get_view();

@@ -78,7 +78,7 @@ void Render::D11GContext::set_sampler_state(SamplerState* sampler)
 	_current_sampler = sampler;
 }
 
-void Render::D11GContext::set_render_target(RenderTarget* target, GEMaskEngine* mask)
+void Render::D11GContext::set_render_target(GERenderTarget* target, GEMaskEngine* mask)
 {
 	auto* mask_view = mask == nullptr ? nullptr : mask->get_view();
 	if(target == nullptr)
@@ -91,7 +91,7 @@ void Render::D11GContext::set_render_target(RenderTarget* target, GEMaskEngine* 
 	}
 }
 
-void Render::D11GContext::set_render_target(RenderTarget* target)
+void Render::D11GContext::set_render_target(GERenderTarget* target)
 {
 	ID3D11DepthStencilView* old_view;
 	_d11context->OMGetRenderTargets(0, nullptr, &old_view);

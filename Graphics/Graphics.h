@@ -5,7 +5,7 @@
 #include "Graphics/DepthStencilStatesCollection.h"
 #include "Graphics/Scene.h"
 #include "Graphics/ShaderCollection.h"
-#include "Render/Engine/RenderTarget.h"
+#include "Render/Common/RenderTarget.h"
 #include "Render/Common/SpriteEngine.h"
 
 namespace Render {
@@ -23,7 +23,7 @@ namespace Core
 		Surface _screen_resolution;
 		
 		IDXGISwapChain* _swap;
-		Render::RenderTarget _targetView;
+		Render::DX11RenderTarget _targetView;
 
 		Render::SamplerState* _samplerState;
 
@@ -48,7 +48,7 @@ namespace Core
 		Render::SpriteEngine* get_sprite_engine() const;
 		
 		Surface get_screen_resolution() const;
-		inline Render::RenderTarget* get_render_target_view();
+		inline Render::GERenderTarget* get_render_target_view();
 
 		inline Render::IGDevice* get_device() const;
 		inline Render::IGContext* get_context() const;

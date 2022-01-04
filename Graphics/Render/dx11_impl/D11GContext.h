@@ -28,8 +28,8 @@ namespace Render {
 		void set_vertex_shader(VertexShader* vs) override;
 		void set_mask_engine(GEMaskEngine* mask) override;
 		void set_sampler_state(SamplerState* sampler) override;
-		void set_render_target(RenderTarget* target, GEMaskEngine* mask) override;
-		void set_render_target(RenderTarget* target) override;
+		void set_render_target(GERenderTarget* target, GEMaskEngine* mask) override;
+		void set_render_target(GERenderTarget* target) override;
 		void set_shader_resource(GETexture* texture,UINT slot) override;
 		void set_rasterizer(GERasterizer& rs) override;
 		void draw_indexed(UINT count, UINT start_location=0,UINT base_vertex_location=0) override;

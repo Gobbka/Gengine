@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <d3d11.h>
-#include "../../Common/Bindable.h"
+#include "../Common/Bindable.h"
 
 namespace Render {
 	enum class SamplerFilter
@@ -9,11 +9,11 @@ namespace Render {
 		Anisotropic,
 	};
 
-	class SamplerState : Bindable
+	class DX11SamplerState : Bindable
 	{
 		ID3D11SamplerState* _state;
 	public:
-		SamplerState(Core::GraphicsContext* engine,SamplerFilter filter = SamplerFilter::Anisotropic);
+		DX11SamplerState(Core::GraphicsContext* engine,SamplerFilter filter = SamplerFilter::Anisotropic);
 
 		void bind() override;
 	};

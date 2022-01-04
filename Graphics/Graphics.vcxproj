@@ -164,6 +164,7 @@
     <ClInclude Include="Render\Common\MaskEngine.h" />
     <ClInclude Include="Render\Common\Rasterizer.h" />
     <ClInclude Include="Render\Common\RenderTarget.h" />
+    <ClInclude Include="Render\Common\SamplerState.h" />
     <ClInclude Include="Render\Common\Texture.h" />
     <ClInclude Include="Render\dx11_impl\D11GContext.h" />
     <ClInclude Include="Render\dx11_impl\D11GDevice.h" />
@@ -188,7 +189,7 @@
     <ClInclude Include="Render\dx11_impl\Texture.h" />
     <ClInclude Include="Render\d3d\Buffer\VertexBuffer.h" />
     <ClInclude Include="Render\d3d\Shader\PixelShader.h" />
-    <ClInclude Include="Render\d3d\Shader\SamplerState.h" />
+    <ClInclude Include="Render\dx11_impl\SamplerState.h" />
     <ClInclude Include="Render\d3d\Shader\IShader.h" />
     <ClInclude Include="Render\d3d\Shader\VertexShader.h" />
     <ClInclude Include="Render\d3d\Vertex.h" />
@@ -224,7 +225,7 @@
     <ClCompile Include="Render\dx11_impl\Texture.cpp" />
     <ClCompile Include="Render\d3d\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Render\d3d\Shader\PixelShader.cpp" />
-    <ClCompile Include="Render\d3d\Shader\SamplerState.cpp" />
+    <ClCompile Include="Render\dx11_impl\SamplerState.cpp" />
     <ClCompile Include="Render\d3d\Shader\VertexShader.cpp" />
     <ClCompile Include="Render\d3d\Vertex.cpp" />
     <ClCompile Include="Render\dx11_impl\BlendEngine.cpp" />

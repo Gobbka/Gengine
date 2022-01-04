@@ -8,10 +8,6 @@
 #include "Render/Common/RenderTarget.h"
 #include "Render/Common/SpriteEngine.h"
 
-namespace Render {
-	class SamplerState;
-}
-
 namespace Core
 {
 	class __declspec(dllexport) GraphicsContext final
@@ -25,7 +21,7 @@ namespace Core
 		IDXGISwapChain* _swap;
 		Render::DX11RenderTarget _targetView;
 
-		Render::SamplerState* _samplerState;
+		Render::GESamplerState* _samplerState;
 
 		Render::IGDevice* _gdevice;
 		Render::IGContext* _gcontext;

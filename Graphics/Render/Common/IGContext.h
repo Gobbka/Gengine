@@ -10,7 +10,6 @@ namespace Render
 {
 	class PixelShader;
 	class VertexShader;
-	class SamplerState;
 	
 	class IGContext
 	{
@@ -45,7 +44,7 @@ namespace Render
 		virtual void set_pixel_shader(PixelShader* ps) =0;
 		virtual void set_vertex_shader(VertexShader* vs) = 0;
 		virtual void set_mask_engine(GEMaskEngine* mask) =0;
-		virtual void set_sampler_state(SamplerState* sampler) =0;
+		virtual void set_sampler_state(GESamplerState* sampler) =0;
 		virtual void draw_indexed(UINT count, UINT start_location=0,UINT base_vertex_location=0) = 0;
 		virtual void draw(UINT count, UINT start_location) = 0;
 

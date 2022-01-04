@@ -7,7 +7,7 @@
 #include "Graphics/Que/DrawSkyboxPass/DrawSkyboxPass.h"
 #include "Types/Types.h"
 
-#include "Render/d3d/Shader/SamplerState.h"
+#include "Render/Common/SamplerState.h"
 #include "Render/d3d/Shader/VertexShader.h"
 
 #include "Graphics/Que/RenderQueuePass/RenderMeshPass.h"
@@ -24,7 +24,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	, _screen_resolution(0,0)
 	, _swap(swap)
 	, _targetView(this,swap)
-	, _samplerState(new Render::SamplerState(this))
+	, _samplerState(new Render::GESamplerState(this))
 	, _gdevice(new Render::D11GDevice(dev,this))
 	, _gcontext(new Render::D11GContext(context,this))
 	, _spriteEngine(new Render::SpriteEngine(this))

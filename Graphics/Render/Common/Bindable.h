@@ -6,8 +6,6 @@ namespace Core {
 
 namespace Render
 {
-	class Camera;
-
 	class __declspec(dllexport) Bindable
 	{
 	protected:

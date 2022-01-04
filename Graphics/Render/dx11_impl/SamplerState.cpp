@@ -1,6 +1,6 @@
 ﻿#include "SamplerState.h"
 
-#include "../../../Graphics.h"
+#include "../../Graphics.h"
 #include "Logger/Logger.h"
 
 D3D11_FILTER SamplerFilterToD3D11Filter(Render::SamplerFilter filter)
@@ -16,7 +16,7 @@ D3D11_FILTER SamplerFilterToD3D11Filter(Render::SamplerFilter filter)
 	}
 }
 
-Render::SamplerState::SamplerState(Core::GraphicsContext* engine, SamplerFilter filter)
+Render::DX11SamplerState::DX11SamplerState(Core::GraphicsContext* engine, SamplerFilter filter)
 	: Bindable(engine)
 	, _state(nullptr)
 {
@@ -34,7 +34,7 @@ Render::SamplerState::SamplerState(Core::GraphicsContext* engine, SamplerFilter 
 		.abort(TEXT("SamplerState.cpp: Cannot create sampler state"));
 }
 
-void Render::SamplerState::bind()
+void Render::DX11SamplerState::bind()
 {
 	_engine->context->PSSetSamplers(0, 1, &_state);
 }

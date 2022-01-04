@@ -11,6 +11,7 @@ namespace Render
 	class DX11Rasterizer;
 	class DX11IndexBuffer;
 	class DX11RenderTarget;
+	class DX11SamplerState;
 
 	typedef DX11Texture GETexture;
 	typedef DX11MaskEngine GEMaskEngine;
@@ -18,6 +19,7 @@ namespace Render
 	typedef DX11Rasterizer GERasterizer;
 	typedef DX11IndexBuffer GEIndexBuffer;
 	typedef DX11RenderTarget GERenderTarget;
+	typedef DX11SamplerState GESamplerState;
 }
 
 #endif

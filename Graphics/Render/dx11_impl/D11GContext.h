@@ -8,7 +8,6 @@ namespace Core
 }
 
 namespace Render {
-	class SamplerState;
 	class VertexShader;
 	class PixelShader;
 
@@ -19,7 +18,7 @@ namespace Render {
 		PrimitiveTopology _current_topology;
 		PixelShader* _current_ps;
 		VertexShader* _currect_vs;
-		SamplerState* _current_sampler;
+		GESamplerState* _current_sampler;
 	public:
 		D11GContext(ID3D11DeviceContext*d11context, Core::GraphicsContext* context);
 
@@ -27,7 +26,7 @@ namespace Render {
 		void set_pixel_shader(PixelShader* ps) override;
 		void set_vertex_shader(VertexShader* vs) override;
 		void set_mask_engine(GEMaskEngine* mask) override;
-		void set_sampler_state(SamplerState* sampler) override;
+		void set_sampler_state(GESamplerState* sampler) override;
 		void set_render_target(GERenderTarget* target, GEMaskEngine* mask) override;
 		void set_render_target(GERenderTarget* target) override;
 		void set_shader_resource(GETexture* texture,UINT slot) override;

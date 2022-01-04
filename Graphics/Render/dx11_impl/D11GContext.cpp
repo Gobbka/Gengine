@@ -1,18 +1,19 @@
 ﻿#include "D11GContext.h"
 
 #include "../../Render/d3d/Shader/PixelShader.h"
-#include "../../Render/d3d/Shader/SamplerState.h"
+#include "../../Render/Common/SamplerState.h"
 #include "../../Render/d3d/Shader/VertexShader.h"
 #include "../../Render/Common/Rasterizer.h"
 #include "../../Render/Common/MaskEngine.h"
 
 Render::D11GContext::D11GContext(ID3D11DeviceContext* d11context, Core::GraphicsContext* context )
-	: IGContext(context),
-	_d11context(d11context),
-	_current_topology(PrimitiveTopology::NONE),
-	_current_ps(nullptr),
-	_currect_vs(nullptr),
-	_current_sampler(nullptr)
+	: IGContext(context)
+	, _info_queue(nullptr)
+	, _d11context(d11context)
+	, _current_topology(PrimitiveTopology::NONE)
+	, _current_ps(nullptr)
+	, _currect_vs(nullptr)
+	, _current_sampler(nullptr)
 {
 	ID3D11Device* device;
 	_d11context->GetDevice(&device);
@@ -68,7 +69,7 @@ void Render::D11GContext::set_mask_engine(GEMaskEngine* mask)
 	_d11context->OMSetRenderTargets(num_view,pp_target, mask->get_view());
 }
 
-void Render::D11GContext::set_sampler_state(SamplerState* sampler)
+void Render::D11GContext::set_sampler_state(GESamplerState* sampler)
 {
 	if(sampler != _current_sampler)
 	{

@@ -3,6 +3,8 @@
 #include "../../Render/d3d/Shader/PixelShader.h"
 #include "../../Render/d3d/Shader/SamplerState.h"
 #include "../../Render/d3d/Shader/VertexShader.h"
+#include "../../Render/Common/Rasterizer.h"
+#include "../../Render/Common/MaskEngine.h"
 
 Render::D11GContext::D11GContext(ID3D11DeviceContext* d11context, Core::GraphicsContext* context )
 	: IGContext(context),

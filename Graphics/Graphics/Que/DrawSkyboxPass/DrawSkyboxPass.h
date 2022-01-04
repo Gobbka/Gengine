@@ -1,7 +1,7 @@
 #pragma once
 #include "../IPass/IPass.h"
 #include "../../Mesh.h"
-#include "../../../Render/Common/GraphicsCommon.h"
+#include "../../../Render/Common/Rasterizer.h"
 
 namespace Core
 {

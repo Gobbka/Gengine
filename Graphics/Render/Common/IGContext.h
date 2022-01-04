@@ -4,6 +4,7 @@
 #include <DirectXMath.h>
 
 #include "GraphicsCommon.h"
+#include "MaskEngine.h"
 
 namespace Render
 {

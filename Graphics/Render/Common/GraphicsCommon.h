@@ -3,15 +3,18 @@
 #include "../../GraphicsBuildSettings.h"
 
 #ifdef DRAW_LIBRARY_DX11
-#include "../dx11_impl/BlendEngine.h"
-#include "../dx11_impl/MaskEngine.h"
-#include "../dx11_impl/Rasterizer.h"
 
 namespace Render
 {
+	class DX11Texture;
+	class DX11MaskEngine;
+	class DX11BlendEngine;
+	class DX11Rasterizer;
+
 	typedef DX11BlendEngine GEBlendEngine;
 	typedef DX11MaskEngine GEMaskEngine;
 	typedef DX11Rasterizer GERasterizer;
+	typedef DX11Texture GETexture;
 }
 
 #endif

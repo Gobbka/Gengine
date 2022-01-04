@@ -159,7 +159,10 @@
     <ClInclude Include="Graphics\Components\PointLightComponent.h" />
     <ClInclude Include="Graphics\Components\SkyboxComponent.h" />
     <ClInclude Include="Graphics\DepthStencilStatesCollection.h" />
+    <ClInclude Include="Render\Common\BlendEngine.h" />
     <ClInclude Include="Render\Common\GraphicsCommon.h" />
+    <ClInclude Include="Render\Common\MaskEngine.h" />
+    <ClInclude Include="Render\Common\Rasterizer.h" />
     <ClInclude Include="Render\Common\Texture.h" />
     <ClInclude Include="Render\dx11_impl\D11GContext.h" />
     <ClInclude Include="Render\dx11_impl\D11GDevice.h" />

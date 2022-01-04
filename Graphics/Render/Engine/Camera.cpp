@@ -6,7 +6,7 @@
 #include "Types/Types.h"
 #include "../../Graphics.h"
 #include "../Common/IGContext.h"
-
+#include "../Common/BlendEngine.h"
 
 void Render::Camera::clear(Color3XM color)
 {

@@ -5,7 +5,7 @@
 #include "IIndexBuffer.h"
 #include "IVertexBuffer.h"
 #include "../d3d/Vertex.h"
-#include "Texture.h"
+#include "Rasterizer.h"
 #include "ITexture2D.h"
 
 namespace Render

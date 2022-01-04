@@ -194,7 +194,7 @@
     <ClInclude Include="Render\d3d\Shader\VertexShader.h" />
     <ClInclude Include="Render\d3d\Vertex.h" />
     <ClInclude Include="Render\dx11_impl\BlendEngine.h" />
-    <ClInclude Include="Render\Engine\Camera.h" />
+    <ClInclude Include="Graphics\Camera.h" />
     <ClInclude Include="Render\Engine\DepthStencil.h" />
     <ClInclude Include="Render\dx11_impl\MaskEngine.h" />
     <ClInclude Include="Render\dx11_impl\Rasterizer.h" />
@@ -229,7 +229,7 @@
     <ClCompile Include="Render\d3d\Shader\VertexShader.cpp" />
     <ClCompile Include="Render\d3d\Vertex.cpp" />
     <ClCompile Include="Render\dx11_impl\BlendEngine.cpp" />
-    <ClCompile Include="Render\Engine\Camera.cpp" />
+    <ClCompile Include="Graphics\Camera.cpp" />
     <ClCompile Include="Render\Engine\DepthStencil.cpp" />
     <ClCompile Include="Render\dx11_impl\MaskEngine.cpp" />
     <ClCompile Include="Render\dx11_impl\RenderTarget.cpp" />

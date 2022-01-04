@@ -1,12 +1,12 @@
 ﻿#include "UIContext.h"
 
-#include "Graphics.h"
+#include <Graphics.h>
 #include <Render/Common/IGContext.h>
-#include "Render/Engine/Camera.h"
-#include "InteractiveForm.h"
+#include <Graphics/Camera.h>
 #include <Render/d3d/Buffer/ConstantBuffer.h>
+#include <Render/d3d/Shader/VertexShader.h>
+#include "InteractiveForm.h"
 #include "Canvas/Vertex2D.h"
-#include "Render/d3d/Shader/VertexShader.h"
 
 class DrawUIPass : public Render::IPass
 {

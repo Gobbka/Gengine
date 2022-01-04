@@ -1,7 +1,7 @@
 ﻿#include "MaskEngine.h"
 
 #include "../../Graphics.h"
-#include "../Engine/Camera.h"
+#include "../../Graphics/Camera.h"
 #include "Types/Types.h"
 #include "../Common/RenderTarget.h"
 #include "Logger/Logger.h"

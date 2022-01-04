@@ -6,7 +6,7 @@
 #include <FS/FSDirectory.h>
 
 #include <Graphics.h>
-#include <Render/Engine/Camera.h>
+#include <Graphics/Camera.h>
 #include <InteractiveForm.h>
 #include <Loaders/AssetsLoader.h>
 
@@ -16,9 +16,9 @@
 #include <UI/FlexColumnPanel.h>
 #include <UI/FlexRowPanel.h>
 
-#include "Animation/Animator.h"
-#include "Graphics/SpriteFont.h"
-#include "Logger/Logger.h"
+#include <Animation/Animator.h>
+#include <Graphics/SpriteFont.h>
+#include <Logger/Logger.h>
 
 namespace UI
 {

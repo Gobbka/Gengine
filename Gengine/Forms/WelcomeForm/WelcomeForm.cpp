@@ -1,12 +1,12 @@
 #include "WelcomeForm.h"
 
-#include "Graphics.h"
-#include "InteractiveForm.h"
-#include "UIContext.h"
-#include "Graphics/SpriteFont.h"
-#include "Render/Engine/Camera.h"
-#include "Render/Common/RenderTarget.h"
-#include "UI/Text.h"
+#include <Graphics.h>
+#include <InteractiveForm.h>
+#include <UIContext.h>
+#include <Graphics/SpriteFont.h>
+#include <Graphics/Camera.h>
+#include <Render/Common/RenderTarget.h>
+#include <UI/Text.h>
 
 Forms::WelcomeForm::WelcomeForm(HINSTANCE hinst)
 	: Form(TEXT("Welcome!"),hinst,400,500)

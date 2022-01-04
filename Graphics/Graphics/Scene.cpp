@@ -1,6 +1,6 @@
 ﻿#include "Scene.h"
 
-#include "../Render/Engine/Camera.h"
+#include "Camera.h"
 #include "../Graphics/Components/DirectionLightComponent.h"
 #include "Components/MeshRenderer.h"
 #include "Components/GameEntityComponent.h"

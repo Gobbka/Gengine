@@ -2,11 +2,11 @@
 
 #include <algorithm>
 
-#include "../Common/RenderTarget.h"
+#include "../Render/Common/RenderTarget.h"
 #include "Types/Types.h"
-#include "../../Graphics.h"
-#include "../Common/IGContext.h"
-#include "../Common/BlendEngine.h"
+#include "../Graphics.h"
+#include "../Render/Common/IGContext.h"
+#include "../Render/Common/BlendEngine.h"
 
 void Render::Camera::clear(Color3XM color)
 {

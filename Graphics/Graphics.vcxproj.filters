@@ -51,7 +51,7 @@
     <ClInclude Include="Render\dx11_impl\SamplerState.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Engine\Camera.h">
+    <ClInclude Include="Graphics\Camera.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Render\Common\SpriteEngine.h">
@@ -209,7 +209,7 @@
     <ClCompile Include="Render\dx11_impl\SamplerState.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Engine\Camera.cpp">
+    <ClCompile Include="Graphics\Camera.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Render\Common\SpriteEngine.cpp">

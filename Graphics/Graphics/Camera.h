@@ -1,6 +1,6 @@
 #pragma once
-#include "../Common/GraphicsCommon.h"
-#include "../Viewer/WorldViewer.h"
+#include "../Render/Common/GraphicsCommon.h"
+#include "../Render/Viewer/WorldViewer.h"
 
 struct Surface;
 

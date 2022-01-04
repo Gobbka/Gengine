@@ -1,6 +1,6 @@
 #include "CreateNormalsmapPass.h"
 #include "../../../Graphics.h"
-#include "../../../Render/Engine/Camera.h"
+#include "../../Camera.h"
 #include "../../Components/MeshRenderer.h"
 #include "../../../Render/Common/IGContext.h"
 #include "../../../Render/Common/IndexBuffer.h"

@@ -1,7 +1,7 @@
 #include "RenderMeshPass.h"
 
 #include "../../Components/MeshRenderer.h"
-#include "../../../Render/Engine/Camera.h"
+#include "../../Camera.h"
 #include "../../../Graphics.h"
 #include "../../../Render/Common/IGContext.h"
 #include "../../../Render/Common/IndexBuffer.h"

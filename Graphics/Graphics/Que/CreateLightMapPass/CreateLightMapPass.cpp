@@ -2,7 +2,7 @@
 #include "../../I3DObject/Cube/Cube.h"
 #include "../../../Graphics.h"
 #include "../../../Render/Common/IGContext.h"
-#include "../../../Render/Engine/Camera.h"
+#include "../../Camera.h"
 #include "../../Components/LightViewer.h"
 #include "../../Components/PointLightComponent.h"
 #include "../../Components/MeshRenderer.h"

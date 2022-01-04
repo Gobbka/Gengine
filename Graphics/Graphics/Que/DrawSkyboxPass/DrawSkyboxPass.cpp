@@ -2,7 +2,7 @@
 #include "../../../Graphics.h"
 #include "../../Components/SkyboxComponent.h"
 #include "../../../Render/Common/IGContext.h"
-#include "../../../Render/Engine/Camera.h"
+#include "../../Camera.h"
 #include "../../I3DObject/Cube/Cube.h"
 #include "../../../Render/Common/IndexBuffer.h"
 

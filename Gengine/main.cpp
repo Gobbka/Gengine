@@ -12,14 +12,14 @@
 
 #include <Graphics/Components/DirectionLightComponent.h>
 
-#include "Graphics/Components/MeshRenderer.h"
-#include "Graphics/Components/LightViewer.h"
-#include "Graphics/Components/PointLightComponent.h"
-#include "Graphics/Components/SkyboxComponent.h"
-#include "Loaders/AssetsLoader.h"
-#include "Logger/Logger.h"
-#include "Render/Engine/Camera.h"
-#include "Types/Material.h"
+#include <Graphics/Components/MeshRenderer.h>
+#include <Graphics/Components/LightViewer.h>
+#include <Graphics/Components/PointLightComponent.h>
+#include <Graphics/Components/SkyboxComponent.h>
+#include <Loaders/AssetsLoader.h>
+#include <Logger/Logger.h>
+#include <Graphics/Camera.h>
+#include <Types/Material.h>
 
 void debugger_loop()
 {

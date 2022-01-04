@@ -15,8 +15,8 @@ namespace Render {
 		ID3D11VertexShader* get_d11_vs();
 		ID3D11InputLayout* get_d11_il();
 		
-		VertexShader(Core::DX11Graphics* engine,const char*data,size_t size,const D3D11_INPUT_ELEMENT_DESC*layout,UINT num_elements);
-		VertexShader(Core::DX11Graphics* ctx, const wchar_t* file_name,const D3D11_INPUT_ELEMENT_DESC* layout, UINT num_elements);
+		VertexShader(GEGraphics* engine,const char*data,size_t size,const D3D11_INPUT_ELEMENT_DESC*layout,UINT num_elements);
+		VertexShader(GEGraphics* ctx, const wchar_t* file_name,const D3D11_INPUT_ELEMENT_DESC* layout, UINT num_elements);
 
 		void bind();
 	};

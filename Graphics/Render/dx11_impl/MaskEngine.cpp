@@ -47,7 +47,7 @@ Render::DX11MaskEngine::DX11MaskEngine(DX11RenderTarget* target, MaskEngineUsage
 	_buffer = GETexture(_context, texture_2d);
 }
 
-Render::DX11MaskEngine::DX11MaskEngine(Core::DX11Graphics* context, Surface resolution, MaskEngineUsage usage)
+Render::DX11MaskEngine::DX11MaskEngine(GEGraphics* context, Surface resolution, MaskEngineUsage usage)
 	: _context(context)
 	, _buffer(nullptr)
 	, _view(nullptr)

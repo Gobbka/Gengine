@@ -47,7 +47,7 @@ InteractiveForm* InteractiveForm::add_element(UI::InteractiveElement* element)
 	return this;
 }
 
-InteractiveForm::InteractiveForm(Core::DX11Graphics* pEngine, Position2* cursor_position)
+InteractiveForm::InteractiveForm(Render::GEGraphics* pEngine, Position2* cursor_position)
 	: _hidden(false)
 	, _canvas(pEngine)
 	, _cursor_position(cursor_position)

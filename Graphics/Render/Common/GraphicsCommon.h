@@ -13,6 +13,7 @@ namespace Render
 	class DX11RenderTarget;
 	class DX11SamplerState;
 	class DX11DepthStencil;
+	class DX11Graphics;
 
 	typedef DX11Texture GETexture;
 	typedef DX11MaskEngine GEMaskEngine;
@@ -22,6 +23,7 @@ namespace Render
 	typedef DX11RenderTarget GERenderTarget;
 	typedef DX11SamplerState GESamplerState;
 	typedef DX11DepthStencil GEDepthStencil;
+	typedef DX11Graphics GEGraphics;
 }
 
 #endif

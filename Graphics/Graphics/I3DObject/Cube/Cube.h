@@ -1,9 +1,6 @@
 #pragma once
 #include "Types/Types.h"
-
-namespace Core {
-	class DX11Graphics;
-}
+#include "../../../Render/Common/GraphicsCommon.h"
 
 namespace Render
 {
@@ -13,7 +10,7 @@ namespace Render
 	class __declspec(dllexport) Cube
 	{
 	public:
-		static Mesh make(Core::DX11Graphics* context, Position3 pos, int size);
-		static Mesh make_independent(Core::DX11Graphics* context, Position3 pos, int size);
+		static Mesh make(GEGraphics* context, Position3 pos, int size);
+		static Mesh make_independent(GEGraphics* context, Position3 pos, int size);
 	};
 }

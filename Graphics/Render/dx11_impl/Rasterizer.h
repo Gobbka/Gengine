@@ -1,11 +1,6 @@
 ﻿#pragma once
 #include <d3d11.h>
 
-namespace Core
-{
-	class DX11Graphics;
-}
-
 namespace Render
 {
 	class D11GContext;

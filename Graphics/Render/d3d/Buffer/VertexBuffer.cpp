@@ -8,7 +8,7 @@ void Render::VertexBuffer::copy_to(void* buffer, UINT size)
 	memcpy(buffer, this->data, size * stride_size);
 }
 
-Render::VertexBuffer::VertexBuffer(Core::DX11Graphics* engine, Vertex* data, size_t length, ID3D11Buffer* buffer)
+Render::VertexBuffer::VertexBuffer(GEGraphics* engine, Vertex* data, size_t length, ID3D11Buffer* buffer)
 	: IVertexBuffer(engine,(char*)data,length)
 	, _buffer(buffer)
 {}

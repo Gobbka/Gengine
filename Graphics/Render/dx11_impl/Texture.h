@@ -1,11 +1,7 @@
 ﻿#pragma once
 #include <d3d11.h>
 #include "Types/Types.h"
-
-namespace Core
-{
-	class DX11Graphics;
-}
+#include "../Common/GraphicsCommon.h"
 
 namespace Render
 {
@@ -14,7 +10,7 @@ namespace Render
 
 	class __declspec(dllexport) DX11Texture
 	{
-		Core::DX11Graphics* _context;
+		GEGraphics* _context;
 		
 		D3D11_TEXTURE2D_DESC get_desc() const;
 
@@ -25,11 +21,11 @@ namespace Render
 	public:
 		ID3D11Texture2D* texture() const;
 
-		DX11Texture(Core::DX11Graphics* context, Surface resolution, UINT bind_flags = D3D11_BIND_SHADER_RESOURCE,DXGI_FORMAT format =DXGI_FORMAT_R8G8B8A8_UNORM);
-		DX11Texture(Core::DX11Graphics* context, Material& material);
-		DX11Texture(Core::DX11Graphics* context, ID3D11Texture2D* texture);
-		DX11Texture(Core::DX11Graphics* context, ITexture2DDesc texture);
-		DX11Texture(Core::DX11Graphics* context);
+		DX11Texture(GEGraphics* context, Surface resolution, UINT bind_flags = D3D11_BIND_SHADER_RESOURCE,DXGI_FORMAT format =DXGI_FORMAT_R8G8B8A8_UNORM);
+		DX11Texture(GEGraphics* context, Material& material);
+		DX11Texture(GEGraphics* context, ID3D11Texture2D* texture);
+		DX11Texture(GEGraphics* context, ITexture2DDesc texture);
+		DX11Texture(GEGraphics* context);
 		DX11Texture(DX11Texture&& move) noexcept;
 		DX11Texture(DX11Texture& other);
 		~DX11Texture();

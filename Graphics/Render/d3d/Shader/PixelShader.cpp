@@ -1,7 +1,5 @@
 ﻿#include "PixelShader.h"
-
 #include <d3dcompiler.h>
-
 #include "../../../Graphics.h"
 
 void Render::PixelShader::construct(ID3DBlob* shader_blob)
@@ -14,7 +12,7 @@ void Render::PixelShader::construct(ID3DBlob* shader_blob)
 	);
 }
 
-Render::PixelShader::PixelShader(Core::DX11Graphics* engine, const wchar_t* path)
+Render::PixelShader::PixelShader(GEGraphics* engine, const wchar_t* path)
 	: IShader(engine)
 {
 	ID3DBlob* blob;

@@ -16,9 +16,9 @@ namespace Render
 	{
 		ConstantBuffer<PointLightCBStruct> _light_struct;
 		Mesh _point_light_cube;
-		Core::DX11Graphics* _context;
+		GEGraphics* _context;
 		void execute(Scene*scene) override;
 	public:
-		explicit CreateLightMapPass(Core::DX11Graphics* context);
+		explicit CreateLightMapPass(GEGraphics* context);
 	};
 }

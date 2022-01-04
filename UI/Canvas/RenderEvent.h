@@ -5,10 +5,6 @@
 typedef unsigned UINT;
 typedef unsigned char BYTE;
 
-namespace Core {
-	class DX11Graphics;
-}
-
 namespace Canvas
 {
 	class CanvasImpl;
@@ -40,10 +36,10 @@ namespace Render {
 
 	class DrawEvent2D final : public CanvasDrawEvent{
 
-		Core::DX11Graphics* _context;
+		GEGraphics* _context;
 		UINT _stencil_layer = 0u;
 	public:
-		DrawEvent2D(Core::DX11Graphics*ctx,Canvas::DrawData*data);
+		DrawEvent2D(GEGraphics*ctx,Canvas::DrawData*data);
 
 		void mask_draw_begin();
 		void mask_discard_begin(bool increase_layer = true);

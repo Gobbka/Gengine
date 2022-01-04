@@ -14,21 +14,21 @@ namespace Render
 	template<typename T>
 	class __declspec(dllexport) ConstantBuffer
 	{
-		Core::DX11Graphics* _context;
+		GEGraphics* _context;
 		ID3D11Buffer* _d3d_buffer;
 		UINT _slot = 0;
 		BYTE _binds = 0;
 	public:
 		T data;
 
-		ConstantBuffer(Core::DX11Graphics* engine, UINT slot = 0, BYTE binds = CBBindFlag_vs);
+		ConstantBuffer(GEGraphics* engine, UINT slot = 0, BYTE binds = CBBindFlag_vs);
 
 		void update() const;
 		void bind();
 	};
 
 	template <typename T>
-	ConstantBuffer<T>::ConstantBuffer(Core::DX11Graphics* engine, UINT slot, BYTE binds)
+	ConstantBuffer<T>::ConstantBuffer(GEGraphics* engine, UINT slot, BYTE binds)
 		: _context(engine)
 		, _d3d_buffer(nullptr)
 		, _slot(slot)

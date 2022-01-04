@@ -14,7 +14,7 @@ namespace Render
 	{
 		ID3D11SamplerState* _state;
 	public:
-		DX11SamplerState(Core::DX11Graphics* engine,SamplerFilter filter = SamplerFilter::Anisotropic);
+		DX11SamplerState(GEGraphics* engine,SamplerFilter filter = SamplerFilter::Anisotropic);
 
 		void bind() override;
 	};

@@ -1,19 +1,15 @@
 #pragma once
 #include "../IPass/IPass.h"
-
-namespace Core
-{
-	class DX11Graphics;
-}
+#include "../../../Render/Common/GraphicsCommon.h"
 
 namespace Render
 {
 	class CreateShadowMapPass : public IPass
 	{
-		Core::DX11Graphics* _context;
+		GEGraphics* _context;
 		void execute(Scene*scene) override;
 	public:
-		CreateShadowMapPass(Core::DX11Graphics*context)
+		CreateShadowMapPass(GEGraphics*context)
 			: _context(context)
 		{}
 

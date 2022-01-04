@@ -7,17 +7,12 @@ namespace UI {
 	class UIContext;
 }
 
-namespace Core
-{
-	class DX11Graphics;
-}
-
 namespace GE
 {
 
 	class Form : public Window
 	{
-		Core::DX11Graphics* _graphics;
+		Render::GEGraphics* _graphics;
 		UI::UIContext* _ui_context;
 		
 	protected:
@@ -29,7 +24,7 @@ namespace GE
 		Render::Scene* main_scene;
 
 		UI::UIContext* get_ui();
-		Core::DX11Graphics* get_graphics_context() const;
+		Render::GEGraphics* get_graphics_context() const;
 
 		void drag_move();
 		void force_draw();

@@ -11,7 +11,7 @@ namespace Render
 	class __declspec(dllexport) Scene
 	{
 		ECS::World* _world;
-		Core::DX11Graphics* _context;
+		GEGraphics* _context;
 		ECS::Entity* _main_camera;
 		Passer _render_pipeline;
 	public:
@@ -36,7 +36,7 @@ namespace Render
 		
 		__forceinline ECS::World* world() const { return _world; }
 		
-		Scene(Core::DX11Graphics*context);
+		Scene(GEGraphics*context);
 		void destroy() const;
 	};
 

@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include <d3d11.h>
-
 #include "IShader.h"
 
 namespace Render {
@@ -11,6 +10,6 @@ namespace Render {
 	public:
 		ID3D11PixelShader* get_d3d11_ps() { return _shader; }
 
-		PixelShader(Core::DX11Graphics* engine,const wchar_t*path);
+		PixelShader(GEGraphics* engine,const wchar_t*path);
 	};
 }

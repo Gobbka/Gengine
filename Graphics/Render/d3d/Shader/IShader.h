@@ -1,16 +1,12 @@
 ﻿#pragma once
-
-namespace Core
-{
-	class DX11Graphics;
-};
+#include "../../Common/GraphicsCommon.h"
 
 namespace Render {
 	class __declspec(dllexport) IShader
 	{
 	protected:
-		Core::DX11Graphics* context;
+		GEGraphics* context;
 
-		explicit IShader(Core::DX11Graphics* engine) : context(engine) {}
+		explicit IShader(GEGraphics* engine) : context(engine) {}
 	};
 }

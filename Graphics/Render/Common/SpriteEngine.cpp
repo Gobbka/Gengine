@@ -2,7 +2,7 @@
 #include "../../Graphics.h"
 #include "../Common/IGContext.h"
 
-Render::SpriteEngine::SpriteEngine(Core::DX11Graphics* context)
+Render::SpriteEngine::SpriteEngine(GEGraphics* context)
 	: _graphicsContext(context)
 	, _context(context->get_context())
 {}

@@ -37,7 +37,7 @@ UI::UIContext* GE::Form::get_ui()
     return _ui_context;
 }
 
-Core::DX11Graphics* GE::Form::get_graphics_context() const
+Render::GEGraphics* GE::Form::get_graphics_context() const
 {
     return _graphics;
 }

@@ -1,17 +1,14 @@
 ﻿#pragma once
-
-namespace Core {
-	class DX11Graphics;
-}
+#include "GraphicsCommon.h"
 
 namespace Render
 {
 	class __declspec(dllexport) Bindable
 	{
 	protected:
-		Core::DX11Graphics* _engine;
+		GEGraphics* _engine;
 	public:
-		Bindable(Core::DX11Graphics*engine)
+		Bindable(GEGraphics*engine)
 			: _engine(engine)
 		{}
 

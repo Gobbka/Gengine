@@ -14,7 +14,7 @@ namespace Render
 	class IGContext
 	{
 	protected:
-		IGContext(Core::DX11Graphics* context)
+		IGContext(GEGraphics* context)
 			: matrix_buffer(context),
 			control_buffer(context,1,CBBindFlag_vs | CBBindFlag_ps)
 		{}

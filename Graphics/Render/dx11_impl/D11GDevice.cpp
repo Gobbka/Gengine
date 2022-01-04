@@ -41,7 +41,7 @@ Render::IVertexBuffer<char>* Render::D11GDevice::alloc_vertex_buffer_impl(void* 
 	return new VertexBuffer(_gfx, (Vertex*)data, desc.length, buffer);
 }
 
-Render::D11GDevice::D11GDevice(ID3D11Device* device,Core::DX11Graphics* gfx)
+Render::D11GDevice::D11GDevice(ID3D11Device* device, GEGraphics* gfx)
 	: _device(device)
 	, _gfx(gfx)
 {}

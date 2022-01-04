@@ -3,7 +3,7 @@
 #include "../../Graphics.h"
 #include "../../Render/Common/IGContext.h"
 
-Render::DirectionLightComponent::DirectionLightComponent(Core::DX11Graphics* gcontext)
+Render::DirectionLightComponent::DirectionLightComponent(GEGraphics* gcontext)
 	: WorldViewer(gcontext->get_screen_resolution())
 	, context(gcontext)
 	, mask_engine(new GEMaskEngine(context,context->get_screen_resolution(),MaskEngineUsage::Depth))

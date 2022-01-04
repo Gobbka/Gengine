@@ -1,10 +1,6 @@
 ﻿#pragma once
 #include <d3d11.h>
-
-namespace Core
-{
-	class DX11Graphics;
-}
+#include "../Common/GraphicsCommon.h"
 
 namespace Render
 {
@@ -42,7 +38,7 @@ namespace Render
 		ID3D11DepthStencilState* _state;
 	public:
 		DX11DepthStencil();
-		DX11DepthStencil(Core::DX11Graphics* context,DepthStencilDesc desc);
+		DX11DepthStencil(GEGraphics* context,DepthStencilDesc desc);
 
 		void bind(unsigned reference = 0) const;
 		bool valid() const;

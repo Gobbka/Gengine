@@ -13,13 +13,13 @@ namespace Render
 	
 	class __declspec(dllexport) DX11MaskEngine
 	{
-		Core::DX11Graphics* _context;
+		GEGraphics* _context;
 		GETexture _buffer;
 		ID3D11DepthStencilView* _view;
 		DX11RenderTarget* _target;
 	public:
 		DX11MaskEngine(DX11RenderTarget* target, MaskEngineUsage usage = MaskEngineUsage::DepthStencil);
-		explicit DX11MaskEngine(Core::DX11Graphics* context,Surface resolution, MaskEngineUsage usage = MaskEngineUsage::DepthStencil);
+		explicit DX11MaskEngine(GEGraphics* context,Surface resolution, MaskEngineUsage usage = MaskEngineUsage::DepthStencil);
 
 		void clear_buffer() const;
 

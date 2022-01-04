@@ -11,23 +11,23 @@ namespace Render
 
 	class ClearPass : public IPass
 	{
-		Core::DX11Graphics* _context;
+		GEGraphics* _context;
 		void execute(Scene*scene) override;
 	public:
-		ClearPass(Core::DX11Graphics* context)
+		ClearPass(GEGraphics* context)
 			: _context(context)
 		{}
 	};
 	
 	class __declspec(dllexport) RenderMeshPass : public IPass
 	{
-		Core::DX11Graphics* _context;
+		GEGraphics* _context;
 
 		void render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshRenderer> model,DirectX::XMMATRIX VPMatrix) const;
 		inline void render_camera(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<LightViewer> lview, ECS::World* world);
-		inline void execute_scene(Render::Scene* scene);
+		inline void execute_scene(Scene* scene);
 	public:
-		RenderMeshPass(Core::DX11Graphics* context);
+		RenderMeshPass(GEGraphics* context);
 
 		void execute(Scene*scene) override;
 	};

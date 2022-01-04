@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Render\dx11_impl\Graphics.h" />
     <ClInclude Include="GraphicsBuildSettings.h" />
     <ClInclude Include="Graphics\Components\GameEntityComponent.h" />
     <ClInclude Include="Graphics\Components\LightViewer.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Graphics\DepthStencilStatesCollection.h" />
     <ClInclude Include="Render\Common\BlendEngine.h" />
     <ClInclude Include="Render\Common\DepthStencil.h" />
+    <ClInclude Include="Render\Common\Graphics.h" />
     <ClInclude Include="Render\Common\GraphicsCommon.h" />
     <ClInclude Include="Render\Common\MaskEngine.h" />
     <ClInclude Include="Render\Common\Rasterizer.h" />
@@ -209,7 +211,7 @@
     <ClInclude Include="Render\Viewer\WorldViewer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Render\dx11_impl\Graphics.cpp" />
     <ClCompile Include="Graphics\DepthStencilStatesCollection.cpp" />
     <ClCompile Include="Render\dx11_impl\D11GContext.cpp" />
     <ClCompile Include="Render\dx11_impl\D11GDevice.cpp" />

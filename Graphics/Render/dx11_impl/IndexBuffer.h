@@ -1,22 +1,18 @@
 ﻿#pragma once
 #include <d3d11.h>
-
-namespace Core
-{
-	class DX11Graphics;
-}
+#include "../Common/GraphicsCommon.h"
 
 namespace Render
 {
 	class __declspec(dllexport) DX11IndexBuffer
 	{
-		Core::DX11Graphics* _context;
+		GEGraphics* _context;
 		size_t _size;
 		unsigned* _data;
 		ID3D11Buffer* _index_buffer;
 
 	public:
-		DX11IndexBuffer(Core::DX11Graphics* graphics_context,UINT*index,size_t size);
+		DX11IndexBuffer(GEGraphics* graphics_context,UINT*index,size_t size);
 
 		void bind();
 		void update();

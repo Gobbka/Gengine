@@ -45,7 +45,7 @@ void Render::CreateLightMapPass::execute(Scene*scene)
 	gcontext->set_pixel_shader(old_ps);
 }
 
-Render::CreateLightMapPass::CreateLightMapPass(Core::DX11Graphics* context)
+Render::CreateLightMapPass::CreateLightMapPass(GEGraphics* context)
 	: _light_struct(context,0,CBBindFlag_ps)
 	, _point_light_cube(Cube::make_independent(context,Position3::null(),1))
 	, _context(context)

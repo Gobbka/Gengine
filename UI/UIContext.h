@@ -2,11 +2,8 @@
 #include <vector>
 #include "Ecs/Ecs.h"
 #include "Events/WinIntEventHandler.h"
+#include "Render/Common/GraphicsCommon.h"
 #include "Types/Types.h"
-
-namespace Core {
-	class DX11Graphics;
-}
 
 namespace Render {
 	class Scene;
@@ -20,10 +17,10 @@ namespace UI {
 	{
 	private:
 		std::vector<InteractiveForm*> _forms;
-		Core::DX11Graphics* _gfx;
+		Render::GEGraphics* _gfx;
 		Vector2 _cursor;
 	public:
-		UIContext(Core::DX11Graphics*gfx,Render::Scene*scene);
+		UIContext(Render::GEGraphics*gfx,Render::Scene*scene);
 		
 		ECS::Entity* create_layer();
 	protected:

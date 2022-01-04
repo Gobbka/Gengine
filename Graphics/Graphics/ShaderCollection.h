@@ -2,11 +2,7 @@
 #include <map>
 #include "../Render/d3d/Shader/IShader.h"
 #include "../Render/d3d/Shader/PixelShader.h"
-
-namespace Core
-{
-	class DX11Graphics;
-}
+#include "../Render/Common/GraphicsCommon.h"
 
 namespace Render
 {
@@ -17,9 +13,9 @@ namespace Render
 class __declspec(dllexport) ShaderCollection
 {
 	std::map<const wchar_t*, Render::IShader*> _collection;
-	Core::DX11Graphics* _context;
+	Render::GEGraphics* _context;
 public:
-	explicit ShaderCollection(Core::DX11Graphics* context);
+	explicit ShaderCollection(Render::GEGraphics* context);
 
 	void insert(const wchar_t* file_name, Render::IShader* shader);
 

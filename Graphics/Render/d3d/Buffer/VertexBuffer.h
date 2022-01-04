@@ -15,7 +15,7 @@ namespace Render
 		void copy_to(void* buffer, UINT size) override;
 	public:
 		
-		VertexBuffer(Core::DX11Graphics* engine, Vertex* data,size_t length, ID3D11Buffer*buffer);
+		VertexBuffer(GEGraphics* engine, Vertex* data,size_t length, ID3D11Buffer*buffer);
 		~VertexBuffer() override;
 
 		void bind() override;

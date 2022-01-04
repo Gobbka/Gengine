@@ -4,10 +4,6 @@
 #include "Types/Transform.h"
 #include "Types/Types.h"
 
-namespace Core {
-	class DX11Graphics;
-}
-
 namespace Render
 {
 	class MeshRenderer;
@@ -38,7 +34,6 @@ namespace Render
 	public:
 		explicit WorldViewer(Surface resolution = Surface(0, 0));
 		WorldViewer(WorldViewer& other);
-		
 
 		void set_projection_type(WVProjectionType type);
 		void set_scale(float scale);

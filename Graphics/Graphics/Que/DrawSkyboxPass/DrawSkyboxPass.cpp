@@ -38,7 +38,7 @@ void Render::DrawSkyboxPass::execute(Scene*scene)
 	gcontext->set_rasterizer(old_rasterizer);
 }
 
-Render::DrawSkyboxPass::DrawSkyboxPass(Core::DX11Graphics* context)
+Render::DrawSkyboxPass::DrawSkyboxPass(GEGraphics* context)
 	: _context(context)
 	, _skybox_cube(Cube::make_independent(context,Position3::null(),1))
 	, _skybox_rasterizer(context->get_device()->create_rasterizer(RasterizerDesc(true)))

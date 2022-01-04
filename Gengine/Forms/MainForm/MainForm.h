@@ -5,10 +5,6 @@ namespace Render {
 	class Camera;
 }
 
-namespace Core {
-	class DX11Graphics;
-}
-
 namespace UI {
 	class InteractiveElement;
 	class FlexColumnPanel;

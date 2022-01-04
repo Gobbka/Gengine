@@ -2,11 +2,6 @@
 #include "../Render/Common/DepthStencil.h"
 #include <map>
 
-namespace Core
-{
-	class DX11Graphics;
-}
-
 namespace Render {
 	typedef __int8 DSBitSet;
 
@@ -21,10 +16,10 @@ namespace Render {
 
 	class __declspec(dllexport) DepthStencilStatesCollection
 	{
-		Core::DX11Graphics* _context;
+		GEGraphics* _context;
 		std::map<DSBitSet, GEDepthStencil> _map;
 	public:
-		DepthStencilStatesCollection(Core::DX11Graphics*context);
+		DepthStencilStatesCollection(GEGraphics*context);
 
 		GEDepthStencil operator[](DSBitSet index);
 	};

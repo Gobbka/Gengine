@@ -20,7 +20,7 @@ namespace Render
 	protected:
 		size_t size;
 
-		IVertexBuffer(Core::DX11Graphics* engine,T*data, size_t size) : Bindable(engine), size(size), data(data), stride_size(sizeof(T)) {}
+		IVertexBuffer(GEGraphics* engine,T*data, size_t size) : Bindable(engine), size(size), data(data), stride_size(sizeof(T)) {}
 	public:
 		T* data;
 		char stride_size;

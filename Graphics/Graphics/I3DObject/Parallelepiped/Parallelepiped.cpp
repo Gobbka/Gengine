@@ -23,7 +23,7 @@ UINT PARALLELEPIPED_INDEPENDENT_INDEX_ARRAY[]{
 namespace Render {
 	class IndexBuffer;
 
-	Mesh Parallelepiped::make(Core::DX11Graphics* context,Position3 pos, Vector3 resolution)
+	Mesh Parallelepiped::make(GEGraphics* context,Position3 pos, Vector3 resolution)
 	{
 		auto* device = context->get_device();
 		auto x = pos.x;
@@ -72,7 +72,7 @@ namespace Render {
 		return Mesh(vbuffer, index_buffer);
 	}
 
-	Mesh Parallelepiped::make_independent(Core::DX11Graphics* context, Position3 pos, Vector3 resolution)
+	Mesh Parallelepiped::make_independent(GEGraphics* context, Position3 pos, Vector3 resolution)
 	{
 		auto* device = context->get_device();
 		auto x = pos.x;

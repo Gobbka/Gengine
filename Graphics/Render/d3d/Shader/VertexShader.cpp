@@ -35,7 +35,7 @@ ID3D11InputLayout* Render::VertexShader::get_d11_il()
 	return _layout;
 }
 
-Render::VertexShader::VertexShader(Core::DX11Graphics* ctx, const wchar_t* file_name,const D3D11_INPUT_ELEMENT_DESC* layout,
+Render::VertexShader::VertexShader(GEGraphics* ctx, const wchar_t* file_name,const D3D11_INPUT_ELEMENT_DESC* layout,
 	UINT num_elements)
 	: IShader(ctx)
 	, _shader(nullptr)

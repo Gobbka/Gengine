@@ -1,33 +1,32 @@
 #include "Graphics.h"
 
-#include "Render/dx11_impl/D11GContext.h"
-#include "Render/dx11_impl/D11GDevice.h"
-#include "Graphics/Que/CreateLightMapPass/CreateLightMapPass.h"
-#include "Graphics/Que/CreateNormalsMapPass/CreateNormalsmapPass.h"
-#include "Graphics/Que/DrawSkyboxPass/DrawSkyboxPass.h"
+#include "D11GContext.h"
+#include "D11GDevice.h"
+#include "../../Graphics/Que/CreateLightMapPass/CreateLightMapPass.h"
+#include "../../Graphics/Que/CreateNormalsMapPass/CreateNormalsmapPass.h"
+#include "../../Graphics/Que/DrawSkyboxPass/DrawSkyboxPass.h"
 #include "Types/Types.h"
 
-#include "Render/Common/SamplerState.h"
-#include "Render/d3d/Shader/VertexShader.h"
+#include "../Common/SamplerState.h"
+#include "../d3d/Shader/VertexShader.h"
 
-#include "Graphics/Que/RenderQueuePass/RenderMeshPass.h"
-#include "Render/d3d/Vertex.h"
-#include "Render/Common/RenderTarget.h"
-#include "Render/Common/SpriteEngine.h"
+#include "../../Graphics/Que/RenderQueuePass/RenderMeshPass.h"
+#include "../d3d/Vertex.h"
+#include "../Common/RenderTarget.h"
+#include "../Common/SpriteEngine.h"
 
-#include "GraphicsBuildSettings.h"
 #include "Logger/Logger.h"
 
-Core::DX11Graphics::DX11Graphics(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11DeviceContext* context)
+Render::DX11Graphics::DX11Graphics(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11DeviceContext* context)
 	: context(context)
 	, device(dev)
 	, _screen_resolution(0,0)
 	, _swap(swap)
 	, _targetView(this,swap)
-	, _samplerState(new Render::GESamplerState(this))
-	, _gdevice(new Render::D11GDevice(dev,this))
-	, _gcontext(new Render::D11GContext(context,this))
-	, _spriteEngine(new Render::SpriteEngine(this))
+	, _samplerState(new GESamplerState(this))
+	, _gdevice(new D11GDevice(dev,this))
+	, _gcontext(new D11GContext(context,this))
+	, _spriteEngine(new SpriteEngine(this))
 	, shader_collection(this)
 	, dss_collection(this)
 	, main_scene(nullptr)
@@ -45,7 +44,7 @@ Core::DX11Graphics::DX11Graphics(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11
 	_samplerState->bind();
 }
 
-Core::DX11Graphics::~DX11Graphics()
+Render::DX11Graphics::~DX11Graphics()
 {
 	if (device)
 		device->Release();
@@ -65,7 +64,7 @@ Core::DX11Graphics::~DX11Graphics()
 	}
 }
 
-Render::Scene* Core::DX11Graphics::create_empty_scene()
+Render::Scene* Render::DX11Graphics::create_empty_scene()
 {
 	auto* scene = new Render::Scene(this);
 	this->scenes.push_back(scene);
@@ -74,47 +73,47 @@ Render::Scene* Core::DX11Graphics::create_empty_scene()
 	return scene;
 }
 
-Render::Scene* Core::DX11Graphics::create_scene_3d()
+Render::Scene* Render::DX11Graphics::create_scene_3d()
 {
 	auto* scene = create_empty_scene();
 	auto &pipeline = scene->render_pipeline();
 
-	pipeline.add_pass(new Render::ClearPass(this), Render::PassStep::begin);
-	pipeline.add_pass(new Render::DrawSkyboxPass(this), Render::PassStep::begin);
+	pipeline.add_pass(new ClearPass(this), Render::PassStep::begin);
+	pipeline.add_pass(new DrawSkyboxPass(this), Render::PassStep::begin);
 	//_passer._probe_passes.push_back(new Render::CreateShadowMapPass());
-	pipeline.add_pass(new Render::CreateNormalsMapPass(this), Render::PassStep::probe);
+	pipeline.add_pass(new CreateNormalsMapPass(this), Render::PassStep::probe);
 	//_passer.add_pass(new Render::CreateLightMapPass(this),Render::PassStep::probe);
-	pipeline.add_pass(new Render::RenderMeshPass(this), Render::PassStep::draw);
+	pipeline.add_pass(new RenderMeshPass(this), Render::PassStep::draw);
 
 	return scene;
 }
 
-Render::SpriteEngine* Core::DX11Graphics::get_sprite_engine() const
+Render::SpriteEngine* Render::DX11Graphics::get_sprite_engine() const
 {
 	return _spriteEngine;
 }
 
-Surface Core::DX11Graphics::get_screen_resolution() const
+Surface Render::DX11Graphics::get_screen_resolution() const
 {
 	return _screen_resolution;
 }
 
-inline Render::GERenderTarget* Core::DX11Graphics::get_render_target_view()
+inline Render::GERenderTarget* Render::DX11Graphics::get_render_target_view()
 {
 	return &_targetView;
 }
 
-inline Render::IGDevice* Core::DX11Graphics::get_device() const
+inline Render::IGDevice* Render::DX11Graphics::get_device() const
 {
 	return _gdevice;
 }
 
-inline Render::IGContext* Core::DX11Graphics::get_context() const
+inline Render::IGContext* Render::DX11Graphics::get_context() const
 {
 	return _gcontext;
 }
 
-void Core::DX11Graphics::set_resolution(Surface new_resolution)
+void Render::DX11Graphics::set_resolution(Surface new_resolution)
 {
 	_screen_resolution = new_resolution;
 
@@ -122,7 +121,7 @@ void Core::DX11Graphics::set_resolution(Surface new_resolution)
 	context->RSSetViewports(1, &viewport);
 }
 
-void Core::DX11Graphics::make_frame()
+void Render::DX11Graphics::make_frame()
 {
 	if (_screen_resolution.width == 0.f || _screen_resolution.height == 0.f)
 		return;
@@ -138,12 +137,12 @@ void Core::DX11Graphics::make_frame()
 	main_scene->render_pipeline().execute(main_scene);
 }
 
-void Core::DX11Graphics::present_frame() const
+void Render::DX11Graphics::present_frame() const
 {
 	_swap->Present(1u, 0u);
 }
 
-Core::DX11Graphics* Graphics_CreateContext(HWND hwnd)
+Render::GEGraphics* Graphics_CreateContext(HWND hwnd)
 {
 #ifdef DRAW_LIBRARY_DX11
 	IDXGISwapChain* pswap = nullptr;
@@ -191,6 +190,6 @@ Core::DX11Graphics* Graphics_CreateContext(HWND hwnd)
 
 	GEAssert(hr).abort(TEXT("Graphics.cpp: cannot create dx11 device and swap chain"));
 
-	return new Core::DX11Graphics(device, pswap, context);
+	return new Render::DX11Graphics(device, pswap, context);
 #endif
 }

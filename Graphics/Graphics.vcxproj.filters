@@ -78,9 +78,6 @@
     <ClInclude Include="Render\Engine\RenderTarget.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Common\ITexture2D.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Render\Light\DirectionLightComponent.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>

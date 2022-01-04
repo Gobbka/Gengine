@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include <d3d11.h>
-#include "../Common/ITexture2D.h"
 
 namespace Core
 {
@@ -10,6 +9,7 @@ namespace Core
 struct Surface;
 
 namespace Render {
+	struct ITexture2DDesc;
 	class Material;
 
 	class __declspec(dllexport) DX11Texture

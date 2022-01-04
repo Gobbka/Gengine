@@ -6,7 +6,7 @@
 #include "IVertexBuffer.h"
 #include "../d3d/Vertex.h"
 #include "Rasterizer.h"
-#include "ITexture2D.h"
+#include "Texture.h"
 
 namespace Render
 {

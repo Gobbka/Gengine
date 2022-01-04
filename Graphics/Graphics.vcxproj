@@ -167,7 +167,6 @@
     <ClInclude Include="Render\dx11_impl\D11GContext.h" />
     <ClInclude Include="Render\dx11_impl\D11GDevice.h" />
     <ClInclude Include="Render\Common\IIndexBuffer.h" />
-    <ClInclude Include="Render\Common\ITexture2D.h" />
     <ClInclude Include="Render\Common\IVertexBuffer.h" />
     <ClInclude Include="Render\Engine\PrimitiveTopology.h" />
     <ClInclude Include="Graphics\Que\CreateLightMapPass\CreateLightMapPass.h" />

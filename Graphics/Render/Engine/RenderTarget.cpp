@@ -1,7 +1,6 @@
 ﻿#include "RenderTarget.h"
 
 #include "../../Graphics.h"
-#include "../Common/ITexture2D.h"
 #include "Logger/Logger.h"
 
 Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, IDXGISwapChain* swap)

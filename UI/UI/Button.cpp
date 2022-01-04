@@ -95,7 +95,7 @@ void UI::Button::handle_mouse_leave()
 	InteractiveElement::handle_mouse_leave();
 }
 
-void UI::Button::set_texture(Render::Texture* texture)
+void UI::Button::set_texture(Render::GETexture* texture)
 {
 }
 

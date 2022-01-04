@@ -5,7 +5,7 @@
 #include "IIndexBuffer.h"
 #include "IVertexBuffer.h"
 #include "../d3d/Vertex.h"
-#include "../d3d/Buffer/Texture.h"
+#include "Texture.h"
 #include "ITexture2D.h"
 
 namespace Render
@@ -30,9 +30,9 @@ namespace Render
 		virtual IIndexBuffer* alloc_index_buffer(unsigned size) = 0;
 		virtual IIndexBuffer* alloc_index_buffer(void* data, unsigned size) = 0;
 
-		Texture* create_texture(Material& material);
-		Texture* create_texture(Material material);
-		virtual Texture* create_texture(ITexture2DDesc desc) =0;
+		GETexture* create_texture(Material& material);
+		GETexture* create_texture(Material material);
+		virtual GETexture* create_texture(ITexture2DDesc desc) =0;
 		virtual GERasterizer create_rasterizer(RasterizerDesc desc)=0;
 	};
 
@@ -56,7 +56,7 @@ namespace Render
 		return buffer;
 	}
 
-	inline Texture* IGDevice::create_texture(Material& material)
+	inline GETexture* IGDevice::create_texture(Material& material)
 	{
 		ITexture2DDesc desc;
 		desc.format = material.format;
@@ -68,7 +68,7 @@ namespace Render
 		return this->create_texture(desc);
 	}
 
-	inline Texture* IGDevice::create_texture(Material material)
+	inline GETexture* IGDevice::create_texture(Material material)
 	{
 		ITexture2DDesc desc;
 		desc.format = material.format;

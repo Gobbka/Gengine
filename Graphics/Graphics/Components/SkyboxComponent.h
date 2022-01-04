@@ -1,15 +1,12 @@
 #pragma once
 
-namespace Render
-{
-	class Texture;
-}
+#include "../../Render/Common/Texture.h"
 
 struct SkyboxComponent
 {
-	Render::Texture* sky_texture;
+	Render::GETexture* sky_texture;
 
-	SkyboxComponent(Render::Texture* sky_texture)
+	SkyboxComponent(Render::GETexture* sky_texture)
 		: sky_texture(sky_texture)
 	{}
 };

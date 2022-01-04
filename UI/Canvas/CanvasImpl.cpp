@@ -48,7 +48,7 @@ Canvas::CanvasImpl::CanvasImpl(Core::GraphicsContext* context)
 	, _context(context)
 {
 	Render::Material white(Color3XM{ 1,1,1 });
-	_drawData.default_texture = new Render::Texture(context, white);
+	_drawData.default_texture = new Render::GETexture(context, white);
 }
 
 Core::GraphicsContext* Canvas::CanvasImpl::gfx() const

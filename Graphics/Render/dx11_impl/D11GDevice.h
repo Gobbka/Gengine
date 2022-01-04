@@ -20,7 +20,7 @@ namespace Render
 		IIndexBuffer* alloc_index_buffer(unsigned size) override;
 		IIndexBuffer* alloc_index_buffer(void* data, unsigned size) override;
 
-		Texture* create_texture(ITexture2DDesc desc) override;
+		GETexture* create_texture(ITexture2DDesc desc) override;
 		GERasterizer create_rasterizer(RasterizerDesc desc) override;
 	};
 }

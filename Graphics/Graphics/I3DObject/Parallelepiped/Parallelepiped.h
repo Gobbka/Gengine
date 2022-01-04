@@ -8,7 +8,6 @@ namespace Core {
 
 namespace Render
 {
-	class Texture;
 	struct DrawEvent;
 
 	class __declspec(dllexport) Parallelepiped

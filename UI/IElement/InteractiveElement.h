@@ -1,10 +1,10 @@
 #pragma once
 #include "functional"
+#include "Render/Common/Texture.h"
 #include "Types/Types.h"
 
 namespace Render {
 	class DrawEvent2D;
-	class Texture;
 }
 
 namespace UI {
@@ -30,7 +30,7 @@ namespace UI {
 		virtual void    set_resolution(Surface surface) = 0;
 		virtual Surface get_resolution() = 0;
 
-		virtual void set_texture(Render::Texture* texture) PURE;
+		virtual void set_texture(Render::GETexture* texture) PURE;
 
 		virtual void move_by(Position2) = 0;
 	};

@@ -8,7 +8,6 @@ namespace Core {
 namespace Render
 {
 	struct Mesh;
-	class Texture;
 	struct DrawEvent;
 
 	class __declspec(dllexport) Cube

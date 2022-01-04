@@ -1,20 +1,20 @@
 ﻿#include "Texture.h"
-#include "../../../Graphics.h"
+#include "../../Graphics.h"
 #include "Logger/Logger.h"
 
-D3D11_TEXTURE2D_DESC Render::Texture::get_desc() const
+D3D11_TEXTURE2D_DESC Render::DX11Texture::get_desc() const
 {
 	D3D11_TEXTURE2D_DESC desc;
 	_texture->GetDesc(&desc);
 	return desc;
 }
 
-ID3D11Texture2D* Render::Texture::texture() const
+ID3D11Texture2D* Render::DX11Texture::texture() const
 {
 	return _texture;
 }
 
-Render::Texture::Texture(Core::GraphicsContext* context, Surface resolution, UINT bind_flags, DXGI_FORMAT format)
+Render::DX11Texture::DX11Texture(Core::GraphicsContext* context, Surface resolution, UINT bind_flags, DXGI_FORMAT format)
 	: _context(context)
 	, _texture(nullptr)
 	, _resource(nullptr)
@@ -44,7 +44,7 @@ Render::Texture::Texture(Core::GraphicsContext* context, Surface resolution, UIN
 		.abort(TEXT("Texture.cpp: cannot create shader resource view"));
 }
 
-Render::Texture::Texture(Core::GraphicsContext* engine,Material& material)
+Render::DX11Texture::DX11Texture(Core::GraphicsContext* engine,Material& material)
 	: _context(engine)
 	, _texture(nullptr)
 	, _resource(nullptr)
@@ -76,7 +76,7 @@ Render::Texture::Texture(Core::GraphicsContext* engine,Material& material)
 		.abort(TEXT("Texture.cpp: cannot create shader resource view from material texture"));
 }
 
-Render::Texture::Texture(Core::GraphicsContext* context, ID3D11Texture2D* texture)
+Render::DX11Texture::DX11Texture(Core::GraphicsContext* context, ID3D11Texture2D* texture)
 	: _context(context)
 	, _texture(texture)
 	, _resource(nullptr)
@@ -87,7 +87,7 @@ Render::Texture::Texture(Core::GraphicsContext* context, ID3D11Texture2D* textur
 	_height = desc.Height;
 }
 
-Render::Texture::Texture(Core::GraphicsContext* context, ITexture2DDesc texture)
+Render::DX11Texture::DX11Texture(Core::GraphicsContext* context, ITexture2DDesc texture)
 	: _context(context)
 	, _texture(nullptr)
 	, _resource(nullptr)
@@ -124,7 +124,7 @@ Render::Texture::Texture(Core::GraphicsContext* context, ITexture2DDesc texture)
 		.abort(TEXT("Texture.cpp: cannot create shader resurce view from texture from ITexture2DDesc"));
 }
 
-Render::Texture::Texture(Core::GraphicsContext* context)
+Render::DX11Texture::DX11Texture(Core::GraphicsContext* context)
 	: _context(context)
 	, _texture(nullptr)
 	, _resource(nullptr)
@@ -132,7 +132,7 @@ Render::Texture::Texture(Core::GraphicsContext* context)
 	, _height(0)
 {}
 
-Render::Texture::Texture(Texture&& move) noexcept
+Render::DX11Texture::DX11Texture(DX11Texture&& move) noexcept
 	: _context(move._context)
 	, _texture(move._texture)
 	, _resource(move._resource)
@@ -143,7 +143,7 @@ Render::Texture::Texture(Texture&& move) noexcept
 	move._texture = nullptr;
 }
 
-Render::Texture::Texture(Texture& other)
+Render::DX11Texture::DX11Texture(DX11Texture& other)
 	: _context(other._context)
 	, _texture(nullptr)
 	, _resource(nullptr)
@@ -162,7 +162,7 @@ Render::Texture::Texture(Texture& other)
 	}
 }
 
-Render::Texture::~Texture()
+Render::DX11Texture::~DX11Texture()
 {
 	if (_texture)
 		_texture->Release();
@@ -170,7 +170,7 @@ Render::Texture::~Texture()
 		_resource->Release();
 }
 
-Render::Texture& Render::Texture::operator=(Texture&& other) noexcept
+Render::DX11Texture& Render::DX11Texture::operator=(DX11Texture&& other) noexcept
 {
 	if (_texture && _texture != other._texture)
 		_texture->Release();
@@ -189,7 +189,7 @@ Render::Texture& Render::Texture::operator=(Texture&& other) noexcept
 	return*this;
 }
 
-Render::ITexture2DDesc Render::Texture::get_texture_desc() const
+Render::ITexture2DDesc Render::DX11Texture::get_texture_desc() const
 {
 	D3D11_TEXTURE2D_DESC textDesc;
 	_texture->GetDesc(&textDesc);
@@ -206,27 +206,27 @@ Render::ITexture2DDesc Render::Texture::get_texture_desc() const
 	};
 }
 
-Surface Render::Texture::resolution() const
+Surface Render::DX11Texture::resolution() const
 {
 	return { (float)_width,(float)_height };
 }
 
-void Render::Texture::bind(UINT slot)
+void Render::DX11Texture::bind(UINT slot)
 {
 	_context->context->PSSetShaderResources(slot, 1, &_resource);
 }
 
-bool Render::Texture::is_render_target()
+bool Render::DX11Texture::is_render_target()
 {
 	return get_desc().BindFlags & D3D11_BIND_RENDER_TARGET;
 }
 
-bool Render::Texture::is_shader_resource()
+bool Render::DX11Texture::is_shader_resource()
 {
 	return get_desc().BindFlags & D3D11_BIND_SHADER_RESOURCE;
 }
 
-char* Render::Texture::get_data(size_t* lpsize)
+char* Render::DX11Texture::get_data(size_t* lpsize)
 {
 	D3D11_MAPPED_SUBRESOURCE mp;
 	
@@ -237,12 +237,12 @@ char* Render::Texture::get_data(size_t* lpsize)
 	return nullptr;
 }
 
-void Render::Texture::copy_to(Texture* target) const
+void Render::DX11Texture::copy_to(DX11Texture* target) const
 {
 	_context->context->CopyResource(target->_texture, _texture);
 }
 
-void Render::Texture::copy_to(ID3D11Resource* target) const
+void Render::DX11Texture::copy_to(ID3D11Resource* target) const
 {
 	_context->context->CopyResource(target, _texture);
 }

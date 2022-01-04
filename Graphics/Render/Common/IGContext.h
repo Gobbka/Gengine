@@ -50,7 +50,7 @@ namespace Render
 
 		virtual void set_render_target(RenderTarget* target) = 0;
 		virtual void set_render_target(RenderTarget* target, GEMaskEngine* mask) =0;
-		virtual void set_shader_resource(Texture* texture,UINT slot=0) =0;
+		virtual void set_shader_resource(GETexture* texture,UINT slot=0) =0;
 		void set_shader_resource(GEMaskEngine*mask,UINT slot=0);
 		void set_shader_resource(RenderTarget* rt, UINT slot = 0);
 		virtual void set_rasterizer(GERasterizer& rs) =0;

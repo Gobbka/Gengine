@@ -30,7 +30,7 @@ namespace Render {
 		void set_sampler_state(SamplerState* sampler) override;
 		void set_render_target(RenderTarget* target, GEMaskEngine* mask) override;
 		void set_render_target(RenderTarget* target) override;
-		void set_shader_resource(Texture* texture,UINT slot) override;
+		void set_shader_resource(GETexture* texture,UINT slot) override;
 		void set_rasterizer(GERasterizer& rs) override;
 		void draw_indexed(UINT count, UINT start_location=0,UINT base_vertex_location=0) override;
 		void draw(UINT count, UINT start_location) override;

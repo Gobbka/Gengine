@@ -15,7 +15,6 @@
 #include <UI/Panel.h>
 #include <UI/FlexColumnPanel.h>
 #include <UI/FlexRowPanel.h>
-#include <UI/Text.h>
 
 #include "Animation/Animator.h"
 #include "Graphics/SpriteFont.h"
@@ -28,7 +27,7 @@ namespace UI
 	private:
 		FS::FSObject _object;
 	public:
-		Directory(FS::FSObject object, Position2 position, Surface resolution, Render::Texture* texture)
+		Directory(FS::FSObject object, Position2 position, Surface resolution, Render::GETexture* texture)
 			: Panel(position, resolution, nullptr),
 			_object(object)
 		{
@@ -120,7 +119,7 @@ void Forms::MainForm::scan_assets_directory()
 
 	directory.foreach([&](FS::FSObject* file)
 	{
-		Render::Texture* lp_texture = file->is_directory() ? _folder_texture : _file_texture;
+		Render::GETexture* lp_texture = file->is_directory() ? _folder_texture : _file_texture;
 		
 		auto* panel = new UI::Directory(*file, { 0,0 }, { 120,120 }, lp_texture);
 		

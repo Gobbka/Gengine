@@ -6,7 +6,7 @@ namespace UI {
 	{
 		Position2 _position;
 		Surface _resolution;
-		Render::Texture* _texture;
+		Render::GETexture* _texture;
 		Color3XM _color;
 
 		void update_items() override;
@@ -15,7 +15,7 @@ namespace UI {
 
 		ElementDescription get_desc() override;
 
-		FlexColumnPanel(Vector2 position, Surface resolution, Render::Texture* texture);
+		FlexColumnPanel(Vector2 position, Surface resolution, Render::GETexture* texture);
 		FlexColumnPanel(Vector2 position, Surface resolution, Color3XM color);
 
 		bool point_belongs(Position2 point) override;
@@ -23,7 +23,7 @@ namespace UI {
 
 		void move_by(Position2 pos) override;
 
-		void set_texture(Render::Texture* texture) override;
+		void set_texture(Render::GETexture* texture) override;
 
 		Position2 get_position() override;
 		Surface get_resolution() override;

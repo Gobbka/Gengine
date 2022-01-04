@@ -45,7 +45,7 @@ Render::CanvasDrawEvent::CanvasDrawEvent(Canvas::DrawData* data)
 	: _draw_data(data)
 {}
 
-Render::EventDrawCmd Render::CanvasDrawEvent::new_draw_cmd(UINT vertices,UINT indices,Texture*texture) const
+Render::EventDrawCmd Render::CanvasDrawEvent::new_draw_cmd(UINT vertices,UINT indices, GETexture*texture) const
 {
 	texture = texture ? texture : _draw_data->default_texture;
 
@@ -73,7 +73,7 @@ void Render::CanvasDrawEvent::draw_rect(Position2 pos, Surface resolution, Color
 	memcpy(indices, rect_indices, sizeof(rect_indices));
 }
 
-void Render::CanvasDrawEvent::draw_rect(Position2 pos, Surface resolution, Texture* texture) const
+void Render::CanvasDrawEvent::draw_rect(Position2 pos, Surface resolution, GETexture* texture) const
 {
 	static UINT rect_indices[]{ 0,1,2,1,3,2 };
 

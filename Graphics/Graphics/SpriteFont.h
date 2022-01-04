@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "Types/Types.h"
+#include "../Render/Common/Texture.h"
 
 namespace Core
 {
@@ -22,14 +23,12 @@ namespace Render {
 		float XAdvance;
 	};
 
-	class Texture;
-
 	struct __declspec(dllexport) SpriteFont
 	{
 		std::vector<Glyph> glyphs;
 		float line_spacings;
 		wchar_t default_character;
-		Texture* font_texture;
+		GETexture* font_texture;
 
 		SpriteFont(IGDevice*device,BinaryReader& reader);
 		SpriteFont(IGDevice*device,const wchar_t*file_name);

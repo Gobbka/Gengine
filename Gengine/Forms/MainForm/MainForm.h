@@ -3,7 +3,6 @@
 
 namespace Render {
 	class Camera;
-	class Texture;
 }
 
 namespace Core {
@@ -31,8 +30,8 @@ namespace Forms
 		UI::FlexRowPanel* _assets_panel;
 		UI::Panel* _render_panel;
 
-		Render::Texture* _folder_texture;
-		Render::Texture* _file_texture;
+		Render::GETexture* _folder_texture;
+		Render::GETexture* _file_texture;
 	public:
 		Render::Scene* editorScene;
 

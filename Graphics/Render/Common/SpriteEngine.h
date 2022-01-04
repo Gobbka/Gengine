@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Texture.h"
 
 namespace Core {
 	class GraphicsContext;
@@ -6,7 +7,6 @@ namespace Core {
 
 namespace Render {
 	class IGContext;
-	class Texture;
 	class PixelShader;
 	class VertexShader;
 
@@ -23,13 +23,13 @@ namespace Render {
 	private:
 		Core::GraphicsContext* _graphicsContext;
 		IGContext* _context;
-		Texture* _binded_texture[16]{};
+		GETexture* _binded_texture[16]{};
 	public:
 		SpriteEngine(
 			Core::GraphicsContext* context
 		);
 
-		void bind_texture(Texture* texture,unsigned slot);
+		void bind_texture(GETexture* texture,unsigned slot);
 
 		void begin_sprite_mode(bool light = false);
 		void begin_color_mode();

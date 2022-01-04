@@ -17,7 +17,7 @@ UI::ElementDescription UI::Panel::get_desc()
 	return ElementDescription(false, "PANEL");
 }
 
-UI::Panel::Panel(Vector2 position,Surface resolution, Render::Texture* texture)
+UI::Panel::Panel(Vector2 position,Surface resolution, Render::GETexture* texture)
 	: _position(position)
 	, _resolution(resolution)
 	, _texture(texture)
@@ -51,7 +51,7 @@ void UI::Panel::move_by(Position2 pos)
 	_position += pos;
 }
 
-void UI::Panel::set_texture(Render::Texture* texture)
+void UI::Panel::set_texture(Render::GETexture* texture)
 {
 	_texture = texture;
 }

@@ -56,9 +56,9 @@ Render::IIndexBuffer* Render::D11GDevice::alloc_index_buffer(void* data, unsigne
 	return new IndexBuffer(_gfx, (UINT*)data, size);
 }
 
-Render::Texture* Render::D11GDevice::create_texture(ITexture2DDesc desc)
+Render::GETexture* Render::D11GDevice::create_texture(ITexture2DDesc desc)
 {
-	return new Texture(_gfx, desc);
+	return new GETexture(_gfx, desc);
 }
 
 Render::GERasterizer Render::D11GDevice::create_rasterizer(RasterizerDesc desc)

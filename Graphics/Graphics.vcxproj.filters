@@ -45,7 +45,7 @@
     <ClInclude Include="Render\d3d\Shader\PixelShader.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\d3d\Buffer\Texture.h">
+    <ClInclude Include="Render\dx11_impl\Texture.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Render\d3d\Shader\SamplerState.h">
@@ -165,6 +165,9 @@
     <ClInclude Include="Render\Common\GraphicsCommon.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Render\Common\Texture.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp">
@@ -188,7 +191,7 @@
     <ClCompile Include="Render\d3d\Shader\PixelShader.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\d3d\Buffer\Texture.cpp">
+    <ClCompile Include="Render\dx11_impl\Texture.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Render\d3d\Shader\SamplerState.cpp">

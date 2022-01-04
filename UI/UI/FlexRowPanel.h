@@ -6,7 +6,7 @@ namespace UI
 	class __declspec(dllexport) FlexRowPanel : public Parent {
 		Position2 _position;
 		Surface _resolution;
-		Render::Texture* _texture;
+		Render::GETexture* _texture;
 		Color3XM _color;
 		float _scroll_bar_height;
 		Vector2 _scroll_offset;
@@ -18,7 +18,7 @@ namespace UI
 
 		ElementDescription get_desc() override;
 
-		FlexRowPanel(Vector2 position, Surface resolution, Render::Texture* texture);
+		FlexRowPanel(Vector2 position, Surface resolution, Render::GETexture* texture);
 		FlexRowPanel(Vector2 position, Surface resolution, Color3XM color);
 
 		bool point_belongs(Position2 point) override;
@@ -26,7 +26,7 @@ namespace UI
 
 		void move_by(Position2 pos) override;
 
-		void set_texture(Render::Texture* texture) override;
+		void set_texture(Render::GETexture* texture) override;
 
 		Position2 get_position() override;
 		Surface get_resolution() override;

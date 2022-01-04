@@ -7,7 +7,7 @@ Render::SpriteEngine::SpriteEngine(Core::GraphicsContext* context)
 	, _context(context->get_context())
 {}
 
-void Render::SpriteEngine::bind_texture(Texture* texture,unsigned slot)
+void Render::SpriteEngine::bind_texture(GETexture* texture,unsigned slot)
 {
 	if(texture != _binded_texture[slot])
 	{

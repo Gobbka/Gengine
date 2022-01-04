@@ -1,7 +1,6 @@
 ﻿#include "RenderTarget.h"
 
 #include "../../Graphics.h"
-#include "../d3d/Buffer/Texture.h"
 #include "../Common/ITexture2D.h"
 #include "Logger/Logger.h"
 
@@ -22,12 +21,12 @@ Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, IDXGISwapChai
 	GEAssert(context->device->CreateRenderTargetView(back_buffer, nullptr, &_targetView))
 		.abort(TEXT("RenderTarget.cpp: cannot create render target from IDXGISwapChain"));
 	
-	_texture = Texture(context, (ID3D11Texture2D*)back_buffer);
+	_texture = GETexture(context, (ID3D11Texture2D*)back_buffer);
 	
 	back_buffer->Release();
 }
 
-Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, Texture texture)
+Render::RenderTarget::RenderTarget(Core::GraphicsContext* context, GETexture texture)
 	: _targetView(nullptr)
 	, _context(context)
 	, _texture(std::move(texture))
@@ -70,7 +69,7 @@ Render::RenderTarget::RenderTarget(RenderTarget&& other) noexcept
 {
 	other._targetView = nullptr;
 	other._context = nullptr;
-	other._texture = Texture(_context);
+	other._texture = GETexture(_context);
 }
 
 Render::RenderTarget::~RenderTarget()
@@ -107,7 +106,7 @@ ID3D11Resource* Render::RenderTarget::get_resource()
 	return _texture.texture();
 }
 
-Render::Texture* Render::RenderTarget::get_texture()
+Render::GETexture* Render::RenderTarget::get_texture()
 {
 	return &_texture;
 }

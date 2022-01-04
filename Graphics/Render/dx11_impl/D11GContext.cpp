@@ -104,7 +104,7 @@ void Render::D11GContext::set_render_target(RenderTarget* target)
 	}
 }
 
-void Render::D11GContext::set_shader_resource(Texture* texture,UINT slot)
+void Render::D11GContext::set_shader_resource(GETexture* texture,UINT slot)
 {
 	if(texture != nullptr)
 	{

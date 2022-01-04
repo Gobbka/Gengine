@@ -11,7 +11,7 @@ namespace Canvas
 		DynamicAllocator<UI::Vertex2D> vertices;
 		DynamicAllocator<UINT> indices;
 
-		Render::Texture* default_texture;
+		Render::GETexture* default_texture;
 
 		DrawData()
 			: draw_list(100)

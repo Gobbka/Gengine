@@ -153,7 +153,7 @@ void UI::Text::set_resolution(Surface surface)
 
 }
 
-void UI::Text::set_texture(Render::Texture* texture)
+void UI::Text::set_texture(Render::GETexture* texture)
 {
 }
 

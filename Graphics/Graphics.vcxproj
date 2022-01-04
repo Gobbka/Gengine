@@ -160,6 +160,7 @@
     <ClInclude Include="Graphics\Components\SkyboxComponent.h" />
     <ClInclude Include="Graphics\DepthStencilStatesCollection.h" />
     <ClInclude Include="Render\Common\GraphicsCommon.h" />
+    <ClInclude Include="Render\Common\Texture.h" />
     <ClInclude Include="Render\dx11_impl\D11GContext.h" />
     <ClInclude Include="Render\dx11_impl\D11GDevice.h" />
     <ClInclude Include="Render\Common\IIndexBuffer.h" />
@@ -181,7 +182,7 @@
     <ClInclude Include="Render\Common\Bindable.h" />
     <ClInclude Include="Render\d3d\Buffer\ConstantBuffer.h" />
     <ClInclude Include="Render\d3d\Buffer\IndexBuffer.h" />
-    <ClInclude Include="Render\d3d\Buffer\Texture.h" />
+    <ClInclude Include="Render\dx11_impl\Texture.h" />
     <ClInclude Include="Render\d3d\Buffer\VertexBuffer.h" />
     <ClInclude Include="Render\d3d\Shader\PixelShader.h" />
     <ClInclude Include="Render\d3d\Shader\SamplerState.h" />
@@ -217,7 +218,7 @@
     <ClCompile Include="Graphics\ShaderCollection.cpp" />
     <ClCompile Include="Graphics\SpriteFont.cpp" />
     <ClCompile Include="Render\d3d\Buffer\IndexBuffer.cpp" />
-    <ClCompile Include="Render\d3d\Buffer\Texture.cpp" />
+    <ClCompile Include="Render\dx11_impl\Texture.cpp" />
     <ClCompile Include="Render\d3d\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Render\d3d\Shader\PixelShader.cpp" />
     <ClCompile Include="Render\d3d\Shader\SamplerState.cpp" />

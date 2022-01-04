@@ -32,10 +32,10 @@ namespace Render {
 	public:
 		CanvasDrawEvent(Canvas::DrawData* data);
 
-		EventDrawCmd new_draw_cmd(UINT vertices,UINT indices,Texture*texture = nullptr) const;
+		EventDrawCmd new_draw_cmd(UINT vertices,UINT indices, GETexture*texture = nullptr) const;
 
 		void draw_rect(Position2 pos,Surface resolution,Color3XM color) const;
-		void draw_rect(Position2 pos,Surface resolution,Texture* texture) const;
+		void draw_rect(Position2 pos,Surface resolution, GETexture* texture) const;
 	};
 
 	class DrawEvent2D final : public CanvasDrawEvent{

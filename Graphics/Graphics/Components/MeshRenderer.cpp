@@ -1,6 +1,6 @@
 #include "MeshRenderer.h"
 
-Render::MeshRenderer::MeshRenderer(Texture* texture,Texture*normals)
+Render::MeshRenderer::MeshRenderer(GETexture* texture, GETexture*normals)
 	: texture(texture)
 	, normals(normals)
 	, transform(Position3::null())

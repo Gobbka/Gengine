@@ -78,7 +78,7 @@ UI::ElementDescription UI::FlexRowPanel::get_desc()
 	return ElementDescription(true, "FLEXROWPANEL");
 }
 
-UI::FlexRowPanel::FlexRowPanel(Vector2 position, Surface resolution, Render::Texture* texture)
+UI::FlexRowPanel::FlexRowPanel(Vector2 position, Surface resolution, Render::GETexture* texture)
 	: Parent(position)
 	, _position(position)
 	, _resolution(resolution)
@@ -120,7 +120,7 @@ void UI::FlexRowPanel::move_by(Position2 pos)
 	UI::Parent::move_by(pos);
 }
 
-void UI::FlexRowPanel::set_texture(Render::Texture* texture)
+void UI::FlexRowPanel::set_texture(Render::GETexture* texture)
 {
 	_texture = texture;
 }

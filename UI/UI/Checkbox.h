@@ -33,7 +33,7 @@ namespace UI
 		void move_by(Position2 offset) override;
 
 		void handle_mouse_up() override;
-		void set_texture(Render::Texture* texture) override;
+		void set_texture(Render::GETexture* texture) override;
 	};
 }
 

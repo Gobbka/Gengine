@@ -74,7 +74,7 @@ void UI::Checkbox::handle_mouse_up()
 	InteractiveElement::handle_mouse_up();
 }
 
-void UI::Checkbox::set_texture(Render::Texture* texture)
+void UI::Checkbox::set_texture(Render::GETexture* texture)
 {
 
 }

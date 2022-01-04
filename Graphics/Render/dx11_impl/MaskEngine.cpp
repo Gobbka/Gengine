@@ -44,7 +44,7 @@ Render::DX11MaskEngine::DX11MaskEngine(RenderTarget* target, MaskEngineUsage usa
 	GEAssert(device->CreateDepthStencilView(texture_2d, &descDSV, &_view))
 		.abort(TEXT("MaskEngine.cpp: cannot create depth stencil view"));
 
-	_buffer = Texture(_context, texture_2d);
+	_buffer = GETexture(_context, texture_2d);
 }
 
 Render::DX11MaskEngine::DX11MaskEngine(Core::GraphicsContext* context, Surface resolution, MaskEngineUsage usage)
@@ -81,7 +81,7 @@ Render::DX11MaskEngine::DX11MaskEngine(Core::GraphicsContext* context, Surface r
 	GEAssert(device->CreateDepthStencilView(texture_2d, &descDSV, &_view))
 		.abort(TEXT("MaskEngine.cpp: cannot create depth stencil view"));
 
-	_buffer = Texture(_context, texture_2d);
+	_buffer = GETexture(_context, texture_2d);
 }
 
 void Render::DX11MaskEngine::clear_buffer() const
@@ -89,7 +89,7 @@ void Render::DX11MaskEngine::clear_buffer() const
 	_context->context->ClearDepthStencilView(_view, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 }
 
-Render::Texture* Render::DX11MaskEngine::get_texture()
+Render::GETexture* Render::DX11MaskEngine::get_texture()
 {
 	return &_buffer;
 }

@@ -37,7 +37,7 @@ namespace UI
 		void handle_mouse_down() override;
 		void handle_mouse_enter() override;
 		void handle_mouse_leave() override;
-		void set_texture(Render::Texture* texture) override;
+		void set_texture(Render::GETexture* texture) override;
 	};
 }
 

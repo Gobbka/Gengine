@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "Ecs/Ecs.h"
 #include "Que/IPass/Passer.h"
-
+#include "../Render/Common/Texture.h"
 struct PointLightComponent;
 
 namespace Core {
@@ -9,7 +9,6 @@ namespace Core {
 }
 
 namespace Render {
-	class Texture;
 	class RenderTarget;
 	class Camera;
 
@@ -35,7 +34,7 @@ namespace Render {
 		ECS::Entity* instantiate(Component&component);
 		template<typename Component>
 		ECS::Entity* instantiate();
-		ECS::Entity* create_model(Texture*texture,Texture*normals=nullptr);
+		ECS::Entity* create_model(GETexture*texture, GETexture*normals=nullptr);
 		ECS::Entity* create_point_light(PointLightComponent light);
 		ECS::Entity* create_direction_light();
 		

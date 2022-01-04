@@ -1,14 +1,10 @@
 ﻿#pragma once
-
-namespace Render
-{
-	class Texture;
-}
+#include <Render/Common/Texture.h>
 
 namespace Canvas {
 	struct DrawCmd
 	{
-		Render::Texture* texture;
+		Render::GETexture* texture;
 		unsigned idx_offset;
 		unsigned idx_count;
 		unsigned vtx_count;

@@ -55,7 +55,7 @@ UI::ElementDescription UI::FlexColumnPanel::get_desc()
 	return ElementDescription(true, "FLEXCOLUMNPANEL");
 }
 
-UI::FlexColumnPanel::FlexColumnPanel(Vector2 position, Surface resolution, Render::Texture* texture)
+UI::FlexColumnPanel::FlexColumnPanel(Vector2 position, Surface resolution, Render::GETexture* texture)
 	: Parent(position)
 	, _position(position)
 	, _resolution(resolution)
@@ -93,7 +93,7 @@ void UI::FlexColumnPanel::move_by(Position2 pos)
 	UI::Parent::move_by(pos);
 }
 
-void UI::FlexColumnPanel::set_texture(Render::Texture* texture)
+void UI::FlexColumnPanel::set_texture(Render::GETexture* texture)
 {
 	_texture = texture;
 }

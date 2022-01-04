@@ -16,7 +16,7 @@ D3D11_FILTER SamplerFilterToD3D11Filter(Render::SamplerFilter filter)
 	}
 }
 
-Render::DX11SamplerState::DX11SamplerState(Core::GraphicsContext* engine, SamplerFilter filter)
+Render::DX11SamplerState::DX11SamplerState(Core::DX11Graphics* engine, SamplerFilter filter)
 	: Bindable(engine)
 	, _state(nullptr)
 {

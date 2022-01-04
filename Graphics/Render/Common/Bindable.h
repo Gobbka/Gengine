@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 namespace Core {
-	class GraphicsContext;
+	class DX11Graphics;
 }
 
 namespace Render
@@ -9,9 +9,9 @@ namespace Render
 	class __declspec(dllexport) Bindable
 	{
 	protected:
-		Core::GraphicsContext* _engine;
+		Core::DX11Graphics* _engine;
 	public:
-		Bindable(Core::GraphicsContext*engine)
+		Bindable(Core::DX11Graphics*engine)
 			: _engine(engine)
 		{}
 

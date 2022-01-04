@@ -3,17 +3,17 @@
 
 namespace Core
 {
-	class GraphicsContext;
+	class DX11Graphics;
 }
 
 namespace Render
 {
 	class CreateShadowMapPass : public IPass
 	{
-		Core::GraphicsContext* _context;
+		Core::DX11Graphics* _context;
 		void execute(Scene*scene) override;
 	public:
-		CreateShadowMapPass(Core::GraphicsContext*context)
+		CreateShadowMapPass(Core::DX11Graphics*context)
 			: _context(context)
 		{}
 

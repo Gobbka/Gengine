@@ -36,7 +36,7 @@ void Render::DrawEvent2D::set_alpha(float alpha) const
 	}
 }
 
-Render::DrawEvent2D::DrawEvent2D(Core::GraphicsContext* ctx, Canvas::DrawData* de)
+Render::DrawEvent2D::DrawEvent2D(Core::DX11Graphics* ctx, Canvas::DrawData* de)
 	: CanvasDrawEvent(de)
 	, _context(ctx)
 {}

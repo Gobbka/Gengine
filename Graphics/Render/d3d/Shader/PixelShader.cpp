@@ -14,7 +14,7 @@ void Render::PixelShader::construct(ID3DBlob* shader_blob)
 	);
 }
 
-Render::PixelShader::PixelShader(Core::GraphicsContext* engine, const wchar_t* path)
+Render::PixelShader::PixelShader(Core::DX11Graphics* engine, const wchar_t* path)
 	: IShader(engine)
 {
 	ID3DBlob* blob;

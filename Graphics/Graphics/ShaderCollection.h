@@ -5,7 +5,7 @@
 
 namespace Core
 {
-	class GraphicsContext;
+	class DX11Graphics;
 }
 
 namespace Render
@@ -17,9 +17,9 @@ namespace Render
 class __declspec(dllexport) ShaderCollection
 {
 	std::map<const wchar_t*, Render::IShader*> _collection;
-	Core::GraphicsContext* _context;
+	Core::DX11Graphics* _context;
 public:
-	explicit ShaderCollection(Core::GraphicsContext* context);
+	explicit ShaderCollection(Core::DX11Graphics* context);
 
 	void insert(const wchar_t* file_name, Render::IShader* shader);
 

@@ -4,7 +4,7 @@
 
 namespace Core
 {
-	class GraphicsContext;
+	class DX11Graphics;
 }
 
 namespace Render {
@@ -21,10 +21,10 @@ namespace Render {
 
 	class __declspec(dllexport) DepthStencilStatesCollection
 	{
-		Core::GraphicsContext* _context;
+		Core::DX11Graphics* _context;
 		std::map<DSBitSet, GEDepthStencil> _map;
 	public:
-		DepthStencilStatesCollection(Core::GraphicsContext*context);
+		DepthStencilStatesCollection(Core::DX11Graphics*context);
 
 		GEDepthStencil operator[](DSBitSet index);
 	};

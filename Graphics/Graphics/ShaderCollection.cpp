@@ -1,7 +1,7 @@
 ﻿#include "ShaderCollection.h"
 #include "../Render/d3d/Shader/IShader.h"
 
-ShaderCollection::ShaderCollection(Core::GraphicsContext* context)
+ShaderCollection::ShaderCollection(Core::DX11Graphics* context)
 	: _context(context)
 {
 }

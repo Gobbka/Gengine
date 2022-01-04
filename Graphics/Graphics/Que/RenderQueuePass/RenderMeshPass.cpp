@@ -79,7 +79,7 @@ inline void Render::RenderMeshPass::execute_scene(Render::Scene* scene)
 	}
 }
 
-Render::RenderMeshPass::RenderMeshPass(Core::GraphicsContext* context)
+Render::RenderMeshPass::RenderMeshPass(Core::DX11Graphics* context)
 	: _context(context)
 {
 }

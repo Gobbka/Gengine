@@ -3,7 +3,7 @@
 #include "../../Graphics.h"
 #include "Logger/Logger.h"
 
-Render::DX11RenderTarget::DX11RenderTarget(Core::GraphicsContext* context, IDXGISwapChain* swap)
+Render::DX11RenderTarget::DX11RenderTarget(Core::DX11Graphics* context, IDXGISwapChain* swap)
 	:  _targetView(nullptr)
 	, _context(context)
 	, _texture(context)
@@ -25,7 +25,7 @@ Render::DX11RenderTarget::DX11RenderTarget(Core::GraphicsContext* context, IDXGI
 	back_buffer->Release();
 }
 
-Render::DX11RenderTarget::DX11RenderTarget(Core::GraphicsContext* context, GETexture texture)
+Render::DX11RenderTarget::DX11RenderTarget(Core::DX11Graphics* context, GETexture texture)
 	: _targetView(nullptr)
 	, _context(context)
 	, _texture(std::move(texture))
@@ -36,7 +36,7 @@ Render::DX11RenderTarget::DX11RenderTarget(Core::GraphicsContext* context, GETex
 		.abort(TEXT("RenderTarget.cpp: cannot create render target from texture"));
 }
 
-Render::DX11RenderTarget::DX11RenderTarget(Core::GraphicsContext* context, Surface texture_resolution)
+Render::DX11RenderTarget::DX11RenderTarget(Core::DX11Graphics* context, Surface texture_resolution)
 	: _targetView(nullptr)
 	, _context(context)
 	, _texture(context, texture_resolution, D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET)
@@ -45,7 +45,7 @@ Render::DX11RenderTarget::DX11RenderTarget(Core::GraphicsContext* context, Surfa
 		.abort(TEXT("RenderTarget.cpp: cannot create render target"));
 }
 
-Render::DX11RenderTarget::DX11RenderTarget(Core::GraphicsContext* context, ITexture2DDesc texture_desc)
+Render::DX11RenderTarget::DX11RenderTarget(Core::DX11Graphics* context, ITexture2DDesc texture_desc)
 	: _targetView(nullptr)
 	, _context(context)
 	, _texture(context,texture_desc)
@@ -54,7 +54,7 @@ Render::DX11RenderTarget::DX11RenderTarget(Core::GraphicsContext* context, IText
 		.abort(TEXT("RenderTarget.cpp: cannot create render target"));
 }
 
-Render::DX11RenderTarget::DX11RenderTarget(Core::GraphicsContext* context)
+Render::DX11RenderTarget::DX11RenderTarget(Core::DX11Graphics* context)
 	: _targetView(nullptr)
 	, _context(context)
 	, _texture(context)
@@ -90,7 +90,7 @@ Render::DX11RenderTarget& Render::DX11RenderTarget::operator=(DX11RenderTarget&&
 	return *this;
 }
 
-Core::GraphicsContext* Render::DX11RenderTarget::get_context()
+Core::DX11Graphics* Render::DX11RenderTarget::get_context()
 {
 	return _context;
 }

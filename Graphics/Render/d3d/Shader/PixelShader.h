@@ -11,6 +11,6 @@ namespace Render {
 	public:
 		ID3D11PixelShader* get_d3d11_ps() { return _shader; }
 
-		PixelShader(Core::GraphicsContext* engine,const wchar_t*path);
+		PixelShader(Core::DX11Graphics* engine,const wchar_t*path);
 	};
 }

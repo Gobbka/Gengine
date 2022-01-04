@@ -9,7 +9,7 @@ namespace UI {
 
 namespace Core
 {
-	class GraphicsContext;
+	class DX11Graphics;
 }
 
 namespace GE
@@ -17,7 +17,7 @@ namespace GE
 
 	class Form : public Window
 	{
-		Core::GraphicsContext* _graphics;
+		Core::DX11Graphics* _graphics;
 		UI::UIContext* _ui_context;
 		
 	protected:
@@ -29,7 +29,7 @@ namespace GE
 		Render::Scene* main_scene;
 
 		UI::UIContext* get_ui();
-		Core::GraphicsContext* get_graphics_context() const;
+		Core::DX11Graphics* get_graphics_context() const;
 
 		void drag_move();
 		void force_draw();

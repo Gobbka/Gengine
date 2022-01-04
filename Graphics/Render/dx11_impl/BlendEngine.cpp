@@ -3,7 +3,7 @@
 #include "../../Graphics.h"
 #include "Logger/Logger.h"
 
-Render::DX11BlendEngine::DX11BlendEngine(Core::GraphicsContext* engine)
+Render::DX11BlendEngine::DX11BlendEngine(Core::DX11Graphics* engine)
 	: Bindable(engine)
 	, _blend(nullptr)
 {

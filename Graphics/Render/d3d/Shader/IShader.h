@@ -2,15 +2,15 @@
 
 namespace Core
 {
-	class GraphicsContext;
+	class DX11Graphics;
 };
 
 namespace Render {
 	class __declspec(dllexport) IShader
 	{
 	protected:
-		Core::GraphicsContext* context;
+		Core::DX11Graphics* context;
 
-		explicit IShader(Core::GraphicsContext* engine) : context(engine) {}
+		explicit IShader(Core::DX11Graphics* engine) : context(engine) {}
 	};
 }

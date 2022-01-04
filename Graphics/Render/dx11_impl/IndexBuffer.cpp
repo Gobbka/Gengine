@@ -1,7 +1,7 @@
 ﻿#include "IndexBuffer.h"
 #include "../../Graphics.h"
 
-Render::DX11IndexBuffer::DX11IndexBuffer(Core::GraphicsContext* graphics_context, UINT* index, size_t size)
+Render::DX11IndexBuffer::DX11IndexBuffer(Core::DX11Graphics* graphics_context, UINT* index, size_t size)
 	: _context(graphics_context)
 	, _size(size)
 	, _data(index)

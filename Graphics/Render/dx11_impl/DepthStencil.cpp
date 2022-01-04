@@ -27,7 +27,7 @@ Render::DX11DepthStencil::DX11DepthStencil()
 	, _state(nullptr)
 {}
 
-Render::DX11DepthStencil::DX11DepthStencil(Core::GraphicsContext* context, DepthStencilDesc desc)
+Render::DX11DepthStencil::DX11DepthStencil(Core::DX11Graphics* context, DepthStencilDesc desc)
 	: _context(context->context)
 	, _state(nullptr)
 {

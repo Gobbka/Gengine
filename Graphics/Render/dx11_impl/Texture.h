@@ -4,7 +4,7 @@
 
 namespace Core
 {
-	class GraphicsContext;
+	class DX11Graphics;
 }
 
 namespace Render
@@ -14,7 +14,7 @@ namespace Render
 
 	class __declspec(dllexport) DX11Texture
 	{
-		Core::GraphicsContext* _context;
+		Core::DX11Graphics* _context;
 		
 		D3D11_TEXTURE2D_DESC get_desc() const;
 
@@ -25,11 +25,11 @@ namespace Render
 	public:
 		ID3D11Texture2D* texture() const;
 
-		DX11Texture(Core::GraphicsContext* context, Surface resolution, UINT bind_flags = D3D11_BIND_SHADER_RESOURCE,DXGI_FORMAT format =DXGI_FORMAT_R8G8B8A8_UNORM);
-		DX11Texture(Core::GraphicsContext* context, Material& material);
-		DX11Texture(Core::GraphicsContext* context, ID3D11Texture2D* texture);
-		DX11Texture(Core::GraphicsContext* context, ITexture2DDesc texture);
-		DX11Texture(Core::GraphicsContext* context);
+		DX11Texture(Core::DX11Graphics* context, Surface resolution, UINT bind_flags = D3D11_BIND_SHADER_RESOURCE,DXGI_FORMAT format =DXGI_FORMAT_R8G8B8A8_UNORM);
+		DX11Texture(Core::DX11Graphics* context, Material& material);
+		DX11Texture(Core::DX11Graphics* context, ID3D11Texture2D* texture);
+		DX11Texture(Core::DX11Graphics* context, ITexture2DDesc texture);
+		DX11Texture(Core::DX11Graphics* context);
 		DX11Texture(DX11Texture&& move) noexcept;
 		DX11Texture(DX11Texture& other);
 		~DX11Texture();

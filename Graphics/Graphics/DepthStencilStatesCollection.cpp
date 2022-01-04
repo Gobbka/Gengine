@@ -10,7 +10,7 @@ Render::DepthFunc get_depth_func(Render::DSBitSet bitset)
 	return Render::DepthFunc::none;
 }
 
-Render::DepthStencilStatesCollection::DepthStencilStatesCollection(Core::GraphicsContext* context)
+Render::DepthStencilStatesCollection::DepthStencilStatesCollection(Core::DX11Graphics* context)
 	: _context(context)
 {
 }

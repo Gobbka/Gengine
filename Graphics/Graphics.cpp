@@ -18,7 +18,7 @@
 #include "GraphicsBuildSettings.h"
 #include "Logger/Logger.h"
 
-Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11DeviceContext* context)
+Core::DX11Graphics::DX11Graphics(ID3D11Device* dev, IDXGISwapChain* swap, ID3D11DeviceContext* context)
 	: context(context)
 	, device(dev)
 	, _screen_resolution(0,0)
@@ -45,7 +45,7 @@ Core::GraphicsContext::GraphicsContext(ID3D11Device* dev, IDXGISwapChain* swap, 
 	_samplerState->bind();
 }
 
-Core::GraphicsContext::~GraphicsContext()
+Core::DX11Graphics::~DX11Graphics()
 {
 	if (device)
 		device->Release();
@@ -65,7 +65,7 @@ Core::GraphicsContext::~GraphicsContext()
 	}
 }
 
-Render::Scene* Core::GraphicsContext::create_empty_scene()
+Render::Scene* Core::DX11Graphics::create_empty_scene()
 {
 	auto* scene = new Render::Scene(this);
 	this->scenes.push_back(scene);
@@ -74,7 +74,7 @@ Render::Scene* Core::GraphicsContext::create_empty_scene()
 	return scene;
 }
 
-Render::Scene* Core::GraphicsContext::create_scene_3d()
+Render::Scene* Core::DX11Graphics::create_scene_3d()
 {
 	auto* scene = create_empty_scene();
 	auto &pipeline = scene->render_pipeline();
@@ -89,32 +89,32 @@ Render::Scene* Core::GraphicsContext::create_scene_3d()
 	return scene;
 }
 
-Render::SpriteEngine* Core::GraphicsContext::get_sprite_engine() const
+Render::SpriteEngine* Core::DX11Graphics::get_sprite_engine() const
 {
 	return _spriteEngine;
 }
 
-Surface Core::GraphicsContext::get_screen_resolution() const
+Surface Core::DX11Graphics::get_screen_resolution() const
 {
 	return _screen_resolution;
 }
 
-inline Render::GERenderTarget* Core::GraphicsContext::get_render_target_view()
+inline Render::GERenderTarget* Core::DX11Graphics::get_render_target_view()
 {
 	return &_targetView;
 }
 
-inline Render::IGDevice* Core::GraphicsContext::get_device() const
+inline Render::IGDevice* Core::DX11Graphics::get_device() const
 {
 	return _gdevice;
 }
 
-inline Render::IGContext* Core::GraphicsContext::get_context() const
+inline Render::IGContext* Core::DX11Graphics::get_context() const
 {
 	return _gcontext;
 }
 
-void Core::GraphicsContext::set_resolution(Surface new_resolution)
+void Core::DX11Graphics::set_resolution(Surface new_resolution)
 {
 	_screen_resolution = new_resolution;
 
@@ -122,7 +122,7 @@ void Core::GraphicsContext::set_resolution(Surface new_resolution)
 	context->RSSetViewports(1, &viewport);
 }
 
-void Core::GraphicsContext::make_frame()
+void Core::DX11Graphics::make_frame()
 {
 	if (_screen_resolution.width == 0.f || _screen_resolution.height == 0.f)
 		return;
@@ -138,12 +138,12 @@ void Core::GraphicsContext::make_frame()
 	main_scene->render_pipeline().execute(main_scene);
 }
 
-void Core::GraphicsContext::present_frame() const
+void Core::DX11Graphics::present_frame() const
 {
 	_swap->Present(1u, 0u);
 }
 
-Core::GraphicsContext* Graphics_CreateContext(HWND hwnd)
+Core::DX11Graphics* Graphics_CreateContext(HWND hwnd)
 {
 #ifdef DRAW_LIBRARY_DX11
 	IDXGISwapChain* pswap = nullptr;
@@ -191,6 +191,6 @@ Core::GraphicsContext* Graphics_CreateContext(HWND hwnd)
 
 	GEAssert(hr).abort(TEXT("Graphics.cpp: cannot create dx11 device and swap chain"));
 
-	return new Core::GraphicsContext(device, pswap, context);
+	return new Core::DX11Graphics(device, pswap, context);
 #endif
 }

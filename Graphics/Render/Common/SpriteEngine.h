@@ -2,7 +2,7 @@
 #include "Texture.h"
 
 namespace Core {
-	class GraphicsContext;
+	class DX11Graphics;
 }
 
 namespace Render {
@@ -21,12 +21,12 @@ namespace Render {
 		};
 		
 	private:
-		Core::GraphicsContext* _graphicsContext;
+		Core::DX11Graphics* _graphicsContext;
 		IGContext* _context;
 		GETexture* _binded_texture[16]{};
 	public:
 		SpriteEngine(
-			Core::GraphicsContext* context
+			Core::DX11Graphics* context
 		);
 
 		void bind_texture(GETexture* texture,unsigned slot);

@@ -10,7 +10,7 @@
 
 class DrawUIPass : public Render::IPass
 {
-	Core::GraphicsContext* _context;
+	Core::DX11Graphics* _context;
 
 public:
 	void execute(Render::Scene*scene) override
@@ -54,7 +54,7 @@ public:
 		mask_engine->clear_buffer();
 	}
 
-	DrawUIPass(Core::GraphicsContext*context)
+	DrawUIPass(Core::DX11Graphics*context)
 		: _context(context)
 	{}
 };
@@ -67,7 +67,7 @@ ECS::Entity* UI::UIContext::create_layer()
 	return ent;
 }
 
-UI::UIContext::UIContext(Core::GraphicsContext* gfx,Render::Scene* scene)
+UI::UIContext::UIContext(Core::DX11Graphics* gfx,Render::Scene* scene)
 	: WinIntEventHandler()
 	, _gfx(gfx)
 	, _cursor(0,0)

@@ -1,4 +1,4 @@
-#pragma once
+ #pragma once
 #include <d3d11.h>
 
 #include "Render/Common/IGDevice.h"
@@ -10,7 +10,7 @@
 
 namespace Core
 {
-	class __declspec(dllexport) GraphicsContext final
+	class __declspec(dllexport) DX11Graphics final
 	{
 	public:
 		ID3D11DeviceContext* context;
@@ -30,8 +30,8 @@ namespace Core
 		Render::SpriteEngine* _spriteEngine;
 		
 	public:
-		GraphicsContext(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
-		~GraphicsContext();
+		DX11Graphics(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
+		~DX11Graphics();
 
 		ShaderCollection shader_collection;
 		Render::DepthStencilStatesCollection dss_collection;
@@ -56,4 +56,4 @@ namespace Core
 	};
 }
 
-__declspec(dllexport) Core::GraphicsContext* Graphics_CreateContext(HWND hwnd);
+__declspec(dllexport) Core::DX11Graphics* Graphics_CreateContext(HWND hwnd);

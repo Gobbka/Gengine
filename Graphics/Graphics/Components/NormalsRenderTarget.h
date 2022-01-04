@@ -9,7 +9,7 @@ namespace Render
 		GERenderTarget normals_map;
 		GERenderTarget light_map;
 
-		LightViewer(Core::GraphicsContext*context,Surface resolution)
+		LightViewer(Core::DX11Graphics*context,Surface resolution)
 			: normals_map(context,resolution)
 			, light_map(context,resolution)
 		{

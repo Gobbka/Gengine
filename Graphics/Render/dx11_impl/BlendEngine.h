@@ -8,7 +8,7 @@ namespace Render
 	{
 		ID3D11BlendState* _blend;
 	public:
-		DX11BlendEngine(Core::GraphicsContext* engine);
+		DX11BlendEngine(Core::DX11Graphics* engine);
 		
 		void bind() override;
 	};

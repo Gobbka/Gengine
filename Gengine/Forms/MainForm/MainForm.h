@@ -6,7 +6,7 @@ namespace Render {
 }
 
 namespace Core {
-	class GraphicsContext;
+	class DX11Graphics;
 }
 
 namespace UI {

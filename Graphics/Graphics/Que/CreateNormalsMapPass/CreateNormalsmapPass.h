@@ -3,17 +3,17 @@
 
 namespace Core
 {
-	class GraphicsContext;
+	class DX11Graphics;
 }
 
 namespace Render
 {
 	class CreateNormalsMapPass : public IPass
 	{
-		Core::GraphicsContext* _context;
+		Core::DX11Graphics* _context;
 		void execute(Scene*scene) override;
 	public:
-		CreateNormalsMapPass(Core::GraphicsContext*context)
+		CreateNormalsMapPass(Core::DX11Graphics*context)
 			: _context(context)
 		{}
 	};

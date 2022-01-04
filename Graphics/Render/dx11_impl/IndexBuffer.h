@@ -3,20 +3,20 @@
 
 namespace Core
 {
-	class GraphicsContext;
+	class DX11Graphics;
 }
 
 namespace Render
 {
 	class __declspec(dllexport) DX11IndexBuffer
 	{
-		Core::GraphicsContext* _context;
+		Core::DX11Graphics* _context;
 		size_t _size;
 		unsigned* _data;
 		ID3D11Buffer* _index_buffer;
 
 	public:
-		DX11IndexBuffer(Core::GraphicsContext* graphics_context,UINT*index,size_t size);
+		DX11IndexBuffer(Core::DX11Graphics* graphics_context,UINT*index,size_t size);
 
 		void bind();
 		void update();

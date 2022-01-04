@@ -25,7 +25,7 @@ void Render::Camera::set_resolution(Surface resolution)
 	WorldViewer::set_view_resolution(resolution);
 }
 
-Core::GraphicsContext* Render::Camera::graphics_context()
+Core::DX11Graphics* Render::Camera::graphics_context()
 {
 	return _context;
 }
@@ -73,7 +73,7 @@ Render::Camera::Camera(Camera&& other) noexcept
 }
 
 
-Render::Camera::Camera(Core::GraphicsContext* context, DX11RenderTarget* target)
+Render::Camera::Camera(Core::DX11Graphics* context, DX11RenderTarget* target)
 	: WorldViewer(target->get_texture()->resolution())
 	, _blendEngine(new GEBlendEngine(context))
 	, _render_target(target)

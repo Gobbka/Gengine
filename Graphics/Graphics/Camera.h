@@ -9,20 +9,20 @@ namespace Render
 		GEBlendEngine* _blendEngine;
 		DX11RenderTarget* _render_target;
 		GEMaskEngine* _mask_engine;
-		Core::GraphicsContext* _context;
+		Core::DX11Graphics* _context;
 	public:
 		void clear(Color3XM color);
 		void clear();
 		
 		void set_resolution(Surface new_resolution);
 
-		Core::GraphicsContext* graphics_context();
+		Core::DX11Graphics* graphics_context();
 		DX11RenderTarget* get_target_view();
 		GEMaskEngine* get_mask_engine() const;
 
 		Camera& operator=(Camera&& other) noexcept;
 		Camera(Camera&& other) noexcept;
-		Camera(Core::GraphicsContext* context, DX11RenderTarget*target);
+		Camera(Core::DX11Graphics* context, DX11RenderTarget*target);
 
 		void bind() const;
 	};

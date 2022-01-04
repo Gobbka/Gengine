@@ -40,7 +40,7 @@ namespace UI {
 		bool has_element(InteractiveElement* element);
 		InteractiveForm* add_element(InteractiveElement* element);
 	public:
-		InteractiveForm(Core::GraphicsContext* pEngine,Position2*cursor_position);
+		InteractiveForm(Core::DX11Graphics* pEngine,Position2*cursor_position);
 		//InteractiveForm(InteractiveForm&& other) noexcept;
 		~InteractiveForm() = default;
 	public:

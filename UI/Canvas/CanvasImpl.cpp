@@ -43,7 +43,7 @@ void Canvas::CanvasImpl::present()
 	}
 }
 
-Canvas::CanvasImpl::CanvasImpl(Core::GraphicsContext* context)
+Canvas::CanvasImpl::CanvasImpl(Core::DX11Graphics* context)
 	: _buffer(context->get_device()->alloc_vertex_buffer<UI::Vertex2D>(100u,true))
 	, _ibuffer(context->get_device()->alloc_index_buffer(100))
 	, _context(context)
@@ -52,7 +52,7 @@ Canvas::CanvasImpl::CanvasImpl(Core::GraphicsContext* context)
 	_drawData.default_texture = new Render::GETexture(context, white);
 }
 
-Core::GraphicsContext* Canvas::CanvasImpl::gfx() const
+Core::DX11Graphics* Canvas::CanvasImpl::gfx() const
 {
 	return _context;
 }

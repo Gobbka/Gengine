@@ -6,10 +6,10 @@ namespace Render
 {
 	struct __declspec(dllexport) DirectionLightComponent : WorldViewer
 	{
-		Core::GraphicsContext* context;
+		Core::DX11Graphics* context;
 		GEMaskEngine* mask_engine;
 
-		explicit DirectionLightComponent(Core::GraphicsContext* context);
+		explicit DirectionLightComponent(Core::DX11Graphics* context);
 		DirectionLightComponent(DirectionLightComponent&& other) noexcept;
 		DirectionLightComponent& operator=(DirectionLightComponent&& other) noexcept;
 

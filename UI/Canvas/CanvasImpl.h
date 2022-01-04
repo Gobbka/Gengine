@@ -3,7 +3,7 @@
 
 namespace Core
 {
-	class GraphicsContext;
+	class DX11Graphics;
 }
 
 namespace Render
@@ -18,16 +18,16 @@ namespace Canvas {
 		DrawData _drawData;
 		Render::IVertexBuffer<UI::Vertex2D>* _buffer;
 		Render::GEIndexBuffer* _ibuffer;
-		Core::GraphicsContext* _context;
+		Core::DX11Graphics* _context;
 	public:
 
 		DrawData* begin();
 		void present();
 
-		CanvasImpl(Core::GraphicsContext*context);
+		CanvasImpl(Core::DX11Graphics*context);
 		CanvasImpl() = delete;
 		~CanvasImpl() = default;
 
-		Core::GraphicsContext* gfx() const;
+		Core::DX11Graphics* gfx() const;
 	};
 }

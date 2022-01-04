@@ -5,7 +5,7 @@
 #include "Types/Types.h"
 
 namespace Core {
-	class GraphicsContext;
+	class DX11Graphics;
 }
 
 namespace Render {
@@ -20,10 +20,10 @@ namespace UI {
 	{
 	private:
 		std::vector<InteractiveForm*> _forms;
-		Core::GraphicsContext* _gfx;
+		Core::DX11Graphics* _gfx;
 		Vector2 _cursor;
 	public:
-		UIContext(Core::GraphicsContext*gfx,Render::Scene*scene);
+		UIContext(Core::DX11Graphics*gfx,Render::Scene*scene);
 		
 		ECS::Entity* create_layer();
 	protected:

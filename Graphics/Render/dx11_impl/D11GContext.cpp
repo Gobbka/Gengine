@@ -6,7 +6,7 @@
 #include "../../Render/Common/Rasterizer.h"
 #include "../../Render/Common/MaskEngine.h"
 
-Render::D11GContext::D11GContext(ID3D11DeviceContext* d11context, Core::GraphicsContext* context )
+Render::D11GContext::D11GContext(ID3D11DeviceContext* d11context, Core::DX11Graphics* context )
 	: IGContext(context)
 	, _info_queue(nullptr)
 	, _d11context(d11context)

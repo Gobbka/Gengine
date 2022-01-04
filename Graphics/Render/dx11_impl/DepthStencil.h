@@ -3,7 +3,7 @@
 
 namespace Core
 {
-	class GraphicsContext;
+	class DX11Graphics;
 }
 
 namespace Render
@@ -42,7 +42,7 @@ namespace Render
 		ID3D11DepthStencilState* _state;
 	public:
 		DX11DepthStencil();
-		DX11DepthStencil(Core::GraphicsContext* context,DepthStencilDesc desc);
+		DX11DepthStencil(Core::DX11Graphics* context,DepthStencilDesc desc);
 
 		void bind(unsigned reference = 0) const;
 		bool valid() const;

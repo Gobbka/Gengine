@@ -7,11 +7,11 @@ namespace Render
 {
 	class DrawSkyboxPass final : public IPass
 	{
-		Core::GraphicsContext* _context;
+		Core::DX11Graphics* _context;
 		Mesh _skybox_cube;
 		GERasterizer _skybox_rasterizer;
 		void execute(Scene*) override;
 	public:
-		explicit DrawSkyboxPass(Core::GraphicsContext* context);
+		explicit DrawSkyboxPass(Core::DX11Graphics* context);
 	};
 }

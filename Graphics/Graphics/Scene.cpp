@@ -66,7 +66,7 @@ ECS::Entity* Render::Scene::create_direction_light()
 	return ent;
 }
 
-Render::Scene::Scene(Core::GraphicsContext* context)
+Render::Scene::Scene(Core::DX11Graphics* context)
 	: _world(ECS::World::createWorld())
 	, _context(context)
 	, _main_camera(nullptr)

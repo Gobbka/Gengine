@@ -186,7 +186,6 @@
     <ClInclude Include="Graphics\SpriteFont.h" />
     <ClInclude Include="Render\Common\IGContext.h" />
     <ClInclude Include="Render\Common\IGDevice.h" />
-    <ClInclude Include="Render\Common\Bindable.h" />
     <ClInclude Include="Render\d3d\Buffer\ConstantBuffer.h" />
     <ClInclude Include="Render\dx11_impl\IndexBuffer.h" />
     <ClInclude Include="Render\dx11_impl\Texture.h" />

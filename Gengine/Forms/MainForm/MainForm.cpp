@@ -248,7 +248,7 @@ void Forms::MainForm::print_gpu_info()
 	adapter->GetDesc(&desc);
 	std::cout << "=== GPU ===\n";
 	std::wcout << L"Name: " << desc.Description << '\n';
-	std::cout << "Memory: "<< green << desc.DedicatedVideoMemory / 1048576u <<white << "MB\n";
+	std::cout << "Memory: "<< green << desc.DedicatedVideoMemory / 1048576u << white << "MB\n";
 	adapter->GetDesc(&desc);
 	if (adapter)
 		adapter->Release();

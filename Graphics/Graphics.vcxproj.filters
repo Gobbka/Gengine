@@ -18,9 +18,6 @@
     <ClInclude Include="Render\dx11_impl\Graphics.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Common\Bindable.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Render\d3d\Buffer\VertexBuffer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>

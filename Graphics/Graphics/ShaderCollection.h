@@ -13,9 +13,9 @@ namespace Render
 class __declspec(dllexport) ShaderCollection
 {
 	std::map<const wchar_t*, Render::IShader*> _collection;
-	Render::GEGraphics* _context;
+	Render::GEGraphics* _graphics;
 public:
-	explicit ShaderCollection(Render::GEGraphics* context);
+	explicit ShaderCollection(Render::GEGraphics* graphics);
 
 	void insert(const wchar_t* file_name, Render::IShader* shader);
 
@@ -28,7 +28,7 @@ public:
 		if (shader != nullptr)
 			return (T*)shader;
 
-		shader = new T(_context,file_name);
+		shader = new T(_graphics,file_name);
 
 		insert(file_name, shader);
 

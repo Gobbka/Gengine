@@ -38,7 +38,7 @@ ECS::Entity* Render::Scene::create_camera(GERenderTarget* target)
 {
 	auto* ent = create_entity();
 	
-	ent->assign<Camera>(_context,target);
+	ent->assign<Camera>(_graphics,target);
 
 	return ent;
 }
@@ -62,13 +62,13 @@ ECS::Entity* Render::Scene::create_point_light(PointLightComponent light)
 ECS::Entity* Render::Scene::create_direction_light()
 {
 	auto ent = _world->create();
-	ent->assign<DirectionLightComponent>(_context);
+	ent->assign<DirectionLightComponent>(_graphics);
 	return ent;
 }
 
-Render::Scene::Scene(GEGraphics* context)
+Render::Scene::Scene(GEGraphics* graphics)
 	: _world(ECS::World::createWorld())
-	, _context(context)
+	, _graphics(graphics)
 	, _main_camera(nullptr)
 {
 }

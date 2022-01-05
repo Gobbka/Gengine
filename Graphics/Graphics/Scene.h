@@ -11,7 +11,7 @@ namespace Render
 	class __declspec(dllexport) Scene
 	{
 		ECS::World* _world;
-		GEGraphics* _context;
+		GEGraphics* _graphics;
 		ECS::Entity* _main_camera;
 		Passer _render_pipeline;
 	public:
@@ -36,7 +36,7 @@ namespace Render
 		
 		__forceinline ECS::World* world() const { return _world; }
 		
-		Scene(GEGraphics*context);
+		Scene(GEGraphics*graphics);
 		void destroy() const;
 	};
 

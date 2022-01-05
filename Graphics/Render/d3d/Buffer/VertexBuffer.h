@@ -18,7 +18,7 @@ namespace Render
 		VertexBuffer(GEGraphics* engine, Vertex* data,size_t length, ID3D11Buffer*buffer);
 		~VertexBuffer() override;
 
-		void bind() override;
+		void bind();
 		void update(UINT update_size = -1) override;
 	};
 }

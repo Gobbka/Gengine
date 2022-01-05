@@ -17,7 +17,7 @@ D3D11_FILTER SamplerFilterToD3D11Filter(Render::SamplerFilter filter)
 }
 
 Render::DX11SamplerState::DX11SamplerState(GEGraphics* engine, SamplerFilter filter)
-	: Bindable(engine)
+	: _graphics(engine)
 	, _state(nullptr)
 {
 
@@ -30,11 +30,11 @@ Render::DX11SamplerState::DX11SamplerState(GEGraphics* engine, SamplerFilter fil
 	desc.MaxLOD = D3D11_FLOAT32_MAX;
 	desc.MinLOD = 0;
 
-	GEAssert(_engine->device->CreateSamplerState(&desc, &_state))
+	GEAssert(_graphics->device->CreateSamplerState(&desc, &_state))
 		.abort(TEXT("SamplerState.cpp: Cannot create sampler state"));
 }
 
 void Render::DX11SamplerState::bind()
 {
-	_engine->context->PSSetSamplers(0, 1, &_state);
+	_graphics->context->PSSetSamplers(0, 1, &_state);
 }

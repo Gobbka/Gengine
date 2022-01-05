@@ -8,13 +8,13 @@
 #include "../Render/Common/IGContext.h"
 #include "../Render/Common/BlendEngine.h"
 
-void Render::Camera::clear(Color3XM color)
+void Render::Camera::clear(Color3XM color) const
 {
 	_render_target->clear(color);
 	_mask_engine->clear_buffer();
 }
 
-void Render::Camera::clear()
+void Render::Camera::clear() const
 {
 	_render_target->clear();
 	_mask_engine->clear_buffer();
@@ -22,15 +22,15 @@ void Render::Camera::clear()
 
 void Render::Camera::set_resolution(Surface resolution)
 {
-	WorldViewer::set_view_resolution(resolution);
+	set_view_resolution(resolution);
 }
 
-Render::GEGraphics* Render::Camera::graphics_context()
+Render::GEGraphics* Render::Camera::get_graphics() const
 {
-	return _context;
+	return _graphics;
 }
 
-Render::DX11RenderTarget* Render::Camera::get_target_view()
+Render::DX11RenderTarget* Render::Camera::get_target_view() const
 {
 	return _render_target;
 }
@@ -52,7 +52,7 @@ Render::Camera& Render::Camera::operator=(Camera&& other) noexcept
 	_blendEngine = other._blendEngine;
 	_mask_engine = other._mask_engine;
 	_render_target = other._render_target;
-	_context = other._context;
+	_graphics = other._graphics;
 
 	*(WorldViewer*)this = std::move((WorldViewer&)other);
 
@@ -65,7 +65,7 @@ Render::Camera::Camera(Camera&& other) noexcept
 	, _blendEngine(other._blendEngine)
 	, _render_target(other._render_target)
 	, _mask_engine(other._mask_engine)
-	, _context(other._context)
+	, _graphics(other._graphics)
 {
 	other._blendEngine = nullptr;
 	other._mask_engine = nullptr;
@@ -73,16 +73,16 @@ Render::Camera::Camera(Camera&& other) noexcept
 }
 
 
-Render::Camera::Camera(GEGraphics* context, DX11RenderTarget* target)
+Render::Camera::Camera(GEGraphics* graphics, DX11RenderTarget* target)
 	: WorldViewer(target->get_texture()->resolution())
-	, _blendEngine(new GEBlendEngine(context))
+	, _blendEngine(new GEBlendEngine(graphics))
 	, _render_target(target)
 	, _mask_engine(new GEMaskEngine(_render_target))
-	, _context(context)
+	, _graphics(graphics)
 {}
 
 void Render::Camera::bind() const
 {
 	_blendEngine->bind();
-	_context->get_context()->set_render_target(_render_target, _mask_engine);
+	_graphics->get_context()->set_render_target(_render_target, _mask_engine);
 }

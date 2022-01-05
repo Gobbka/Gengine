@@ -42,7 +42,7 @@ inline void Render::RenderMeshPass::render_camera(ECS::ComponentHandle<Camera> c
 	_context->dss_collection[(DSBitSet)DepthStencilUsage::depth_equal].bind();
 
 	auto world_to_screen = camera->world_to_screen_matrix();
-	auto* sprite_engine = camera->graphics_context()->get_sprite_engine();
+	auto* sprite_engine = camera->get_graphics()->get_sprite_engine();
 
 	sprite_engine->begin_sprite_mode(true);
 	sprite_engine->bind_texture(lview->normals_map.get_texture(), 1);

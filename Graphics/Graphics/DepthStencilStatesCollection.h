@@ -16,10 +16,10 @@ namespace Render {
 
 	class __declspec(dllexport) DepthStencilStatesCollection
 	{
-		GEGraphics* _context;
+		GEGraphics* _graphics;
 		std::map<DSBitSet, GEDepthStencil> _map;
 	public:
-		DepthStencilStatesCollection(GEGraphics*context);
+		DepthStencilStatesCollection(GEGraphics*graphics);
 
 		GEDepthStencil operator[](DSBitSet index);
 	};

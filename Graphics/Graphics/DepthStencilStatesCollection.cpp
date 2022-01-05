@@ -10,8 +10,8 @@ Render::DepthFunc get_depth_func(Render::DSBitSet bitset)
 	return Render::DepthFunc::none;
 }
 
-Render::DepthStencilStatesCollection::DepthStencilStatesCollection(GEGraphics* context)
-	: _context(context)
+Render::DepthStencilStatesCollection::DepthStencilStatesCollection(GEGraphics* graphics)
+	: _graphics(graphics)
 {
 }
 
@@ -24,7 +24,7 @@ Render::GEDepthStencil Render::DepthStencilStatesCollection::operator[](DSBitSet
 		ds_desc.depth = get_depth_func(index);
 		ds_desc.stencil_usage = (StencilUsage)(index >> 2);
 
-		element = GEDepthStencil(_context, ds_desc);
+		element = GEDepthStencil(_graphics, ds_desc);
 		_map[index] = element;
 	}
 	return element;

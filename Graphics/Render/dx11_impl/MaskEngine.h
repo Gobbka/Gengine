@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include <d3d11.h>
-#include "../Common/Bindable.h"
 #include "../Common/Texture.h"
 
 namespace Render

@@ -1,8 +1,8 @@
 ﻿#include "ShaderCollection.h"
 #include "../Render/d3d/Shader/IShader.h"
 
-ShaderCollection::ShaderCollection(Render::GEGraphics* context)
-	: _context(context)
+ShaderCollection::ShaderCollection(Render::GEGraphics* graphics)
+	: _graphics(graphics)
 {
 }
 

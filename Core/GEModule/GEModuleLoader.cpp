@@ -11,26 +11,19 @@ GeModule* GELoadModule(wchar_t* path)
 	{
 		return nullptr;
 	}
-	const auto module_main = (GEModuleMain)GetProcAddress(handle, "GEModuleMain");
-	if(module_main != nullptr)
-	{
-		GeModule ge_module;
-		ge_module.path = path;
-		ge_module.index = GEGetNewModuleIndex();
-		ge_module.features = GE_MODULE_FEATURE_DX11 | GE_MODULE_FEATURE_WIN_OS;
-		ge_module.unload_func = nullptr;
-		if(module_main(&ge_module))
-		{
-			const auto last_element_index = g_modules.size();
-			g_modules.push_back(ge_module);
+	GeModule module;
+	module.startup = (GEModule_Startup)GetProcAddress(handle, "GEModule_Startup");
+	module.unload = (GEModule_Unload)GetProcAddress(handle, "GEModule_Unload");
+	module.query = (GEModule_Query)GetProcAddress(handle, "GEModule_Query");
+	module.index = GEGetNewModuleIndex();
+	module.path = path;
 
-			CloseHandle(handle);
-			return &g_modules[last_element_index];
-		}
-	}
+	if (module.startup)
+		module.startup();
 
+	g_modules.push_back(module);
 	CloseHandle(handle);
-	return nullptr;
+	return &g_modules[g_modules.size()];
 }
 
 GEModuleIndex GEGetNewModuleIndex()
@@ -40,6 +33,6 @@ GEModuleIndex GEGetNewModuleIndex()
 
 void GEUnloadModule(GeModule module)
 {
-	module.unload_func(&module);
-
+	if (module.unload)
+		module.unload();
 }

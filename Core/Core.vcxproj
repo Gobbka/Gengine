@@ -162,6 +162,7 @@
     <ClInclude Include="FS\FSObject.h" />
     <ClInclude Include="GEModule\GEModuleCommon.h" />
     <ClInclude Include="GEModule\GEModuleLoader.h" />
+    <ClInclude Include="GEStream.h" />
     <ClInclude Include="Loaders\AssetsLoader.h" />
     <ClInclude Include="Logger\Logger.h" />
     <ClInclude Include="Types\Colors.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="FS\FSFile.cpp" />
     <ClCompile Include="FS\FSObject.cpp" />
     <ClCompile Include="GEModule\GEModuleLoader.cpp" />
+    <ClCompile Include="GEStream.cpp" />
     <ClCompile Include="Loaders\AssetsLoader.cpp" />
     <ClCompile Include="Types\Material.cpp" />
     <ClCompile Include="Types\Transform.cpp" />

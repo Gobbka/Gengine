@@ -22,15 +22,15 @@
 
 void debugger_loop()
 {
-	const auto* server = PipeServer::create(LR"(\\.\pipe\GENGINE_DBG)");
+	// const auto* server = PipeServer::create(LR"(\\.\pipe\GENGINE_DBG)");
 
-	while(true)
-	{
-        char* buffer;
-        server->receive(&buffer);
+	//while(true)
+	//{
+ //       char* buffer;
+ //       server->receive(&buffer);
 
-        std::cout << "[DBG]" << buffer << '\n';
-	}
+ //       std::cout << "[DBG]" << buffer << '\n';
+	//}
 }
 
 int WINAPI wWinMain(
@@ -53,7 +53,7 @@ int WINAPI wWinMain(
     	form->get_ui()->window_proc(msg, wp, lp);
     };
 	
-    auto* stone_texture = context->get_device()->create_texture(AssetsLoader::load_png(L"assets\\Pebbles_027_BaseColor.png"));
+    auto* stone_texture = context->get_device()->create_texture(AssetsLoader::load_png(L"assets\\nigga.png"));
     auto* stone_texture_normals = context->get_device()->create_texture(AssetsLoader::load_png(L"assets\\Pebbles_027_Normal.png"));
     auto* workbench_texture = context->get_device()->create_texture(AssetsLoader::load_png(L"assets\\workspace_background.png"));
     auto* red_texture = context->get_device()->create_texture(Render::Material(Color3XM::from_rgb(255,50,50)));

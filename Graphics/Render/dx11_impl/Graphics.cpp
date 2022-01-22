@@ -76,7 +76,7 @@ Render::Scene* Render::DX11Graphics::create_empty_scene()
 Render::Scene* Render::DX11Graphics::create_scene_3d()
 {
 	auto* scene = create_empty_scene();
-	auto &pipeline = scene->render_pipeline();
+	auto& pipeline = scene->render_pipeline();
 
 	pipeline.add_pass(new ClearPass(this), Render::PassStep::begin);
 	pipeline.add_pass(new DrawSkyboxPass(this), Render::PassStep::begin);

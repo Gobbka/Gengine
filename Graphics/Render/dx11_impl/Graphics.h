@@ -19,35 +19,35 @@ namespace Render
 		Surface _screen_resolution;
 		
 		IDXGISwapChain* _swap;
-		Render::DX11RenderTarget _targetView;
+		DX11RenderTarget _targetView;
 
-		Render::GESamplerState* _samplerState;
+		GESamplerState* _samplerState;
 
-		Render::IGDevice* _gdevice;
-		Render::IGContext* _gcontext;
+		IGDevice* _gdevice;
+		IGContext* _gcontext;
 	private:
 		
-		Render::SpriteEngine* _spriteEngine;
+		SpriteEngine* _spriteEngine;
 		
 	public:
 		DX11Graphics(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 		~DX11Graphics();
 
 		ShaderCollection shader_collection;
-		Render::DepthStencilStatesCollection dss_collection;
+		DepthStencilStatesCollection dss_collection;
 
-		Render::Scene* create_empty_scene();
-		Render::Scene* create_scene_3d();
-		std::vector<Render::Scene*> scenes;
-		Render::Scene* main_scene;
+		Scene* create_empty_scene();
+		Scene* create_scene_3d();
+		std::vector<Scene*> scenes;
+		Scene* main_scene;
 		
-		Render::SpriteEngine* get_sprite_engine() const;
+		SpriteEngine* get_sprite_engine() const;
 		
 		Surface get_screen_resolution() const;
-		inline Render::GERenderTarget* get_render_target_view();
+		inline GERenderTarget* get_render_target_view();
 
-		inline Render::IGDevice* get_device() const;
-		inline Render::IGContext* get_context() const;
+		inline IGDevice* get_device() const;
+		inline IGContext* get_context() const;
 	public:
 		void set_resolution(Surface new_resolution);
 

@@ -186,6 +186,9 @@
     <ClInclude Include="Graphics.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\Commander.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Render\dx11_impl\Graphics.cpp">
@@ -282,6 +285,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Que\DrawSkyboxPass\DrawSkyboxPass.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Commander.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

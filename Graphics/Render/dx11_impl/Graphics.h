@@ -7,6 +7,7 @@
 #include "../../Graphics/ShaderCollection.h"
 #include "../Common/RenderTarget.h"
 #include "../Common/SpriteEngine.h"
+#include "../../Graphics/Commander.h"
 
 namespace Render
 {
@@ -28,13 +29,13 @@ namespace Render
 	private:
 		
 		SpriteEngine* _spriteEngine;
-		
 	public:
 		DX11Graphics(ID3D11Device*, IDXGISwapChain*, ID3D11DeviceContext*);
 		~DX11Graphics();
 
 		ShaderCollection shader_collection;
 		DepthStencilStatesCollection dss_collection;
+		Commander* commander;
 
 		Scene* create_empty_scene();
 		Scene* create_scene_3d();

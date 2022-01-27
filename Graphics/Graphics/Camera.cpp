@@ -1,7 +1,5 @@
 #include "Camera.h"
 
-#include <algorithm>
-
 #include "../Render/Common/RenderTarget.h"
 #include "Types/Types.h"
 #include "../Graphics.h"

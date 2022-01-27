@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Graphics\Commander.h" />
     <ClInclude Include="Render\dx11_impl\Graphics.h" />
     <ClInclude Include="GraphicsBuildSettings.h" />
     <ClInclude Include="Graphics\Components\GameEntityComponent.h" />
@@ -210,6 +211,7 @@
     <ClInclude Include="Render\Viewer\WorldViewer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Graphics\Commander.cpp" />
     <ClCompile Include="Render\dx11_impl\Graphics.cpp" />
     <ClCompile Include="Graphics\DepthStencilStatesCollection.cpp" />
     <ClCompile Include="Render\dx11_impl\D11GContext.cpp" />

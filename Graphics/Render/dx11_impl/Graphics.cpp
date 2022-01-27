@@ -29,6 +29,7 @@ Render::DX11Graphics::DX11Graphics(ID3D11Device* dev, IDXGISwapChain* swap, ID3D
 	, _spriteEngine(new SpriteEngine(this))
 	, shader_collection(this)
 	, dss_collection(this)
+	, commander(new Commander(this))
 	, main_scene(nullptr)
 {
 	set_resolution(_targetView.get_texture()->resolution());

@@ -3,7 +3,6 @@
 #include "../../Camera.h"
 #include "../../Components/MeshRenderer.h"
 #include "../../../Render/Common/IGContext.h"
-#include "../../../Render/d3d/Buffer/ConstantBuffer.h"
 #include "../../Components/LightViewer.h"
 
 void Render::CreateNormalsMapPass::execute(Scene* scene)
@@ -14,6 +13,7 @@ void Render::CreateNormalsMapPass::execute(Scene* scene)
 
 	gcontext->debug_message("CreateNormalMapPass executed");
 	commander->nm_begin();
+	commander->render_begin();
 
 	world->each<LightViewer, Camera>([&](ECS::Entity* ent, ECS::ComponentHandle<LightViewer> nrt, ECS::ComponentHandle<Camera> cam)
 		{
@@ -21,17 +21,10 @@ void Render::CreateNormalsMapPass::execute(Scene* scene)
 			nrt->normals_map.clear();
 
 			gcontext->set_mask_engine(cam->get_mask_engine());
+			commander->bind_camera_matrix(cam.get_ptr());
 
-			// do stuff here
-			auto world_matrix = cam->world_to_screen_matrix();
 			world->each<MeshRenderer>([&](ECS::Entity* ent, ECS::ComponentHandle<MeshRenderer>component)
 				{
-					auto modelMatrix = component->transform.get_world_matrix();
-					auto final_matrix = DirectX::XMMatrixMultiplyTranspose(modelMatrix, world_matrix);
-					gcontext->matrix_buffer.data.MVPMatrix = final_matrix;
-					gcontext->matrix_buffer.data.ModelMatrix = DirectX::XMMatrixTranspose(modelMatrix);
-					gcontext->matrix_buffer.update();
-
 					for (Mesh mesh : component->meshes)
 					{
 						if (component->normals)
@@ -43,7 +36,7 @@ void Render::CreateNormalsMapPass::execute(Scene* scene)
 							commander->nm_solid_mode();
 						}
 
-						commander->draw_mesh(mesh);
+						commander->draw_mesh(mesh,component->transform.get_world_matrix());
 					}
 				});
 		});

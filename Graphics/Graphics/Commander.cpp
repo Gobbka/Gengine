@@ -43,6 +43,11 @@ void Render::Commander::bind_camera(Camera* camera)
 	_vp_matrix = camera->world_to_screen_matrix();
 }
 
+void Render::Commander::bind_camera_matrix(Camera* camera)
+{
+	_vp_matrix = camera->world_to_screen_matrix();
+}
+
 void Render::Commander::draw_mesh(Mesh& mesh)
 {
 	auto* gcontext = _gfx->get_context();

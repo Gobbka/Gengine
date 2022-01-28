@@ -33,6 +33,7 @@ namespace Render {
 
 		void render_begin();
 		void bind_camera(Camera* camera);
+		void bind_camera_matrix(Camera* camera);
 		void draw_mesh(Mesh& mesh);
 		void draw_mesh(Mesh& mesh, DirectX::XMMATRIX model_matrix);
 	};

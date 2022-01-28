@@ -11,7 +11,7 @@
 class DrawUIPass : public Render::IPass
 {
 	Render::GEGraphics* _context;
-
+	Render::ConstantBuffer<Render::MVPStruct> _mvp_struct;
 public:
 	void execute(Render::Scene*scene) override
 	{
@@ -22,10 +22,11 @@ public:
 		auto* gcontext = _context->get_context();
 		gcontext->debug_message("DrawUIPass executed");
 		gcontext->set_topology(PrimitiveTopology::TRIANGLELIST);
-		gcontext->matrix_buffer.data.MVPMatrix = DirectX::XMMatrixTranspose(
+		_mvp_struct.data.MVPMatrix = XMMatrixTranspose(
 			DirectX::XMMatrixOrthographicLH(resolution.width,resolution.height,0.0,1.f) * DirectX::XMMatrixTranslation(-1,1,0)
 		);
-		gcontext->matrix_buffer.update();
+		_mvp_struct.update();
+		_mvp_struct.bind();
 		
 		auto* mask_engine = camera->get_mask_engine();
 
@@ -53,6 +54,7 @@ public:
 
 	DrawUIPass(Render::GEGraphics*context)
 		: _context(context)
+		, _mvp_struct(context,0)
 	{}
 };
 

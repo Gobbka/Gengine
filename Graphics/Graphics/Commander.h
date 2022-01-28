@@ -9,15 +9,15 @@ namespace Render {
 	template<typename T>
 	class ConstantBuffer;
 
+	__declspec(align(16))
+	struct MVPStruct
+	{
+		DirectX::XMMATRIX MVPMatrix;
+		DirectX::XMMATRIX ModelMatrix;
+	};
+
 	class Commander
 	{
-		__declspec(align(16))
-			struct MVPStruct
-		{
-			DirectX::XMMATRIX MVPMatrix;
-			DirectX::XMMATRIX ModelMatrix;
-		};
-
 
 		GEGraphics* _gfx;
 		PixelShader* _normals_ps;

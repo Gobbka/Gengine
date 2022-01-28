@@ -78,8 +78,6 @@ void Render::RenderMeshPass::execute(Scene*scene)
 	auto* gcontext = _context->get_context();
 	gcontext->debug_message("RenderMeshPass");
 
-	gcontext->matrix_buffer.bind();
-
 	_context->get_sprite_engine()->bind_texture(nullptr, 1);
 	execute_scene(scene);
 }

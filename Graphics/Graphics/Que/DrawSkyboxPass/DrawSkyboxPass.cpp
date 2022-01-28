@@ -9,15 +9,14 @@
 void Render::DrawSkyboxPass::execute(Scene*scene)
 {
 	auto* gcontext = _context->get_context();
+	auto* commander = _context->commander;
 	gcontext->debug_message("DrawSkyboxPass executed");
 	auto old_rasterizer = gcontext->get_rasterizer();
 
 	gcontext->set_rasterizer(_skybox_rasterizer);
-	gcontext->set_topology(_skybox_cube.topology);
 	gcontext->set_pixel_shader(_context->shader_collection.get<PixelShader>(L"d3d11\\texture_ps.cso"));
 
-	_skybox_cube.buffer->bind();
-	_skybox_cube.index_buffer->bind();
+	commander->render_begin();
 
 	auto* world = scene->world();
 
@@ -27,12 +26,11 @@ void Render::DrawSkyboxPass::execute(Scene*scene)
 
 			auto vp_matrix = cam->rotation_matrix() * cam->projection_matrix();
 			auto model_matrix = DirectX::XMMatrixTranslation(-.5f, .5f, -.5f);
-			gcontext->matrix_buffer.data.ModelMatrix = DirectX::XMMatrixTranspose(model_matrix);
-			gcontext->matrix_buffer.data.MVPMatrix = DirectX::XMMatrixMultiplyTranspose(model_matrix, vp_matrix);
-			gcontext->matrix_buffer.update();
+			commander->bind_camera(cam.get_ptr(), vp_matrix);
 
 			gcontext->set_shader_resource(skybox->sky_texture, 0);
-			gcontext->draw_indexed(_skybox_cube.index_buffer->get_size());
+
+			commander->draw_mesh(_skybox_cube,model_matrix);
 		});
 
 	gcontext->set_rasterizer(old_rasterizer);

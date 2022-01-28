@@ -43,6 +43,12 @@ void Render::Commander::bind_camera(Camera* camera)
 	_vp_matrix = camera->world_to_screen_matrix();
 }
 
+void Render::Commander::bind_camera(Camera* camera, DirectX::XMMATRIX vp_matrix)
+{
+	camera->bind();
+	_vp_matrix = vp_matrix;
+}
+
 void Render::Commander::bind_camera_matrix(Camera* camera)
 {
 	_vp_matrix = camera->world_to_screen_matrix();
@@ -62,7 +68,7 @@ void Render::Commander::draw_mesh(Mesh& mesh)
 void Render::Commander::draw_mesh(Mesh& mesh, DirectX::XMMATRIX model_matrix)
 {
 	_mvp_buffer->data.ModelMatrix = XMMatrixTranspose(model_matrix);
-	_mvp_buffer->data.MVPMatrix = DirectX::XMMatrixMultiplyTranspose(model_matrix , _vp_matrix);
+	_mvp_buffer->data.MVPMatrix = XMMatrixMultiplyTranspose(model_matrix , _vp_matrix);
 	_mvp_buffer->update();
 
 	draw_mesh(mesh);

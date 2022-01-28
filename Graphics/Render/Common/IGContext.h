@@ -15,8 +15,8 @@ namespace Render
 	{
 	protected:
 		IGContext(GEGraphics* context)
-			: matrix_buffer(context),
-			control_buffer(context,1,CBBindFlag_vs | CBBindFlag_ps)
+			: matrix_buffer(context)
+			//control_buffer(context,1,CBBindFlag_vs | CBBindFlag_ps)
 		{}
 	public:
 		virtual ~IGContext() = default;
@@ -27,16 +27,9 @@ namespace Render
 			DirectX::XMMATRIX MVPMatrix;
 			DirectX::XMMATRIX ModelMatrix;
 		};
-
-		__declspec(align(16))
-		struct ControlBufferStruct
-		{
-			float opacity = 1.f;
-		};
 		
 	public:
 		ConstantBuffer<MatrixBufferStruct> matrix_buffer;
-		ConstantBuffer<ControlBufferStruct> control_buffer;
 
 		virtual void debug_message(const char* message) =0;
 

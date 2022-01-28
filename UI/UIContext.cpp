@@ -26,9 +26,6 @@ public:
 			DirectX::XMMatrixOrthographicLH(resolution.width,resolution.height,0.0,1.f) * DirectX::XMMatrixTranslation(-1,1,0)
 		);
 		gcontext->matrix_buffer.update();
-
-		gcontext->control_buffer.data.opacity = 1.f;
-		gcontext->control_buffer.update();
 		
 		auto* mask_engine = camera->get_mask_engine();
 

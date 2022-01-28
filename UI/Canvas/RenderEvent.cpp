@@ -29,11 +29,6 @@ BYTE Render::DrawEvent2D::mask_get_stencil_layer() const
 void Render::DrawEvent2D::set_alpha(float alpha) const
 {
 	auto* context = _context->get_context();
-	if(context->control_buffer.data.opacity != alpha)
-	{
-		context->control_buffer.data.opacity = alpha;
-		context->control_buffer.update();
-	}
 }
 
 Render::DrawEvent2D::DrawEvent2D(GEGraphics* ctx, Canvas::DrawData* de)

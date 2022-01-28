@@ -11,6 +11,7 @@
 void Render::CreateShadowMapPass::execute(Scene*scene)
 {
 	auto* gcontext = _context->get_context();
+	auto* commander = _context->commander;
 	gcontext->debug_message("CreateShadowMapPass");
 	auto* old_ps = gcontext->get_pixel_shader();
 
@@ -27,17 +28,12 @@ void Render::CreateShadowMapPass::execute(Scene*scene)
 			scene->world()->each<MeshRenderer>([&](ECS::Entity* ent, ECS::ComponentHandle<MeshRenderer>component)
 				{
 					auto modelMatrix = component->transform.get_world_matrix();
-					auto final_matrix = DirectX::XMMatrixMultiplyTranspose(modelMatrix, world_matrix);
-					gcontext->matrix_buffer.data.MVPMatrix = final_matrix;
-					gcontext->matrix_buffer.data.ModelMatrix = DirectX::XMMatrixTranspose(modelMatrix);
-					gcontext->matrix_buffer.update();
 
-					for (const auto mesh : component->meshes)
+					commander->bind_camera(nullptr, world_matrix);
+
+					for (Mesh mesh : component->meshes)
 					{
-						mesh.index_buffer->bind();
-						mesh.buffer->bind();
-						gcontext->set_topology(mesh.topology);
-						gcontext->draw_indexed(mesh.index_buffer->get_size());
+						commander->draw_mesh(mesh,modelMatrix);
 					}
 				});
 		});

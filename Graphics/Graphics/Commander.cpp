@@ -45,7 +45,8 @@ void Render::Commander::bind_camera(Camera* camera)
 
 void Render::Commander::bind_camera(Camera* camera, DirectX::XMMATRIX vp_matrix)
 {
-	camera->bind();
+	if(camera)
+		camera->bind();
 	_vp_matrix = vp_matrix;
 }
 

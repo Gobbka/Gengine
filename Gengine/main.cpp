@@ -94,7 +94,8 @@ int WINAPI wWinMain(
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - time);
 
         form->main_scene->world()->tick(1.f/(float)duration.count());
-		
+        cube->get<Render::MeshRenderer>()->transform.adjust_position(Position3(0.01f, 0, 0));
+
         time = now;
 	}
 }

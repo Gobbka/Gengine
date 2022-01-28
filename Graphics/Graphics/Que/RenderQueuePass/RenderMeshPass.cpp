@@ -19,29 +19,14 @@ void Render::ClearPass::execute(Scene*scene)
 		});
 }
 
-void Render::RenderMeshPass::render_model(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<MeshRenderer> model, DirectX::XMMATRIX VPMatrix) const
-{
-	auto* gcontext = _context->get_context();
-	const auto model_matrix = model->transform.get_world_matrix();
-	gcontext->matrix_buffer.data.MVPMatrix = DirectX::XMMatrixTranspose(model_matrix * VPMatrix);
-	gcontext->matrix_buffer.data.ModelMatrix = DirectX::XMMatrixTranspose(model_matrix);
-	gcontext->matrix_buffer.update();
-	
-	for(const auto mesh : model->meshes)
-	{
-		mesh.index_buffer->bind();
-		mesh.buffer->bind();
-		gcontext->set_topology(mesh.topology);
-		gcontext->draw_indexed(mesh.index_buffer->get_size());
-	}
-}
-
 inline void Render::RenderMeshPass::render_camera(ECS::ComponentHandle<Camera> camera,ECS::ComponentHandle<LightViewer>lview, ECS::World* world)
 {
-	camera->bind();
+	auto* commander = _context->commander;
+
+	commander->render_begin();
+	commander->bind_camera(camera.get_ptr());
 	_context->dss_collection[(DSBitSet)DepthStencilUsage::depth_equal].bind();
 
-	auto world_to_screen = camera->world_to_screen_matrix();
 	auto* sprite_engine = camera->get_graphics()->get_sprite_engine();
 
 	sprite_engine->begin_sprite_mode(true);
@@ -49,12 +34,16 @@ inline void Render::RenderMeshPass::render_camera(ECS::ComponentHandle<Camera> c
 	world->each<MeshRenderer>([&](ECS::Entity* ent, ECS::ComponentHandle<MeshRenderer> model)
 		{
 			sprite_engine->bind_texture(model->texture,0);
-			render_model(camera, model, world_to_screen);
+			
+			for(Mesh mesh : model->meshes)
+			{
+				commander->draw_mesh(mesh, model->transform.get_world_matrix());
+			}
 		}
 	);
 }
 
-inline void Render::RenderMeshPass::execute_scene(Render::Scene* scene)
+inline void Render::RenderMeshPass::execute_scene(Scene* scene)
 {
 	auto main_camera_id = scene->get_main_camera()->getEntityId();
 	ECS::ComponentHandle<Camera> hMainCamera;

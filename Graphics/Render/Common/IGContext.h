@@ -22,14 +22,14 @@ namespace Render
 		virtual ~IGContext() = default;
 
 		__declspec(align(16))
-			struct MatrixBufferStruct
+		struct MatrixBufferStruct
 		{
 			DirectX::XMMATRIX MVPMatrix;
 			DirectX::XMMATRIX ModelMatrix;
 		};
 
 		__declspec(align(16))
-			struct ControlBufferStruct
+		struct ControlBufferStruct
 		{
 			float opacity = 1.f;
 		};

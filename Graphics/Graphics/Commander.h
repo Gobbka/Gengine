@@ -12,8 +12,8 @@ namespace Render {
 	__declspec(align(16))
 	struct MVPStruct
 	{
-		DirectX::XMMATRIX MVPMatrix;
-		DirectX::XMMATRIX ModelMatrix;
+		GEMatrix MVPMatrix;
+		GEMatrix ModelMatrix;
 	};
 
 	class Commander
@@ -23,7 +23,7 @@ namespace Render {
 		PixelShader* _normals_ps;
 		PixelShader* _normals_texture_ps;
 		ConstantBuffer<MVPStruct>* _mvp_buffer;
-		DirectX::XMMATRIX _vp_matrix;
+		GEMatrix _vp_matrix;
 	public:
 		Commander(GEGraphics* gfx);
 
@@ -33,9 +33,8 @@ namespace Render {
 
 		void render_begin();
 		void bind_camera(Camera* camera);
-		void bind_camera(Camera* camera,DirectX::XMMATRIX vp_matrix);
-		void bind_camera_matrix(Camera* camera);
+		void bind_camera(Camera* camera,GEMatrix vp_matrix);
 		void draw_mesh(Mesh& mesh);
-		void draw_mesh(Mesh& mesh, DirectX::XMMATRIX model_matrix);
+		void draw_mesh(Mesh& mesh,GEMatrix model_matrix);
 	};
 }

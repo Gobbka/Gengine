@@ -2,6 +2,7 @@
 #include "../../GraphicsBuildSettings.h"
 
 #ifdef DRAW_LIBRARY_DX11
+#include <DirectXMath.h>
 
 namespace Render
 {
@@ -24,6 +25,8 @@ namespace Render
 	typedef DX11SamplerState GESamplerState;
 	typedef DX11DepthStencil GEDepthStencil;
 	typedef DX11Graphics GEGraphics;
+
+	typedef DirectX::XMMATRIX GEMatrix;
 }
 
 #endif

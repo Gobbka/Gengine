@@ -19,6 +19,7 @@ UI::Text::Text(Render::SpriteFont* font, const wchar_t* text,Position2 position)
 	, _vbuffer(nullptr)
 	, _ibuffer(nullptr)
 	, _position(position)
+	, _resolution(0,0)
 	, font(font)
 {
 	set_text(text);
@@ -30,6 +31,7 @@ UI::Text::Text(Text&& other) noexcept
 	, _vbuffer(other._vbuffer)
 	, _ibuffer(other._ibuffer)
 	, _position(other._position)
+	, _resolution(0,0)
 	, font(other.font)
 {
 	other.font = nullptr;
@@ -68,6 +70,7 @@ UI::Text::~Text()
 void UI::Text::set_text(const wchar_t* text)
 {
 	_length = wcslen(text);
+	_resolution.width = 0;
 
 	delete _vbuffer;
 	delete _ibuffer;
@@ -139,7 +142,11 @@ void UI::Text::set_text(const wchar_t* text)
 		{
 			write_pos.x += 8;
 		}
+
+		_resolution.width = max(_resolution.width, write_pos.x + glyphResolution.x);
 	}
+
+	_resolution.height = write_pos.y;
 }
 
 void UI::Text::set_position(Position2 pos)
@@ -196,7 +203,7 @@ UI::ElementDescription UI::Text::get_desc()
 
 Surface UI::Text::get_resolution()
 {
-	return { 0,0 };
+	return _resolution;
 }
 
 bool UI::Text::point_belongs(Position2 point)

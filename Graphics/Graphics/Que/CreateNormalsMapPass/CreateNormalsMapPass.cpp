@@ -21,7 +21,7 @@ void Render::CreateNormalsMapPass::execute(Scene* scene)
 			nrt->normals_map.clear();
 
 			gcontext->set_mask_engine(cam->get_mask_engine());
-			commander->bind_camera_matrix(cam.get_ptr());
+			commander->bind_camera(nullptr,cam->world_to_screen_matrix());
 
 			world->each<MeshRenderer>([&](ECS::Entity* ent, ECS::ComponentHandle<MeshRenderer>component)
 				{

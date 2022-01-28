@@ -13,6 +13,7 @@ Render::Commander::Commander(GEGraphics* gfx)
 	, _normals_ps(_gfx->shader_collection.get<PixelShader>(L"d3d11\\normals_ps.cso"))
 	, _normals_texture_ps(_gfx->shader_collection.get<PixelShader>(L"d3d11\\normals_texture_ps.cso"))
 	, _mvp_buffer(new ConstantBuffer<MVPStruct>(gfx,0))
+	, _vp_matrix(DirectX::XMMatrixIdentity())
 {
 }
 
@@ -43,16 +44,11 @@ void Render::Commander::bind_camera(Camera* camera)
 	_vp_matrix = camera->world_to_screen_matrix();
 }
 
-void Render::Commander::bind_camera(Camera* camera, DirectX::XMMATRIX vp_matrix)
+void Render::Commander::bind_camera(Camera* camera, GEMatrix vp_matrix)
 {
 	if(camera)
 		camera->bind();
 	_vp_matrix = vp_matrix;
-}
-
-void Render::Commander::bind_camera_matrix(Camera* camera)
-{
-	_vp_matrix = camera->world_to_screen_matrix();
 }
 
 void Render::Commander::draw_mesh(Mesh& mesh)
@@ -66,7 +62,7 @@ void Render::Commander::draw_mesh(Mesh& mesh)
 	gcontext->draw_indexed(mesh.index_buffer->get_size());
 }
 
-void Render::Commander::draw_mesh(Mesh& mesh, DirectX::XMMATRIX model_matrix)
+void Render::Commander::draw_mesh(Mesh& mesh, GEMatrix model_matrix)
 {
 	_mvp_buffer->data.ModelMatrix = XMMatrixTranspose(model_matrix);
 	_mvp_buffer->data.MVPMatrix = XMMatrixMultiplyTranspose(model_matrix , _vp_matrix);

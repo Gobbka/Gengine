@@ -24,6 +24,7 @@ namespace UI
 		unsigned* _ibuffer;
 
 		Position2 _position;
+		Surface _resolution;
 	public:
 		Render::SpriteFont* font;
 

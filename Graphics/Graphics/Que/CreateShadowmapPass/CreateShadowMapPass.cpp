@@ -3,7 +3,6 @@
 #include "../../Components/MeshRenderer.h"
 #include "../../../Graphics.h"
 #include "../../../Render/Common/IGContext.h"
-#include "../../../Render/Common/IndexBuffer.h"
 #include "../../../Graphics/Components/DirectionLightComponent.h"
 #include "../../Mesh.h"
 

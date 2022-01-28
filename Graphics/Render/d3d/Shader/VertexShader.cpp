@@ -3,6 +3,7 @@
 #include <d3dcompiler.h>
 #include "../../../Render/Common/IGContext.h"
 #include "../../../Graphics.h"
+#include "Logger/Logger.h"
 
 void Render::VertexShader::construct(ID3DBlob* shader_blob)
 {

@@ -54,7 +54,7 @@ int WINAPI wWinMain(
     };
 	
     auto* stone_texture = context->get_device()->create_texture(AssetsLoader::load_png(L"assets\\nigga.png"));
-    auto* stone_texture_normals = context->get_device()->create_texture(AssetsLoader::load_png(L"assets\\Pebbles_027_Normal.png"));
+    auto* stone_texture_normals = context->get_device()->create_texture(AssetsLoader::load_png(L"assets\\nigga_normal.png"));
     auto* workbench_texture = context->get_device()->create_texture(AssetsLoader::load_png(L"assets\\workspace_background.png"));
     auto* red_texture = context->get_device()->create_texture(Render::Material(Color3XM::from_rgb(255,50,50)));
 
@@ -94,6 +94,7 @@ int WINAPI wWinMain(
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - time);
 
         form->main_scene->world()->tick(1.f/(float)duration.count());
+        //cube->get<Render::MeshRenderer>()->transform.adjust_position({ 0.01f,0,0 });
 
         time = now;
 	}

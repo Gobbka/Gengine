@@ -1,5 +1,4 @@
 #pragma once
-#include <DirectXMath.h>
 #include "../IPass/IPass.h"
 #include "../../Scene.h"
 
@@ -9,7 +8,7 @@ namespace Render
 	class MeshRenderer;
 	class Camera;
 
-	class ClearPass : public IPass
+	class __declspec(dllexport) ClearPass : public IPass
 	{
 		GEGraphics* _context;
 		void execute(Scene*scene) override;

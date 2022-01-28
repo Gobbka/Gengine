@@ -4,6 +4,7 @@
 #include "UIContext.h"
 #include "Window/WindowsManager.h"
 #include "../../resource.h"
+#include "Graphics/Que/RenderQueuePass/RenderMeshPass.h"
 
 void GE::Form::handle_resize(Surface rect)
 {
@@ -23,6 +24,7 @@ GE::Form::Form(const wchar_t*name,HINSTANCE hinst, UINT width, UINT height)
     //pipeline.clear(Render::PassStep::draw);
 	pipeline.clear(Render::PassStep::probe);
 	pipeline.clear(Render::PassStep::begin);
+    pipeline.add_pass(new Render::ClearPass(_graphics), Render::PassStep::begin);
 }
 
 GE::Form::~Form()

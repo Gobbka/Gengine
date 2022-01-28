@@ -16,7 +16,6 @@ namespace UI {
 	class __declspec(dllexport) UIContext : public Interaction::WinIntEventHandler
 	{
 	private:
-		std::vector<InteractiveForm*> _forms;
 		Render::GEGraphics* _gfx;
 		Vector2 _cursor;
 	public:

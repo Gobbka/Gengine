@@ -53,19 +53,19 @@ InteractiveForm::InteractiveForm(Render::GEGraphics* pEngine, Position2* cursor_
 	, _cursor_position(cursor_position)
 {}
 
-Interaction::EventStatus InteractiveForm::on_mouse_move(MoveEvent move_event)
+EventStatus InteractiveForm::on_mouse_move(MoveEvent move_event)
 {
 	if (hidden())
-		return Interaction::EventStatus::none;
+		return EventStatus::none;
 
 	if (this->dragged)
 	{
 		auto new_pos = dragged->element->get_position() + move_event.delta;
 		this->dragged->element->set_position(new_pos);
-		return Interaction::EventStatus::handled;
+		return EventStatus::handled;
 	}
 
-	auto e_handled = Interaction::EventStatus::none;
+	auto e_handled = EventStatus::none;
 
 	for (auto i = _children.size(); i --> 0;)
 	{
@@ -73,7 +73,7 @@ Interaction::EventStatus InteractiveForm::on_mouse_move(MoveEvent move_event)
 		
 		if (
 			element->styles.display != ElementStyles::DisplayType::none &&
-			e_handled == Interaction::EventStatus::none &&
+			e_handled == EventStatus::none &&
 			element->point_belongs(move_event.absolute)
 			)
 		{
@@ -82,7 +82,7 @@ Interaction::EventStatus InteractiveForm::on_mouse_move(MoveEvent move_event)
 				element->handle_mouse_enter();
 			}
 			element->handle_mouse_move(move_event);
-			e_handled = Interaction::EventStatus::handled;
+			e_handled = EventStatus::handled;
 		}
 		else if (element->state.hovered == true)
 		{
@@ -93,30 +93,30 @@ Interaction::EventStatus InteractiveForm::on_mouse_move(MoveEvent move_event)
 	return e_handled;
 }
 
-Interaction::EventStatus InteractiveForm::on_mouse_scroll(short direction)
+EventStatus InteractiveForm::on_mouse_scroll(short direction)
 {
 	if (hidden())
-		return Interaction::EventStatus::none;
+		return EventStatus::none;
 	
 	foreach([direction](InteractiveElement* element)
 		{
 			if (element->state.hovered == true)
 				element->handle_mouse_scroll(direction);
 		});
-	return Interaction::EventStatus::none;
+	return EventStatus::none;
 }
 
-Interaction::EventStatus InteractiveForm::on_db_click()
+EventStatus InteractiveForm::on_db_click()
 {
 	if (hidden())
-		return Interaction::EventStatus::none;
+		return EventStatus::none;
 
 	foreach([](InteractiveElement* element)
 		{
 			if (element->state.hovered == true)
 				element->handle_db_click();
 		});
-	return Interaction::EventStatus::none;
+	return EventStatus::none;
 }
 
 bool InteractiveForm::hidden() const
@@ -148,10 +148,10 @@ void InteractiveForm::render()
 	_canvas.present();
 }
 
-Interaction::EventStatus InteractiveForm::on_lbmouse_up()
+EventStatus InteractiveForm::on_lbmouse_up()
 {
 	if (hidden())
-		return Interaction::EventStatus::none;
+		return EventStatus::none;
 
 	for(auto*element : _children)
 	{
@@ -161,13 +161,13 @@ Interaction::EventStatus InteractiveForm::on_lbmouse_up()
 
 	free_drag_move();
 
-	return Interaction::EventStatus::none;
+	return EventStatus::none;
 }
 
-Interaction::EventStatus InteractiveForm::on_lbmouse_down()
+EventStatus InteractiveForm::on_lbmouse_down()
 {
 	if (hidden())
-		return Interaction::EventStatus::none;
+		return EventStatus::none;
 
 	for(auto* element : _children)
 	{
@@ -175,6 +175,6 @@ Interaction::EventStatus InteractiveForm::on_lbmouse_down()
 			element->handle_mouse_down();
 	}
 
-	return Interaction::EventStatus::none;
+	return EventStatus::none;
 }
 

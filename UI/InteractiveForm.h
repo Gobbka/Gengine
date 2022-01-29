@@ -33,7 +33,7 @@ namespace UI {
 		Position2* _cursor_position;
 		DragStruct* dragged = nullptr;
 	public:
-		void foreach(std::function<void(UI::InteractiveElement* element)>callback);
+		void foreach(std::function<void(InteractiveElement* element)>callback);
 		void drag_move(InteractiveElement* element);
 		void free_drag_move();
 
@@ -44,11 +44,11 @@ namespace UI {
 		//InteractiveForm(InteractiveForm&& other) noexcept;
 		~InteractiveForm() = default;
 	public:
-		Interaction::EventStatus on_lbmouse_up();
-		Interaction::EventStatus on_lbmouse_down();
-		Interaction::EventStatus on_mouse_move(MoveEvent move_event);
-		Interaction::EventStatus on_mouse_scroll(short direction);
-		Interaction::EventStatus on_db_click();
+		EventStatus on_lbmouse_up();
+		EventStatus on_lbmouse_down();
+		EventStatus on_mouse_move(MoveEvent move_event);
+		EventStatus on_mouse_scroll(short direction);
+		EventStatus on_db_click();
 
 		bool hidden() const;
 		void show();

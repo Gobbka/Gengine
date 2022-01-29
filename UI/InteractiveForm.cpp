@@ -7,9 +7,9 @@
 
 using namespace UI;
 
-void InteractiveForm::foreach(std::function<void(UI::InteractiveElement* element)> callback)
+void InteractiveForm::foreach(std::function<void(InteractiveElement* element)> callback)
 {
-	for(auto*element:this->_children)
+	for(auto* element : _children)
 		callback(element);
 }
 
@@ -31,16 +31,16 @@ void InteractiveForm::free_drag_move()
 	dragged = nullptr;
 }
 
-bool InteractiveForm::has_element(UI::InteractiveElement* element)
+bool InteractiveForm::has_element(InteractiveElement* element)
 {
-	for (auto* in_element : this->_children)
+	for (auto* in_element : _children)
 		if (element == in_element)
 			return true;
 	return false;
 }
 
 
-InteractiveForm* InteractiveForm::add_element(UI::InteractiveElement* element)
+InteractiveForm* InteractiveForm::add_element(InteractiveElement* element)
 {
 	_children.push_back(element);
 
@@ -67,9 +67,9 @@ Interaction::EventStatus InteractiveForm::on_mouse_move(MoveEvent move_event)
 
 	auto e_handled = Interaction::EventStatus::none;
 
-	for (auto i = this->_children.size(); i --> 0;)
+	for (auto i = _children.size(); i --> 0;)
 	{
-		auto* element = this->_children[i];
+		auto* element = _children[i];
 		
 		if (
 			element->styles.display != ElementStyles::DisplayType::none &&
@@ -98,7 +98,7 @@ Interaction::EventStatus InteractiveForm::on_mouse_scroll(short direction)
 	if (hidden())
 		return Interaction::EventStatus::none;
 	
-	foreach([direction](UI::InteractiveElement* element)
+	foreach([direction](InteractiveElement* element)
 		{
 			if (element->state.hovered == true)
 				element->handle_mouse_scroll(direction);
@@ -111,7 +111,7 @@ Interaction::EventStatus InteractiveForm::on_db_click()
 	if (hidden())
 		return Interaction::EventStatus::none;
 
-	foreach([](UI::InteractiveElement* element)
+	foreach([](InteractiveElement* element)
 		{
 			if (element->state.hovered == true)
 				element->handle_db_click();
@@ -139,7 +139,7 @@ void InteractiveForm::render()
 	auto* de = _canvas.begin();
 	Render::DrawEvent2D event(_canvas.gfx(),de);
 
-	for (auto* element : this->_children)
+	for (auto* element : _children)
 	{
 		if (element->styles.display != ElementStyles::DisplayType::none)
 			element->draw(&event);
@@ -152,14 +152,14 @@ Interaction::EventStatus InteractiveForm::on_lbmouse_up()
 {
 	if (hidden())
 		return Interaction::EventStatus::none;
-	
-	this->foreach([](UI::InteractiveElement* element)
-		{
-			if (element->state.hovered == true)
-				element->handle_mouse_up();
-		});
 
-	this->free_drag_move();
+	for(auto*element : _children)
+	{
+		if (element->state.hovered == true)
+			element->handle_mouse_up();
+	}
+
+	free_drag_move();
 
 	return Interaction::EventStatus::none;
 }
@@ -168,12 +168,13 @@ Interaction::EventStatus InteractiveForm::on_lbmouse_down()
 {
 	if (hidden())
 		return Interaction::EventStatus::none;
-	
-	this->foreach([](UI::InteractiveElement* element)
-		{
-			if (element->state.hovered == true)
-				element->handle_mouse_down();
-		});
+
+	for(auto* element : _children)
+	{
+		if (element->state.hovered == true)
+			element->handle_mouse_down();
+	}
+
 	return Interaction::EventStatus::none;
 }
 

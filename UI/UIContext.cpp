@@ -15,12 +15,13 @@ class DrawUIPass : public Render::IPass
 public:
 	void execute(Render::Scene*scene) override
 	{
-		auto* camera = scene->get_main_camera()->get<Render::Camera>().get_ptr();
-		camera->bind();
-
-		auto resolution = camera->get_view_resolution();
 		auto* gcontext = _context->get_context();
 		gcontext->debug_message("DrawUIPass executed");
+
+		auto* camera = scene->get_main_camera()->get<Render::Camera>().get_ptr();
+		camera->bind();
+		auto resolution = camera->get_view_resolution();
+
 		gcontext->set_topology(PrimitiveTopology::TRIANGLELIST);
 		_mvp_struct.data.MVPMatrix = XMMatrixTranspose(
 			DirectX::XMMatrixOrthographicLH(resolution.width,resolution.height,0.0,1.f) * DirectX::XMMatrixTranslation(-1,1,0)

@@ -7,7 +7,7 @@
 
 using namespace UI;
 
-void InteractiveForm::foreach(std::function<void(InteractiveElement* element)> callback)
+void InteractiveForm::foreach(std::function<void(InteractiveElement* element)> callback) const
 {
 	for(auto* element : _children)
 		callback(element);
@@ -20,18 +20,18 @@ void InteractiveForm::drag_move(InteractiveElement* element)
 
 	pos.y *= -1;
 	cursor -= pos;
-	dragged = new DragStruct{ cursor ,element};
+	_dragged = new DragStruct{ cursor ,element};
 }
 
 void InteractiveForm::free_drag_move()
 {
-	if (dragged == nullptr) return;
+	if (_dragged == nullptr) return;
 
-	delete dragged;
-	dragged = nullptr;
+	delete _dragged;
+	_dragged = nullptr;
 }
 
-bool InteractiveForm::has_element(InteractiveElement* element)
+bool InteractiveForm::has_element(InteractiveElement* element) const
 {
 	for (auto* in_element : _children)
 		if (element == in_element)
@@ -53,15 +53,15 @@ InteractiveForm::InteractiveForm(Render::GEGraphics* pEngine, Position2* cursor_
 	, _cursor_position(cursor_position)
 {}
 
-EventStatus InteractiveForm::on_mouse_move(MoveEvent move_event)
+EventStatus InteractiveForm::on_mouse_move(MoveEvent move_event) const
 {
 	if (hidden())
 		return EventStatus::none;
 
-	if (this->dragged)
+	if (_dragged)
 	{
-		auto new_pos = dragged->element->get_position() + move_event.delta;
-		this->dragged->element->set_position(new_pos);
+		const auto new_pos = _dragged->element->get_position() + move_event.delta;
+		_dragged->element->set_position(new_pos);
 		return EventStatus::handled;
 	}
 
@@ -93,7 +93,7 @@ EventStatus InteractiveForm::on_mouse_move(MoveEvent move_event)
 	return e_handled;
 }
 
-EventStatus InteractiveForm::on_mouse_scroll(short direction)
+EventStatus InteractiveForm::on_mouse_scroll(short direction) const
 {
 	if (hidden())
 		return EventStatus::none;
@@ -106,7 +106,7 @@ EventStatus InteractiveForm::on_mouse_scroll(short direction)
 	return EventStatus::none;
 }
 
-EventStatus InteractiveForm::on_db_click()
+EventStatus InteractiveForm::on_db_click() const
 {
 	if (hidden())
 		return EventStatus::none;
@@ -164,7 +164,7 @@ EventStatus InteractiveForm::on_lbmouse_up()
 	return EventStatus::none;
 }
 
-EventStatus InteractiveForm::on_lbmouse_down()
+EventStatus InteractiveForm::on_lbmouse_down() const
 {
 	if (hidden())
 		return EventStatus::none;

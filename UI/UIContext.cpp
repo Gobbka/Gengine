@@ -28,8 +28,8 @@ public:
 		);
 		_mvp_struct.update();
 		_mvp_struct.bind();
-		
-		auto* mask_engine = camera->get_mask_engine();
+
+		const auto* mask_engine = camera->get_mask_engine();
 
 		_context->dss_collection[(Render::DSBitSet)Render::DepthStencilUsage::stencil_mask].bind(0);
 

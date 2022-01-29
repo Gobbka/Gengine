@@ -28,16 +28,16 @@ namespace UI {
 
 		Canvas::CanvasImpl _canvas;
 
-		std::vector<InteractiveElement*> _children;
+		std::vector<InteractiveElement*> _children{};
 
 		Position2* _cursor_position;
-		DragStruct* dragged = nullptr;
+		DragStruct* _dragged = nullptr;
 	public:
-		void foreach(std::function<void(InteractiveElement* element)>callback);
+		void foreach(std::function<void(InteractiveElement* element)>callback) const;
 		void drag_move(InteractiveElement* element);
 		void free_drag_move();
 
-		bool has_element(InteractiveElement* element);
+		bool has_element(InteractiveElement* element) const;
 		InteractiveForm* add_element(InteractiveElement* element);
 	public:
 		InteractiveForm(Render::GEGraphics* pEngine,Position2*cursor_position);
@@ -45,10 +45,10 @@ namespace UI {
 		~InteractiveForm() = default;
 	public:
 		EventStatus on_lbmouse_up();
-		EventStatus on_lbmouse_down();
-		EventStatus on_mouse_move(MoveEvent move_event);
-		EventStatus on_mouse_scroll(short direction);
-		EventStatus on_db_click();
+		EventStatus on_lbmouse_down() const;
+		EventStatus on_mouse_move(MoveEvent move_event) const;
+		EventStatus on_mouse_scroll(short direction) const;
+		EventStatus on_db_click() const;
 
 		bool hidden() const;
 		void show();

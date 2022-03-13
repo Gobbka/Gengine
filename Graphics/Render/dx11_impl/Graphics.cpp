@@ -1,7 +1,7 @@
 #include "Graphics.h"
 
 #include "D11GContext.h"
-#include "D11GDevice.h"
+#include "DX11Allocator.h"
 #include "../../Graphics/Que/CreateLightMapPass/CreateLightMapPass.h"
 #include "../../Graphics/Que/CreateNormalsMapPass/CreateNormalsmapPass.h"
 #include "../../Graphics/Que/DrawSkyboxPass/DrawSkyboxPass.h"
@@ -24,7 +24,7 @@ Render::DX11Graphics::DX11Graphics(ID3D11Device* dev, IDXGISwapChain* swap, ID3D
 	, _swap(swap)
 	, _targetView(this,swap)
 	, _samplerState(new GESamplerState(this))
-	, _gdevice(new D11GDevice(dev,this))
+	, _gdevice(new DX11Allocator(dev,this))
 	, _gcontext(new D11GContext(context,this))
 	, _spriteEngine(new SpriteEngine(this))
 	, shader_collection(this)
@@ -104,7 +104,7 @@ inline Render::GERenderTarget* Render::DX11Graphics::get_render_target_view()
 	return &_targetView;
 }
 
-inline Render::IGDevice* Render::DX11Graphics::get_device() const
+inline Render::IAllocator* Render::DX11Graphics::get_device() const
 {
 	return _gdevice;
 }

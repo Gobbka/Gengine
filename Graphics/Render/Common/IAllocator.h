@@ -3,18 +3,17 @@
 
 #include "GraphicsCommon.h"
 #include "IVertexBuffer.h"
-#include "../d3d/Vertex.h"
 #include "Rasterizer.h"
 #include "Texture.h"
 
 namespace Render
 {
-	class __declspec(dllexport) IGDevice
+	class __declspec(dllexport) IAllocator
 	{
 	protected:
 		virtual IVertexBuffer<char>* alloc_vertex_buffer_impl(void*data,UINT element_size, IVertexBufferDesc desc) = 0;
 	public:
-		virtual ~IGDevice() = default;
+		virtual ~IAllocator() = default;
 
 		template<typename T>
 		IVertexBuffer<T>* alloc_vertex_buffer(unsigned size, bool dynamic = true);
@@ -31,7 +30,7 @@ namespace Render
 	};
 
 	template <typename T>
-	IVertexBuffer<T>* IGDevice::alloc_vertex_buffer(unsigned size, bool dynamic)
+	IVertexBuffer<T>* IAllocator::alloc_vertex_buffer(unsigned size, bool dynamic)
 	{
 		IVertexBufferDesc buffer_desc;
 		buffer_desc.length = size;
@@ -43,14 +42,14 @@ namespace Render
 	}
 
 	template <typename T>
-	IVertexBuffer<T>* IGDevice::alloc_vertex_buffer(T* data, IVertexBufferDesc desc)
+	IVertexBuffer<T>* IAllocator::alloc_vertex_buffer(T* data, IVertexBufferDesc desc)
 	{
 		auto* buffer = (IVertexBuffer<T>*)alloc_vertex_buffer_impl(data, sizeof(T), desc);
 		buffer->stride_size = sizeof(T);
 		return buffer;
 	}
 
-	inline GETexture* IGDevice::create_texture(Material& material)
+	inline GETexture* IAllocator::create_texture(Material& material)
 	{
 		ITexture2DDesc desc;
 		desc.format = material.format;
@@ -62,7 +61,7 @@ namespace Render
 		return this->create_texture(desc);
 	}
 
-	inline GETexture* IGDevice::create_texture(Material material)
+	inline GETexture* IAllocator::create_texture(Material material)
 	{
 		ITexture2DDesc desc;
 		desc.format = material.format;

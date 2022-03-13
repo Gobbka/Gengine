@@ -6,7 +6,7 @@
 class BinaryReader;
 
 namespace Render {
-	class IGDevice;
+	class IAllocator;
 
 	struct Glyph
 	{
@@ -24,8 +24,8 @@ namespace Render {
 		wchar_t default_character;
 		GETexture* font_texture;
 
-		SpriteFont(IGDevice*device,BinaryReader& reader);
-		SpriteFont(IGDevice*device,const wchar_t*file_name);
+		SpriteFont(IAllocator*device,BinaryReader& reader);
+		SpriteFont(IAllocator*device,const wchar_t*file_name);
 		SpriteFont(SpriteFont&& other) noexcept;
 		SpriteFont& operator=(SpriteFont&& other) noexcept;
 

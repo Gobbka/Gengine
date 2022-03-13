@@ -93,10 +93,10 @@
     <ClInclude Include="Graphics\Que\IPass\Passer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Common\IGDevice.h">
+    <ClInclude Include="Render\Common\IAllocator.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Render\dx11_impl\D11GDevice.h">
+    <ClInclude Include="Render\dx11_impl\DX11Allocator.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Render\Common\IGContext.h">
@@ -254,7 +254,7 @@
     <ClCompile Include="Graphics\Que\IPass\Passer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Render\dx11_impl\D11GDevice.cpp">
+    <ClCompile Include="Render\dx11_impl\DX11Allocator.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Render\dx11_impl\D11GContext.cpp">

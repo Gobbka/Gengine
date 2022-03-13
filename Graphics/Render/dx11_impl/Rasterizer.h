@@ -4,7 +4,7 @@
 namespace Render
 {
 	class D11GContext;
-	class D11GDevice;
+	class DX11Allocator;
 
 	struct RasterizerDesc
 	{
@@ -18,7 +18,7 @@ namespace Render
 	class DX11Rasterizer
 	{
 		friend D11GContext;
-		friend D11GDevice;
+		friend DX11Allocator;
 
 		ID3D11RasterizerState* _rs;
 	

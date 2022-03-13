@@ -1,4 +1,4 @@
-#include "D11GDevice.h"
+#include "DX11Allocator.h"
 
 #include "BlendEngine.h"
 #include "../../Graphics.h"
@@ -21,7 +21,7 @@ D3D11_USAGE get_d11_usage(Render::IVertexBufferDesc::Usage usage)
 	throw std::exception("Unknown usage");
 }
 
-Render::IVertexBuffer<char>* Render::D11GDevice::alloc_vertex_buffer_impl(void* data, UINT element_size,
+Render::IVertexBuffer<char>* Render::DX11Allocator::alloc_vertex_buffer_impl(void* data, UINT element_size,
 	IVertexBufferDesc desc)
 {
 	D3D11_BUFFER_DESC vbuffer{
@@ -41,27 +41,27 @@ Render::IVertexBuffer<char>* Render::D11GDevice::alloc_vertex_buffer_impl(void* 
 	return new VertexBuffer(_gfx, (Vertex*)data, desc.length, buffer);
 }
 
-Render::D11GDevice::D11GDevice(ID3D11Device* device, GEGraphics* gfx)
+Render::DX11Allocator::DX11Allocator(ID3D11Device* device, GEGraphics* gfx)
 	: _device(device)
 	, _gfx(gfx)
 {}
 
-Render::GEIndexBuffer* Render::D11GDevice::alloc_index_buffer(unsigned size)
+Render::GEIndexBuffer* Render::DX11Allocator::alloc_index_buffer(unsigned size)
 {
 	return new GEIndexBuffer(_gfx, new UINT[size], size);
 }
 
-Render::GEIndexBuffer* Render::D11GDevice::alloc_index_buffer(void* data, unsigned size)
+Render::GEIndexBuffer* Render::DX11Allocator::alloc_index_buffer(void* data, unsigned size)
 {
 	return new GEIndexBuffer(_gfx, (UINT*)data, size);
 }
 
-Render::GETexture* Render::D11GDevice::create_texture(ITexture2DDesc desc)
+Render::GETexture* Render::DX11Allocator::create_texture(ITexture2DDesc desc)
 {
 	return new GETexture(_gfx, desc);
 }
 
-Render::GERasterizer Render::D11GDevice::create_rasterizer(RasterizerDesc desc)
+Render::GERasterizer Render::DX11Allocator::create_rasterizer(RasterizerDesc desc)
 {
 	ID3D11RasterizerState* rs=nullptr;
 	auto rsdesc = CD3D11_RASTERIZER_DESC(CD3D11_DEFAULT());

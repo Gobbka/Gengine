@@ -7,7 +7,7 @@
 
 static const char spriteFontMagic[] = "DXTKfont";
 
-Render::SpriteFont::SpriteFont(IGDevice* device,BinaryReader& reader)
+Render::SpriteFont::SpriteFont(IAllocator* device,BinaryReader& reader)
 {
     // Validate the header.
     for (char const* magic = spriteFontMagic; *magic; magic++)
@@ -53,7 +53,7 @@ Render::SpriteFont::SpriteFont(IGDevice* device,BinaryReader& reader)
     );
 }
 
-Render::SpriteFont::SpriteFont(IGDevice* device, const wchar_t* file_name)
+Render::SpriteFont::SpriteFont(IAllocator* device, const wchar_t* file_name)
 	: line_spacings(0)
 	, default_character(0)
 	, font_texture(nullptr)

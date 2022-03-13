@@ -1,7 +1,7 @@
  #pragma once
 #include <d3d11.h>
 
-#include "../Common/IGDevice.h"
+#include "../Common/IAllocator.h"
 #include "../../Graphics/DepthStencilStatesCollection.h"
 #include "../../Graphics/Scene.h"
 #include "../../Graphics/ShaderCollection.h"
@@ -24,7 +24,7 @@ namespace Render
 
 		GESamplerState* _samplerState;
 
-		IGDevice* _gdevice;
+		IAllocator* _gdevice;
 		IGContext* _gcontext;
 	private:
 		
@@ -47,7 +47,7 @@ namespace Render
 		Surface get_screen_resolution() const;
 		inline GERenderTarget* get_render_target_view();
 
-		inline IGDevice* get_device() const;
+		inline IAllocator* get_device() const;
 		inline IGContext* get_context() const;
 	public:
 		void set_resolution(Surface new_resolution);

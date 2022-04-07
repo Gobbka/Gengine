@@ -50,7 +50,7 @@ END
 // PNG
 //
 
-IDB_PNG1                PNG                     "C:\\Users\\Gobka\\source\\repos\\Gengine\\Resource\\Media\\icon.png"
+IDB_PNG1                PNG                     "C:\\Users\\nikit\\source\\repos\\Gengine\\Resource\\Media\\icon.png"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -60,9 +60,9 @@ IDB_PNG1                PNG                     "C:\\Users\\Gobka\\source\\repos
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1               ICON                    "C:\\Users\\Gobka\\source\\repos\\Gengine\\Resource\\Media\\icon.ico"
+IDI_ICON1               ICON                    "C:\\Users\\nikit\\source\\repos\\Gengine\\Resource\\Media\\icon.ico"
 
-IDI_ICON2               ICON                    "C:\\Users\\Gobka\\source\\repos\\Gengine\\Resource\\Media\\icon128.ico"
+IDI_ICON2               ICON                    "C:\\Users\\nikit\\source\\repos\\Gengine\\Resource\\Media\\icon128.ico"
 
 #endif    // Русский (Россия) resources
 /////////////////////////////////////////////////////////////////////////////

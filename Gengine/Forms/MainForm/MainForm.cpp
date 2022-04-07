@@ -71,7 +71,8 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	, _render_panel(new UI::Panel({ 250, -30 }, { 897, 500 }, nullptr))
 	, editorScene(get_graphics_context()->create_scene_3d())
 {
-	auto* font = new Render::SpriteFont(get_graphics_context()->get_device(), TEXT("visby.spritefont"));
+	auto font_reader = AssetsLoader::make_sprite_font(L"Visby Round CF", 18);
+	auto* font = new Render::SpriteFont(get_graphics_context()->get_device(), font_reader);
 
 	main_scene->register_system(new UI::HandleAnimationSystem());
 	

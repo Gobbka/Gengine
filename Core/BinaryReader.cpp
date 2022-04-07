@@ -5,10 +5,11 @@
 #include "FS/FSFile.h"
 
 BinaryReader::BinaryReader(_In_z_ wchar_t const* fileName) noexcept(false)
+	: mPos(nullptr)
+	, mEnd(nullptr)
+	, mOwnedData(nullptr)
 {
-	mOwnedData = nullptr;
-
-	size_t dataSize=0;
+	auto dataSize = 0ull;
 	const auto result = ReadEntireFile(fileName, &mOwnedData, &dataSize);
 
 	assert(result);
@@ -22,6 +23,16 @@ BinaryReader::BinaryReader(_In_reads_bytes_(dataSize) uint8_t const* dataBlob, s
 	mEnd(dataBlob + dataSize),
 	mOwnedData(nullptr)
 {}
+
+BinaryReader::BinaryReader(BinaryReader&& other) noexcept(true)
+	: mPos(other.mPos)
+	, mEnd(other.mEnd)
+	, mOwnedData(other.mOwnedData)
+{
+	other.mOwnedData = nullptr;
+	other.mPos = nullptr;
+	other.mEnd = nullptr;
+}
 
 char* BinaryReader::to_string()
 {

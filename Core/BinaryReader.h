@@ -14,6 +14,7 @@ public:
     BinaryReader(_In_reads_bytes_(dataSize) uint8_t const* dataBlob, size_t dataSize) noexcept;
 
     BinaryReader(BinaryReader const&) = delete;
+    BinaryReader(BinaryReader && other) noexcept(true);
 
     // Reads a single value.
     template<typename T> T const& Read()

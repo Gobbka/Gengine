@@ -3,6 +3,8 @@
 #include <FreeImage.h>
 #include "../BinaryReader.h"
 #include "../FS/FSFile.h"
+#include <sstream>
+#include <ostream>
 
 Render::Material AssetsLoader::material_from_png(BYTE*ptr,UINT size)
 {
@@ -48,4 +50,45 @@ Render::Material AssetsLoader::load_png_resource(const wchar_t* name,const wchar
 	}
 
 	throw std::exception("Cannot find resource");
+}
+
+BinaryReader AssetsLoader::make_sprite_font(const wchar_t* font_name,UINT font_size)
+{
+	STARTUPINFO info{ sizeof(info) };
+	PROCESS_INFORMATION process_info;
+	
+	std::wostringstream out_file_name_s;
+	out_file_name_s << font_name << "_" << font_size << L"px.tempfont";
+
+	std::wostringstream ofs;
+	ofs << L"cmd \"" << font_name << "\" \"" << out_file_name_s.str() << "\" /FontSize:"<<font_size;
+
+	const auto command = ofs.str();
+
+	if (
+		CreateProcess(
+			L"MakeSpriteFont.exe",
+			(LPWSTR)command.c_str(),
+			nullptr, 
+			nullptr, 
+			true, 
+			0, 
+			nullptr, 
+			nullptr,
+			&info, 
+			&process_info)
+		)
+	{
+		WaitForSingleObject(process_info.hProcess, INFINITE);
+		CloseHandle(process_info.hProcess);
+		CloseHandle(process_info.hThread);
+	}
+
+	auto file_name = out_file_name_s.str();
+	BinaryReader reader(file_name.c_str());
+
+	FS::FSFile file(out_file_name_s.str(),0,nullptr);
+	file.remove();
+
+	return std::move(reader);
 }

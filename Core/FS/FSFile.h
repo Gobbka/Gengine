@@ -11,5 +11,6 @@ namespace FS {
 		~FSFile() = default;
 
 		auto size() const { return _file_size; }
+		bool remove() const;
 	};
 }

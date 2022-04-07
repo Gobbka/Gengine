@@ -62,6 +62,11 @@ struct __declspec(dllexport) Surface {
 	{
 		return {(int)width, (int)height};
 	}
+
+	long square() const
+	{
+		return (long)width * (long)height;
+	}
 };
 
 typedef __declspec(dllexport) Vector2 Position2;

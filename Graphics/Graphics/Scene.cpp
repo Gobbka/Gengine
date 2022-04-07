@@ -61,7 +61,7 @@ ECS::Entity* Render::Scene::create_point_light(PointLightComponent light)
 
 ECS::Entity* Render::Scene::create_direction_light()
 {
-	auto ent = _world->create();
+	auto ent = create_entity();
 	ent->assign<DirectionLightComponent>(_graphics);
 	return ent;
 }

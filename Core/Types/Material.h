@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+
 #include "Types.h"
 
 namespace Render
@@ -25,6 +27,7 @@ namespace Render
 
 		explicit Material(Color3XM color);
 		Material(const BYTE* pSysMem, Surface resolution,bool alpha = true);
+		Material(Surface resolution, std::vector<Color3XM> colors);
 		Material(Material& other);
 		Material(Material&& other) noexcept;
 		Material& operator=(Material&& other) noexcept;

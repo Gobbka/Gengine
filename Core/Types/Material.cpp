@@ -2,32 +2,33 @@
 #include "Types.h"
 
 Render::Material::Material(const BYTE* pSysMem, const Surface resolution,bool alpha)
-	: _pSysMem(nullptr),
-	_resolution(resolution)
+	: _pSysMem(nullptr)
+	, _resolution(resolution)
 {
-	const auto res_int = resolution.to_vector2int();
-	const auto square = res_int.x * res_int.y * 4;
+	const auto square = resolution.square() * 4;
 
 	_pSysMem = new BYTE[square];
 	memcpy(_pSysMem, pSysMem, square);
 }
 
-Render::Material::Material(Material& other)
-	:
-	_resolution(other._resolution)
+Render::Material::Material(Surface resolution, std::vector<Color3XM> colors)
+	: _pSysMem(new BYTE[resolution.square() * 4])
+	, _resolution(resolution)
 {
-	const auto resolution_int = _resolution.to_vector2int();
-	const auto square = (resolution_int.x * resolution_int.y) * 4;
+}
+
+Render::Material::Material(Material& other)
+	: _resolution(other._resolution)
+{
+	const auto square = _resolution.square() * 4;
 	_pSysMem = new BYTE[square];
 	memcpy(_pSysMem, other._pSysMem, square);
 }
 
 Render::Material::Material(Material&& other) noexcept
-	:
-	_resolution(other._resolution)
+	: _pSysMem(other._pSysMem)
+	, _resolution(other._resolution)
 {
-	_pSysMem = other._pSysMem;
-
 	other._pSysMem = nullptr;
 	other._resolution = Surface(0, 0);
 }
@@ -48,14 +49,14 @@ Render::Material& Render::Material::operator=(Material&& other) noexcept
 }
 
 Render::Material::Material(Color3XM color)
-	: _resolution(1,1)
+	: _pSysMem(new BYTE[4])
+	, _resolution(1,1)
+	, format(DXGI_FORMAT_R8G8B8A8_UNORM)
 {
-	_pSysMem = new BYTE[4];
 	_pSysMem[0] = (BYTE)(color.r * 255.f);
 	_pSysMem[1] = (BYTE)(color.g * 255.f);
 	_pSysMem[2] = (BYTE)(color.b * 255.f);
 	_pSysMem[3] = 255;
-	format = DXGI_FORMAT_R8G8B8A8_UNORM;
 }
 
 Render::Material::~Material()
@@ -69,7 +70,7 @@ void Render::Material::swap_channels(RGBChannel _first, RGBChannel _second) cons
 	
 	const auto first = (UINT)_first;
 	const auto second = (UINT)_second;
-	const auto square = (int)(_resolution.width * _resolution.height);
+	const auto square = _resolution.square();
 
 	for(auto i = 0;i < square;i++)
 	{

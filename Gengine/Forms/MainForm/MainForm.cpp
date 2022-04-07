@@ -57,8 +57,6 @@ namespace UI
 			SetCursor(LoadCursor(0, IDC_ARROW));
 			Panel::handle_mouse_leave();
 		}
-		
-		
 	};
 }
 

@@ -3,7 +3,7 @@
 #include <Graphics.h>
 #include <Render/Common/IGContext.h>
 #include <Graphics/Camera.h>
-#include <Render/d3d/Buffer/ConstantBuffer.h>
+#include <Render/Common/ConstantBuffer.h>
 #include <Render/d3d/Shader/VertexShader.h>
 #include "InteractiveForm.h"
 #include "Canvas/Vertex2D.h"
@@ -23,7 +23,7 @@ public:
 		auto resolution = camera->get_view_resolution();
 
 		gcontext->set_topology(PrimitiveTopology::TRIANGLELIST);
-		_mvp_struct.data.MVPMatrix = XMMatrixTranspose(
+		_mvp_struct.data()->MVPMatrix = XMMatrixTranspose(
 			DirectX::XMMatrixOrthographicLH(resolution.width,resolution.height,0.0,1.f) * DirectX::XMMatrixTranslation(-1,1,0)
 		);
 		_mvp_struct.update();

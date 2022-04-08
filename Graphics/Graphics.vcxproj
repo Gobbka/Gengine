@@ -153,6 +153,8 @@
   <ItemGroup>
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Graphics\Commander.h" />
+    <ClInclude Include="Render\Common\ConstantBuffer.h" />
+    <ClInclude Include="Render\dx11_impl\DX11ConstantBuffer.h" />
     <ClInclude Include="Render\dx11_impl\Graphics.h" />
     <ClInclude Include="GraphicsBuildSettings.h" />
     <ClInclude Include="Graphics\Components\GameEntityComponent.h" />
@@ -187,7 +189,6 @@
     <ClInclude Include="Graphics\SpriteFont.h" />
     <ClInclude Include="Render\Common\IGContext.h" />
     <ClInclude Include="Render\Common\IAllocator.h" />
-    <ClInclude Include="Render\d3d\Buffer\ConstantBuffer.h" />
     <ClInclude Include="Render\dx11_impl\IndexBuffer.h" />
     <ClInclude Include="Render\dx11_impl\Texture.h" />
     <ClInclude Include="Render\d3d\Buffer\VertexBuffer.h" />
@@ -212,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics\Commander.cpp" />
+    <ClCompile Include="Render\dx11_impl\DX11ConstantBuffer.cpp" />
     <ClCompile Include="Render\dx11_impl\Graphics.cpp" />
     <ClCompile Include="Graphics\DepthStencilStatesCollection.cpp" />
     <ClCompile Include="Render\dx11_impl\D11GContext.cpp" />

@@ -7,7 +7,6 @@
 #include "../../Components/PointLightComponent.h"
 #include "../../Components/MeshRenderer.h"
 
-
 void Render::CreateLightMapPass::execute(Scene*scene)
 {
 	auto* world = scene->world();
@@ -31,8 +30,8 @@ void Render::CreateLightMapPass::execute(Scene*scene)
 
 		world->each<PointLightComponent>([&](ECS::Entity* ent, ECS::ComponentHandle<PointLightComponent> plight)
 		{
-			_light_struct.data.pos = plight->position;
-			_light_struct.data.intensity = plight->intensity;
+			_light_struct.data()->pos = plight->position;
+			_light_struct.data()->intensity = plight->intensity;
 			_light_struct.update();
 
 			world->each<MeshRenderer>([&](ECS::Entity* entity, ECS::ComponentHandle<MeshRenderer>rendered)

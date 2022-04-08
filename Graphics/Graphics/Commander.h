@@ -1,13 +1,12 @@
 ﻿#pragma once
 #include <DirectXMath.h>
 #include "../Render/Common/GraphicsCommon.h"
+#include "../Render/Common/ConstantBuffer.h"
 
 namespace Render {
 	class Camera;
 	struct Mesh;
 	class PixelShader;
-	template<typename T>
-	class ConstantBuffer;
 
 	__declspec(align(16))
 	struct MVPStruct
@@ -18,11 +17,10 @@ namespace Render {
 
 	class Commander
 	{
-
 		GEGraphics* _gfx;
 		PixelShader* _normals_ps;
 		PixelShader* _normals_texture_ps;
-		ConstantBuffer<MVPStruct>* _mvp_buffer;
+		ConstantBuffer<MVPStruct> _mvp_buffer;
 		GEMatrix _vp_matrix;
 	public:
 		Commander(GEGraphics* gfx);

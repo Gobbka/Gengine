@@ -6,13 +6,13 @@
 #include "../Render/Common/Graphics.h"
 #include "../Render/Common/IGContext.h"
 #include "../Render/Common/IndexBuffer.h"
-#include "../Render/d3d/Buffer/ConstantBuffer.h"
+#include "../Render/Common/ConstantBuffer.h"
 
 Render::Commander::Commander(GEGraphics* gfx)
 	: _gfx(gfx)
 	, _normals_ps(_gfx->shader_collection.get<PixelShader>(L"d3d11\\normals_ps.cso"))
 	, _normals_texture_ps(_gfx->shader_collection.get<PixelShader>(L"d3d11\\normals_texture_ps.cso"))
-	, _mvp_buffer(new ConstantBuffer<MVPStruct>(gfx,0))
+	, _mvp_buffer(gfx,0)
 	, _vp_matrix(DirectX::XMMatrixIdentity())
 {
 }
@@ -35,7 +35,7 @@ void Render::Commander::nm_texture_mode(GETexture* normals)
 
 void Render::Commander::render_begin()
 {
-	_mvp_buffer->bind();
+	_mvp_buffer.bind();
 }
 
 void Render::Commander::bind_camera(Camera* camera)
@@ -64,9 +64,9 @@ void Render::Commander::draw_mesh(Mesh& mesh)
 
 void Render::Commander::draw_mesh(Mesh& mesh, GEMatrix model_matrix)
 {
-	_mvp_buffer->data.ModelMatrix = XMMatrixTranspose(model_matrix);
-	_mvp_buffer->data.MVPMatrix = XMMatrixMultiplyTranspose(model_matrix , _vp_matrix);
-	_mvp_buffer->update();
+	_mvp_buffer.data()->ModelMatrix = XMMatrixTranspose(model_matrix);
+	_mvp_buffer.data()->MVPMatrix = XMMatrixMultiplyTranspose(model_matrix, _vp_matrix);
+	_mvp_buffer.update();
 
 	draw_mesh(mesh);
 }

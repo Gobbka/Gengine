@@ -2,7 +2,8 @@
 #include "../IPass/IPass.h"
 #include "../../Mesh.h"
 #include "Types/Types.h"
-#include "../../../Render/d3d/Buffer/ConstantBuffer.h"
+#include "../../../Render/Common/GraphicsCommon.h"
+#include "../../../Render/Common/ConstantBuffer.h"
 
 namespace Render
 {

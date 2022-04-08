@@ -15,6 +15,9 @@ namespace Render
 	class DX11SamplerState;
 	class DX11DepthStencil;
 	class DX11Graphics;
+	class DX11ConstantBuffer;
+	template<typename T>
+	class ConstantBuffer;
 
 	typedef DX11Texture GETexture;
 	typedef DX11MaskEngine GEMaskEngine;
@@ -25,6 +28,7 @@ namespace Render
 	typedef DX11SamplerState GESamplerState;
 	typedef DX11DepthStencil GEDepthStencil;
 	typedef DX11Graphics GEGraphics;
+	typedef DX11ConstantBuffer GEConstantBuffer;
 
 	typedef DirectX::XMMATRIX GEMatrix;
 }

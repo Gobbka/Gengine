@@ -3,18 +3,11 @@
 
 #include "InteractiveElement.h"
 
-namespace Application {
-	namespace Render {
-		class Text;
-	}
-}
-
 namespace UI
 {
-
 	class __declspec(dllexport) ChildrenCollection {
 	protected:
-		std::vector<UI::InteractiveElement*> _children;
+		std::vector<InteractiveElement*> _children;
 
 	public:
 
@@ -25,11 +18,11 @@ namespace UI
 
 		size_t count() const;
 
-		UI::InteractiveElement* operator[](UINT index);
+		InteractiveElement* operator[](UINT index);
 
 		InteractiveElement* last();
 
-		void append(UI::InteractiveElement* child);
+		void append(InteractiveElement* child);
 
 	};
 
@@ -54,6 +47,7 @@ namespace UI
 
 		void draw(Render::DrawEvent2D* event) override;
 		void move_by(Position2 move) override;
+		void set_position(Position2 pos) override;
 
 		InteractiveElement* element_at(UINT index);
 

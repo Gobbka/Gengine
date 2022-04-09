@@ -84,7 +84,8 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_worldspace_panel->add_element(new UI::Button({ 0,0 }, { 0,50 }, { RGB_TO_FLOAT(48,48,48) }, font, L"Create nigger"));
 
 	auto* tree = new UI::Tree(font, { 0,0 });
-	tree->add_item(L"Nigger");
+	tree->add_item(L"Ya debil");
+	tree->add_item(L"Yes ofc");
 	_worldspace_panel->add_element(tree);
 
 	_assets_panel_wrapper->add_element(

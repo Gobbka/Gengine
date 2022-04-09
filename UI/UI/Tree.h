@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <vector>
 
+#include "FlexColumnPanel.h"
 #include "../IElement/InteractiveElement.h"
 #include "Text.h"
 
@@ -15,8 +16,7 @@ namespace UI
 		TreeItem& operator=(TreeItem const& item);
 	};
 
-	class __declspec(dllexport) Tree final : public InteractiveElement {
-		Position2 _position;
+	class __declspec(dllexport) Tree final : public FlexColumnPanel {
 		Render::SpriteFont* _font;
 		std::vector<TreeItem> _items{};
 	public:
@@ -24,14 +24,6 @@ namespace UI
 
 		void add_item(const wchar_t* name);
 
-		void set_position(Position2 pos) override;
-		void set_resolution(Surface surface) override;
-		void set_texture(Render::GETexture* texture) override;
-		void move_by(Position2) override;
-		void draw(Render::DrawEvent2D* event) override;
-		Position2 get_position() override;
 		ElementDescription get_desc() override;
-		Surface get_resolution() override;
-		bool point_belongs(Position2 point) override;
 	};
 }

@@ -156,15 +156,13 @@ void UI::Text::set_text(const wchar_t* text)
 		}
 
 		_resolution.width = max(_resolution.width, write_pos.x + glyphResolution.x);
+		_resolution.height = abs(write_pos.y) + glyphResolution.y;
 	}
-
-	_resolution.height = write_pos.y;
 }
 
 void UI::Text::set_position(Position2 pos)
 {
-	const auto diff = pos - _position;
-	move_by(diff);
+	move_by(pos - _position);
 }
 
 void UI::Text::set_resolution(Surface surface)

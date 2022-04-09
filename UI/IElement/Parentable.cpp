@@ -146,7 +146,15 @@ void UI::Parent::move_by(Position2 pos)
 	}
 }
 
- UI::InteractiveElement* UI::Parent::element_at(UINT index)
+void UI::Parent::set_position(Position2 pos)
+{
+	for (auto* element : _children)
+	{
+		element->set_position(pos);
+	}
+}
+
+UI::InteractiveElement* UI::Parent::element_at(UINT index)
 {
 	return this->_children[index];
 }

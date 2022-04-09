@@ -83,6 +83,8 @@ bool UI::FlexColumnPanel::point_belongs(Position2 point)
 
 void UI::FlexColumnPanel::set_position(Position2 pos)
 {
+	move_by(pos - _position);
+
 	_position = pos;
 }
 
@@ -90,7 +92,7 @@ void UI::FlexColumnPanel::move_by(Position2 pos)
 {
 	_position += pos;
 
-	UI::Parent::move_by(pos);
+	Parent::move_by(pos);
 }
 
 void UI::FlexColumnPanel::set_texture(Render::GETexture* texture)

@@ -3,7 +3,7 @@
 
 namespace UI
 {
-	class __declspec(dllexport) Checkbox final : public ::UI::InteractiveElement
+	class __declspec(dllexport) Checkbox final : public InteractiveElement
 	{
 		void draw(Render::DrawEvent2D* event) override;
 
@@ -18,8 +18,8 @@ namespace UI
 		bool is_checked() const;
 		ElementDescription get_desc() override;
 
-		Checkbox(Position2 position, Surface resolution, Color3XM color,bool*value);
-		Checkbox(Position2 position, Surface resolution,bool*value);
+		Checkbox(Position2 position, Surface resolution, Color3XM color, bool*value);
+		Checkbox(Position2 position, Surface resolution, bool*value);
 
 		void set_position(Position2 position) override;
 

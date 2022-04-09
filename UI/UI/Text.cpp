@@ -15,7 +15,7 @@ UINT text_indices[]
 
 UI::Text::Text(Render::SpriteFont* font, const wchar_t* text,Position2 position)
 	: _length(0)
-	, _text(nullptr)
+	, _text(text)
 	, _vbuffer(nullptr)
 	, _ibuffer(nullptr)
 	, _position(position)
@@ -38,6 +38,18 @@ UI::Text::Text(Text&& other) noexcept
 	other._vbuffer = nullptr;
 	other._ibuffer = nullptr;
 	other._text = nullptr;
+}
+
+UI::Text::Text(Text const& copy)
+	: _length(copy._length)
+	, _text(copy._text)
+	, _vbuffer(nullptr)
+	, _ibuffer(nullptr)
+	, _position(copy._position)
+	, _resolution(copy._resolution)
+	, font(copy.font)
+{
+	set_text(_text);
 }
 
 UI::Text& UI::Text::operator=(Text&& other) noexcept

@@ -30,6 +30,7 @@ namespace UI
 
 		Text(Render::SpriteFont* font,const wchar_t*text,Position2 pos);
 		Text(Text&& other) noexcept;
+		Text(Text const& copy);
 		Text& operator=(Text&& other) noexcept;
 		~Text() override;
 

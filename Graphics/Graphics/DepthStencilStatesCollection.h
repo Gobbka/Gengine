@@ -9,7 +9,7 @@ namespace Render {
 	{
 		depth = 0b1,
 		depth_equal = 0b10,
-		stencil_normal = (DSBitSet)StencilUsage::normal << 2,
+		stencil_normal = (DSBitSet)StencilUsage::ignore << 2,
 		stencil_write = (DSBitSet)StencilUsage::write << 2,
 		stencil_mask = (DSBitSet)StencilUsage::mask << 2,
 	};

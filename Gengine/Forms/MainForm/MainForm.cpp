@@ -72,7 +72,9 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	, editorScene(get_graphics_context()->create_scene_3d())
 {
 	auto font_reader = AssetsLoader::make_sprite_font(L"Visby Round CF", 18);
-	auto* font = new Render::SpriteFont(get_graphics_context()->get_device(), font_reader);
+	auto* visby_18 = new Render::SpriteFont(get_graphics_context()->get_device(), font_reader);
+	font_reader = AssetsLoader::make_sprite_font(L"Visby Round CF", 14);
+	auto* visby_14 = new Render::SpriteFont(get_graphics_context()->get_device(), font_reader);
 
 	main_scene->register_system(new UI::HandleAnimationSystem());
 	
@@ -81,17 +83,17 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 
 	auto uicanvas = get_ui()->create_layer()->get<UI::InteractiveForm>();
 
-	_worldspace_panel->add_element(new UI::Button({ 0,0 }, { 0,50 }, { RGB_TO_FLOAT(48,48,48) }, font, L"Create nigger"));
+	_worldspace_panel->add_element(new UI::Button({ 0,0 }, { 0,50 }, { RGB_TO_FLOAT(48,48,48) }, visby_18, L"Create nigger"));
 
-	auto* tree = new UI::Tree(font, { 0,0 });
+	auto* tree = new UI::Tree(visby_14, { 0,0 });
 	tree->add_item(L"Ya debil");
 	tree->add_item(L"Yes ofc");
 	_worldspace_panel->add_element(tree);
 
 	_assets_panel_wrapper->add_element(
 		(new UI::FlexRowPanel({ 0,0 }, { (float)width - 450,30 }, { RGB_TO_FLOAT(34,34,34) }))
-		->add_element(new UI::Button({ 0,0 }, { 70,30 }, { RGB_TO_FLOAT(34,34,34) }, font, L"Assets"))
-		->add_element(new UI::Button({ 0,0 }, { 80,30 }, { RGB_TO_FLOAT(34,34,34) }, font, L"Console"))
+		->add_element(new UI::Button({ 0,0 }, { 70,30 }, { RGB_TO_FLOAT(34,34,34) }, visby_18, L"Assets"))
+		->add_element(new UI::Button({ 0,0 }, { 80,30 }, { RGB_TO_FLOAT(34,34,34) }, visby_18, L"Console"))
 	);
 
 	_assets_panel_wrapper->add_element(_assets_panel);
@@ -107,7 +109,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 
 	_render_panel->set_texture(worldTexture->get_texture());
 
-	_topbar_panel->add_element(new UI::Button({ 0,0 }, { 50,30 }, { RGB_TO_FLOAT(34,34,34) }, font, L"Build"));
+	_topbar_panel->add_element(new UI::Button({ 0,0 }, { 50,30 }, { RGB_TO_FLOAT(34,34,34) }, visby_18, L"Build"));
 	
 	uicanvas
 		->add_element(_topbar_panel)

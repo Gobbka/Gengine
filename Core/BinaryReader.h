@@ -15,6 +15,7 @@ public:
 
     BinaryReader(BinaryReader const&) = delete;
     BinaryReader(BinaryReader && other) noexcept(true);
+    BinaryReader& operator=(BinaryReader&& other) noexcept;
 
     // Reads a single value.
     template<typename T> T const& Read()

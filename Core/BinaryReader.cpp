@@ -34,6 +34,21 @@ BinaryReader::BinaryReader(BinaryReader&& other) noexcept(true)
 	other.mEnd = nullptr;
 }
 
+BinaryReader& BinaryReader::operator=(BinaryReader&& other) noexcept
+{
+	if (mOwnedData != other.mOwnedData)
+		delete[] mOwnedData;
+	mOwnedData = other.mOwnedData;
+	mEnd = other.mEnd;
+	mPos = other.mPos;
+
+	other.mOwnedData = nullptr;
+	other.mEnd = nullptr;
+	other.mPos = nullptr;
+
+	return*this;
+}
+
 char* BinaryReader::to_string()
 {
 	char* new_ = new char[available()+1];

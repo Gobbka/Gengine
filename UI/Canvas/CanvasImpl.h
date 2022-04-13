@@ -14,6 +14,11 @@ namespace Canvas {
 		Render::IVertexBuffer<UI::Vertex2D>* _buffer;
 		Render::GEIndexBuffer* _ibuffer;
 		Render::GEGraphics* _context;
+
+		Render::GEDepthStencil _write_stencil;
+		Render::GEDepthStencil _discard_stencil;
+		Render::GEDepthStencil _ignore_stencil;
+		Render::GEMaskEngine* _mask_engine;
 	public:
 
 		DrawData* begin();

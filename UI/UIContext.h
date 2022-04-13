@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include <vector>
 #include "Ecs/Ecs.h"
 #include "Events/WinIntEventHandler.h"
 #include "Render/Common/GraphicsCommon.h"

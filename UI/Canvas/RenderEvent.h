@@ -25,6 +25,8 @@ namespace Render {
 	class CanvasDrawEvent
 	{
 		Canvas::DrawData* _draw_data;
+		StencilUsage _stencil_mode = StencilUsage::ignore;
+		unsigned char _stencil_layer = 0;
 	public:
 		CanvasDrawEvent(Canvas::DrawData* data);
 
@@ -32,20 +34,16 @@ namespace Render {
 
 		void draw_rect(Position2 pos,Surface resolution,Color3XM color) const;
 		void draw_rect(Position2 pos,Surface resolution, GETexture* texture) const;
+
+		StencilUsage stencil(StencilUsage mode);
+		void stencil_end(StencilUsage mode);
 	};
 
 	class DrawEvent2D final : public CanvasDrawEvent{
 
 		GEGraphics* _context;
-		UINT _stencil_layer = 0u;
 	public:
 		DrawEvent2D(GEGraphics*ctx,Canvas::DrawData*data);
-
-		void mask_draw_begin();
-		void mask_discard_begin(bool increase_layer = true);
-		void mask_discard_end(bool decrease_layer = true);
-		void mask_set_stencil(BYTE new_index);
-		BYTE mask_get_stencil_layer() const;
 
 		void set_alpha(float alpha) const;
 	};

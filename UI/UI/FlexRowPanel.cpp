@@ -40,19 +40,19 @@ void UI::FlexRowPanel::update_items()
 
 void UI::FlexRowPanel::draw(Render::DrawEvent2D* event)
 {
-
-	event->mask_draw_begin();
+	auto old_stencil = event->stencil(Render::StencilUsage::write);
 	event->set_alpha(this->alpha);
 
 	if (_texture)
 		event->draw_rect(_position, _resolution, _texture);
 	else
 		event->draw_rect(_position, _resolution, _color);
+	event->stencil_end(old_stencil);
 
+	event->stencil(Render::StencilUsage::mask);
 	event->set_alpha(1.f);
-	event->mask_discard_begin(false);
 	Parent::draw(event);
-	event->mask_discard_end(true);
+	event->stencil_end(old_stencil);
 
 	if (_scroll_bar_height < 1)
 	{

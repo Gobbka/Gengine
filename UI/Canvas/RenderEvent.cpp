@@ -3,29 +3,6 @@
 #include <Graphics.h>
 #include <Render/Common/IGContext.h>
 
-void Render::DrawEvent2D::mask_draw_begin()
-{
-}
-
-void Render::DrawEvent2D::mask_discard_begin(bool increase_layer)
-{
-}
-
-void Render::DrawEvent2D::mask_discard_end(bool decrease_layer)
-{
-
-}
-
-void Render::DrawEvent2D::mask_set_stencil(BYTE new_index)
-{
-	_stencil_layer = new_index;
-}
-
-BYTE Render::DrawEvent2D::mask_get_stencil_layer() const
-{
-	return _stencil_layer;
-}
-
 void Render::DrawEvent2D::set_alpha(float alpha) const
 {
 	auto* context = _context->get_context();
@@ -46,8 +23,8 @@ Render::EventDrawCmd Render::CanvasDrawEvent::new_draw_cmd(UINT vertices,UINT in
 
 	auto vertices_index = _draw_data->vertices.require(vertices);
 	auto indices_index = _draw_data->indices.require(indices);
-	
-	_draw_data->draw_list.push(Canvas::DrawCmd{ texture,indices_index,indices,vertices,vertices_index });
+
+	_draw_data->draw_list.push(Canvas::DrawCmd{ texture,indices_index,indices,vertices,vertices_index,_stencil_layer,_stencil_mode });
 	
 	return { _draw_data->vertices.at(vertices_index) , _draw_data->indices.at(indices_index) };
 }
@@ -83,4 +60,17 @@ void Render::CanvasDrawEvent::draw_rect(Position2 pos, Surface resolution, GETex
 	vertices[3] = UI::Vertex2D({ pos.x + resolution.width,pos.y - resolution.height }, color, { 1,1 });
 
 	memcpy(indices, rect_indices, sizeof(rect_indices));
+}
+
+Render::StencilUsage Render::CanvasDrawEvent::stencil(StencilUsage mode)
+{
+	_stencil_layer++;
+	_stencil_mode = mode;
+	return _stencil_mode;
+}
+
+void Render::CanvasDrawEvent::stencil_end(StencilUsage mode)
+{
+	_stencil_layer--;
+	_stencil_mode = mode;
 }

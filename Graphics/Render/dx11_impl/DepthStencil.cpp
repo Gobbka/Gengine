@@ -51,7 +51,7 @@ Render::DX11DepthStencil::DX11DepthStencil(GEGraphics* context, DepthStencilDesc
 		depthstencildesc.BackFace = create_depth_stencilop_desc(D3D11_COMPARISON_NEVER, D3D11_STENCIL_OP_KEEP);
 		depthstencildesc.FrontFace = create_depth_stencilop_desc(D3D11_COMPARISON_EQUAL, D3D11_STENCIL_OP_KEEP);
 		break;
-	case StencilUsage::normal:
+	case StencilUsage::ignore:
 		depthstencildesc.BackFace = create_depth_stencilop_desc(D3D11_COMPARISON_NEVER, D3D11_STENCIL_OP_KEEP);
 		depthstencildesc.FrontFace = create_depth_stencilop_desc(D3D11_COMPARISON_NEVER, D3D11_STENCIL_OP_KEEP);
 		break;

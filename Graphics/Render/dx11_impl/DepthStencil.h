@@ -7,7 +7,7 @@ namespace Render
 	enum class StencilUsage : __int8
 	{
 		none = 0,
-		normal = 1,
+		ignore = 1,
 		mask = 2,
 		write = 3
 	};
@@ -21,7 +21,7 @@ namespace Render
 
 	struct __declspec(dllexport) DepthStencilDesc {
 		DepthFunc depth = DepthFunc::depth_less;
-		StencilUsage stencil_usage = StencilUsage::normal;
+		StencilUsage stencil_usage = StencilUsage::ignore;
 		bool write = true;
 
 		DepthStencilDesc() = default;

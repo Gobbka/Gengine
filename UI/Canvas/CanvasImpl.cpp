@@ -40,7 +40,7 @@ void Canvas::CanvasImpl::present()
 	_mask_engine->clear_buffer();
 
 	Render::StencilUsage current_usage = Render::StencilUsage::mask;
-	_discard_stencil.bind(0);
+	//_discard_stencil.bind(0);
 
 	for(const auto draw_cmd : _drawData.draw_list)
 	{
@@ -48,11 +48,11 @@ void Canvas::CanvasImpl::present()
 		{
 			if(draw_cmd.stencil_usage == Render::StencilUsage::mask)
 			{
-				_discard_stencil.bind(draw_cmd.stencil_layer);
+				//_discard_stencil.bind(draw_cmd.stencil_layer);
 			}
 			if (draw_cmd.stencil_usage == Render::StencilUsage::write)
 			{
-				_write_stencil.bind(draw_cmd.stencil_layer);
+				//_write_stencil.bind(draw_cmd.stencil_layer);
 			}
 			current_usage = draw_cmd.stencil_usage;
 		}

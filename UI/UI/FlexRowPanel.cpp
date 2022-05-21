@@ -1,6 +1,7 @@
 #include "FlexRowPanel.h"
 
 #include "../Canvas/RenderEvent.h"
+#include "Logger/Logger.h"
 #include "Types/Types.h"
 
 void UI::FlexRowPanel::update_items()
@@ -47,12 +48,10 @@ void UI::FlexRowPanel::draw(Render::DrawEvent2D* event)
 		event->draw_rect(_position, _resolution, _texture);
 	else
 		event->draw_rect(_position, _resolution, _color);
-	event->stencil_end(old_stencil);
 
 	event->stencil(Render::StencilUsage::mask);
 	event->set_alpha(1.f);
 	Parent::draw(event);
-	event->stencil_end(old_stencil);
 
 	if (_scroll_bar_height < 1)
 	{
@@ -62,15 +61,15 @@ void UI::FlexRowPanel::draw(Render::DrawEvent2D* event)
 		const auto scroll_bar_width = 20;
 		const auto scroll_bar_height_px = resolution.height * _scroll_bar_height;
 
-		auto content_height = _resolution.height / _scroll_bar_height;
-
-
 		event->draw_rect(
 			{ position.x + resolution.width - scroll_bar_width - 5,position.y - _scroll_offset.y * _scroll_bar_height},
 			{ scroll_bar_width,scroll_bar_height_px },
 			Color3XM::from_rgb(62, 62, 62)
 		);
 	}
+
+	event->stencil_end(old_stencil);
+	event->stencil_end(old_stencil);
 }
 
 UI::ElementDescription UI::FlexRowPanel::get_desc()

@@ -28,7 +28,7 @@ void UI::FlexColumnPanel::draw(Render::DrawEvent2D* event)
 			event->draw_rect(_position, _resolution, _texture);
 		else
 			event->draw_rect(_position, _resolution, _color);
-		event->stencil_end(old_stencil);
+		//event->stencil_end(old_stencil);
 
 		event->stencil(Render::StencilUsage::mask);
 		event->set_alpha(1.f);

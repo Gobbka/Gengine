@@ -24,7 +24,16 @@ Render::EventDrawCmd Render::CanvasDrawEvent::new_draw_cmd(UINT vertices,UINT in
 	auto vertices_index = _draw_data->vertices.require(vertices);
 	auto indices_index = _draw_data->indices.require(indices);
 
-	_draw_data->draw_list.push(Canvas::DrawCmd{ texture,indices_index,indices,vertices,vertices_index,_stencil_layer,_stencil_mode });
+	auto stencil_layer = (unsigned char)(_stencil_layer >= 0 ? _stencil_layer : 0);
+		
+	_draw_data->draw_list.push(Canvas::DrawCmd{ 
+		texture,
+		indices_index,
+		indices,
+		vertices,
+		vertices_index,stencil_layer,
+		_stencil_mode
+	});
 	
 	return { _draw_data->vertices.at(vertices_index) , _draw_data->indices.at(indices_index) };
 }

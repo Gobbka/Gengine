@@ -26,7 +26,7 @@ namespace Render {
 	{
 		Canvas::DrawData* _draw_data;
 		StencilUsage _stencil_mode = StencilUsage::ignore;
-		unsigned char _stencil_layer = 0;
+		short _stencil_layer = -1;
 	public:
 		CanvasDrawEvent(Canvas::DrawData* data);
 

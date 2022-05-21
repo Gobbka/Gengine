@@ -153,6 +153,9 @@
   <ItemGroup>
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Graphics\Commander.h" />
+    <ClInclude Include="Graphics\Geometric\2D.h" />
+    <ClInclude Include="Graphics\Que\PostEffects\GEPostEffect.h" />
+    <ClInclude Include="Graphics\Que\PostEffects\SmoothPostEffect.h" />
     <ClInclude Include="Render\Common\ConstantBuffer.h" />
     <ClInclude Include="Render\dx11_impl\DX11ConstantBuffer.h" />
     <ClInclude Include="Render\dx11_impl\Graphics.h" />
@@ -213,6 +216,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics\Commander.cpp" />
+    <ClCompile Include="Graphics\Geometric\2D.cpp" />
+    <ClCompile Include="Graphics\Que\PostEffects\GEPostEffect.cpp" />
+    <ClCompile Include="Graphics\Que\PostEffects\SmoothPostEffect.cpp" />
     <ClCompile Include="Render\dx11_impl\DX11ConstantBuffer.cpp" />
     <ClCompile Include="Render\dx11_impl\Graphics.cpp" />
     <ClCompile Include="Graphics\DepthStencilStatesCollection.cpp" />

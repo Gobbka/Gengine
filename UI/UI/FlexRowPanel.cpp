@@ -1,40 +1,11 @@
 #include "FlexRowPanel.h"
 
 #include "../Canvas/RenderEvent.h"
-#include "Logger/Logger.h"
 #include "Types/Types.h"
 
 void UI::FlexRowPanel::update_items()
 {
-	float content_height = 0.f;
-	auto last_position = get_position();
-	auto own_position = get_position();
-
-	for(auto*element:*children())
-	{
-		auto element_res = element->get_resolution();
-
-		if(last_position.x + element_res.width > own_position.x + get_resolution().width)
-		{
-			element->set_position({ own_position.x,last_position.y - element_res.height });
-			last_position.x = own_position.x;
-			last_position.y -= element_res.height;
-		}else
-		{
-			element->set_position(last_position);
-
-			last_position.x += element_res.width;
-		}
-
-		content_height = last_position.y - element_res.height;
-	}
-
-	content_height -= own_position.y;
-
-	if (content_height * -1 > _resolution.height)
-	{
-		_height_ratio = _resolution.height / (content_height * -1);
-	}
+	_location_rule.place_on(get_position(), get_resolution());
 }
 
 void UI::FlexRowPanel::draw(Render::DrawEvent2D* event)
@@ -50,18 +21,19 @@ void UI::FlexRowPanel::draw(Render::DrawEvent2D* event)
 	event->stencil(Render::StencilUsage::mask);
 	event->set_alpha(1.f);
 	Parent::draw(event);
+	const auto height_ratio = _location_rule.height_ratio();
 
-	if (_height_ratio < 1)
+	if (height_ratio < 1)
 	{
 		auto resolution = get_resolution();
 		auto position = get_position();
 		// scroll bar width
 		constexpr auto sb_width = 20;
 		// scroll bar height
-		const auto sb_height = resolution.height * _height_ratio - 10;
+		const auto sb_height = resolution.height * height_ratio - 10;
 
 		event->draw_rect(
-			{ position.x + resolution.width - sb_width - 5,position.y - _scroll_offset.y * _height_ratio - 5},
+			{ position.x + resolution.width - sb_width - 5,position.y - _scroll_offset.y * height_ratio - 5},
 			{ sb_width,sb_height },
 			Color3XM::from_rgb(62, 62, 62)
 		);
@@ -82,9 +54,10 @@ UI::FlexRowPanel::FlexRowPanel(Vector2 position, Surface resolution, Render::GET
 	, _resolution(resolution)
 	, _texture(texture)
 	, _color(1, 1, 1)
-	, _height_ratio(1)
 	, _scroll_offset(0, 0)
-{}
+	, _location_rule(children())
+{
+}
 
 UI::FlexRowPanel::FlexRowPanel(Vector2 position, Surface resolution, Color3XM color)
 	: Parent(position)
@@ -92,9 +65,14 @@ UI::FlexRowPanel::FlexRowPanel(Vector2 position, Surface resolution, Color3XM co
 	, _resolution(resolution)
 	, _texture(nullptr)
 	, _color(color)
-	, _height_ratio(1)
 	, _scroll_offset(0,0)
-{}
+	, _location_rule(children())
+{
+}
+
+UI::FlexRowPanel::~FlexRowPanel()
+{
+}
 
 bool UI::FlexRowPanel::point_belongs(Position2 point)
 {
@@ -141,13 +119,14 @@ void UI::FlexRowPanel::set_resolution(Surface surface)
 
 void UI::FlexRowPanel::handle_mouse_scroll(int delta)
 {
-	if(_height_ratio >= 1)
+	const auto height_ratio = _location_rule.height_ratio();
+	if(height_ratio >= 1)
 	{
 		return;
 	}
 
 	auto fdelta = (float)delta;
-	const auto content_height = _resolution.height / _height_ratio;
+	const auto content_height = _resolution.height / height_ratio;
 	const auto height_different = content_height - _resolution.height;
 
 	if(_scroll_offset.y - fdelta > height_different)

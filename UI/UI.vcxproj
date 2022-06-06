@@ -172,6 +172,8 @@
     <ClCompile Include="Events\WinIntEventHandler.cpp" />
     <ClCompile Include="InteractiveForm.cpp" />
     <ClCompile Include="UIContext.cpp" />
+    <ClCompile Include="UI\Rules\FlexRule.cpp" />
+    <ClCompile Include="UI\Rules\ILocationRule.cpp" />
     <ClCompile Include="UI\Text.cpp" />
     <ClCompile Include="UI\Tree.cpp" />
   </ItemGroup>
@@ -194,6 +196,8 @@
     <ClInclude Include="InteractiveForm.h" />
     <ClInclude Include="UIContext.h" />
     <ClInclude Include="Canvas\Vertex2D.h" />
+    <ClInclude Include="UI\Rules\FlexRule.h" />
+    <ClInclude Include="UI\Rules\ILocationRule.h" />
     <ClInclude Include="UI\Text.h" />
     <ClInclude Include="UI\Tree.h" />
   </ItemGroup>

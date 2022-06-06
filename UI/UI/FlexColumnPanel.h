@@ -8,6 +8,7 @@ namespace UI {
 		Surface _resolution;
 		Render::GETexture* _texture;
 		Color3XM _color;
+		FlexRule _location_rule;
 
 		void update_items() override;
 	public:

@@ -8,9 +8,8 @@ namespace UI
 		Surface _resolution;
 		Render::GETexture* _texture;
 		Color3XM _color;
-		// panel height / inner content height
-		float _height_ratio;
 		Vector2 _scroll_offset;
+		FlexRule _location_rule;
 
 		void update_items() override;
 	public:
@@ -21,6 +20,7 @@ namespace UI
 
 		FlexRowPanel(Vector2 position, Surface resolution, Render::GETexture* texture);
 		FlexRowPanel(Vector2 position, Surface resolution, Color3XM color);
+		~FlexRowPanel() override;
 
 		bool point_belongs(Position2 point) override;
 		void set_position(Position2 pos) override;

@@ -2,6 +2,7 @@
 #include "functional"
 #include "Render/Common/Texture.h"
 #include "Types/Types.h"
+#include "../UI/Rules/FlexRule.h"
 
 namespace Render {
 	class DrawEvent2D;

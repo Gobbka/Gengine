@@ -5,16 +5,7 @@
 
 void UI::FlexColumnPanel::update_items()
 {
-	auto last_pos = get_position();
-
-	for(auto*element:*children())
-	{
-		element->set_position(Position2{ last_pos });
-		auto old_resolution = element->get_resolution();
-		element->set_resolution({ get_resolution().width,old_resolution.height });
-
-		last_pos.y -= old_resolution.height;
-	}
+	_location_rule.place_on(get_position(), get_resolution());
 }
 
 void UI::FlexColumnPanel::draw(Render::DrawEvent2D* event)
@@ -60,7 +51,10 @@ UI::FlexColumnPanel::FlexColumnPanel(Vector2 position, Surface resolution, Rende
 	, _resolution(resolution)
 	, _texture(texture)
 	, _color(1, 1, 1)
-{}
+	, _location_rule(children())
+{
+	_location_rule.direction = FlexDirection::Column;
+}
 
 UI::FlexColumnPanel::FlexColumnPanel(Vector2 position, Surface resolution, Color3XM color)
 	: Parent(position)
@@ -68,7 +62,10 @@ UI::FlexColumnPanel::FlexColumnPanel(Vector2 position, Surface resolution, Color
 	, _resolution(resolution)
 	, _texture(nullptr)
 	, _color(color)
-{}
+	, _location_rule(children())
+{
+	_location_rule.direction = FlexDirection::Column;
+}
 
 bool UI::FlexColumnPanel::point_belongs(Position2 point)
 {

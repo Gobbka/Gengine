@@ -19,6 +19,7 @@
 #include <Logger/Logger.h>
 #include <Graphics/Camera.h>
 #include <Types/Material.h>
+#include <JSON/Decoder.h>
 
 void debugger_loop()
 {
@@ -42,6 +43,8 @@ int WINAPI wWinMain(
 {
     AllocLoggerConsole();
     LogW(lpCmdLine);
+
+    // JSON::decode(LR"([123,"nigga",228])");
 
     auto*form = new Forms::MainForm(hInstance, 1400, 780);
     form->show();

@@ -164,6 +164,9 @@
     <ClInclude Include="GEModule\GEModuleCommon.h" />
     <ClInclude Include="GEModule\GEModuleLoader.h" />
     <ClInclude Include="GEStream.h" />
+    <ClInclude Include="JSON\Common.h" />
+    <ClInclude Include="JSON\Decoder.h" />
+    <ClInclude Include="JSON\Encoder.h" />
     <ClInclude Include="Loaders\AssetsLoader.h" />
     <ClInclude Include="Logger\Logger.h" />
     <ClInclude Include="Types\Colors.h" />
@@ -185,6 +188,9 @@
     <ClCompile Include="FS\FSObject.cpp" />
     <ClCompile Include="GEModule\GEModuleLoader.cpp" />
     <ClCompile Include="GEStream.cpp" />
+    <ClCompile Include="JSON\Common.cpp" />
+    <ClCompile Include="JSON\Decoder.cpp" />
+    <ClCompile Include="JSON\Encoder.cpp" />
     <ClCompile Include="Loaders\AssetsLoader.cpp" />
     <ClCompile Include="Types\Material.cpp" />
     <ClCompile Include="Types\Transform.cpp" />

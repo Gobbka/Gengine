@@ -8,7 +8,8 @@ namespace UI
 		Surface _resolution;
 		Render::GETexture* _texture;
 		Color3XM _color;
-		float _scroll_bar_height;
+		// panel height / inner content height
+		float _height_ratio;
 		Vector2 _scroll_offset;
 
 		void update_items() override;

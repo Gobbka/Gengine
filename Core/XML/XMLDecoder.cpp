@@ -230,7 +230,7 @@ XML::Document XML::decode_document(const wchar_t* str)
 			}
 			if(part.role == ParsedXmlPart::Role::CloseTag)
 			{
-				current_node = current_node->parent_node();
+				current_node = current_node->parentNode();
 			}
 			if(part.role == ParsedXmlPart::Role::SingleTag)
 			{
@@ -238,7 +238,7 @@ XML::Document XML::decode_document(const wchar_t* str)
 			}
 			if(part.role == ParsedXmlPart::Role::Value)
 			{
-				current_node->set_inner_text(GEString{ part.name });
+				current_node->setInnerText(GEString{ part.name });
 			}
 		}
 

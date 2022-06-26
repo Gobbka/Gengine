@@ -51,7 +51,7 @@ int WINAPI wWinMain(
     );
 
 	auto* root = (XML::Node*) & document.root_node;
-    auto& iterator = root->find_by_tag(GEString(L"Project")).get()->string();
+    auto& iterator = root->getElementsByTagName(GEString(L"Project")).get()->string();
 
     auto*form = new Forms::MainForm(hInstance, 1400, 780);
     form->show();

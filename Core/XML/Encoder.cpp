@@ -1,5 +1,4 @@
 ﻿#include "Encoder.h"
-#include <iostream>
 
 void XML::Encoder::encode(Node& node)
 {
@@ -16,11 +15,11 @@ void XML::Encoder::encode(Node& node)
 	{
 		out << ">";
 
-		if (node.is_string())
+		if (node.isString())
 		{
 			out << node.string();
 		}
-		if (node.is_array())
+		if (node.isArray())
 		{
 			auto* arr = &node.array();
 

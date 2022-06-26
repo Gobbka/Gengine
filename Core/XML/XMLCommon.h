@@ -37,16 +37,16 @@ namespace XML
 		char* bytes;
 		ValueType type;
 	public:
-		Number parse_number() const;
+		Number parseInt() const;
 		GEString& string() const;
 		std::vector<Node>& array() const;
 
 		Node* append(Node node);
-		void set_inner_text(GEString text);
+		void setInnerText(GEString text);
 		void clear();
 
-		bool is_string() const;
-		bool is_array() const;
+		bool isString() const;
+		bool isArray() const;
 		bool null() const;
 
 		NodeValue();
@@ -70,8 +70,9 @@ namespace XML
 
 		Node& operator=(Node&& other) noexcept;
 
-		NodeEntry find_by_tag(GEString child_tag);
-		Node* parent_node();
+		NodeEntry getElementsByTagName(GEString child_tag);
+		Node* getElementByTagName(GEString child_tag);
+		Node* parentNode() const;
 	};
 
 	struct __declspec(dllexport) Document

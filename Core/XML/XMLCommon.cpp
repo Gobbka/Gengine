@@ -49,7 +49,7 @@ void XML::Attributes::each(std::function<void(const char* key, const char* value
 }
 
 
-XML::Number XML::NodeValue::parse_number() const
+XML::Number XML::NodeValue::parseInt() const
 {
 	if (type != ValueType::string)
 		throw std::exception("Value type is not a string");
@@ -101,14 +101,14 @@ XML::Node* XML::NodeValue::append(Node node)
 		type = ValueType::array;
 	}
 
-	if (!is_array())
+	if (!isArray())
 		throw std::exception("Value type is not a node array");
 
 	array().push_back(std::move(node));
 	return &array()[array().size() - 1];
 }
 
-void XML::NodeValue::set_inner_text(GEString text)
+void XML::NodeValue::setInnerText(GEString text)
 {
 	if(bytes != nullptr)
 	{
@@ -145,12 +145,12 @@ std::vector<XML::Node>& XML::NodeValue::array() const
 	throw std::exception("Value type is not a node array");
 }
 
-bool XML::NodeValue::is_string() const
+bool XML::NodeValue::isString() const
 {
 	return type == ValueType::string;
 }
 
-bool XML::NodeValue::is_array() const
+bool XML::NodeValue::isArray() const
 {
 	return type == ValueType::array;
 }
@@ -219,12 +219,17 @@ XML::Node::~Node() noexcept
 	clear();
 }
 
-XML::NodeEntry XML::Node::find_by_tag(GEString child_tag)
+XML::NodeEntry XML::Node::getElementsByTagName(GEString child_tag)
 {
-	return NodeEntry( this,std::move(child_tag) );
+	return NodeEntry(this, std::move(child_tag));
 }
 
-XML::Node* XML::Node::parent_node()
+XML::Node* XML::Node::getElementByTagName(GEString child_tag)
+{
+	return NodeEntry(this, std::move(child_tag)).get();
+}
+
+XML::Node* XML::Node::parentNode() const
 {
 	return _parent_node;
 }

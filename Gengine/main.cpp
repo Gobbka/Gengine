@@ -21,6 +21,8 @@
 #include <Types/Material.h>
 #include <XML/XMLDecoder.h>
 
+#include "Input/Console.h"
+
 void debugger_loop()
 {
 	// const auto* server = PipeServer::create(LR"(\\.\pipe\GENGINE_DBG)");
@@ -41,7 +43,7 @@ int WINAPI wWinMain(
     _In_ int nShowCmd
 )
 {
-    AllocLoggerConsole();
+    GEConsole::show();
     LogW(lpCmdLine);
 
     auto*form = new Forms::MainForm(hInstance, 1400, 780);

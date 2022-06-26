@@ -55,11 +55,6 @@ struct GEAssert {
     {}
 };
 
-#define AllocLoggerConsole() AllocConsole(); \
-freopen("CONIN$", "r", stdin); \
-freopen("CONOUT$", "w", stdout); \
-freopen("CONOUT$", "w", stderr) \
-
 inline std::ostream& blue(std::ostream& s)
 {
     HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);

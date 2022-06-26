@@ -4,8 +4,9 @@
 #include <functional>
 #include <Windows.h>
 
-#include "Keyboard.h"
+#include "../Input/Keyboard.h"
 
+class Keyboard;
 
 namespace GE {
 	class __declspec(dllexport) Window

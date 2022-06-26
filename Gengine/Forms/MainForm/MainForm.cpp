@@ -1,7 +1,7 @@
 #include "MainForm.h"
 
 #include <FreeImage.h>
-#include <Window/Keyboard.h>
+#include <Input/Keyboard.h>
 #include <FS/FSObject.h>
 #include <FS/FSDirectory.h>
 
@@ -19,6 +19,7 @@
 #include <Animation/Animator.h>
 #include <Graphics/SpriteFont.h>
 #include <Logger/Logger.h>
+#include <Input/Console.h>
 
 #include "UI/Tree.h"
 
@@ -152,7 +153,7 @@ void Forms::MainForm::update()
 	static float scale = 45.f;
 	auto camera = editorScene->get_main_camera()->get<Render::Camera>();
 	
-	if (keyboard->pressed(VirtualKey::KEY_W)) // W
+	if (keyboard->pressed(VirtualKey::KEY_W))
 	{
 		camera->adjust_position_relative(Position3(0.05f, 0, 0));
 	}
@@ -196,27 +197,29 @@ void Forms::MainForm::update()
 	}
 	if(keyboard->pressed(VirtualKey::F1))
 	{
-		char command[12];
-		std::cout << "Send command to MainForm: \n>> ";
-		scanf("%12s", command);
-		if(strcmp(command,"dom")==0)
+		LogA("Waing for command from user\n>> ");
+		const auto command = GEConsole::readInput();
+		if(command == L"dom")
 		{
 			main_scene->world()->each<UI::InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<UI::InteractiveForm>form)
 				{
 					std::cout << "=== Interactive From ===\n";
 					form->foreach([&](UI::InteractiveElement* element)
 						{
-							print_element(element,0);
+							print_element(element, 0);
 						});
 				});
+			return;
 		}
-		if(strcmp(command,"gpu")==0)
+		if(command == L"gpu")
 		{
 			print_gpu_info();
+			return;
 		}
-		if(strcmp(command,"entity")==0)
+		if(command == L"entity")
 		{
 			print_entity();
+			return;
 		}
 	}
 }

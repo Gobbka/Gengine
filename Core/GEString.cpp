@@ -81,6 +81,26 @@ bool GEString::operator==(GEString& other) const
 	return false;
 }
 
+bool GEString::operator==(const wchar_t* other) const
+{
+	for (int i = 0;; i++)
+	{
+		const auto first_char = _string[i];
+		const auto second_char = other[i];
+
+		if (first_char == second_char && second_char == '\0')
+			return true;
+
+		if (first_char == '\0' || second_char == '\0')
+			break;
+
+		if (first_char != second_char)
+			break;
+	}
+
+	return false;
+}
+
 bool GEString::endsWith(const wchar_t* search_string) const
 {
 	const auto length = wcslen(search_string);

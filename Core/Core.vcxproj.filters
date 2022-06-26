@@ -69,7 +69,7 @@
     <ClInclude Include="Window\WindowsManager.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Window\Keyboard.h">
+    <ClInclude Include="Input\Keyboard.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="GEStream.h">
@@ -91,6 +91,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="GEString.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Console.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
@@ -137,7 +140,7 @@
     <ClCompile Include="Window\WindowsWindow.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Window\Keyboard.cpp">
+    <ClCompile Include="Input\Keyboard.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="GEStream.cpp">
@@ -159,6 +162,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="GEString.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Console.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

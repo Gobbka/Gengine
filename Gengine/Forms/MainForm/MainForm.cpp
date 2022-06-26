@@ -113,10 +113,10 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_topbar_panel->add_element(new UI::Button({ 0,0 }, { 50,30 }, { RGB_TO_FLOAT(34,34,34) }, visby_18, L"Build"));
 	
 	uicanvas
-		->add_element(_topbar_panel)
-		->add_element(_worldspace_panel)
-		->add_element(_render_panel)
-		->add_element(_assets_panel_wrapper)
+		->addElement(_topbar_panel)
+		->addElement(_worldspace_panel)
+		->addElement(_render_panel)
+		->addElement(_assets_panel_wrapper)
 	;
 	
 	scan_assets_directory();

@@ -4,7 +4,7 @@
 
 void UI::Panel::draw(Render::DrawEvent2D* event)
 {	
-	event->set_alpha(this->alpha);
+	event->set_alpha(styles.alpha);
 
 	if (_texture)
 		event->drawRect(_position, _resolution, _texture);

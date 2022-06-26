@@ -13,7 +13,7 @@ void InteractiveForm::foreach(std::function<void(InteractiveElement* element)> c
 		callback(element);
 }
 
-void InteractiveForm::drag_move(InteractiveElement* element)
+void InteractiveForm::dragMove(InteractiveElement* element)
 {
 	auto pos = element->get_position();
 	auto cursor = *_cursor_position;
@@ -23,7 +23,7 @@ void InteractiveForm::drag_move(InteractiveElement* element)
 	_dragged = new DragStruct{ cursor ,element};
 }
 
-void InteractiveForm::free_drag_move()
+void InteractiveForm::freeDragMove()
 {
 	if (_dragged == nullptr) return;
 
@@ -31,7 +31,7 @@ void InteractiveForm::free_drag_move()
 	_dragged = nullptr;
 }
 
-bool InteractiveForm::has_element(InteractiveElement* element) const
+bool InteractiveForm::hasElement(InteractiveElement* element) const
 {
 	for (auto* in_element : _children)
 		if (element == in_element)
@@ -40,7 +40,7 @@ bool InteractiveForm::has_element(InteractiveElement* element) const
 }
 
 
-InteractiveForm* InteractiveForm::add_element(InteractiveElement* element)
+InteractiveForm* InteractiveForm::addElement(InteractiveElement* element)
 {
 	_children.push_back(element);
 
@@ -159,7 +159,7 @@ EventStatus InteractiveForm::on_lbmouse_up()
 			element->handle_mouse_up();
 	}
 
-	free_drag_move();
+	freeDragMove();
 
 	return EventStatus::none;
 }

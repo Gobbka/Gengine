@@ -11,7 +11,7 @@ void UI::FlexRowPanel::update_items()
 void UI::FlexRowPanel::draw(Render::DrawEvent2D* event)
 {
 	auto old_stencil = event->stencil(Render::StencilUsage::write);
-	event->set_alpha(this->alpha);
+	event->set_alpha(styles.alpha);
 
 	if (_texture)
 		event->drawRect(_position, _resolution, _texture);

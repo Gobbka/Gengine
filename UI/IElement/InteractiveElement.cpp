@@ -15,7 +15,7 @@ bool UI::InteractiveElement::have_parent() const
 
 void UI::InteractiveElement::set_alpha(float alpha)
 {
-	this->alpha = alpha;
+	styles.alpha = alpha;
 }
 
 void UI::InteractiveElement::set_margin(float x, float y)

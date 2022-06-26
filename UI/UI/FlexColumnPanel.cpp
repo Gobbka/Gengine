@@ -13,7 +13,7 @@ void UI::FlexColumnPanel::draw(Render::DrawEvent2D* event)
 	if (this->styles.overflow == VisibleState::hidden)
 	{
 		auto old_stencil = event->stencil(Render::StencilUsage::write);
-		event->set_alpha(this->alpha);
+		event->set_alpha(styles.alpha);
 
 		if (_texture)
 			event->drawRect(_position, _resolution, _texture);
@@ -28,7 +28,7 @@ void UI::FlexColumnPanel::draw(Render::DrawEvent2D* event)
 	}
 	else
 	{
-		event->set_alpha(this->alpha);
+		event->set_alpha(styles.alpha);
 
 		if (_texture)
 			event->drawRect(_position, _resolution, _texture);

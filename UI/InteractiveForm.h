@@ -34,11 +34,11 @@ namespace UI {
 		DragStruct* _dragged = nullptr;
 	public:
 		void foreach(std::function<void(InteractiveElement* element)>callback) const;
-		void drag_move(InteractiveElement* element);
-		void free_drag_move();
+		void dragMove(InteractiveElement* element);
+		void freeDragMove();
 
-		bool has_element(InteractiveElement* element) const;
-		InteractiveForm* add_element(InteractiveElement* element);
+		bool hasElement(InteractiveElement* element) const;
+		InteractiveForm* addElement(InteractiveElement* element);
 	public:
 		InteractiveForm(Render::GEGraphics* pEngine,Position2*cursor_position);
 		//InteractiveForm(InteractiveForm&& other) noexcept;

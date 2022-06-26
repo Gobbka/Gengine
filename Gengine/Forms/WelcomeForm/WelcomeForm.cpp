@@ -17,7 +17,7 @@ Forms::WelcomeForm::WelcomeForm(HINSTANCE hinst)
 	auto* font = new Render::SpriteFont(get_graphics_context()->get_device(), L"visby.spritefont");
 	auto uicanvas = get_ui()->create_layer()->get<UI::InteractiveForm>();
 
-	uicanvas->add_element(new UI::Text(font, L"Welcome to GEngine!", { 0,0 }));
+	uicanvas->addElement(new UI::Text(font, L"Welcome to GEngine!", { 0,0 }));
 }
 
 void Forms::WelcomeForm::update()

@@ -52,6 +52,7 @@ namespace UI {
 		} display = DisplayType::block;
 		
 		DirectX::XMFLOAT4 margin = { 0,0,0,0 };
+		float alpha = 1.f;
 	};
 
 	struct ElementState
@@ -80,7 +81,6 @@ namespace UI {
 	protected:
 		InteractiveForm* form = nullptr;
 		Parent* parent = nullptr;
-		float alpha = 1.f;
 
 		static void default_event_callback(UIElementEventArgs args) {}
 	public:

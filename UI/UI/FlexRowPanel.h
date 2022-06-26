@@ -1,5 +1,6 @@
 #pragma once
 #include "../IElement/Parentable.h"
+#include "Rules/FlexRule.h"
 
 namespace UI
 {

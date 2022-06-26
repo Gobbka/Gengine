@@ -164,6 +164,7 @@
     <ClInclude Include="GEModule\GEModuleCommon.h" />
     <ClInclude Include="GEModule\GEModuleLoader.h" />
     <ClInclude Include="GEStream.h" />
+    <ClInclude Include="GEString.h" />
     <ClInclude Include="JSON\Common.h" />
     <ClInclude Include="JSON\Decoder.h" />
     <ClInclude Include="JSON\Encoder.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="Window\Keyboard.h" />
     <ClInclude Include="Window\WindowsManager.h" />
     <ClInclude Include="Window\WindowsWindow.h" />
+    <ClInclude Include="XML\Iterator\NodeEntry.h" />
     <ClInclude Include="XML\XMLCommon.h" />
     <ClInclude Include="XML\XMLDecoder.h" />
     <ClInclude Include="XML\Encoder.h" />
@@ -188,6 +190,7 @@
     <ClCompile Include="FS\FSObject.cpp" />
     <ClCompile Include="GEModule\GEModuleLoader.cpp" />
     <ClCompile Include="GEStream.cpp" />
+    <ClCompile Include="GEString.cpp" />
     <ClCompile Include="JSON\Common.cpp" />
     <ClCompile Include="JSON\Decoder.cpp" />
     <ClCompile Include="JSON\Encoder.cpp" />
@@ -198,6 +201,7 @@
     <ClCompile Include="Window\Keyboard.cpp" />
     <ClCompile Include="Window\WindowsManager.cpp" />
     <ClCompile Include="Window\WindowsWindow.cpp" />
+    <ClCompile Include="XML\Iterator\NodeEntry.cpp" />
     <ClCompile Include="XML\XMLCommon.cpp" />
     <ClCompile Include="XML\XMLDecoder.cpp" />
     <ClCompile Include="XML\Encoder.cpp" />

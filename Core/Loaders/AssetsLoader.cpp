@@ -87,7 +87,7 @@ BinaryReader AssetsLoader::make_sprite_font(const wchar_t* font_name,UINT font_s
 	auto file_name = out_file_name_s.str();
 	BinaryReader reader(file_name.c_str());
 
-	FS::FSFile file(out_file_name_s.str(),0,nullptr);
+	FS::File file(out_file_name_s.str(),0,(char*)nullptr);
 	file.remove();
 
 	return std::move(reader);

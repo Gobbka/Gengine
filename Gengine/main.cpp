@@ -19,7 +19,7 @@
 #include <Logger/Logger.h>
 #include <Graphics/Camera.h>
 #include <Types/Material.h>
-#include <JSON/Decoder.h>
+#include <XML/XMLDecoder.h>
 
 void debugger_loop()
 {
@@ -44,6 +44,11 @@ int WINAPI wWinMain(
     AllocLoggerConsole();
     LogW(lpCmdLine);
 
+    XML::decode_document(
+        LR"(<?xml version="1.0" encoding="utf-8"?>)"
+        "\n<Project DefaultTargets=\"Build\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">dedok pa familii selok"
+        "\n</Project>"
+    );
     // JSON::decode(LR"([123,"nigga",228])");
 
     auto*form = new Forms::MainForm(hInstance, 1400, 780);

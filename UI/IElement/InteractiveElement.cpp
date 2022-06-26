@@ -57,8 +57,6 @@ void UI::InteractiveElement::set_parent(Parent* parent)
 	this->parent = parent;
 }
 
-#pragma region events handler
-
 void UI::InteractiveElement::handle_mouse_move( MoveEvent event)
 {
 	this->onMouseMove(this, event.absolute.x, event.absolute.y);
@@ -95,6 +93,3 @@ void UI::InteractiveElement::handle_mouse_scroll(int delta)
 {
 	this->onMouseScroll(this, delta);
 }
-
-#pragma endregion 
-

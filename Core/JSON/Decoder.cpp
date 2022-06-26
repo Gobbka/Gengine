@@ -78,9 +78,9 @@ unsigned parse(const wchar_t* text,unsigned&current_depth,std::vector<NodeDescri
 	return 0;
 }
 
-JSON::Node JSON::decode(const wchar_t* text,unsigned max_depth)
+JSON::Node JSON::decode(const wchar_t* text)
 {
-	std::vector<NodeDescription> nodes(max_depth);
+	std::vector<NodeDescription> nodes(255);
 
 	unsigned current_depth = 0;
 	parse(text, current_depth, nodes);

@@ -4,7 +4,7 @@
 
 namespace FS
 {
-	class FSFile;
+	class File;
 }
 
 class __declspec(dllexport) BinaryReader

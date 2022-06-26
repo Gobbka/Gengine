@@ -2,7 +2,6 @@
 #include "functional"
 #include "Render/Common/Texture.h"
 #include "Types/Types.h"
-#include "../UI/Rules/FlexRule.h"
 
 namespace Render {
 	class DrawEvent2D;
@@ -77,7 +76,7 @@ namespace UI {
 	class __declspec(dllexport) InteractiveElement : public IControllable
 	{
 	public:
-		typedef std::function<void(UIElementEventArgs)> EventCallback;
+		typedef std::function<void(InteractiveElement*pObject)> EventCallback;
 	protected:
 		InteractiveForm* form = nullptr;
 		Parent* parent = nullptr;
@@ -122,8 +121,8 @@ namespace UI {
 
 		EventCallback onMouseEnter = default_event_callback;
 		EventCallback onMouseLeave = default_event_callback;
-		void(*onMouseMove)(UIElementEventArgs args, float mX, float mY) = [](UIElementEventArgs, float, float) {};
-		std::function<void(UIElementEventArgs args, int delta)>onMouseScroll = [](UIElementEventArgs, int) {};
+		void(*onMouseMove)(InteractiveElement* pObject, float mX, float mY) = [](InteractiveElement*, float, float) {};
+		std::function<void(InteractiveElement* pObject, int delta)>onMouseScroll = [](InteractiveElement*, int) {};
 		EventCallback onMouseUp = default_event_callback;
 		EventCallback onMouseDown = default_event_callback;
 		EventCallback onDBClick = default_event_callback;

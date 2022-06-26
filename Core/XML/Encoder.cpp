@@ -36,5 +36,5 @@ void XML::Encoder::encode(Node& node)
 XML::Encoder::Encoder(XML::Document& document)
 {
 	out << R"(<?xml version="1.0" encoding="UTF-8" ?>)";
-	encode(document.base_node);
+	encode(document.root_node);
 }

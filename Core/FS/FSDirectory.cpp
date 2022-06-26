@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <fileapi.h>
 #include <fstream>
+
 FS::FSDirectory::FSDirectory(wchar_t* dir_path)
 	: FSObject(std::wstring(dir_path))
 {
@@ -23,7 +24,7 @@ void FS::FSDirectory::foreach(std::function<void(FSObject*)> callback)
 			std::wstring filename(path());
 			filename = filename + L'\\' + data.cFileName;
 
-			FSFile file(filename, data.nFileSizeLow, nullptr);
+			File file(filename, data.nFileSizeLow, (char*)nullptr);
 			callback(&file);
 		}
 	}
@@ -33,7 +34,7 @@ void FS::FSDirectory::foreach(std::function<void(FSObject*)> callback)
 		std::wstring filename(path());
 		filename = filename + L'\\' + data.cFileName;
 		
-		FSFile file(filename, data.nFileSizeLow, nullptr);
+		File file(filename, data.nFileSizeLow, (char*)nullptr);
 		callback(&file);
 	}
 }

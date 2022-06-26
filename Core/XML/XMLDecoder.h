@@ -3,5 +3,5 @@
 
 namespace XML
 {
-	__declspec(dllexport) Document decode_document(const char*str);
+	__declspec(dllexport) Document decode_document(const wchar_t*str);
 }

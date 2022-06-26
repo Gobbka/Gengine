@@ -11,56 +11,9 @@ size_t quick_pow10(size_t n)
 	return pow10[n];
 }
 
-bool strings_equal(const char*ptr1,const char*ptr2)
-{
-	for(int i=0;;i++)
-	{
-		const auto first_char = ptr1[i];
-		const auto second_char = ptr2[i];
-
-		if (first_char == second_char == '\0')
-			return true;
-
-		if (first_char == '\0' || second_char == '\0')
-			break;
-
-		if (first_char != second_char)
-			break;
-	}
-
-	return false;
-}
-
-XML::NodeEntry::NodeEntry(Node* node, const char* tag_filter)
-	: _tag_filter(tag_filter)
-	, _nodes(&node->array())
-	, _current_iteration(0)
-{
-	next();
-}
-
-bool XML::NodeEntry::next()
-{
-	for(; _current_iteration < _nodes->size(); _current_iteration++)
-	{
-		const auto* node = &_nodes->operator[](_current_iteration);
-		if(strings_equal(_tag_filter, node->tag()))
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-XML::Node* XML::NodeEntry::get() const
-{
-	return &_nodes->operator[](_current_iteration);
-}
-
 XML::Attributes::Attributes(Attributes&& other) noexcept
+	: _attributes(std::move(other._attributes))
 {
-	_attributes = std::move(other._attributes);
 }
 
 void XML::Attributes::add(char* key, char* value)
@@ -133,19 +86,55 @@ XML::Number XML::NodeValue::parse_number() const
 	return value;
 }
 
-const char* XML::NodeValue::string() const
+GEString& XML::NodeValue::string() const
 {
 	if(type == ValueType::string)
-		return (const char*)bytes;
+		return *(GEString*)bytes;
 	throw std::exception("Value type is not a string");
 }
 
-void XML::NodeValue::append(Node&& node) const
+XML::Node* XML::NodeValue::append(Node node)
 {
+	if(bytes == nullptr)
+	{
+		bytes = (char*)new std::vector<Node>;
+		type = ValueType::array;
+	}
+
 	if (!is_array())
 		throw std::exception("Value type is not a node array");
 
 	array().push_back(std::move(node));
+	return &array()[array().size() - 1];
+}
+
+void XML::NodeValue::set_inner_text(GEString text)
+{
+	if(bytes != nullptr)
+	{
+		this->clear();
+	}
+
+	bytes = (char*)new GEString(std::move(text));
+}
+
+void XML::NodeValue::clear()
+{
+	switch (type)
+	{
+	case ValueType::unknown:
+		delete[] bytes;
+		break;
+	case ValueType::string:
+		delete (GEString*)bytes;
+		break;
+	case ValueType::array:
+		delete (std::vector<Node>*)bytes;
+		break;
+	}
+
+	bytes = nullptr;
+	type = ValueType::unknown;
 }
 
 std::vector<XML::Node>& XML::NodeValue::array() const
@@ -170,59 +159,21 @@ bool XML::NodeValue::null() const
 	return bytes == nullptr;
 }
 
-XML::NodeValue::NodeValue(ValueType type, void* bytes)
-	: bytes(bytes)
-	, type(type)
-{}
+XML::NodeValue::NodeValue()
+	: bytes(nullptr)
+	, type(ValueType::unknown)
+{
+}
 
 XML::NodeValue::NodeValue(NodeValue&& other) noexcept
 	: bytes(other.bytes)
 	, type(other.type)
 {
 	other.bytes = nullptr;
+	other.type = ValueType::unknown;
 }
 
-XML::Tag::Tag(char* name)
-	: value(name)
-{}
-
-XML::Tag::Tag(const char* name)
-	: value(nullptr)
-{
-	const auto src_len = strlen(name);
-	value = new char[src_len + 1];
-	memcpy(value, name, src_len + 1);
-}
-
-XML::IValue::IValue(char* value)
-	: value(value)
-{}
-
-XML::ArrayValue::ArrayValue()
-	: IValue((char*)new std::vector<Node>)
-{}
-
-XML::NullValue::NullValue()
-	: IValue(nullptr)
-{}
-
-XML::StringValue::StringValue(char* value)
-	: IValue(value)
-{}
-
-XML::StringValue::StringValue(const char* value)
-	: IValue(nullptr)
-{
-	const auto src_len = strlen(value);
-	this->value = new char[src_len + 1];
-	memcpy(this->value, value, src_len + 1);
-}
-
-XML::NumberValue::NumberValue(Number num)
-	: IValue(nullptr)
-{}
-
-const char* XML::Node::tag() const
+GEString& XML::Node::tag()
 {
 	return _tag;
 }
@@ -232,60 +183,53 @@ XML::Attributes& XML::Node::attributes()
 	return _attributes;
 }
 
-XML::Node::Node(Tag tag, IValue value)
-	: NodeValue(ValueType::string,value.value)
-	, _tag(tag.value)
-{}
-
-XML::Node::Node(Tag tag, ArrayValue value)
-	: NodeValue(ValueType::array,value.value)
-	, _tag(tag.value)
-{}
+XML::Node::Node(GEString tag,Node* parent_node)
+	: NodeValue()
+	, _tag(std::move(tag))
+	, _parent_node(parent_node)
+{
+}
 
 XML::Node::Node(Node&& other) noexcept
 	: NodeValue(std::move(other))
-	, _tag(other._tag)
+	, _tag(std::move(other._tag))
 	, _attributes(std::move(other._attributes))
+	, _parent_node(other._parent_node)
 {
-	other._tag = nullptr;
 	other.bytes = nullptr;
+	other._parent_node = nullptr;
 }
 
 XML::Node& XML::Node::operator=(Node&& other) noexcept
 {
-	_tag = other._tag;
+	_tag = std::move(other._tag);
 	bytes = other.bytes;
 	type = other.type;
+	_parent_node = other._parent_node;
 
-	other._tag = nullptr;
-	other.bytes = nullptr;
+	other._parent_node = nullptr;
+	other.clear();
 
 	return*this;
 }
 
 XML::Node::~Node() noexcept
 {
-	if(is_array())
-	{
-		const auto*vector = &array();
-		delete vector;
-	}
-
-	delete[]_tag;
+	clear();
 }
 
-XML::Node* XML::Node::find_by_tag_first(const char* child_tag)
-{
-	return NodeEntry( this, child_tag ).get();
-}
-
-XML::NodeEntry XML::Node::find_by_tag(const char* child_tag)
+XML::NodeEntry XML::Node::find_by_tag(GEString& child_tag)
 {
 	return NodeEntry( this,child_tag );
 }
 
-XML::Document::Document(Node base_node)
-	: base_node(std::move(base_node))
+XML::Node* XML::Node::parent_node()
+{
+	return _parent_node;
+}
+
+XML::Document::Document(Node root_node)
+	: root_node(std::move(root_node))
 {
 
 }

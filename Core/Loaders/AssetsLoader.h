@@ -4,9 +4,9 @@
 
 class __declspec(dllexport) AssetsLoader
 {
-	static Render::Material material_from_png(BYTE*ptr,UINT size);
+	static Render::Material materialFromPng(BYTE*ptr,UINT size);
 public:
-	static Render::Material load_png(const wchar_t* path);
-	static Render::Material load_png_resource(const wchar_t* name,const wchar_t*type);
-	static BinaryReader make_sprite_font(const wchar_t* font_name,UINT font_size);
+	static Render::Material loadImage(const wchar_t* path);
+	static Render::Material loadPngResource(const wchar_t* name,const wchar_t*type);
+	static BinaryReader makeSpriteFont(const wchar_t* font_name,UINT font_size);
 };

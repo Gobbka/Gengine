@@ -3,10 +3,11 @@
 #include <FreeImage.h>
 #include "../BinaryReader.h"
 #include "../FS/FSFile.h"
+#include "../GEString.h"
 #include <sstream>
 #include <ostream>
 
-Render::Material AssetsLoader::material_from_png(BYTE*ptr,UINT size)
+Render::Material AssetsLoader::materialFromPng(BYTE*ptr,UINT size)
 {
 	auto* fmemory = FreeImage_OpenMemory(ptr,size);
 
@@ -23,15 +24,22 @@ Render::Material AssetsLoader::material_from_png(BYTE*ptr,UINT size)
 	return (Render::Material&&)material;
 }
 
-Render::Material AssetsLoader::load_png(const wchar_t* path)
+Render::Material AssetsLoader::loadImage(const wchar_t* path)
 {
+	const GEString path_str(path);
+
 	BinaryReader reader(path);
 	const auto size = reader.available();
 
-	return material_from_png((BYTE*)reader.ReadArray<BYTE>(size), size);
+	if(path_str.endsWith(L".png"))
+	{
+		return materialFromPng((BYTE*)reader.ReadArray<BYTE>(size), size);
+	}
+
+	throw std::exception("Unknown image format");
 }
 
-Render::Material AssetsLoader::load_png_resource(const wchar_t* name,const wchar_t*type)
+Render::Material AssetsLoader::loadPngResource(const wchar_t* name,const wchar_t*type)
 {
 	const auto hmodule = GetModuleHandle(nullptr);
 	const auto hResInfo = FindResource(nullptr, name, type);
@@ -46,13 +54,13 @@ Render::Material AssetsLoader::load_png_resource(const wchar_t* name,const wchar
 
 		memcpy(new_mem, lp_resource, res_size);
 
-		return material_from_png(new_mem, res_size);
+		return materialFromPng(new_mem, res_size);
 	}
 
 	throw std::exception("Cannot find resource");
 }
 
-BinaryReader AssetsLoader::make_sprite_font(const wchar_t* font_name,UINT font_size)
+BinaryReader AssetsLoader::makeSpriteFont(const wchar_t* font_name,UINT font_size)
 {
 	STARTUPINFO info{ sizeof(info) };
 	PROCESS_INFORMATION process_info;

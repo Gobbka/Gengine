@@ -10,8 +10,8 @@ namespace GE {
 	public:
 		Window* find(HWND hwnd);
 
-		void register_window(Window* wnd);
-		void remove_window(Window* wnd);
+		void registerWindow(Window* wnd);
+		void removeWindow(Window* wnd);
 
 		auto begin() { return _windows.begin(); }
 		auto end() { return _windows.end(); }

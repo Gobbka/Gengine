@@ -71,9 +71,9 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	, _render_panel(new UI::Panel({ 250, -30 }, { 897, 500 }, nullptr))
 	, editorScene(get_graphics_context()->create_scene_3d())
 {
-	auto font_reader = AssetsLoader::make_sprite_font(L"Visby Round CF", 18);
+	auto font_reader = AssetsLoader::makeSpriteFont(L"Visby Round CF", 18);
 	auto* visby_18 = new Render::SpriteFont(get_graphics_context()->get_device(), font_reader);
-	font_reader = AssetsLoader::make_sprite_font(L"Visby Round CF", 14);
+	font_reader = AssetsLoader::makeSpriteFont(L"Visby Round CF", 14);
 	auto* visby_14 = new Render::SpriteFont(get_graphics_context()->get_device(), font_reader);
 
 	main_scene->register_system(new UI::HandleAnimationSystem());
@@ -98,8 +98,8 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 
 	_assets_panel_wrapper->add_element(_assets_panel);
 
-	_folder_texture = get_graphics_context()->get_device()->create_texture(AssetsLoader::load_png(TEXT("assets\\folder.png")));
-	_file_texture = get_graphics_context()->get_device()->create_texture(AssetsLoader::load_png(TEXT("assets\\file.png")));
+	_folder_texture = get_graphics_context()->get_device()->create_texture(AssetsLoader::loadImage(TEXT("assets\\folder.png")));
+	_file_texture = get_graphics_context()->get_device()->create_texture(AssetsLoader::loadImage(TEXT("assets\\file.png")));
 
 	auto worldTexture = new Render::GERenderTarget(get_graphics_context(), { 1400,780 });
 	auto* editorCam = editorScene->create_camera(worldTexture);

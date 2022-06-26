@@ -11,12 +11,12 @@ GE::Window* GE::WindowsManager::find(HWND hwnd)
 	return nullptr;
 }
 
-void GE::WindowsManager::register_window(Window* wnd)
+void GE::WindowsManager::registerWindow(Window* wnd)
 {
 	_windows.push_back(wnd);
 }
 
-void GE::WindowsManager::remove_window(Window* wnd)
+void GE::WindowsManager::removeWindow(Window* wnd)
 {
 	// TODO: complete
 	for(UINT i = 0;i < _windows.size();i++)

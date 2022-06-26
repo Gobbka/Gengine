@@ -81,6 +81,17 @@ bool GEString::operator==(GEString& other) const
 	return false;
 }
 
+bool GEString::endsWith(const wchar_t* search_string) const
+{
+	const auto length = wcslen(search_string);
+	for(auto i = length - 1, j = _length - 1;i-->0 && j --> 0;)
+	{
+		if (_string[j] != search_string[i])
+			return false;
+	}
+	return true;
+}
+
 GEString::~GEString()
 {
 	delete[] _string;

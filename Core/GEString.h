@@ -16,4 +16,6 @@ public:
 
 	bool operator==(GEString& other) const;
 	friend std::ostream& operator<<(std::ostream& os, const GEString& foo);
+
+	bool endsWith(const wchar_t* search_string) const;
 };

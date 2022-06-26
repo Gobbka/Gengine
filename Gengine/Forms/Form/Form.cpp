@@ -31,7 +31,7 @@ GE::Form::~Form()
 {
     delete _ui_context;
     delete _graphics;
-	WindowsManager::instance()->remove_window(this);
+	WindowsManager::instance()->removeWindow(this);
 }
 
 UI::UIContext* GE::Form::get_ui()

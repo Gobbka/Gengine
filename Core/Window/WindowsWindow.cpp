@@ -114,7 +114,7 @@ GE::Window::Window(const wchar_t*name,HINSTANCE hint, UINT width, UINT height,HI
 
 	assert(_hwnd != nullptr);
 
-	WindowsManager::instance()->register_window(this);
+	WindowsManager::instance()->registerWindow(this);
 }
 
 void GE::Window::show()

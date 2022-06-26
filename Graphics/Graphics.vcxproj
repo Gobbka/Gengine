@@ -157,7 +157,9 @@
     <ClInclude Include="Graphics\Que\PostEffects\GEPostEffect.h" />
     <ClInclude Include="Graphics\Que\PostEffects\SmoothPostEffect.h" />
     <ClInclude Include="Render\Common\ConstantBuffer.h" />
+    <ClInclude Include="Render\Common\VBuffer.h" />
     <ClInclude Include="Render\dx11_impl\DX11ConstantBuffer.h" />
+    <ClInclude Include="Render\dx11_impl\DX11VBuffer.h" />
     <ClInclude Include="Render\dx11_impl\Graphics.h" />
     <ClInclude Include="GraphicsBuildSettings.h" />
     <ClInclude Include="Graphics\Components\GameEntityComponent.h" />
@@ -178,7 +180,6 @@
     <ClInclude Include="Render\dx11_impl\D11GContext.h" />
     <ClInclude Include="Render\dx11_impl\DX11Allocator.h" />
     <ClInclude Include="Render\Common\IndexBuffer.h" />
-    <ClInclude Include="Render\Common\IVertexBuffer.h" />
     <ClInclude Include="Graphics\PrimitiveTopology.h" />
     <ClInclude Include="Graphics\Que\CreateLightMapPass\CreateLightMapPass.h" />
     <ClInclude Include="Graphics\Que\CreateNormalsMapPass\CreateNormalsmapPass.h" />
@@ -194,7 +195,6 @@
     <ClInclude Include="Render\Common\IAllocator.h" />
     <ClInclude Include="Render\dx11_impl\IndexBuffer.h" />
     <ClInclude Include="Render\dx11_impl\Texture.h" />
-    <ClInclude Include="Render\d3d\Buffer\VertexBuffer.h" />
     <ClInclude Include="Render\d3d\Shader\PixelShader.h" />
     <ClInclude Include="Render\dx11_impl\SamplerState.h" />
     <ClInclude Include="Render\d3d\Shader\IShader.h" />
@@ -220,6 +220,7 @@
     <ClCompile Include="Graphics\Que\PostEffects\GEPostEffect.cpp" />
     <ClCompile Include="Graphics\Que\PostEffects\SmoothPostEffect.cpp" />
     <ClCompile Include="Render\dx11_impl\DX11ConstantBuffer.cpp" />
+    <ClCompile Include="Render\dx11_impl\DX11VBuffer.cpp" />
     <ClCompile Include="Render\dx11_impl\Graphics.cpp" />
     <ClCompile Include="Graphics\DepthStencilStatesCollection.cpp" />
     <ClCompile Include="Render\dx11_impl\D11GContext.cpp" />
@@ -235,7 +236,6 @@
     <ClCompile Include="Graphics\SpriteFont.cpp" />
     <ClCompile Include="Render\dx11_impl\IndexBuffer.cpp" />
     <ClCompile Include="Render\dx11_impl\Texture.cpp" />
-    <ClCompile Include="Render\d3d\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Render\d3d\Shader\PixelShader.cpp" />
     <ClCompile Include="Render\dx11_impl\SamplerState.cpp" />
     <ClCompile Include="Render\d3d\Shader\VertexShader.cpp" />

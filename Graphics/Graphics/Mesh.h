@@ -5,15 +5,13 @@
 namespace Render
 {
 	struct Vertex;
-	template<typename T>
-	class IVertexBuffer;
 
 	struct __declspec(dllexport) Mesh final
 	{
-		IVertexBuffer<Vertex>* buffer;
+		GEVBuffer_Impl* buffer;
 		GEIndexBuffer* index_buffer;
 		PrimitiveTopology topology;
 		
-		Mesh(IVertexBuffer<Vertex>* buffer, GEIndexBuffer* index_buffer);
+		Mesh(GEVBuffer_Impl* buffer, GEIndexBuffer* index_buffer);
 	};
 }

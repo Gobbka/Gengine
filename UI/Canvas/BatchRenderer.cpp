@@ -15,10 +15,10 @@ Canvas::DrawData* Canvas::BatchRenderer::begin()
 
 void Canvas::BatchRenderer::present() 
 {
-	if(_drawData.vertices.length() > _buffer->get_size())
+	if(_drawData.vertices.length() > _buffer->getLength())
 	{
 		delete _buffer;
-		_buffer = _context->get_device()->alloc_vertex_buffer<UI::Vertex2D>(_drawData.vertices.length()+500, true);
+		_buffer = new Render::GEVBuffer<UI::Vertex2D>(_context,_drawData.vertices.length() + 500,true);
 	}
 	if(_drawData.indices.length() > _ibuffer->get_size())
 	{
@@ -63,7 +63,7 @@ void Canvas::BatchRenderer::present()
 }
 
 Canvas::BatchRenderer::BatchRenderer(Render::GEGraphics* context)
-	: _buffer(context->get_device()->alloc_vertex_buffer<UI::Vertex2D>(100u,true))
+	: _buffer(new Render::GEVBuffer<UI::Vertex2D>(context,100u,true))
 	, _ibuffer(context->get_device()->alloc_index_buffer(100))
 	, _context(context)
 	, _write_stencil(context,Render::DepthStencilDesc{Render::DepthFunc::none,Render::StencilUsage::write})

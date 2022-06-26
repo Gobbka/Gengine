@@ -16,6 +16,7 @@ namespace Render
 	class DX11DepthStencil;
 	class DX11Graphics;
 	class DX11ConstantBuffer;
+	class DX11VBuffer;
 	template<typename T>
 	class ConstantBuffer;
 
@@ -29,6 +30,7 @@ namespace Render
 	typedef DX11DepthStencil GEDepthStencil;
 	typedef DX11Graphics GEGraphics;
 	typedef DX11ConstantBuffer GEConstantBuffer;
+	typedef DX11VBuffer GEVBuffer_Impl;
 
 	typedef DirectX::XMMATRIX GEMatrix;
 }

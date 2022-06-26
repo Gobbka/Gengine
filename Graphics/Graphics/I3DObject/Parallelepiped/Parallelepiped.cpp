@@ -1,6 +1,8 @@
 #include "Parallelepiped.h"
 #include "../../../Graphics.h"
 #include "../../../Render/d3d/Vertex.h"
+#include "../../../Render/Common/VBuffer.h"
+
 
 UINT PARALLELEPIPED_INDEX_ARRAY[]{
 	0,1,2,1,3,2, // front
@@ -62,11 +64,13 @@ namespace Render {
 		ptr[5].color = { 0,1,0 };
 		ptr[4].color = { 1,1,0 };
 
-		IVertexBufferDesc desc;
-		desc.usage = IVertexBufferDesc::Usage::immutable;
+		VBufferDesc desc;
+		desc.usage = VBufferDesc::Usage::immutable;
 		desc.length = 8;
+		desc.stride_size = sizeof(Vertex);
+		desc.p_data = ptr;
 
-		auto* vbuffer = device->alloc_vertex_buffer(ptr,desc);
+		auto* vbuffer = new GEVBuffer_Impl(context, desc);
 		static auto* index_buffer = device->alloc_index_buffer(PARALLELEPIPED_INDEX_ARRAY, ARRAYSIZE(PARALLELEPIPED_INDEX_ARRAY));
 		
 		return Mesh(vbuffer, index_buffer);
@@ -127,11 +131,13 @@ namespace Render {
 		ptr[22] = Vertex({ x,y - height,z }, { 0,1,0 }, downs_normal, downs_tangent);
 		ptr[23] = Vertex({ x + width,y - height,z }, { 1,1,0 }, downs_normal, downs_tangent);
 
-		IVertexBufferDesc desc;
-		desc.usage = IVertexBufferDesc::Usage::immutable;
+		VBufferDesc desc;
+		desc.usage = VBufferDesc::Usage::immutable;
 		desc.length = 24;
+		desc.stride_size = sizeof(Vertex);
+		desc.p_data = ptr;
 
-		auto* vbuffer = device->alloc_vertex_buffer(ptr, desc);
+		auto* vbuffer = new GEVBuffer<Vertex>(context, desc);// device->alloc_vertex_buffer(ptr, desc);
 		static auto* index_buffer = device->alloc_index_buffer(PARALLELEPIPED_INDEPENDENT_INDEX_ARRAY, ARRAYSIZE(PARALLELEPIPED_INDEPENDENT_INDEX_ARRAY));
 
 		return Mesh(vbuffer, index_buffer);

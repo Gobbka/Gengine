@@ -8,8 +8,6 @@ namespace Render
 	{
 		ID3D11Device* _device;
 		GEGraphics* _gfx;
-
-		IVertexBuffer<char>* alloc_vertex_buffer_impl(void* data, UINT element_size, IVertexBufferDesc desc) override;
 	public:
 		DX11Allocator(ID3D11Device* device, GEGraphics*context);
 

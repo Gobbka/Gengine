@@ -1,6 +1,5 @@
 #include "GEPostEffect.h"
 
-#include "../../../Render/Common/IVertexBuffer.h"
 #include "../../../Render/dx11_impl/Graphics.h"
 #include "../../Geometric/2D.h"
 

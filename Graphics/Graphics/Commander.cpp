@@ -7,6 +7,7 @@
 #include "../Render/Common/IGContext.h"
 #include "../Render/Common/IndexBuffer.h"
 #include "../Render/Common/ConstantBuffer.h"
+#include "../Render/Common/VBuffer.h"
 
 Render::Commander::Commander(GEGraphics* gfx)
 	: _gfx(gfx)

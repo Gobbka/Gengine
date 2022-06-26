@@ -1,17 +1,13 @@
 #pragma once
-#include "DrawData.h"
+#include <Render/Common/VBuffer.h>
 
-namespace Render
-{
-	template<typename T>
-	class IVertexBuffer;
-}
+#include "DrawData.h"
 
 namespace Canvas {
 
 	class BatchRenderer final {
 		DrawData _drawData;
-		Render::IVertexBuffer<UI::Vertex2D>* _buffer;
+		Render::GEVBuffer<UI::Vertex2D>* _buffer;
 		Render::GEIndexBuffer* _ibuffer;
 		Render::GEGraphics* _context;
 

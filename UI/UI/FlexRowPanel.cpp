@@ -14,9 +14,9 @@ void UI::FlexRowPanel::draw(Render::DrawEvent2D* event)
 	event->set_alpha(this->alpha);
 
 	if (_texture)
-		event->draw_rect(_position, _resolution, _texture);
+		event->drawRect(_position, _resolution, _texture);
 	else
-		event->draw_rect(_position, _resolution, _color);
+		event->drawRect(_position, _resolution, _color);
 
 	event->stencil(Render::StencilUsage::mask);
 	event->set_alpha(1.f);
@@ -32,15 +32,15 @@ void UI::FlexRowPanel::draw(Render::DrawEvent2D* event)
 		// scroll bar height
 		const auto sb_height = resolution.height * height_ratio - 10;
 
-		event->draw_rect(
+		event->drawRect(
 			{ position.x + resolution.width - sb_width - 5,position.y - _scroll_offset.y * height_ratio - 5},
 			{ sb_width,sb_height },
 			Color3XM::from_rgb(62, 62, 62)
 		);
 	}
 
-	event->stencil_end(old_stencil);
-	event->stencil_end(old_stencil);
+	event->stencilEnd(old_stencil);
+	event->stencilEnd(old_stencil);
 }
 
 UI::ElementDescription UI::FlexRowPanel::get_desc()

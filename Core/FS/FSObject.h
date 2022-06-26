@@ -8,7 +8,7 @@ namespace FS
 	protected:
 		std::wstring _path;
 	public:
-		bool is_directory() const;
+		bool isDirectory() const;
 		
 		FSObject(std::wstring & path);
 		FSObject(std::wstring && path);

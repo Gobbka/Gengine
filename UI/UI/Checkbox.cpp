@@ -4,9 +4,9 @@
 void UI::Checkbox::draw(Render::DrawEvent2D* event)
 {
 	if (*_lp_value)
-		event->draw_rect(_position, _resolution, active_color);
+		event->drawRect(_position, _resolution, active_color);
 	else
-		event->draw_rect(_position, _resolution, non_active_color);
+		event->drawRect(_position, _resolution, non_active_color);
 }
 
 bool UI::Checkbox::is_checked() const

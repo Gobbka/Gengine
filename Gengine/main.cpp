@@ -44,15 +44,6 @@ int WINAPI wWinMain(
     AllocLoggerConsole();
     LogW(lpCmdLine);
 
-    const auto document = XML::decode_document(
-        LR"(<?xml version="1.0" encoding="utf-8"?>)"
-        "\n<Project DefaultTargets=\"Build\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">dedok pa familii selok"
-        "\n</Project>"
-    );
-
-	auto* root = (XML::Node*) & document.root_node;
-    auto& iterator = root->getElementsByTagName(GEString(L"Project")).get()->string();
-
     auto*form = new Forms::MainForm(hInstance, 1400, 780);
     form->show();
 

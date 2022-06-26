@@ -39,7 +39,7 @@ namespace UI
 
 		void handle_db_click() override
 		{
-			if(!_object.is_directory())
+			if(!_object.isDirectory())
 			{
 				std::wstring command(L"start ");
 				command += _object.path();
@@ -127,7 +127,7 @@ void Forms::MainForm::scan_assets_directory()
 
 	directory.foreach([&](FS::FSObject* file)
 	{
-		Render::GETexture* lp_texture = file->is_directory() ? _folder_texture : _file_texture;
+		Render::GETexture* lp_texture = file->isDirectory() ? _folder_texture : _file_texture;
 		
 		auto* panel = new UI::Directory(*file, { 0,0 }, { 120,120 }, lp_texture);
 		

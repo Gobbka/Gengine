@@ -5,7 +5,7 @@
 
 void Render::DrawEvent2D::set_alpha(float alpha) const
 {
-	auto* context = _context->get_context();
+
 }
 
 Render::DrawEvent2D::DrawEvent2D(GEGraphics* ctx, Canvas::DrawData* de)
@@ -17,7 +17,7 @@ Render::CanvasDrawEvent::CanvasDrawEvent(Canvas::DrawData* data)
 	: _draw_data(data)
 {}
 
-Render::EventDrawCmd Render::CanvasDrawEvent::new_draw_cmd(UINT vertices,UINT indices, GETexture*texture) const
+Render::EventDrawCmd Render::CanvasDrawEvent::newDrawCmd(UINT vertices,UINT indices, GETexture*texture) const
 {
 	texture = texture ? texture : _draw_data->default_texture;
 
@@ -38,11 +38,11 @@ Render::EventDrawCmd Render::CanvasDrawEvent::new_draw_cmd(UINT vertices,UINT in
 	return { _draw_data->vertices.at(vertices_index) , _draw_data->indices.at(indices_index) };
 }
 
-void Render::CanvasDrawEvent::draw_rect(Position2 pos, Surface resolution, Color3XM color) const
+void Render::CanvasDrawEvent::drawRect(Position2 pos, Surface resolution, Color3XM color) const
 {
 	static UINT rect_indices[]{0,1,2,1,3,2};
 
-	auto draw_cmd = new_draw_cmd(4,6);
+	auto draw_cmd = newDrawCmd(4,6);
 	auto* vertices = draw_cmd.vertices;
 	auto* indices = draw_cmd.indices;
 
@@ -54,11 +54,11 @@ void Render::CanvasDrawEvent::draw_rect(Position2 pos, Surface resolution, Color
 	memcpy(indices, rect_indices, sizeof(rect_indices));
 }
 
-void Render::CanvasDrawEvent::draw_rect(Position2 pos, Surface resolution, GETexture* texture) const
+void Render::CanvasDrawEvent::drawRect(Position2 pos, Surface resolution, GETexture* texture) const
 {
 	static UINT rect_indices[]{ 0,1,2,1,3,2 };
 
-	auto draw_cmd = new_draw_cmd(4, 6, texture);
+	auto draw_cmd = newDrawCmd(4, 6, texture);
 	auto* vertices = draw_cmd.vertices;
 	auto* indices = draw_cmd.indices;
 	const auto color = Color3XM{ 1,1,1 };
@@ -78,7 +78,7 @@ Render::StencilUsage Render::CanvasDrawEvent::stencil(StencilUsage mode)
 	return _stencil_mode;
 }
 
-void Render::CanvasDrawEvent::stencil_end(StencilUsage mode)
+void Render::CanvasDrawEvent::stencilEnd(StencilUsage mode)
 {
 	_stencil_layer--;
 	_stencil_mode = mode;

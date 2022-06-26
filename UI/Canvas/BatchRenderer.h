@@ -9,7 +9,7 @@ namespace Render
 
 namespace Canvas {
 
-	class CanvasImpl final {
+	class BatchRenderer final {
 		DrawData _drawData;
 		Render::IVertexBuffer<UI::Vertex2D>* _buffer;
 		Render::GEIndexBuffer* _ibuffer;
@@ -24,9 +24,9 @@ namespace Canvas {
 		DrawData* begin();
 		void present();
 
-		CanvasImpl(Render::GEGraphics*context);
-		CanvasImpl() = delete;
-		~CanvasImpl() = default;
+		BatchRenderer(Render::GEGraphics*context);
+		BatchRenderer() = delete;
+		~BatchRenderer() = default;
 
 		Render::GEGraphics* gfx() const;
 	};

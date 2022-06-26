@@ -1,7 +1,7 @@
 ﻿#include "FSObject.h"
 #include <Windows.h>
 
-bool FS::FSObject::is_directory() const
+bool FS::FSObject::isDirectory() const
 {
 	auto attributes = GetFileAttributesW(path());
 	if (attributes == INVALID_FILE_ATTRIBUTES)

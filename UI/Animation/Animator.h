@@ -16,7 +16,6 @@ namespace UI
 		}
 	};
 	
-	
 	struct __declspec(dllexport) AnimationComponent
 	{
 	public:

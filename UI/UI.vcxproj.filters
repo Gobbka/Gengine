@@ -36,7 +36,7 @@
     <ClCompile Include="Animation\Animator.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Canvas\CanvasImpl.cpp">
+    <ClCompile Include="Canvas\BatchRenderer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Canvas\RenderEvent.cpp">
@@ -98,7 +98,7 @@
     <ClInclude Include="Animation\Animator.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Canvas\CanvasImpl.h">
+    <ClInclude Include="Canvas\BatchRenderer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Canvas\RenderEvent.h">

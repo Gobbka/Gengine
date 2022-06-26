@@ -20,7 +20,7 @@ void UI::Button::set_position(Position2 position)
 
 void UI::Button::draw(Render::DrawEvent2D* event)
 {
-	event->draw_rect(_position, _resolution, _visible_color);
+	event->drawRect(_position, _resolution, _visible_color);
 	_text.draw(event);
 }
 

@@ -7,9 +7,9 @@ void UI::Panel::draw(Render::DrawEvent2D* event)
 	event->set_alpha(this->alpha);
 
 	if (_texture)
-		event->draw_rect(_position, _resolution, _texture);
+		event->drawRect(_position, _resolution, _texture);
 	else
-		event->draw_rect(_position, _resolution, _color);
+		event->drawRect(_position, _resolution, _color);
 }
 
 UI::ElementDescription UI::Panel::get_desc()

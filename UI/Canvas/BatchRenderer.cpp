@@ -1,10 +1,10 @@
-#include "CanvasImpl.h"
+#include "BatchRenderer.h"
 
 #include "Graphics.h"
 #include <Render/Common/IGContext.h>
 #include <Render/Common/IndexBuffer.h>
 
-Canvas::DrawData* Canvas::CanvasImpl::begin()
+Canvas::DrawData* Canvas::BatchRenderer::begin()
 {
 	_drawData.vertices.clear();
 	_drawData.indices.clear();
@@ -13,7 +13,7 @@ Canvas::DrawData* Canvas::CanvasImpl::begin()
 	return &_drawData;
 }
 
-void Canvas::CanvasImpl::present() 
+void Canvas::BatchRenderer::present() 
 {
 	if(_drawData.vertices.length() > _buffer->get_size())
 	{
@@ -62,7 +62,7 @@ void Canvas::CanvasImpl::present()
 	}
 }
 
-Canvas::CanvasImpl::CanvasImpl(Render::GEGraphics* context)
+Canvas::BatchRenderer::BatchRenderer(Render::GEGraphics* context)
 	: _buffer(context->get_device()->alloc_vertex_buffer<UI::Vertex2D>(100u,true))
 	, _ibuffer(context->get_device()->alloc_index_buffer(100))
 	, _context(context)
@@ -75,7 +75,7 @@ Canvas::CanvasImpl::CanvasImpl(Render::GEGraphics* context)
 	_drawData.default_texture = new Render::GETexture(context, white);
 }
 
-Render::GEGraphics* Canvas::CanvasImpl::gfx() const
+Render::GEGraphics* Canvas::BatchRenderer::gfx() const
 {
 	return _context;
 }

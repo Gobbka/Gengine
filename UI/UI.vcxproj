@@ -160,7 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation\Animator.cpp" />
-    <ClCompile Include="Canvas\CanvasImpl.cpp" />
+    <ClCompile Include="Canvas\BatchRenderer.cpp" />
     <ClCompile Include="Events\EventBus.cpp" />
     <ClCompile Include="Events\IEvent.cpp" />
     <ClCompile Include="UI\Button.cpp" />
@@ -181,7 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation\Animator.h" />
-    <ClInclude Include="Canvas\CanvasImpl.h" />
+    <ClInclude Include="Canvas\BatchRenderer.h" />
     <ClInclude Include="Canvas\DrawCmd.h" />
     <ClInclude Include="Canvas\DrawData.h" />
     <ClInclude Include="Canvas\DynamicAllocator.h" />

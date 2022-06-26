@@ -16,24 +16,24 @@ void UI::FlexColumnPanel::draw(Render::DrawEvent2D* event)
 		event->set_alpha(this->alpha);
 
 		if (_texture)
-			event->draw_rect(_position, _resolution, _texture);
+			event->drawRect(_position, _resolution, _texture);
 		else
-			event->draw_rect(_position, _resolution, _color);
+			event->drawRect(_position, _resolution, _color);
 		//event->stencil_end(old_stencil);
 
 		event->stencil(Render::StencilUsage::mask);
 		event->set_alpha(1.f);
 		Parent::draw(event);
-		event->stencil_end(old_stencil);
+		event->stencilEnd(old_stencil);
 	}
 	else
 	{
 		event->set_alpha(this->alpha);
 
 		if (_texture)
-			event->draw_rect(_position, _resolution, _texture);
+			event->drawRect(_position, _resolution, _texture);
 		else
-			event->draw_rect(_position, _resolution, _color);
+			event->drawRect(_position, _resolution, _color);
 
 		event->set_alpha(1.f);
 		Parent::draw(event);

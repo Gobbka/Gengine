@@ -2,7 +2,7 @@
 #include <functional>
 #include <vector>
 
-#include "Canvas/CanvasImpl.h"
+#include "Canvas/BatchRenderer.h"
 #include "Events/InteractionEventHandler.h"
 
 namespace UI {
@@ -26,7 +26,7 @@ namespace UI {
 	private:
 		bool _hidden;
 
-		Canvas::CanvasImpl _canvas;
+		Canvas::BatchRenderer _canvas;
 
 		std::vector<InteractiveElement*> _children{};
 

@@ -116,6 +116,7 @@ void XML::NodeValue::set_inner_text(GEString text)
 	}
 
 	bytes = (char*)new GEString(std::move(text));
+	type = ValueType::string;
 }
 
 void XML::NodeValue::clear()
@@ -218,9 +219,9 @@ XML::Node::~Node() noexcept
 	clear();
 }
 
-XML::NodeEntry XML::Node::find_by_tag(GEString& child_tag)
+XML::NodeEntry XML::Node::find_by_tag(GEString child_tag)
 {
-	return NodeEntry( this,child_tag );
+	return NodeEntry( this,std::move(child_tag) );
 }
 
 XML::Node* XML::Node::parent_node()

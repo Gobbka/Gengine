@@ -70,7 +70,7 @@ namespace XML
 
 		Node& operator=(Node&& other) noexcept;
 
-		NodeEntry find_by_tag(GEString& child_tag);
+		NodeEntry find_by_tag(GEString child_tag);
 		Node* parent_node();
 	};
 

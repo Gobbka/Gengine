@@ -12,7 +12,7 @@ namespace XML
 		std::vector<Node>* _nodes;
 		size_t _current_iteration;
 	public:
-		explicit NodeEntry(Node* node,GEString& tag_filter);
+		explicit NodeEntry(Node* node,GEString tag_filter);
 
 		void reset();
 		bool next();

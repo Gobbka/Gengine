@@ -21,8 +21,8 @@ bool strings_equal(const char* ptr1, const char* ptr2)
 	return false;
 }
 
-XML::NodeEntry::NodeEntry(Node* node, GEString& tag_filter)
-	: _tag_filter(tag_filter)
+XML::NodeEntry::NodeEntry(Node* node, GEString tag_filter)
+	: _tag_filter(std::move(tag_filter))
 	, _nodes(&node->array())
 	, _current_iteration(0)
 {
@@ -51,5 +51,9 @@ bool XML::NodeEntry::next()
 
 XML::Node* XML::NodeEntry::get() const
 {
-	return &_nodes->operator[](_current_iteration);
+	if(_current_iteration < _nodes->size())
+	{
+		return &_nodes->operator[](_current_iteration);
+	}
+	return nullptr;
 }

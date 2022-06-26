@@ -13,14 +13,14 @@ GEString::GEString(const wchar_t* string)
 	: _length(wcslen(string))
 	, _string(new wchar_t[_length + 1])
 {
-	memcpy(_string, string, _length * sizeof(wchar_t));
+	memcpy(_string, string, (_length + 1) * sizeof(wchar_t));
 }
 
 GEString::GEString(GEString& copy)
 	: _length(copy._length)
 	, _string(new wchar_t[_length])
 {
-	memcpy(_string, copy._string, _length * sizeof(wchar_t));
+	memcpy(_string, copy._string, (_length + 1) * sizeof(wchar_t));
 }
 
 GEString::GEString(GEString&& move) noexcept
@@ -68,7 +68,7 @@ bool GEString::operator==(GEString& other) const
 		const auto first_char = _string[i];
 		const auto second_char = other._string[i];
 
-		if (first_char == second_char == '\0')
+		if (first_char == second_char && second_char == '\0')
 			return true;
 
 		if (first_char == '\0' || second_char == '\0')

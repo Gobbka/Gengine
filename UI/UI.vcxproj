@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="Animation\Animator.cpp" />
     <ClCompile Include="Canvas\BatchRenderer.cpp" />
+    <ClCompile Include="Events\MouseEvent.cpp" />
     <ClCompile Include="Events\EventBus.cpp" />
     <ClCompile Include="Events\IEvent.cpp" />
     <ClCompile Include="UI\Button.cpp" />
@@ -185,8 +186,11 @@
     <ClInclude Include="Canvas\DrawCmd.h" />
     <ClInclude Include="Canvas\DrawData.h" />
     <ClInclude Include="Canvas\DynamicAllocator.h" />
+    <ClInclude Include="Events\MouseEvent.h" />
     <ClInclude Include="Events\EventBus.h" />
     <ClInclude Include="Events\IEvent.h" />
+    <ClInclude Include="IElement\Css.h" />
+    <ClInclude Include="IElement\ElementDescription.h" />
     <ClInclude Include="UI\Button.h" />
     <ClInclude Include="UI\Checkbox.h" />
     <ClInclude Include="IElement\InteractiveElement.h" />

@@ -25,8 +25,8 @@ namespace UI {
 	protected:
 		void onMouseDown(MouseButton button) override;
 		void onMouseUp(MouseButton button) override;
-		void on_mouse_scroll(short direction) override;
-		void on_mouse_move(int mx, int my) override;
-		void on_db_click() override;
+		void onMouseScroll(short direction) override;
+		void onMouseMove(int mx, int my) override;
+		void onDbClick() override;
 	};
 }

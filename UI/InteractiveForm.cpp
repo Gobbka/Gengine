@@ -72,7 +72,7 @@ EventStatus InteractiveForm::on_mouse_move(MouseEvent* move_event) const
 		auto* element = _children[i];
 		
 		if (
-			element->styles.display != ElementStyles::DisplayType::none &&
+			element->styles.display != Css::Display::none &&
 			e_handled == EventStatus::none &&
 			element->point_belongs(move_event->screen)
 			)
@@ -141,7 +141,7 @@ void InteractiveForm::render()
 
 	for (auto* element : _children)
 	{
-		if (element->styles.display != ElementStyles::DisplayType::none)
+		if (element->styles.display != Css::Display::none)
 			element->draw(&event);
 	}
 

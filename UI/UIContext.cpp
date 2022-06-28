@@ -100,7 +100,7 @@ void UI::UIContext::onMouseUp(MouseButton button)
 		});
 }
 
-void UI::UIContext::on_mouse_scroll(short direction)
+void UI::UIContext::onMouseScroll(short direction)
 {
 	MouseEvent scroll_event{ nullptr,{0,(float)direction},_cursor };
 
@@ -110,7 +110,7 @@ void UI::UIContext::on_mouse_scroll(short direction)
 		});
 }
 
-void UI::UIContext::on_mouse_move(int mx, int my)
+void UI::UIContext::onMouseMove(int mx, int my)
 {
 	const Position2 new_pos = { (float)mx,(float)-my };
 	MouseEvent move_event{nullptr,new_pos - _cursor,new_pos};
@@ -123,7 +123,7 @@ void UI::UIContext::on_mouse_move(int mx, int my)
 		});
 }
 
-void UI::UIContext::on_db_click()
+void UI::UIContext::onDbClick()
 {
 	_gfx->main_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
 		{

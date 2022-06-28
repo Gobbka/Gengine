@@ -18,8 +18,8 @@ namespace UI
 
 		virtual void onMouseDown(MouseButton button) PURE;
 		virtual void onMouseUp(MouseButton button) PURE;
-		virtual void on_mouse_scroll(short direction) PURE;
-		virtual void on_mouse_move(int mx, int my) PURE;
-		virtual void on_db_click() PURE;
+		virtual void onMouseScroll(short direction) PURE;
+		virtual void onMouseMove(int mx, int my) PURE;
+		virtual void onDbClick() PURE;
 	};
 }

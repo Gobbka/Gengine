@@ -2,10 +2,10 @@
 #include "../InteractiveForm.h"
 
 UI::ElementDescription::ElementDescription(bool can_be_parent, const char* string_name,bool has_text)
+	: can_be_parent(can_be_parent)
+	, has_text(has_text)
+	, string_name(string_name)
 {
-	this->can_be_parent = can_be_parent;
-	this->string_name = string_name;
-	this->has_text = has_text;
 }
 
 bool UI::InteractiveElement::have_parent() const
@@ -16,17 +16,6 @@ bool UI::InteractiveElement::have_parent() const
 void UI::InteractiveElement::set_alpha(float alpha)
 {
 	styles.alpha = alpha;
-}
-
-void UI::InteractiveElement::set_margin(float x, float y)
-{
-	this->styles.margin.x = this->styles.margin.z = x;
-	this->styles.margin.y = this->styles.margin.w = y;
-}
-
-void UI::InteractiveElement::set_margin(float x, float y, float z, float w)
-{
-	this->styles.margin = { x,y,z,w };
 }
 
 UI::Parent* UI::InteractiveElement::get_parent() const

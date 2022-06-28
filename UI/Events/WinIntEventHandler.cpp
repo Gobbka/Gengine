@@ -10,12 +10,12 @@ void UI::Interaction::WinIntEventHandler::windowProc(UINT msg, WPARAM wParam, LP
 	
 	if(msg == WM_MOUSEWHEEL)
 	{
-		this->on_mouse_scroll(GET_WHEEL_DELTA_WPARAM(wParam));
+		this->onMouseScroll(GET_WHEEL_DELTA_WPARAM(wParam));
 	}
 
 	if(msg == WM_MOUSEMOVE)
 	{
-		this->on_mouse_move(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+		this->onMouseMove(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
 	}
 
 	if (msg == WM_LBUTTONUP)
@@ -30,7 +30,7 @@ void UI::Interaction::WinIntEventHandler::windowProc(UINT msg, WPARAM wParam, LP
 
 	if(msg == WM_LBUTTONDBLCLK)
 	{
-		this->on_db_click();
+		this->onDbClick();
 		//this->on_lbmouse_down();
 		//Sleep(5);
 		//this->on_lbmouse_up();

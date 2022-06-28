@@ -10,7 +10,7 @@ void UI::FlexColumnPanel::update_items()
 
 void UI::FlexColumnPanel::draw(Render::DrawEvent2D* event)
 {
-	if (this->styles.overflow == VisibleState::hidden)
+	if (this->styles.overflow == Css::Visible::hidden)
 	{
 		auto old_stencil = event->stencil(Render::StencilUsage::write);
 		event->set_alpha(styles.alpha);

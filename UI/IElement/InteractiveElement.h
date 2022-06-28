@@ -1,4 +1,6 @@
 #pragma once
+#include "Css.h"
+#include "ElementDescription.h"
 #include "functional"
 #include "Render/Common/Texture.h"
 #include "Types/Types.h"
@@ -35,43 +37,9 @@ namespace UI {
 		virtual void move_by(Position2) = 0;
 	};
 
-
-	enum class VisibleState : bool
-	{
-		visible = true,
-		hidden = false,
-	};
-
-	struct ElementStyles
-	{
-		VisibleState      overflow = VisibleState::visible;
-		enum class DisplayType
-		{
-			block,
-			none,
-		} display = DisplayType::block;
-		
-		DirectX::XMFLOAT4 margin = { 0,0,0,0 };
-		float alpha = 1.f;
-	};
-
 	struct ElementState
 	{
 		bool hovered = false;
-	};
-
-	struct ElementDescription
-	{
-		// flags
-
-		bool can_be_parent : 1;
-		bool has_text : 1;
-
-		// other
-
-		const char* string_name;
-
-		ElementDescription(bool can_be_parent, const char* string_name, bool has_text = false);
 	};
 
 	class __declspec(dllexport) InteractiveElement : public IControllable
@@ -86,7 +54,7 @@ namespace UI {
 	public:
 		UINT unique_id = 0;
 
-		ElementStyles styles;
+		Css styles;
 		ElementState  state;
 	public:
 		virtual void draw(Render::DrawEvent2D* event) = 0;
@@ -113,16 +81,13 @@ namespace UI {
 
 		void set_alpha(float alpha);
 
-		void set_margin(float x, float y);
-		void set_margin(float x, float y, float z, float w);
-
 	public:
 		// public callbacks
 
 		EventCallback onMouseEnter = default_event_callback;
 		EventCallback onMouseLeave = default_event_callback;
 		void(*onMouseMove)(InteractiveElement* pObject, float mX, float mY) = [](InteractiveElement*, float, float) {};
-		std::function<void(MouseEvent*)>onMouseScroll = [](MouseEvent*) {};
+		EventCallback onMouseScroll = default_event_callback;
 		EventCallback onMouseUp = default_event_callback;
 		EventCallback onMouseDown = default_event_callback;
 		EventCallback onDBClick = default_event_callback;

@@ -79,7 +79,7 @@ void UI::Parent::handle_mouse_move(MouseEvent* event)
 		
 		if (
 			e_handled == false &&
-			element->styles.display != ElementStyles::DisplayType::none &&
+			element->styles.display != Css::Display::none &&
 			element->point_belongs(event->screen)
 			)
 		{
@@ -133,7 +133,7 @@ void UI::Parent::draw(Render::DrawEvent2D* event)
 {
 	for (auto* element : _children)
 	{
-		if (element->styles.display != ElementStyles::DisplayType::none)
+		if (element->styles.display != Css::Display::none)
 			element->draw(event);
 	}
 }
@@ -175,7 +175,7 @@ UI::Parent* UI::Parent::add_element(InteractiveElement* element)
 
 UI::Parent* UI::Parent::add_element(InteractiveElement* element, bool visible)
 {
-	element->styles.display = visible ? ElementStyles::DisplayType::none : ElementStyles::DisplayType::block;
+	element->styles.display = visible ? Css::Display::none : Css::Display::block;
 	return this->add_element(element);
 }
 

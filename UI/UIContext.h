@@ -10,6 +10,7 @@ namespace Render {
 }
 
 namespace UI {
+	enum class MouseButton;
 	class InteractiveForm;
 
 	class __declspec(dllexport) UIContext : public Interaction::WinIntEventHandler
@@ -22,8 +23,8 @@ namespace UI {
 		
 		ECS::Entity* create_layer();
 	protected:
-		void on_lbmouse_down() override;
-		void on_lbmouse_up() override;
+		void onMouseDown(MouseButton button) override;
+		void onMouseUp(MouseButton button) override;
 		void on_mouse_scroll(short direction) override;
 		void on_mouse_move(int mx, int my) override;
 		void on_db_click() override;

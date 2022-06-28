@@ -65,20 +65,21 @@ Surface UI::Button::get_resolution()
 	return _resolution;
 }
 
-void UI::Button::handle_mouse_up()
+void UI::Button::handleMouseUp(MouseEvent* event)
 {
-	this->onClick(this);
+	event->target = this;
+	this->onClick(event);
 
 	_visible_color = { _color.r + .1f,_color.g + .1f,_color.b + 0.1f };
 
-	InteractiveElement::handle_mouse_up();
+	InteractiveElement::handleMouseUp(event);
 }
 
-void UI::Button::handle_mouse_down()
+void UI::Button::handleMouseDown(MouseEvent* event)
 {
 	_visible_color = { _visible_color.r + .2f,_visible_color.g + .2f,_visible_color.b + 0.2f };
 	
-	InteractiveElement::handle_mouse_down();
+	InteractiveElement::handleMouseDown(event);
 }
 
 void UI::Button::handle_mouse_enter()

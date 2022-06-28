@@ -33,8 +33,8 @@ namespace UI
 	protected:
 		virtual void update_items() = 0;
 
-		void handle_mouse_up() override;
-		void handle_mouse_down() override;
+		void handleMouseUp(MouseEvent*event) override;
+		void handleMouseDown(MouseEvent*event) override;
 		void handle_mouse_enter() override;
 		void handle_mouse_leave() override;
 		void handle_mouse_move(MouseEvent* event) override;

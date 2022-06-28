@@ -148,7 +148,7 @@ void InteractiveForm::render()
 	_canvas.present();
 }
 
-EventStatus InteractiveForm::on_lbmouse_up()
+EventStatus InteractiveForm::onMouseUp(MouseEvent*event)
 {
 	if (hidden())
 		return EventStatus::none;
@@ -156,7 +156,7 @@ EventStatus InteractiveForm::on_lbmouse_up()
 	for(auto*element : _children)
 	{
 		if (element->state.hovered == true)
-			element->handle_mouse_up();
+			element->handleMouseUp(event);
 	}
 
 	freeDragMove();
@@ -164,7 +164,7 @@ EventStatus InteractiveForm::on_lbmouse_up()
 	return EventStatus::none;
 }
 
-EventStatus InteractiveForm::on_lbmouse_down() const
+EventStatus InteractiveForm::onMouseDown(MouseEvent* event) const
 {
 	if (hidden())
 		return EventStatus::none;
@@ -172,7 +172,7 @@ EventStatus InteractiveForm::on_lbmouse_down() const
 	for(auto* element : _children)
 	{
 		if (element->state.hovered == true)
-			element->handle_mouse_down();
+			element->handleMouseDown(event);
 	}
 
 	return EventStatus::none;

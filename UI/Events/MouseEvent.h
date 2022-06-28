@@ -5,6 +5,13 @@
 
 namespace UI
 {
+	enum class MouseButton {
+		none,
+		left,
+		middle,
+		right
+	};
+
 	class __declspec(dllexport) MouseEvent : public IEvent
 	{
 	public:
@@ -12,10 +19,12 @@ namespace UI
 			: IEvent(target)
 			, delta(delta)
 			, screen(screen)
+			, button(MouseButton::none)
 		{
 		}
 
 		Position2 delta;
 		Position2 screen;
+		MouseButton button;
 	};
 }

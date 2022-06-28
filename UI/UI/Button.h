@@ -33,8 +33,8 @@ namespace UI
 
 		EventCallback onClick = default_event_callback;
 
-		void handle_mouse_up() override;
-		void handle_mouse_down() override;
+		void handleMouseUp(MouseEvent* event) override;
+		void handleMouseDown(MouseEvent* event) override;
 		void handle_mouse_enter() override;
 		void handle_mouse_leave() override;
 		void set_texture(Render::GETexture* texture) override;

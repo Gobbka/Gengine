@@ -32,26 +32,26 @@ UI::InteractiveElement* UI::ChildrenCollection::last()
 }
 
 
-void UI::Parent::handle_mouse_up()
+void UI::Parent::handleMouseUp(MouseEvent* event)
 {
 	for(auto*element:_children)
 	{
 		if (element->state.hovered)
-			element->handle_mouse_up();
+			element->handleMouseUp(event);
 	}
 	
-	InteractiveElement::handle_mouse_up();
+	InteractiveElement::handleMouseUp(event);
 }
 
-void UI::Parent::handle_mouse_down()
+void UI::Parent::handleMouseDown(MouseEvent* event)
 {
 	for (auto* element : _children)
 	{
 		if (element->state.hovered)
-			element->handle_mouse_down();
+			element->handleMouseDown(event);
 	}
 	
-	InteractiveElement::handle_mouse_down();
+	InteractiveElement::handleMouseDown(event);
 }
 
 void UI::Parent::handle_mouse_enter()

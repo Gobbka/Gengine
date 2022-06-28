@@ -78,19 +78,25 @@ UI::UIContext::UIContext(Render::GEGraphics* gfx,Render::Scene* scene)
 	scene->render_pipeline().add_pass(new DrawUIPass(gfx), Render::PassStep::overlay);
 }
 
-void UI::UIContext::on_lbmouse_down()
+void UI::UIContext::onMouseDown(MouseButton button)
 {
+	MouseEvent mouse_event{ nullptr,{0,0},_cursor };
+	mouse_event.button = button;
+
 	_gfx->main_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
 		{
-			form->on_lbmouse_down();
+			form->onMouseDown(&mouse_event);
 		});
 }
 
-void UI::UIContext::on_lbmouse_up()
+void UI::UIContext::onMouseUp(MouseButton button)
 {
+	MouseEvent mouse_event{ nullptr,{0,0},_cursor };
+	mouse_event.button = button;
+
 	_gfx->main_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
 		{
-			form->on_lbmouse_up();
+			form->onMouseUp(&mouse_event);
 		});
 }
 

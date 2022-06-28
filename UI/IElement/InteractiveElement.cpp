@@ -59,34 +59,37 @@ void UI::InteractiveElement::set_parent(Parent* parent)
 
 void UI::InteractiveElement::handle_mouse_move(MouseEvent* event)
 {
+	event->target = this;
 	this->onMouseMove(this, event->screen.x, event->screen.y);
 }
 
 void UI::InteractiveElement::handle_mouse_leave()
 {
 	this->state.hovered = false;
-	this->onMouseLeave(this);
+	this->onMouseLeave(nullptr);
 }
 
 void UI::InteractiveElement::handle_mouse_enter()
 {
 	this->state.hovered = true;
-	this->onMouseEnter(this);
+	this->onMouseEnter(nullptr);
 }
 
-void UI::InteractiveElement::handle_mouse_up()
+void UI::InteractiveElement::handleMouseUp(MouseEvent* event)
 {
-	this->onMouseUp(this);
+	event->target = this;
+	this->onMouseUp(event);
 }
 
-void UI::InteractiveElement::handle_mouse_down()
+void UI::InteractiveElement::handleMouseDown(MouseEvent* event)
 {
-	this->onMouseDown(this);
+	event->target = this;
+	this->onMouseDown(event);
 }
 
 void UI::InteractiveElement::handle_db_click()
 {
-	this->onDBClick(this);
+	this->onDBClick(nullptr);
 }
 
 void UI::InteractiveElement::handle_mouse_scroll(MouseEvent* delta)

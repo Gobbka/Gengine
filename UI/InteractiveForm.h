@@ -38,8 +38,8 @@ namespace UI {
 		//InteractiveForm(InteractiveForm&& other) noexcept;
 		~InteractiveForm() = default;
 	public:
-		EventStatus on_lbmouse_up();
-		EventStatus on_lbmouse_down() const;
+		EventStatus onMouseUp(MouseEvent* event);
+		EventStatus onMouseDown(MouseEvent* event) const;
 		EventStatus on_mouse_move(MouseEvent* move_event) const;
 		EventStatus on_mouse_scroll(MouseEvent* direction) const;
 		EventStatus on_db_click() const;

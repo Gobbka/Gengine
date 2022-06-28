@@ -77,12 +77,12 @@ namespace UI {
 	class __declspec(dllexport) InteractiveElement : public IControllable
 	{
 	public:
-		typedef std::function<void(InteractiveElement*pObject)> EventCallback;
+		typedef std::function<void(MouseEvent*event)> EventCallback;
 	protected:
 		InteractiveForm* form = nullptr;
 		Parent* parent = nullptr;
 
-		static void default_event_callback(UIElementEventArgs args) {}
+		static void default_event_callback(MouseEvent*event) {}
 	public:
 		UINT unique_id = 0;
 
@@ -136,8 +136,8 @@ namespace UI {
 		virtual void handle_mouse_move(MouseEvent* event);
 		virtual void handle_mouse_leave();
 		virtual void handle_mouse_enter();
-		virtual void handle_mouse_up();
-		virtual void handle_mouse_down();
+		virtual void handleMouseUp(MouseEvent* event);
+		virtual void handleMouseDown(MouseEvent* event);
 		virtual void handle_db_click();
 		virtual void handle_mouse_scroll(MouseEvent* delta);
 	};

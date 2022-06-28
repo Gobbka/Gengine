@@ -20,12 +20,12 @@ void UI::Interaction::WinIntEventHandler::windowProc(UINT msg, WPARAM wParam, LP
 
 	if (msg == WM_LBUTTONUP)
 	{
-		this->on_lbmouse_up();
+		this->onMouseUp(MouseButton::left);
 	}
 
 	if (msg == WM_LBUTTONDOWN)
 	{
-		this->on_lbmouse_down();
+		this->onMouseDown(MouseButton::left);
 	}
 
 	if(msg == WM_LBUTTONDBLCLK)

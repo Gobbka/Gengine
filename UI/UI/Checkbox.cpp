@@ -67,11 +67,11 @@ void UI::Checkbox::move_by(const Position2 offset)
 	_position += offset;
 }
 
-void UI::Checkbox::handle_mouse_up()
+void UI::Checkbox::handleMouseUp(MouseEvent* event)
 {
 	*_lp_value = !*_lp_value;
 
-	InteractiveElement::handle_mouse_up();
+	InteractiveElement::handleMouseUp(event);
 }
 
 void UI::Checkbox::set_texture(Render::GETexture* texture)

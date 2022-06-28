@@ -69,18 +69,18 @@ void UI::Parent::handle_mouse_leave()
 	InteractiveElement::handle_mouse_leave();
 }
 
-void UI::Parent::handle_mouse_move(MoveEvent event)
+void UI::Parent::handle_mouse_move(MouseEvent* event)
 {
 	bool e_handled = false;
 
 	for (auto i = _children.count(); i --> 0;)
 	{
-		auto* element = (UI::InteractiveElement*)_children[i];
+		auto* element = _children[i];
 		
 		if (
 			e_handled == false &&
 			element->styles.display != ElementStyles::DisplayType::none &&
-			element->point_belongs(event.absolute)
+			element->point_belongs(event->screen)
 			)
 		{
 			if (element->state.hovered == false)
@@ -99,7 +99,7 @@ void UI::Parent::handle_mouse_move(MoveEvent event)
 	InteractiveElement::handle_mouse_move(event);
 }
 
-void UI::Parent::handle_mouse_scroll(int delta)
+void UI::Parent::handle_mouse_scroll(MouseEvent* delta)
 {
 
 	for (auto* element : _children)

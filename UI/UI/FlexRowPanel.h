@@ -34,6 +34,6 @@ namespace UI
 		Surface get_resolution() override;
 		void set_resolution(Surface surface) override;
 
-		void handle_mouse_scroll(int delta) override;
+		void handle_mouse_scroll(MouseEvent* event) override;
 	};
 }

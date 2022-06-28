@@ -1,6 +1,7 @@
 #include "FlexRowPanel.h"
 
 #include "../Canvas/RenderEvent.h"
+#include "../Events/MouseEvent.h"
 #include "Types/Types.h"
 
 void UI::FlexRowPanel::update_items()
@@ -117,7 +118,7 @@ void UI::FlexRowPanel::set_resolution(Surface surface)
 	_resolution = surface;
 }
 
-void UI::FlexRowPanel::handle_mouse_scroll(int delta)
+void UI::FlexRowPanel::handle_mouse_scroll(MouseEvent* event)
 {
 	const auto height_ratio = _location_rule.height_ratio();
 	if(height_ratio >= 1)
@@ -125,7 +126,7 @@ void UI::FlexRowPanel::handle_mouse_scroll(int delta)
 		return;
 	}
 
-	auto fdelta = (float)delta;
+	auto fdelta = event->delta.y;
 	const auto content_height = _resolution.height / height_ratio;
 	const auto height_different = content_height - _resolution.height;
 
@@ -146,5 +147,5 @@ void UI::FlexRowPanel::handle_mouse_scroll(int delta)
 		element->move_by({ 0,fdelta * -1 });
 	}
 
-	Parent::handle_mouse_scroll(delta);
+	Parent::handle_mouse_scroll(event);
 }

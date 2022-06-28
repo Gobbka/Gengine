@@ -57,9 +57,9 @@ void UI::InteractiveElement::set_parent(Parent* parent)
 	this->parent = parent;
 }
 
-void UI::InteractiveElement::handle_mouse_move( MoveEvent event)
+void UI::InteractiveElement::handle_mouse_move(MouseEvent* event)
 {
-	this->onMouseMove(this, event.absolute.x, event.absolute.y);
+	this->onMouseMove(this, event->screen.x, event->screen.y);
 }
 
 void UI::InteractiveElement::handle_mouse_leave()
@@ -89,7 +89,7 @@ void UI::InteractiveElement::handle_db_click()
 	this->onDBClick(this);
 }
 
-void UI::InteractiveElement::handle_mouse_scroll(int delta)
+void UI::InteractiveElement::handle_mouse_scroll(MouseEvent* delta)
 {
-	this->onMouseScroll(this, delta);
+	this->onMouseScroll(delta);
 }

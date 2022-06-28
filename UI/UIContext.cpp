@@ -96,22 +96,24 @@ void UI::UIContext::on_lbmouse_up()
 
 void UI::UIContext::on_mouse_scroll(short direction)
 {
+	MouseEvent scroll_event{ nullptr,{0,(float)direction},_cursor };
+
 	_gfx->main_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
 		{
-			form->on_mouse_scroll(direction);
+			form->on_mouse_scroll(&scroll_event);
 		});
 }
 
 void UI::UIContext::on_mouse_move(int mx, int my)
 {
 	const Position2 new_pos = { (float)mx,(float)-my };
-	const MoveEvent move_event{new_pos - _cursor,new_pos};
+	MouseEvent move_event{nullptr,new_pos - _cursor,new_pos};
 	
 	_cursor = new_pos;
 	
 	_gfx->main_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
 		{
-			form->on_mouse_move(move_event);
+			form->on_mouse_move(&move_event);
 		});
 }
 

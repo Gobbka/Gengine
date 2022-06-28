@@ -8,8 +8,8 @@ namespace Render {
 }
 
 namespace UI {
+	class MouseEvent;
 
-	struct MoveEvent;
 	class InteractiveForm;
 
 	class Parent;
@@ -122,7 +122,7 @@ namespace UI {
 		EventCallback onMouseEnter = default_event_callback;
 		EventCallback onMouseLeave = default_event_callback;
 		void(*onMouseMove)(InteractiveElement* pObject, float mX, float mY) = [](InteractiveElement*, float, float) {};
-		std::function<void(InteractiveElement* pObject, int delta)>onMouseScroll = [](InteractiveElement*, int) {};
+		std::function<void(MouseEvent*)>onMouseScroll = [](MouseEvent*) {};
 		EventCallback onMouseUp = default_event_callback;
 		EventCallback onMouseDown = default_event_callback;
 		EventCallback onDBClick = default_event_callback;
@@ -133,12 +133,12 @@ namespace UI {
 		// u must to call base func if think that event need to be handled
 		//
 
-		virtual void handle_mouse_move(MoveEvent event);
+		virtual void handle_mouse_move(MouseEvent* event);
 		virtual void handle_mouse_leave();
 		virtual void handle_mouse_enter();
 		virtual void handle_mouse_up();
 		virtual void handle_mouse_down();
 		virtual void handle_db_click();
-		virtual void handle_mouse_scroll(int delta);
+		virtual void handle_mouse_scroll(MouseEvent* delta);
 	};
 }

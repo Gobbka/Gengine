@@ -3,7 +3,7 @@
 #include <iostream>
 #include <windowsx.h>
 
-void UI::Interaction::WinIntEventHandler::window_proc(UINT msg, WPARAM wParam, LPARAM lParam)
+void UI::Interaction::WinIntEventHandler::windowProc(UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	if (!this->can_handle_event)
 		return;

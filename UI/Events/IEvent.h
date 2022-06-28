@@ -3,8 +3,14 @@
 namespace UI {
 	class InteractiveElement;
 
-	struct IEvent
+	class IEvent
 	{
-		InteractiveElement* pObject;
+	public:
+		IEvent(InteractiveElement* target)
+			: target(target)
+		{
+		}
+
+		InteractiveElement* target;
 	};
 }

@@ -53,14 +53,14 @@ InteractiveForm::InteractiveForm(Render::GEGraphics* pEngine, Position2* cursor_
 	, _cursor_position(cursor_position)
 {}
 
-EventStatus InteractiveForm::on_mouse_move(MoveEvent move_event) const
+EventStatus InteractiveForm::on_mouse_move(MouseEvent* move_event) const
 {
 	if (hidden())
 		return EventStatus::none;
 
 	if (_dragged)
 	{
-		const auto new_pos = _dragged->element->get_position() + move_event.delta;
+		const auto new_pos = _dragged->element->get_position() + move_event->delta;
 		_dragged->element->set_position(new_pos);
 		return EventStatus::handled;
 	}
@@ -74,7 +74,7 @@ EventStatus InteractiveForm::on_mouse_move(MoveEvent move_event) const
 		if (
 			element->styles.display != ElementStyles::DisplayType::none &&
 			e_handled == EventStatus::none &&
-			element->point_belongs(move_event.absolute)
+			element->point_belongs(move_event->screen)
 			)
 		{
 			if (element->state.hovered == false)
@@ -93,7 +93,7 @@ EventStatus InteractiveForm::on_mouse_move(MoveEvent move_event) const
 	return e_handled;
 }
 
-EventStatus InteractiveForm::on_mouse_scroll(short direction) const
+EventStatus InteractiveForm::on_mouse_scroll(MouseEvent* direction) const
 {
 	if (hidden())
 		return EventStatus::none;

@@ -9,7 +9,7 @@ namespace UI
 		class __declspec(dllexport) WinIntEventHandler : public IEventHandler
 		{
 		public:
-			void window_proc(UINT msg, WPARAM wParam, LPARAM lParam);
+			void windowProc(UINT msg, WPARAM wParam, LPARAM lParam);
 		};
 	}
 }

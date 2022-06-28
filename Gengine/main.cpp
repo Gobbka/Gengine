@@ -53,7 +53,7 @@ int WINAPI wWinMain(
 
     form->on_wndproc = [&](UINT msg, WPARAM wp, LPARAM lp)
     {
-    	form->get_ui()->window_proc(msg, wp, lp);
+    	form->get_ui()->windowProc(msg, wp, lp);
     };
 	
     auto* stone_texture = context->get_device()->create_texture(AssetsLoader::loadImage(L"assets\\Pebbles_027_BaseColor.png"));

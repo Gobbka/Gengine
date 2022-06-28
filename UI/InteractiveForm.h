@@ -1,19 +1,13 @@
 #pragma once
 #include <functional>
 #include <vector>
-
+#include "Events/MouseEvent.h"
 #include "Canvas/BatchRenderer.h"
 #include "Events/InteractionEventHandler.h"
 
 namespace UI {
 	
 	class InteractiveElement;
-
-	struct __declspec(dllexport) MoveEvent
-	{
-		Position2 delta;
-		Position2 absolute;
-	};
 
 	class __declspec(dllexport) InteractiveForm final
 	{
@@ -46,8 +40,8 @@ namespace UI {
 	public:
 		EventStatus on_lbmouse_up();
 		EventStatus on_lbmouse_down() const;
-		EventStatus on_mouse_move(MoveEvent move_event) const;
-		EventStatus on_mouse_scroll(short direction) const;
+		EventStatus on_mouse_move(MouseEvent* move_event) const;
+		EventStatus on_mouse_scroll(MouseEvent* direction) const;
 		EventStatus on_db_click() const;
 
 		bool hidden() const;

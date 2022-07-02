@@ -61,7 +61,7 @@ namespace UI {
 
 		// public getters
 
-		bool have_parent() const;
+		bool haveParent() const;
 
 		Position2 get_position() override PURE;
 
@@ -71,7 +71,7 @@ namespace UI {
 
 		virtual bool point_belongs(Position2 point) PURE;
 
-		Parent* get_parent() const;
+		Parent* parentNode() const;
 		InteractiveForm* get_form() const;
 		Position2 point_to(InteractiveElement* element);
 	public:
@@ -98,9 +98,9 @@ namespace UI {
 		// u must to call base func if think that event need to be handled
 		//
 
-		virtual void handle_mouse_move(MouseEvent* event);
-		virtual void handle_mouse_leave();
-		virtual void handle_mouse_enter();
+		virtual void handleMouseMove(MouseEvent* event);
+		virtual void handleMouseLeave();
+		virtual void handleMouseEnter();
 		virtual void handleMouseUp(MouseEvent* event);
 		virtual void handleMouseDown(MouseEvent* event);
 		virtual void handle_db_click();

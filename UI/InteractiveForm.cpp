@@ -26,7 +26,9 @@ void InteractiveForm::foreachAll(Parent* parent, std::function<void(InteractiveE
 void InteractiveForm::foreach(std::function<void(InteractiveElement* element)> callback) const
 {
 	for(auto* element : _children)
+	{
 		callback(element);
+	}
 }
 
 void InteractiveForm::foreachAll(std::function<void(InteractiveElement* element)> callback) const
@@ -72,6 +74,7 @@ bool InteractiveForm::hasElement(InteractiveElement* element) const
 
 InteractiveForm* InteractiveForm::addElement(InteractiveElement* element)
 {
+	element->set_form(this);
 	_children.push_back(element);
 
 	return this;
@@ -109,7 +112,7 @@ EventStatus InteractiveForm::onMouseMove(MouseEvent* move_event) const
 
 		if (element->state.hovered)
 		{
-			element->handle_mouse_leave();
+			element->handleMouseLeave();
 		}
 	});
 
@@ -117,27 +120,31 @@ EventStatus InteractiveForm::onMouseMove(MouseEvent* move_event) const
 	{
 		if(!element->state.hovered)
 		{
-			element->handle_mouse_enter();
+			element->handleMouseEnter();
 		}
 		if(element->styles.cursor == Css::Cursor::pointer)
 		{
 			SetCursor(LoadCursor(nullptr, IDC_HAND));
 		}
-		element->handle_mouse_move(move_event);
+		element->handleMouseMove(move_event);
 	}
 
 	return EventStatus::none;
 }
 
-EventStatus InteractiveForm::on_mouse_scroll(MouseEvent* direction) const
+EventStatus InteractiveForm::onMouseScroll(MouseEvent* direction) const
 {
 	if (hidden())
+	{
 		return EventStatus::none;
+	}
 	
 	foreach([direction](InteractiveElement* element)
 		{
 			if (element->state.hovered == true)
+			{
 				element->handle_mouse_scroll(direction);
+			}
 		});
 	return EventStatus::none;
 }
@@ -145,7 +152,9 @@ EventStatus InteractiveForm::on_mouse_scroll(MouseEvent* direction) const
 EventStatus InteractiveForm::on_db_click() const
 {
 	if (hidden())
+	{
 		return EventStatus::none;
+	}
 
 	foreach([](InteractiveElement* element)
 		{
@@ -178,7 +187,9 @@ void InteractiveForm::render()
 	for (auto* element : _children)
 	{
 		if (element->styles.display != Css::Display::none)
+		{
 			element->draw(&event);
+		}
 	}
 
 	_canvas.present();
@@ -187,12 +198,16 @@ void InteractiveForm::render()
 EventStatus InteractiveForm::onMouseUp(MouseEvent*event)
 {
 	if (hidden())
+	{
 		return EventStatus::none;
+	}
 
 	for(auto*element : _children)
 	{
 		if (element->state.hovered == true)
+		{
 			element->handleMouseUp(event);
+		}
 	}
 
 	freeDragMove();
@@ -203,12 +218,16 @@ EventStatus InteractiveForm::onMouseUp(MouseEvent*event)
 EventStatus InteractiveForm::onMouseDown(MouseEvent* event) const
 {
 	if (hidden())
+	{
 		return EventStatus::none;
+	}
 
 	for(auto* element : _children)
 	{
 		if (element->state.hovered == true)
+		{
 			element->handleMouseDown(event);
+		}
 	}
 
 	return EventStatus::none;

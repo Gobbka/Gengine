@@ -35,9 +35,9 @@ namespace UI
 
 		void handleMouseUp(MouseEvent*event) override;
 		void handleMouseDown(MouseEvent*event) override;
-		void handle_mouse_enter() override;
-		void handle_mouse_leave() override;
-		void handle_mouse_move(MouseEvent* event) override;
+		void handleMouseEnter() override;
+		void handleMouseLeave() override;
+		void handleMouseMove(MouseEvent* event) override;
 		void handle_mouse_scroll(MouseEvent* delta) override;
 		void handle_db_click() override;
 	public:

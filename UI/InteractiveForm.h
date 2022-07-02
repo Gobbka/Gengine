@@ -44,7 +44,7 @@ namespace UI {
 		EventStatus onMouseUp(MouseEvent* event);
 		EventStatus onMouseDown(MouseEvent* event) const;
 		EventStatus onMouseMove(MouseEvent* move_event) const;
-		EventStatus on_mouse_scroll(MouseEvent* direction) const;
+		EventStatus onMouseScroll(MouseEvent* direction) const;
 		EventStatus on_db_click() const;
 
 		bool hidden() const;

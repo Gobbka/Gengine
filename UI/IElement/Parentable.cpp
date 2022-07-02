@@ -54,22 +54,22 @@ void UI::Parent::handleMouseDown(MouseEvent* event)
 	InteractiveElement::handleMouseDown(event);
 }
 
-void UI::Parent::handle_mouse_enter()
+void UI::Parent::handleMouseEnter()
 {
-	InteractiveElement::handle_mouse_enter();
+	InteractiveElement::handleMouseEnter();
 }
 
-void UI::Parent::handle_mouse_leave()
+void UI::Parent::handleMouseLeave()
 {
 	for (auto* element : _children)
 	{
-		element->handle_mouse_leave();
+		element->handleMouseLeave();
 	}
 	
-	InteractiveElement::handle_mouse_leave();
+	InteractiveElement::handleMouseLeave();
 }
 
-void UI::Parent::handle_mouse_move(MouseEvent* event)
+void UI::Parent::handleMouseMove(MouseEvent* event)
 {
 	bool e_handled = false;
 
@@ -85,18 +85,18 @@ void UI::Parent::handle_mouse_move(MouseEvent* event)
 		{
 			if (element->state.hovered == false)
 			{
-				element->handle_mouse_enter();
+				element->handleMouseEnter();
 			}
-			element->handle_mouse_move(event);
+			element->handleMouseMove(event);
 			e_handled = true;
 		}
 		else if (element->state.hovered == true)
 		{
-			element->handle_mouse_leave();
+			element->handleMouseLeave();
 		}
 	}
 
-	InteractiveElement::handle_mouse_move(event);
+	InteractiveElement::handleMouseMove(event);
 }
 
 void UI::Parent::handle_mouse_scroll(MouseEvent* delta)
@@ -161,7 +161,7 @@ UI::InteractiveElement* UI::Parent::element_at(UINT index)
 
 UI::Parent* UI::Parent::add_element(InteractiveElement* element)
 {
-	if (element->have_parent())
+	if (element->haveParent())
 		return this;
 
 	element->set_parent(this);

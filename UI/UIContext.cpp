@@ -106,7 +106,7 @@ void UI::UIContext::onMouseScroll(short direction)
 
 	_gfx->main_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
 		{
-			form->on_mouse_scroll(&scroll_event);
+			form->onMouseScroll(&scroll_event);
 		});
 }
 

@@ -8,7 +8,7 @@ UI::ElementDescription::ElementDescription(bool can_be_parent, const char* strin
 {
 }
 
-bool UI::InteractiveElement::have_parent() const
+bool UI::InteractiveElement::haveParent() const
 {
 	return this->parent != nullptr;
 }
@@ -18,7 +18,7 @@ void UI::InteractiveElement::set_alpha(float alpha)
 	styles.alpha = alpha;
 }
 
-UI::Parent* UI::InteractiveElement::get_parent() const
+UI::Parent* UI::InteractiveElement::parentNode() const
 {
 	return this->parent;
 }
@@ -46,19 +46,19 @@ void UI::InteractiveElement::set_parent(Parent* parent)
 	this->parent = parent;
 }
 
-void UI::InteractiveElement::handle_mouse_move(MouseEvent* event)
+void UI::InteractiveElement::handleMouseMove(MouseEvent* event)
 {
 	event->target = this;
 	this->onMouseMove(this, event->screen.x, event->screen.y);
 }
 
-void UI::InteractiveElement::handle_mouse_leave()
+void UI::InteractiveElement::handleMouseLeave()
 {
 	this->state.hovered = false;
 	this->onMouseLeave(nullptr);
 }
 
-void UI::InteractiveElement::handle_mouse_enter()
+void UI::InteractiveElement::handleMouseEnter()
 {
 	this->state.hovered = true;
 	this->onMouseEnter(nullptr);

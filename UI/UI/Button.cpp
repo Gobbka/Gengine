@@ -82,18 +82,18 @@ void UI::Button::handleMouseDown(MouseEvent* event)
 	InteractiveElement::handleMouseDown(event);
 }
 
-void UI::Button::handle_mouse_enter()
+void UI::Button::handleMouseEnter()
 {
 	_visible_color = { _color.r + .1f,_color.g + .1f,_color.b + 0.1f };
 
-	InteractiveElement::handle_mouse_enter();
+	InteractiveElement::handleMouseEnter();
 }
 
-void UI::Button::handle_mouse_leave()
+void UI::Button::handleMouseLeave()
 {
 	_visible_color = _color;
 
-	InteractiveElement::handle_mouse_leave();
+	InteractiveElement::handleMouseLeave();
 }
 
 void UI::Button::set_texture(Render::GETexture* texture)

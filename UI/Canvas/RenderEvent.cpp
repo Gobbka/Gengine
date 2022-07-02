@@ -21,17 +21,18 @@ Render::EventDrawCmd Render::CanvasDrawEvent::newDrawCmd(UINT vertices,UINT indi
 {
 	texture = texture ? texture : _draw_data->default_texture;
 
-	auto vertices_index = _draw_data->vertices.require(vertices);
-	auto indices_index = _draw_data->indices.require(indices);
+	const auto vertices_index = _draw_data->vertices.require(vertices);
+	const auto indices_index = _draw_data->indices.require(indices);
 
-	auto stencil_layer = (unsigned char)(_stencil_layer >= 0 ? _stencil_layer : 0);
+	const auto stencil_layer = (unsigned char)(_stencil_layer >= 0 ? _stencil_layer : 0);
 		
 	_draw_data->draw_list.push(Canvas::DrawCmd{ 
 		texture,
 		indices_index,
 		indices,
 		vertices,
-		vertices_index,stencil_layer,
+		vertices_index,
+		stencil_layer,
 		_stencil_mode
 	});
 	
@@ -69,6 +70,11 @@ void Render::CanvasDrawEvent::drawRect(Position2 pos, Surface resolution, GEText
 	vertices[3] = UI::Vertex2D({ pos.x + resolution.width,pos.y - resolution.height }, color, { 1,1 });
 
 	memcpy(indices, rect_indices, sizeof(rect_indices));
+}
+
+void Render::CanvasDrawEvent::drawRect(Position2 pos, Surface resolution, Css* styles) const
+{
+
 }
 
 Render::StencilUsage Render::CanvasDrawEvent::stencil(StencilUsage mode)

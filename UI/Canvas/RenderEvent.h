@@ -2,6 +2,8 @@
 #include "DrawData.h"
 #include "Vertex2D.h"
 
+struct Css;
+
 namespace Render {
 
 	struct EventDrawCmd
@@ -20,8 +22,9 @@ namespace Render {
 
 		EventDrawCmd newDrawCmd(UINT vertices,UINT indices, GETexture*texture = nullptr) const;
 
-		void drawRect(Position2 pos,Surface resolution,Color3XM color) const;
-		void drawRect(Position2 pos,Surface resolution, GETexture* texture) const;
+		void drawRect(Position2 pos, Surface resolution, Color3XM color) const;
+		void drawRect(Position2 pos, Surface resolution, GETexture* texture) const;
+		void drawRect(Position2 pos, Surface resolution, Css* styles) const;
 
 		StencilUsage stencil(StencilUsage mode);
 		void stencilEnd(StencilUsage mode);

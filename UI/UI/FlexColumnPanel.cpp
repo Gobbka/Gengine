@@ -40,7 +40,7 @@ void UI::FlexColumnPanel::draw(Render::DrawEvent2D* event)
 	}
 }
 
-UI::ElementDescription UI::FlexColumnPanel::get_desc()
+UI::ElementDescription UI::FlexColumnPanel::getDesc()
 {
 	return ElementDescription(true, "FLEXCOLUMNPANEL");
 }

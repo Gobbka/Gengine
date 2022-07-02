@@ -15,8 +15,15 @@ struct Css
 		none,
 	};
 
+	enum class Cursor 
+	{
+		arrow,
+		pointer,
+	};
+
 	Visible overflow = Visible::visible;
 	Display display = Display::block;
+	Cursor cursor = Cursor::arrow;
 
 	Vector4 margin = {0,0,0,0};
 	float alpha = 1.f;

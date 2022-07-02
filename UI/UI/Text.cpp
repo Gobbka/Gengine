@@ -206,7 +206,7 @@ Position2 UI::Text::get_position()
 	return { 0,0 };
 }
 
-UI::ElementDescription UI::Text::get_desc()
+UI::ElementDescription UI::Text::getDesc()
 {
 	return { false,"LABEL" };
 }

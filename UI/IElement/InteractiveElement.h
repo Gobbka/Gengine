@@ -65,7 +65,7 @@ namespace UI {
 
 		Position2 get_position() override PURE;
 
-		virtual ElementDescription get_desc() PURE;
+		virtual ElementDescription getDesc() PURE;
 
 		Surface get_resolution() override PURE;
 

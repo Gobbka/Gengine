@@ -12,7 +12,7 @@ void UI::Panel::draw(Render::DrawEvent2D* event)
 		event->drawRect(_position, _resolution, _color);
 }
 
-UI::ElementDescription UI::Panel::get_desc()
+UI::ElementDescription UI::Panel::getDesc()
 {
 	return ElementDescription(false, "PANEL");
 }

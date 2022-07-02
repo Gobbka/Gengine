@@ -44,7 +44,7 @@ void UI::FlexRowPanel::draw(Render::DrawEvent2D* event)
 	event->stencilEnd(old_stencil);
 }
 
-UI::ElementDescription UI::FlexRowPanel::get_desc()
+UI::ElementDescription UI::FlexRowPanel::getDesc()
 {
 	return ElementDescription(true, "FLEXROWPANEL");
 }

@@ -16,7 +16,7 @@ namespace UI
 		Color3XM non_active_color{ 0.305f,0.305f,0.305f };
 	
 		bool is_checked() const;
-		ElementDescription get_desc() override;
+		ElementDescription getDesc() override;
 
 		Checkbox(Position2 position, Surface resolution, Color3XM color, bool*value);
 		Checkbox(Position2 position, Surface resolution, bool*value);

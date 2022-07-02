@@ -4,13 +4,43 @@
 
 #include "IElement/InteractiveElement.h"
 #include "Canvas/RenderEvent.h"
+#include "IElement/Parentable.h"
 
 using namespace UI;
+
+void InteractiveForm::foreachAll(Parent* parent, std::function<void(InteractiveElement* element)> callback)
+{
+	auto& children = *parent->children();
+	for(auto* element : children)
+	{
+		callback(element);
+
+		const auto description = element->getDesc();
+		if (description.can_be_parent)
+		{
+			foreachAll((Parent*)element, callback);
+		}
+	}
+}
 
 void InteractiveForm::foreach(std::function<void(InteractiveElement* element)> callback) const
 {
 	for(auto* element : _children)
 		callback(element);
+}
+
+void InteractiveForm::foreachAll(std::function<void(InteractiveElement* element)> callback) const
+{
+	for(auto* element : _children)
+	{
+		callback(element);
+
+		const auto description = element->getDesc();
+		if(description.can_be_parent)
+		{
+			foreachAll((Parent*)element, callback);
+		}
+	}
 }
 
 void InteractiveForm::dragMove(InteractiveElement* element)
@@ -53,10 +83,12 @@ InteractiveForm::InteractiveForm(Render::GEGraphics* pEngine, Position2* cursor_
 	, _cursor_position(cursor_position)
 {}
 
-EventStatus InteractiveForm::on_mouse_move(MouseEvent* move_event) const
+EventStatus InteractiveForm::onMouseMove(MouseEvent* move_event) const
 {
 	if (hidden())
+	{
 		return EventStatus::none;
+	}
 
 	if (_dragged)
 	{
@@ -65,32 +97,36 @@ EventStatus InteractiveForm::on_mouse_move(MouseEvent* move_event) const
 		return EventStatus::handled;
 	}
 
-	auto e_handled = EventStatus::none;
+	std::vector<InteractiveElement*> event_objects;
 
-	for (auto i = _children.size(); i --> 0;)
+	foreachAll([&](InteractiveElement* element)
 	{
-		auto* element = _children[i];
-		
-		if (
-			element->styles.display != Css::Display::none &&
-			e_handled == EventStatus::none &&
-			element->point_belongs(move_event->screen)
-			)
+		if(element->styles.display != Css::Display::none && element->point_belongs(move_event->screen))
 		{
-			if (element->state.hovered == false)
-			{
-				element->handle_mouse_enter();
-			}
-			element->handle_mouse_move(move_event);
-			e_handled = EventStatus::handled;
+			event_objects.push_back(element);
+			return;
 		}
-		else if (element->state.hovered == true)
+
+		if (element->state.hovered)
 		{
 			element->handle_mouse_leave();
 		}
+	});
+
+	for(auto*element : event_objects)
+	{
+		if(!element->state.hovered)
+		{
+			element->handle_mouse_enter();
+		}
+		if(element->styles.cursor == Css::Cursor::pointer)
+		{
+			SetCursor(LoadCursor(nullptr, IDC_HAND));
+		}
+		element->handle_mouse_move(move_event);
 	}
 
-	return e_handled;
+	return EventStatus::none;
 }
 
 EventStatus InteractiveForm::on_mouse_scroll(MouseEvent* direction) const

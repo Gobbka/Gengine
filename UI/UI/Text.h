@@ -43,7 +43,7 @@ namespace UI
 		void draw(Render::DrawEvent2D* event) override;
 		void set_color(Color3XM color);
 		Position2 get_position() override;
-		ElementDescription get_desc() override;
+		ElementDescription getDesc() override;
 		Surface get_resolution() override;
 		bool point_belongs(Position2 point) override;
 	};

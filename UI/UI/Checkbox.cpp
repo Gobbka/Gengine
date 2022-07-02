@@ -14,7 +14,7 @@ bool UI::Checkbox::is_checked() const
 	return *_lp_value;
 }
 
-UI::ElementDescription UI::Checkbox::get_desc()
+UI::ElementDescription UI::Checkbox::getDesc()
 {
 	return ElementDescription(false,"CHECKBOX" );
 }

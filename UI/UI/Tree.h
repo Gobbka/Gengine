@@ -24,6 +24,6 @@ namespace UI
 
 		void add_item(const wchar_t* name);
 
-		ElementDescription get_desc() override;
+		ElementDescription getDesc() override;
 	};
 }

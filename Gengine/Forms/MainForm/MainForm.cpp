@@ -35,7 +35,7 @@ namespace UI
 			_object(object)
 		{
 			Panel::set_texture(texture);
-			
+			styles.cursor = Css::Cursor::pointer;
 		}
 
 		void handle_db_click() override
@@ -47,18 +47,6 @@ namespace UI
 				
 				_wsystem(command.c_str());
 			}
-		}
-
-		void handle_mouse_enter() override
-		{
-			SetCursor(LoadCursor(0, IDC_HAND));
-			Panel::handle_mouse_enter();
-		}
-
-		void handle_mouse_leave() override
-		{
-			SetCursor(LoadCursor(0, IDC_ARROW));
-			Panel::handle_mouse_leave();
 		}
 	};
 }
@@ -230,7 +218,7 @@ void Forms::MainForm::print_element(UI::InteractiveElement* element,UINT deep)
 	{
 		std::cout << '-';
 	}
-	auto desc = element->get_desc();
+	auto desc = element->getDesc();
 	auto pos = element->get_position();
 	auto res = element->get_resolution();
 	std::cout

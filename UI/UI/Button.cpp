@@ -24,7 +24,7 @@ void UI::Button::draw(Render::DrawEvent2D* event)
 	_text.draw(event);
 }
 
-UI::ElementDescription UI::Button::get_desc()
+UI::ElementDescription UI::Button::getDesc()
 {
 	return {false,"BUTTON",true};
 }

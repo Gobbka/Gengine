@@ -38,7 +38,7 @@ void UI::Tree::add_item(const wchar_t* name)
 	add_element(new Text(_font, name, { 0,10 }));
 }
 
-UI::ElementDescription UI::Tree::get_desc()
+UI::ElementDescription UI::Tree::getDesc()
 {
 	return ElementDescription{ true,"TREE" };
 }

@@ -119,7 +119,7 @@ void UI::UIContext::onMouseMove(int mx, int my)
 	
 	_gfx->main_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
 		{
-			form->on_mouse_move(&move_event);
+			form->onMouseMove(&move_event);
 		});
 }
 

@@ -16,7 +16,7 @@ namespace UI
 		void draw(Render::DrawEvent2D* event) override;
 	public:
 
-		ElementDescription get_desc() override;
+		ElementDescription getDesc() override;
 
 		Button(Position2 position, Surface resolution, Color3XM color,Render::SpriteFont*font, const wchar_t* text);
 

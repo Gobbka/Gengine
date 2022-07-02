@@ -20,7 +20,7 @@ namespace UI
 		void draw(Render::DrawEvent2D* event) override;
 
 
-		ElementDescription get_desc() override;
+		ElementDescription getDesc() override;
 
 		Panel(Vector2 position, Surface resolution, Render::GETexture*texture);
 		Panel(Vector2 position, Surface resolution, Color3XM color);

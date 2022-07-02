@@ -6,7 +6,8 @@
 #include "Events/InteractionEventHandler.h"
 
 namespace UI {
-	
+	class Parent;
+
 	class InteractiveElement;
 
 	class __declspec(dllexport) InteractiveForm final
@@ -26,8 +27,10 @@ namespace UI {
 
 		Position2* _cursor_position;
 		DragStruct* _dragged = nullptr;
+		static void foreachAll(Parent* parent, std::function<void(InteractiveElement* element)>callback);
 	public:
 		void foreach(std::function<void(InteractiveElement* element)>callback) const;
+		void foreachAll(std::function<void(InteractiveElement* element)>callback) const;
 		void dragMove(InteractiveElement* element);
 		void freeDragMove();
 
@@ -40,7 +43,7 @@ namespace UI {
 	public:
 		EventStatus onMouseUp(MouseEvent* event);
 		EventStatus onMouseDown(MouseEvent* event) const;
-		EventStatus on_mouse_move(MouseEvent* move_event) const;
+		EventStatus onMouseMove(MouseEvent* move_event) const;
 		EventStatus on_mouse_scroll(MouseEvent* direction) const;
 		EventStatus on_db_click() const;
 

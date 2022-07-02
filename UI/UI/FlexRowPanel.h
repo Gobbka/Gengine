@@ -17,7 +17,7 @@ namespace UI
 
 		void draw(Render::DrawEvent2D* event) override;
 
-		ElementDescription get_desc() override;
+		ElementDescription getDesc() override;
 
 		FlexRowPanel(Vector2 position, Surface resolution, Render::GETexture* texture);
 		FlexRowPanel(Vector2 position, Surface resolution, Color3XM color);

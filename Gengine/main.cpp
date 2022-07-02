@@ -46,6 +46,9 @@ int WINAPI wWinMain(
     GEConsole::show();
     LogW(lpCmdLine);
 
+    GEString idiot(L"C://dedok");
+    idiot = idiot + GEString(L"//") + GEString(L"Some path to nigga");
+
     auto*form = new Forms::MainForm(hInstance, 1400, 780);
     form->show();
 

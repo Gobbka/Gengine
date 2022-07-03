@@ -7,7 +7,7 @@ namespace FS {
 	class __declspec(dllexport) FSDirectory : public FSObject
 	{
 	public:
-		FSDirectory(wchar_t* dir_path);
+		FSDirectory(GEString path);
 
 		void foreach(std::function<void(FSObject*)> callback);
 	};

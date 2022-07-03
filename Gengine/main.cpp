@@ -22,6 +22,7 @@
 #include <XML/XMLDecoder.h>
 
 #include "Input/Console.h"
+#include "Window/WindowsManager.h"
 
 void debugger_loop()
 {
@@ -87,17 +88,30 @@ int WINAPI wWinMain(
 
     auto time = std::chrono::high_resolution_clock::now();
 
-	while(true)
+	auto& windows = *GE::WindowsManager::instance();
+
+	while(windows.hasLiveWindows())
 	{
-        form->peek();
-        form->update();
-        form->force_draw();
+        for(auto* window : windows)
+        {
+            if(window->peek())
+            {
+                ((GE::Form*)window)->update();
+                ((GE::Form*)window)->force_draw();
+            }else
+            {
+                delete window;
+                break;
+            }
+        }
 
         auto now = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - time);
 
-        form->main_scene->world()->tick(1.f/(float)duration.count());
-        //cube->get<Render::MeshRenderer>()->transform.adjust_position({ 0.01f,0,0 });
+        for (auto* window : windows)
+        {
+            ((GE::Form*)window)->main_scene->world()->tick(1.f / (float)duration.count());
+        }
 
         time = now;
 	}

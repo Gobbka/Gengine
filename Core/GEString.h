@@ -25,4 +25,6 @@ public:
 	GEString slice(size_t start, size_t end) const;
 	GEString trim() const;
 	GEString operator+(GEString const& ref) const;
+
+	const wchar_t* data();
 };

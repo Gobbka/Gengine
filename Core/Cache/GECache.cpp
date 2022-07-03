@@ -23,6 +23,6 @@ void GECache::write(const wchar_t* name, char* data, size_t size, unsigned secon
 	GEStream data_stream(write_size);
 	data_stream.write(time(nullptr), 0);
 	data_stream.copy(data, size, sizeof(timestamp));
-	FS::File file(name);
+	FS::File file(GEString{ name });
 	file.write(data_stream);
 }

@@ -10,6 +10,7 @@ namespace GE {
 	public:
 		Window* find(HWND hwnd);
 
+		bool hasLiveWindows() const;
 		void registerWindow(Window* wnd);
 		void removeWindow(Window* wnd);
 

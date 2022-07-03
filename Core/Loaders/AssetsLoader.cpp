@@ -95,7 +95,7 @@ BinaryReader AssetsLoader::makeSpriteFont(const wchar_t* font_name,UINT font_siz
 	auto file_name = out_file_name_s.str();
 	BinaryReader reader(file_name.c_str());
 
-	FS::File file(out_file_name_s.str(),0,(char*)nullptr);
+	FS::File file(GEString(file_name.c_str()), 0, (char*)nullptr);
 	file.remove();
 
 	return std::move(reader);

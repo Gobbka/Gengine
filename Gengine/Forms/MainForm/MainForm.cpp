@@ -30,9 +30,9 @@ namespace UI
 	private:
 		FS::FSObject _object;
 	public:
-		Directory(FS::FSObject object, Position2 position, Surface resolution, Render::GETexture* texture)
-			: Panel(position, resolution, nullptr),
-			_object(object)
+		Directory(FS::FSObject && object, Position2 position, Surface resolution, Render::GETexture* texture)
+			: Panel(position, resolution, nullptr)
+			, _object(std::move(object))
 		{
 			Panel::set_texture(texture);
 			styles.cursor = Css::Cursor::pointer;
@@ -42,10 +42,9 @@ namespace UI
 		{
 			if(!_object.isDirectory())
 			{
-				std::wstring command(L"start ");
-				command += _object.path();
+				GEString command = GEString{ L"start "} + _object.path();
 				
-				_wsystem(command.c_str());
+				_wsystem(command.data());
 			}
 		}
 	};
@@ -116,7 +115,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 				constexpr auto sensitivity = 0.5f;
 				editorScene->get_main_camera()->get<Render::Camera>()->adjust_rotation(
 				{
-					- e->delta.y / 100 * sensitivity,
+					 - e->delta.y / 100 * sensitivity,
 					 e->delta.x / 100 * sensitivity,
 					0
 				});
@@ -135,15 +134,16 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	scan_assets_directory();
 }
 
-void Forms::MainForm::scan_assets_directory()
+void Forms::MainForm::scan_assets_directory(GEString subpath)
 {
-	FS::FSDirectory directory((wchar_t*)L"assets");
+	GEString abs_path = GEString{ L"assets" } + subpath;
+	FS::FSDirectory directory(std::move(abs_path));
 
 	directory.foreach([&](FS::FSObject* file)
 	{
 		Render::GETexture* lp_texture = file->isDirectory() ? _folder_texture : _file_texture;
 		
-		auto* panel = new UI::Directory(*file, { 0,0 }, { 120,120 }, lp_texture);
+		auto* panel = new UI::Directory(std::move( * file ), {0,0}, {120,120}, lp_texture);
 		
 		_assets_panel->add_element(panel);
 	});

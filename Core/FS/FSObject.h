@@ -1,19 +1,21 @@
 ﻿#pragma once
-#include <string>
+#include "../GEString.h"
 
 namespace FS
 {
 	class __declspec(dllexport) FSObject
 	{
 	protected:
-		std::wstring _path;
+		GEString _path;
 	public:
-		bool isDirectory() const;
+		bool isDirectory();
+
+		explicit FSObject(GEString& string);
+		explicit FSObject(GEString&& string);
+
+		explicit FSObject(FSObject&& move) noexcept;
 		
-		FSObject(std::wstring & path);
-		FSObject(std::wstring && path);
-		
-		auto* path() const { return _path.c_str(); }
-		auto wpath() { return _path; }
+		auto* wpath() { return _path.data(); }
+		auto& path() { return _path; }
 	};
 }

@@ -11,6 +11,11 @@ GE::Window* GE::WindowsManager::find(HWND hwnd)
 	return nullptr;
 }
 
+bool GE::WindowsManager::hasLiveWindows() const
+{
+	return _windows.size() > 0;
+}
+
 void GE::WindowsManager::registerWindow(Window* wnd)
 {
 	_windows.push_back(wnd);
@@ -18,16 +23,12 @@ void GE::WindowsManager::registerWindow(Window* wnd)
 
 void GE::WindowsManager::removeWindow(Window* wnd)
 {
-	// TODO: complete
 	for(UINT i = 0;i < _windows.size();i++)
 	{
 		if (_windows[i] == wnd)
+		{
 			_windows.erase(_windows.begin()+i);
-	}
-
-	if(_windows.size() == 0)
-	{
-		exit(0);
+		}
 	}
 }
 

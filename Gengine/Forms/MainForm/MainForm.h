@@ -1,4 +1,5 @@
 #pragma once
+#include "GEString.h"
 #include "../Form/Form.h"
 
 namespace Render {
@@ -33,7 +34,7 @@ namespace Forms
 
 		MainForm(HINSTANCE hinst, UINT width, UINT height);
 
-		void scan_assets_directory();
+		void scan_assets_directory(GEString sub_path = GEString{L""});
 
 		void handle_resize(Surface rect) override;
 

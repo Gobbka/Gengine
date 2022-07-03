@@ -5,7 +5,7 @@
 #include "WindowsManager.h"
 
 LRESULT GE::Window::window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{	
+{
 	auto* window = WindowsManager::instance()->find(hwnd);
 
 	if (window) {
@@ -20,7 +20,10 @@ LRESULT GE::Window::window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
 		}
 
 		if (msg == WM_CLOSE)
-			delete window;
+		{
+			WindowsManager::instance()->removeWindow(window);
+			window->close();
+		}
 
 		if (msg == WM_SIZE)
 		{
@@ -46,7 +49,9 @@ LRESULT GE::Window::window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
 		}
 
 		if (window->on_wndproc)
+		{
 			window->on_wndproc(msg, wParam, lParam);
+		}
 	}
 
 	return DefWindowProc(hwnd, msg, wParam, lParam);
@@ -63,6 +68,7 @@ void GE::Window::handle_resize(Surface rect)
 GE::Window::Window(const wchar_t*name,HINSTANCE hint, UINT width, UINT height,HICON icon)
 	: _hInst(hint)
 	, _size(width,height)
+	, _closed(false)
 	, keyboard(new Keyboard())
 {
 	const auto* class_name = TEXT("GEWindow");
@@ -117,6 +123,11 @@ GE::Window::Window(const wchar_t*name,HINSTANCE hint, UINT width, UINT height,HI
 	WindowsManager::instance()->registerWindow(this);
 }
 
+void GE::Window::close()
+{
+	_closed = true;
+}
+
 void GE::Window::show()
 {
 	ShowWindow(_hwnd, SW_SHOW);
@@ -127,7 +138,7 @@ void GE::Window::hide()
 	ShowWindow(_hwnd, SW_HIDE);
 }
 
-void GE::Window::peek()
+bool GE::Window::peek() const
 {
 	MSG msg;
 
@@ -136,6 +147,8 @@ void GE::Window::peek()
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
+
+	return !_closed;
 }
 
 HWND GE::Window::hwnd()

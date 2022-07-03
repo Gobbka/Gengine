@@ -18,6 +18,7 @@ namespace GE {
 		HINSTANCE _hInst;
 		HWND _hwnd;
 		Surface _size;
+		bool _closed;
 	protected:
 		virtual void handle_resize(Surface rect);
 		
@@ -33,10 +34,11 @@ namespace GE {
 		
 		Window(const wchar_t*name,HINSTANCE hinst,UINT width=800u,UINT height=600u,HICON icon = nullptr);
 
+		void close();
 		void show();
 		void hide();
 
-		void peek();
+		bool peek() const;
 
 		HWND hwnd();
 		Surface size();

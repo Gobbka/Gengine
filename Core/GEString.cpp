@@ -194,3 +194,9 @@ std::ostream& operator<<(std::ostream& os, const GEString& foo)
 	os << foo._string;
 	return os;
 }
+
+const wchar_t* GEString::data()
+{
+	return _string;
+}
+

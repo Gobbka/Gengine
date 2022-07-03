@@ -5,7 +5,9 @@
 
 BinaryReader GECache::load(const wchar_t* name)
 {
-	BinaryReader reader{ name };
+	auto path = GEString{ L"Cache\\" } + GEString{ name };
+
+	BinaryReader reader{ path.data() };
 	const auto end_time = reader.Read<timestamp>();
 	const auto time_now = time(nullptr);
 
@@ -23,6 +25,11 @@ void GECache::write(const wchar_t* name, char* data, size_t size, unsigned secon
 	GEStream data_stream(write_size);
 	data_stream.write(time(nullptr), 0);
 	data_stream.copy(data, size, sizeof(timestamp));
-	FS::File file(GEString{ name });
+	FS::File file(GEString{ L"Cache\\" } + GEString{ name });
 	file.write(data_stream);
+}
+
+void GECache::write(const wchar_t* name, BinaryReader& data, unsigned seconds)
+{
+	
 }

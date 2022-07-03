@@ -21,6 +21,7 @@
 #include <Logger/Logger.h>
 #include <Input/Console.h>
 
+#include "Cache/GECache.h"
 #include "UI/Tree.h"
 
 namespace UI

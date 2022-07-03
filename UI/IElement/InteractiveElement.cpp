@@ -30,8 +30,8 @@ UI::InteractiveForm* UI::InteractiveElement::get_form() const
 
 Position2 UI::InteractiveElement::point_to(InteractiveElement* element)
 {
-	auto own_pos = get_position();
-	auto their_pos = element->get_position();
+	auto own_pos = getPosition();
+	auto their_pos = element->getPosition();
 
 	return Position2(own_pos.x - their_pos.x, own_pos.y - their_pos.y);
 }

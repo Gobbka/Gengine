@@ -25,14 +25,14 @@ namespace UI
 		Panel(Vector2 position, Surface resolution, Render::GETexture*texture);
 		Panel(Vector2 position, Surface resolution, Color3XM color);
 
-		bool point_belongs(Position2 point) override;
-		void set_position(Position2 pos) override;
+		bool pointBelongs(Position2 point) override;
+		void setPosition(Position2 pos) override;
 
-		void move_by(Position2 pos) override;
+		void moveBy(Position2 pos) override;
 
 		void set_texture(Render::GETexture* texture) override;
 
-		Position2 get_position() override;
+		Position2 getPosition() override;
 		Surface get_resolution() override;
 		void set_resolution(Surface surface) override;
 	};

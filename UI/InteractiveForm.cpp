@@ -47,7 +47,7 @@ void InteractiveForm::foreachAll(std::function<void(InteractiveElement* element)
 
 void InteractiveForm::dragMove(InteractiveElement* element)
 {
-	auto pos = element->get_position();
+	auto pos = element->getPosition();
 	auto cursor = *_cursor_position;
 
 	pos.y *= -1;
@@ -80,9 +80,9 @@ InteractiveForm* InteractiveForm::addElement(InteractiveElement* element)
 	return this;
 }
 
-InteractiveForm::InteractiveForm(Render::GEGraphics* pEngine, Position2* cursor_position)
+InteractiveForm::InteractiveForm(Render::GEGraphics* gfx, Position2* cursor_position)
 	: _hidden(false)
-	, _canvas(pEngine)
+	, _canvas(gfx)
 	, _cursor_position(cursor_position)
 {}
 
@@ -95,8 +95,8 @@ EventStatus InteractiveForm::onMouseMove(MouseEvent* move_event) const
 
 	if (_dragged)
 	{
-		const auto new_pos = _dragged->element->get_position() + move_event->delta;
-		_dragged->element->set_position(new_pos);
+		const auto new_pos = _dragged->element->getPosition() + move_event->delta;
+		_dragged->element->setPosition(new_pos);
 		return EventStatus::handled;
 	}
 
@@ -104,7 +104,7 @@ EventStatus InteractiveForm::onMouseMove(MouseEvent* move_event) const
 
 	foreachAll([&](InteractiveElement* element)
 	{
-		if(element->styles.display != Css::Display::none && element->point_belongs(move_event->screen))
+		if(element->styles.display != Css::Display::none && element->pointBelongs(move_event->screen))
 		{
 			event_objects.push_back(element);
 			return;
@@ -149,7 +149,7 @@ EventStatus InteractiveForm::onMouseScroll(MouseEvent* direction) const
 	return EventStatus::none;
 }
 
-EventStatus InteractiveForm::on_db_click() const
+EventStatus InteractiveForm::onDbClick() const
 {
 	if (hidden())
 	{

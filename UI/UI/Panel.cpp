@@ -31,7 +31,7 @@ UI::Panel::Panel(Vector2 position, Surface resolution, Color3XM color)
 	, _color(color)
 {}
 
-bool UI::Panel::point_belongs(Position2 point)
+bool UI::Panel::pointBelongs(Position2 point)
 {
 	auto resolution = _resolution;
 	auto position = _position;
@@ -41,12 +41,12 @@ bool UI::Panel::point_belongs(Position2 point)
 		(point.y <= position.y && point.y >= (position.y - resolution.height));
 }
 
-void UI::Panel::set_position(Position2 pos)
+void UI::Panel::setPosition(Position2 pos)
 {
 	_position = pos;
 }
 
-void UI::Panel::move_by(Position2 pos)
+void UI::Panel::moveBy(Position2 pos)
 {
 	_position += pos;
 }
@@ -56,7 +56,7 @@ void UI::Panel::set_texture(Render::GETexture* texture)
 	_texture = texture;
 }
 
-Position2 UI::Panel::get_position()
+Position2 UI::Panel::getPosition()
 {
 	return _position;
 }

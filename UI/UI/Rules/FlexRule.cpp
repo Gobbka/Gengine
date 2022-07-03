@@ -14,13 +14,13 @@ void UI::FlexRule::place_on_row(Position2 base_position, Surface resolution)
 
 		if (last_position.x + element_res.width > own_position.x + resolution.width)
 		{
-			element->set_position({ own_position.x,last_position.y - element_res.height });
+			element->setPosition({ own_position.x,last_position.y - element_res.height });
 			last_position.x = own_position.x;
 			last_position.y -= element_res.height;
 		}
 		else
 		{
-			element->set_position(last_position);
+			element->setPosition(last_position);
 
 			last_position.x += element_res.width;
 		}
@@ -42,7 +42,7 @@ void UI::FlexRule::place_on_column(Position2 base_position, Surface resolution)
 
 	for (auto* element : *_children)
 	{
-		element->set_position(Position2{ last_pos });
+		element->setPosition(Position2{ last_pos });
 		auto old_resolution = element->get_resolution();
 		element->set_resolution({ resolution.width,old_resolution.height });
 

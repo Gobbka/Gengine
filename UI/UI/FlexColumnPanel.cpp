@@ -5,7 +5,7 @@
 
 void UI::FlexColumnPanel::update_items()
 {
-	_location_rule.place_on(get_position(), get_resolution());
+	_location_rule.place_on(getPosition(), get_resolution());
 }
 
 void UI::FlexColumnPanel::draw(Render::DrawEvent2D* event)
@@ -67,7 +67,7 @@ UI::FlexColumnPanel::FlexColumnPanel(Vector2 position, Surface resolution, Color
 	_location_rule.direction = FlexDirection::Column;
 }
 
-bool UI::FlexColumnPanel::point_belongs(Position2 point)
+bool UI::FlexColumnPanel::pointBelongs(Position2 point)
 {
 	auto resolution = _resolution;
 	auto position = _position;
@@ -77,18 +77,18 @@ bool UI::FlexColumnPanel::point_belongs(Position2 point)
 		(point.y <= position.y && point.y >= (position.y - resolution.height));
 }
 
-void UI::FlexColumnPanel::set_position(Position2 pos)
+void UI::FlexColumnPanel::setPosition(Position2 pos)
 {
-	move_by(pos - _position);
+	moveBy(pos - _position);
 
 	_position = pos;
 }
 
-void UI::FlexColumnPanel::move_by(Position2 pos)
+void UI::FlexColumnPanel::moveBy(Position2 pos)
 {
 	_position += pos;
 
-	Parent::move_by(pos);
+	Parent::moveBy(pos);
 }
 
 void UI::FlexColumnPanel::set_texture(Render::GETexture* texture)
@@ -96,7 +96,7 @@ void UI::FlexColumnPanel::set_texture(Render::GETexture* texture)
 	_texture = texture;
 }
 
-Position2 UI::FlexColumnPanel::get_position()
+Position2 UI::FlexColumnPanel::getPosition()
 {
 	return _position;
 }

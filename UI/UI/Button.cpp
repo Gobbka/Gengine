@@ -2,7 +2,7 @@
 #include "../InteractiveForm.h"
 #include "../Canvas/RenderEvent.h"
 
-bool UI::Button::point_belongs(Position2 point)
+bool UI::Button::pointBelongs(Position2 point)
 {
 	const auto position = _position;
 	const auto resolution = _resolution;
@@ -12,10 +12,10 @@ bool UI::Button::point_belongs(Position2 point)
 		(point.y <= position.y && point.y >= (position.y - resolution.height));
 }
 
-void UI::Button::set_position(Position2 position)
+void UI::Button::setPosition(Position2 position)
 {
 	_position = position;
-	_text.set_position(position);
+	_text.setPosition(position);
 }
 
 void UI::Button::draw(Render::DrawEvent2D* event)
@@ -49,10 +49,10 @@ void UI::Button::set_text_color(Color3XM color)
 	_text.set_color(color);
 }
 
-void UI::Button::move_by(Position2 offset)
+void UI::Button::moveBy(Position2 offset)
 {
 	_position += offset;
-	_text.move_by(offset);
+	_text.moveBy(offset);
 }
 
 void UI::Button::set_resolution(Surface resolution)
@@ -100,7 +100,7 @@ void UI::Button::set_texture(Render::GETexture* texture)
 {
 }
 
-Position2 UI::Button::get_position()
+Position2 UI::Button::getPosition()
 {
 	return _position;
 }

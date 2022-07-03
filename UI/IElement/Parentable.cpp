@@ -80,7 +80,7 @@ void UI::Parent::handleMouseMove(MouseEvent* event)
 		if (
 			e_handled == false &&
 			element->styles.display != Css::Display::none &&
-			element->point_belongs(event->screen)
+			element->pointBelongs(event->screen)
 			)
 		{
 			if (element->state.hovered == false)
@@ -138,19 +138,19 @@ void UI::Parent::draw(Render::DrawEvent2D* event)
 	}
 }
 
-void UI::Parent::move_by(Position2 pos)
+void UI::Parent::moveBy(Position2 pos)
 {
 	for (auto* element : _children)
 	{
-		element->move_by(pos);
+		element->moveBy(pos);
 	}
 }
 
-void UI::Parent::set_position(Position2 pos)
+void UI::Parent::setPosition(Position2 pos)
 {
 	for (auto* element : _children)
 	{
-		element->set_position(pos);
+		element->setPosition(pos);
 	}
 }
 
@@ -165,7 +165,7 @@ UI::Parent* UI::Parent::add_element(InteractiveElement* element)
 		return this;
 
 	element->set_parent(this);
-	element->move_by(this->get_position());
+	element->moveBy(this->getPosition());
 	children()->append(element);
 
 	update_items();

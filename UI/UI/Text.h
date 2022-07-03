@@ -36,15 +36,15 @@ namespace UI
 
 		void set_text(const wchar_t* text);
 
-		void set_position(Position2 pos) override;
+		void setPosition(Position2 pos) override;
 		void set_resolution(Surface surface) override;
 		void set_texture(Render::GETexture* texture) override;
-		void move_by(Position2) override;
+		void moveBy(Position2) override;
 		void draw(Render::DrawEvent2D* event) override;
 		void set_color(Color3XM color);
-		Position2 get_position() override;
+		Position2 getPosition() override;
 		ElementDescription getDesc() override;
 		Surface get_resolution() override;
-		bool point_belongs(Position2 point) override;
+		bool pointBelongs(Position2 point) override;
 	};
 }

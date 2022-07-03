@@ -46,8 +46,8 @@ namespace UI
 		Parent(Position2 position);
 
 		void draw(Render::DrawEvent2D* event) override;
-		void move_by(Position2 move) override;
-		void set_position(Position2 pos) override;
+		void moveBy(Position2 move) override;
+		void setPosition(Position2 pos) override;
 
 		InteractiveElement* element_at(UINT index);
 

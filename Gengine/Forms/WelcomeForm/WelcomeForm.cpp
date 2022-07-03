@@ -15,7 +15,7 @@ Forms::WelcomeForm::WelcomeForm(HINSTANCE hinst)
 	main_cam->get_target_view()->clear_color = Color3XM::from_rgb(26,26,26);
 
 	auto* font = new Render::SpriteFont(get_graphics_context()->get_device(), L"visby.spritefont");
-	auto uicanvas = get_ui()->create_layer()->get<UI::InteractiveForm>();
+	auto uicanvas = get_ui()->createLayer()->get<UI::InteractiveForm>();
 
 	uicanvas->addElement(new UI::Text(font, L"Welcome to GEngine!", { 0,0 }));
 }

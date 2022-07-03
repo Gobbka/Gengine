@@ -6,7 +6,7 @@
 
 void UI::FlexRowPanel::update_items()
 {
-	_location_rule.place_on(get_position(), get_resolution());
+	_location_rule.place_on(getPosition(), get_resolution());
 }
 
 void UI::FlexRowPanel::draw(Render::DrawEvent2D* event)
@@ -27,7 +27,7 @@ void UI::FlexRowPanel::draw(Render::DrawEvent2D* event)
 	if (height_ratio < 1)
 	{
 		auto resolution = get_resolution();
-		auto position = get_position();
+		auto position = getPosition();
 		// scroll bar width
 		constexpr auto sb_width = 20;
 		// scroll bar height
@@ -75,7 +75,7 @@ UI::FlexRowPanel::~FlexRowPanel()
 {
 }
 
-bool UI::FlexRowPanel::point_belongs(Position2 point)
+bool UI::FlexRowPanel::pointBelongs(Position2 point)
 {
 	auto resolution = _resolution;
 	auto position = _position;
@@ -85,16 +85,16 @@ bool UI::FlexRowPanel::point_belongs(Position2 point)
 		(point.y <= position.y && point.y >= (position.y - resolution.height));
 }
 
-void UI::FlexRowPanel::set_position(Position2 pos)
+void UI::FlexRowPanel::setPosition(Position2 pos)
 {
 	_position = pos;
 }
 
-void UI::FlexRowPanel::move_by(Position2 pos)
+void UI::FlexRowPanel::moveBy(Position2 pos)
 {
 	_position += pos;
 
-	Parent::move_by(pos);
+	Parent::moveBy(pos);
 }
 
 void UI::FlexRowPanel::set_texture(Render::GETexture* texture)
@@ -102,7 +102,7 @@ void UI::FlexRowPanel::set_texture(Render::GETexture* texture)
 	_texture = texture;
 }
 
-Position2 UI::FlexRowPanel::get_position()
+Position2 UI::FlexRowPanel::getPosition()
 {
 	return _position;
 }
@@ -144,7 +144,7 @@ void UI::FlexRowPanel::handle_mouse_scroll(MouseEvent* event)
 
 	for (auto* element : *children())
 	{
-		element->move_by({ 0,fdelta * -1 });
+		element->moveBy({ 0,fdelta * -1 });
 	}
 
 	Parent::handle_mouse_scroll(event);

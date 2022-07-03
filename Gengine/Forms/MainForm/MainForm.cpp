@@ -69,7 +69,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	const auto main_cam = main_scene->get_main_camera()->get<Render::Camera>();
 	main_cam->get_target_view()->clear_color = Color3XM(.05f, .05f, .05f);
 
-	auto uicanvas = get_ui()->create_layer()->get<UI::InteractiveForm>();
+	auto uicanvas = get_ui()->createLayer()->get<UI::InteractiveForm>();
 
 	_worldspace_panel->add_element(new UI::Button({ 0,0 }, { 0,50 }, { RGB_TO_FLOAT(48,48,48) }, visby_18, L"Create nigger"));
 
@@ -244,7 +244,7 @@ void Forms::MainForm::print_element(UI::InteractiveElement* element,UINT deep)
 		std::cout << '-';
 	}
 	auto desc = element->getDesc();
-	auto pos = element->get_position();
+	auto pos = element->getPosition();
 	auto res = element->get_resolution();
 	std::cout
 		<< " " << green << desc.string_name << white

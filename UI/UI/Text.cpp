@@ -160,9 +160,9 @@ void UI::Text::set_text(const wchar_t* text)
 	}
 }
 
-void UI::Text::set_position(Position2 pos)
+void UI::Text::setPosition(Position2 pos)
 {
-	move_by(pos - _position);
+	moveBy(pos - _position);
 }
 
 void UI::Text::set_resolution(Surface surface)
@@ -174,7 +174,7 @@ void UI::Text::set_texture(Render::GETexture* texture)
 {
 }
 
-void UI::Text::move_by(Position2 position)
+void UI::Text::moveBy(Position2 position)
 {
 	_position += position;
 
@@ -201,7 +201,7 @@ void UI::Text::set_color(Color3XM color)
 	}
 }
 
-Position2 UI::Text::get_position()
+Position2 UI::Text::getPosition()
 {
 	return { 0,0 };
 }
@@ -216,7 +216,7 @@ Surface UI::Text::get_resolution()
 	return _resolution;
 }
 
-bool UI::Text::point_belongs(Position2 point)
+bool UI::Text::pointBelongs(Position2 point)
 {
 	return false;
 }

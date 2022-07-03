@@ -20,18 +20,18 @@ namespace UI
 
 		Button(Position2 position, Surface resolution, Color3XM color,Render::SpriteFont*font, const wchar_t* text);
 
-		bool point_belongs(Position2 point) override;
+		bool pointBelongs(Position2 point) override;
 
-		void set_position(Position2 position) override;
+		void setPosition(Position2 position) override;
 		void set_color(Color3XM color);
 		void set_text_color(Color3XM color);
-		void move_by(Position2 offset) override;
+		void moveBy(Position2 offset) override;
 		void set_resolution(Surface resolution) override;
 
 		Surface get_resolution() override;
-		Position2 get_position() override;
+		Position2 getPosition() override;
 
-		EventCallback onClick = default_event_callback;
+		EventCallback onClick = defaultEventCallback;
 
 		void handleMouseUp(MouseEvent* event) override;
 		void handleMouseDown(MouseEvent* event) override;

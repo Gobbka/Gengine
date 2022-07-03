@@ -59,7 +59,7 @@ public:
 	{}
 };
 
-ECS::Entity* UI::UIContext::create_layer()
+ECS::Entity* UI::UIContext::createLayer()
 {
 	auto* ent = _gfx->main_scene->world()->create();
 	auto handle = ent->assign<InteractiveForm>(_gfx, &_cursor);
@@ -127,6 +127,6 @@ void UI::UIContext::onDbClick()
 {
 	_gfx->main_scene->world()->each<InteractiveForm>([&](ECS::Entity* ent, ECS::ComponentHandle<InteractiveForm> form)
 		{
-			form->on_db_click();
+			form->onDbClick();
 		});
 }

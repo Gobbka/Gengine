@@ -32,12 +32,12 @@ UI::Checkbox::Checkbox(const Position2 position, const Surface resolution,bool*v
 	, _resolution(resolution)
 {}
 
-void UI::Checkbox::set_position(const Position2 position)
+void UI::Checkbox::setPosition(const Position2 position)
 {
 	_position = position;
 }
 
-Position2 UI::Checkbox::get_position()
+Position2 UI::Checkbox::getPosition()
 {
 	return _position;
 }
@@ -52,9 +52,9 @@ void UI::Checkbox::set_resolution(const Surface resolution)
 	_resolution = resolution;
 }
 
-bool UI::Checkbox::point_belongs(const Position2 point)
+bool UI::Checkbox::pointBelongs(const Position2 point)
 {
-	const auto position = get_position();
+	const auto position = getPosition();
 	const auto resolution = get_resolution();
 	
 	return
@@ -62,7 +62,7 @@ bool UI::Checkbox::point_belongs(const Position2 point)
 		(point.y <= position.y && point.y >= (position.y - resolution.height));
 }
 
-void UI::Checkbox::move_by(const Position2 offset)
+void UI::Checkbox::moveBy(const Position2 offset)
 {
 	_position += offset;
 }

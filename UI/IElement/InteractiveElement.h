@@ -16,7 +16,6 @@ namespace UI {
 
 	class Parent;
 	class InteractiveElement;
-	typedef InteractiveElement* UIElementEventArgs;
 
 	class __declspec(dllexport) IControllable
 	{
@@ -26,15 +25,15 @@ namespace UI {
 
 		bool hidden = false;
 
-		virtual void      set_position(Position2 pos) = 0;
-		virtual Position2 get_position() = 0;
+		virtual void      setPosition(Position2 pos) = 0;
+		virtual Position2 getPosition() = 0;
 
 		virtual void    set_resolution(Surface surface) = 0;
 		virtual Surface get_resolution() = 0;
 
 		virtual void set_texture(Render::GETexture* texture) PURE;
 
-		virtual void move_by(Position2) = 0;
+		virtual void moveBy(Position2) = 0;
 	};
 
 	struct ElementState
@@ -50,26 +49,24 @@ namespace UI {
 		InteractiveForm* form = nullptr;
 		Parent* parent = nullptr;
 
-		static void default_event_callback(MouseEvent*event) {}
+		static void defaultEventCallback(MouseEvent*event) {}
 	public:
 		UINT unique_id = 0;
 
 		Css styles;
-		ElementState  state;
-	public:
-		virtual void draw(Render::DrawEvent2D* event) = 0;
+		ElementState state;
 
-		// public getters
+		virtual void draw(Render::DrawEvent2D* event) = 0;
 
 		bool haveParent() const;
 
-		Position2 get_position() override PURE;
+		Position2 getPosition() override PURE;
 
 		virtual ElementDescription getDesc() PURE;
 
 		Surface get_resolution() override PURE;
 
-		virtual bool point_belongs(Position2 point) PURE;
+		virtual bool pointBelongs(Position2 point) PURE;
 
 		Parent* parentNode() const;
 		InteractiveForm* get_form() const;
@@ -84,13 +81,13 @@ namespace UI {
 	public:
 		// public callbacks
 
-		EventCallback onMouseEnter = default_event_callback;
-		EventCallback onMouseLeave = default_event_callback;
-		EventCallback onMouseMove = default_event_callback;
-		EventCallback onMouseScroll = default_event_callback;
-		EventCallback onMouseUp = default_event_callback;
-		EventCallback onMouseDown = default_event_callback;
-		EventCallback onDBClick = default_event_callback;
+		EventCallback onMouseEnter = defaultEventCallback;
+		EventCallback onMouseLeave = defaultEventCallback;
+		EventCallback onMouseMove = defaultEventCallback;
+		EventCallback onMouseScroll = defaultEventCallback;
+		EventCallback onMouseUp = defaultEventCallback;
+		EventCallback onMouseDown = defaultEventCallback;
+		EventCallback onDBClick = defaultEventCallback;
 	public:
 		//====================
 		// EVENT HANDLER'S

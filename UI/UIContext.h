@@ -21,7 +21,7 @@ namespace UI {
 	public:
 		UIContext(Render::GEGraphics*gfx,Render::Scene*scene);
 		
-		ECS::Entity* create_layer();
+		ECS::Entity* createLayer();
 	protected:
 		void onMouseDown(MouseButton button) override;
 		void onMouseUp(MouseButton button) override;

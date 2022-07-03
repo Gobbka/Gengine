@@ -21,16 +21,16 @@ namespace UI
 		Checkbox(Position2 position, Surface resolution, Color3XM color, bool*value);
 		Checkbox(Position2 position, Surface resolution, bool*value);
 
-		void set_position(Position2 position) override;
+		void setPosition(Position2 position) override;
 
-		Position2 get_position() override;
+		Position2 getPosition() override;
 
 		Surface get_resolution() override;
 		void set_resolution(Surface resolution) override;
 
-		bool point_belongs(Position2 point) override;
+		bool pointBelongs(Position2 point) override;
 
-		void move_by(Position2 offset) override;
+		void moveBy(Position2 offset) override;
 
 		void handleMouseUp(MouseEvent* event) override;
 		void set_texture(Render::GETexture* texture) override;

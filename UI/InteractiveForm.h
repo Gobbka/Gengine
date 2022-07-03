@@ -37,7 +37,7 @@ namespace UI {
 		bool hasElement(InteractiveElement* element) const;
 		InteractiveForm* addElement(InteractiveElement* element);
 	public:
-		InteractiveForm(Render::GEGraphics* pEngine,Position2*cursor_position);
+		InteractiveForm(Render::GEGraphics* gfx,Position2* cursor_position);
 		//InteractiveForm(InteractiveForm&& other) noexcept;
 		~InteractiveForm() = default;
 	public:
@@ -45,7 +45,7 @@ namespace UI {
 		EventStatus onMouseDown(MouseEvent* event) const;
 		EventStatus onMouseMove(MouseEvent* move_event) const;
 		EventStatus onMouseScroll(MouseEvent* direction) const;
-		EventStatus on_db_click() const;
+		EventStatus onDbClick() const;
 
 		bool hidden() const;
 		void show();

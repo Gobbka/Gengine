@@ -33,7 +33,7 @@ Render::Material AssetsLoader::loadImage(const wchar_t* path)
 
 	if(path_str.endsWith(L".png"))
 	{
-		return materialFromPng((BYTE*)reader.ReadArray<BYTE>(size), size);
+		return materialFromPng((BYTE*)reader.readArray<BYTE>(size), size);
 	}
 
 	throw std::exception("Unknown image format");

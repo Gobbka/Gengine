@@ -4,7 +4,7 @@ GE::Window* GE::WindowsManager::find(HWND hwnd)
 {
 	for(auto*wnd : _windows)
 	{
-		if (wnd->hwnd() == hwnd)
+		if (wnd->windowId() == hwnd)
 			return wnd;
 	}
 

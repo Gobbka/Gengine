@@ -9,33 +9,29 @@ LRESULT GE::Window::window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
 	auto* window = WindowsManager::instance()->find(hwnd);
 
 	if (window) {
-
-		if (msg == WM_KEYDOWN)
+		switch (msg)
 		{
+		case WM_KEYDOWN:
 			window->keyboard->set((VirtualKey)wParam, true);
-		}
-		if (msg == WM_KEYUP)
-		{
+			break;
+		case WM_KEYUP:
 			window->keyboard->set((VirtualKey)wParam, false);
-		}
-
-		if (msg == WM_CLOSE)
-		{
+			break;
+		case WM_CLOSE:
 			WindowsManager::instance()->removeWindow(window);
 			window->close();
-		}
-
-		if (msg == WM_SIZE)
-		{
+			break;
+		case WM_SIZE:
+			{
 			const auto window_width = LOWORD(lParam);
 			const auto window_height = HIWORD(lParam);
 
 			std::cout << window_width << " " << window_height << '\n';
-			window->handle_resize(Surface(window_width, window_height));
-		}
-
-		if (msg == WM_SIZING)
-		{
+			window->handleResize(Surface(window_width, window_height));
+			}
+			break;
+		case WM_SIZING:
+			{
 			const auto r = *(RECT*)lParam;
 
 			const auto window_width = (UINT)(r.right - r.left);
@@ -46,6 +42,8 @@ LRESULT GE::Window::window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
 
 			if (window_height > window->max_height)
 				((RECT*)lParam)->bottom = r.top + window->max_height;
+			}
+			break;
 		}
 
 		if (window->on_wndproc)
@@ -57,17 +55,19 @@ LRESULT GE::Window::window_procedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
 	return DefWindowProc(hwnd, msg, wParam, lParam);
 }
 
-void GE::Window::handle_resize(Surface rect)
+void GE::Window::handleResize(Surface rect)
 {
 	_size = rect;
 
 	if(this->on_resize)
+	{
 		this->on_resize(rect);
+	}
 }
 
 GE::Window::Window(const wchar_t*name,HINSTANCE hint, UINT width, UINT height,HICON icon)
 	: _hInst(hint)
-	, _size(width,height)
+	, _size((float)width,(float)height)
 	, _closed(false)
 	, keyboard(new Keyboard())
 {
@@ -128,12 +128,12 @@ void GE::Window::close()
 	_closed = true;
 }
 
-void GE::Window::show()
+void GE::Window::show() const
 {
 	ShowWindow(_hwnd, SW_SHOW);
 }
 
-void GE::Window::hide()
+void GE::Window::hide() const
 {
 	ShowWindow(_hwnd, SW_HIDE);
 }
@@ -151,12 +151,12 @@ bool GE::Window::peek() const
 	return !_closed;
 }
 
-HWND GE::Window::hwnd()
+HWND GE::Window::windowId() const
 {
 	return _hwnd;
 }
 
-Surface GE::Window::size()
+Surface GE::Window::size() const
 {
 	return _size;
 }

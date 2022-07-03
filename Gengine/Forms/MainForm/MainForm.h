@@ -36,7 +36,7 @@ namespace Forms
 
 		void scan_assets_directory(GEString sub_path = GEString{L""});
 
-		void handle_resize(Surface rect) override;
+		void handleResize(Surface rect) override;
 
 		void update() override;
 	};

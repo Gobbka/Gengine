@@ -16,7 +16,7 @@ namespace GE
 		UI::UIContext* _ui_context;
 		
 	protected:
-		void handle_resize(Surface rect) override;
+		void handleResize(Surface rect) override;
 
 		Form(const wchar_t*name, HINSTANCE hinst, UINT width, UINT height);
 		virtual ~Form();

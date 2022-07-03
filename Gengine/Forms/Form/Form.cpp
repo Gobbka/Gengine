@@ -6,15 +6,15 @@
 #include "../../resource.h"
 #include "Graphics/Que/RenderQueuePass/RenderMeshPass.h"
 
-void GE::Form::handle_resize(Surface rect)
+void GE::Form::handleResize(Surface rect)
 {
     _graphics->set_resolution(rect);
-    Window::handle_resize(rect);
+    Window::handleResize(rect);
 }
 
 GE::Form::Form(const wchar_t*name,HINSTANCE hinst, UINT width, UINT height)
 	: Window(name, hinst, width, height,LoadIcon(hinst,MAKEINTRESOURCE(IDI_ICON1)))
-	, _graphics(Graphics_CreateContext(hwnd()))
+	, _graphics(Graphics_CreateContext(windowId()))
 	, _ui_context(nullptr)
 	, main_scene(_graphics->create_scene_3d())
 {
@@ -47,7 +47,7 @@ Render::GEGraphics* GE::Form::get_graphics_context() const
 void GE::Form::drag_move()
 {
     ReleaseCapture();
-    SendMessage(hwnd(), WM_NCLBUTTONDOWN, HTCAPTION, 0);
+    SendMessage(windowId(), WM_NCLBUTTONDOWN, HTCAPTION, 0);
 }
 
 void GE::Form::force_draw()

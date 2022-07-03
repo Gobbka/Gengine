@@ -11,16 +11,14 @@ class Keyboard;
 namespace GE {
 	class __declspec(dllexport) Window
 	{
-	private:
 		static LRESULT CALLBACK window_procedure(HWND, UINT, WPARAM, LPARAM);
-	private:
 		
 		HINSTANCE _hInst;
 		HWND _hwnd;
 		Surface _size;
 		bool _closed;
 	protected:
-		virtual void handle_resize(Surface rect);
+		virtual void handleResize(Surface rect);
 		
 	public:
 		UINT max_width = 0xFFFFFF;
@@ -35,12 +33,12 @@ namespace GE {
 		Window(const wchar_t*name,HINSTANCE hinst,UINT width=800u,UINT height=600u,HICON icon = nullptr);
 
 		void close();
-		void show();
-		void hide();
+		void show() const;
+		void hide() const;
 
 		bool peek() const;
 
-		HWND hwnd();
-		Surface size();
+		HWND windowId() const;
+		Surface size() const;
 	};
 }

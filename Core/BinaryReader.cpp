@@ -5,59 +5,60 @@
 #include "FS/FSFile.h"
 
 BinaryReader::BinaryReader(_In_z_ wchar_t const* fileName) noexcept(false)
-	: mPos(nullptr)
-	, mEnd(nullptr)
-	, mOwnedData(nullptr)
+	: _pos(nullptr)
+	, _end(nullptr)
+	, _data(nullptr)
 {
-	auto dataSize = 0ull;
-	const auto result = ReadEntireFile(fileName, &mOwnedData, &dataSize);
+	auto data_size = 0ull;
+	const auto result = readEntireFile(fileName, &_data, &data_size);
 
 	assert(result);
 
-	mPos = mOwnedData;
-	mEnd = mOwnedData + dataSize;
+	_pos = _data;
+	_end = _data + data_size;
 }
 
 BinaryReader::BinaryReader(_In_reads_bytes_(dataSize) uint8_t const* dataBlob, size_t dataSize) noexcept
-	: mPos(dataBlob),
-	mEnd(dataBlob + dataSize),
-	mOwnedData(nullptr)
-{}
+	: _pos(dataBlob),
+	_end(dataBlob + dataSize),
+	_data(nullptr)
+{
+}
 
 BinaryReader::BinaryReader(BinaryReader&& other) noexcept(true)
-	: mPos(other.mPos)
-	, mEnd(other.mEnd)
-	, mOwnedData(other.mOwnedData)
+	: _pos(other._pos)
+	, _end(other._end)
+	, _data(other._data)
 {
-	other.mOwnedData = nullptr;
-	other.mPos = nullptr;
-	other.mEnd = nullptr;
+	other._data = nullptr;
+	other._pos = nullptr;
+	other._end = nullptr;
 }
 
 BinaryReader& BinaryReader::operator=(BinaryReader&& other) noexcept
 {
-	if (mOwnedData != other.mOwnedData)
-		delete[] mOwnedData;
-	mOwnedData = other.mOwnedData;
-	mEnd = other.mEnd;
-	mPos = other.mPos;
+	if (_data != other._data)
+		delete[] _data;
+	_data = other._data;
+	_end = other._end;
+	_pos = other._pos;
 
-	other.mOwnedData = nullptr;
-	other.mEnd = nullptr;
-	other.mPos = nullptr;
+	other._data = nullptr;
+	other._end = nullptr;
+	other._pos = nullptr;
 
 	return*this;
 }
 
-char* BinaryReader::to_string()
+char* BinaryReader::toString() const
 {
-	char* new_ = new char[available()+1];
-	new_[available()] = '\0';
-	memcpy(new_, mOwnedData, mEnd - mOwnedData);
-	return new_;
+	auto* buffer = new char[available()+1];
+	buffer[available()] = '\0';
+	memcpy(buffer, _data, _end - _data);
+	return buffer;
 }
 
-bool BinaryReader::ReadEntireFile(_In_z_ wchar_t const* fileName, _Inout_ uint8_t** data, size_t* dataSize)
+bool BinaryReader::readEntireFile(_In_z_ wchar_t const* fileName, _Inout_ uint8_t** data, size_t* dataSize)
 {
 	std::ifstream ifs(fileName,std::ios::binary | std::ios::ate);
 
@@ -74,5 +75,5 @@ bool BinaryReader::ReadEntireFile(_In_z_ wchar_t const* fileName, _Inout_ uint8_
 
 BinaryReader::~BinaryReader()
 {
-	delete[] mOwnedData;
+	delete[] _data;
 }

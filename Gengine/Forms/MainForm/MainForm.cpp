@@ -150,7 +150,7 @@ void Forms::MainForm::scan_assets_directory(GEString subpath)
 
 }
 
-void Forms::MainForm::handle_resize(Surface rect)
+void Forms::MainForm::handleResize(Surface rect)
 {
 	auto width = rect.width;
 	auto height = rect.height;
@@ -158,7 +158,7 @@ void Forms::MainForm::handle_resize(Surface rect)
 	_topbar_panel->set_resolution(Surface(width, 30));
 	_worldspace_panel->set_resolution(Surface(250, height - 30));
 	
-	Form::handle_resize(rect);
+	Form::handleResize(rect);
 }
 
 void Forms::MainForm::update()

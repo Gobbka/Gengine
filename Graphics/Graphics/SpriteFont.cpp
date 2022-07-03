@@ -19,7 +19,7 @@ Render::SpriteFont::SpriteFont(IAllocator* device,BinaryReader& reader)
     }
 
     const auto glyphCount = reader.Read<uint32_t>();
-    auto* glyphData = reader.ReadArray<Glyph>(glyphCount);
+    auto* glyphData = reader.readArray<Glyph>(glyphCount);
 
     for(uint32_t i =0;i < glyphCount;i++)
     {
@@ -37,7 +37,7 @@ Render::SpriteFont::SpriteFont(IAllocator* device,BinaryReader& reader)
 
     const auto dataSize = uint64_t(textureStride) * uint64_t(textureRows);
 
-    const auto textureData = reader.ReadArray<uint8_t>(static_cast<size_t>(dataSize));
+    const auto textureData = reader.readArray<uint8_t>(static_cast<size_t>(dataSize));
 
     this->font_texture = device->create_texture(
 	    ITexture2DDesc {

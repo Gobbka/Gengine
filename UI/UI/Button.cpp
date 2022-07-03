@@ -36,7 +36,7 @@ UI::Button::Button(Position2 position, Surface resolution, Color3XM color,Render
 	, _visible_color(color)
 	, _text(font,text,position)
 {
-
+	styles.cursor = Css::Cursor::pointer;
 }
 
 void UI::Button::set_color(Color3XM color)

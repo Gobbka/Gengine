@@ -106,6 +106,31 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 		->addElement(_render_panel)
 		->addElement(_assets_panel_wrapper)
 	;
+
+	_render_panel->onMouseDown = [&](UI::MouseEvent* event)
+	{
+		if(event->button == UI::MouseButton::right)
+		{
+			event->target->onMouseMove = [&](UI::MouseEvent* e)
+			{
+				constexpr auto sensitivity = 0.5f;
+				editorScene->get_main_camera()->get<Render::Camera>()->adjust_rotation(
+				{
+					- e->delta.y / 100 * sensitivity,
+					 e->delta.x / 100 * sensitivity,
+					0
+				});
+			};
+		}
+	};
+
+	_render_panel->onMouseUp = [&](UI::MouseEvent* event)
+	{
+		if (event->button == UI::MouseButton::right)
+		{
+			event->target->onMouseMove = nullptr;
+		}
+	};
 	
 	scan_assets_directory();
 }

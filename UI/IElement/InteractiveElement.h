@@ -86,7 +86,7 @@ namespace UI {
 
 		EventCallback onMouseEnter = default_event_callback;
 		EventCallback onMouseLeave = default_event_callback;
-		void(*onMouseMove)(InteractiveElement* pObject, float mX, float mY) = [](InteractiveElement*, float, float) {};
+		EventCallback onMouseMove = default_event_callback;
 		EventCallback onMouseScroll = default_event_callback;
 		EventCallback onMouseUp = default_event_callback;
 		EventCallback onMouseDown = default_event_callback;

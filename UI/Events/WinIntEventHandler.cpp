@@ -28,6 +28,16 @@ void UI::Interaction::WinIntEventHandler::windowProc(UINT msg, WPARAM wParam, LP
 		this->onMouseDown(MouseButton::left);
 	}
 
+	if(msg == WM_RBUTTONUP)
+	{
+		onMouseUp(MouseButton::right);
+	}
+
+	if (msg == WM_RBUTTONDOWN)
+	{
+		onMouseDown(MouseButton::right);
+	}
+
 	if(msg == WM_LBUTTONDBLCLK)
 	{
 		this->onDbClick();

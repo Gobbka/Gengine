@@ -49,13 +49,19 @@ void UI::InteractiveElement::set_parent(Parent* parent)
 void UI::InteractiveElement::handleMouseMove(MouseEvent* event)
 {
 	event->target = this;
-	this->onMouseMove(this, event->screen.x, event->screen.y);
+	if(onMouseMove)
+	{
+		this->onMouseMove(event);
+	}
 }
 
 void UI::InteractiveElement::handleMouseLeave()
 {
 	this->state.hovered = false;
-	this->onMouseLeave(nullptr);
+	if(onMouseLeave)
+	{
+		this->onMouseLeave(nullptr);
+	}
 }
 
 void UI::InteractiveElement::handleMouseEnter()
@@ -67,7 +73,10 @@ void UI::InteractiveElement::handleMouseEnter()
 void UI::InteractiveElement::handleMouseUp(MouseEvent* event)
 {
 	event->target = this;
-	this->onMouseUp(event);
+	if(onMouseUp)
+	{
+		this->onMouseUp(event);
+	}
 }
 
 void UI::InteractiveElement::handleMouseDown(MouseEvent* event)

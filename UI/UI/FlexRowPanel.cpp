@@ -121,7 +121,7 @@ void UI::FlexRowPanel::set_resolution(Surface surface)
 void UI::FlexRowPanel::handle_mouse_scroll(MouseEvent* event)
 {
 	const auto height_ratio = _location_rule.height_ratio();
-	if(height_ratio >= 1)
+	if(height_ratio >= 1 || height_ratio <= 0)
 	{
 		return;
 	}

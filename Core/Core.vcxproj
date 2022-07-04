@@ -171,6 +171,8 @@
     <ClInclude Include="JSON\Encoder.h" />
     <ClInclude Include="Loaders\AssetsLoader.h" />
     <ClInclude Include="Logger\Logger.h" />
+    <ClInclude Include="System\GEProcess.h" />
+    <ClInclude Include="System\GEThread.h" />
     <ClInclude Include="Types\Colors.h" />
     <ClInclude Include="Types\Material.h" />
     <ClInclude Include="Types\Transform.h" />
@@ -197,6 +199,8 @@
     <ClCompile Include="JSON\Decoder.cpp" />
     <ClCompile Include="JSON\Encoder.cpp" />
     <ClCompile Include="Loaders\AssetsLoader.cpp" />
+    <ClCompile Include="System\GEProcess.cpp" />
+    <ClCompile Include="System\GEThread.cpp" />
     <ClCompile Include="Types\Material.cpp" />
     <ClCompile Include="Types\Transform.cpp" />
     <ClCompile Include="Types\Types.cpp" />

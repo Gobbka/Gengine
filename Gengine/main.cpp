@@ -82,8 +82,6 @@ int WINAPI wWinMain(
             form->main_scene->get_main_camera()->get<Render::Camera>()->get_view_resolution()
 	);
 
-    CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)debugger_loop, nullptr, 0, 0);
-
     form->main_scene->world()->registerSystem(new PhysicsModule());
 
     auto time = std::chrono::high_resolution_clock::now();

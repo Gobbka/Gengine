@@ -56,7 +56,7 @@ int WINAPI wWinMain(
     {
     	form->get_ui()->windowProc(msg, wp, lp);
     };
-	
+
     auto* stone_texture = context->get_device()->create_texture(AssetsLoader::loadImage(L"assets\\Pebbles_027_BaseColor.png"));
     auto* stone_texture_normals = context->get_device()->create_texture(AssetsLoader::loadImage(L"assets\\Pebbles_027_Normal.png"));
     auto* workbench_texture = context->get_device()->create_texture(AssetsLoader::loadImage(L"assets\\workspace_background.png"));
@@ -68,18 +68,18 @@ int WINAPI wWinMain(
     component->set_rotation(Vector3(0.519999862f, 0.880000114f, 0));
 
     form->editorScene->create_point_light({ 1,{1,1,1},{-3,3,10} });
-    form->editorScene->get_main_camera()->assign<Render::SkyboxComponent>(workbench_texture);
-    auto* cube = form->editorScene->create_model(stone_texture,stone_texture_normals);
-    auto* platform = form->editorScene->create_model(red_texture);
+    form->editorScene->getMainCamera()->assign<Render::SkyboxComponent>(workbench_texture);
+    auto* cube = form->editorScene->createModel(stone_texture,stone_texture_normals);
+    auto* platform = form->editorScene->createModel(red_texture);
     platform->get<Render::MeshRenderer>()->transform.set_position(Position3{ 0,-7,0 });
 
     cube->get<Render::MeshRenderer>()->add_mesh(Render::Cube::make_independent(context, Position3::null(), 5));
     platform->get<Render::MeshRenderer>()->add_mesh(Render::Parallelepiped::make_independent(context, Position3::null(), Vector3{ 27,3,27 }));
 
-    form->editorScene->get_main_camera()
+    form->editorScene->getMainCamera()
 		->assign<Render::LightViewer>(
             context,
-            form->main_scene->get_main_camera()->get<Render::Camera>()->get_view_resolution()
+            form->main_scene->getMainCamera()->get<Render::Camera>()->get_view_resolution()
 	);
 
     form->main_scene->world()->registerSystem(new PhysicsModule());

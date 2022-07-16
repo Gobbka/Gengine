@@ -65,9 +65,9 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	font_reader = AssetsLoader::makeSpriteFont(L"Visby Round CF", 14);
 	auto* visby_14 = new Render::SpriteFont(get_graphics_context()->get_device(), font_reader);
 
-	main_scene->register_system(new UI::HandleAnimationSystem());
+	main_scene->registerSystem(new UI::HandleAnimationSystem());
 	
-	const auto main_cam = main_scene->get_main_camera()->get<Render::Camera>();
+	const auto main_cam = main_scene->getMainCamera()->get<Render::Camera>();
 	main_cam->get_target_view()->clear_color = Color3XM(.05f, .05f, .05f);
 
 	auto uicanvas = get_ui()->createLayer()->get<UI::InteractiveForm>();
@@ -91,8 +91,8 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 	_file_texture = get_graphics_context()->get_device()->create_texture(AssetsLoader::loadImage(TEXT("assets\\file.png")));
 
 	auto worldTexture = new Render::GERenderTarget(get_graphics_context(), { 1400,780 });
-	auto* editorCam = editorScene->create_camera(worldTexture);
-	editorScene->set_main_camera(editorCam);
+	auto* editorCam = editorScene->createCamera(worldTexture);
+	editorScene->setMainCamera(editorCam);
 	auto cam = editorCam->get<Render::Camera>();
 	cam->get_target_view()->clear_color.a = 0.f;
 
@@ -114,7 +114,7 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 			event->target->onMouseMove = [&](UI::MouseEvent* e)
 			{
 				constexpr auto sensitivity = 0.5f;
-				editorScene->get_main_camera()->get<Render::Camera>()->adjust_rotation(
+				editorScene->getMainCamera()->get<Render::Camera>()->adjust_rotation(
 				{
 					 - e->delta.y / 100 * sensitivity,
 					 e->delta.x / 100 * sensitivity,
@@ -122,6 +122,12 @@ Forms::MainForm::MainForm(HINSTANCE hinst, UINT width, UINT height)
 				});
 			};
 		}
+	};
+
+	_render_panel->onMouseScroll = [&](UI::MouseEvent* event)
+	{
+		const auto camera = editorScene->getMainCamera()->get<Render::Camera>();
+		camera->set_fov(camera->getFov() + event->delta.y / 255.f);
 	};
 
 	_render_panel->onMouseUp = [&](UI::MouseEvent* event)
@@ -165,7 +171,7 @@ void Forms::MainForm::handleResize(Surface rect)
 void Forms::MainForm::update()
 {
 	static float scale = 45.f;
-	auto camera = editorScene->get_main_camera()->get<Render::Camera>();
+	auto camera = editorScene->getMainCamera()->get<Render::Camera>();
 	
 	if (keyboard->pressed(VirtualKey::KEY_W))
 	{

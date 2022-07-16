@@ -44,7 +44,7 @@ inline void Render::RenderMeshPass::render_camera(ECS::ComponentHandle<Camera> c
 
 inline void Render::RenderMeshPass::execute_scene(Scene* scene)
 {
-	auto main_camera_id = scene->get_main_camera()->getEntityId();
+	auto main_camera_id = scene->getMainCamera()->getEntityId();
 	ECS::ComponentHandle<Camera> hMainCamera;
 	ECS::ComponentHandle<LightViewer> hLightViewer;
 	auto* world = scene->world();

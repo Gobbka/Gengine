@@ -17,24 +17,24 @@ namespace Render
 	public:
 		bool active = true;
 
-		Passer& render_pipeline();
+		Passer& renderPipeline();
 
-		ECS::Entity* get_main_camera();
-		void set_main_camera(ECS::Entity*);
+		ECS::Entity* getMainCamera();
+		void setMainCamera(ECS::Entity*);
 
-		void register_system(ECS::EntitySystem*system);
+		void registerSystem(ECS::EntitySystem*system);
 
-		ECS::Entity* create_entity(ECS::Entity*parent=nullptr);
-		ECS::Entity* create_camera(GERenderTarget* target);
+		ECS::Entity* createEntity(ECS::Entity*parent=nullptr);
+		ECS::Entity* createCamera(GERenderTarget* target);
 		template<typename Component>
 		ECS::Entity* instantiate(Component&component);
 		template<typename Component>
 		ECS::Entity* instantiate();
-		ECS::Entity* create_model(GETexture*texture, GETexture*normals=nullptr);
+		ECS::Entity* createModel(GETexture*texture, GETexture*normals=nullptr);
 		ECS::Entity* create_point_light(PointLightComponent light);
 		ECS::Entity* create_direction_light();
 		
-		__forceinline ECS::World* world() const { return _world; }
+		ECS::World* world() const { return _world; }
 		
 		Scene(GEGraphics*graphics);
 		void destroy() const;
@@ -43,7 +43,7 @@ namespace Render
 	template <typename Component>
 	ECS::Entity* Scene::instantiate(Component& component)
 	{
-		auto* ent = create_entity();
+		auto* ent = createEntity();
 		ent->assign<Component>(component);
 		return ent;
 	}
@@ -51,7 +51,7 @@ namespace Render
 	template <typename Component>
 	ECS::Entity* Scene::instantiate()
 	{
-		auto* ent = create_entity();
+		auto* ent = createEntity();
 		ent->assign<Component>();
 		return ent;
 	}

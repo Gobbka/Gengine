@@ -93,6 +93,11 @@ void Render::WorldViewer::set_farz(const float farz)
 	_projectionMatrix = create_projection_matrix();
 }
 
+float Render::WorldViewer::getFov()
+{
+	return _fov;
+}
+
 Surface Render::WorldViewer::get_view_resolution() const
 {
 	return _resolution;

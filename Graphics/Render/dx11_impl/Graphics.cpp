@@ -77,7 +77,7 @@ Render::Scene* Render::DX11Graphics::create_empty_scene()
 Render::Scene* Render::DX11Graphics::create_scene_3d()
 {
 	auto* scene = create_empty_scene();
-	auto& pipeline = scene->render_pipeline();
+	auto& pipeline = scene->renderPipeline();
 
 	pipeline.add_pass(new ClearPass(this), Render::PassStep::begin);
 	pipeline.add_pass(new DrawSkyboxPass(this), Render::PassStep::begin);
@@ -132,10 +132,10 @@ void Render::DX11Graphics::make_frame()
 		if (!scene->active || scene == main_scene)
 			continue;
 
-		scene->render_pipeline().execute(scene);
+		scene->renderPipeline().execute(scene);
 	}
 
-	main_scene->render_pipeline().execute(main_scene);
+	main_scene->renderPipeline().execute(main_scene);
 }
 
 void Render::DX11Graphics::present_frame() const

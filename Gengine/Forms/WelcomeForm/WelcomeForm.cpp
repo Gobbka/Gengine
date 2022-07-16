@@ -11,7 +11,7 @@
 Forms::WelcomeForm::WelcomeForm(HINSTANCE hinst)
 	: Form(TEXT("Welcome!"),hinst,400,500)
 {
-	const auto main_cam = main_scene->get_main_camera()->get<Render::Camera>();
+	const auto main_cam = main_scene->getMainCamera()->get<Render::Camera>();
 	main_cam->get_target_view()->clear_color = Color3XM::from_rgb(26,26,26);
 
 	auto* font = new Render::SpriteFont(get_graphics_context()->get_device(), L"visby.spritefont");

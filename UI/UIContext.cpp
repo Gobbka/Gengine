@@ -18,7 +18,7 @@ public:
 		auto* gcontext = _context->get_context();
 		gcontext->debug_message("DrawUIPass executed");
 
-		auto* camera = scene->get_main_camera()->get<Render::Camera>().get_ptr();
+		auto* camera = scene->getMainCamera()->get<Render::Camera>().get_ptr();
 		camera->bind();
 		auto resolution = camera->get_view_resolution();
 
@@ -75,7 +75,7 @@ UI::UIContext::UIContext(Render::GEGraphics* gfx,Render::Scene* scene)
 	auto* vs = new Render::VertexShader(gfx, L"d3d11\\canvas_vs.cso", vertex2D_layout, ARRAYSIZE(UI::vertex2D_layout));
 	gfx->shader_collection.insert(L"d3d11\\canvas_vs.cso", vs);
 
-	scene->render_pipeline().add_pass(new DrawUIPass(gfx), Render::PassStep::overlay);
+	scene->renderPipeline().add_pass(new DrawUIPass(gfx), Render::PassStep::overlay);
 }
 
 void UI::UIContext::onMouseDown(MouseButton button)

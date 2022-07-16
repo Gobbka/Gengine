@@ -40,6 +40,8 @@ namespace Render
 		void set_fov(float fov);
 		void set_farz(float farz);
 
+		float getFov();
+
 		Surface get_view_resolution() const;
 		void set_view_resolution(Surface surface);
 

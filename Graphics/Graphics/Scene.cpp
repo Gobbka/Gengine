@@ -6,46 +6,46 @@
 #include "Components/GameEntityComponent.h"
 #include "Components/PointLightComponent.h"
 
-Render::Passer& Render::Scene::render_pipeline()
+Render::Passer& Render::Scene::renderPipeline()
 {
 	return _render_pipeline;
 }
 
-ECS::Entity* Render::Scene::get_main_camera()
+ECS::Entity* Render::Scene::getMainCamera()
 {
 	return _main_camera;
 }
 
-void Render::Scene::set_main_camera(ECS::Entity* cam)
+void Render::Scene::setMainCamera(ECS::Entity* cam)
 {
 	_main_camera = cam;
 }
 
-void Render::Scene::register_system(ECS::EntitySystem* system)
+void Render::Scene::registerSystem(ECS::EntitySystem* system)
 {
 	_world->registerSystem(system);
 }
 
 
-ECS::Entity* Render::Scene::create_entity(ECS::Entity* parent)
+ECS::Entity* Render::Scene::createEntity(ECS::Entity* parent)
 {
 	auto* ent = _world->create();
 	ent->assign<Core::GameEntityComponent>(parent);
 	return ent;
 }
 
-ECS::Entity* Render::Scene::create_camera(GERenderTarget* target)
+ECS::Entity* Render::Scene::createCamera(GERenderTarget* target)
 {
-	auto* ent = create_entity();
+	auto* ent = createEntity();
 	
 	ent->assign<Camera>(_graphics,target);
 
 	return ent;
 }
 
-ECS::Entity* Render::Scene::create_model(GETexture* texture, GETexture* normals)
+ECS::Entity* Render::Scene::createModel(GETexture* texture, GETexture* normals)
 {
-	auto* ent = create_entity();
+	auto* ent = createEntity();
 	ent->assign<MeshRenderer>(texture,normals);
 
 	return ent;
@@ -53,7 +53,7 @@ ECS::Entity* Render::Scene::create_model(GETexture* texture, GETexture* normals)
 
 ECS::Entity* Render::Scene::create_point_light(PointLightComponent light)
 {
-	auto* ent = create_entity();
+	auto* ent = createEntity();
 	ent->assign<PointLightComponent>(light);
 
 	return ent;
@@ -61,7 +61,7 @@ ECS::Entity* Render::Scene::create_point_light(PointLightComponent light)
 
 ECS::Entity* Render::Scene::create_direction_light()
 {
-	auto ent = create_entity();
+	auto ent = createEntity();
 	ent->assign<DirectionLightComponent>(_graphics);
 	return ent;
 }

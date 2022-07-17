@@ -295,16 +295,16 @@ void Forms::MainForm::print_entity()
 			std::cout << '[' << ent->getEntityId() << "] ";
 		});
 	std::cout << "\nChoose entity? (enter entity id or 0 to close)\n>>";
-	int id=0;
-	scanf("%d", &id);
-	if(id != ECS::Entity::InvalidEntityId)
+	const auto id = GEConsole::readNumber();
+
+	if(id != 0)
 	{
-		char command[20];
 		std::cout << "Available commands:\ndel (delete entity)\nEnter command\n>>";
-		scanf("%20s", command);
-		if(strcmp(command,"del")==0)
+		const auto command = GEConsole::readInput();
+		
+		if(command == L"del")
 		{
-			editorScene->world()->destroy( editorScene->world()->getById(id));
+			editorScene->destroyEntity(id);
 		}
 	}
 }

@@ -108,7 +108,7 @@ int WINAPI wWinMain(
 
         for (auto* window : windows)
         {
-            ((GE::Form*)window)->main_scene->world()->tick(1.f / (float)duration.count());
+            ((GE::Form*)window)->main_scene->tick(1.f / (float)duration.count());
         }
 
         time = now;

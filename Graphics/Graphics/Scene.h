@@ -35,9 +35,14 @@ namespace Render
 		ECS::Entity* create_direction_light();
 		
 		ECS::World* world() const { return _world; }
+		void tick(float delta_time) const;
+
+		ECS::Entity* getEntityById(size_t id) const;
+		void destroyEntity(size_t id) const;
+		void destroyEntity(ECS::Entity* ent) const;
 		
 		Scene(GEGraphics*graphics);
-		void destroy() const;
+		~Scene();
 	};
 
 	template <typename Component>

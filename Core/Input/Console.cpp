@@ -17,6 +17,16 @@ GEString GEConsole::readInput()
 	throw std::exception("Cannot read console input");
 }
 
+long long GEConsole::readNumber()
+{
+	long long out;
+	if(scanf_s("%d",&out))
+	{
+		return out;
+	}
+	return 0;
+}
+
 void GEConsole::show()
 {
 	AllocConsole();

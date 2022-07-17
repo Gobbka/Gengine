@@ -66,6 +66,28 @@ ECS::Entity* Render::Scene::create_direction_light()
 	return ent;
 }
 
+void Render::Scene::tick(float delta_time) const
+{
+	_world->tick(delta_time);
+}
+
+ECS::Entity* Render::Scene::getEntityById(size_t id) const
+{
+	return _world->getById(id);
+}
+
+void Render::Scene::destroyEntity(size_t id) const
+{
+	_world->destroy(
+		getEntityById(id)
+	);
+}
+
+void Render::Scene::destroyEntity(ECS::Entity* ent) const
+{
+	_world->destroy(ent);
+}
+
 Render::Scene::Scene(GEGraphics* graphics)
 	: _world(ECS::World::createWorld())
 	, _graphics(graphics)
@@ -73,7 +95,8 @@ Render::Scene::Scene(GEGraphics* graphics)
 {
 }
 
-void Render::Scene::destroy() const
+Render::Scene::~Scene()
 {
+	_world->destroyWorld();
 	delete _world;
 }
